@@ -1,0 +1,43 @@
+<span id="leftShowHideIcon" class="glyphicon" title="Hide Periperial View" ng-class="srvStyle.getShowHideIconClass1();" aria-hidden="true" ng-click="srvLayout.toggleActive1();"></span>
+<span id="rightShowHideIcon" class="glyphicon" title="Hide Output View" ng-class="srvStyle.getShowHideIconClass3();" aria-hidden="true" ng-click="srvLayout.toggleActive3();"></span>
+
+<ul id="requirementHeadingAlt3" class="nav nav-tabs">
+	<li id="requirementTab1" ng-class="srvStyle.getRequirementTab1Class()">
+		<a href="" ng-click="srvLayout.showColOnly(1)">
+			<span class="viewHeadingAlt">Peripherals</span>
+		</a>
+	</li>
+	<li id="requirementTab2" class="active">
+		<a href="">
+			<span class="viewHeading">Requirements</span>
+		</a>
+	</li>
+	<li id="requirementTab3" ng-class="srvStyle.getRequirementTab3Class()">
+		<a href="" ng-click="srvLayout.showColOnly(3)">
+			<span class="viewHeadingAlt">Output</span>
+		</a>
+	</li>
+</ul>
+
+<div id="viewRequirement" class="viewDiv">	
+	<div id="reqProperties">
+		<div class="panel panel-default" style="border:none;margin-bottom:4px;box-shadow:none;">
+		
+			<div class="panel-body" style="padding:2px;">
+			
+				<my-requirements></my-requirements>
+
+				<div style="border-top:1px solid #dddddd;margin:0 auto 8px auto;width:90%;align:center;text-align:center;"></div>
+				<div ng-show="!isStandardGPIO">
+					<requirement-config></requirement-config>
+				</div>
+				<div ng-if="isStandardGPIO" ng-show="isStandardGPIO">
+					<requirement-config-gpio></requirement-config-gpio>
+				</div>
+				<div style="border-top:1px solid #dddddd;margin:0 auto 8px auto;width:90%;align:center;text-align:center;"></div>
+				<requirement-pins></requirement-pins>
+	
+			</div>
+		</div>
+	</div>
+</div>

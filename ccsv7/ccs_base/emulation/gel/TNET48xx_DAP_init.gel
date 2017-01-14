@@ -1,0 +1,242 @@
+/* 
+ * Neptune_CCS31_a9.gel
+ * 
+ * This GEL file is loaded on the command line of Code Composer 
+ * The OnTargetConnect() function is called every time you start
+ * Code Composer.  You can customize this function to
+ * initialize wait states or to perform other initialization.
+ * 
+ * THALASSA or GSAMPLE // RAM or FLASH : select choice possible
+ *
+ * select configuration
+ *     menu        GEL->board->THALASSA RAM
+ *                             THALASSA FLASH
+ *                             GSAMPLE  RAM
+ *                             GSAMPLE  FLASH
+ * the config default is THALASSA RAM
+*/
+
+#define DEBUG_CONF 0
+#define THALASSA_RAM 0
+#define THALASSA_FLASH 1
+#define GSAMPLE_RAM 2
+#define GSAMPLE_FLASH 3
+
+int CONFIG_H_S = THALASSA_RAM; // configuration Hard Soft (see affich_config)
+
+affich_config()
+{
+   GEL_TextOut("\n +--------------------------------------+ \n");
+   GEL_TextOut(" |      config ");
+    
+  if(CONFIG_H_S == THALASSA_RAM || CONFIG_H_S == THALASSA_FLASH)
+    GEL_TextOut("THALASSA ",,1);
+  else if(CONFIG_H_S == GSAMPLE_RAM ||CONFIG_H_S == GSAMPLE_FLASH )
+    GEL_TextOut("G-SAMPLE ",,1);
+    
+  if(CONFIG_H_S == THALASSA_RAM || CONFIG_H_S == GSAMPLE_RAM)
+    GEL_TextOut("RAM     ",,2);
+  else if (CONFIG_H_S == THALASSA_FLASH || CONFIG_H_S == GSAMPLE_FLASH )
+    GEL_TextOut("FLASH   ",,2);
+    
+ if (DEBUG_CONF)
+    GEL_TextOut(" (%d)    |\n",,,,,CONFIG_H_S);
+ else
+    GEL_TextOut("        |\n");
+
+       GEL_TextOut(" +--------------------------------------+ \n\n");
+}
+/************************************************************************************/
+
+device_setup() {
+// boot config //
+(*(int*)0x08611A38)=0x83e70B13;
+(*(int*)0x08611A3c)=0x95a4f1e0;
+(*(int*)0x08611B68)=0x00000300;  /* docsis mac phycr */
+// psc //
+(*(int*)0x08621a04) = 0x103;     /* vlynq */
+(*(int*)0x08621a08) = 0x103;     /* DSPSS */
+(*(int*)0x08621a38) = 0x103;     /* Power domain up */  
+(*(int*)0x08621a14) = 0x103;     /* emif3 reset */
+(*(int*)0x08621a10) = 0x103;     /* DDR PHY */
+(*(int*)0x08621a20) = 0x103;     /* TDM */
+(*(int*)0x08621a24) = 0x103;     /* bbu */
+(*(int*)0x08621a28) = 0x103;     /* perf mon */
+(*(int*)0x08621a2C) = 0x103;     /* DOCSIS_MAC */
+(*(int*)0x08621a30) = 0x103;     /* slow per */
+(*(int*)0x08621a34) = 0x103;     /* uart1 */
+(*(int*)0x08621a38) = 0x103;     /* gpio */ 
+(*(int*)0x08621a3C) = 0x103;     /* Timer0 */
+(*(int*)0x08621a40) = 0x103;     /* Timer1 */ 
+(*(int*)0x08621a44) = 0x103;     /* Timer2 */ 
+(*(int*)0x08621a48) = 0x103;     /* Rom */
+(*(int*)0x08621a4C) = 0x103;     /* Aemif */
+(*(int*)0x08621a50) = 0x103;     /* SPI */
+(*(int*)0x08621a54) = 0x103;     /* Debugss */
+(*(int*)0x08621a58) = 0x103;     /* SRAM */
+(*(int*)0x08621a5C) = 0x103;     /* SBRSS */
+(*(int*)0x08621a60) = 0x103;     /* SR_CPDSP */
+(*(int*)0x08621a64) = 0x103;     /* SR_MPDSP */
+(*(int*)0x08621a68) = 0x103;     /* SR_QPDSP */
+(*(int*)0x08621a6C) = 0x103;     /* SR_APDSP */
+(*(int*)0x08621a70) = 0x103;     /* SR_LUT */
+(*(int*)0x08621a74) = 0x103;     /* USB */
+(*(int*)0x08621a78) = 0x103;     /* SR_CPGMAC */
+(*(int*)0x08621a7C) = 0x103;     /* SR_MDIO */
+(*(int*)0x08621a80) = 0x103;     /* ADC_DUMP */
+(*(int*)0x08621a84) = 0x103;     /* SR_PCI */
+(*(int*)0x08621a88) = 0x103;     /* USB_PHY */
+(*(int*)0x08621a8C) = 0x103;     /* DSP_PROXY */
+
+(*(int*)0x08621120) = 0x1; 
+
+/* configure async emif to resonable stobe values */
+(*(int*)0x08610810) = 0x0;
+(*(int*)0x08610814) = 0x0;
+(*(int*)0x08610818) = 0x0;
+(*(int*)0x0861081C) = 0x0;
+ 
+(*(int*)0x00000000) = 0x1; /*write to pass time */
+(*(int*)0x00000000) = 0x2; /*write to pass time */
+(*(int*)0x00000000) = 0x3; /*write to pass time */
+(*(int*)0x00000000) = 0x4; /*write to pass time */
+(*(int*)0x00000000) = 0x5; /*write to pass time */
+(*(int*)0x00000000) = 0x6; /*write to pass time */
+(*(int*)0x00000000) = 0x7; /*write to pass time */
+(*(int*)0x00000000) = 0x8; /*write to pass time */
+(*(int*)0x00000000) = 0x9; /*write to pass time */
+(*(int*)0x00000000) = 0xa; /*write to pass time */
+(*(int*)0x00000000) = 0xb; /*write to pass time */
+
+
+/* DSPSS emif base address */
+(*(int*)0x05000004) = 0x80000000;
+
+  
+
+
+/* upload init code to arm9 (endian switch) */
+(*(int*)0x09100000) = 0xEA000006;
+(*(int*)0x09100004) = 0xEAFFFFFE;
+(*(int*)0x09100008) = 0xEAFFFFFE;
+(*(int*)0x0910000C) = 0xEAFFFFFE;
+(*(int*)0x09100010) = 0xEAFFFFFE;
+(*(int*)0x09100014) = 0xEAFFFFFE;
+(*(int*)0x09100018) = 0xEAFFFFFE;
+(*(int*)0x0910001C) = 0xEAFFFFFE;
+(*(int*)0x09100020) = 0xEE114F10;
+(*(int*)0x09100024) = 0xE3844D40;
+(*(int*)0x09100028) = 0xE3844004;
+(*(int*)0x0910002C) = 0xE3844080;
+(*(int*)0x09100030) = 0xEE014F10;
+(*(int*)0x09100034) = 0xEAFFFFFE;
+(*(int*)0x09100038) = 0xE1A00000;
+(*(int*)0x0910003C) = 0xE1A00000;
+(*(int*)0x09100040) = 0xE1A00000;
+(*(int*)0x09100044) = 0xE1A00000;
+(*(int*)0x09100048) = 0xE1A00000;
+(*(int*)0x0910004C) = 0xE1A00000; 
+/* release arm9 from reset */
+(*(int*)0x09098008) = 0x40;
+
+//GEL_TextOut("ARM9 is out of reset\n");  
+
+/* emif DDR2 configuration */
+//(*(int *)0x08613008) = 0x632; /* config reg */
+//(*(int *)0x0861301C) = 0x4; /* config 2 */
+//(*(int *)0x08613010) = 0x32923A89; /* Timing 1 */
+//(*(int *)0x08613014) = 0x3A1BC722; /* Timing 2 */
+
+// arm 9 reset //
+(*(int*)0x09098008) = 0x40;
+
+
+/* bootcfg */
+(*(int*)0x08611A38)=0x83e70B13;
+(*(int*)0x08611A3c)=0x95a4f1e0;
+(*(int*)0x08611A20)=0x04000000;
+(*(int*)0x08611310)=0x00000008;  
+
+/* gpio */
+ 
+
+
+
+ 
+ // uart baud rate config //
+//(*(int *)0x80200100) = 0x0002450E; 
+//(*(int *)0x80200104) = 0x00012287; 
+//(*(int *)0x80200108) = 0x00009143; 
+// 641 khz
+//(*(int *)0x80200100) = 0x000271FA; 
+//(*(int *)0x80200104) = 0x000138FD; 
+//(*(int *)0x80200108) = 0x00009C7E; 
+// 617 khz
+(*(int *)0x80200100) = 0x00025a8a;  //400MHz
+(*(int *)0x80200104) = 0x00012d45;  //200MHz
+(*(int *)0x80200108) = 0x000096a2;  //100MHz
+
+
+}
+
+
+OnTargetConnect()
+{ 
+  GEL_TextOut("---->>>  End of StartUp() procedure!  <<<----\n");
+
+   /* Device Setup */
+  device_setup();
+ 
+  /* Neptune Setup */
+//  watchdog_disable();
+
+  
+  // EMIFF Configuration
+// EMIFF_Setup_DDRAM();
+
+  /* Load User Gel Files & execute its startup procedure that will configure the EMIFs */
+  //user_startup();
+  
+  // Select emifs_nfcs_1 instead of gpio19 & emifs_ncs_2 instead of GPIO 43
+
+// Select_EMIFS_nCS1_nCS2();
+  ////
+// if ( CONFIG_H_S == THALASSA_RAM || CONFIG_H_S == THALASSA_FLASH ) // Thalassa
+// { 
+      // Nor EMIFS Conf
+//      nCS1_NOR_Setup();
+      // FPGA EMIFS Conf
+//      nCS2_FPGA_Setup();
+    
+      // SRAM I/F init
+//      nCS3_SRAM_Setup();
+//  }
+  
+//  else if ( CONFIG_H_S == GSAMPLE_RAM || CONFIG_H_S == GSAMPLE_FLASH  ) // G-Sample
+//  {
+      // NAND Flash EMIFS Conf
+//      nCS1_NAND_Flash_Setup();
+      
+      // CPLD EMIFS Conf
+//      nCS2_CPLD_Setup();
+      
+      // NOR Flash EMIFS Conf  
+//     nCS3_NOR_Flash_Setup();
+//  }
+  
+  
+  // Init MMU to download code into SDRAM
+  //init_MMU();
+  
+//  if(CONFIG_H_S == GSAMPLE_RAM ) // G_SAMPLE download code into DDRAM
+//    init_MMU_EMIconso_GSample();
+
+   /* DSP reset release */
+//  release_UMA26_reset();
+
+   GEL_TextOut("---->>>  End of OnTargetConnect() procedure!  <<<----\n");
+}
+
+
+
+/* EOF */

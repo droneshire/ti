@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="Stall Profiling" basedir=".">
+
+	<property name="dvt.activity.name" value="Hardware Trace Analyzer/${ant.project.name}"/>
+  	<property name="dvt.activity.description" value="Count the number of data and program cache stall cycles&#10;(L1P Miss Stalls, L1D Read Miss Stalls and L1D Write Buffer Full Stalls)."/>
+
+   	<property name="uc_name" value="Stall_Profiling_Analysis" />
+	<property name="technology" value="Hardware Core Trace" />
+
+	<dvt.import file="../../scripts/StallProfilingAnalysisDialog.js"/>
+	<dvt.import file="../../scripts/CoreTrace.js"/>
+
+	<!-- target mapping file(s) must be named emu\<uc_name>.xml to be found -->
+	
+	<dvt.property>
+		version=1.0.0
+		dvt.activity.priority = 50
+
+		<!-- Data Provider and AF information-->
+		dataproviders=Trace
+		Trace.name=Trace Viewer
+		Trace.analyzer=Stall Cycle Profiler
+	</dvt.property>
+	
+</project>

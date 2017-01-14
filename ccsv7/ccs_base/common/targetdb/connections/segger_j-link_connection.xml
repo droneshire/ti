@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+
+<connection id="SEGGER J-Link Emulator">
+	<connectionType Type="JLink"/>
+	<property Type="hiddenfield" Value="No" id="dataFileRequired"/>
+</connection>

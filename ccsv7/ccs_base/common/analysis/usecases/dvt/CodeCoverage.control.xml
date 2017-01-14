@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="Code Coverage" basedir=".">
+
+	<property name="dvt.activity.name" value="Hardware Trace Analyzer/${ant.project.name}"/>
+  	<property name="dvt.activity.description" value="Collect code execution information and execute code coverage analysis.&#10;Other analysis are available from the Analyze button in the Trace Viewer."/>
+
+   	<property name="uc_name" value="CodeCoverage" />
+	<property name="technology" value="Hardware Core Trace" />
+
+	<dvt.import file="../../scripts/CodeCoverageDialog.js"/>
+	<dvt.import file="../../scripts/CoreTrace.js"/>
+	
+	<dvt.property>
+		version=1.0.0
+		dvt.activity.priority = 65
+
+		<!-- Data Provider and AF information-->
+		dataproviders=Trace
+		Trace.name=Trace Viewer
+		Trace.analyzer=Code Coverage
+	</dvt.property>
+	
+	<dvt.configaf id="merge" label="Merge coverage statistics over multiple data collections" tooltip="Merge coverage statistics over multiple data collections" values="Trace Viewer.Code Coverage.merge" defaultValue="false">
+		<job>
+			<jobProperty name="Trace Viewer.Code Coverage.merge" />
+		</job>
+	</dvt.configaf>	
+	
+	<dvt.configaf id="colorLines" label="Highlight covered lines in source files" tooltip="Highlight covered lines in source files" values="Trace Viewer.Code Coverage.colorLines" defaultValue="false">
+		<job>
+			<jobProperty name="Trace Viewer.Code Coverage.colorLines" />
+		</job>
+	</dvt.configaf>	
+	
+	<dvt.configaf id="showLibraries" label="Show TI Libraries" tooltip="Show TI Libraries" values="Trace Viewer.Code Coverage.showLibraries" defaultValue="false">
+		<job>
+			<jobProperty name="Trace Viewer.Code Coverage.showLibraries" />
+		</job>
+	</dvt.configaf>	
+	
+	<dvt.configaf id="optimizedCode" label="Show Instruction Coverage View (may increase processing time significantly)" tooltip="Shows The Instruction Coverage View" values="Trace Viewer.Code Coverage.optimizedCode" defaultValue="false">
+		<job>
+			<jobProperty name="Trace Viewer.Code Coverage.optimizedCode" />
+		</job>
+	</dvt.configaf>	
+	
+	<dvt.configaf id="useCaseDialogShown"  values="Trace Viewer.Code Coverage.useCaseDialogShown" defaultValue="false">
+		<job>
+			<jobProperty name="Trace Viewer.Code Coverage.useCaseDialogShown" />
+		</job>
+	</dvt.configaf>	
+	
+</project>

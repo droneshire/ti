@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module id="Hidden" HW_revision="1" XML_version="1" description="" hidden="true">
+      <register id="CLK" acronym="CLK" width="32" description=""/>
+      <register id="R15" acronym="R15" width="32" description=""/>
+      <register id="R13_MON" acronym="R13_MON" width="32" description=""/>
+      <register id="R14_MON" acronym="R14_MON" width="32" description=""/>
+      <register id="SPSR_MON" acronym="SPSR_MON" width="32" description=""/>
+      <register id="SPSR_FIQ" acronym="SPSR_FIQ" width="32" description="Stores the status of interrupt enables and critical processor status signals" />
+      <register id="R8_FIQ" acronym="R8_FIQ" width="32" description="General Purpose Register 8 in FIQ mode" />
+      <register id="R9_FIQ" acronym="R9_FIQ" width="32" description="General Purpose Register 9 in FIQ mode" />
+      <register id="R10_FIQ" acronym="R10_FIQ" width="32" description="General Purpose Register 10 in FIQ mode" />
+      <register id="R11_FIQ" acronym="R11_FIQ" width="32" description="General Purpose Register 11 in FIQ mode" />
+      <register id="R12_FIQ" acronym="R12_FIQ" width="32" description="General Purpose Register 12 in FIQ mode" />
+      <register id="R13_FIQ" acronym="R13_FIQ" width="32" description="General Purpose Register 13 in FIQ mode" />
+      <register id="R14_FIQ" acronym="R14_FIQ" width="32" description="General Purpose Register 14 in FIQ mode" />
+      <register id="SPSR_SVC" acronym="SPSR_SVC" width="32" description="Stores the status of interrupt enables and critical processor status signals in supervisor mode" />
+      <register id="R13_SVC" acronym="R13_SVC" width="32" description="General Purpose Register 13 in Supervisor mode" />
+      <register id="R14_SVC" acronym="R14_SVC" width="32" description="General Purpose Register 14 in Supervisor mode" />
+      <register id="SPSR_ABT" acronym="SPSR_ABT" width="32" description="Stores the status of interrupt enables and critical processor status signals in abort mode" />
+      <register id="R13_ABT" acronym="R13_ABT" width="32" description="General Purpose Register 13 in Abort mode" />
+      <register id="R14_ABT" acronym="R14_ABT" width="32" description="General Purpose Register 14 in Abort mode" />
+      <register id="SPSR_IRQ" acronym="SPSR_IRQ" width="32" description="Stores the status of interrupt enables and critical processor status signals" />
+      <register id="R13_IRQ" acronym="R13_IRQ" width="32" description="General Purpose Register 13 in IRQ mode" />
+      <register id="R14_IRQ" acronym="R14_IRQ" width="32" description="General Purpose Register 14 in IRQ mode" />
+      <register id="SPSR_UND" acronym="SPSR_UND" width="32" description="Stores the status of interrupt enables and critical processor status signals" />
+      <register id="R13_UND" acronym="R13_UND" width="32" description="General Purpose Register 13 in Undefined mode" />
+      <register id="R14_UND" acronym="R14_UND" width="32" description="General Purpose Register 14 in Undefined mode" />
+      <register id="AP" acronym="AP" width="32" description=""/>
+      <register id="FP" acronym="FP" width="32" description=""/>
+      <register id="F0" acronym="F0" width="32" description=""/>
+      <register id="F1" acronym="F1" width="32" description=""/>
+      <register id="F2" acronym="F2" width="32" description=""/>
+      <register id="F3" acronym="F3" width="32" description=""/>
+      <register id="F4" acronym="F4" width="32" description=""/>
+      <register id="F5" acronym="F5" width="32" description=""/>
+      <register id="F6" acronym="F6" width="32" description=""/>
+      <register id="F7" acronym="F7" width="32" description=""/>
+      <register id="F8" acronym="F8" width="32" description=""/>
+      <register id="F9" acronym="F9" width="32" description=""/>
+      <register id="F10" acronym="F10" width="32" description=""/>
+      <register id="F11" acronym="F11" width="32" description=""/>
+      <register id="F12" acronym="F12" width="32" description=""/>
+      <register id="F13" acronym="F13" width="32" description=""/>
+      <register id="F14" acronym="F14" width="32" description=""/>
+      <register id="F15" acronym="F15" width="32" description=""/>
+      <register id="D0" acronym="D0" width="64" description=""/>
+      <register id="D1" acronym="D1" width="64" description=""/>
+      <register id="D2" acronym="D2" width="64" description=""/>
+      <register id="D3" acronym="D3" width="64" description=""/>
+      <register id="D4" acronym="D4" width="64" description=""/>
+      <register id="D5" acronym="D5" width="64" description=""/>
+      <register id="D6" acronym="D6" width="64" description=""/>
+      <register id="WP0_ADDR" acronym="WP0_ADDR" width="32" description=""/>
+      <register id="WP0_AMASK" acronym="WP0_AMASK" width="32" description=""/>
+      <register id="WP0_DATA" acronym="WP0_DATA" width="32" description=""/>
+      <register id="WP0_DMASK" acronym="WP0_DMASK" width="32" description=""/>
+      <register id="WP0_CTRL" acronym="WP0_CTRL" width="32" description=""/>
+      <register id="WP0_CMASK" acronym="WP0_CMASK" width="32" description=""/>
+      <register id="WP1_ADDR" acronym="WP1_ADDR" width="32" description=""/>
+      <register id="WP1_AMASK" acronym="WP1_AMASK" width="32" description=""/>
+      <register id="WP1_DATA" acronym="WP1_DATA" width="32" description=""/>
+      <register id="WP1_DMASK" acronym="WP1_DMASK" width="32" description=""/>
+      <register id="WP1_CTRL" acronym="WP1_CTRL" width="32" description=""/>
+      <register id="WP1_CMASK" acronym="WP1_CMASK" width="32" description=""/>
+      <register id="EMU_STAT" acronym="EMU_STAT" width="32" description=""/>
+      <register id="EMU_CNTR" acronym="EMU_CNTR" width="32" description=""/>
+      <register id="EMU_MODE" acronym="EMU_MODE" width="32" description=""/>
+      <register id="EMU_PCTL" acronym="EMU_PCTL" width="32" description=""/>
+      <register id="ANAENBL" acronym="ANAENBL" width="32" description=""/>
+      <register id="REG_ENDIAN" acronym="REG_ENDIAN" width="32" description=""/>
+      <register id="REG_ICECRUSHER" acronym="REG_ICECRUSHER" width="32" description=""/>
+      <register id="REG_RTDXENABLE" acronym="REG_RTDXENABLE" width="32" description=""/>
+      <register id="SCLK" acronym="SCLK" width="32" description=""/>
+      <register id="NCLK" acronym="NCLK" width="32" description=""/>
+      <register id="ICLK" acronym="ICLK" width="32" description=""/>
+      <register id="CCLK" acronym="CCLK" width="32" description=""/>
+      <register id="FCLK" acronym="FCLK" width="32" description=""/>
+      <register id="NINSTR" acronym="NINSTR" width="32" description=""/>
+      <register id="FADDR" acronym="FADDR" width="32" description=""/>
+      <register id="DADDR" acronym="DADDR" width="32" description=""/>
+      <register id="XADDR" acronym="XADDR" width="32" description=""/>
+      <register id="REG_E2ICE_COUNTER0" acronym="REG_E2ICE_COUNTER0" width="32" description=""/>
+      <register id="REG_E2ICE_COUNTER1" acronym="REG_E2ICE_COUNTER1" width="32" description=""/>
+      <register id="REG_CP15_TABL_ADDR" acronym="REG_CP15_TABL_ADDR" width="32" description=""/>
+      <register id="REG_RUN_COUNT" acronym="REG_RUN_COUNT" width="32" description=""/>
+      <register id="EMU0_COUNTER" acronym="EMU0_COUNTER" width="32" description=""/>
+      <register id="EMU1_COUNTER" acronym="EMU1_COUNTER" width="32" description=""/>
+      <register id="DCC_DOWNLOAD_ENBL" acronym="DCC_DOWNLOAD_ENBL" width="32" description=""/>
+      <register id="DCC_DOWNLOAD_MONITOR_ADD" acronym="DCC_DOWNLOAD_MONITOR_ADD" width="32" description=""/>
+      <register id="REG_DAP_MSG_MASK" acronym="REG_DAP_MSG_MASK" width="32" description=""/>
+      <register id="REG_AHB_DOWNLOAD" acronym="REG_AHB_DOWNLOAD" width="32" description=""/>
+      <register id="REG_DEBUG1" acronym="REG_DEBUG1" width="32" description=""/>
+      <register id="REG_DEBUG2" acronym="REG_DEBUG2" width="32" description=""/>
+      <register id="REG_VECTOR_CATCH" acronym="REG_VECTOR_CATCH" width="32" description=""/>
+
+      <!-- START: Coprocessor 15 Registers based on CortexR4 and CortexR4F TRM, Rev r1p3 -->
+      <!-- Refer to section 4.2: System control coprocessor registers.  The order -->
+      <!-- of the registers is the same as the order in which they are appear     -->
+      <!-- in the Technical Reference Manual (TRM)                                -->
+
+      <register id="CP15_ID_CODE" acronym="CP15_ID_CODE" width="32" description="" />
+      <register id="CP15_MAIN_ID" acronym="CP15_MAIN_ID" width="32" description="" />
+      <register id="CP15_CACHE_TYPE" acronym="CP15_CACHE_TYPE" width="32" description="" />
+      <register id="CP15_TCM_TYPE" acronym="CP15_TCM_TYPE" width="32" description="" />
+      <register id="CP15_MPU_TYPE" acronym="CP15_MPU_TYPE" width="32" description="" />
+      <register id="CP15_MULTIPROCESSOR_ID" acronym="CP15_MULTIPROCESSOR_ID" width="32" description="" />
+      <register id="CP15_PROCESSOR_FEATURE_0" acronym="CP15_PROCESSOR_FEATURE_0" width="32" description="" />
+      <register id="CP15_PROCESSOR_FEATURE_1" acronym="CP15_PROCESSOR_FEATURE_1" width="32" description="" />
+      <register id="CP15_DEBUG_FEATURE_0" acronym="CP15_DEBUG_FEATURE_0" width="32" description="" />
+      <register id="CP15_AUXILIARY_FEATURE_0" acronym="CP15_AUXILIARY_FEATURE_0" width="32" description="" />
+      <register id="CP15_MEMORY_MODEL_FEATURE_0" acronym="CP15_MEMORY_MODEL_FEATURE_0" width="32" description="" />
+      <register id="CP15_MEMORY_MODEL_FEATURE_1" acronym="CP15_MEMORY_MODEL_FEATURE_1" width="32" description="" />
+      <register id="CP15_MEMORY_MODEL_FEATURE_2" acronym="CP15_MEMORY_MODEL_FEATURE_2" width="32" description="" />
+      <register id="CP15_MEMORY_MODEL_FEATURE_3" acronym="CP15_MEMORY_MODEL_FEATURE_3" width="32" description="" />
+      <register id="CP15_INSTRUCTION_SET_ATTRIBUTE_0" acronym="CP15_INSTRUCTION_SET_ATTRIBUTE_0" width="32" description="" />
+      <register id="CP15_INSTRUCTION_SET_ATTRIBUTE_1" acronym="CP15_INSTRUCTION_SET_ATTRIBUTE_1" width="32" description="" />
+      <register id="CP15_INSTRUCTION_SET_ATTRIBUTE_2" acronym="CP15_INSTRUCTION_SET_ATTRIBUTE_2" width="32" description="" />
+      <register id="CP15_INSTRUCTION_SET_ATTRIBUTE_3" acronym="CP15_INSTRUCTION_SET_ATTRIBUTE_3" width="32" description="" />
+      <register id="CP15_INSTRUCTION_SET_ATTRIBUTE_4" acronym="CP15_INSTRUCTION_SET_ATTRIBUTE_4" width="32" description="" />
+      <register id="CP15_INSTRUCTION_SET_ATTRIBUTE_5" acronym="CP15_INSTRUCTION_SET_ATTRIBUTE_5" width="32" description="" />
+      <register id="CP15_CURRENT_CACHE_SIZE_ID" acronym="CP15_CURRENT_CACHE_SIZE_ID" width="32" description="" />
+      <register id="CP15_CURRENT_CACHE_LEVEL_ID" acronym="CP15_CURRENT_CACHE_LEVEL_ID" width="32" description="" />
+      <register id="CP15_CACHE_SIZE_SELECTION" acronym="CP15_CACHE_SIZE_SELECTION" width="32" description="" />
+      <register id="CP15_SYSTEM_CONTROL" acronym="CP15_SYSTEM_CONTROL" width="32" description="" />
+      <register id="CP15_AUXILIARY_CONTROL" acronym="CP15_AUXILIARY_CONTROL" width="32" description="" />
+      <register id="CP15_COPROCESSOR_ACCESS" acronym="CP15_COPROCESSOR_ACCESS" width="32" description="" />
+      <register id="CP15_DATA_FAULT_STATUS" acronym="CP15_DATA_FAULT_STATUS" width="32" description="" />
+      <register id="CP15_INSTRUCTION_FAULT_STATUS" acronym="CP15_INSTRUCTION_FAULT_STATUS" width="32" description="" />
+      <register id="CP15_AUX_DATA_FAULT_STATUS" acronym="CP15_AUX_DATA_FAULT_STATUS" width="32" description="" />
+      <register id="CP15_AUX_INSTRUCTION_FAULT_STATUS" acronym="CP15_AUX_INSTRUCTION_FAULT_STATUS" width="32" description="" />
+      <register id="CP15_DATA_FAULT_ADDRESS" acronym="CP15_DATA_FAULT_ADDRESS" width="32" description="" />
+      <register id="CP15_INSTRUCTION_FAULT_ADDRESS" acronym="CP15_INSTRUCTION_FAULT_ADDRESS" width="32" description="" />
+      <register id="CP15_MPU_REGION_BASE_ADDRESS" acronym="CP15_MPU_REGION_BASE_ADDRESS" width="32" description="" />
+      <register id="CP15_MPU_REGION_SIZE_ENABLE" acronym="CP15_MPU_REGION_SIZE_ENABLE" width="32" description="" />
+      <register id="CP15_MPU_REGION_ACCESS" acronym="CP15_MPU_REGION_ACCESS" width="32" description="" />
+      <register id="CP15_MPU_REGION_NUMBER" acronym="CP15_MPU_REGION_NUMBER" width="32" description="" />
+      <register id="CP15_NOP" acronym="CP15_NOP" width="32" description="" />
+      <register id="CP15_INVALIDATE_ENTIRE_ICACHE" acronym="CP15_INVALIDATE_ENTIRE_ICACHE" width="32" description="" />
+      <register id="CP15_ICACHE_INVALIDATE_ALL_TO_POU" acronym="CP15_ICACHE_INVALIDATE_ALL_TO_POU" width="32" description="" />
+      <register id="CP15_ICACHE_FLUSH_PREFETCH_BUFFER" acronym="CP15_ICACHE_FLUSH_PREFETCH_BUFFER" width="32" description="" />
+      <register id="CP15_ICACHE_INVALIDATE_ENTIRE_BPA" acronym="CP15_ICACHE_INVALIDATE_ENTIRE_BPA" width="32" description="" />
+      <register id="CP15_ICACHE_INVALIDATE_ADDRESS_FROM_BPA" acronym="CP15_ICACHE_INVALIDATE_ADDRESS_FROM_BPA" width="32" description="" />
+      <register id="CP15_DCACHE_INVALIDATE_LINE_BY_PHYSICAL_ADDRESS" acronym="CP15_DCACHE_INVALIDATE_LINE_BY_PHYSICAL_ADDRESS" width="32" description="" />
+      <register id="CP15_DCACHE_INVALIDATE_LINE_BY_SETWAY" acronym="CP15_DCACHE_INVALIDATE_LINE_BY_SETWAY" width="32" description="" />
+      <register id="CP15_DCACHE_CLEAN_LINE_BY_PHYSICAL_ADDRESS" acronym="CP15_DCACHE_CLEAN_LINE_BY_PHYSICAL_ADDRESS" width="32" description="" />
+      <register id="CP15_DCACHE_CLEAN_LINE_BY_SETWAY" acronym="CP15_DCACHE_CLEAN_LINE_BY_SETWAY" width="32" description="" />
+      <register id="CP15_DATA_SYNCHRONIZATION_BARRIER" acronym="CP15_DATA_SYNCHRONIZATION_BARRIER" width="32" description="" />
+      <register id="CP15_DATA_MEMORY_BARRIER" acronym="CP15_DATA_MEMORY_BARRIER" width="32" description="" />
+      <register id="CP15_DCACHE_CLEAN_BYPATOPOU" acronym="CP15_DCACHE_CLEAN_BYPATOPOU" width="32" description="" />
+      <register id="CP15_DCACHE_CLEAN_INVALIDATE_LINE_BYPATOPOU" acronym="CP15_DCACHE_CLEAN_INVALIDATE_LINE_BYPATOPOU" width="32" description="" />
+      <register id="CP15_DCACHE_CLEAN_INVALIDATE_LINE_BY_SETWAY" acronym="CP15_DCACHE_CLEAN_INVALIDATE_LINE_BY_SETWAY" width="32" description="" />
+      <register id="CP15_TCM_BTCM_REGION" acronym="CP15_TCM_BTCM_REGION" width="32" description="" />
+      <register id="CP15_TCM_ATCM_REGION" acronym="CP15_TCM_ATCM_REGION" width="32" description="" />
+      <register id="CP15_TCM_TCM_SELECTION" acronym="CP15_TCM_TCM_SELECTION" width="32" description="" />
+      <register id="CP15_PERFORMANCE_MONITOR_CONTROL" acronym="CP15_PERFORMANCE_MONITOR_CONTROL" width="32" description="" />
+      <register id="CP15_COUNT_ENABLE_SET" acronym="CP15_COUNT_ENABLE_SET" width="32" description="" />
+      <register id="CP15_COUNT_ENABLE_CLEAR" acronym="CP15_COUNT_ENABLE_CLEAR" width="32" description="" />
+      <register id="CP15_OVERFLOW_FLAG_STATUS" acronym="CP15_OVERFLOW_FLAG_STATUS" width="32" description="" />
+      <register id="CP15_SOFTWARE_INCREMENT" acronym="CP15_SOFTWARE_INCREMENT" width="32" description="" />
+      <register id="CP15_COUNTER_SELECTION" acronym="CP15_COUNTER_SELECTION" width="32" description="" />
+      <register id="CP15_CYCLE_COUNT" acronym="CP15_CYCLE_COUNT" width="32" description="" />
+      <register id="CP15_EVENT_SELECTION" acronym="CP15_EVENT_SELECTION" width="32" description="" />
+      <register id="CP15_PERFORMANCE_MONITOR_COUNT" acronym="CP15_PERFORMANCE_MONITOR_COUNT" width="32" description="" />
+      <register id="CP15_USER_ENABLE" acronym="CP15_USER_ENABLE" width="32" description="" />
+      <register id="CP15_INTERRUPT_ENABLE_SET" acronym="CP15_INTERRUPT_ENABLE_SET" width="32" description="" />
+      <register id="CP15_INTERRUPT_ENABLE_CLEAR" acronym="CP15_INTERRUPT_ENABLE_CLEAR" width="32" description="" />
+      <register id="CP15_SLAVE_PORT_CONTROL" acronym="CP15_SLAVE_PORT_CONTROL" width="32" description="" />
+      <register id="CP15_FCSE_PID" acronym="CP15_FCSE_PID" width="32" description="" />
+      <register id="CP15_CONTEXT_ID" acronym="CP15_CONTEXT_ID" width="32" description="" />
+      <register id="CP15_USER_READ_WRITE_THREAD_PROCESS_ID" acronym="CP15_USER_READ_WRITE_THREAD_PROCESS_ID" width="32" description="" />
+      <register id="CP15_USER_READ_ONLY_THREAD_PROCESS_ID" acronym="CP15_USER_READ_ONLY_THREAD_PROCESS_ID" width="32" description="" />
+      <register id="CP15_PRIVILEDGED_ONLY_THREAD_PROCESS_ID" acronym="CP15_PRIVILEDGED_ONLY_THREAD_PROCESS_ID" width="32" description="" />
+      <register id="CP15_SECONDARY_AUXILIARY_CONTROL" acronym="CP15_SECONDARY_AUXILIARY_CONTROL" width="32" description="" />
+      <register id="CP15_NVAL_IRQ_ENABLE_SET" acronym="CP15_NVAL_IRQ_ENABLE_SET" width="32" description="" />
+      <register id="CP15_NVAL_FIQ_ENABLE_SET" acronym="CP15_NVAL_FIQ_ENABLE_SET" width="32" description="" />
+      <register id="CP15_NVAL_RESET_ENABLE_SET" acronym="CP15_NVAL_RESET_ENABLE_SET" width="32" description="" />
+      <register id="CP15_NVAL_DEBUG_REQUEST_ENABLE_SET" acronym="CP15_NVAL_DEBUG_REQUEST_ENABLE_SET" width="32" description="" />
+      <register id="CP15_NVAL_IRQ_ENABLE_CLEAR" acronym="CP15_NVAL_IRQ_ENABLE_CLEAR" width="32" description="" />
+      <register id="CP15_NVAL_FIQ_ENABLE_CLEAR" acronym="CP15_NVAL_FIQ_ENABLE_CLEAR" width="32" description="" />
+      <register id="CP15_NVAL_RESET_ENABLE_CLEAR" acronym="CP15_NVAL_RESET_ENABLE_CLEAR" width="32" description="" />
+      <register id="CP15_NVAL_DEBUG_REQUEST_ENABLE_CLEAR" acronym="CP15_NVAL_DEBUG_REQUEST_ENABLE_CLEAR" width="32" description="" />
+      <register id="CP15_BUILD_OPTIONS_1" acronym="CP15_BUILD_OPTIONS_1" width="32" description="" />
+      <register id="CP15_BUILD_OPTIONS_2" acronym="CP15_BUILD_OPTIONS_2" width="32" description="" />
+      <register id="CP15_CORRECTABLE_FAULT_LOCATION" acronym="CP15_CORRECTABLE_FAULT_LOCATION" width="32" description="" />
+      <register id="CP15_INVALIDATE_ALL_DATA_CACHE" acronym="CP15_INVALIDATE_ALL_DATA_CACHE" width="32" description="" />
+      <register id="CP15_CACHE_SIZE_OVERRIDE" acronym="CP15_CACHE_SIZE_OVERRIDE" width="32" description="" />
+      <!-- END Coprocessor 15 Registers based on CortexR4 and CortexR4F TRM, Rev r1p3 -->
+
+      <register id="DAP_DP_ADDR" acronym="DAP_DP_ADDR" width="32" description=""/>
+      <register id="DAP_DP_CSW" acronym="DAP_DP_CSW" width="32" description=""/>
+      <register id="DAP_APB_AP_CSW" acronym="DAP_APB_AP_CSW" width="32" description=""/>
+      <register id="DAP_APB_AP_TAR" acronym="DAP_APB_AP_TAR" width="32" description=""/>
+      <register id="DAP_APB_AP_DRW" acronym="DAP_APB_AP_DRW" width="32" description=""/>
+      <register id="DAP_APB_AP_BD0" acronym="DAP_APB_AP_BD0" width="32" description=""/>
+      <register id="DAP_APB_AP_BD1" acronym="DAP_APB_AP_BD1" width="32" description=""/>
+      <register id="DAP_APB_AP_BD2" acronym="DAP_APB_AP_BD2" width="32" description=""/>
+      <register id="DAP_APB_AP_BD3" acronym="DAP_APB_AP_BD3" width="32" description=""/>
+      <register id="DAP_APB_AP_ROM" acronym="DAP_APB_AP_ROM" width="32" description=""/>
+      <register id="DAP_APB_AP_IDR" acronym="DAP_APB_AP_IDR" width="32" description=""/>
+      <register id="DAP_AHB_AP_CSW" acronym="DAP_AHB_AP_CSW" width="32" description=""/>
+      <register id="DAP_AHB_AP_TAR" acronym="DAP_AHB_AP_TAR" width="32" description=""/>
+      <register id="DAP_AHB_AP_DRW" acronym="DAP_AHB_AP_DRW" width="32" description=""/>
+      <register id="DAP_AHB_AP_BD0" acronym="DAP_AHB_AP_BD0" width="32" description=""/>
+      <register id="DAP_AHB_AP_BD1" acronym="DAP_AHB_AP_BD1" width="32" description=""/>
+      <register id="DAP_AHB_AP_BD2" acronym="DAP_AHB_AP_BD2" width="32" description=""/>
+      <register id="DAP_AHB_AP_BD3" acronym="DAP_AHB_AP_BD3" width="32" description=""/>
+      <register id="DAP_AHB_AP_ROM" acronym="DAP_AHB_AP_ROM" width="32" description=""/>
+      <register id="DAP_AHB_AP_IDR" acronym="DAP_AHB_AP_IDR" width="32" description=""/>
+      <register id="REG_DIDR" acronym="REG_DIDR" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_VERSION" acronym="BPWP_VERSION" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_NUM_BP_AVAILABLE" acronym="BPWP_NUM_BP_AVAILABLE" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_NUM_BP_WITH_CONTEXT" acronym="BPWP_NUM_BP_WITH_CONTEXT" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_FIRST_CONTEXT_BP" acronym="BPWP_FIRST_CONTEXT_BP" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_NUM_WP_AVAILABLE" acronym="BPWP_NUM_WP_AVAILABLE" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_BP_ADDR0" acronym="BPWP_BP_ADDR0" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_BP_ADDR1" acronym="BPWP_BP_ADDR1" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_BP_ADDR2" acronym="BPWP_BP_ADDR2" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_BP_ADDR3" acronym="BPWP_BP_ADDR3" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_BP_ADDR4" acronym="BPWP_BP_ADDR4" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_BP_ADDR5" acronym="BPWP_BP_ADDR5" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_BP_ADDR6" acronym="BPWP_BP_ADDR6" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_BP_ADDR7" acronym="BPWP_BP_ADDR7" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_BP_ADDR8" acronym="BPWP_BP_ADDR8" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_BP_ADDR9" acronym="BPWP_BP_ADDR9" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_BP_ADDR10" acronym="BPWP_BP_ADDR10" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_BP_ADDR11" acronym="BPWP_BP_ADDR11" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_BP_ADDR12" acronym="BPWP_BP_ADDR12" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_BP_ADDR13" acronym="BPWP_BP_ADDR13" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_BP_ADDR14" acronym="BPWP_BP_ADDR14" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_BP_ADDR15" acronym="BPWP_BP_ADDR15" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_BP_CNTL0" acronym="BPWP_BP_CNTL0" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_BP_CNTL1" acronym="BPWP_BP_CNTL1" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_BP_CNTL2" acronym="BPWP_BP_CNTL2" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_BP_CNTL3" acronym="BPWP_BP_CNTL3" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_BP_CNTL4" acronym="BPWP_BP_CNTL4" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_BP_CNTL5" acronym="BPWP_BP_CNTL5" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_BP_CNTL6" acronym="BPWP_BP_CNTL6" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_BP_CNTL7" acronym="BPWP_BP_CNTL7" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_BP_CNTL8" acronym="BPWP_BP_CNTL8" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_BP_CNTL9" acronym="BPWP_BP_CNTL9" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_BP_CNTL10" acronym="BPWP_BP_CNTL10" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_BP_CNTL11" acronym="BPWP_BP_CNTL11" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_BP_CNTL12" acronym="BPWP_BP_CNTL12" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_BP_CNTL13" acronym="BPWP_BP_CNTL13" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_BP_CNTL14" acronym="BPWP_BP_CNTL14" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_BP_CNTL15" acronym="BPWP_BP_CNTL15" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_WP_ADDR0" acronym="BPWP_WP_ADDR0" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_WP_ADDR1" acronym="BPWP_WP_ADDR1" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_WP_ADDR2" acronym="BPWP_WP_ADDR2" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_WP_ADDR3" acronym="BPWP_WP_ADDR3" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_WP_ADDR4" acronym="BPWP_WP_ADDR4" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_WP_ADDR5" acronym="BPWP_WP_ADDR5" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_WP_ADDR6" acronym="BPWP_WP_ADDR6" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_WP_ADDR7" acronym="BPWP_WP_ADDR7" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_WP_ADDR8" acronym="BPWP_WP_ADDR8" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_WP_ADDR9" acronym="BPWP_WP_ADDR9" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_WP_ADDR10" acronym="BPWP_WP_ADDR10" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_WP_ADDR11" acronym="BPWP_WP_ADDR11" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_WP_ADDR12" acronym="BPWP_WP_ADDR12" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_WP_ADDR13" acronym="BPWP_WP_ADDR13" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_WP_ADDR14" acronym="BPWP_WP_ADDR14" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_WP_ADDR15" acronym="BPWP_WP_ADDR15" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_WP_CNTL0" acronym="BPWP_WP_CNTL0" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_WP_CNTL1" acronym="BPWP_WP_CNTL1" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_WP_CNTL2" acronym="BPWP_WP_CNTL2" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_WP_CNTL3" acronym="BPWP_WP_CNTL3" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_WP_CNTL4" acronym="BPWP_WP_CNTL4" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_WP_CNTL5" acronym="BPWP_WP_CNTL5" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_WP_CNTL6" acronym="BPWP_WP_CNTL6" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_WP_CNTL7" acronym="BPWP_WP_CNTL7" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_WP_CNTL8" acronym="BPWP_WP_CNTL8" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_WP_CNTL9" acronym="BPWP_WP_CNTL9" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_WP_CNTL10" acronym="BPWP_WP_CNTL10" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_WP_CNTL11" acronym="BPWP_WP_CNTL11" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_WP_CNTL12" acronym="BPWP_WP_CNTL12" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_WP_CNTL13" acronym="BPWP_WP_CNTL13" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_WP_CNTL14" acronym="BPWP_WP_CNTL14" width="32" description="" rwaccess="RW,RW"/>
+      <register id="BPWP_WP_CNTL15" acronym="BPWP_WP_CNTL15" width="32" description="" rwaccess="RW,RW"/>
+      <register id="REG_ANALYSIS_EVENT_STATUS" acronym="REG_ANALYSIS_EVENT_STATUS" width="32" description=""/>
+      <register id="REG_FOR_CTI_WORKAROUND" acronym="REG_FOR_CTI_WORKAROUND" width="32" description=""/>
+      <register id="FPSID" acronym="FPSID" width="32" description=""/>
+      <register id="FPSCR" acronym="FPSCR" width="32" description=""/>
+      <register id="FPEXC" acronym="FPEXC" width="32" description=""/>
+      <register id="MVFR0" acronym="MVFR0" width="32" description=""/>
+      <register id="MVFR1" acronym="MVFR1" width="32" description=""/>
+      <register id="VFP_SYSTEM_FPSID" acronym="VFP_SYSTEM_FPSID" width="32" description=""/>
+      <register id="VFP_SYSTEM_FPSCR" acronym="VFP_SYSTEM_FPSCR" width="32" description=""/>
+      <register id="VFP_SYSTEM_FPEXC" acronym="VFP_SYSTEM_FPEXC" width="32" description=""/>
+      <register id="VFP_SYSTEM_MVFR0" acronym="VFP_SYSTEM_MVFR0" width="32" description=""/>
+      <register id="VFP_SYSTEM_MVFR1" acronym="VFP_SYSTEM_MVFR1" width="32" description=""/>
+      <register id="VFP_SP_S0" acronym="VFP_SP_S0" width="32" description=""/>
+      <register id="VFP_SP_S1" acronym="VFP_SP_S1" width="32" description=""/>
+      <register id="VFP_SP_S2" acronym="VFP_SP_S2" width="32" description=""/>
+      <register id="VFP_SP_S3" acronym="VFP_SP_S3" width="32" description=""/>
+      <register id="VFP_SP_S4" acronym="VFP_SP_S4" width="32" description=""/>
+      <register id="VFP_SP_S5" acronym="VFP_SP_S5" width="32" description=""/>
+      <register id="VFP_SP_S6" acronym="VFP_SP_S6" width="32" description=""/>
+      <register id="VFP_SP_S7" acronym="VFP_SP_S7" width="32" description=""/>
+      <register id="VFP_SP_S8" acronym="VFP_SP_S8" width="32" description=""/>
+      <register id="VFP_SP_S9" acronym="VFP_SP_S9" width="32" description=""/>
+      <register id="VFP_SP_S10" acronym="VFP_SP_S10" width="32" description=""/>
+      <register id="VFP_SP_S11" acronym="VFP_SP_S11" width="32" description=""/>
+      <register id="VFP_SP_S12" acronym="VFP_SP_S12" width="32" description=""/>
+      <register id="VFP_SP_S13" acronym="VFP_SP_S13" width="32" description=""/>
+      <register id="VFP_SP_S14" acronym="VFP_SP_S14" width="32" description=""/>
+      <register id="VFP_SP_S15" acronym="VFP_SP_S15" width="32" description=""/>
+      <register id="VFP_SP_S16" acronym="VFP_SP_S16" width="32" description=""/>
+      <register id="VFP_SP_S17" acronym="VFP_SP_S17" width="32" description=""/>
+      <register id="VFP_SP_S18" acronym="VFP_SP_S18" width="32" description=""/>
+      <register id="VFP_SP_S19" acronym="VFP_SP_S19" width="32" description=""/>
+      <register id="VFP_SP_S20" acronym="VFP_SP_S20" width="32" description=""/>
+      <register id="VFP_SP_S21" acronym="VFP_SP_S21" width="32" description=""/>
+      <register id="VFP_SP_S22" acronym="VFP_SP_S22" width="32" description=""/>
+      <register id="VFP_SP_S23" acronym="VFP_SP_S23" width="32" description=""/>
+      <register id="VFP_SP_S24" acronym="VFP_SP_S24" width="32" description=""/>
+      <register id="VFP_SP_S25" acronym="VFP_SP_S25" width="32" description=""/>
+      <register id="VFP_SP_S26" acronym="VFP_SP_S26" width="32" description=""/>
+      <register id="VFP_SP_S27" acronym="VFP_SP_S27" width="32" description=""/>
+      <register id="VFP_SP_S28" acronym="VFP_SP_S28" width="32" description=""/>
+      <register id="VFP_SP_S29" acronym="VFP_SP_S29" width="32" description=""/>
+      <register id="VFP_SP_S30" acronym="VFP_SP_S30" width="32" description=""/>
+      <register id="VFP_SP_S31" acronym="VFP_SP_S31" width="32" description=""/>
+      <register id="VFP_DP_D0_L" acronym="VFP_DP_D0_L" width="32" description=""/>
+      <register id="VFP_DP_D0_H" acronym="VFP_DP_D0_H" width="32" description=""/>
+      <register id="VFP_DP_D1_L" acronym="VFP_DP_D1_L" width="32" description=""/>
+      <register id="VFP_DP_D1_H" acronym="VFP_DP_D1_H" width="32" description=""/>
+      <register id="VFP_DP_D2_L" acronym="VFP_DP_D2_L" width="32" description=""/>
+      <register id="VFP_DP_D2_H" acronym="VFP_DP_D2_H" width="32" description=""/>
+      <register id="VFP_DP_D3_L" acronym="VFP_DP_D3_L" width="32" description=""/>
+      <register id="VFP_DP_D3_H" acronym="VFP_DP_D3_H" width="32" description=""/>
+      <register id="VFP_DP_D4_L" acronym="VFP_DP_D4_L" width="32" description=""/>
+      <register id="VFP_DP_D4_H" acronym="VFP_DP_D4_H" width="32" description=""/>
+      <register id="VFP_DP_D5_L" acronym="VFP_DP_D5_L" width="32" description=""/>
+      <register id="VFP_DP_D5_H" acronym="VFP_DP_D5_H" width="32" description=""/>
+      <register id="VFP_DP_D6_L" acronym="VFP_DP_D6_L" width="32" description=""/>
+      <register id="VFP_DP_D6_H" acronym="VFP_DP_D6_H" width="32" description=""/>
+      <register id="VFP_DP_D7_L" acronym="VFP_DP_D7_L" width="32" description=""/>
+      <register id="VFP_DP_D7_H" acronym="VFP_DP_D7_H" width="32" description=""/>
+      <register id="VFP_DP_D8_L" acronym="VFP_DP_D8_L" width="32" description=""/>
+      <register id="VFP_DP_D8_H" acronym="VFP_DP_D8_H" width="32" description=""/>
+      <register id="VFP_DP_D9_L" acronym="VFP_DP_D9_L" width="32" description=""/>
+      <register id="VFP_DP_D9_H" acronym="VFP_DP_D9_H" width="32" description=""/>
+      <register id="VFP_DP_D10_L" acronym="VFP_DP_D10_L" width="32" description=""/>
+      <register id="VFP_DP_D10_H" acronym="VFP_DP_D10_H" width="32" description=""/>
+      <register id="VFP_DP_D11_L" acronym="VFP_DP_D11_L" width="32" description=""/>
+      <register id="VFP_DP_D11_H" acronym="VFP_DP_D11_H" width="32" description=""/>
+      <register id="VFP_DP_D12_L" acronym="VFP_DP_D12_L" width="32" description=""/>
+      <register id="VFP_DP_D12_H" acronym="VFP_DP_D12_H" width="32" description=""/>
+      <register id="VFP_DP_D13_L" acronym="VFP_DP_D13_L" width="32" description=""/>
+      <register id="VFP_DP_D13_H" acronym="VFP_DP_D13_H" width="32" description=""/>
+      <register id="VFP_DP_D14_L" acronym="VFP_DP_D14_L" width="32" description=""/>
+      <register id="VFP_DP_D14_H" acronym="VFP_DP_D14_H" width="32" description=""/>
+      <register id="VFP_DP_D15_L" acronym="VFP_DP_D15_L" width="32" description=""/>
+      <register id="VFP_DP_D15_H" acronym="VFP_DP_D15_H" width="32" description=""/>
+      <register id="VFP_DP_D0" acronym="VFP_DP_D0" width="64" description=""/>
+      <register id="VFP_DP_D1" acronym="VFP_DP_D1" width="64" description=""/>
+      <register id="VFP_DP_D2" acronym="VFP_DP_D2" width="64" description=""/>
+      <register id="VFP_DP_D3" acronym="VFP_DP_D3" width="64" description=""/>
+      <register id="VFP_DP_D4" acronym="VFP_DP_D4" width="64" description=""/>
+      <register id="VFP_DP_D5" acronym="VFP_DP_D5" width="64" description=""/>
+      <register id="VFP_DP_D6" acronym="VFP_DP_D6" width="64" description=""/>
+      <register id="VFP_DP_D7" acronym="VFP_DP_D7" width="64" description=""/>
+      <register id="VFP_DP_D8" acronym="VFP_DP_D8" width="64" description=""/>
+      <register id="VFP_DP_D9" acronym="VFP_DP_D9" width="64" description=""/>
+      <register id="VFP_DP_D10" acronym="VFP_DP_D10" width="64" description=""/>
+      <register id="VFP_DP_D11" acronym="VFP_DP_D11" width="64" description=""/>
+      <register id="VFP_DP_D12" acronym="VFP_DP_D12" width="64" description=""/>
+      <register id="VFP_DP_D13" acronym="VFP_DP_D13" width="64" description=""/>
+      <register id="VFP_DP_D14" acronym="VFP_DP_D14" width="64" description=""/>
+      <register id="VFP_DP_D15" acronym="VFP_DP_D15" width="64" description=""/>
+      
+        <register id="ETM_CONTROL" acronym="ETM_CONTROL" width="32" description=""/>
+        <register id="ETM_CONFIG" acronym="ETM_CONFIG" width="32" description=""/>
+        <register id="ETM_TRIG_EVNT" acronym="ETM_TRIG_EVNT" width="32" description=""/>
+        <register id="ETM_ASIC_CONTROL" acronym="ETM_ASIC_CONTROL" width="32" description=""/>
+        <register id="ETM_STATUS" acronym="ETM_STATUS" width="32" description=""/>
+        <register id="ETM_SYSTEM_CONFIG" acronym="ETM_SYSTEM_CONFIG" width="32" description=""/>
+        <register id="ETM_START_STOP" acronym="ETM_START_STOP" width="32" description=""/>
+        <register id="ETM_TRACE_ENABLE_CTL2" acronym="ETM_TRACE_ENABLE_CTL2" width="32" description=""/>
+        <register id="ETM_TRACE_ENBL_EVT" acronym="ETM_TRACE_ENBL_EVT" width="32" description=""/>
+        <register id="ETM_TRACE_ENBL_RGN" acronym="ETM_TRACE_ENBL_RGN" width="32" description=""/>
+        <register id="ETM_FIFO_FULL_RGN" acronym="ETM_FIFO_FULL_RGN" width="32" description=""/>
+        <register id="ETM_FIFO_FULL_LVL" acronym="ETM_FIFO_FULL_LVL" width="32" description=""/>
+        <register id="ETM_VIEW_DATA_EVT" acronym="ETM_VIEW_DATA_EVT" width="32" description=""/>
+        <register id="ETM_VIEW_DATA_CTL1" acronym="ETM_VIEW_DATA_CTL1" width="32" description=""/>
+        <register id="ETM_VIEW_DATA_CTL2" acronym="ETM_VIEW_DATA_CTL2" width="32" description=""/>
+        <register id="ETM_VIEW_DATA_CTL3" acronym="ETM_VIEW_DATA_CTL3" width="32" description=""/>
+        <register id="ETM_ADDR_CMP1" acronym="ETM_ADDR_CMP1" width="32" description=""/>
+        <register id="ETM_ADDR_CMP2" acronym="ETM_ADDR_CMP2" width="32" description=""/>
+        <register id="ETM_ADDR_CMP3" acronym="ETM_ADDR_CMP3" width="32" description=""/>
+        <register id="ETM_ADDR_CMP4" acronym="ETM_ADDR_CMP4" width="32" description=""/>
+        <register id="ETM_ADDR_CMP5" acronym="ETM_ADDR_CMP5" width="32" description=""/>
+        <register id="ETM_ADDR_CMP6" acronym="ETM_ADDR_CMP6" width="32" description=""/>
+        <register id="ETM_ADDR_CMP7" acronym="ETM_ADDR_CMP7" width="32" description=""/>
+        <register id="ETM_ADDR_CMP8" acronym="ETM_ADDR_CMP8" width="32" description=""/>
+        <register id="ETM_ADDR_CMP9" acronym="ETM_ADDR_CMP9" width="32" description=""/>
+        <register id="ETM_ADDR_CMP10" acronym="ETM_ADDR_CMP10" width="32" description=""/>
+        <register id="ETM_ADDR_CMP11" acronym="ETM_ADDR_CMP11" width="32" description=""/>
+        <register id="ETM_ADDR_CMP12" acronym="ETM_ADDR_CMP12" width="32" description=""/>
+        <register id="ETM_ADDR_CMP13" acronym="ETM_ADDR_CMP13" width="32" description=""/>
+        <register id="ETM_ADDR_CMP14" acronym="ETM_ADDR_CMP14" width="32" description=""/>
+        <register id="ETM_ADDR_CMP15" acronym="ETM_ADDR_CMP15" width="32" description=""/>
+        <register id="ETM_ADDR_CMP16" acronym="ETM_ADDR_CMP16" width="32" description=""/>
+        <register id="ETM_ADDR_ACC1" acronym="ETM_ADDR_ACC1" width="32" description=""/>
+        <register id="ETM_ADDR_ACC2" acronym="ETM_ADDR_ACC2" width="32" description=""/>
+        <register id="ETM_ADDR_ACC3" acronym="ETM_ADDR_ACC3" width="32" description=""/>
+        <register id="ETM_ADDR_ACC4" acronym="ETM_ADDR_ACC4" width="32" description=""/>
+        <register id="ETM_ADDR_ACC5" acronym="ETM_ADDR_ACC5" width="32" description=""/>
+        <register id="ETM_ADDR_ACC6" acronym="ETM_ADDR_ACC6" width="32" description=""/>
+        <register id="ETM_ADDR_ACC7" acronym="ETM_ADDR_ACC7" width="32" description=""/>
+        <register id="ETM_ADDR_ACC8" acronym="ETM_ADDR_ACC8" width="32" description=""/>
+        <register id="ETM_ADDR_ACC9" acronym="ETM_ADDR_ACC9" width="32" description=""/>
+        <register id="ETM_ADDR_ACC10" acronym="ETM_ADDR_ACC10" width="32" description=""/>
+        <register id="ETM_ADDR_ACC11" acronym="ETM_ADDR_ACC11" width="32" description=""/>
+        <register id="ETM_ADDR_ACC12" acronym="ETM_ADDR_ACC12" width="32" description=""/>
+        <register id="ETM_ADDR_ACC13" acronym="ETM_ADDR_ACC13" width="32" description=""/>
+        <register id="ETM_ADDR_ACC14" acronym="ETM_ADDR_ACC14" width="32" description=""/>
+        <register id="ETM_ADDR_ACC15" acronym="ETM_ADDR_ACC15" width="32" description=""/>
+        <register id="ETM_ADDR_ACC16" acronym="ETM_ADDR_ACC16" width="32" description=""/>
+        <register id="ETM_DATA_CMP1" acronym="ETM_DATA_CMP1" width="32" description=""/>
+        <register id="ETM_DATA_CMP2" acronym="ETM_DATA_CMP2" width="32" description=""/>
+        <register id="ETM_DATA_CMP3" acronym="ETM_DATA_CMP3" width="32" description=""/>
+        <register id="ETM_DATA_CMP4" acronym="ETM_DATA_CMP4" width="32" description=""/>
+        <register id="ETM_DATA_CMP5" acronym="ETM_DATA_CMP5" width="32" description=""/>
+        <register id="ETM_DATA_CMP6" acronym="ETM_DATA_CMP6" width="32" description=""/>
+        <register id="ETM_DATA_CMP7" acronym="ETM_DATA_CMP7" width="32" description=""/>
+        <register id="ETM_DATA_CMP8" acronym="ETM_DATA_CMP8" width="32" description=""/>
+        <register id="ETM_DATA_MSK1" acronym="ETM_DATA_MSK1" width="32" description=""/>
+        <register id="ETM_DATA_MSK2" acronym="ETM_DATA_MSK2" width="32" description=""/>
+        <register id="ETM_DATA_MSK3" acronym="ETM_DATA_MSK3" width="32" description=""/>
+        <register id="ETM_DATA_MSK4" acronym="ETM_DATA_MSK4" width="32" description=""/>
+        <register id="ETM_DATA_MSK5" acronym="ETM_DATA_MSK5" width="32" description=""/>
+        <register id="ETM_DATA_MSK6" acronym="ETM_DATA_MSK6" width="32" description=""/>
+        <register id="ETM_DATA_MSK7" acronym="ETM_DATA_MSK7" width="32" description=""/>
+        <register id="ETM_DATA_MSK8" acronym="ETM_DATA_MSK8" width="32" description=""/>
+        <register id="ETM_INIT_CNT1" acronym="ETM_INIT_CNT1" width="32" description=""/>
+        <register id="ETM_INIT_CNT2" acronym="ETM_INIT_CNT2" width="32" description=""/>
+        <register id="ETM_INIT_CNT3" acronym="ETM_INIT_CNT3" width="32" description=""/>
+        <register id="ETM_INIT_CNT4" acronym="ETM_INIT_CNT4" width="32" description=""/>
+        <register id="ETM_CNT_ENBL1" acronym="ETM_CNT_ENBL1" width="32" description=""/>
+        <register id="ETM_CNT_ENBL2" acronym="ETM_CNT_ENBL2" width="32" description=""/>
+        <register id="ETM_CNT_ENBL3" acronym="ETM_CNT_ENBL3" width="32" description=""/>
+        <register id="ETM_CNT_ENBL4" acronym="ETM_CNT_ENBL4" width="32" description=""/>
+        <register id="ETM_CNT_RELD1" acronym="ETM_CNT_RELD1" width="32" description=""/>
+        <register id="ETM_CNT_RELD2" acronym="ETM_CNT_RELD2" width="32" description=""/>
+        <register id="ETM_CNT_RELD3" acronym="ETM_CNT_RELD3" width="32" description=""/>
+        <register id="ETM_CNT_RELD4" acronym="ETM_CNT_RELD4" width="32" description=""/>
+        <register id="ETM_CNT_VAL1" acronym="ETM_CNT_VAL1" width="32" description=""/>
+        <register id="ETM_CNT_VAL2" acronym="ETM_CNT_VAL2" width="32" description=""/>
+        <register id="ETM_CNT_VAL3" acronym="ETM_CNT_VAL3" width="32" description=""/>
+        <register id="ETM_CNT_VAL4" acronym="ETM_CNT_VAL4" width="32" description=""/>
+        <register id="ETM_SEQ_STATE1" acronym="ETM_SEQ_STATE1" width="32" description=""/>
+        <register id="ETM_SEQ_STATE2" acronym="ETM_SEQ_STATE2" width="32" description=""/>
+        <register id="ETM_SEQ_STATE3" acronym="ETM_SEQ_STATE3" width="32" description=""/>
+        <register id="ETM_SEQ_STATE4" acronym="ETM_SEQ_STATE4" width="32" description=""/>
+        <register id="ETM_SEQ_STATE5" acronym="ETM_SEQ_STATE5" width="32" description=""/>
+        <register id="ETM_SEQ_STATE6" acronym="ETM_SEQ_STATE6" width="32" description=""/>
+        <register id="ETM_SEQ_CURRENT" acronym="ETM_SEQ_CURRENT" width="32" description=""/>
+        <register id="ETM_EXTN_OUTP1" acronym="ETM_EXTN_OUTP1" width="32" description=""/>
+        <register id="ETM_EXTN_OUTP2" acronym="ETM_EXTN_OUTP2" width="32" description=""/>
+        <register id="ETM_EXTN_OUTP3" acronym="ETM_EXTN_OUTP3" width="32" description=""/>
+        <register id="ETM_EXTN_OUTP4" acronym="ETM_EXTN_OUTP4" width="32" description=""/>
+        <register id="ETM_CONTEXT_ID_VAL1" acronym="ETM_CONTEXT_ID_VAL1" width="32" description=""/>
+        <register id="ETM_CONTEXT_ID_VAL2" acronym="ETM_CONTEXT_ID_VAL2" width="32" description=""/>
+        <register id="ETM_CONTEXT_ID_VAL3" acronym="ETM_CONTEXT_ID_VAL3" width="32" description=""/>
+        <register id="ETM_CONTEXT_ID_MASK" acronym="ETM_CONTEXT_ID_MASK" width="32" description=""/>
+        <register id="ETM_IMPL_SPEC1" acronym="ETM_IMPL_SPEC1" width="32" description=""/>
+        <register id="ETM_IMPL_SPEC2" acronym="ETM_IMPL_SPEC2" width="32" description=""/>
+        <register id="ETM_IMPL_SPEC3" acronym="ETM_IMPL_SPEC3" width="32" description=""/>
+        <register id="ETM_IMPL_SPEC4" acronym="ETM_IMPL_SPEC4" width="32" description=""/>
+        <register id="ETM_IMPL_SPEC5" acronym="ETM_IMPL_SPEC5" width="32" description=""/>
+        <register id="ETM_IMPL_SPEC6" acronym="ETM_IMPL_SPEC6" width="32" description=""/>
+        <register id="ETM_IMPL_SPEC7" acronym="ETM_IMPL_SPEC7" width="32" description=""/>
+        <register id="ETM_IMPL_SPEC8" acronym="ETM_IMPL_SPEC8" width="32" description=""/>
+        <register id="ETM_SYNCH_FREQ" acronym="ETM_SYNCH_FREQ" width="32" description=""/>
+        <register id="ETM_ID" acronym="ETM_ID" width="32" description=""/>
+        <register id="ETM_CONFIG_EXT" acronym="ETM_CONFIG_EXT" width="32" description=""/>
+        <register id="ETM_EXT_INPUT_SEL" acronym="ETM_EXT_INPUT_SEL" width="32" description=""/>
+        <register id="ETM_TRACE_START_STOP_EICE" acronym="ETM_TRACE_START_STOP_EICE" width="32" description=""/>
+        <register id="ETM_EICE_BEHAVE_CONTROL" acronym="ETM_EICE_BEHAVE_CONTROL" width="32" description=""/>
+        <register id="ETM_CS_TRACE_ID" acronym="ETM_CS_TRACE_ID" width="32" description=""/>
+        <register id="ETM_OSLOCK_ACCESS" acronym="ETM_OSLOCK_ACCESS" width="32" description=""/>
+        <register id="ETM_OSLOCK_STATUS" acronym="ETM_OSLOCK_STATUS" width="32" description=""/>
+        <register id="ETM_OSSAVE_RESTORE" acronym="ETM_OSSAVE_RESTORE" width="32" description=""/>
+        <register id="ETM_POWER_DOWN_STATUS" acronym="ETM_POWER_DOWN_STATUS" width="32" description=""/>
+        <register id="ETM_INTG_MODE_CNTL" acronym="ETM_INTG_MODE_CNTL" width="32" description=""/>
+        <register id="ETM_CLAIM_TAG_SET" acronym="ETM_CLAIM_TAG_SET" width="32" description=""/>
+        <register id="ETM_CLAIM_TAG_CLEAR" acronym="ETM_CLAIM_TAG_CLEAR" width="32" description=""/>
+        <register id="ETM_LOCK_ACCESS" acronym="ETM_LOCK_ACCESS" width="32" description=""/>
+        <register id="ETM_LOCK_STATUS" acronym="ETM_LOCK_STATUS" width="32" description=""/>
+        <register id="ETM_AUTHENTICATION" acronym="ETM_AUTHENTICATION" width="32" description=""/>
+        <register id="ETM_DEVICE_CONFIG" acronym="ETM_DEVICE_CONFIG" width="32" description=""/>
+        <register id="ETM_DEVICE_TYPE" acronym="ETM_DEVICE_TYPE" width="32" description=""/>
+        <register id="ETM_ITMISCOUT" acronym="ETM_ITMISCOUT" width="32" description=""/>
+        <register id="ETM_ITMISCIN" acronym="ETM_ITMISCIN" width="32" description=""/>
+        <register id="ETM_ITTRIGGERACK" acronym="ETM_ITTRIGGERACK" width="32" description=""/>
+        <register id="ETM_ITTRIGGERREQ" acronym="ETM_ITTRIGGERREQ" width="32" description=""/>
+        <register id="ETM_ITATBDATA0" acronym="ETM_ITATBDATA0" width="32" description=""/>
+        <register id="ETM_ITATBCTR2" acronym="ETM_ITATBCTR2" width="32" description=""/>
+        <register id="ETM_ITATBCTR1" acronym="ETM_ITATBCTR1" width="32" description=""/>
+        <register id="ETM_ITATBCTR0" acronym="ETM_ITATBCTR0" width="32" description=""/>
+        <register id="ETM_PERIPHERAL_ID4" acronym="ETM_PERIPHERAL_ID4" width="32" description=""/>
+        <register id="ETM_PERIPHERAL_ID5" acronym="ETM_PERIPHERAL_ID5" width="32" description=""/>
+        <register id="ETM_PERIPHERAL_ID6" acronym="ETM_PERIPHERAL_ID6" width="32" description=""/>
+        <register id="ETM_PERIPHERAL_ID7" acronym="ETM_PERIPHERAL_ID7" width="32" description=""/>
+        <register id="ETM_PERIPHERAL_ID0" acronym="ETM_PERIPHERAL_ID0" width="32" description=""/>
+        <register id="ETM_PERIPHERAL_ID1" acronym="ETM_PERIPHERAL_ID1" width="32" description=""/>
+        <register id="ETM_PERIPHERAL_ID2" acronym="ETM_PERIPHERAL_ID2" width="32" description=""/>
+        <register id="ETM_PERIPHERAL_ID3" acronym="ETM_PERIPHERAL_ID3" width="32" description=""/>
+        <register id="ETM_COMPONENT_ID0" acronym="ETM_COMPONENT_ID0" width="32" description=""/>
+        <register id="ETM_COMPONENT_ID1" acronym="ETM_COMPONENT_ID1" width="32" description=""/>
+        <register id="ETM_COMPONENT_ID2" acronym="ETM_COMPONENT_ID2" width="32" description=""/>
+        <register id="ETM_COMPONENT_ID3" acronym="ETM_COMPONENT_ID3" width="32" description=""/>
+        <register id="REG_DCC_DTR_RX" acronym="REG_DCC_DTR_RX" width="32" description=""/>
+        <register id="REG_DCC_DTR_TX" acronym="REG_DCC_DTR_TX" width="32" description=""/>
+</module>

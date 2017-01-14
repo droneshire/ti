@@ -1,0 +1,109 @@
+;
+; Copyright (c) 2011 EWA Technologies, Inc.
+;
+; xds560.inf -- XDS560
+;
+[Version]
+Signature   = "$CHICAGO$"
+Class=TI_Debug_Probe
+ClassGUID={8E84F6AE-7786-4c95-A48A-14CF3B92C002}
+Provider    = %EWA%
+DriverVer   = 06/09/2016,3.0.2.0
+CatalogFile = xds560.cat
+
+
+;
+; Class section
+;
+[ClassInstall32]
+AddReg=AddReg_ClassInstall
+
+[AddReg_ClassInstall]
+HKR,,,,"%TI_Debug_Probe_Name%"
+HKR,,Icon,,-1
+
+
+;
+; XDS560 Device Install Section
+;
+[Manufacturer]
+%EWA% = EWA, NTamd64
+
+[EWA]
+%DescriptionString%=XDS560_Device,PCI\VEN_10B5&DEV_9054&SUBSYS_AC6E104C
+
+[EWA.NTamd64]
+%DescriptionString%=XDS560_Device,PCI\VEN_10B5&DEV_9054&SUBSYS_AC6E104C
+
+[PreCopySection]
+HKR,,NoSetupUI,,1
+
+[ControlFlags]
+ExcludeFromSelect = *
+
+[SourceDisksNames]
+1 = %SourceDisk%,,,\i386
+
+[SourceDisksNames.amd64]
+1 = %SourceDisk%,,,\amd64
+
+[SourceDisksFiles]
+xds560.sys    = 1,,
+
+[DestinationDirs]
+DefaultDestDir  = 11
+Files.Ext       = 10,System32\Drivers
+Files.Inf       = 17
+
+[Files.Ext]
+xds560.sys
+
+[Files.Inf]
+
+
+;
+; Blackhawk XDS560 Debug Probe Driver
+;
+[XDS560_Device]
+CopyFiles = Files.Inf, Files.Ext 
+AddReg = XDS560_Device.AddReg
+
+[XDS560_Device.HW]
+AddReg = XDS560_Device.AddRegHW
+
+[XDS560_Device.NT]
+CopyFiles = Files.Ext 
+
+[XDS560_Device.NT.HW]
+AddReg = XDS560_Device.AddRegHW
+
+[XDS560_Device.NT.Services]
+AddService = XDS560, 0x00000002, XDS560.AddService
+
+[XDS560_Device.AddRegHW]
+HKLM,"System\CurrentControlSet\Services\XDS560\Parameters","GUID",0x00000,{894A7461-A033-11d2-821E-444553540000}
+
+[XDS560_Device.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,xds560.sys
+
+[XDS560.AddService]
+DisplayName    = %ServiceName%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\xds560.sys
+LoadOrderGroup = Base
+
+
+;------------------------------------------------
+;
+; Strings
+;
+[Strings]
+; localizeable
+EWA = "Texas Instruments Incorporated"
+SourceDisk = "XDS560 Installation Disk"
+DescriptionString = "XDS560 PCI Debug Probe"
+ServiceName = "Texas Instruments XDS560 Device Driver"
+TI_Debug_Probe_Name="Texas Instruments Debug Probes"

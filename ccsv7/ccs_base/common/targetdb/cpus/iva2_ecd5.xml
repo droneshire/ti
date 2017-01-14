@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cpu id="TMS192C2028" isa="hidden" HW_revision="2.0" XML_version="1.0" description="IVA2 ECD5 Accelerator">
+    <instance href="..\Modules\ihwa\iva2_ecd5\ecd5_target_db.xml" id="System" xml="ecd5_target_db.xml" xmlpath="..\Modules\ihwa\iva2_ecd5\" HW_revision="1.0" description="ECD5 System MMR" requestor="TMS192C2028" baseaddr="0" size="0" accessnumbytes="4" permissions="rw"/>
+	<instance href="..\Modules\ihwa\iva2_ecd5\ecd5_debug.xml" 	  id="Debug"  xml="ecd5_debug.xml" 	   xmlpath="..\Modules\ihwa\iva2_ecd5\" HW_revision="1.0" description="ECD5 Debug MMR"  requestor="TMS192C2028" baseaddr="0" size="0" accessnumbytes="4" permissions="rw"/>
+	<!-- Need to add Debug register under empty group again so they can be accessed without the Debug_ prefix -->
+	<instance href="..\Modules\ihwa\iva2_ecd5\ecd5_debug.xml" 	  id=""       xml="ecd5_debug.xml" 	   xmlpath="..\Modules\ihwa\iva2_ecd5\" HW_revision="1.0" description="ECD5 Debug MMR"  requestor="TMS192C2028" baseaddr="0" size="0" accessnumbytes="4" permissions="rw"/>
+	<!-- Adding hidden pseuod registers -->
+	<instance href="..\Modules\ihwa\ihwa_notvisible.xml"    id=""    xml="ihwa_notvisible.xml"    xmlpath="..\Modules\ihwa\" HW_version="1.0"  description="Dummy Registers" requestor="TMS192C2028" baseaddr="0x00" endaddr="0x00" size="0x01" accessnumbytes="4" permissions="p" />
+	
+</cpu>

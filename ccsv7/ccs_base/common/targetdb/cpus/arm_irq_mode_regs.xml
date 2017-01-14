@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module id="IRQ" HW_revision="" XML_version="1.2" description="IRQ Registers">
+
+	<register id="SPSR_IRQ" acronym="SPSR_IRQ" width="32" description="Stores the status of interrupt enables and critical processor status signals" >
+		<bitfield id="N" width="1" begin="31" end="31" resetval="0" description="Stores bit 31 of the result of the instruction. In other words stores the sign of the number" range="" rwaccess="R" />
+		<bitfield id="Z" width="1" begin="30" end="30" resetval="0" description="Is set to 1 if the result of the operation is zero else stays 0" range="" rwaccess="R" />
+		<bitfield id="C" width="1" begin="29" end="29" resetval="0" description="Stores the value of the carry bit if it occurred in an addition or the borrow bit in a subtraction. In a shift stores the last bit shifted out." range="" rwaccess="R" />
+		<bitfield id="V" width="1" begin="28" end="28" resetval="0" description="Set to 1 if an overflow occurred " range="" rwaccess="R" />
+		<bitfield id="Q" width="1" begin="27" end="27" resetval="0" description="Indicates whether an overflow or a saturation occurred in the enhanced DSP instructions" range="" rwaccess="R" />
+		<bitfield id="IT_1_0" width="2" begin="26" end="25" resetval="0" description="IT state bits." range="" rwaccess="RW" />
+		<bitfield id="J" width="1" begin="24" end="24" resetval="0" description="Java State Bit." range="" rwaccess="R" />
+		<bitfield id="Reserved" width="4" begin="23" end="20" resetval="0" description="Reserved." range="" rwaccess="R" />
+		<bitfield id="GE" width="4" begin="19" end="16" resetval="0" description="Greater than or equal bits" range="" rwaccess="RW" />
+		<bitfield id="IT_7_2" width="6" begin="15" end="10" resetval="0" description="IT state bits" range="" rwaccess="RW" />
+		<bitfield id="E" width="1" begin="9" end="9" resetval="0" description="If set, data memory is interpreted as big-endian. If cleared data memory is interpreted as little-endian." range="" rwaccess="RW" />
+		<bitfield id="A" width="1" begin="8" end="8" resetval="1" description="If set, any asynchronous abort is held pending until this bit is cleared." range="" rwaccess="RW" />
+		<bitfield id="I" width="1" begin="7" end="7" resetval="1" description="If set, IRQ is disabled. If cleared IRQ is allowed" range="" rwaccess="RW" />
+		<bitfield id="F" width="1" begin="6" end="6" resetval="1" description="If set, FIQ is disabled. If cleared FIQ is allowed" range="" rwaccess="RW" />
+		<bitfield id="T" width="1" begin="5" end="5" resetval="0" description="If set ARM is in Thumb mode" range="" rwaccess="RW" />
+		<bitfield id="M" width="5" begin="4" end="0" resetval="0x13" description="Mode of ARM: 0x10=User, 0x11=FIQ, 0x12=IRQ, 0x13=SVC, 0x16=MON, 0x1A=HYP, 0x17=ABT, 0x1B=UND, 0x1F=SYS" range="" rwaccess="RW" />
+	</register>
+	<register id="R13_IRQ" acronym="R13_IRQ" width="32" description="General Purpose Register 13 in IRQ mode" />
+	<register id="R14_IRQ" acronym="R14_IRQ" width="32" description="General Purpose Register 14 in IRQ mode" />
+
+</module>

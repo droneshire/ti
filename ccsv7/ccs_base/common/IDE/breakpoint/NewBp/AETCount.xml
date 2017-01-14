@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<newBreakpoint xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="schema.xsd" enable="true" name="Count Event" breakpointType="1">
+	<targets>
+		<target>
+			<type>dsk,emu</type>
+			<familyId>320</familyId>
+			<subfamilyId>62,64,66,67</subfamilyId>
+			<revision>10,11,12,13,14,15,16,18,127,20</revision>
+		</target>
+	</targets>
+	
+	<defaultProperty>
+		<property name="Miscellaneous.Name" value="Count Event"/>
+  		<property name="Hardware Configuration.Type" value="Count Event" />
+  		<property name="Hardware Configuration.Type.System Event" value="CPU clock cycles" />
+	</defaultProperty>
+
+	<showIn>
+		<breakpointView autoSubmit="true" />
+	</showIn>
+
+</newBreakpoint>

@@ -1,0 +1,21 @@
+{
+    "//": "NOTE: The properties below override the ones in app_default.json",
+    "mode": "remoteserver",
+    "subMode": "stagingserver",
+    "myHttpPort": "4001",
+    "webComponentsServer": "http://dev-sl.ti.com/components",
+    "contentPath": "~/ti/tirex-stagingserver/content",
+    "dbPath": "~/ti/tirex-stagingserver/.db",
+    "contentPackagesConfig": "~/ti/tirex-stagingserver/content/config/default.json",
+    "downloadsCache": "~/ti/tirex-stagingserver/.downloads",
+    "ccsCloudUrl": "{ccs-url}",
+    "logsDir": "~/ti/tirex-stagingserver/.logs",
+    "analyticsDir": "~/ti/tirex-stagingserver/.tirex-analytics-data",
+    "remoteBundleZips": "",
+    "refreshDB": "false",
+    "allowRefreshFromWeb": "true",
+    "seaportHostIP": "127.0.0.1",
+    "seaportPort": "8002",
+    "myRole": ""
+}
+

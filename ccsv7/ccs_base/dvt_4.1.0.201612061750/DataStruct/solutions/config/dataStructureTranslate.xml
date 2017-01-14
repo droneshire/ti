@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<translate name="DataStructureTranslate">
+      	<passthruAll>
+		   	<removeField name="Label"/>
+		   	<removeField name="Type"/>
+		   	<removeField name="StartAddress"/>
+		   	<removeField name="EndAddress"/>
+	</passthruAll>
+<passthru name="Symbol" input ="Label"/>
+<!--<passthru name="SymbolAddress" input ="SymbolAddress"/>
+<passthru name="Length" input ="Length"/>
+<passthru name="CPUaccesssummary" input ="CPUaccesssummary"/>
+-->
+</translate>

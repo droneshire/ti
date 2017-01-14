@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module id="Arch" HW_revision="" XML_version="1" description="Architectural Registers">
+
+    <register id="R0" acronym="R0" offset="0x00" page="2" width="32" description="Register R0" />
+    <register id="R1" acronym="R1" offset="0x01" page="2" width="32" description="Register R1" />
+    <register id="R2" acronym="R2" offset="0x02" page="2" width="32" description="Register R2" />
+    <register id="R3" acronym="R3" offset="0x03" page="2" width="32" description="Register R3" />
+    <register id="R4" acronym="R4" offset="0x04" page="2" width="32" description="Register R4" />
+    <register id="R5" acronym="R5" offset="0x05" page="2" width="32" description="Register R5" />
+    <register id="R6" acronym="R6" offset="0x06" page="2" width="32" description="Register R6" />
+    <register id="R7" acronym="R7" offset="0x07" page="2" width="32" description="Register R7" />
+
+</module>

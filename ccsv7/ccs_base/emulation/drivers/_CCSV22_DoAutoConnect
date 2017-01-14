@@ -1,0 +1,36 @@
+<!-- ************************************************************ -->
+<!-- Files created by Spectrum Digital Inc.                       -->
+<!-- (C) Copyright 2004 by Spectrum Digital Incorporated          -->
+<!-- All rights reserved                                          -->
+<!-- ************************************************************ -->
+
+If the file "CCSV22_DoAutoConnect" is found in the 
+<ccs_install_dir>\drivers directory then emulation
+drivers will do auto connection to the target.  This
+feature allows a CCS 2.4/3.x compliant SD driver to be
+used in a CCS 2.2x environment.
+
+The file "CCSV22_DoAutoConnect" should not be present
+for CCS 2.4/3.x as it will cause CCS and emulation drivers
+to get out of sync.. 
+
+To enable CCS V22 auto-connection simply remove
+the underscore in the file name:
+
+_CCSV22_DoAutoConnect  >> CCSV22_DoAutoConnect
+
+To disable CCS V22 auto-connection simply add the
+underscore to the file name:
+
+CCSV22_DoAutoConnect  >> _CCSV22_DoAutoConnect
+
+If you want to have a dual CCS 2.2x and CCS 2.4/3.x
+environment then you can either install the 2.4/3.x
+drivers into both environments.  Or you can copy your
+CCS 2.4x/3.x drivers to your CCS 2.2x install path.
+If you do a copy then you will need to copy the following:
+
+<install_dir>\specdig\sdconfig, full contents
+<install_dir>\drivers, files with "sd" prefix.
+Copy _CCSV22_DoAutoConnect  to CCSV22_DoAutoConnect in
+the ccs 2.2x directory.

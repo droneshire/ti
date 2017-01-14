@@ -1,0 +1,5 @@
+{
+  "//": "NOTE: The properties below override the ones in app_default.json",
+  "refreshDB": "false",
+  "allowRefreshFromWeb": "true"
+}

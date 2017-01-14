@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="Custom" basedir=".">
+
+	<property name="dvt.activity.name" value="System Analyzer/${ant.project.name}"/>
+	<property name="dvt.activity.description" value="UIA Dataprovider."/>
+
+	<property name="uc_name" value="Custom" />
+	<dvt.import file="../../scripts/SystemAnalyzer.js"/>
+
+	<dvt.property>
+		version=1.0.0
+		dvt.activity.priority = 150
+
+		<!-- Data Provider and AF information-->
+		uiaMode=Live
+		dataproviders=UIA
+		UIA.name=UIA Log Viewer
+		UIA.analyzer=Execution Graph:false,Concurrency:false,Context Aware Profile:false,Duration:false,Task Profiler:false,CPU Load:false,Task Load:false,Count Analysis:false,Printf Logs:false
+
+		ExecutionGraph.Tip=
+		Concurrency.Tip=
+		ContextAwareProfile.Tip=
+		Duration.Tip=
+		TaskProfiler.Tip=
+		CPULoad.Tip=
+		TaskLoad.Tip=
+		CountAnalysis.Tip=
+		PrintfLogs.Tip=
+
+	</dvt.property>
+</project>

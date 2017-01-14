@@ -1,0 +1,31 @@
+<div class="datagrid datagridBlue">
+		<table id="mainRequirementTable" class="reqDetails_{{srvConfigVM.selectedInterface.peripheralRequirementsLength() > 0}}" style="margin-bottom:8px;border-color:#118899;">
+			<tbody>
+				<tr class="alt" title="Give an unique name for identifying the current GPIO requirement">
+					<td class="reqCol1" style="font-weight:bold;">Name: </td>
+					<td class="reqCol2"> 
+						<pm-requirement-name 
+								display-current-error-warning="displayCurrentValidationErrorWarning"
+								input-id="'reqNameStandardGPIO'"
+								/>
+
+					</td>  
+				</tr>
+
+				<tr class="alt" title="Select the number of GPIO pins needed to satisfy this requirement">
+					<td class="reqCol1" style="font-weight:bold;">Number of GPIO pins: </td>
+					<td class="reqCol2"> 
+					
+							
+						<div class="dropdown">
+							<select id="numberOfGPIOPins" ng-model="srvConfigVM.selectedRequirement.requirement.numOfGPIOPins" ng-change="numOfGPIOPinsApply()"  
+								ng-options="option for option in numberOfGPIOOptions" integer> 
+							</select>
+						</div>
+					
+					</td>  
+				</tr>	
+
+			</tbody>
+		</table>
+</div>

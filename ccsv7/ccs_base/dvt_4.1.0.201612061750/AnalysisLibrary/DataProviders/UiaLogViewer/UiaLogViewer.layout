@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_34" class="java.beans.XMLDecoder"> 
+ <object class="com.ti.dvt.gsb.model.LayoutModel"> 
+  <void property="autoLayout"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="layoutMap"> 
+   <void method="put"> 
+    <string>Tap</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>77</int> 
+     <int>60</int> 
+     <int>51</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:Logs</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>69</int> 
+     <int>319</int> 
+     <int>79</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>BufferFlowCntrol</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>47</int> 
+     <int>215</int> 
+     <int>112</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>UIALogSource</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>50</int> 
+     <int>10</int> 
+     <int>106</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>$HookIn</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>68</int> 
+     <int>166</int> 
+     <int>71</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>LogView</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>69</int> 
+     <int>267</int> 
+     <int>93</int> 
+     <int>36</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>bLogUIA</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>220</int> 
+     <int>282</int> 
+     <int>72</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:UIA Logs</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>223</int> 
+     <int>345</int> 
+     <int>74</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>UIAPreprocessor</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>44</int> 
+     <int>110</int> 
+     <int>118</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+  </void> 
+ </object> 
+</java> 

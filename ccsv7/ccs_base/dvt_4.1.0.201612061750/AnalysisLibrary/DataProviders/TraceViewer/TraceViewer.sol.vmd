@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_35" class="java.beans.XMLDecoder"> 
+ <object class="com.ti.dvt.ui.views.core.ViewModel"> 
+  <void property="viewConnectionMgr"> 
+   <void property="connections"> 
+    <void method="add"> 
+     <object class="com.ti.dvt.ui.views.core.ViewConnection"> 
+      <void property="source"> 
+       <string>Trace Viewer</string> 
+      </void> 
+      <void property="target"> 
+       <string>com.ti.dvt.ui.views.table:Trace Display</string> 
+      </void> 
+     </object> 
+    </void> 
+   </void> 
+  </void> 
+  <void property="viewInfoMap"> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:Trace Display</string> 
+    <object class="com.ti.dvt.ui.views.core.ViewInfo"> 
+     <void property="paneInfoColl"> 
+      <void method="add"> 
+       <object class="com.ti.dvt.ui.views.core.PaneInfo"> 
+        <void property="ID"> 
+         <string>com.ti.dvt.ui.views.table:Trace Display</string> 
+        </void> 
+        <void property="properties"> 
+         <object class="com.ti.dvt.ui.views.core.TableProp"> 
+          <void property="XFieldName"> 
+           <string>Cycle</string> 
+          </void> 
+          <void property="showRowCount"> 
+           <boolean>true</boolean> 
+          </void> 
+		  <void property="allowSort"> 
+		   <boolean>false</boolean> 
+  		  </void> 
+          <void property="solutionName"> 
+           <string>TraceViewer</string> 
+          </void> 
+         </object> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="title"> 
+      <string>Trace Viewer</string> 
+     </void> 
+    </object> 
+   </void> 
+  </void> 
+ </object> 
+</java> 

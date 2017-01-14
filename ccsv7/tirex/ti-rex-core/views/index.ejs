@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title><%= title %></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+		<!--  osohm: note that the less.js-middleware in Express will automatically compile the less files 
+      		  to css files on-the-fly. Should be converted to pre-compiled css for production. -->
+        <link rel="stylesheet" href="stylesheets/main.css">
+        <script src="html5-boilerplate-4.3.0/js/vendor/modernizr-2.6.2.min.js"></script>
+        <!-- Respond.js for IE 8 or less only -->
+		<!--[if (lt IE 9) & (!IEMobile)]>
+			<script src="respond/dest/respond.min.js"></script>
+		<![endif]-->
+    </head>
+    <body>
+		<!-- Bootstrap 3.x only supports IE8+ -->
+        <!--[if lte IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+		<header role="banner">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-sm-3 vcenter">
+						<a href="#"> 
+							<!-- % include ti_logo.svg %-->
+							<img id="tilogo" alt="Texas Instruments" src="http://www.ti.com/assets/en/images/homepage/ti-logo.png"></img> 
+						</a>
+					</div><!-- get rid of any spaces inbetween as a work around for inline-block issue; don't modify this comment; see http://css-tricks.com/fighting-the-space-between-inline-block-elements/ 
+				 --><div class="col-sm-7 vcenter">
+						<% include gcs.html %> 
+					</div><!-- get rid of any spaces inbetween as a work around for inline-block issue, don't modify this comment; see http://css-tricks.com/fighting-the-space-between-inline-block-elements/
+				  --><div class="col-sm-2 text-right vcenter">
+						<a href=#">Sign in or register</a>
+					</div>
+				</div>
+			</div>
+			<nav class="navbar navbar-default" role="navigation">
+			  <div class="container-fluid">
+			    <!-- Brand and toggle get grouped for better mobile display -->
+			    <div class="navbar-header">
+			      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+			        <span class="sr-only">Toggle navigation</span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			      </button>
+			    </div>
+			
+			    <!-- Collect the nav links, forms, and other content for toggling -->
+			    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			      <ul class="nav navbar-nav">
+			        <li class="active"><a href="#">Home</a></li>
+			        <li><a href="#">Browse Content</a></li>
+			      </ul>
+			      <ul class="nav navbar-nav navbar-right">
+			        <li><a href="http://ccscloud:8000">CCS Cloud</a></li>
+			        <li><a href="http://www.ti.com/ww/en/parametric_selection_tool">Parametric Search</a></li>
+			        <li><a href="#">Launchpad Interactive</a></li>
+			        <li><a href="http://e2e.ti.com">E2E Forum</a></li>
+			        <li><a href="http://processors.wiki.ti.com">Wiki</a></li>
+	                <li class="dropdown">
+			          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Communities</a>
+			          <ul class="dropdown-menu">
+			            <li><a href="http://forum.43oh.com">43oh</a></li>
+			            <li><a href="http://forum.stellarisiti.com">StellarisTI</a></li>
+			            <li><a href="http://www.forum.c2kcentral.com">C2K Central</a></li>
+			            <li><a href="http://forum.beaglefu.com">Beaglefu</a></li>
+    		          </ul>
+			        </li>
+			      </ul>
+			    </div><!-- /.navbar-collapse -->
+			  </div><!-- /.container-fluid -->
+			</nav>
+		</header>
+
+		<main role="main">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-12">
+						<h1>Free Cloud-based Software Development Tools</h1>
+						<p>Welcome to TI's cloud-based tools! Code, compile and download to your Launchpad.</p>
+						<p><i class="ti-readmore-icon"></i> <a href="#">More</a></p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<br>
+						<br>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-2">
+						<p><a class="btn btn-block btn-primary" href="#">Launchpad Interactive</a></p>
+						<p><a class="btn btn-block btn-primary" href="#">Resource Explorer</a></p>
+						<p><a class="btn btn-block btn-primary" href="http://ccscloud:8000">CCS Cloud</a></p>
+					</div>
+					<div class="col-sm-1">
+					</div>
+					<!-- <div class="col-sm-9"> -->
+						<!-- video embed code generated with https://developers.google.com/youtube/youtube_player_demo -->
+						<iframe class="col-sm-7" id="ytplayer" type="text/html" width="640" height="360"
+						src="https://www.youtube.com/embed/rW8m-dSiA8U?controls=0&modestbranding=1&rel=0&showinfo=0"
+						frameborder="0" allowfullscreen> </iframe>					
+					<!-- </div> -->
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<br>
+						<br>
+					</div>
+				</div>
+			</div>
+		</main>
+
+		<footer role="contentinfo">
+			<% include ti_footer.html %> 
+		</footer>
+
+		<!-- scripts that are required by dependent script must be included first -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="html5-boilerplate-4.3.0/js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+        <script src="bootstrap-3.1.1/dist/js/bootstrap.min.js"></script>
+        <script src="html5-boilerplate-4.3.0/js/plugins.js"></script>
+        <script src="html5-boilerplate-4.3.0/js/main.js"></script>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='//www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-XXXXX-X');ga('send','pageview');
+        </script>
+    </body>
+</html>

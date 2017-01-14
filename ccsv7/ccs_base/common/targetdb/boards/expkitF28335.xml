@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<board  id="EXPKITF28335" XML_version="1" desc="Experimenter's Kit - Delfino F28335" description="Delfino F28335 Experimenter's Kit">
+    <instance XML_version="1.2" href="devices/f28335.xml" id="F28335" xml="f28335.xml" xmlpath="." /> 
+</board>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- 
+  TI File $Revision: 
+  Checkin $Date: 
+  --> 
+
+<!--  F2805x DCSM REGS COMMON Registers 
+     =================================== 
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     --> 
+<module id="DCSM REGS COMMON" HW_revision="" XML_version="1" description="DCSM REGS COMMON Registers">
+    <register id="FLSEM" acronym="FLSEM" offset="0" page="1" width="32" description="Flash Wrapper Semaphore Register" />
+    <register id="SECTSTAT" acronym="SECTSTAT" offset="2" page="1" width="32" description="Sectors Status Register" />
+    <register id="RAMSTAT" acronym="RAMSTAT" offset="4" page="1" width="32" description="RAM Status Register" />
+    <!--  2 empty  -->
+</module>

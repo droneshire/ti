@@ -1,0 +1,12 @@
+<script type="text/ng-template" id="saveFileModal.html">
+	<div class="modal-header" style="padding:16px 16px 0 16px;">
+		<h3 class="modal-title">Enter Your Design Name</h3>
+	</div>
+	<div class="modal-body" style="padding:16px 16px 0 16px;">
+		File name: <input type="text" ng-model="filename" value="{{filename}}" style="width:180px" />.pinmux
+	</div>
+	<div class="modal-footer" style="padding:8px;">
+		<button class="btn btn-primary" ng-click="ok()">Save</button>
+		<button class="btn btn-primary" ng-click="cancel()">Cancel</button>
+	</div>
+</script>

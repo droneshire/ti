@@ -1,0 +1,1526 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_29" class="java.beans.XMLDecoder"> 
+ <object class="com.ti.dvt.ui.views.core.ViewModel"> 
+  <void property="viewConnectionMgr"> 
+   <void property="connections"> 
+    <void method="add"> 
+     <object class="com.ti.dvt.ui.views.core.ViewConnection"> 
+      <void property="source"> 
+       <string>Instruction Coverage</string> 
+      </void> 
+      <void property="target"> 
+       <string>com.ti.dvt.ui.views.table:Instruction Coverage</string> 
+      </void> 
+     </object> 
+    </void> 
+    <void method="add"> 
+     <object class="com.ti.dvt.ui.views.core.ViewConnection"> 
+      <void property="source"> 
+       <string>File Coverage</string> 
+      </void> 
+      <void property="target"> 
+       <string>com.ti.dvt.ui.views.table:FileCoverage</string> 
+      </void> 
+     </object> 
+    </void> 
+    <void method="add"> 
+     <object class="com.ti.dvt.ui.views.core.ViewConnection"> 
+      <void property="source"> 
+       <string>Function Coverage</string> 
+      </void> 
+      <void property="target"> 
+       <string>com.ti.dvt.ui.views.table:FunctionCoverage</string> 
+      </void> 
+     </object> 
+    </void> 
+    <void method="add"> 
+     <object class="com.ti.dvt.ui.views.core.ViewConnection"> 
+      <void property="source"> 
+       <string>Line Coverage</string> 
+      </void> 
+      <void property="target"> 
+       <string>com.ti.dvt.ui.views.table:CodeCoverage</string> 
+      </void> 
+     </object> 
+    </void> 
+   </void> 
+  </void> 
+  <void property="viewInfoMap"> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:FileCoverage</string> 
+    <object class="com.ti.dvt.ui.views.core.ViewInfo"> 
+     <void property="paneInfoColl"> 
+      <void method="add"> 
+       <object class="com.ti.dvt.ui.views.core.PaneInfo"> 
+        <void property="ID"> 
+         <string>com.ti.dvt.ui.views.table:FileCoverage</string> 
+        </void> 
+        <void property="properties"> 
+         <object class="com.ti.dvt.ui.views.core.TableProp"> 
+          <void property="barEnabled"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="showViewSourceCodeMenu"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="solutionName"> 
+           <string>CodeCoverage</string> 
+          </void> 
+          <void property="sourceFieldName"> 
+           <string>File Name</string> 
+          </void> 
+          <void property="sourceTracking"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="tableMeta"> 
+           <void property="columnMetaMap"> 
+            <void method="put"> 
+             <string>Percent Source Line Coverage</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %,.1f</string> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Lines Covered</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="bar"> 
+               <boolean>true</boolean> 
+              </void> 
+              <void property="barInfos"> 
+               <void method="add"> 
+                <object class="com.ti.dvt.ui.internal.GridColumnMeta$BarInfo"> 
+                 <void property="max"> 
+                  <double>100.0</double> 
+                 </void> 
+                </object> 
+               </void> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %,.1f</string> 
+              </void> 
+              <void property="unit"> 
+               <string>%</string> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>103</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>File Name</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>67</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Instrs Covered</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="bar"> 
+               <boolean>true</boolean> 
+              </void> 
+              <void property="barInfos"> 
+               <void method="add"> 
+                <object class="com.ti.dvt.ui.internal.GridColumnMeta$BarInfo"> 
+                 <void property="max"> 
+                  <double>100.0</double> 
+                 </void> 
+                </object> 
+               </void> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %,.1f</string> 
+              </void> 
+              <void property="unit"> 
+               <string>%</string> 
+              </void> 
+              <void property="width"> 
+               <int>89</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Total Lines</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>71</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Total Instructions</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Instructions Covered (%)</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %,.1f</string> 
+              </void> 
+              <void property="width"> 
+               <int>144</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Total Instrs</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Instruction Count</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>126</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Lines Covered Count</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>124</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Executed Instruction Count</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>190</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Source Line Covered (%)</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %,.1f</string> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>143</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Percent Instruction Coverage</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %,.1f</string> 
+              </void> 
+              <void property="width"> 
+               <int>203</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Percent Line Coverage</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %,.1f</string> 
+              </void> 
+              <void property="width"> 
+               <int>162</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>FileName</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>77</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Instrs Covered Count</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>125</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>PercentInstructionCoverage</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>126</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Instructions Covered</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>123</int> 
+              </void> 
+             </object> 
+            </void> 
+           </void> 
+           <void property="columnOrder"> 
+            <array class="java.lang.String" length="8"> 
+             <void index="0"> 
+              <string></string> 
+             </void> 
+             <void index="1"> 
+              <string>File Name</string> 
+             </void> 
+             <void index="2"> 
+              <string>Total Lines</string> 
+             </void> 
+             <void index="3"> 
+              <string>Total Instrs</string> 
+             </void> 
+             <void index="4"> 
+              <string>Instrs Covered Count</string> 
+             </void> 
+             <void index="5"> 
+              <string>Lines Covered Count</string> 
+             </void> 
+             <void index="6"> 
+              <string>Instrs Covered (%)</string> 
+             </void> 
+             <void index="7"> 
+              <string>Lines Covered (%)</string> 
+             </void> 
+            </array> 
+           </void> 
+          </void> 
+         </object> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="title"> 
+      <string>File Coverage</string> 
+     </void> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:CodeCoverage</string> 
+    <object class="com.ti.dvt.ui.views.core.ViewInfo"> 
+     <void property="paneInfoColl"> 
+      <void method="add"> 
+       <object class="com.ti.dvt.ui.views.core.PaneInfo"> 
+        <void property="ID"> 
+         <string>com.ti.dvt.ui.views.table:CodeCoverage</string> 
+        </void> 
+        <void property="properties"> 
+         <object class="com.ti.dvt.ui.views.core.TableProp"> 
+          <void property="barEnabled"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="lineNumberFieldName"> 
+           <string>Line Number</string> 
+          </void> 
+          <void property="scrollLock"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="showViewSourceCodeMenu"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="solutionName"> 
+           <string>CodeCoverage</string> 
+          </void> 
+          <void property="sourceFieldName"> 
+           <string>File Name</string> 
+          </void> 
+          <void property="sourceTracking"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="tableMeta"> 
+           <void property="columnMetaMap"> 
+            <void method="put"> 
+             <string>Symbol Address</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Hex %#X</string> 
+              </void> 
+              <void property="width"> 
+               <int>99</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>File Name</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>67</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Instructions Covered (%)</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %,.1f</string> 
+              </void> 
+              <void property="width"> 
+               <int>144</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Total Instrs</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Instruction Count</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>126</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Executed Instruction Count</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>190</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Filename</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>131</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Percent Instruction Coverage</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %,.1f</string> 
+              </void> 
+              <void property="width"> 
+               <int>203</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>LineCountMax</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>108</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Coverage</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>16777216</int> 
+              </void> 
+              <void property="width"> 
+               <int>77</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>FirstPCCount</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>97</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Library</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Line Number</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>83</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Covered</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>58</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>PercentInstructionCoverage</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %,.1f</string> 
+              </void> 
+              <void property="width"> 
+               <int>126</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>CPU Cycles</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>74</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>End Address</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Hex %#X</string> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>79</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>LineCountMin</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>105</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Instrs Covered</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="bar"> 
+               <boolean>true</boolean> 
+              </void> 
+              <void property="barInfos"> 
+               <void method="add"> 
+                <object class="com.ti.dvt.ui.internal.GridColumnMeta$BarInfo"> 
+                 <void property="max"> 
+                  <double>100.0</double> 
+                 </void> 
+                </object> 
+               </void> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %,.1f</string> 
+              </void> 
+              <void property="unit"> 
+               <string>%</string> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>89</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Total Instructions</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>106</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Function</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>61</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>PC Count</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>65</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Start Address</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Hex %#X</string> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>cycle.CPU</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>77</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>FileName</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>77</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Instrs Covered Count</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>125</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Inst exec count</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>93</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Instructions Covered</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>123</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>PC</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>94</int> 
+              </void> 
+             </object> 
+            </void> 
+           </void> 
+           <void property="columnOrder"> 
+            <array class="java.lang.String" length="10"> 
+             <void index="0"> 
+              <string></string> 
+             </void> 
+             <void index="1"> 
+              <string>File Name</string> 
+             </void> 
+             <void index="2"> 
+              <string>Function</string> 
+             </void> 
+             <void index="3"> 
+              <string>Line Number</string> 
+             </void> 
+             <void index="4"> 
+              <string>Covered</string> 
+             </void> 
+             <void index="5"> 
+              <string>Start Address</string> 
+             </void> 
+             <void index="6"> 
+              <string>End Address</string> 
+             </void> 
+             <void index="7"> 
+              <string>Total Instrs</string> 
+             </void> 
+             <void index="8"> 
+              <string>Instrs Covered Count</string> 
+             </void> 
+             <void index="9"> 
+              <string>Instrs Covered (%)</string> 
+             </void> 
+            </array> 
+           </void> 
+          </void> 
+         </object> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="title"> 
+      <string>Line Coverage</string> 
+     </void> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:FunctionCoverage</string> 
+    <object class="com.ti.dvt.ui.views.core.ViewInfo"> 
+     <void property="paneInfoColl"> 
+      <void method="add"> 
+       <object class="com.ti.dvt.ui.views.core.PaneInfo"> 
+        <void property="ID"> 
+         <string>com.ti.dvt.ui.views.table:FunctionCoverage</string> 
+        </void> 
+        <void property="properties"> 
+         <object class="com.ti.dvt.ui.views.core.TableProp"> 
+          <void property="barEnabled"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="scrollLock"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="showViewSourceCodeMenu"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="solutionName"> 
+           <string>CodeCoverage</string> 
+          </void> 
+          <void property="sourceFieldName"> 
+           <string>File Name</string> 
+          </void> 
+          <void property="sourceTracking"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="symbolFieldName"> 
+           <string>Function</string> 
+          </void> 
+          <void property="tableMeta"> 
+           <void property="columnMetaMap"> 
+            <void method="put"> 
+             <string>Symbol Address</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Hex %#X</string> 
+              </void> 
+              <void property="width"> 
+               <int>99</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Percent Source Line Coverage</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %,.1f</string> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Lines Covered</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="bar"> 
+               <boolean>true</boolean> 
+              </void> 
+              <void property="barInfos"> 
+               <void method="add"> 
+                <object class="com.ti.dvt.ui.internal.GridColumnMeta$BarInfo"> 
+                 <void property="max"> 
+                  <double>100.0</double> 
+                 </void> 
+                </object> 
+               </void> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %,.1f</string> 
+              </void> 
+              <void property="unit"> 
+               <string>%</string> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>98</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>File Name</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>67</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Instructions Covered (%)</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %,.1f</string> 
+              </void> 
+              <void property="width"> 
+               <int>144</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Total Instrs</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Instruction Count</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>126</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Lines Covered Count</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>1225</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Filename</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>143</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Executed Instruction Count</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>190</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Source Line Covered (%)</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %,.1f</string> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>143</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Percent Instruction Coverage</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %,.1f</string> 
+              </void> 
+              <void property="width"> 
+               <int>203</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Percentage</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>73</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Coverage</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>64</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>LineCountMax</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>108</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>FirstPCCount</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>97</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Line Number</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>83</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Library</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>59</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Lines executed</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>111</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>PercentInstructionCoverage</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>126</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Lines of code</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>84</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>CPU Cycles</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>74</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>End Address</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Hex %#X</string> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>79</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>LineCountMin</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>105</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Total Instructions</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Total Lines</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>71</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Instrs Covered</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="bar"> 
+               <boolean>true</boolean> 
+              </void> 
+              <void property="barInfos"> 
+               <void method="add"> 
+                <object class="com.ti.dvt.ui.internal.GridColumnMeta$BarInfo"> 
+                 <void property="max"> 
+                  <double>100.0</double> 
+                 </void> 
+                </object> 
+               </void> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %,.1f</string> 
+              </void> 
+              <void property="unit"> 
+               <string>%</string> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Function</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>61</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>PC Count</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>74</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Times called</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>80</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Start Address</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Hex %#X</string> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>83</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>size</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>39</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Instrs Covered)</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %,.1f</string> 
+              </void> 
+              <void property="unit"> 
+               <string>%</string> 
+              </void> 
+              <void property="width"> 
+               <int>1504</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Percent Line Coverage</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %,.1f</string> 
+              </void> 
+              <void property="width"> 
+               <int>162</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>cycle.CPU</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>77</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>FileName</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>77</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Instrs Covered Count</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>125</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Inst exec count</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>93</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Instructions Covered</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>123</int> 
+              </void> 
+             </object> 
+            </void> 
+           </void> 
+           <void property="columnOrder"> 
+            <array class="java.lang.String" length="11"> 
+             <void index="0"> 
+              <string></string> 
+             </void> 
+             <void index="1"> 
+              <string>File Name</string> 
+             </void> 
+             <void index="2"> 
+              <string>Function</string> 
+             </void> 
+             <void index="3"> 
+              <string>Total Lines</string> 
+             </void> 
+             <void index="4"> 
+              <string>Start Address</string> 
+             </void> 
+             <void index="5"> 
+              <string>End Address</string> 
+             </void> 
+             <void index="6"> 
+              <string>Total Instrs</string> 
+             </void> 
+             <void index="7"> 
+              <string>Instrs Covered Count</string> 
+             </void> 
+             <void index="8"> 
+              <string>Lines Covered Count</string> 
+             </void> 
+             <void index="9"> 
+              <string>Instrs Covered (%)</string> 
+             </void> 
+             <void index="10"> 
+              <string>Lines Covered (%)</string> 
+             </void> 
+            </array> 
+           </void> 
+          </void> 
+         </object> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="title"> 
+      <string>Function Coverage</string> 
+     </void> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:Instruction Coverage</string> 
+    <object class="com.ti.dvt.ui.views.core.ViewInfo"> 
+     <void property="paneInfoColl"> 
+      <void method="add"> 
+       <object class="com.ti.dvt.ui.views.core.PaneInfo"> 
+        <void property="ID"> 
+         <string>com.ti.dvt.ui.views.table:Instruction Coverage</string> 
+        </void> 
+        <void property="properties"> 
+         <object class="com.ti.dvt.ui.views.core.TableProp"> 
+          <void property="lineNumberFieldName"> 
+           <string>Line Number</string> 
+          </void> 
+          <void property="showViewSourceCodeMenu"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="solutionName"> 
+           <string>CodeCoverage</string> 
+          </void> 
+          <void property="sourceFieldName"> 
+           <string>File Name</string> 
+          </void> 
+          <void property="sourceTracking"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="tableMeta"> 
+           <void property="columnMetaMap"> 
+            <void method="put"> 
+             <string>Address</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Hex %#X</string> 
+              </void> 
+             </object> 
+            </void> 
+           </void> 
+           <void property="columnOrder"> 
+            <array class="java.lang.String" length="7"> 
+             <void index="0"> 
+              <string></string> 
+             </void> 
+             <void index="1"> 
+              <string>File Name</string> 
+             </void> 
+             <void index="2"> 
+              <string>Function</string> 
+             </void> 
+             <void index="3"> 
+              <string>Line Number</string> 
+             </void> 
+             <void index="4"> 
+              <string>Address</string> 
+             </void> 
+             <void index="5"> 
+              <string>Disassembly</string> 
+             </void> 
+             <void index="6"> 
+              <string>Coverage</string> 
+             </void> 
+            </array> 
+           </void> 
+          </void> 
+         </object> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="title"> 
+      <string>Instruction Coverage</string> 
+     </void> 
+    </object> 
+   </void> 
+  </void> 
+ </object> 
+</java> 

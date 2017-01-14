@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<newBreakpoint xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="schema.xsd" name="Count Event" breakpointType="1">
+  <targets>
+    <target>
+      <type>dsk,emu</type>
+      <familyId>470</familyId>
+      <subfamilyId>15</subfamilyId>
+      <revision>*</revision>
+    </target>
+  </targets>
+  <defaultProperty>
+    <property name="Miscellaneous.Name" value="Count Event" />
+    <property name="Hardware Configuration.Type" value="Count Event"></property>
+  </defaultProperty>
+  <submitSequence>
+    <id>Hardware Configuration.Type.Event to Count</id>
+  </submitSequence>
+  <showIn>
+    <breakpointView autoSubmit="false" />
+  </showIn>
+  <dialog colCount="2">
+    <label id="label_CTC" widthHint="100" heightHint="15" verticalAlign="center">
+      <text>Event to Count:</text>
+    </label>
+    <comboBox id="Hardware Configuration.Type.Event to Count" widthHint="150" heightHint="15">
+      <text>Clock Cycles</text>
+      <choices>
+        <item>Clock Cycles</item>
+        <item>Software increment</item>
+        <item>Level 1 instruction cache refill</item>
+        <item>Level 1 instruction TLB refill</item>
+        <item>Level 1 data cache refill</item>
+        <item>Level 1 data cache access</item>
+        <item>Level 1 data TLB refill</item>
+        <item>Instruction architecturally executed</item>
+        <item>Exception taken</item>
+        <item>Exception return</item>
+        <item>Write to CONTEXTIDR</item>
+        <item>Mispredicted or not predicted branch speculatively executed</item>
+        <item>Predictable branch speculatively executed</item>
+        <item>Data memory access</item>
+        <item>Level 1 instruction cache access</item>
+        <item>Level 1 data cache write-back</item>
+        <item>Level 2 data cache access</item>
+        <item>Level 2 data cache refill</item>
+        <item>Level 2 data cache write-back</item>
+        <item>Bus access</item>
+        <item>Local memory error</item>
+        <item>Instruction speculatively executed</item>
+        <item>Write to TTBR</item>
+        <item>Bus cycle</item>
+        <item>Level 1 data cache access, read</item>
+        <item>Level 1 data cache access, write</item>
+        <item>Level 1 data cache refill, read</item>
+        <item>Level 1 data cache refill, write</item>
+        <item>Level 1 data cache write-back, victim</item>
+        <item>Level 1 data cache write-back, cleaning and coherency</item>
+        <item>Level 1 data cache invalidate</item>
+        <item>Level 1 data TLB refill, read</item>
+        <item>Level 1 data TLB refill, write</item>
+        <item>Level 2 data cache access, read</item>
+        <item>Level 2 data cache access, write</item>
+        <item>Level 2 data cache refill, read</item>
+        <item>Level 2 data cache refill, write</item>
+        <item>Level 2 data cache writeback, victim</item>
+        <item>Level 2 data cache writeback, cleaning and coherency</item>
+        <item>Level 2 data cache invalidate</item>
+        <item>Bus access, read</item>
+        <item>Bus access, write</item>
+        <item>Bus access, Normal, Cacheable, Shareable</item>
+        <item>Bus access, not Normal, Cacheable, Shareable</item>
+        <item>Bus access, normal</item>
+        <item>Bus access, peripheral</item>
+        <item>Data memory access, read</item>
+        <item>Data memory access, write</item>
+        <item>Unaligned access, read</item>
+        <item>Unaligned access, write</item>
+        <item>Unaligned access</item>
+        <item>Exclusive instruction speculatively executed, LDREX</item>
+        <item>Exclusive instruction speculatively executed, STREX pass</item>
+        <item>Exclusive instruction speculatively executed, STREX fail</item>
+        <item>Instruction speculatively executed,load</item>
+        <item>Instruction speculatively executed,store</item>
+        <item>Instruction speculatively executed, load or store</item>
+        <item>Instruction speculatively executed, integer data processing</item>
+        <item>Instruction speculatively executed, Advanced SIMD Extension</item>
+        <item>Instruction speculatively executed, Floating-point Extensionl</item>
+        <item>Instruction speculatively executed, software change of the PC</item>
+        <item>Branch speculatively executed, immediate branch</item>
+        <item>Branch speculatively executed, procedure return</item>
+        <item>Branch speculatively executed, indirect branch</item>
+        <item>Branch speculatively executed, ISB</item>
+        <item>Branch speculatively executed, DSB</item>
+        <item>Branch speculatively executed, DMB</item>
+      </choices>
+    </comboBox>
+  </dialog>
+</newBreakpoint>

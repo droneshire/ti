@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Execution Graph" default="enable" basedir=".">
+	<import file="../../templates/analysisfeature.xml"/>
+	
+	<property name="dvt.activity.name" value="Graph/${ant.project.name}"/>
+	<property name="dvt.activity.description" value="${ant.project.name}"/>
+	<property name="dvt.activity.icon" value="platform:/plugin/com.ti.dvt.ui/icons/views/discrete.gif"/>
+	<property name="dvt.data.type" value="CSV,UIA"/>
+	<property name="dvt.views" value="Graph"/>
+	<property name="dvt.views.show" value="Graph"/>
+	<property name="analysisFeatureName" value="Execution" />
+
+	<!-- override template target -->
+	<target name="configureAnalysisFeature" depends="findcores,wizard,remove,cond-signle,cond-multi,autoconfig" if="ConfigWizard">
+		<echo message="${bufferbypass.text}"/>
+		<echo message="${wizard.page1.masterlist.text}"/>
+	</target>
+
+	<target name="findcores" >
+		<dvt.script language="javascript">
+			<![CDATA[ 
+					activity = project.getReference("dvt.activity");
+					list = Packages.com.ti.dvt.uia.utils.Util.getEndPointNames(activity, ",");
+					project.setNewProperty("myList", list);
+					arrayoflist = list.split(",");
+					if(arrayoflist[0] == ""){
+		                        	project.setNewProperty("promptForCore", "YES");
+					}
+					else if( arrayoflist.length == 1){
+		                        	project.setNewProperty("promptForCore", "NO");
+						project.setNewProperty("autoCore", arrayoflist[0]);
+					}
+					else{
+		                        	project.setNewProperty("promptForCore", "YES");
+					}
+			]]>
+		</dvt.script>
+		<condition property="NoWizard">
+			<or>
+				<equals arg1="${promptForCore}" arg2="NO" />
+				<isset property="wizard.page1.masterlist.text"/>
+			</or>
+		</condition>
+	</target>
+
+	<target name="autoconfig" if="autoCore">
+		<dvt.property refid="analysisFeatureRef" dataprocessor="Tap.5" name="Filter" value="(Master == &quot;${autoCore}&quot;)"/>
+		<dvt.property refid="analysisFeatureRef" datacontext="${autoCore}"/>
+	</target>
+	
+	
+	
+	<target name="checkWizard">
+		<!--
+		<echo message="${promptForCore}"/>
+		<echo message="${ConfigWizard}"/>
+		<echo message="${autoCore}"/>
+		<echo message="${wizard.page1.masterlist.text}"/>
+		-->
+		
+		<condition property="checkWizard">
+			<or>
+				<isset property="wizard.page1.masterlist.text"/>
+				<isset property="ConfigWizard"/>
+				<isset property="NoWizard"/>
+			</or>
+		</condition>
+	</target>
+
+	<target name="remove" depends="checkWizard" unless="checkWizard">
+        <dvt.remove/>
+    </target>
+    
+	<target name="check-cond">
+		  <condition property="cond-single-true">
+		        <not> <equals arg1="${wizard.page1.masterlist.text}" arg2="ALL" /> </not>
+		  </condition>
+		</target>
+
+		 
+		<target name="cond-signle" depends="check-cond" if="cond-single-true">
+			<echo message="Single core"/>
+			
+			<dvt.property refid="analysisFeatureRef" dataprocessor="Tap.5" name="Filter" value="(Master == &quot;${wizard.page1.masterlist.text}&quot;)"/>
+			<!-- set data context name to identify the data set (shown in the views) -->
+			<dvt.property refid="analysisFeatureRef" datacontext="${wizard.page1.masterlist.text}"/>
+		</target>
+
+		<target name="cond-multi" depends="check-cond" unless="cond-single-true">
+		   <echo message="All cores"/>
+			
+			<!-- set data context name to identify the data set (shown in the views) -->
+			<dvt.property refid="analysisFeatureRef" datacontext="ALL"/>	
+		</target>
+	
+	<target name="wizard" unless="NoWizard">
+		
+		<dvt.config.wizard id="ConfigWizard" text="Analysis Feature Configuration">
+			<page text="${ant.project.name} Configuration" numColumns="1">
+				<label text="Core or Master"/>
+        		<combo id="wizard.page1.masterlist" text="ALL" edit="true" >
+        								<item text = "ALL"/>
+        					        	<list text="${myList}" delimiter=","/>
+							</combo>
+			</page>
+		</dvt.config.wizard>
+	</target>
+
+	<!-- override template target -->
+	<target name="postAddAnalysisFeature">
+		<dvt.start refid="analysisFeatureRef"/>
+		<dvt.view.show refid="analysisFeatureRef" view="${dvt.views.show}"/>
+	</target>
+	
+	<target name="createStandardContextMenu">
+	</target>
+
+</project>

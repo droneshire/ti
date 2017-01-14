@@ -1,0 +1,10 @@
+[
+    {
+        "email": "",
+        "assets": [
+            "http://software-dl.ti.com/ccs/esd/tirex/zips/Sitara_1_02_00_00/Sitara_1_02_00_00__win.zip",
+            "http://software-dl.ti.com/ccs/esd/tirex/zips/Sitara_1_02_00_00/Sitara_1_02_00_00__linux.zip",
+            "http://software-dl.ti.com/ccs/esd/tirex/zips/Sitara_1_02_00_00/Sitara_1_02_00_00__macos.zip"
+        ]
+    }
+]

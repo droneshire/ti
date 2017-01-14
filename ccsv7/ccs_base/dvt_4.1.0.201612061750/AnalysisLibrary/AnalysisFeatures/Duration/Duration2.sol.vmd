@@ -1,0 +1,1073 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_29" class="java.beans.XMLDecoder"> 
+ <object class="com.ti.dvt.ui.views.core.ViewModel"> 
+  <void property="viewConnectionMgr"> 
+   <void property="connections"> 
+    <void method="add"> 
+     <object class="com.ti.dvt.ui.views.core.ViewConnection"> 
+      <void property="source"> 
+       <string>VirtualBuffer</string> 
+      </void> 
+      <void property="target"> 
+       <string>com.ti.dvt.ui.views.line:Graph</string> 
+      </void> 
+     </object> 
+    </void> 
+   </void> 
+  </void> 
+  <void property="viewInfoMap"> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.line:Graph</string> 
+    <object class="com.ti.dvt.ui.views.core.ViewInfo"> 
+     <void property="paneInfoColl"> 
+      <void method="add"> 
+       <object class="com.ti.dvt.ui.views.core.PaneInfo"> 
+        <void property="ID"> 
+         <string>com.ti.dvt.ui.views.line:Graph</string> 
+        </void> 
+        <void property="properties"> 
+         <object class="com.ti.dvt.ui.views.core.LineProp"> 
+          <void property="XDisplayFormat"> 
+           <string>Time ns!auto!#,##0.##</string> 
+          </void> 
+          <void property="XFieldName"> 
+           <string>STOP</string> 
+          </void> 
+          <void property="XRange"> 
+           <void property="span"> 
+            <double>-1.0</double> 
+           </void> 
+          </void> 
+          <void property="XTitle"> 
+           <string>End Time</string> 
+          </void> 
+          <void property="YFieldName"> 
+           <string>Duration</string> 
+          </void> 
+          <void property="YRange"> 
+           <void property="auto"> 
+            <boolean>true</boolean> 
+           </void> 
+           <void property="end"> 
+            <double>1.795128238E8</double> 
+           </void> 
+           <void property="start"> 
+            <double>-8547879.8</double> 
+           </void> 
+          </void> 
+          <void property="YTitle"> 
+           <string>Duration</string> 
+          </void> 
+          <void property="channelColumnDetectName"> 
+           <string>Source</string> 
+          </void> 
+          <void property="channelProps"> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_5, Math Oprns</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>221</int> 
+               <int>0</int> 
+               <int>0</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_1, Math Oprns</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>0</int> 
+               <int>221</int> 
+               <int>0</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_2, Math Oprns</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>0</int> 
+               <int>0</int> 
+               <int>221</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_3, Math Oprns</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>221</int> 
+               <int>221</int> 
+               <int>0</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_4, Math Oprns</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>221</int> 
+               <int>0</int> 
+               <int>221</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_0, tsk0_loop</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>0</int> 
+               <int>221</int> 
+               <int>221</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_1, Benchmark Counter %d</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>221</int> 
+               <int>0</int> 
+               <int>153</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_1, 3e8</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>153</int> 
+               <int>221</int> 
+               <int>0</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_1, (routing).abc</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>0</int> 
+               <int>153</int> 
+               <int>221</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_1, 5dc</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>221</int> 
+               <int>153</int> 
+               <int>0</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_1, 7d0</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>0</int> 
+               <int>221</int> 
+               <int>153</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_1, 9c4</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>153</int> 
+               <int>0</int> 
+               <int>221</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_1, bb8</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>221</int> 
+               <int>0</int> 
+               <int>51</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_1, dac</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>51</int> 
+               <int>221</int> 
+               <int>0</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_1, fa0</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>0</int> 
+               <int>51</int> 
+               <int>221</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_1, 1194</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>221</int> 
+               <int>51</int> 
+               <int>0</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_1, 1388</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>0</int> 
+               <int>221</int> 
+               <int>51</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_1, 157c</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>51</int> 
+               <int>0</int> 
+               <int>221</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_1, 1770</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>221</int> 
+               <int>0</int> 
+               <int>255</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_1, 1964</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>0</int> 
+               <int>255</int> 
+               <int>221</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_1, 1b58</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>0</int> 
+               <int>221</int> 
+               <int>255</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_1, 1d4c</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>255</int> 
+               <int>0</int> 
+               <int>221</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_1, 1f40</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>221</int> 
+               <int>0</int> 
+               <int>102</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_1, 2134</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>102</int> 
+               <int>221</int> 
+               <int>0</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_1, 2328</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>0</int> 
+               <int>102</int> 
+               <int>221</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_1, 251c</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>221</int> 
+               <int>102</int> 
+               <int>0</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_1, 2710</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>0</int> 
+               <int>221</int> 
+               <int>102</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_1, 2904</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>102</int> 
+               <int>0</int> 
+               <int>221</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_1, 2af8</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>221</int> 
+               <int>0</int> 
+               <int>170</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_1, 2cec</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>170</int> 
+               <int>221</int> 
+               <int>0</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_1, 2ee0</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>0</int> 
+               <int>170</int> 
+               <int>221</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_1, 30d4</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>221</int> 
+               <int>170</int> 
+               <int>0</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_1, 32c8</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>0</int> 
+               <int>221</int> 
+               <int>170</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_1, 34bc</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>170</int> 
+               <int>0</int> 
+               <int>221</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_1, 36b0</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>221</int> 
+               <int>0</int> 
+               <int>204</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_1, 38a4</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>204</int> 
+               <int>221</int> 
+               <int>0</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_1, 3a98</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>0</int> 
+               <int>204</int> 
+               <int>221</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_1, 3c8c</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>221</int> 
+               <int>204</int> 
+               <int>0</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_1, 3e80</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>0</int> 
+               <int>221</int> 
+               <int>204</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_1, 4074</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>204</int> 
+               <int>0</int> 
+               <int>221</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_1, 4268</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>221</int> 
+               <int>153</int> 
+               <int>153</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_1, 445c</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>153</int> 
+               <int>221</int> 
+               <int>153</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldIndex"> 
+              <int>3</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>C64XP_1, 4650</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>153</int> 
+               <int>153</int> 
+               <int>221</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+          </void> 
+          <void property="enableGroup"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="solutionName"> 
+           <string>Duration2</string> 
+          </void> 
+         </object> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="title"> 
+      <string>Graph</string> 
+     </void> 
+    </object> 
+   </void> 
+  </void> 
+ </object> 
+</java> 

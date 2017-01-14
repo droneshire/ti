@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+  TI File $Revision: /main/1 $
+  Checkin $Date: August 5, 2009   17:02:31 $
+  -->
+
+<!-- DSP281x GPIO Registers
+     ===================================
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     -->
+<module id="GPIO" HW_revision="" XML_version="1" description="GPIO Registers">
+  <register id="GPAMUX" acronym="GPAMUX" offset="0" page="1" width="16" description="GPIO A Mux Control Register" />
+  <register id="GPADIR" acronym="GPADIR" offset="1" page="1" width="16" description="GPIO A Direction Control Register" />
+  <register id="GPAQUAL" acronym="GPAQUAL" offset="2" page="1" width="16" description="GPIO A Input Qualification Control Register" />
+  <!-- 1 empty -->        
+  <register id="GPBMUX" acronym="GPBMUX" offset="4" page="1" width="16" description="GPIO B Mux Control Register" />
+  <register id="GPBDIR" acronym="GPBDIR" offset="5" page="1" width="16" description="GPIO B Direction Control Register" />
+  <register id="GPBQUAL" acronym="GPBQUAL" offset="6" page="1" width="16" description="GPIO B Input Qualification Control Register" />
+  <!-- 5 empty -->        
+  <register id="GPDMUX" acronym="GPDMUX" offset="12" page="1" width="16" description="GPIO D Mux Control Register" />
+  <register id="GPDDIR" acronym="GPDDIR" offset="13" page="1" width="16" description="GPIO D Direction Control Register" />
+  <register id="GPDQUAL" acronym="GPDQUAL" offset="14" page="1" width="16" description="GPIO D Input Qualification Control Register" />
+  <!-- 1 empty -->        
+  <register id="GPEMUX" acronym="GPEMUX" offset="16" page="1" width="16" description="GPIO E Mux Control Register" />
+  <register id="GPEDIR" acronym="GPEDIR" offset="17" page="1" width="16" description="GPIO E Direction Control Register" />
+  <register id="GPEQUAL" acronym="GPEQUAL" offset="18" page="1" width="16" description="GPIO E Input Qualification Control Register" />
+  <!-- 1 empty -->        
+  <register id="GPFMUX" acronym="GPFMUX" offset="20" page="1" width="16" description="GPIO F Mux Control Register" />
+  <register id="GPFDIR" acronym="GPFDIR" offset="21" page="1" width="16" description="GPIO F Direction Control Register" />
+  <!-- 2 empty -->        
+  <register id="GPGMUX" acronym="GPGMUX" offset="24" page="1" width="16" description="GPIO G Mux Control Register" />
+  <register id="GPGDIR" acronym="GPGDIR" offset="25" page="1" width="16" description="GPIO G Direction Control Register" />
+  <!-- 6 empty -->  
+  <register id="GPADAT" acronym="GPADAT" offset="32" page="1" width="16" description="GPIO A Data Register" />
+  <register id="GPASET" acronym="GPASET" offset="33" page="1" width="16" description="GPIO A Set Register" />
+  <register id="GPACLEAR" acronym="GPACLEAR" offset="34" page="1" width="16" description="GPIO A Clear Register" />
+  <register id="GPATOGGLE" acronym="GPATOGGLE" offset="35" page="1" width="16" description="GPIO A Toggle Register" />
+  <register id="GPBDAT" acronym="GPBDAT" offset="36" page="1" width="16" description="GPIO B Data Register" />
+  <register id="GPBSET" acronym="GPBSET" offset="37" page="1" width="16" description="GPIO B Set Register" />
+  <register id="GPBCLEAR" acronym="GPBCLEAR" offset="38" page="1" width="16" description="GPIO B Clear Register" />
+  <register id="GPBTOGGLE" acronym="GPBTOGGLE" offset="39" page="1" width="16" description="GPIO B Toggle Register" />
+  <!-- 4 empty -->        
+  <register id="GPDDAT" acronym="GPDDAT" offset="44" page="1" width="16" description="GPIO D Data Register" />
+  <register id="GPDSET" acronym="GPDSET" offset="45" page="1" width="16" description="GPIO D Set Register" />
+  <register id="GPDCLEAR" acronym="GPDCLEAR" offset="46" page="1" width="16" description="GPIO D Clear Register" />
+  <register id="GPDTOGGLE" acronym="GPDTOGGLE" offset="47" page="1" width="16" description="GPIO D Toggle Register" />
+  <register id="GPEDAT" acronym="GPEDAT" offset="48" page="1" width="16" description="GPIO E Data Register" />
+  <register id="GPESET" acronym="GPESET" offset="49" page="1" width="16" description="GPIO E Set Register" />
+  <register id="GPECLEAR" acronym="GPECLEAR" offset="50" page="1" width="16" description="GPIO E Clear Register" />
+  <register id="GPETOGGLE" acronym="GPETOGGLE" offset="51" page="1" width="16" description="GPIO E Toggle Register" />
+  <register id="GPFDAT" acronym="GPFDAT" offset="52" page="1" width="16" description="GPIO F Data Register" />
+  <register id="GPFSET" acronym="GPFSET" offset="53" page="1" width="16" description="GPIO F Set Register" />
+  <register id="GPFCLEAR" acronym="GPFCLEAR" offset="54" page="1" width="16" description="GPIO F Clear Register" />
+  <register id="GPFTOGGLE" acronym="GPFTOGGLE" offset="55" page="1" width="16" description="GPIO F Toggle Register" />
+  <register id="GPGDAT" acronym="GPGDAT" offset="56" page="1" width="16" description="GPIO G Data Register" />
+  <register id="GPGSET" acronym="GPGSET" offset="57" page="1" width="16" description="GPIO G Set Register" />
+  <register id="GPGCLEAR" acronym="GPGCLEAR" offset="58" page="1" width="16" description="GPIO G Clear Register" />
+  <register id="GPGTOGGLE" acronym="GPGTOGGLE" offset="59" page="1" width="16" description="GPIO G Toggle Register" />
+  <!-- 4 empty -->        
+
+</module>

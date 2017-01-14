@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+<data>
+
+<page name="gettingStarted">
+  <topics>
+   <topic> 
+    <category>Getting Started</category> 
+    <subcategories>
+  
+
+     <subcategory id="1" priority="1">
+      <title>C2000 CCS 4 Projects</title>
+      <name>C2000 CCS 4 Projects</name>
+      <description><![CDATA[<p>CCS 4 ready projects can be found in 
+      <ol>
+      <li><a href="http://www.ti.com/controlsuite">controlSUITE for C2000 microcontrollers</a>a cohesive set of 
+                               software infrastructure and software tools designed to minimize software development time. 
+                               From device-specific drivers and support software to complete system examples in sophisticated system applications, 
+                               controlSUITE provides libraries and examples at every stage of development and evaluation. </li>
+      <li><a href="http://focus.ti.com/mcu/docs/mcuflashtools.tsp?sectionId=95&tabId=1540&familyId=916">C/C++ Header Files and Peripheral Examples</a>
+                               If what you are looking for is not in controlSUITE, then take a look here. This link includes device-specific header files, 
+                               simple peripheral code examples, and useful software libraries
+                               to help you get started writing code and developing applications for C2000 devices. </li>
+      
+      <ol>
+      Predefined projects can be imported by selecting Project &#8594 Import existing CCS/CCE Eclipse Project.
+             
+      ]]></description>
+     </subcategory>     
+
+    
+      <subcategory id="3" priority="3">
+      <title>Your first C2000 project</title>
+      <name>Your first C2000 project</name>
+      <description><![CDATA[<p>The following Wiki page link demonstrates:</p>
+      <ol>
+      <li>How to get started with your first CCSv4 C2000 project</li>
+      <li>How to migrate from a CCSv3.3 project to CCv4 </li>
+      <li>Flash programming with CCSv3.3 vs CCSv4 for C2000 devices</li>
+      <li>How to make portable CCSv4 projects</li>
+      <li>...and more!!</li>
+      <li>LINK: <a href="http://processors.wiki.ti.com/index.php/C2000_Getting_Started_with_Code_Composer_Studio_v4">Getting Started in CCSv4 for C2000 MediaWiki</a></li>     
+      <ol>      ]]>     
+      </description>
+     </subcategory>
+     
+     
+  
+     
+    </subcategories>
+  </topic>
+   
+   <topic>
+    <category>Resources</category>
+    <subcategories> 
+
+     <subcategory id="2" priority="1">
+      <title>C2000 Getting Started Application Notes</title>
+      <name>C2000 Getting Started Application Notes</name>
+      <description><![CDATA[<p>Some useful application notes for getting started with C2000 devices are listed below</p>
+      <ul>
+       <li><a href="http://www-s.ti.com/sc/techlit/SPRAA85">Programming TMS320x28xx and 28xxx Peripherals in C/C++ (SPRAA85)</a></li>
+       <li><a href="http://www-s.ti.com/sc/techlit/SPRA958">Running an Application from Internal Flash Memory on the TMS320F28xxx DSP(SPRA958)</a></li>
+       <li><a href="http://www.ti.com/f28xkits"> C2000 Hardware and Software Development Kits and Tools</a></li>   
+      </ul>
+      ]]></description>
+     </subcategory>
+     
+     <subcategory id="2" priority="2">
+      <title>C2000 Wiki Pages</title>
+      <name>C2000 Wiki Pages</name>
+      <link><![CDATA[http://processors.wiki.ti.com/index.php/C2000]]></link>
+      <description><![CDATA[<p>The C2000 Wiki includes:</p>
+      <ol>
+      <li><a href="http://processors.wiki.ti.com/index.php/Getting_Started_with_C2000_Links">Getting Started with C2000 Wiki Page</a></li>
+      <li><a href="http://processors.wiki.ti.com/index.php/Category:Control_Law_Accelerator_for_C2000">Control Law Accellerator Frequently Asked Questions</a></li>
+      <li><a href="http://processors.wiki.ti.com/index.php/Category:Flash_for_C2000">Flash Frequently Asked Questions</a></li>
+      <li><a href="http://processors.wiki.ti.com/index.php/Category:C2000_Training">Archived Workshops!</a></li>
+      <li>...and much more!!</li>
+      <ol>      ]]>     
+      </description>
+     </subcategory>      
+     
+    </subcategories>
+   </topic>
+  </topics>
+ </page>
+
+
+
+ <page name="examples">
+  <topics> 
+   <topic>
+    <category>Example Code</category>
+    <subcategories>
+     
+     <subcategory id="1" priority="1">
+      <title>C2000 controlSUITE</title>
+      <name>C2000 controlSUITE</name>
+      <link><![CDATA[http://www.ti.com/controlsuite]]></link>
+      <description><![CDATA[<p>controlSUITE for C2000 microcontrollers is a cohesive set of 
+                               software infrastructure and software tools designed to minimize software development time. 
+                               From device-specific drivers and support software to complete system examples in sophisticated system applications, 
+                               controlSUITE provides libraries and examples at every stage of development and evaluation. 
+                               Go beyond simple code snippits - jump start your real-time system with real-world software. ControlSUITE example code 
+                               includes ready-to-go Code Composer Studio V4 projects.</p>]]></description>
+     </subcategory>     
+
+     <subcategory id="1" priority="1">
+      <title>Header Files and Software Examples</title>
+      <name>C2000 C/C++ Header Files, Peripheral Examples, and Software Libraries</name>
+      <link><![CDATA[http://focus.ti.com/mcu/docs/mcuflashtools.tsp?sectionId=95&tabId=1540&familyId=916]]></link>
+      <description><![CDATA[<p>If what you are looking for is not in controlSUITE, then take a look here. The above link includes device-specific header files, 
+                               simple peripheral code examples, and useful software libraries
+                               to help you get started writing code and developing applications for C2000 devices.  The 28x header files and peripheral examples
+                               include ready-to-go Code Composer Studio V4 projects. </p>]]></description>
+     </subcategory>
+
+     
+    </subcategories>
+   </topic>
+  </topics>
+ </page>
+ 
+ 
+ <page name="deviceInformation">
+   <topics>
+    <topic>
+    <category>C2000 Technical Documentation</category>
+    <subcategories>
+     <subcategory id="1" priority="1">
+      <title>C2000 Architecture</title>
+      <name><![CDATA[C2000 Architecture Information]]></name>
+      <image><![CDATA[images/c2000_architecture.jpg]]></image>
+      <link></link>
+      <description><![CDATA[<p>The C2000 controller uses a central 32-bit CPU core coupled with a highly optimized peripheral and interrupt management bus. The peripherals run on an independent time basis which can be synchronized as needed. Code security for the on-chip Flash and RAM allows secure program and data storage.</p>]]></description>
+     </subcategory>
+     <subcategory id = "2" priority = "2">
+      <title>Data Sheets and User Guides </title>
+      <name>C2000 Data Sheets and Users Guides</name>
+      <!--image><![CDATA[images/datasheets.jpg]]></image> -->
+      <link><![CDATA[http://focus.ti.com/paramsearch/docs/parametricsearch.tsp?sectionId=95&tabId=1220&familyId=916&family=mcu]]></link>
+      <description><![CDATA[<p>Device datasheets and peripheral user guides can be obtained by accessing the specific device web page.  Data sheets include internal device details, pin functions, and electrical specifications. User guides describe device peripherals and registers</p>]]></description>
+     </subcategory>
+    </subcategories>
+   </topic>
+  </topics>
+ </page>
+</data>
+
+
+
+
+
+

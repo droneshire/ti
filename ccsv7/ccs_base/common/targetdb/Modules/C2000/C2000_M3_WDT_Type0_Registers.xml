@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- 
+  TI File $Revision: 
+  Checkin $Date: 
+  --> 
+
+<!--  28M35x WDT REGS Registers 
+     =================================== 
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     --> 
+<module id="WDT REGS" HW_revision="" XML_version="1" description="WDT REGS Registers">
+    <register id="WDTLOAD" acronym="WDTLOAD" offset="0" page="1" width="32" description="Watchdog Load" />
+    <register id="WDTVALUE" acronym="WDTVALUE" offset="4" page="1" width="32" description="Watchdog Value" />
+    <register id="WDTCTL" acronym="WDTCTL" offset="8" page="1" width="32" description="Watchdog Control" />
+    <register id="WDTICR" acronym="WDTICR" offset="12" page="1" width="32" description="Watchdog Interrupt Clear" />
+    <register id="WDTRIS" acronym="WDTRIS" offset="16" page="1" width="32" description="Watchdog Raw Interrupt Status" />
+    <register id="WDTMIS" acronym="WDTMIS" offset="20" page="1" width="32" description="Watchdog Masked Interrupt Status" />
+    <!--  1024 empty  -->
+    <register id="WDTTEST" acronym="WDTTEST" offset="1048" page="1" width="32" description="Watchdog Test" />
+    <!--  2020 empty  -->
+    <register id="WDTLOCK" acronym="WDTLOCK" offset="3072" page="1" width="32" description="Watchdog Lock" />
+    <!--  972 empty  -->
+    <register id="WDTPERIPHID4" acronym="WDTPERIPHID4" offset="4048" page="1" width="32" description="Watchdog Peripheral Identification 4" />
+    <register id="WDTPERIPHID5" acronym="WDTPERIPHID5" offset="4052" page="1" width="32" description="Watchdog Peripheral Identification 5" />
+    <register id="WDTPERIPHID6" acronym="WDTPERIPHID6" offset="4056" page="1" width="32" description="Watchdog Peripheral Identification 6" />
+    <register id="WDTPERIPHID7" acronym="WDTPERIPHID7" offset="4060" page="1" width="32" description="Watchdog Peripheral Identification 7" />
+    <register id="WDTPERIPHID0" acronym="WDTPERIPHID0" offset="4064" page="1" width="32" description="Watchdog Peripheral Identification 0" />
+    <register id="WDTPERIPHID1" acronym="WDTPERIPHID1" offset="4068" page="1" width="32" description="Watchdog Peripheral Identification 1" />
+    <register id="WDTPERIPHID2" acronym="WDTPERIPHID2" offset="4072" page="1" width="32" description="Watchdog Peripheral Identification 2" />
+    <register id="WDTPERIPHID3" acronym="WDTPERIPHID3" offset="4076" page="1" width="32" description="Watchdog Peripheral Identification 3" />
+    <register id="WDTPCELLID0" acronym="WDTPCELLID0" offset="4080" page="1" width="32" description="Watchdog PrimeCell Identification 0" />
+    <register id="WDTPCELLID1" acronym="WDTPCELLID1" offset="4084" page="1" width="32" description="Watchdog PrimeCell Identification 1" />
+    <register id="WDTPCELLID2" acronym="WDTPCELLID2" offset="4088" page="1" width="32" description="Watchdog PrimeCell Identification 2" />
+    <register id="WDTPCELLID3" acronym="WDTPCELLID3" offset="4092" page="1" width="32" description="Watchdog PrimeCell Identification 3" />
+</module>

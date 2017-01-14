@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_38" class="java.beans.XMLDecoder"> 
+ <object class="com.ti.dvt.gsb.model.LayoutModel"> 
+  <void property="autoLayout"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="layoutMap"> 
+   <void method="put"> 
+    <string>Tap</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>381</int> 
+     <int>127</int> 
+     <int>51</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>UIALogSource</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>363</int> 
+     <int>72</int> 
+     <int>87</int> 
+     <int>31</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>bLogMSP</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>201</int> 
+     <int>416</int> 
+     <int>107</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>Tap.1b</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>339</int> 
+     <int>352</int> 
+     <int>-1</int> 
+     <int>-1</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.line:Energy</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>455</int> 
+     <int>495</int> 
+     <int>80</int> 
+     <int>34</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>bLogMSP2</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>444</int> 
+     <int>413</int> 
+     <int>102</int> 
+     <int>36</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>Tap.2a</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>462</int> 
+     <int>352</int> 
+     <int>-1</int> 
+     <int>-1</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>Tap.2b</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>567</int> 
+     <int>348</int> 
+     <int>-1</int> 
+     <int>-1</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>Tap.1a</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>222</int> 
+     <int>351</int> 
+     <int>-1</int> 
+     <int>-1</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:Logs@1</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>215</int> 
+     <int>493</int> 
+     <int>80</int> 
+     <int>34</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>MSPPwrPreprocessor</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>335</int> 
+     <int>182</int> 
+     <int>143</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>$HookIn</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>269</int> 
+     <int>227</int> 
+     <int>76</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.dvtgraph:States</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>333</int> 
+     <int>496</int> 
+     <int>80</int> 
+     <int>34</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>bLogMSPb</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>328</int> 
+     <int>416</int> 
+     <int>-1</int> 
+     <int>-1</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>BufferFlowControl2</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>447</int> 
+     <int>285</int> 
+     <int>191</int> 
+     <int>36</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>bLogMSP2b</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>553</int> 
+     <int>411</int> 
+     <int>-1</int> 
+     <int>-1</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.line:Power</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>560</int> 
+     <int>495</int> 
+     <int>80</int> 
+     <int>34</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>BufferFlowControl</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>217</int> 
+     <int>286</int> 
+     <int>181</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+  </void> 
+ </object> 
+</java> 

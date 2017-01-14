@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configurations XML_version="1.2" id="configurations_0">
+<configuration XML_version="1.2" id="Blackhawk USB560-M Emulator_0">
+        <instance XML_version="1.2" desc="Blackhawk USB560-M Emulator_0" href="connections\BH-USB560m_Connection.xml" id="Blackhawk USB560-M Emulator_0" xml="BH-USB560m_Connection.xml" xmlpath="connections"/>
+        <connection XML_version="1.2" id="Blackhawk USB560-M Emulator_0">
+            <instance XML_version="1.2" href="drivers\tixds560icepick_c.xml" id="drivers" xml="tixds560icepick_c.xml" xmlpath="drivers"/>
+            <instance XML_version="1.2" href="drivers\tixds560c64xp.xml" id="drivers" xml="tixds560c64xp.xml" xmlpath="drivers"/>
+            <platform XML_version="1.2" id="platform_0">
+                <instance XML_version="1.2" desc="TMS320TCI6488(CPU Registers, Fast Start)_0" href="Devices\tci6488_NoPeripheralRegs.xml" id="TMS320TCI6488(CPU Registers, Fast Start)_0" xml="tci6488_NoPeripheralRegs.xml" xmlpath="Devices"/>
+                <device HW_revision="1" XML_version="1.2" description="3 C64x+ Cores - This configuration defines CPU registers only with no peripheral registers, debugger start will be faster." id="TMS320TCI6488(CPU Registers, Fast Start)_0" partnum="TMS320TCI6488">
+                    <router HW_revision="" XML_version="1.2" description="" id="device_1" isa="ICEPICK_C">
+                        <subpath id="device_3">
+                            <cpu HW_revision="" XML_version="1.2" description="" id="device_4" isa="TMS320C64XP">
+                                <property Type="filepathfield" Value="..\..\..\..\MyStuff\work\C64xplus\GELScripts\6488\Init\init6488.gel" id="GEL File"/>
+                            </cpu>
+                        </subpath>
+                        <subpath id="device_5">
+                            <cpu HW_revision="" XML_version="1.2" description="" id="device_6" isa="TMS320C64XP">
+                                <property Type="filepathfield" Value="..\..\..\..\MyStuff\work\C64xplus\GELScripts\6488\Init\init6488.gel" id="GEL File"/>
+                            </cpu>
+                        </subpath>
+                        <subpath id="device_7">
+                            <cpu HW_revision="" XML_version="1.2" description="" id="device_8" isa="TMS320C64XP">
+                                <property Type="filepathfield" Value="..\..\..\..\MyStuff\work\C64xplus\GELScripts\6488\Init\init6488.gel" id="GEL File"/>
+                            </cpu>
+                        </subpath>
+                    </router>
+                </device>
+            </platform>
+        </connection>
+    </configuration>
+</configurations>
+

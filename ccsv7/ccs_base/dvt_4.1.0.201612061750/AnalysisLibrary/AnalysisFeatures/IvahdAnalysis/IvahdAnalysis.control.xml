@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="IVAHD Analyzer" default="enable" basedir=".">
+	<import file="../../templates/analysisfeature.xml"/>
+	
+	<property name="dvt.activity.name" value="IVAHD/${ant.project.name}"/>
+	<property name="dvt.activity.description" value="Analyzes IVAHD SMSET trace data."/>
+	<property name="dvt.data.type" value="STM"/>
+	<property name="dvt.views" value="Scope,Log Table,System Events,Start Stop Counts,Duration per algo per MB,Duration per algo,Duration vs Time,Duration vs MB,MB Table"/>
+	<property name="dvt.views.show" value="Scope"/>
+	<property name="analysisFeatureName" value="IvahdAnalysis" />
+	<!--property name="bufferbypass.text" value="true" /-->
+
+	<!-- Uncomment to hide AF: -->
+	<!--target name="enable"/-->
+	
+	<!-- override template target -->
+	<target name="postAddAnalysisFeature">
+		<dvt.start refid="analysisFeatureRef"/>
+		<dvt.view.show refid="analysisFeatureRef" view="${dvt.views.show}"/>
+	</target>
+</project>

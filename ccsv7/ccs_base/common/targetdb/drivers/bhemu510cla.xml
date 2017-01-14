@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--                                                  -->
+<!-- Blackhawk XDS510 Emulator XML Definitions.       -->
+<!-- Date: 07 March 2016                              -->
+<!-- Vers: 6.0.83.001                                 -->
+<!--                                                  -->
+
+<drivers id="TMS192C2006">
+    <isa id="TMS192C2006" ProcID="0x30008030">
+        <driver file="..\..\..\emulation\drivers\tixds510ihwa.dvr">
+			<connectionType Type="BHEMU"/>
+			<connectionType Type="BH2000"/>
+			<property Name="TraceDeviceId" Type="numericfield" Value="0x0" NumericType="HEX" UpperBound="0xFFFFFFFF" LowerBound="0" ID="device.traceId"/>
+            <property id="debugParent" Type="hiddenfield" Value="" />
+            <property id="IHWA Base Address" Type="hiddenfield" Value="0x00" />
+            <property id="noSystemBreakpoints" Type="hiddenfield" Value="true" />
+        </driver>
+    </isa>
+</drivers>

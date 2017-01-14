@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<drivers id="CortexA9">
+  <isa Type="CortexA9" ProcID="0x75802400">
+    <driver file="..\..\..\emulation\drivers\tixds510cortexA9.dvr">
+      <connectionType Type="TIXDS100v2"/>
+	<!--Driver level property-->
+	 <property Name="Address" Type="numericfield" Value="0x0" NumericType="HEX" UpperBound="0xFFFFFFFF" LowerBound="0" ID="device.address"/>
+      <property Name="TraceDeviceId" Type="numericfield" Value="0x0" NumericType="HEX" UpperBound="0xFFFFFFFF" LowerBound="0" ID="device.traceId"/>
+      <property Name="Access Port Designator" Type="numericfield" Value="0x0" NumericType="HEX" UpperBound="0xFFFFFFFF" LowerBound="0" ID="device.identify"/>
+    </driver>
+  </isa>
+</drivers>

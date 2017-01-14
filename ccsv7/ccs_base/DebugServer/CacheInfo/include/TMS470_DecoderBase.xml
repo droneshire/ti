@@ -1,0 +1,396 @@
+﻿<!-- Decoders perform the following sequence of operations:
+		1) XOR XorWithRegValue with register valuex
+		2) Mask with BitfieldMask property 
+		3) shift right by BitfieldShift bits 
+		4a) if a <StringTable> field is present with <NumStrings> > 0, use result of step 3 as index into lookup table of strings and 
+			set string result = value from table.  No further processing is done in this case.
+		4b) if a <DecoderTable> field is present with <NumDecoders> > 0, use result of step 3 as index into lookup table of decoders and
+			call the specified decoder and sets result = value and string result = string from the decoder 
+		4c) if a <LookupTable> field is present with <NumIndexValues> > 0, use result of step 3 as index into lookup table and set result = value from table 
+		5) multiply the result from step 4b or 4c by floating point Multiplier value (e.g. set to 0.25 to divide by 4)  
+		6) add AddToProduct value 
+		7) if IsTrueIfResultIsZero, decode_bool returns true if 0, false if non-zero
+		
+		If any of these properties are not defined, they are set to the
+		following default values:
+			XorWithRegValue = 0
+			BitfieldMask = 0xffffffff
+			BitfieldShift = 0
+			Multiplier = 1.0
+			AddToProduct = 0
+			IsTrueIfResultIsZero = false
+		-->
+<Decoder>
+	<DecoderName>GetModeStatusString</DecoderName>
+	<BitfieldMask>0x01F</BitfieldMask>
+	<BitfieldShift>0</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+	<StringTable>
+		<NumStrings>32</NumStrings>
+		<Array index="0">0(?)</Array>
+		<Array index="1">1(?)</Array>
+		<Array index="2">2(?)</Array>
+		<Array index="3">3(?)</Array>
+		<Array index="4">4(?)</Array>
+		<Array index="5">5(?)</Array>
+		<Array index="6">6(?)</Array>
+		<Array index="7">7(?)</Array>
+		<Array index="8">8(?)</Array>
+		<Array index="9">9(?)</Array>
+		<Array index="10">0x0A(?)</Array>
+		<Array index="11">0x0B(?)</Array>
+		<Array index="12">0x0C(?)</Array>
+		<Array index="13">0x0D(?)</Array>
+		<Array index="14">0x0E(?)</Array>
+		<Array index="15">0x0F(?)</Array>
+		<Array index="16">User</Array>
+		<Array index="17">FIQ</Array>
+		<Array index="18">IRQ</Array>
+		<Array index="19">Supervisor</Array>
+		<Array index="20">0x14(?)</Array>
+		<Array index="21">0x15(?)</Array>
+		<Array index="22">0x16(?)</Array>
+		<Array index="23">Abort</Array>
+		<Array index="24">0x18(?)</Array>
+		<Array index="25">0x19(?)</Array>
+		<Array index="26">0x1A(?)</Array>
+		<Array index="27">Undefined</Array>
+		<Array index="28">0x1C(?)</Array>
+		<Array index="29">0x1D(?)</Array>
+		<Array index="30">0x1E(?)</Array>
+		<Array index="31">System</Array>
+	</StringTable>
+</Decoder>
+<Decoder>
+	<DecoderName>GetThumbModeStatusString</DecoderName>
+	<BitfieldMask>0x020</BitfieldMask>
+	<BitfieldShift>5</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+	<StringTable>
+		<NumStrings>2</NumStrings>
+		<Array index="0">ARM</Array>
+		<Array index="1">Thumb</Array>
+	</StringTable>
+</Decoder>
+<Decoder>
+	<DecoderName>IsMmuEnabled</DecoderName>
+	<BitfieldMask>0x01</BitfieldMask>
+	<BitfieldShift>0</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>IsRomMode</DecoderName>
+	<BitfieldMask>0x0200</BitfieldMask>
+	<BitfieldShift>9</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>IsSystemReadAccess</DecoderName>
+	<BitfieldMask>0x0100</BitfieldMask>
+	<BitfieldShift>8</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>GetTranslationTableBaseAdrs</DecoderName>
+	<BitfieldMask>0x0ffffc000</BitfieldMask>
+	<BitfieldShift>0</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>GetTTBR1CutoverAdrs</DecoderName>
+	<BitfieldMask>0x07</BitfieldMask>
+	<BitfieldShift>0</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+	<LookupTable>
+		<NumIndexValues>8</NumIndexValues>
+		<Array index="0">0xFFFFFFFF</Array>
+		<Array index="1">0x7FFFFFFF</Array>
+		<Array index="2">0x3FFFFFFF</Array>
+		<Array index="3">0x1FFFFFFF</Array>
+		<Array index="4">0x0FFFFFFF</Array>
+		<Array index="5">0x07FFFFFF</Array>
+		<Array index="6">0x03FFFFFF</Array>
+		<Array index="7">0x01FFFFFF</Array>	
+	</LookupTable>
+</Decoder>
+<Decoder>
+	<DecoderName>GetRegisterValue</DecoderName>
+	<BitfieldMask>0x0ffffffff</BitfieldMask>
+	<BitfieldShift>0</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>AlwaysFalse</DecoderName>
+	<BitfieldMask>0x00</BitfieldMask>
+	<BitfieldShift>0</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+	<IsTrueIfResultIsZero>true</IsTrueIfResultIsZero>	
+</Decoder>
+<Decoder>
+	<DecoderName>AlwaysZero</DecoderName>
+	<BitfieldMask>0x00</BitfieldMask>
+	<BitfieldShift>0</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>AlwaysOne</DecoderName>
+	<BitfieldMask>0x00</BitfieldMask>
+	<BitfieldShift>0</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>1</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>AlwaysThree</DecoderName>
+	<BitfieldMask>0x00</BitfieldMask>
+	<BitfieldShift>0</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>3</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>AlwaysFour</DecoderName>
+	<BitfieldMask>0x00</BitfieldMask>
+	<BitfieldShift>0</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>4</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>IsArmV7MmuMode</DecoderName>
+	<BitfieldMask>0x0800000</BitfieldMask>
+	<BitfieldShift>23</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>IsArmV6MmuMode</DecoderName>
+	<BitfieldMask>0x0800000</BitfieldMask>
+	<BitfieldShift>23</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>IsArmV5MmuMode</DecoderName>
+	<BitfieldMask>0x0800000</BitfieldMask>
+	<BitfieldShift>23</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+	<IsTrueIfResultIsZero>true</IsTrueIfResultIsZero>
+</Decoder>
+<Decoder>
+	<DecoderName>IsThereAnMMU</DecoderName>
+	<BitfieldMask>0x01</BitfieldMask>
+	<BitfieldShift>0</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+	<IsTrueIfResultIsZero>false</IsTrueIfResultIsZero>
+</Decoder>
+<Decoder>
+	<DecoderName>MmuL2PageTable_GetNumSubPages</DecoderName>
+	<BitfieldMask>0x0800000</BitfieldMask>
+	<BitfieldShift>23</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+	<DecoderTable>
+		<NumDecoders>2</NumDecoders>
+		<Array index="0">AlwaysZero</Array>
+		<Array index="1">Getb14_b12</Array>
+	</DecoderTable>		
+</Decoder>
+<Decoder>
+	<DecoderName>Getb18</DecoderName>
+	<BitfieldMask>0x040000</BitfieldMask>
+	<BitfieldShift>18</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>Getb15</DecoderName>
+	<BitfieldMask>0x08000</BitfieldMask>
+	<BitfieldShift>15</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>Getb2</DecoderName>
+	<BitfieldMask>0x04</BitfieldMask>
+	<BitfieldShift>2</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>Getb0</DecoderName>
+	<BitfieldMask>0x01</BitfieldMask>
+	<BitfieldShift>0</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>Getb1_b0</DecoderName>
+	<BitfieldMask>0x03</BitfieldMask>
+	<BitfieldShift>0</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>Getb3_b2</DecoderName>
+	<BitfieldMask>0x0C</BitfieldMask>
+	<BitfieldShift>2</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>Getb5_b4</DecoderName>
+	<BitfieldMask>0x30</BitfieldMask>
+	<BitfieldShift>4</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>Getb5_b4_Add_4</DecoderName>
+	<BitfieldMask>0x30</BitfieldMask>
+	<BitfieldShift>4</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>4</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>Getb7_b6</DecoderName>
+	<BitfieldMask>0xC0</BitfieldMask>
+	<BitfieldShift>6</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>Getb9_b8</DecoderName>
+	<BitfieldMask>0x300</BitfieldMask>
+	<BitfieldShift>8</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>Getb11_b10</DecoderName>
+	<BitfieldMask>0xC00</BitfieldMask>
+	<BitfieldShift>10</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>Getb11_b10_Add_4</DecoderName>
+	<BitfieldMask>0xC00</BitfieldMask>
+	<BitfieldShift>10</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>4</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>Getb13_b12</DecoderName>
+	<BitfieldMask>0x3000</BitfieldMask>
+	<BitfieldShift>12</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>Getb15_b14</DecoderName>
+	<BitfieldMask>0xC000</BitfieldMask>
+	<BitfieldShift>14</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>Getb17_b16</DecoderName>
+	<BitfieldMask>0x30000</BitfieldMask>
+	<BitfieldShift>16</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>Getb19_b18</DecoderName>
+	<BitfieldMask>0xC0000</BitfieldMask>
+	<BitfieldShift>18</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>Getb21_b20</DecoderName>
+	<BitfieldMask>0x300000</BitfieldMask>
+	<BitfieldShift>20</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>Getb23_b22</DecoderName>
+	<BitfieldMask>0xC00000</BitfieldMask>
+	<BitfieldShift>22</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>Getb25_b24</DecoderName>
+	<BitfieldMask>0x3000000</BitfieldMask>
+	<BitfieldShift>24</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>Getb27_b26</DecoderName>
+	<BitfieldMask>0xC000000</BitfieldMask>
+	<BitfieldShift>26</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>Getb29_b28</DecoderName>
+	<BitfieldMask>0x30000000</BitfieldMask>
+	<BitfieldShift>28</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>Getb31_b30</DecoderName>
+	<BitfieldMask>0xC0000000</BitfieldMask>
+	<BitfieldShift>30</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>Getb8_b5</DecoderName>
+	<BitfieldMask>0x01E0</BitfieldMask>
+	<BitfieldShift>5</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>Getb8_b6</DecoderName>
+	<BitfieldMask>0x01C0</BitfieldMask>
+	<BitfieldShift>6</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>Getb14_b12</DecoderName>
+	<BitfieldMask>0x07000</BitfieldMask>
+	<BitfieldShift>12</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>Getb15_b12</DecoderName>
+	<BitfieldMask>0x0F000</BitfieldMask>
+	<BitfieldShift>12</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>Getb31_b25</DecoderName>
+	<BitfieldMask>0xFE000000</BitfieldMask>
+	<BitfieldShift>25</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>

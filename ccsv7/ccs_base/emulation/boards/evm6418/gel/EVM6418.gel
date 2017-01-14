@@ -1,0 +1,239 @@
+/*--------------------------------------------------------------*/
+/* EVM6418.gel                                                  */
+/* Version 1.10                                                 */
+/*                                                              */
+/* This GEL file is designed to be used in conjunction with     */
+/* CCS 3.00 and the EVM6418.                                    */
+/*                                                              */
+/*--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------*/
+/* The StartUp() function is called each time CCS is started.   */
+/* Customize this function to perform desired initialization.   */
+/*--------------------------------------------------------------*/
+
+StartUp()
+{
+    setup_memory_map();
+}
+
+/*--------------------------------------------------------------*/
+/* OnTargetConnect() -- this function is called after a target  */
+/* connect.                                                     */
+/*--------------------------------------------------------------*/
+OnTargetConnect()
+{
+    /*
+    GEL_Reset is used to deal with the worst case senario of
+    unknown target state.  If for some reason a reset is not
+    desired upon target connection, GEL_Reset may be removed
+    and replaced with something "less brutal" like a cache
+    initialization function
+    GEL_Reset();
+    */
+    init_emif();
+}
+
+/*--------------------------------------------------------------*/
+/* Setup memory map for EVM6418.                                */
+/*                                                              */
+/*--------------------------------------------------------------*/
+setup_memory_map()
+{
+
+    GEL_MapOn();
+    GEL_MapReset();
+
+    /* On-chip memory map */
+    GEL_MapAdd(0x00000000, 0, 0x00080000, 1, 1); /* Internal Memory       */
+    GEL_MapAdd(0x01800000, 0, 0x00000058, 1, 1); /* EMIFA CTL REGS        */
+    GEL_MapAdd(0x01840000, 0, 0x00008300, 1, 1); /* INT MEM CTL REGS      */
+    GEL_MapAdd(0x018C0000, 0, 0x00000040, 1, 1); /* MCBSP0 CTL REGS       */
+    GEL_MapAdd(0x01900000, 0, 0x00000040, 1, 1); /* MCBSP1 CTL REGS       */
+    GEL_MapAdd(0x01940000, 0, 0x0000000C, 1, 1); /* TIMER0 CTL REGS       */
+    GEL_MapAdd(0x01980000, 0, 0x0000000C, 1, 1); /* TIMER1 CTL REGS       */
+    GEL_MapAdd(0x019C0000, 0, 0x0000000C, 1, 1); /* INT CTL REGS          */
+    GEL_MapAdd(0x01A00000, 0, 0x00010000, 1, 1); /* EDMA REGS AND PARAM   */
+    GEL_MapAdd(0x01AC0000, 0, 0x0000000C, 1, 1); /* TIMER2 CTL REGS       */
+    GEL_MapAdd(0x01B00000, 0, 0x00000028, 1, 1); /* GPIO REGS             */
+    GEL_MapAdd(0x01B3F000, 0, 0x0000001C, 1, 1); /* Device Configuration  */
+    GEL_MapAdd(0x01B40000, 0, 0x00000060, 1, 1); /* I2C0 CTL REGS         */
+    GEL_MapAdd(0x01B44000, 0, 0x00000060, 1, 1); /* I2C1 CTL REGS         */
+    GEL_MapAdd(0x01B4C000, 0, 0x000002A0, 1, 1); /* McASP0 CTL REGS       */
+    GEL_MapAdd(0x01B5C000, 0, 0x000002A0, 1, 1); /* McASP1 CTL REGS       */
+    GEL_MapAdd(0x01B7F000, 0, 0x0000000C, 1, 1); /* ATL REGS              */
+    GEL_MapAdd(0x01B80000, 0, 0x00000054, 1, 1); /* VCP CTL REGS          */
+    GEL_MapAdd(0x02000000, 0, 0x00000030, 1, 1); /* QDMA REGS             */
+    GEL_MapAdd(0x30000000, 0, 0x04000000, 1, 1); /* MCBSP0 Data, EDMA map */
+    GEL_MapAdd(0x34000000, 0, 0x04000000, 1, 1); /* MCBSP1 Data, EDMA map */
+    GEL_MapAdd(0x3C000000, 0, 0x00100000, 1, 1); /* MCASP0 Data           */
+    GEL_MapAdd(0x3C100000, 0, 0x00100000, 1, 1); /* MCASP1 Data           */
+
+    /* Off-chip memory map */
+    GEL_MapAdd(0x80000000, 0, 0x00800000, 1, 1); /* EMIF CE0 8MB SDRAM    */
+    GEL_MapAdd(0x90000000, 0, 0x000F0000, 1, 1); /* EMIF CE1 256Kb Flash  */
+    GEL_MapAdd(0x900F0000, 0, 0x00000020, 1, 1); /* EMIF CE1 UART/CPLD    */
+    GEL_MapAdd(0xA0000000, 0, 0x10000000, 1, 1); /* EMIF CE2 EXPANSION    */
+    GEL_MapAdd(0xB0000000, 0, 0x10000000, 1, 1); /* EMIF CE3 EXPANSION    */
+}
+
+/*--------------------------------------------------------------*/
+/* init_emif()                                                  */
+/*--------------------------------------------------------------*/
+init_emif()
+{
+
+#define EMIFA_GCTL       0x01800000
+#define EMIFA_CE1        0x01800004
+#define EMIFA_CE0        0x01800008
+#define EMIFA_CE2        0x01800010
+#define EMIFA_CE3        0x01800014
+#define EMIFA_SDRAMCTL   0x01800018
+#define EMIFA_SDRAMTIM   0x0180001c
+#define EMIFA_SDRAMEXT   0x01800020
+#define EMIFA_CE1SECCTL  0x01800044
+#define EMIFA_CE0SECCTL  0x01800048
+#define EMIFA_CE2SECCTL  0x01800050
+#define EMIFA_CE3SECCTL  0x01800054
+
+    /* EMIFA */
+    *(int *)EMIFA_GCTL     = 0x00052078;
+    *(int *)EMIFA_CE0      = 0xffffff33;  /* CE0 SDRAM                     */
+    *(int *)EMIFA_CE1      = 0x73a78e01;  /* CE1 Flash + CPLD              */
+    *(int *)EMIFA_CE2      = 0x22a28a22;  /* CE2 Daughtercard 32-bit async */
+    *(int *)EMIFA_CE3      = 0x22a28a42;  /* CE3 Daughtercard 32-bit sync  */
+    *(int *)EMIFA_SDRAMCTL = 0x47115000;  /* SDRAM control                 */
+    *(int *)EMIFA_SDRAMTIM = 0x00000758;  /* SDRAM timing (refresh)        */
+    *(int *)EMIFA_SDRAMEXT = 0x001faf4d;  /* SDRAM extended control        */
+    *(int *)EMIFA_CE0SECCTL= 0x00000002;  /* CE0 Secondary Control Reg.    */
+    *(int *)EMIFA_CE1SECCTL= 0x00000002;  /* CE1 Secondary Control Reg.    */
+    *(int *)EMIFA_CE2SECCTL= 0x00000002;  /* CE2 Secondary Control Reg.    */
+    *(int *)EMIFA_CE3SECCTL= 0x00000002;  /* CE3 Secondary Control Reg.    */
+}
+
+/*--------------------------------------------------------------*/
+/* clear_memory_map()                                           */
+/*--------------------------------------------------------------*/
+clear_memory_map()
+{
+    GEL_MapOff();
+}
+
+/*--------------------------------------------------------------*/
+/* FlushCache()                                                 */
+/*--------------------------------------------------------------*/
+FlushCache()
+{
+    /* Invalidate L1I and L1D */
+    *(int *)0x01840000 = (*(int *)0x01840000 | 0x00000300);
+
+    /* Clean L2 */
+    *(int *)0x01845004 = 0x1;
+}
+
+
+/*--------------------------------------------------------------*/
+/* OnReset()                                                    */
+/*--------------------------------------------------------------*/
+OnReset(int nErrorCode)
+{
+    init_emif();
+}
+
+
+/*--------------------------------------------------------------*/
+/* OnPreFileLoaded()                                            */
+/* This function is called automatically when the 'Load Program'*/
+/* Menu item is selected.                                       */
+/*--------------------------------------------------------------*/
+OnPreFileLoaded()
+{
+/*    GEL_Reset();      -- Commented out for CCS 2.20 */
+    FlushCache();
+    IER = 0;
+    IFR = 0;
+    init_emif();
+}
+
+/*--------------------------------------------------------------*/
+/* OnRestart()                                                  */
+/* This function is called by CCS when you do Debug->Restart.   */
+/* The goal is to put the C6x into a known good state with      */
+/* respect to cache, edma and interrupts.                       */
+/* Failure to do this can cause problems when you restart and   */
+/* run your application code multiple times.  This is different */
+/* then OnPreFileLoaded() which will do a GEL_Reset() to get the*/
+/* C6x into a known good state.                                 */
+/*--------------------------------------------------------------*/
+OnRestart(int nErrorCode )
+{
+      /* Turn off L2 for all EMIFA CE spaces.  App should
+      *  manage these for coherancy in the application.
+      *  GEL_TextOut("Turn off cache segment\n");
+      */
+      *(int *)0x1848200 = 0;  /* MAR0 */
+      *(int *)0x1848204 = 0;  /* MAR1 */
+      *(int *)0x1848208 = 0;  /* MAR2 */
+      *(int *)0x184820c = 0;  /* MAR3 */
+
+      /* Disable EDMA events and interrupts and clear any
+      *  pending events.
+      *  GEL_TextOut("Disable EDMA event\n");
+      */
+      *(int *)0x01A0FFA8 = 0;          /* CIERH */
+      *(int *)0x01A0FFB4 = 0;          /* EERH */
+      *(int *)0x01A0FFB8 = 0XFFFFFFFF; /* ECRH */
+
+      *(int *)0x01A0FFE8 = 0;          /* CIERL */
+      *(int *)0x01A0FFF4 = 0;          /* EERL */
+      *(int *)0x01A0FFF8 = 0xFFFFFFFF; /* ECRL */
+
+      /* Disable other interrupts */
+      IER = 0;
+      IFR = 0;
+}
+
+/*--------------------------------------------------------------*/
+/* RESET MENU                                                   */
+/*--------------------------------------------------------------*/
+menuitem "Resets";
+
+hotmenu Reset_BreakPts_and_EMIF()
+{
+    GEL_BreakPtReset();
+    GEL_Reset();
+    init_emif();
+}
+
+hotmenu Flush_Cache()
+{
+    FlushCache();
+}
+
+/*--------------------------------------------------------------*/
+/* MEMORY MAP MENU                                              */
+/*--------------------------------------------------------------*/
+menuitem "Memory Map";
+
+hotmenu SetMemoryMap()
+{
+    setup_memory_map();
+}
+
+hotmenu ClearMemoryMap()
+{
+    clear_memory_map();
+}
+
+/*--------------------------------------------------------------*/
+/* BOARD OPTIONS MENU                                           */
+/*--------------------------------------------------------------*/
+menuitem "Board Options";
+
+#define CPLD_REVISION 0x9008001F
+
+hotmenu CheckFPGARevision()
+{
+    GEL_TextOut(" FPGA Revision %d\n","Output",1,1,1, *(char *)CPLD_REVISION);
+    GEL_TextOut(" Note: Revision only valid if FGPA DONE LED is on (DS9)\n","Output",1,1,1);
+}

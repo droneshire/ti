@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uiaEventData>
+   <evtMap id="0">
+      <longName>ti.msp430.trace.power.Snapshot</longName>
+      <shortName>Power_Snapshot</shortName>
+      <moduleId>0</moduleId>
+      <diagMask>4</diagMask>
+      <msg>Snapshot%3A+</msg>
+      <eventType>ANALYSIS</eventType>
+   </evtMap>
+   <modIdMap id="0">
+      <moduleName>ti.msp430.trace.power</moduleName>
+      <packageVersion>1, 0, 0</packageVersion>
+   </modIdMap>
+   <transport>
+      <isMultiCoreTransport>false</isMultiCoreTransport>
+      <!-- nonJtagTransport values: [NONE,FILE,USER,ETHERNET] -->
+      <nonJtagTransport>USER</nonJtagTransport>
+      <isNDK>false</isNDK>
+      <!-- uploadMode values: [NONE,SIMULATOR,PROBEPOINT,JTAGSTOPMODE,JTAGRUNMODE,NONJTAGTRANSPORT,NONJTAG_AND_JTAGSTOPMODE] -->
+      <uploadMode>NONE</uploadMode>
+   </transport>
+   <cpuClock>
+      <maxClockFreqMSW>0</maxClockFreqMSW>
+      <maxClockFreqLSW>1000000</maxClockFreqLSW>
+      <canFrequencyBeChanged>true</canFrequencyBeChanged>
+   </cpuClock>
+</uiaEventData>

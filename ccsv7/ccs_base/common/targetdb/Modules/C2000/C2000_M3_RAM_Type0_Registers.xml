@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- 
+  TI File $Revision: 
+  Checkin $Date: 
+  --> 
+
+<!--  28M35x UART REGS Registers 
+     =================================== 
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     --> 
+<module id="UART REGS" HW_revision="" XML_version="1" description="UART REGS Registers">
+    <register id="CXDRCR1" acronym="CXDRCR1" offset="0" page="1" width="32" description="Cx DEDRAM Config Register 1" />
+    <!--  4 empty  -->
+    <register id="CXSRCR1" acronym="CXSRCR1" offset="8" page="1" width="32" description="Cx SHRAM Config Register 1" />
+    <!--  4 empty  -->
+    <register id="MSXMSEL" acronym="MSXMSEL" offset="16" page="1" width="32" description="Sx SHRAM Master Select Register" />
+    <register id="MSXSRCR1" acronym="MSXSRCR1" offset="20" page="1" width="32" description="M3 Sx SHRAM Config Register 1" />
+    <register id="MSXSRCR2" acronym="MSXSRCR2" offset="24" page="1" width="32" description="M3 Sx SHRAM Config Register 2" />
+    <!--  4 empty  -->
+    <!--  4 empty  -->
+    <register id="MTOCMSGRCR" acronym="MTOCMSGRCR" offset="36" page="1" width="32" description="M3TOC28_MSG_RAM Config Register" />
+    <!--  12 empty  -->
+    <register id="CXRTESTINIT1" acronym="CXRTESTINIT1" offset="52" page="1" width="32" description="Cx RAM_TEST and INIT Register 1" />
+    <!--  4 empty  -->
+    <!--  8 empty  -->
+    <register id="MSXRTESTINIT1" acronym="MSXRTESTINIT1" offset="68" page="1" width="32" description="M3 Sx RAM_TEST and INIT Register 1" />
+    <!--  4 empty  -->
+    <!--  4 empty  -->
+    <!--  4 empty  -->
+    <register id="MTOCRTESTINIT" acronym="MTOCRTESTINIT" offset="84" page="1" width="32" description="M3 To Cx Message TEST and INIT Register" />
+    <!--  12 empty  -->
+    <register id="CXRINITDONE1" acronym="CXRINITDONE1" offset="100" page="1" width="32" description="Cx RAM_ INIT_DONE Register  1" />
+    <!--  4 empty  -->
+    <register id="MSXRINITDONE1" acronym="MSXRINITDONE1" offset="108" page="1" width="32" description="M3 Sx RAM_INIT_DONE Register" />
+    <!--  4 empty  -->
+    <!--  4 empty  -->
+    <!--  4 empty  -->
+    <register id="MTOCRINITDONE" acronym="MTOCRINITDONE" offset="124" page="1" width="32" description="M3 To Cx Message RAM Init Done" />
+</module>

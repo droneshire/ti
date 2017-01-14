@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_34" class="java.beans.XMLDecoder"> 
+ <object class="com.ti.dvt.ui.views.core.ViewModel"> 
+  <void property="viewConnectionMgr"> 
+   <void property="connections"> 
+    <void method="add"> 
+     <object class="com.ti.dvt.ui.views.core.ViewConnection"> 
+      <void property="source"> 
+       <string>LogView</string> 
+      </void> 
+      <void property="target"> 
+       <string>com.ti.dvt.ui.views.table:Logs</string> 
+      </void> 
+     </object> 
+    </void> 
+   </void> 
+  </void> 
+  <void property="viewInfoMap"> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:Logs</string> 
+    <object class="com.ti.dvt.ui.views.core.ViewInfo"> 
+     <void property="paneInfoColl"> 
+      <void method="add"> 
+       <object class="com.ti.dvt.ui.views.core.PaneInfo"> 
+        <void property="ID"> 
+         <string>com.ti.dvt.ui.views.table:Logs</string> 
+        </void> 
+        <void property="properties"> 
+         <object class="com.ti.dvt.ui.views.core.TableProp"> 
+          <void property="enableGroup"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="indicatorProps"> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.IndicatorProp"> 
+             <void property="eventProps"> 
+              <void method="add"> 
+               <object class="com.ti.dvt.ui.views.core.IndicatorProp$EventProp"> 
+                <void property="icon"> 
+                 <string>error</string> 
+                </void> 
+                <void property="value"> 
+                 <int>1</int> 
+                </void> 
+               </object> 
+              </void> 
+              <void method="add"> 
+               <object class="com.ti.dvt.ui.views.core.IndicatorProp$EventProp"> 
+                <void property="icon"> 
+                 <string>warning</string> 
+                </void> 
+                <void property="value"> 
+                 <int>2</int> 
+                </void> 
+               </object> 
+              </void> 
+              <void method="add"> 
+               <object class="com.ti.dvt.ui.views.core.IndicatorProp$EventProp"> 
+                <void property="icon"> 
+                 <string>information</string> 
+                </void> 
+                <void property="value"> 
+                 <int>3</int> 
+                </void> 
+               </object> 
+              </void> 
+              <void method="add"> 
+               <object class="com.ti.dvt.ui.views.core.IndicatorProp$EventProp"> 
+                <void property="icon"> 
+                 <string>details</string> 
+                </void> 
+                <void property="value"> 
+                 <int>4</int> 
+                </void> 
+               </object> 
+              </void> 
+              <void method="add"> 
+               <object class="com.ti.dvt.ui.views.core.IndicatorProp$EventProp"> 
+                <void property="icon"> 
+                 <string>lifeCycle</string> 
+                </void> 
+                <void property="value"> 
+                 <int>5</int> 
+                </void> 
+               </object> 
+              </void> 
+              <void method="add"> 
+               <object class="com.ti.dvt.ui.views.core.IndicatorProp$EventProp"> 
+                <void property="icon"> 
+                 <string>analysis</string> 
+                </void> 
+                <void property="value"> 
+                 <int>6</int> 
+                </void> 
+               </object> 
+              </void> 
+              <void method="add"> 
+               <object class="com.ti.dvt.ui.views.core.IndicatorProp$EventProp"> 
+                <void property="icon"> 
+                 <string>module1</string> 
+                </void> 
+                <void property="value"> 
+                 <int>7</int> 
+                </void> 
+               </object> 
+              </void> 
+              <void method="add"> 
+               <object class="com.ti.dvt.ui.views.core.IndicatorProp$EventProp"> 
+                <void property="icon"> 
+                 <string>module2</string> 
+                </void> 
+                <void property="value"> 
+                 <int>8</int> 
+                </void> 
+               </object> 
+              </void> 
+              <void method="add"> 
+               <object class="com.ti.dvt.ui.views.core.IndicatorProp$EventProp"> 
+                <void property="icon"> 
+                 <string>module3</string> 
+                </void> 
+                <void property="value"> 
+                 <int>9</int> 
+                </void> 
+               </object> 
+              </void> 
+              <void method="add"> 
+               <object class="com.ti.dvt.ui.views.core.IndicatorProp$EventProp"> 
+                <void property="icon"> 
+                 <string>emergency</string> 
+                </void> 
+                <void property="value"> 
+                 <int>10</int> 
+                </void> 
+               </object> 
+              </void> 
+              <void method="add"> 
+               <object class="com.ti.dvt.ui.views.core.IndicatorProp$EventProp"> 
+                <void property="icon"> 
+                 <string>critical</string> 
+                </void> 
+                <void property="value"> 
+                 <int>11</int> 
+                </void> 
+               </object> 
+              </void> 
+             </void> 
+             <void property="fieldName"> 
+              <string>Type</string> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.IndicatorProp"> 
+             <void property="eventProps"> 
+              <void method="add"> 
+               <object class="com.ti.dvt.ui.views.core.IndicatorProp$EventProp"> 
+                <void property="icon"> 
+                 <string>dataloss</string> 
+                </void> 
+                <void property="value"> 
+                 <int>1</int> 
+                </void> 
+               </object> 
+              </void> 
+              <void method="add"> 
+               <object class="com.ti.dvt.ui.views.core.IndicatorProp$EventProp"> 
+                <void property="icon"> 
+                 <string>seqerror</string> 
+                </void> 
+                <void property="value"> 
+                 <int>2</int> 
+                </void> 
+               </object> 
+              </void> 
+              <void method="add"> 
+               <object class="com.ti.dvt.ui.views.core.IndicatorProp$EventProp"> 
+                <void property="icon"> 
+                 <string>multierror</string> 
+                </void> 
+                <void property="value"> 
+                 <int>3</int> 
+                </void> 
+               </object> 
+              </void> 
+             </void> 
+             <void property="fieldName"> 
+              <string>Error</string> 
+             </void> 
+            </object> 
+           </void> 
+          </void> 
+          <void property="solutionName"> 
+           <string>UiaLogViewer</string> 
+          </void> 
+          <void property="tableMeta"> 
+           <void property="columnMetaMap"> 
+            <void method="put"> 
+             <string>Time</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>100</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Message</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>200</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Event</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>140</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Master</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>64</int> 
+              </void> 
+             </object> 
+            </void> 
+           </void> 
+          </void> 
+         </object> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="title"> 
+      <string>Logs</string> 
+     </void> 
+    </object> 
+   </void> 
+  </void> 
+ </object> 
+</java> 

@@ -1,0 +1,21 @@
+{
+  "//": "NOTE: The properties below override the ones in app_default.json. 'ccsCloudUrl' - will be obtained from dinfra.landscape",
+  "mode": "localserver",
+  "myHttpPort": "3001",
+  "myRole": "",
+  "remoteserverHost": "https://dev.ti.com/tirex",
+  "remoteBundleZips": "https://downloads.ti.com/ccs/esd/tirex/zips/",
+  "webComponentsServer": "https://dev.ti.com/components",
+  "contentPath": "c:/ti/tirex-content",
+  "dbPath": "~/ti/tirex-localserver-3.0.0/.db",
+  "contentPackagesConfig": "config/contentPackages/local.json",
+  "userConfigPath": "~/ti/tirex-localserver-3.0.0",
+  "downloadsCache": "~/ti/tirex-localserver-3.0.0/.downloads",
+  "ccsCloudUrl": "",
+  "logsDir": "~/ti/tirex-localserver-3.0.0/.logs",
+  "analyticsDir": "~/ti/tirex-localserver-3.0.0/.tirex-analytics-data",
+  "relocatePackages": "false",
+  "refreshDB": "false",
+  "allowRefreshFromWeb": "false",
+  "no_proxy": "localhost,127.0.0.0,.toro.design.ti.com"
+}

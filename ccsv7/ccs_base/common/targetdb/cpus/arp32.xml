@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cpu id="TMS700C40XX" isa="hidden" HW_revision="1.0" XML_version="1.0" description="ARP32 CPU">
+
+    <register id="PC" acronym="PC" width="32" description="PC Register"/>
+    <register id="SP" acronym="SP" width="32" description="SP Register"/>
+	<!-- Adding hidden pseudo registers -->
+	<instance href="..\Modules\ihwa\ihwa_notvisible.xml"    id=""    xml="ihwa_notvisible.xml"    xmlpath="..\Modules\ihwa\" HW_version="1.0"  description="Dummy Registers" requestor="TMS700C40XX" baseaddr="0x00" endaddr="0x00" size="0x01" accessnumbytes="4" permissions="p" />	
+
+    <instance href="..\Modules\ihwa\arp32_arch.xml"    id="Arch"    xml="arp32_arch.xml"    xmlpath="..\Modules\ihwa\" HW_version="1.0"  description="Architectural Registers" requestor="TMS700C40XX" baseaddr="0x00" endaddr="0x07" size="0x08" accessnumbytes="4" permissions="p" />
+    <!-- IDE expression window needs to be able to access the arch registers without Arch prefix. Hence adding them again under hidden group -->
+	<instance href="..\Modules\ihwa\arp32_arch.xml" id="" xml="arp32_arch.xml" xmlpath="..\Modules\ihwa\" HW_version="1.0" description="" requestor="TMS700C40XX" baseaddr="0x00" endaddr="0x00" size="0x08" accessnumbytes="4" permissions="p"/>
+    <instance href="..\Modules\ihwa\arp32_control.xml" id="Control" xml="arp32_control.xml" xmlpath="..\Modules\ihwa\" HW_version="1.0"  description="Control Registers"       requestor="TMS700C40XX" baseaddr="0x00" endaddr="0x1f" size="0x20" accessnumbytes="4" permissions="p" />
+    <!-- IDE expression window needs to be able to access the control registers without Control prefix. Hence adding them again under hidden group -->
+	<instance href="..\Modules\ihwa\arp32_control.xml" id="" xml="arp32_control.xml" xmlpath="..\Modules\ihwa\" HW_version="1.0" description="" requestor="TMS700C40XX" baseaddr="0x00" endaddr="0x00" size="0x20" accessnumbytes="4" permissions="p"/>
+    <instance href="..\Modules\ihwa\arp32_shadow.xml"  id="Shadow"  xml="arp32_shadow.xml"  xmlpath="..\Modules\ihwa\" HW_version="1.0"  description="Shadow Registers"        requestor="TMS700C40XX" baseaddr="0x00" endaddr="0x0f" size="0x10" accessnumbytes="4" permissions="p" />
+    <instance href="..\Modules\ihwa\arp32_debug.xml"   id=""        xml="arp32_debug.xml"   xmlpath="..\Modules\ihwa\" HW_revision="1.0" description=""                        requestor="TMS700C40XX" baseaddr="0"                   size="0"    accessnumbytes="4" permissions="p" />
+
+    <instance href="..\Modules\ihwa\vcop_status_regs.xml" id="VCOP_Status_Registers" xml="vcop_status_regs.xml" xmlpath="..\Modules\ihwa\" HW_revision="1.0" description="VCOP Status Registers" requestor="TMS700C40XX" baseaddr="0x40084000" endaddr="0x40084039" size="0x03a" accessnumbytes="4" permissions="p" />
+    <instance href="..\Modules\ihwa\vcop_load_regs.xml"   id="VCOP_Load_Registers"   xml="vcop_load_regs.xml"   xmlpath="..\Modules\ihwa\" HW_revision="1.0" description="VCOP Load Registers"   requestor="TMS700C40XX" baseaddr="0x40084040" endaddr="0x4008407f" size="0x040" accessnumbytes="4" permissions="p" />
+    <instance href="..\Modules\ihwa\vcop_vector_regs.xml" id="VCOP_Vector_Registers" xml="vcop_vector_regs.xml" xmlpath="..\Modules\ihwa\" HW_revision="1.0" description="VCOP Vector Registers" requestor="TMS700C40XX" baseaddr="0x40084080" endaddr="0x4008447f" size="0x400" accessnumbytes="4" permissions="p" />
+
+</cpu>

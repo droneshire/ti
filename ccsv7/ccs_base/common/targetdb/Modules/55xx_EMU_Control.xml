@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- There are three hidden registers that control the configuration of the EMU pins.  They are not real	-->
+<!-- but instead pseudo registers that the emulation driver uses to program the hardware.  The programming	-->
+<!-- does not take effect until the target is run or stepped.  Since these are not real registers, I've 	-->
+<!-- renamed them from the hidden internal names to more meaningful names for a user 						-->
+
+<module id="EMU Pin Control" HW_revision="1" XML_version="1" description="User control of the EMU0/1 pins">
+
+	<!-- The first register globally allows the user to choose between input and output and also off. -->
+
+	<register id="ECU_SEL" acronym="EMU_Global_Enable" width="32" description="Global enable/disable of both EMU pins">
+		<bitfield id="Setting" width="32" begin="0" end="31" resetval="0" description="This will enable or disable both EMU pins.  If either is to be configured as input, then select INPUT.  OUTPUT is reserved for when both pins are to do output" range="-" rwaccess="RW">
+			<bitenum id="INPUT" value="1024" token="INPUT" description="Enable the EMU pins for input"/>
+			<bitenum id="OUTPUT" value="512" token="OUTPUT" description="Enable the EMU pins for output"/>
+			<bitenum id="DISABLED" value="0" token="DISABLED" description="Disable the EMU pins"/>
+		</bitfield>
+	</register>
+
+	<!-- The next two registers let you configure the setup for EMU0/1 specifically. -->
+
+	<register id="ECU_EMU0" acronym="EMU0_Config" width="32" description="The configuration for EMU0">
+		<bitfield id="Setup" width="4" begin="0" end="3" resetval="0" description="The configuration for EMU0" range="-" rwaccess="RW">
+			<bitenum id="Input: Halt when EMU0 goes low" value="0" token="Input: Halt when EMU0 goes low" description=""/>
+			<bitenum id="Input: Halt when EMU0 goes low, and drive EMU0 low on a halt" value="1" token="Input: Halt when EMU0 goes low, and drive EMU0 low on a halt" description=""/>
+			<bitenum id="Output: Force low" value="2" token="Output: Force low" description=""/>
+			<bitenum id="Output: Force high" value="3" token="Output: Force high" description=""/>
+			<bitenum id="Output: Drive low when 32 bit counter matches reference" value="4" token="Output: Drive low when 32 bit counter matches reference" description=""/>
+			<bitenum id="Output: Drive low when AU1 action occurs" value="5" token="Output: Drive low when AU1 action occurs" description=""/>
+			<bitenum id="Output: Reflect AU1's PSA" value="6" token="Output: Reflect AU1's PSA" description=""/>
+			<bitenum id="Output: High speed data logging (requires XDS-510A)" value="7" token="Output: High speed data logging (requires XDS-510A)" description=""/>
+			<bitenum id="Output: Test0[0]" value="8" token="Output: Test0[0]" description=""/>
+			<bitenum id="Output: Test0[1]" value="9" token="Output: Test0[1]" description=""/>
+			<bitenum id="Output: Test0[2]" value="10" token="Output: Test0[2]" description=""/>
+			<bitenum id="Output: Test0[3]" value="11" token="Output: Test0[3]" description=""/>
+			<bitenum id="Output: User0[0]" value="12" token="Output: User0[0]" description=""/>
+			<bitenum id="Output: User0[1]" value="13" token="Output: User0[1]" description=""/>
+			<bitenum id="Output: User0[2]" value="14" token="Output: User0[2]" description=""/>
+			<bitenum id="Output: User0[3]" value="15" token="Output: User0[3]" description=""/>
+		</bitfield>
+		<bitfield id="Pulse" width="1" begin="4" end="4" resetval="0" description="If the configuration supports it, this indicates if EMU0 will be set to pulse" range="-" rwaccess="RW">
+			<bitenum id="OFF" value="1" token="OFF" description=""/>
+			<bitenum id="ON" value="0" token="ON" description=""/>
+		</bitfield>
+	</register>
+	
+	<register id="ECU_EMU1" acronym="EMU1_Config" width="32" description="The configuration for EMU1">
+		<bitfield id="Setup" width="4" begin="0" end="3" resetval="0" description="The configuration for EMU1" range="-" rwaccess="RW">
+			<bitenum id="Input: Halt when EMU1 goes low" value="0" token="Input: Halt when EMU1 goes low" description=""/>
+			<bitenum id="Input: Halt when EMU1 goes low, and drive EMU1 low on a halt" value="1" token="Input: Halt when EMU1 goes low, and drive EMU1 low on a halt" description=""/>
+			<bitenum id="Output: Force low" value="2" token="Output: Force low" description=""/>
+			<bitenum id="Output: Force high" value="3" token="Output: Force high" description=""/>
+			<bitenum id="Output: Drive low when hardware breakpoint occurs" value="4" token="Output: Drive low when hardware breakpoint occurs" description=""/>
+			<bitenum id="Output: Drive low when AU2 action occurs" value="5" token="Output: Drive low when AU2 action occurs" description=""/>
+			<bitenum id="Output: Reflect AU2's PSA" value="6" token="Output: Reflect AU2's PSA" description=""/>
+			<bitenum id="Output: High speed data logging (requires XDS-510A)" value="7" token="Output: High speed data logging (requires XDS-510A)" description=""/>
+			<bitenum id="Output: Test1[0]" value="8" token="Output: Test1[0]" description=""/>
+			<bitenum id="Output: Test1[1]" value="9" token="Output: Test1[1]" description=""/>
+			<bitenum id="Output: Test1[2]" value="10" token="Output: Test1[2]" description=""/>
+			<bitenum id="Output: Test1[3]" value="11" token="Output: Test1[3]" description=""/>
+			<bitenum id="Output: User1[0]" value="12" token="Output: User1[0]" description=""/>
+			<bitenum id="Output: User1[1]" value="13" token="Output: User1[1]" description=""/>
+			<bitenum id="Output: User1[2]" value="14" token="Output: User1[2]" description=""/>
+			<bitenum id="Output: User1[3]" value="15" token="Output: User1[3]" description=""/>
+		</bitfield>
+		<bitfield id="Pulse" width="1" begin="4" end="4" resetval="0" description="If the configuration supports it, this indicates if EMU1 will be set to pulse" range="-" rwaccess="RW">
+			<bitenum id="OFF" value="1" token="OFF" description=""/>
+			<bitenum id="ON" value="0" token="ON" description=""/>
+		</bitfield>
+	</register>
+</module>

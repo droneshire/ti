@@ -1,0 +1,507 @@
+<?xml version="1.0"?>
+<!-- This file defines the static connectivity for a target board.  Any function that must be enabled 
+     at startup is defined in the separate file "pinmap.xml". This file relates only to those functions 
+     that are enabled at user request.  This file can be optional: If a hurricane card connects to a 
+     target that supports dynamic configuration, it is not necessary to predefine connectivity.  Legacy 
+     systems do not support dynamic connectivity, so this file is required for them.  If a hurricane card connects 
+     to multiple targets, and if any of them do not support dynamic connectivity, then all target connectivity 
+     must be defined, even for the ones that are dynamic. -->
+
+<!-- A pin can be connected to multiple targets. If so, it must have an entry for each.-->
+<!-- the setup.xml file defines connectivity between hurricane cards and target cpu's. Whatever is defined there must 
+     synch with what is defined here. Since this file is optional, there is no avoiding duplicate entries. -->
+
+<!-- A receiver may have multiple headers; the HDR-NUM field defines the current header.  
+    The PIN-NUM field defines the current pin on the 60 pin emulation connector. Legit values are A0-15, B0-15, 
+    C0-15, D0-15. 
+    The CPU-ID and CPU-PINNUM fields define which cpu & pin on that cpu are current. 
+    The FUNCTION field defines what functions are presented at the current pin. Legit values are TRACE_0/TRACE_N,
+    RTDX_0_0/RTDX_3_3, EMU_0/EMU_N-->
+
+<!--These definitions originate from SPRU655, the 60 pin emu header tech reference, and restricted by the capabilities
+    of the 6416v1.1 DSP. (12pin emulation debug port)-->
+    
+
+<TARGET-CFG version="1.0.0.0" Copyright="Copyright (c) 2005-2007 Texas Instruments">
+	<HDR-NUM> 0 </HDR-NUM> <!-- Which header is the pin is for (default 0)-->
+	<PIN> 
+		<PIN-NUM>B14</PIN-NUM> <!-- Header pin number-->
+        <CPU-PINNUM>0</CPU-PINNUM> <!-- Target transmitter pin number-->
+		<FUNCTION>TRACE_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_4</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_5</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_6</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_7</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_8</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_9</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_10</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_11</FUNCTION> <!-- Function that this pin can perform-->
+        <FUNCTION>RTDX_0_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_0_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_0_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_0_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_4</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_5</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_6</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_7</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_8</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_9</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_10</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_11</FUNCTION> <!-- Function that this pin can perform-->
+	</PIN>
+	<PIN> 
+		<PIN-NUM>C14</PIN-NUM> <!-- Header pin number-->
+        <CPU-PINNUM>1</CPU-PINNUM> <!-- Target transmitter pin number-->
+		<FUNCTION>TRACE_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_4</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_5</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_6</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_7</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_8</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_9</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_10</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_11</FUNCTION> <!-- Function that this pin can perform-->
+        <FUNCTION>RTDX_0_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_0_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_0_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_0_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_4</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_5</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_6</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_7</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_8</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_9</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_10</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_11</FUNCTION> <!-- Function that this pin can perform-->
+	</PIN>
+	<PIN> 
+		<PIN-NUM>B13</PIN-NUM> <!-- Header pin number-->
+        <CPU-PINNUM>2</CPU-PINNUM> <!-- Target transmitter pin number-->
+		<FUNCTION>TRACE_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_4</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_5</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_6</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_7</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_8</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_9</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_10</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_11</FUNCTION> <!-- Function that this pin can perform-->
+        <FUNCTION>RTDX_0_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_0_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_0_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_0_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_4</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_5</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_6</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_7</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_8</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_9</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_10</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_11</FUNCTION> <!-- Function that this pin can perform-->
+	</PIN>
+	<PIN> 
+		<PIN-NUM>C13</PIN-NUM> <!-- Header pin number-->
+        <CPU-PINNUM>3</CPU-PINNUM> <!-- Target transmitter pin number-->
+		<FUNCTION>TRACE_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_4</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_5</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_6</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_7</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_8</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_9</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_10</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_11</FUNCTION> <!-- Function that this pin can perform-->
+        <FUNCTION>RTDX_0_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_0_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_0_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_0_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_4</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_5</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_6</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_7</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_8</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_9</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_10</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_11</FUNCTION> <!-- Function that this pin can perform-->
+	</PIN>
+	<PIN> 
+		<PIN-NUM>C12</PIN-NUM> <!-- Header pin number-->
+        <CPU-PINNUM>4</CPU-PINNUM> <!-- Target transmitter pin number-->
+		<FUNCTION>TRACE_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_4</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_5</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_6</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_7</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_8</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_9</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_10</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_11</FUNCTION> <!-- Function that this pin can perform-->
+        <FUNCTION>RTDX_0_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_0_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_0_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_0_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_4</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_5</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_6</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_7</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_8</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_9</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_10</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_11</FUNCTION> <!-- Function that this pin can perform-->
+	</PIN>
+	<PIN> 
+		<PIN-NUM>B11</PIN-NUM> <!-- Header pin number-->
+        <CPU-PINNUM>5</CPU-PINNUM> <!-- Target transmitter pin number-->
+		<FUNCTION>TRACE_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_4</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_5</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_6</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_7</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_8</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_9</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_10</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_11</FUNCTION> <!-- Function that this pin can perform-->
+        <FUNCTION>RTDX_0_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_0_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_0_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_0_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_4</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_5</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_6</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_7</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_8</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_9</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_10</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_11</FUNCTION> <!-- Function that this pin can perform-->
+	</PIN>
+	<PIN> 
+		<PIN-NUM>C11</PIN-NUM> <!-- Header pin number-->
+        <CPU-PINNUM>6</CPU-PINNUM> <!-- Target transmitter pin number-->
+		<FUNCTION>TRACE_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_4</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_5</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_6</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_7</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_8</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_9</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_10</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_11</FUNCTION> <!-- Function that this pin can perform-->
+        <FUNCTION>RTDX_0_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_0_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_0_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_0_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_4</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_5</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_6</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_7</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_8</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_9</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_10</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_11</FUNCTION> <!-- Function that this pin can perform-->
+	</PIN>
+	<PIN> 
+		<PIN-NUM>B10</PIN-NUM> <!-- Header pin number-->
+        <CPU-PINNUM>7</CPU-PINNUM> <!-- Target transmitter pin number-->
+		<FUNCTION>TRACE_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_4</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_5</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_6</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_7</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_8</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_9</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_10</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_11</FUNCTION> <!-- Function that this pin can perform-->
+        <FUNCTION>RTDX_0_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_0_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_0_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_0_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_4</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_5</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_6</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_7</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_8</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_9</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_10</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_11</FUNCTION> <!-- Function that this pin can perform-->
+	</PIN>
+	<PIN> 
+		<PIN-NUM>C10</PIN-NUM> <!-- Header pin number-->
+        <CPU-PINNUM>8</CPU-PINNUM> <!-- Target transmitter pin number-->
+		<FUNCTION>TRACE_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_4</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_5</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_6</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_7</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_8</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_9</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_10</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_11</FUNCTION> <!-- Function that this pin can perform-->
+        <FUNCTION>RTDX_0_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_0_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_0_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_0_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_4</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_5</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_6</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_7</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_8</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_9</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_10</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_11</FUNCTION> <!-- Function that this pin can perform-->
+	</PIN>
+	<PIN> 
+		<PIN-NUM>B09</PIN-NUM> <!-- Header pin number-->
+        <CPU-PINNUM>9</CPU-PINNUM> <!-- Target transmitter pin number-->
+		<FUNCTION>TRACE_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_4</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_5</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_6</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_7</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_8</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_9</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_10</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_11</FUNCTION> <!-- Function that this pin can perform-->
+        <FUNCTION>RTDX_0_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_0_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_0_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_0_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_4</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_5</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_6</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_7</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_8</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_9</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_10</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_11</FUNCTION> <!-- Function that this pin can perform-->
+	</PIN>
+	<PIN> 
+		<PIN-NUM>C09</PIN-NUM> <!-- Header pin number-->
+        <CPU-PINNUM>10</CPU-PINNUM> <!-- Target transmitter pin number-->
+		<FUNCTION>TRACE_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_4</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_5</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_6</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_7</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_8</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_9</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_10</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_11</FUNCTION> <!-- Function that this pin can perform-->
+        <FUNCTION>RTDX_0_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_0_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_0_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_0_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_4</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_5</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_6</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_7</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_8</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_9</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_10</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_11</FUNCTION> <!-- Function that this pin can perform-->
+	</PIN>
+	<PIN> 
+		<PIN-NUM>C07</PIN-NUM> <!-- Header pin number-->
+        <CPU-PINNUM>11</CPU-PINNUM> <!-- Target transmitter pin number-->
+		<FUNCTION>TRACE_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_4</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_5</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_6</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_7</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_8</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_9</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_10</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>TRACE_11</FUNCTION> <!-- Function that this pin can perform-->
+        <FUNCTION>RTDX_0_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_0_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_0_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_0_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_1_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>RTDX_2_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_0</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_1</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_2</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_3</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_4</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_5</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_6</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_7</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_8</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_9</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_10</FUNCTION> <!-- Function that this pin can perform-->
+		<FUNCTION>EMU_11</FUNCTION> <!-- Function that this pin can perform-->
+	</PIN>
+</TARGET-CFG>

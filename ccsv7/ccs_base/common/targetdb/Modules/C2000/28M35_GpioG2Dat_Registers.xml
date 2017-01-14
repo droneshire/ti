@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- 
+  TI File $Revision: 
+  Checkin $Date: 
+  --> 
+
+<!--  C28M35x GPIOG2 DATA REGS Registers 
+     =================================== 
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     --> 
+<module id="GPIOG2 DATA REGS" HW_revision="" XML_version="1" description="GPIOG2 DATA REGS Registers">
+    <register id="GPEDAT" acronym="GPEDAT" offset="0" page="1" width="32" description="GPIO E Data Register (GPIO128 to 135)" />
+    <register id="GPESET" acronym="GPESET" offset="2" page="1" width="32" description="GPIO E Data Set Register (GPIO128 to 135)" />
+    <register id="GPECLEAR" acronym="GPECLEAR" offset="4" page="1" width="32" description="GPIO E Data Clear Register (GPIO128 to 135)" />
+    <register id="GPETOGGLE" acronym="GPETOGGLE" offset="6" page="1" width="32" description="GPIO E Data Toggle Register (GPIO128 to 135) " />
+    <!--  16 empty  -->
+    <register id="AIODAT" acronym="AIODAT" offset="24" page="1" width="32" description="Analog IO Data Register (AIO0 to 31)" />
+    <register id="AIOSET" acronym="AIOSET" offset="26" page="1" width="32" description="Analog IO Data Set Register (AIO0 to 31)" />
+    <register id="AIOCLEAR" acronym="AIOCLEAR" offset="28" page="1" width="32" description="Analog IO Data Clear Register (AIO0 to 31)" />
+    <register id="AIOTOGGLE" acronym="AIOTOGGLE" offset="30" page="1" width="32" description="Analog IO Data Toggle Register (AIO0 to 31) " />
+</module>

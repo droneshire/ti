@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<translate name="Time Accumulator">
+   	<passthru name="CPU instruction decoded"	input="CPUinstructiondecoded"/>
+   	<passthru name="CPU instruction condition false" 		input="CPUinstructionconditionfalse"/>
+	<passthruAll>
+	   	<removeField name="CPUinstructiondecoded"/>
+   	        <removeField name="CPUinstructionconditionfalse"/>
+		<removeField name = "EndAddress" />
+	</passthruAll>
+</translate>

@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<!--                                                  -->
+<!-- Blackhawk LAN560 Emulator XML Definitions.       -->
+<!--                                                  -->
+<!-- This is a CCStudio v4/v5 compatible XML.         -->
+<!--                                                  -->
+<!-- 23 December 2011                                 -->
+<!-- v5.1.0.106                                       -->
+<!--                                                  -->
+
+<connection id="Blackhawk LAN560 Emulator, 20-pin JTAG Cable" class="337520">
+
+    <connectionType Type="TIXDS560"/>
+
+    <property id="Emulator Filename" Type="stringfield" Value="bh560eth.out" ID="USCIF.ECOM_DRVR" />
+
+    <property desc="Emulator I/O Port Number" Type="stringfield" Value="0" id="portAddr1" ID="USCIF.ECOM_PORT" />
+
+
+    <property id="BH USB560-M Rev E/F/G Termination" Type="choicelist" Value="0" ID="BH560.RTCK_TERMINATION">
+        <choice Name="RTCK TI Std AC Termination" value="0"/>
+        <choice Name="RTCK BH Termination  NONE " value="4"/>
+        <choice Name="RTCK BH Termination 1B 100" value="5"/>
+        <choice Name="RTCK BH Termination 1B 50 " value="7"/>
+        <choice Name="RTCK BH Termination 2B 100" value="13"/>
+        <choice Name="RTCK BH Termination 2B 50 " value="15"/>
+
+    </property>
+
+    <property id="The JTAG TCLK Frequency (MHz)" Type="choicelist" Value="1" ID="USCIF.TCLK_PROGRAM">
+
+        <choice Name="Automatic with faster 35.0MHz limit" value="automatic">
+            <property id="unused" Type="hiddenfield" Value="exchange" ID="USCIF.TCLK_FREQUENCY"/>
+        </choice>
+        <choice Name="Automatic with legacy 10.368MHz limit" value="automatic">
+            <property id="unused" Type="hiddenfield" Value="legacy" ID="USCIF.TCLK_FREQUENCY"/>
+        </choice>
+        <choice Name="Automatic with user specified limit" value="automatic">
+            <property id="-- Enter a value from 0.50MHz to 64.0MHz" Type="stringfield" Value="10.368MHz" ID="USCIF.TCLK_FREQUENCY"/>
+        </choice>
+        <choice Name="Adaptive with user specified limit" value="adaptive">
+            <property id="-- Enter a value from 0.50MHz to 48.0MHz" Type="stringfield" Value="48.0MHz" ID="USCIF.TCLK_FREQUENCY"/>
+        </choice>
+        <choice Name="Adaptive without any limit at all" value="inverter">
+            <property id="unused" Type="hiddenfield" Value="minimum" ID="USCIF.TCLK_FREQUENCY"/>
+        </choice>
+        <choice Name="Fixed with user specified faster value" value="specific">
+            <property id="-- Enter a value from 0.5MHz to 64.0MHz" Type="stringfield" Value="35.0MHz" ID="USCIF.TCLK_FREQUENCY"/>
+        </choice>
+        <choice Name="Fixed with user specified slower value" value="specific">
+            <property id="-- Enter a value from 488Hz to 0.5MHz" Type="stringfield" Value="100KHz" ID="USCIF.TCLK_FREQUENCY"/>
+        </choice>
+
+    </property>
+
+    <property id="The TMS/TDO Output Timing" Type="choicelist" Value="1" ID="USCIF.TDOEDGE">
+
+        <choice Name="Rising edge allows faster TCLK" value="rise" />
+        <choice Name="Falling edge is JTAG standard"  value="fall" />
+
+    </property>
+
+    <property id="The JTAG nTRST Boot-Mode" Type="choicelist" Value="0" ID="USCIF.JTAGBOOT_MODE">
+
+        <choice Name="Disabled - Both EMU pins remain hi-z" value="disable">
+            <property id="unused" Type="hiddenfield" Value="hiz" ID="USCIF.JTAGBOOT_VALUE"/>
+        </choice>
+        <choice Name="Enabled - Both EMU pins are high" value="enable">
+            <property id="unused" Type="hiddenfield" Value="11"  ID="USCIF.JTAGBOOT_VALUE"/>
+        </choice>
+        <choice Name="Enabled - EMU1 is high, EMU0 is low" value="enable">
+            <property id="unused" Type="hiddenfield" Value="10"  ID="USCIF.JTAGBOOT_VALUE"/>
+        </choice>
+        <choice Name="Enabled - EMU1 is low, EMU0 is high" value="enable">
+            <property id="unused" Type="hiddenfield" Value="01"  ID="USCIF.JTAGBOOT_VALUE"/>
+        </choice>
+        <choice Name="Enabled - Both EMU pins are low" value="enable">
+            <property id="unused" Type="hiddenfield" Value="00"  ID="USCIF.JTAGBOOT_VALUE"/>
+        </choice>
+
+    </property>
+
+    <property id="The Power-On-Reset Boot-Mode" Type="choicelist" Value="0" ID="USCIF.POWERBOOT_MODE">
+
+        <choice Name="Disabled - Both EMU pins remain hi-z" value="disable">
+            <property id="unused" Type="hiddenfield" Value="hiz" ID="USCIF.POWERBOOT_VALUE"/>
+        </choice>
+        <choice Name="Enabled - Both EMU pins are high" value="enable">
+            <property id="unused" Type="hiddenfield" Value="11"  ID="USCIF.POWERBOOT_VALUE"/>
+        </choice>
+        <choice Name="Enabled - EMU1 is high, EMU0 is low" value="enable">
+            <property id="unused" Type="hiddenfield" Value="10"  ID="USCIF.POWERBOOT_VALUE"/>
+        </choice>
+        <choice Name="Enabled - EMU1 is low, EMU0 is high" value="enable">
+            <property id="unused" Type="hiddenfield" Value="01"  ID="USCIF.POWERBOOT_VALUE"/>
+        </choice>
+        <choice Name="Enabled - Both EMU pins are low" value="enable">
+            <property id="unused" Type="hiddenfield" Value="00"  ID="USCIF.POWERBOOT_VALUE"/>
+        </choice>
+
+    </property>
+
+
+    <property id="Link Delay" Type="choicelist" Value="0" ID="">
+
+        <choice Name="Default" value=""/>
+        <choice Name="User specified" value="">
+            <property id="Number of bits" Type="stringfield" Value="2" ID="USCIF.LINKDLY"/>
+        </choice>
+
+    </property>
+
+    <property id="TCK loop-back" Type="choicelist" Value="" ID="USCIF.LOOPBACK_MODE">
+
+        <choice Name="Disabled (default)" value="disable"/>
+        <choice Name="Enabled" value="enable">
+            <property id="Loop-back type" Type="choicelist" Value="" ID="USCIF.LOOPBACK_VALUE">
+                <choice Name="Clock" value="clock"/>
+            </property>
+        </choice>
+    </property>
+
+
+    <property Name="Diagnostic Command" Type="hiddenfield" Value="%ccs_base%/common/uscif/dbgjtag.exe -f %boarddatafile% -rv -o -F inform,logfile=yes -S pathlength -S integrity" ID="DiagnosticCommand"/>
+
+</connection>

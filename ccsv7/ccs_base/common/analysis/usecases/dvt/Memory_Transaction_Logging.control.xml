@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="Memory Transaction Logging" basedir=".">
+
+	<property name="dvt.activity.name" value="Hardware Trace Analyzer/${ant.project.name}"/>
+  	<property name="dvt.activity.description" value="Collect Memory Transactions Data.&#10;Data may be analyzed using the Analyze button in the Trace Viewer.&#10;For more powerful control, we suggest that you consider using the 'Custom STM' use case"/>
+
+
+   	<property name="uc_name" value="Memory_Transaction_Logging" />
+	<property name="technology" value="Hardware System Trace" /><!-- UIA, Sim -->
+
+	<dvt.import file="../../scripts/MemoryThroughputAnalysisDialog.js"/>
+	<dvt.import file="../../scripts/SystemTrace.js"/>	
+	
+	<dvt.property>
+		version=1.0.0
+		dvt.activity.names=CSSTM
+		dvt.activity.priority = 70
+
+		<!-- Data Provider and AF information-->
+		dataproviders=Trace
+		Trace.name=Trace Viewer
+		Trace.analyzer=None
+	</dvt.property>
+	
+</project>

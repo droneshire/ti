@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<translate name = "Delta">
+	<passthruAll>
+		<removeField name = "Delta" />
+	</passthruAll>
+
+	<passthru name = "Delta" input = "(Trace_Status$1 like &quot;.*Pipeline stall.*&quot;)?(Cycle-Cycle$1):0"/>
+</translate>

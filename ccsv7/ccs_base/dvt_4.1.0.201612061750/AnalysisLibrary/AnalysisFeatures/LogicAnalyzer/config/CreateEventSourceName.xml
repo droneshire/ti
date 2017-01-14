@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<translate name="Create Event Source Name">
+
+	<passthru name="Event Source Name" input="Master_Name+&quot;.&quot;+Domain+&quot;.&quot;+Class"/>	
+	<passthru name="AllData" input="Data_Message == &quot;&quot;? DataToString : Data_Message"/>	
+	<passthru name="Time" input="Time"/>	
+	<passthru name="Type" input="Type"/>	
+
+</translate>
+

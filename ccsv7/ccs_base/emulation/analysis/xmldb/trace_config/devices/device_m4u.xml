@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+<!-- This file defines what Trace attributes are available for a device.
+	 This information is used by Trace subsystem to find out setup parameters 
+	 and way to access and configure those parameters. 
+ -->
+ 
+<device id="MSP432" value="0x0B9AF02F" mask="0x0FFFFFFF" HW_revision="1.0" XML_version="1.0">
+
+<FileVersion version="2.0.0.0" Copyright="Copyright (c) 2013 Texas Instruments"></FileVersion>
+	<trace_routes>
+
+		<route>
+			<source source="Cortex_M4_0"/>
+			<link module=""/>
+			<sink module="MOD_TPIU"/>
+			<pin module="MOD_DRM"/>
+		</route> 
+
+	</trace_routes>
+
+	<!-- Supported proc access mechanisms for the device -->
+	<procs>
+
+		<!-- M4u CortexM-->
+		<proc id="Cortex_M4_0" kind="cortex_mxx" traceid="1">
+			<identifier>
+			</identifier>
+		</proc>
+
+	</procs>
+
+	<!-- Available Trace sources for the device -->
+	<sources>
+
+		<!-- processor Trace source -->
+		<source id="Cortex_M4_0" proc="Cortex_M4_0" stmmaster = "false">
+			<components>
+				<component module="MOD_ITM"/>
+				<component module="MOD_SYSCLK"/>
+				<component module="MOD_EXCEPTIONMAP"/>
+			</components> 
+			<characteristics>
+				<characteristic id="DEV_CHAR_ITM_SUPPORT" value="1"/> 
+				<characteristic id="DEV_CHAR_CTI" value="0"/> 
+				<characteristic id="DEV_CHAR_CTIFILE" value="AET_PropertyCTI_GB.xml"/> 
+				<characteristic id="DEV_CHAR_SCTMFILE" value="AET_PropertyARM_M3_DWT.xml"/>
+				<characteristic id="DEV_CHAR_ATBID" value="0x1"/>
+			</characteristics>
+		</source>
+
+	</sources>
+
+	<!-- Available modules asscoiated with various modules in the device -->
+	<modules> 
+
+		<!-- Pins module -->
+		<module id ="MOD_DRM"  kind="drm" proc="Cortex_M4_0" version="1.0" >
+			<registers>
+			</registers>
+			<!-- Define dsp, pti, and tpiu pin maps supported for this device -->
+			<mapping id="program.pinouts">
+				<map program="0" pinouts="tpiu=2,0" />
+				<map program="1" pinouts="tpiu=2,0,1" />
+				<map program="2" pinouts="tpiu=2,0,1,3,4" />
+			</mapping>
+		</module>
+
+		<module id ="MOD_ITM"  kind="itm" proc="Cortex_M4_0" version="1.0" >
+			<mapping id="masterid.decoder">
+				<map masterid="1"   decoder="ItmDWTDecodeUnit"/>
+				<map masterid="2"   decoder="ItmSWDecodeUnit"/>
+			</mapping>
+		</module>
+
+		<!-- version 0 indicates a TPIU light type -->
+		<module id ="MOD_TPIU"  kind="tpiu" proc="" version="0" >
+			<registers>
+			</registers>
+			<characteristics>
+				<characteristic id="DEV_CHAR_TPIUBASE" value="0xE0040000"/> 
+			</characteristics>
+		</module>
+
+		<!-- M4u registers for determining system/trace clock -->
+		<module id="MOD_SYSCLK" kind="clk" proc="" version="1.0" >
+			<registers>
+			</registers>
+			<characteristics>
+				<characteristic id="CSACC" value="0x40010400"/>
+				<characteristic id="CSCTL0" value="0x40010404"/>
+				<characteristic id="CSCTL1" value="0x40010408"/>
+				<characteristic id="CSCTL2" value="0x4001040C"/>
+				<characteristic id="CSCTL3" value="0x40010410"/>
+				<characteristic id="CSCTL4" value="0x40010414"/>
+				<characteristic id="CSCTL5" value="0x40010418"/>
+				<characteristic id="CSCTL6" value="0x4001041C"/>
+				<characteristic id="CSCTL7" value="0x40010420"/>
+				<characteristic id="CSCLKEN" value="0x40010430"/>
+				<characteristic id="TLVBASE" value="0x00201000"/>
+			</characteristics>
+		</module>
+
+		<!-- M4u exception number to name mapping -->
+		<module id="MOD_EXCEPTIONMAP" kind="exception" proc="" version="1.0" >
+			<registers>
+			</registers>
+			<characteristics>
+				<characteristic id="1" value="RESET"/>
+				<characteristic id="2" value="NMI"/>
+				<characteristic id="3" value="HARDFAULT"/>
+				<characteristic id="4" value="MEMMGMT"/>
+				<characteristic id="5" value="BUSFAULT"/>
+				<characteristic id="6" value="USAGEFAULT"/>
+				<characteristic id="11" value="SVC"/>
+				<characteristic id="12" value="DBGMONITOR"/>
+				<characteristic id="14" value="PENDSV"/>
+				<characteristic id="15" value="SYSTICK"/>
+				<characteristic id="16" value="PSS"/>
+				<characteristic id="17" value="CS"/>
+				<characteristic id="18" value="PCM"/>
+				<characteristic id="19" value="WDT"/>
+				<characteristic id="20" value="FPU"/>
+				<characteristic id="21" value="FLCTL"/>
+				<characteristic id="22" value="COMP0"/>
+				<characteristic id="23" value="COMP1"/>
+				<characteristic id="24" value="TA0_0"/>
+				<characteristic id="25" value="TA0_N"/>
+				<characteristic id="26" value="TA1_0"/>
+				<characteristic id="27" value="TA1_N"/>
+				<characteristic id="28" value="TA2_0"/>
+				<characteristic id="29" value="TA2_N"/>
+				<characteristic id="30" value="TA3_0"/>
+				<characteristic id="31" value="TA3_N"/>
+				<characteristic id="32" value="EUSCIA0"/>
+				<characteristic id="33" value="EUSCIA1"/>
+				<characteristic id="34" value="EUSCIA2"/>
+				<characteristic id="35" value="EUSCIA3"/>
+				<characteristic id="36" value="EUSCIB0"/>
+				<characteristic id="37" value="EUSCIB1"/>
+				<characteristic id="38" value="EUSCIB2"/>
+				<characteristic id="39" value="EUSCIB3"/>
+				<characteristic id="40" value="ADC12"/>
+				<characteristic id="41" value="T32_INT1"/>
+				<characteristic id="42" value="T32_INT2"/>
+				<characteristic id="43" value="T32_INTC"/>
+				<characteristic id="44" value="AES"/>
+				<characteristic id="45" value="RTC"/>
+				<characteristic id="46" value="DMA_ERR"/>
+				<characteristic id="47" value="DMA_INT3"/>
+				<characteristic id="48" value="DMA_INT2"/>
+				<characteristic id="49" value="DMA_INT1"/>
+				<characteristic id="50" value="DMA_INT0"/>
+				<characteristic id="51" value="PORT1"/>
+				<characteristic id="52" value="PORT2"/>
+				<characteristic id="53" value="PORT3"/>
+				<characteristic id="54" value="PORT4"/>
+				<characteristic id="55" value="PORT5"/>
+				<characteristic id="56" value="PORT6"/>
+			</characteristics>
+		</module>
+
+	</modules>
+
+
+</device>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="PMI Analysis" default="enable" basedir=".">
+	<import file="../../templates/analysisfeature.xml"/>
+	
+	<property name="dvt.activity.name" value="PMI/${ant.project.name}"/>
+	<property name="dvt.activity.description" value="Analyze PMI and CMI trace data."/>
+	<property name="dvt.data.type" value="STM"/>
+	<property name="dvt.views" value="PMI CMI Log,PMCM Scope,OPP Voltage,CM Activity,PMI Profile"/>
+	<property name="dvt.views.show" value="PMI Profile"/>
+	<property name="analysisFeatureName" value="PMIAnalysis" />
+
+	<!-- minimum required input fields for the AF (optional, for better performance) -->
+	<property name="requiredFields" value="Time,Delta Time,Master Name,Module,Class,Data,Domain,Type,Data Message,Micro Secs,Local Timestamp"/>
+
+	<!-- override template target -->
+	<target name="postAddAnalysisFeature">
+		<dvt.start refid="analysisFeatureRef"/>
+		<dvt.view.show refid="analysisFeatureRef" view="${dvt.views.show}"/>
+	</target>
+</project>

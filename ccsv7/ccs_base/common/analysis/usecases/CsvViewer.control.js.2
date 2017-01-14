@@ -1,0 +1,171 @@
+dvt_activity.include("helper.js");
+
+var dvt_activity_name = "Use Cases/Function Profiling";
+var dvt_activity_description = "Use Case for function profiling.";
+
+var supported_type = 0x64;
+
+var cpus;
+var dvt_cpu_names = "";
+var dvt_validate = false;
+
+//Validate whether this Use Case can be shown in current context.
+function validate()
+{	
+	//Make calls to Debug Server, or Trace Server, 
+	//or whatever else is needed to validate whether this Use Case is valid for current context.
+
+	//getSelectedCores().
+	//look at types..
+	var valid = true;
+
+	cpus = IDEAdapterManager.getCurrentIDE().getSelectedCPUList();
+	
+	System.out.println(supported_type);
+	System.out.println("jack");
+	System.out.println(cpus.length);
+
+
+	if (cpus.length > 0)
+	{	
+		for (i=0; i<cpus.length; i++)
+		{
+			System.out.println(cpus[i].toString());
+			System.out.println(cpus[i].getCPUSubFamily());
+			if (cpus[i].getCPUSubFamily() != supported_type)	
+			{
+				return false;
+			}	
+		}	
+	}
+	
+	dvt_validate = true;
+	
+	return true;
+}
+
+
+function test()
+{
+	new ConfigProperty("Property Dialog").execute();
+}
+
+//Set up GUI for Launch dialog.
+//Add "wizard page" for simple properties.
+function launchDialog()
+{
+	var launch = dvt_usecase_launch_dialog();
+
+	launch.page.setNumColumns(5);
+	launch.page.addWidget(new ConfigLabel("Which Views to Open:"));
+	launch.page.addWidget(new ConfigCheck("Trace View"));
+	launch.page.addWidget(new ConfigCheck("Profile View"));
+	var system = new ConfigCheck("System Analyzer Log View");
+	system.setEnabled(false);
+	launch.page.addWidget(system);
+	var moreButton = new ConfigButton("More...");
+	launch.page.addWidget(moreButton );
+	launch.page.addWidget(new ConfigLabel("DSS Script to run:"));
+	var file = new ConfigFile("");
+	file.setSpanColumns(3);
+	launch.page.addWidget(file);
+	
+	//Callback implementation #1:
+	var impl = { run: test };
+	
+	//Callback implementation #2:
+	var impl2 = { run: function()
+		{
+			new ConfigMessage("test1").execute();
+		}};
+		
+	moreButton.addRun(new IRun(impl));
+
+
+	launch.dialog.execute();
+	
+	return launch;
+}
+
+//Enable this Use Case.
+function enable()
+{
+	cpus = IDEAdapterManager.getCurrentIDE().getSelectedCPUList();
+	
+	if (cpus.length > 0)
+	{	
+		for (i=0; i<cpus.length; i++)
+		{
+			dvt_cpu_names = dvt_cpu_names + cpus[i].toString() + ";";
+		}	
+	}
+	
+	helper();
+	
+	//Example call to IDEAdapter.
+	var cpu = IDEAdapterManager.getCurrentIDECPU();
+	if (cpu != null)
+	{
+		cpu.halt();
+	}
+
+	var launch = launchDialog();
+
+	if (!launch.dialog.getFinished())
+	{
+		return;
+	}
+
+	/*	
+	var fileDialog = new ConfigFile();
+	fileDialog.setText("me");
+	fileDialog.setPath(filepath);
+	fileDialog.execute();
+	if (!fileDialog.getFinished())
+	{
+		return;
+	}
+	*/	
+
+
+	//Add configuration buttons to Analysis Dashboard column.
+	var configure = new Configure();
+	var button = new ConfigButton("Properties...");
+	var propertyRun = { run: function() {launch.dialog.execute();} };
+	button.addRun(new IRun(propertyRun));
+	configure.addWidget(button);
+	dvt_activity.addConfigure(configure);
+
+	dvt_enable = true;
+}
+
+//Disable this Use Case.
+function disable()
+{
+	//Tear down Use Case.
+	//Remove Data Provider? Check to see if this is automatic...
+}
+
+//Run this Use Case.
+function run()
+{
+	System.out.println("here:" + dvt_cpu_names);
+	if (dvt_run)
+	{
+		var csvViewer = ActivityManager.get().findActivity("Viewers/CSV Viewer");
+		csvViewer = csvViewer.copy();
+		
+		if (csvViewer != null)
+		{	
+			ActivityManager.get().addActivityToSession(csvViewer, dvt_activity);
+		}
+		
+		var analysis = ActivityManager.get().findAction("Duration");
+	}
+}
+
+//Reset this Use Case.
+function reset()
+{
+	
+}

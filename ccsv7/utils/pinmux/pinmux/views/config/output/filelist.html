@@ -1,0 +1,42 @@
+<!-- Category Filter Select -->
+<div id="generateFileTab" class="panel panel-default shadow1" style="margin:7px 0 10px 0;border:none;">
+    <div class="panel-heading panel-heading-custom panel-heading-alt" ng-click="hideGenerateSection=!hideGenerateSection" ng-mouseleave="hidePopover()" style="position:relative" >
+        <span ng-class="srvStyle.getTriangleGlyphClass(hideGenerateSection)"></span>
+        <span style="font-size:14px;font-weight:bold;">Generated Files</span>
+    </div>
+    <div class="panel-body" style="padding:0px" ng-hide="hideGenerateSection">
+        <div style="padding:3px 0 3px 7px;" ng-show="showFileListView">
+            <span>Category filter:&nbsp;</span>
+            <select id="catagoryFilter" style="color:#000;width:50%;" ng-model="srvFileListVM.fileCategorySelect" ng-change="filterFilesByCategory(srvFileListVM.fileCategorySelect)" ng-options="option.name for option in srvFileListVM.fileCategories" title="Filter file list by category"></select>
+        </div>
+        <!-- Expanded File List -->
+        <div id="fileListView" class="datagrid datagridGrey" style="margin:0px 4px 4px 4px;" ng-show="showFileListView">
+            <table id="fileListTable" style="width:100%;">
+                <tbody>
+                    <tr ng-repeat="fileEntry in srvFileListVM.filteredFileListArray | orderBy:$root.natural('name')" ng-class-odd="''" ng-class-even="'alt'">
+                        <td><a href="" ng-click="openFile(fileEntry)" title="Open code preview for {{getFileName(fileEntry)}}">{{getFileName(fileEntry)}}</a></td>
+                        <td>{{fileEntry.category}}</td>
+                        <td>
+                            <button id="{{getFileName(fileEntry)}}DownloadBtn" type="button" class="btn btn-xs trexStyleBtn trexBtnMd" ng-click="downloadFile(fileEntry)" title="Download File">
+                                <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2">
+                            <span class="badge" style="font-size:14px;font-weight:bold;background-color:#676767">{{srvFileListVM.fileCategorySelect.numFiles}}</span> Total Files
+                            <span ng-show="numErrors" class="label label-danger" style="font-size:10px;float:right;position:relative;top:1px;" title="{{getErrorsTitleText()}}">Note: Errors in design</span>
+                        </td>
+                        <td>
+                            <button id="btnDownloadAll" type="button" class="btn btn-xs trexStyleBtn trexBtnMd" ng-click="downloadFiles()" title="Download All Files as a Package">
+                                <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+                            </button>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

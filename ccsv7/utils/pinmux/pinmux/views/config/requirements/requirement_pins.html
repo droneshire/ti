@@ -1,0 +1,94 @@
+<div class="datagrid datagridBlue shadow1 pinRequirementsDiv" style="width:100%;">
+		<!-- Signal/Pins form -->
+		<table id="requirementsTable" class="reqDetails_{{srvConfigVM.selectedInterface.peripheralRequirementsLength() > 0}}">
+			<thead ng-if="srvConfigVM.selectedRequirement && ((srvConfigVM.selectedRequirement.singlePinRequirements.length > 0) || srvConfigVM.selectedRequirement.multiPinRequirement )" class="shadow1">		
+				<tr>
+					<th id="req2Col1Head" style="border-bottom:1px solid #115566;">
+
+						<label for="Signals" title="Toggle All signals">
+							<input id="Signals" class="labelInput"
+							ng-model="srvConfigVM.selectedRequirement.selectAll" 
+							ng-change="peripheralSelectAllPins()" type="checkbox" title="Toggle All signals" /> 
+
+							 {{srvConfigVM.selectedInterface.name}} Signals
+						 
+						 </label>
+
+						<span id="reverseSortSignalsBtn" title="{{srvToolTip.sortAlpha}}" ng-click="srvConfigVM.selectedRequirement.reverseSort = !srvConfigVM.selectedRequirement.reverseSort" class="glyphicon glyphicon-sort sort"></span>
+
+						
+					</th>
+					<th id="req2Col2Head">
+						<span>{{srvConfigVM.selectedInterface.name}} Pins </span>
+					</th>
+					<th class="req2ColnHead" 
+						ng-repeat="(name,headerItem) in srvConfigVM.selectedRequirement.uiHeaderConfigurables" > 
+						 
+						<span id="hdlbl{{headerItem.configurable.name}}" ng-hide="headerItem.hidden()">
+							 <span ng-if="headerItem.configurable.type==='CheckBox'"> 
+							 	<label for="hd{{headerItem.configurable.name}}" class="headerItemLabel">{{headerItem.configurable.displayName}}</label>
+							 </span>
+
+							
+							 <span ng-if="headerItem.configurable.type==='DropDown'">
+							 	<span class="headerItemLabel"> {{headerItem.configurable.displayName}} </span>
+							 <span>
+						 </spam>
+
+					</th>
+				</tr>
+				<tr>
+					<th id="req2Col1Head" style="border-bottom:1px solid #115566;" class="configurableUI">
+					</th>
+					<th id="req2Col2Head" class="configurableUI">
+					</th>
+					<th class="req2ColnHead configurableUI" 
+						ng-repeat="(name,headerItem) in srvConfigVM.selectedRequirement.uiHeaderConfigurables" > 
+						 
+						<span ng-hide="headerItem.hidden()" >
+
+							 <span ng-if="headerItem.configurable.type==='CheckBox'"> 
+							 	<input id="hd{{headerItem.configurable.name}}" ng-change="headerItemClicked(headerItem)"
+							 		   type="checkbox" 
+							 		   ng-model="headerItem.model[name]"/>  
+							 </span>
+
+							
+							 <span ng-if="headerItem.configurable.type==='DropDown'">
+							 	<div class="dropdown">
+							 		<span>
+									 	<select id="hd{{headerItem.configurable.name}}" title="{{headerItem.configurable.displayName}}" 
+									 			ng-model="headerItem.model[name]" 
+									 			ng-change="headerItemClicked(headerItem)" 
+									 			ng-options="option.displayName for option in headerItem.configurable.options track by option.name">
+									 	</select>
+									 </span>
+							 	</div>
+							 <span>
+						 </span>
+					</th>
+				</tr>
+			</thead>
+
+			<tbody ng-show="srvConfigVM.selectedRequirement.singlePinRequirements.length > 0" display-single-pin-requirements pin-requirements="srvConfigVM.selectedRequirement.singlePinRequirements" srv-tool-tip="srvToolTip" pin-options="srvConfigVM.selectedRequirement.checkBoxOptions" pin-used-changed="pinUsedChanged" pin-changed="pinChanged" reverse-sort="srvConfigVM.selectedRequirement.reverseSort" display-current-error-warning="srvConfigVM.displayCurrentErrorWarning" apply-option="applyOption"></tbody>
+
+			<thead class="altHead" ng-if="srvConfigVM.selectedRequirement.multiPinRequirement">
+				<tr>
+					<th colspan="100%" style="font-size:14px;font-weight:normal;">
+						<input ng-model="srvConfigVM.selectedRequirement.multiPinRequirement.selectAll" ng-change="multiPinSelectAllPins(srvConfigVM.selectedRequirement.multiPinRequirement)" type="checkbox" />
+						&nbsp;Any 
+						<select id="selectMultiPinCount{{$index}}" ng-model="srvConfigVM.selectedRequirement.multiPinRequirement.multiPinCountSelection" ng-change="multiPinCountChanged(srvConfigVM.selectedRequirement.multiPinRequirement)" ng-init="numOpts=multiPinRequirement.pinRequirements.length" ng-options="selection.getDisplay() for selection in srvConfigVM.selectedRequirement.multiPinRequirement.multiPinCountSelections" style="color:#000000;font-weight:normal;"></select> 
+						of {{numOpts}} the following pins:
+						<span style="float:right;">
+							<span class="label label-danger shadow1" style="margin:0;padding:1px 4px;position:relative;top:-2px" ng-show="srvConfigVM.selectedRequirement.multiPinRequirement.requirement.solution.errorText != ''">Error: {{srvConfigVM.selectedRequirement.multiPinRequirement.requirement.solution.errorText}}</span>
+							<span class="label label-warning shadow1" style="margin:0;padding:1px 4px;position:relative;top:-2px" ng-show="((srvConfigVM.selectedRequirement.multiPinRequirement.requirement.solution.warningText != '') && (srvConfigVM.selectedRequirement.multiPinRequirement.requirement.solution.errorText == ''))">Warning: {{srvConfigVM.selectedRequirement.multiPinRequirement.requirement.solution.warningText}}</span>
+						</span>
+					</th>
+				</tr>
+			</thead>
+			
+			<tbody display-single-pin-requirements pin-requirements="srvConfigVM.selectedRequirement.multiPinRequirement.pinRequirements" srv-tool-tip="srvToolTip" pin-used-changed="pinUsedChanged" pin-changed="pinChanged" reverse-sort="srvConfigVM.selectedRequirement.reverseSort" display-current-error-warning="srvConfigVM.displayCurrentErrorWarning" >
+
+			</tbody>
+		</table>
+	</div>

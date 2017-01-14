@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Memory Throughput" default="enable" basedir=".">
+	<import file="../../templates/analysisfeature.xml"/>
+	
+	<property name="dvt.activity.name" value="MemoryThroughput/${ant.project.name}"/>
+	<property name="dvt.activity.description" value="${ant.project.name}"/>
+	<property name="dvt.activity.icon" value="platform:/plugin/com.ti.dvt.ui/icons/views/discrete.gif"/>
+	<property name="dvt.data.type" value="STM"/>
+	<property name="dvt.views" value="Memory Throughput"/>
+	<property name="dvt.views.show" value="Memory Throughput"/>
+	<property name="analysisFeatureName" value="MemoryThroughput" />
+    
+    <!-- minimum required input fields for the AF (optional, for better performance) -->
+    <property name="requiredFields" value="Class,Data,Domain,Time"/>
+
+	
+	<!-- override template target -->
+	<target name="postAddAnalysisFeature">
+		<dvt.start refid="analysisFeatureRef"/>
+		<dvt.view.show refid="analysisFeatureRef" view="${dvt.views.show}"/>
+	</target>
+
+	<target name="createStandardContextMenu">
+	</target>
+
+</project>

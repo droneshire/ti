@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- 
+  TI File $Revision: 
+  Checkin $Date: 
+  --> 
+
+<!--  C28M35x GPIOG2 CTRL REGS Registers 
+     =================================== 
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     --> 
+<module id="GPIOG2 CTRL REGS" HW_revision="" XML_version="1" description="GPIOG2 CTRL REGS Registers">
+    <register id="GPECTRL" acronym="GPECTRL" offset="0" page="1" width="32" description="GPIO E Control Register (GPIO128 to 135)" />
+    <register id="GPEQSEL1" acronym="GPEQSEL1" offset="2" page="1" width="32" description="GPIO E Qualifier Select 1 Register (GPIO128 to 135) " />
+    <!--  2 empty  -->
+    <register id="GPEMUX1" acronym="GPEMUX1" offset="6" page="1" width="32" description="GPIO E Mux 1 Register (GPIO128 to 135)" />
+    <!--  2 empty  -->
+    <register id="GPEDIR" acronym="GPEDIR" offset="10" page="1" width="32" description="GPIO E Direction Register (GPIO128 to 135 )" />
+    <register id="GPEPUD" acronym="GPEPUD" offset="12" page="1" width="32" description="GPEPUD register for (GPIO128 to 135) " />
+    <!--  40 empty  -->
+    <register id="AIOMUX1" acronym="AIOMUX1" offset="54" page="1" width="32" description="Analog IO Mux 1 Register (AIO0-15)" />
+    <register id="AIOMUX2" acronym="AIOMUX2" offset="56" page="1" width="32" description="Analog IO Mux 2 Register (AIO16-31)" />
+    <register id="AIODIR" acronym="AIODIR" offset="58" page="1" width="32" description="Analog IO Direction Register (AIO0-31)" />
+</module>

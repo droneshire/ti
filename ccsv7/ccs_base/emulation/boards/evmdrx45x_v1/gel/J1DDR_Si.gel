@@ -1,0 +1,744 @@
+/*PLL1 Controller Control Register=> Gerates clocks ARM, VBUSM, EDMA, IMCOP, VENC etc*/
+#define PLL0_BASE_ADDR	0x01CA1C00
+#define PLL0_PLLCTL	 	(unsigned int*)(PLL1_BASE_ADDR + 0x100)	/*PLL Control Register*/
+#define PLL0_OCSEL	 	(unsigned int*)(PLL1_BASE_ADDR + 0x104)	/*OBSCLK Select Register*/
+#define PLL0_SECCTL	 	(unsigned int*)(PLL1_BASE_ADDR + 0x108)	/*PLL Secondary Control Register*/
+#define PLL0_PLLM		(unsigned int*)(PLL1_BASE_ADDR + 0x110)	/*PLL Multiplier Control Register*/
+#define PLL0_PREDIV	 	(unsigned int*)(PLL1_BASE_ADDR + 0x114)	/*PLL Pre-Divider control Register*/
+#define PLL0_PLLDIV1	(unsigned int*)(PLL1_BASE_ADDR + 0x118)	/*PLL Controller Div1 Register*/
+#define PLL0_PLLDIV2	(unsigned int*)(PLL1_BASE_ADDR + 0x11C)	/*PLL Controller Div2 Register*/                      
+#define PLL0_PLLDIV3	(unsigned int*)(PLL1_BASE_ADDR + 0x120)	/*PLL Controller Div3 Register*/
+#define PLL0_OSCDIV1	(unsigned int*)(PLL1_BASE_ADDR + 0x124)	/*Oscilator Divider Register*/
+#define PLL0_POSTDIV	(unsigned int*)(PLL1_BASE_ADDR + 0x128)	/*PLL Post-Divider Register*/
+#define PLL0_BPDIV	 	(unsigned int*)(PLL1_BASE_ADDR + 0x12C)	/*Bypass Divider Register*/
+#define PLL0_WAKEUP	 	(unsigned int*)(PLL1_BASE_ADDR + 0x130)	/*Wakeup Register*/ 
+#define PLL0_PLLCMD	 	(unsigned int*)(PLL1_BASE_ADDR + 0x138)	/*PLL Controller Command Register*/
+#define PLL0_PLLSTAT	(unsigned int*)(PLL1_BASE_ADDR + 0x13C)	/*PLL Controller Status Register*/
+#define PLL0_ALNCTL	 	(unsigned int*)(PLL1_BASE_ADDR + 0x140)	/*PLL Controller Clock Align Control Register*/
+#define PLL0_DCHANGE	(unsigned int*)(PLL1_BASE_ADDR + 0x144)	/*PLLDiv Ratio Change status Register*/
+#define PLL0_CKEN		(unsigned int*)(PLL1_BASE_ADDR + 0x148)	/*Clock Enable Control Register*/
+#define PLL0_CKSTAT	 	(unsigned int*)(PLL1_BASE_ADDR + 0x14C)	/*Clock Status Register*/		
+#define PLL0_SYSTAT	 	(unsigned int*)(PLL1_BASE_ADDR + 0x150)	/*SYSCLK Status Register*/
+#define PLL0_PLLDIV4	(unsigned int*)(PLL1_BASE_ADDR + 0x160)	/*PLL Controller Div4 Register*/
+#define PLL0_PLLDIV5	(unsigned int*)(PLL1_BASE_ADDR + 0x164)	/*PLL Controller Div5 Register*/
+#define PLL0_PLLDIV6	(unsigned int*)(PLL1_BASE_ADDR + 0x168)	/*PLL Controller Div6 Register*/
+#define PLL0_PLLDIV7	(unsigned int*)(PLL1_BASE_ADDR + 0x16C)	/*PLL Controller Div7 Register*/
+#define PLL0_PLLDIV8	(unsigned int*)(PLL1_BASE_ADDR + 0x170)	/*PLL Controller Div8 Register*/
+#define PLL0_PLLDIV9	(unsigned int*)(PLL1_BASE_ADDR + 0x174)	/*PLL Controller Div9 Register*/
+
+						 
+
+/*PLL1 Controller Control Register=> Gerates clocks ARM, VBUSM, EDMA, IMCOP, VENC etc*/
+#define PLL1_BASE_ADDR	0x01CA2000
+#define PLL1_PLLCTL	 	(unsigned int*)(PLL1_BASE_ADDR + 0x100)	/*PLL Control Register*/
+#define PLL1_OCSEL	 	(unsigned int*)(PLL1_BASE_ADDR + 0x104)	/*OBSCLK Select Register*/
+#define PLL1_SECCTL	 	(unsigned int*)(PLL1_BASE_ADDR + 0x108)	/*PLL Secondary Control Register*/
+#define PLL1_PLLM		(unsigned int*)(PLL1_BASE_ADDR + 0x110)	/*PLL Multiplier Control Register*/
+#define PLL1_PREDIV	 	(unsigned int*)(PLL1_BASE_ADDR + 0x114)	/*PLL Pre-Divider control Register*/
+#define PLL1_PLLDIV1	(unsigned int*)(PLL1_BASE_ADDR + 0x118)	/*PLL Controller Div1 Register*/
+#define PLL1_PLLDIV2	(unsigned int*)(PLL1_BASE_ADDR + 0x11C)	/*PLL Controller Div2 Register*/                      
+#define PLL1_PLLDIV3	(unsigned int*)(PLL1_BASE_ADDR + 0x120)	/*PLL Controller Div3 Register*/
+#define PLL1_OSCDIV1	(unsigned int*)(PLL1_BASE_ADDR + 0x124)	/*Oscilator Divider Register*/
+#define PLL1_POSTDIV	(unsigned int*)(PLL1_BASE_ADDR + 0x128)	/*PLL Post-Divider Register*/
+#define PLL1_BPDIV	 	(unsigned int*)(PLL1_BASE_ADDR + 0x12C)	/*Bypass Divider Register*/
+#define PLL1_WAKEUP	 	(unsigned int*)(PLL1_BASE_ADDR + 0x130)	/*Wakeup Register*/ 
+#define PLL1_PLLCMD	 	(unsigned int*)(PLL1_BASE_ADDR + 0x138)	/*PLL Controller Command Register*/
+#define PLL1_PLLSTAT	(unsigned int*)(PLL1_BASE_ADDR + 0x13C)	/*PLL Controller Status Register*/
+#define PLL1_ALNCTL	 	(unsigned int*)(PLL1_BASE_ADDR + 0x140)	/*PLL Controller Clock Align Control Register*/
+#define PLL1_DCHANGE	(unsigned int*)(PLL1_BASE_ADDR + 0x144)	/*PLLDiv Ratio Change status Register*/
+#define PLL1_CKEN		(unsigned int*)(PLL1_BASE_ADDR + 0x148)	/*Clock Enable Control Register*/
+#define PLL1_CKSTAT	 	(unsigned int*)(PLL1_BASE_ADDR + 0x14C)	/*Clock Status Register*/		
+#define PLL1_SYSTAT	 	(unsigned int*)(PLL1_BASE_ADDR + 0x150)	/*SYSCLK Status Register*/
+#define PLL1_PLLDIV4	(unsigned int*)(PLL1_BASE_ADDR + 0x160)	/*PLL Controller Div4 Register*/
+#define PLL1_PLLDIV5	(unsigned int*)(PLL1_BASE_ADDR + 0x164)	/*PLL Controller Div5 Register*/
+#define PLL1_PLLDIV6	(unsigned int*)(PLL1_BASE_ADDR + 0x168)	/*PLL Controller Div6 Register*/
+#define PLL1_PLLDIV7	(unsigned int*)(PLL1_BASE_ADDR + 0x16C)	/*PLL Controller Div7 Register*/
+#define PLL1_PLLDIV8	(unsigned int*)(PLL1_BASE_ADDR + 0x170)	/*PLL Controller Div8 Register*/
+
+//Pin MUX Configuration Registers
+
+#define CFG_PINMUX0         *( unsigned int* )( 0x01C48100 )
+#define CFG_PINMUX1         *( unsigned int* )( 0x01C48104 )
+#define CFG_PINMUX2         *( unsigned int* )( 0x01C48108 )
+#define DSPBOOTADDR         *( unsigned int* )( 0x01C48008 )
+#define CFG_ARMAUX_CTL0     *( unsigned int* )( 0x01C4814C )
+#define CFG_ARMAUX_CTL1     *( unsigned int* )( 0x01C48168 )
+
+
+#define LPSC_ARM0           0
+#define LPSC_GEM0        	1
+#define LPSC_TPCC0          2
+#define LPSC_TPTC0          3
+#define LPSC_TPTC1          4
+#define LPSC_TPTC2          5
+#define LPSC_MCASP0         6
+#define LPSC_MCASP1         7
+#define LPSC_MCASP2         8
+#define LPSC_MCASP3         9
+#define LPSC_DARTE          10
+#define LPSC_SPDIFDOR       11
+#define LPSC_RTI1           12
+#define LPSC_EMIFA          13
+#define LPSC_EMIFB          14
+#define LPSC_VPSS0          15
+  						    //17 permenantly disabled
+#define LPSC_UART1          18
+#define LPSC_UART2          19
+#define LPSC_UART0          20
+#define LPSC_UART3          21
+#define LPSC_I2C0           22
+#define LPSC_I2C1           23
+#define LPSC_I2C2           24
+#define LPSC_I2C3           25
+#define LPSC_ECAP0          26
+#define LPSC_ECAP1          27
+#define LPSC_ECAP2          28
+#define LPSC_ECAP3          29
+#define LPSC_ECAP4          30
+#define LPSC_ECAP5 		    31
+#define LPSC_ECAP6 		    32
+#define LPSC_ECAP7 		    33
+#define LPSC_HCC0           34
+#define LPSC_SPI0           35
+#define LPSC_SPI1           36
+#define LPSC_SPI2           37
+#define LPSC_HCC1           38
+#define LPSC_PATA           39
+#define LPSC_UHPI           40
+                          //41 disabled
+#define LPSC_GPIO           42
+#define LPSC_SPI0           43
+#define LPSC_ECC            44
+#define LPSC_CRC            45
+#define LPSC_RTI2           46
+#define LPSC_MMC0           47
+#define LPSC_MS             48
+#define LPSC_VLYNQ          49
+#define LPSC_VPSS1          50
+#define LPSC_UART4          51
+#define LPSC_UART5          52
+#define LPSC_UART6          53
+#define LPSC_MMC1           54
+#define LPSC_MMC2           55
+#define LPSC_USB            56
+
+
+#define PSC_ADDR 			0x01CA0000
+#define EPCPR 				(PSC_ADDR+0x070)
+#define PTCMD				(PSC_ADDR+0x120)
+#define PTSTAT         		(PSC_ADDR+0x128)   
+#define PDSTAT         		(PSC_ADDR+0x200)
+#define PDCTL				(PSC_ADDR+0x300)            
+
+#define EMIFA_SDCR          *( unsigned int* )( 0x18000008 )
+#define EMIFA_SDRCR         *( unsigned int* )( 0x1800000C )
+#define EMIFA_SDRCR_SR  	*( unsigned char* )( 0x1800000F )
+#define EMIFA_SDTIMR1       *( unsigned int* )( 0x18000010 )
+#define EMIFA_SDTIMR2       *( unsigned int* )( 0x18000014 )
+
+#define	DDR_BASE 0x20000000
+
+#define EIDRR            *(unsigned int*)(DDR_BASE + 0x00)    		//EMIF Module ID and Revision Register                                    
+#define SDSTAT           *(unsigned int*)(DDR_BASE + 0x04)    		//SDRAM Status Register  
+#define SDCFG1           *(unsigned int*)(DDR_BASE + 0x08) 	  		//SDRAM Bank Config Register
+#define SDREF            *(unsigned int*)(DDR_BASE + 0x0C) 	  		//SDRAM Refresh Control Register
+#define SDTIM0           *(unsigned int*)(DDR_BASE + 0x10) 	  		//SDRAM Timing Register
+#define SDTIM1           *(unsigned int*)(DDR_BASE + 0x14) 	  		//SDRAM Timing Register
+#define SDCFG2           *(unsigned int*)(DDR_BASE + 0x1C) 	  		//SDRAM Config Register 2
+#define VBUSMP           *(unsigned int*)(DDR_BASE + 0x20) 	  		//VBUSM Burst Priority Register
+#define VBUSMCFG1        *(unsigned int*)(DDR_BASE + 0x28) 	  		//VBUSM config Value1 Register
+#define VBUSMCFG2        *(unsigned int*)(DDR_BASE + 0x2c) 	  		//VBUSM config Value2 Register
+#define PERFCNT1		 *(unsigned int*)(DDR_BASE + 0x40)	  		//Performance Counter Register 1
+#define PERFCNT2		 *(unsigned int*)(DDR_BASE + 0x44)	  		//Performance Counter Register 2
+#define PERFCNTCFG		 *(unsigned int*)(DDR_BASE + 0x48)    		//Performance Counter Config Register
+#define PERFCNTMSTREGSEL *(unsigned int*)(DDR_BASE + 0x4C)	  		//Performance Counter Master Region Select Register
+#define IODFT_TLGC		 *(unsigned int*)(DDR_BASE + 0x60)          //IODFT test logic and Control register
+#define INTRAW			 *(unsigned int*)(DDR_BASE + 0xC0)    		//Interrupt Raw Register
+#define INTMASK          *(unsigned int*)(DDR_BASE + 0xC4)    		//Interrupt Masked Register
+#define INTMASKSET       *(unsigned int*)(DDR_BASE + 0xC8)    		//Interrupt Mask Set Register
+#define INTMASKCLR       *(unsigned int*)(DDR_BASE + 0xCC)    		//Interrupt Mask Clear Register
+#define DDRPHYREV        *(unsigned int*)(DDR_BASE + 0xE0)    		//DDR PHY ID and Revision Register
+#define DDRPHYCTL1       *(unsigned int*)(DDR_BASE + 0xE4)    		//DDR PHY Control Register
+#define VTPIOCR		 	 *(unsigned int*)(SYSCTL_BASE + 0x70)		// DDR PHY VTP IO Control
+
+
+//StartUp() 
+//{
+//
+//}
+OnTargetConnect()
+{
+}
+
+hotmenu ResetTargetSystem() 
+{
+	GEL_Reset(); //Reset the Target Sytem, it is software reset
+	GEL_TextOut("Reset Target System by Software Reset\n");
+}
+
+menuitem "Initialization";
+ 
+hotmenu PLL1_enable_ARM_264MHz_GEM_528MHz_OscIn(){
+
+	unsigned int i=0;
+	unsigned int CLKSRC=0;    				/*CLKSRC=1 =>External Oscilator 
+										      CLKSRC=0 => Onchip oscilator	*/
+	unsigned int PLL_MULTI=21;				/*PLL1 O/P clock = 24*(143+1)/(7+1)= 432 MHz)	*/
+
+	unsigned int POSTDIV=1;				    
+
+	unsigned int PLLDIV1=0;				    
+	unsigned int PLLDIV2=2;				    
+	unsigned int PLLDIV3=3;				    
+	unsigned int PLLDIV4=3;				    
+	unsigned int PLLDIV5=3;				    
+	unsigned int PLLDIV6=1;				    
+	unsigned int PLLDIV7=2;				    
+	unsigned int PLLDIV8=7;				    
+	unsigned int PLLDIV9=2;				    
+	unsigned int PLLDIV10=1;				    
+	unsigned int PLLDIV11=3;				    
+
+	GEL_TextOut("Please wait System PLL initialization is in Progress Now........\n");  									
+
+	*PLL1_PLLCTL &= 0xFFFFFEFF;  			/*Select the Clock Mode as Oscilator Clock*/
+	*PLL1_PLLCTL |= CLKSRC<<8;
+
+	*PLL1_PLLCTL &= 0xFFFFFFDF;			/*Set PLLENSRC '0', PLL Enable(PLLEN) selection is controlled through MMR*/
+
+	*PLL1_PLLCTL &= 0xFFFFFFFE; 			/*Set PLLEN=0 => PLL BYPASS MODE*/
+
+	for(i=0; i<0x20; i++) {} 			/*Wait at least 4 MXI clock or referene clock cycles to allow PLLEN mux switches properly to bypass clock*/
+
+	*PLL1_PLLCTL |= 0x00000008; 			/*Reset the PLL*/
+
+	*PLL1_PLLCTL |= 0x10; 				/*Disable the PLL*/
+
+	*PLL1_PLLCTL &= 0xFFFFFFFD;			/*Power up the PLL*/
+
+	*PLL1_PLLCTL &= 0xFFFFFFEF;			/*Bring the PLL out of Disable Mode*/
+
+	*PLL1_PLLM = PLL_MULTI; 			/*Program PLLM,PREDIV Reg, POSTDIV register and OSCDIV1 Reg*/
+
+	/* *PLL1_POSTDIV= POSTDIV; */
+	
+	*PLL1_PLLDIV1 =0x8000|PLLDIV1;	 		
+
+	*PLL1_PLLDIV2 =0x8000|PLLDIV2;	 		
+
+	*PLL1_PLLDIV3 =0x8000|PLLDIV3;	 		
+
+	*PLL1_PLLDIV4 =0x8000|PLLDIV4;	 		
+
+	*PLL1_PLLDIV5 =0x8000|PLLDIV5;	 		
+
+	*PLL1_PLLDIV6 =0x8000|PLLDIV6;	 		
+
+	*PLL1_PLLDIV7 =0x8000|PLLDIV7;	 		
+
+	*PLL1_PLLDIV8 =0x8000|PLLDIV8;	 		
+
+	*PLL1_PLLDIV9 =0x8000|PLLDIV9;	 		
+
+	*PLL1_PLLDIV10 =0x8000|PLLDIV10;	 		
+
+	*PLL1_PLLDIV11 =0x8000|PLLDIV11;	 		
+
+	for(i=0; i<0x100; i++) {}			/*Wait for PLL to Reset properly=>PLL reset Time = at least 5us*/
+
+	*PLL1_POSTDIV =0x8000|POSTDIV;
+
+	*PLL1_PLLCMD = 0x0001;				/*Set the GOSET bit*/
+
+	*PLL1_PLLCTL &= 0xFFFFFFF7;			/*Bring PLL out of Reset*/
+
+	for(i=0; i<0x1000; i++) {}               /*Wait for PLL to LOCK atleast 8000 MXI clock or Reference clock cycles*/
+
+	*PLL1_PLLCTL |= 0x1;				/*Enable the PLL Bit of PLLCTL*/
+
+	GEL_TextOut("PLL is Initialized now ..ARM@264MHz and DSP@528MHz\n");  		
+}
+
+ 
+hotmenu PLL1_enable_ARM_132MHz_GEM_264MHz_OscIn(){
+
+	unsigned int i=0;
+	unsigned int CLKSRC=0;    				/*CLKSRC=1 =>External Oscilator 
+										      CLKSRC=0 => Onchip oscilator	*/
+	unsigned int PLL_MULTI=19;/*21*/				/*PLL1 O/P clock = 24*(143+1)/(7+1)= 432 MHz)	*/
+
+	unsigned int POSTDIV=1;				    
+
+	unsigned int PLLDIV1=0;				    
+	unsigned int PLLDIV2=3;				    
+	unsigned int PLLDIV3=3;				    
+	unsigned int PLLDIV4=3;				    
+	unsigned int PLLDIV5=3;				    
+	unsigned int PLLDIV6=1;				    
+	unsigned int PLLDIV7=2;				    
+	unsigned int PLLDIV8=7;				    
+	unsigned int PLLDIV9=2;				    
+	unsigned int PLLDIV10=1;				    
+	unsigned int PLLDIV11=3;				    
+
+	GEL_TextOut("Please wait System PLL initialization is in Progress........\n");  									
+
+/*	*PLL1_PLLCTL &= 0xFFFFFEFF;  			/*Select the Clock Mode as Oscilator Clock*/
+/*	*PLL1_PLLCTL |= CLKSRC<<8;
+
+/*	*PLL1_PLLCTL &= 0xFFFFFFDF;			/*Set PLLENSRC '0', PLL Enable(PLLEN) selection is controlled through MMR*/
+
+	*PLL1_PLLCTL &= 0xFFFFFFFE; 			/*Set PLLEN=0 => PLL BYPASS MODE*/
+
+	for(i=0; i<0x200; i++) {} 			/*Wait at least 4 MXI clock or referene clock cycles to allow PLLEN mux switches properly to bypass clock*/
+
+	*PLL1_PLLCTL &= 0xFFFFFFF7;			/*Bring PLL out of Reset*/
+
+/*	*PLL1_PLLCTL |= 0x10; 				/*Disable the PLL*/
+
+	*PLL1_SECCTL |= 0x00800000;
+
+	*PLL1_PLLCTL &= 0xFFFFFFDD;			/*Power up the PLL*/
+
+/*	*PLL1_PLLCTL &= 0xFFFFFFEF;			/*Bring the PLL out of Disable Mode*/
+
+	*PLL1_PLLM = PLL_MULTI; 			/*Program PLLM,PREDIV Reg, POSTDIV register and OSCDIV1 Reg*/
+
+	*PLL1_POSTDIV =0x8000|POSTDIV;
+		
+	*PLL1_PLLDIV1 =0x8000|PLLDIV1;	 		
+
+	*PLL1_PLLDIV2 =0x8000|PLLDIV2;	 		
+
+	*PLL1_PLLDIV3 =0x8000|PLLDIV3;	 		
+
+	*PLL1_PLLDIV4 =0x8000|PLLDIV4;	 		
+
+	*PLL1_PLLDIV5 =0x8000|PLLDIV5;	 		
+
+	*PLL1_PLLDIV6 =0x8000|PLLDIV6;	 		
+
+	*PLL1_PLLDIV7 =0x8000|PLLDIV7;	 		
+
+	*PLL1_PLLDIV8 =0x8000|PLLDIV8;	 		
+
+	*PLL1_PLLDIV9 =0x8000|PLLDIV9;	 		
+
+	*PLL1_PLLDIV10 =0x8000|PLLDIV10;	 		
+
+	*PLL1_PLLDIV11 =0x8000|PLLDIV11;	 		
+
+	for(i=0; i<0x10000; i++) {}			/*Wait for PLL to Reset properly=>PLL reset Time = at least 5us*/
+
+	*PLL1_PLLCMD = 0x0001;				/*Set the GOSET bit*/
+
+	*PLL1_PLLCTL |= 0x00000008; 			/*Reset the PLL*/
+
+	for(i=0; i<0x10000; i++) {}               /*Wait for PLL to LOCK atleast 8000 MXI clock or Reference clock cycles*/
+
+	*PLL1_PLLCTL |= 0x1;				/*Enable the PLL Bit of PLLCTL*/
+
+	GEL_TextOut("PLL is Initialized ..ARM@264MHz and DSP@528MHz\n");  		
+}
+
+
+hotmenu setup_sdram()
+{
+ 
+	psc_enable(LPSC_EMIFA);
+
+	GEL_TextOut( "\nEMIF LPSC Enabled" );       
+
+	EMIFA_SDCR   	= 0x818620; 
+	EMIFA_SDTIMR1 	= 0x10912a09;
+	EMIFA_SDCR   	= 0x10620; 
+	EMIFA_SDRCR 	= 0x83d;                  
+
+	GEL_TextOut( "\nSDRAM setup Complete." );       
+}
+
+
+PLL2_config()
+{
+int i;
+
+CFG_ARMAUX_CTL1 = 0x001A0000; /* set the multiplier */
+
+CFG_ARMAUX_CTL1 |= 0x01000000;/* Assert Reset : (Bit3) PLLRST = 1    */
+
+for(i=0;i<2000;i++){}
+
+/* Set the BYPASSZ of PLL0/PLL1 to 1 */
+
+CFG_ARMAUX_CTL1 |= 0x00800000;   /* for PLL2 */
+ 
+/* postdiv for pll2 */
+
+CFG_ARMAUX_CTL1 |= 0x02000000;   /* for PLL2 : 648/2 = 324 MHz */
+
+}
+
+hotmenu 	DDR2_Initialization_162MHz()
+{
+ 
+	GEL_TextOut("Pleae wait DDR PLL initialization is in Progress........\n");  									
+
+	PLL2_config();
+
+	GEL_TextOut("DDR PLL is Initialized.. DDR Clock = 162 MHz\n \n");  	
+
+	lpsc_enable_EMIFB();
+
+//	VTPIOInit_Dynamic();
+
+	lpsc_syncreset_EMIFB();
+
+	lpsc_enable_EMIFB();
+
+
+	DDRPHYCTL1 = 0x0884;		   //72 degreee DLL delay (Bit 12) External DQS gatin enabled
+	
+    IODFT_TLGC |=0x00000400;	    //issue a soft reset
+
+	sw_wait(0x1000);
+		
+	SDREF = 0x00000520;				//Program SDRAM Refresh Control Register
+		
+	SDCFG1 = 0x00800000;			//Program SDRAM Bank Config Register
+	
+    SDTIM0 =0x22923249;				//Program SDRAM Timing Control Register1
+	SDTIM1 =0x0022a722;				//Program SDRAM Timing Control Register2
+
+	VBUSMP = 0x00000010;		    //VBUSM Burst Priority Register, pr_old_count = 0xFE
+
+	SDCFG1 = 0x00538632;		    //Program SDRAM Bank Config Register
+
+	SDREF = 0x00000520;				//Program SDRAM Refresh Control Register
+
+	GEL_TextOut("\n DDR2 initialization is Complete....Done \n"); 
+
+}
+
+
+
+hotmenu setup_asyncEmif()
+{
+ 
+	psc_enable(LPSC_EMIFA);
+
+	GEL_TextOut( "\nEMIF LPSC Enabled" );       
+
+	CFG_PINMUX0 |= 0x000007FD; /* ???????*/
+/* configure aemif control registers here */
+	GEL_TextOut( "\nAEMIF setup Complete.Default timing parametrs chosen..." );       
+}
+
+
+hotmenu init_gem()
+{
+	
+	arm_mmr_unlock();
+
+	DSPBOOTADDR = 0x11810000;
+	
+	*(PSC_ADDR+0xA00+4) = ((*(PSC_ADDR+0xA00+4))&0xFFFFFE00)|0x103;	  
+
+	*(PSC_ADDR+0x300) |=0x1;	  
+
+	*PTCMD = 1;
+
+	while((*PTSTAT) & 0x1);      
+	
+	while(!(((*(PSC_ADDR+0x800+4)&0x1F) == 0x3)));
+
+	GEL_TextOut("\n GEM LPSC is enabled and GEM is brought out of Reset");       
+}
+
+menuitem "J1DDR PSC Init functions"
+
+sw_wait( int wait )
+{
+    int count;
+    for( count = wait ; count > 0 ; count-- ){}
+}
+hotmenu lpsc_syncreset_EMIFA()
+{
+	psc_syncReset(LPSC_EMIFA);
+	GEL_TextOut("\n EMIFA LPSC is SyncReset");       
+
+}
+
+hotmenu lpsc_disable_EMIFA()
+{
+	psc_disable(LPSC_EMIFA);
+	GEL_TextOut("\n EMIFA LPSC Disabled");       
+
+}
+
+hotmenu lpsc_enable_EMIFA()
+{
+	psc_enable(LPSC_EMIFA);
+	GEL_TextOut("\n EMIFA LPSC Enabled");       
+
+}
+
+hotmenu lpsc_syncreset_EMIFB()
+{
+	psc_syncReset(LPSC_EMIFB);
+	GEL_TextOut("\n EMIFB LPSC is SyncReset");       
+
+}
+
+hotmenu lpsc_disable_EMIFB()
+{
+	psc_disable(LPSC_EMIFB);
+	GEL_TextOut("\n EMIFB LPSC Disabled");       
+
+}
+
+hotmenu lpsc_enable_EMIFB()
+{
+	psc_enable(LPSC_EMIFB);
+	GEL_TextOut("\n EMIFB LPSC Enabled");       
+
+}
+
+hotmenu lpsc_enable_VCP()
+{
+	psc_enable(LPSC_VCP);
+	GEL_TextOut("\n VCP LPSC Enabled");       
+
+}
+
+hotmenu lpsc_syncreset_McASP0()
+{
+	psc_syncReset(LPSC_MCASP0);
+	GEL_TextOut("\n McASP0 LPSC is SyncReset");       
+
+}
+
+hotmenu lpsc_disable_McASP0()
+{
+	psc_disable(LPSC_MCASP0);
+	GEL_TextOut("\n McASP0 LPSC Disabled");       
+
+}
+
+hotmenu lpsc_enable_McASP0()
+{
+	psc_enable(LPSC_MCASP0);
+	GEL_TextOut("\n McASP0 LPSC Enabled");       
+
+}
+
+hotmenu lpsc_enable_I2C0()
+{
+	psc_enable(LPSC_I2C0);
+	GEL_TextOut("\n I2C0 LPSC Enabled");       
+}
+
+
+hotmenu lpsc_enable_I2C1()
+{
+	psc_enable(LPSC_I2C1);
+	GEL_TextOut("\n I2C1 LPSC Enabled");       
+}
+
+hotmenu lpsc_syncreset_RTI1()
+{
+	psc_syncReset(LPSC_RTI1);
+	GEL_TextOut("\n RTI1 LPSC is SyncReset");       
+
+}
+
+hotmenu lpsc_disable_RTI1()
+{
+	psc_disable(LPSC_RTI1);
+	GEL_TextOut("\n RTI1 LPSC Disabled");       
+
+}
+
+hotmenu lpsc_enable_RTI1()
+{
+	psc_enable(LPSC_RTI1);
+	GEL_TextOut("\n RTI1 LPSC Enabled");       
+
+}
+hotmenu lpsc_enable_EDMA()
+{
+	psc_enable(LPSC_TPCC0);
+	psc_enable(LPSC_TPTC0);
+	psc_enable(LPSC_TPTC1);
+	psc_enable(LPSC_TPTC2);
+	GEL_TextOut("\n TPCC,TPTC0,TPCC1 and TPTC2 LPSCs Enabled");       
+}
+hotmenu lpsc_syncReset_EDMA()
+{
+	psc_syncReset(LPSC_TPCC0);
+	psc_syncReset(LPSC_TPTC0);
+	psc_syncReset(LPSC_TPTC1);
+	psc_syncReset(LPSC_TPTC2);
+	GEL_TextOut("\n TPCC,TPTC0,TPCC1 and TPTC2 LPSCs are synCReset");       
+}
+hotmenu lpsc_enable_GPIO()
+{
+	psc_enable(LPSC_GPIO0);
+	GEL_TextOut("\nGPIO LPSC Enabled");       
+}
+hotmenu lpsc_syncReset_GPIO()
+{
+	psc_syncReset(LPSC_GPIO0);
+	GEL_TextOut("\nGPIO LPSC synCReset");       
+
+}
+hotmenu lpsc_syncReset_SPDIF()
+{
+	psc_syncReset(LPSC_SPDIF);
+	GEL_TextOut("\nSPDIF LPSC synCReset");       
+
+}
+hotmenu lpsc_enable_SPDIF()
+{
+	psc_enable(LPSC_SPDIF);
+	GEL_TextOut("\nSPDIF LPSC Enabled");       
+}
+
+psc_syncReset(int lpscnum)
+{  
+	arm_mmr_unlock();
+
+	*(PSC_ADDR+0xA00+4*lpscnum) = (*(PSC_ADDR+0xA00+4*lpscnum)&0xFFFFFFF0)|0x1;	  
+  	*PTCMD = 1;
+	while((*PTSTAT)&0x1);      
+	while(!(((*(PSC_ADDR+0x800+4*lpscnum)&0x1F) == 0x1)));
+}
+
+psc_enable(int lpscnum)
+{  
+
+	arm_mmr_unlock();
+
+	*(PSC_ADDR+0xA00+4*lpscnum) = ((*(PSC_ADDR+0xA00+4*lpscnum))&0xFFFFFFF0)|0x3;	  
+
+	*(PSC_ADDR+0x300) |=0x1;	  
+
+	*PTCMD = 1;
+
+	while((*PTSTAT) & 0x1);      
+	
+	while(!(((*(PSC_ADDR+0x800+4*lpscnum)&0x1F) == 0x3)));
+	        
+}
+psc_disable(int lpscnum)
+{  
+	arm_mmr_unlock();
+	*(PSC_ADDR+0xA00+4*lpscnum) = (*(PSC_ADDR+0xA00+4*lpscnum)&0xFFFFFFF0)|0x2;	  
+	*PTCMD = 1;
+	while((*PTSTAT) & 0x1);      
+	while(!(((*(PSC_ADDR+0x800+4*lpscnum)&0x1F) == 0x2)));
+	        
+}
+
+arm_mmr_unlock()
+{  
+	CFG_ARMAUX_CTL0 |= 0x00090001; /*writes to PLLCTL, PSC, MPROT are mmr/config spaces allowed.*/
+/*	GEL_TextOut("\n ARM MMR UNLOCKED...PLLCTL, PSC and  MPROT can now be accessed ");*/
+	CFG_ARMAUX_CTL0 |= 0x00090001;        
+}
+
+
+menuitem "Reset Control Gel functions"
+hotmenu SystemReset()
+{
+    GEL_AdvancedReset ( "System Reset" );
+    GEL_TextOut( "System Reset has been issued through GEL.\n\n" );	
+}
+
+hotmenu CpuReset()
+{
+    GEL_AdvancedReset ( "CPU Reset" );
+    GEL_TextOut( "CPU Reset (soft reset) has been issued through GEL.\n\n" );
+}
+
+
+
+hotmenu rg_PLL1_enable_ARM_264MHz_GEM_528MHz_OscIn(){
+
+#define i 0
+#define CLKSRC 0    				/*CLKSRC=1 =>External Oscilator 
+										      CLKSRC=0 => Onchip oscilator	*/
+#define PLL_MULTI 11/*21*/				/*PLL1 O/P clock = 24*(143+1)/(7+1)= 432 MHz)	*/
+
+#define POSTDIV 1				    
+
+#define PLLDIV1 0				    
+#define PLLDIV2 2				    
+#define PLLDIV3 3				    
+#define PLLDIV4 3				    
+#define PLLDIV5 3				    
+#define PLLDIV6 1				    
+#define PLLDIV7 2				    
+#define PLLDIV8 7				    
+#define PLLDIV9 2				    
+#define PLLDIV10 1				    
+#define PLLDIV11 3				    
+
+	GEL_TextOut("Please wait System PLL initialization is in Progress........\n");  									
+
+	*PLL1_PLLCTL &= 0xFFFFFEFF;  			/*Select the Clock Mode as Oscilator Clock*/
+	*PLL1_PLLCTL |= CLKSRC<<8;
+
+	*PLL1_PLLCTL &= 0xFFFFFFDF;			/*Set PLLENSRC '0', PLL Enable(PLLEN) selection is controlled through MMR*/
+
+	*PLL1_PLLCTL &= 0xFFFFFFFE; 			/*Set PLLEN=0 => PLL BYPASS MODE*/
+
+	for(i=0; i<0x20; i++) {} 			/*Wait at least 4 MXI clock or referene clock cycles to allow PLLEN mux switches properly to bypass clock*/
+
+	*PLL1_PLLCTL |= 0x00000008; 			/*Reset the PLL*/
+
+	*PLL1_PLLCTL |= 0x10; 				/*Disable the PLL*/
+
+	*PLL1_PLLCTL &= 0xFFFFFFFD;			/*Power up the PLL*/
+
+	*PLL1_PLLCTL &= 0xFFFFFFEF;			/*Bring the PLL out of Disable Mode*/
+
+	*PLL1_PLLM = PLL_MULTI; 			/*Program PLLM,PREDIV Reg, POSTDIV register and OSCDIV1 Reg*/
+
+	/* *PLL1_POSTDIV= POSTDIV; */
+	
+	*PLL1_PLLDIV1 =0x8000|PLLDIV1;	 		
+
+	*PLL1_PLLDIV2 =0x8000|PLLDIV2;	 		
+
+	*PLL1_PLLDIV3 =0x8000|PLLDIV3;	 		
+
+	*PLL1_PLLDIV4 =0x8000|PLLDIV4;	 		
+
+	*PLL1_PLLDIV5 =0x8000|PLLDIV5;	 		
+
+	*PLL1_PLLDIV6 =0x8000|PLLDIV6;	 		
+
+	*PLL1_PLLDIV7 =0x8000|PLLDIV7;	 		
+
+	*PLL1_PLLDIV8 =0x8000|PLLDIV8;	 		
+
+	*PLL1_PLLDIV9 =0x8000|PLLDIV9;	 		
+
+	*PLL1_PLLDIV10 =0x8000|PLLDIV10;	 		
+
+	*PLL1_PLLDIV11 =0x8000|PLLDIV11;	 		
+
+	for(i=0; i<0x100; i++) {}			/*Wait for PLL to Reset properly=>PLL reset Time = at least 5us*/
+
+	*PLL1_POSTDIV =0x8000|POSTDIV;
+
+	*PLL1_PLLCMD = 0x0001;				/*Set the GOSET bit*/
+
+	*PLL1_PLLCTL &= 0xFFFFFFF7;			/*Bring PLL out of Reset*/
+
+	for(i=0; i<0x1000; i++) {}               /*Wait for PLL to LOCK atleast 8000 MXI clock or Reference clock cycles*/
+
+	*PLL1_PLLCTL |= 0x1;				/*Enable the PLL Bit of PLLCTL*/
+
+	GEL_TextOut("PLL is Initialized ..ARM@264MHz and DSP@528MHz\n");  		
+}

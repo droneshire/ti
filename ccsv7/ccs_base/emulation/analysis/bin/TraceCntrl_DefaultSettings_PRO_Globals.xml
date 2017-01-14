@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file defines the XDS Pro Trace receiver global settings. -->
+<NO_EMU0>false</NO_EMU0>
+<NO_EMU1>false</NO_EMU1>
+<DRM_PROG>0</DRM_PROG>
+<IS_USB>true</IS_USB>
+<ADDR_CURRENT_USB>0</ADDR_CURRENT_USB>
+<ADDR_CURRENT_ETH>0.0.0.0</ADDR_CURRENT_ETH>
+<ADDR_HISTORY_USB></ADDR_HISTORY_USB>
+<ADDR_HISTORY_ETH></ADDR_HISTORY_ETH>
+<USE_CUSTOM>false</USE_CUSTOM>
+<CUSTOM_PATH></CUSTOM_PATH>

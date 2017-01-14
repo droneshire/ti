@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configurations XML_version="1.2" id="configurations_0">
+<configuration XML_version="1.2" id="TI MSP430 USB3_0">
+        <instance XML_version="1.2" desc="TI MSP430 USB3" href="connections/TIMSP430-USB3.xml" id="TI MSP430 USB3" xml="TIMSP430-USB3.xml" xmlpath="connections"/>
+        <connection XML_version="1.2" id="TI MSP430 USB3">
+            <instance XML_version="1.2" href="drivers/msp430_emu.xml" id="drivers" xml="msp430_emu.xml" xmlpath="drivers"/>
+            <platform XML_version="1.2" id="platform_0">
+                <instance XML_version="1.2" desc="MSP430" href="cpus/MSP430.xml" id="MSP430" xml="MSP430.xml" xmlpath="cpus"/>
+            </platform>
+        </connection>
+    </configuration>
+</configurations>

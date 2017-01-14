@@ -1,0 +1,766 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_34" class="java.beans.XMLDecoder"> 
+ <object class="com.ti.dvt.ui.views.core.ViewModel"> 
+  <void property="viewConnectionMgr"> 
+   <void property="connections"> 
+    <void method="add"> 
+     <object class="com.ti.dvt.ui.views.core.ViewConnection"> 
+      <void property="source"> 
+       <string>$Debug.UnlimitedBuffer</string> 
+      </void> 
+      <void property="target"> 
+       <string>com.ti.dvt.ui.views.table:table.1279735125165</string> 
+      </void> 
+     </object> 
+    </void> 
+    <void method="add"> 
+     <object class="com.ti.dvt.ui.views.core.ViewConnection"> 
+      <void property="source"> 
+       <string>Detail</string> 
+      </void> 
+      <void property="target"> 
+       <string>com.ti.dvt.ui.views.table:ForCountAnalysis</string> 
+      </void> 
+     </object> 
+    </void> 
+    <void method="add"> 
+     <object class="com.ti.dvt.ui.views.core.ViewConnection"> 
+      <void property="source"> 
+       <string>Detail</string> 
+      </void> 
+      <void property="target"> 
+       <string>com.ti.dvt.ui.views.line:Graph</string> 
+      </void> 
+     </object> 
+    </void> 
+    <void method="add"> 
+     <object class="com.ti.dvt.ui.views.core.ViewConnection"> 
+      <void property="source"> 
+       <string>Summary</string> 
+      </void> 
+      <void property="target"> 
+       <string>com.ti.dvt.ui.views.table:Load Analysis</string> 
+      </void> 
+     </object> 
+    </void> 
+   </void> 
+  </void> 
+  <void property="viewInfoMap"> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:table.1279735125165</string> 
+    <object class="com.ti.dvt.ui.views.core.ViewInfo"> 
+     <void property="paneInfoColl"> 
+      <void method="add"> 
+       <object class="com.ti.dvt.ui.views.core.PaneInfo"> 
+        <void property="ID"> 
+         <string>com.ti.dvt.ui.views.table:table.1279735125165</string> 
+        </void> 
+        <void property="properties"> 
+         <object class="com.ti.dvt.ui.views.core.TableProp"> 
+          <void property="XFieldName"> 
+           <string>Arg0</string> 
+          </void> 
+          <void property="enableGroup"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="showEndOnUpdate"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="solutionName"> 
+           <string>TaskLoad</string> 
+          </void> 
+          <void property="tableMeta"> 
+           <void property="columnMetaMap"> 
+            <void method="put"> 
+             <string>module</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>143</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Domain</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>107</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>EventClass</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>68</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Payload</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>441</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Load</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>40</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Event</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>43</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>data</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>44</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>class</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>38</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>EventID</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>54</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>ModuleID</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>60</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Module</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>107</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>SeqNo</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>46</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Arg0</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>68</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>time</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>35</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Time</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>120</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Arg4</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>38</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>CpuClk</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>84</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>event</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>77</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Arg3</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>66</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Arg2</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>60</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Master</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>48</int> 
+              </void> 
+             </object> 
+            </void> 
+           </void> 
+           <void property="columnOrder"> 
+            <array class="java.lang.String" length="17"> 
+             <void index="0"> 
+              <string></string> 
+             </void> 
+             <void index="1"> 
+              <string>Time</string> 
+             </void> 
+             <void index="2"> 
+              <string>Master</string> 
+             </void> 
+             <void index="3"> 
+              <string>Module</string> 
+             </void> 
+             <void index="4"> 
+              <string>EventClass</string> 
+             </void> 
+             <void index="5"> 
+              <string>Event</string> 
+             </void> 
+             <void index="6"> 
+              <string>Arg0</string> 
+             </void> 
+             <void index="7"> 
+              <string>Arg1</string> 
+             </void> 
+             <void index="8"> 
+              <string>Arg2</string> 
+             </void> 
+             <void index="9"> 
+              <string>Arg3</string> 
+             </void> 
+             <void index="10"> 
+              <string>Arg4</string> 
+             </void> 
+             <void index="11"> 
+              <string>CpuClk</string> 
+             </void> 
+             <void index="12"> 
+              <string>SeqNo</string> 
+             </void> 
+             <void index="13"> 
+              <string>Domain</string> 
+             </void> 
+             <void index="14"> 
+              <string>Payload</string> 
+             </void> 
+             <void index="15"> 
+              <string>EventID</string> 
+             </void> 
+             <void index="16"> 
+              <string>ModuleID</string> 
+             </void> 
+            </array> 
+           </void> 
+          </void> 
+         </object> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="title"> 
+      <string>$Debug.log</string> 
+     </void> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:Load Analysis</string> 
+    <object class="com.ti.dvt.ui.views.core.ViewInfo"> 
+     <void property="paneInfoColl"> 
+      <void method="add"> 
+       <object class="com.ti.dvt.ui.views.core.PaneInfo"> 
+        <void property="ID"> 
+         <string>com.ti.dvt.ui.views.table:Load Analysis</string> 
+        </void> 
+        <void property="properties"> 
+         <object class="com.ti.dvt.ui.views.core.TableProp"> 
+          <void property="enableGroup"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="solutionName"> 
+           <string>TaskLoad</string> 
+          </void> 
+          <void property="tableMeta"> 
+           <void property="columnMetaMap"> 
+            <void method="put"> 
+             <string>Source</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>117</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Overall</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %,.2f</string> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Count</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>53</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Index</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Max</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>49</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Average</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="barInfos"> 
+               <void method="add"> 
+                <object class="com.ti.dvt.ui.internal.GridColumnMeta$BarInfo"> 
+                 <void property="max"> 
+                  <double>100.0</double> 
+                 </void> 
+                </object> 
+               </void> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %,.2f</string> 
+              </void> 
+              <void property="width"> 
+               <int>69</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Total</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %,.2f</string> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>41</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Min</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>49</int> 
+              </void> 
+             </object> 
+            </void> 
+           </void> 
+           <void property="columnOrder"> 
+            <array class="java.lang.String" length="8"> 
+             <void index="0"> 
+              <string></string> 
+             </void> 
+             <void index="1"> 
+              <string>Index</string> 
+             </void> 
+             <void index="2"> 
+              <string>Source</string> 
+             </void> 
+             <void index="3"> 
+              <string>Count</string> 
+             </void> 
+             <void index="4"> 
+              <string>Min</string> 
+             </void> 
+             <void index="5"> 
+              <string>Max</string> 
+             </void> 
+             <void index="6"> 
+              <string>Average</string> 
+             </void> 
+             <void index="7"> 
+              <string>Total</string> 
+             </void> 
+            </array> 
+           </void> 
+          </void> 
+         </object> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="title"> 
+      <string>Summary</string> 
+     </void> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:ForCountAnalysis</string> 
+    <object class="com.ti.dvt.ui.views.core.ViewInfo"> 
+     <void property="paneInfoColl"> 
+      <void method="add"> 
+       <object class="com.ti.dvt.ui.views.core.PaneInfo"> 
+        <void property="ID"> 
+         <string>com.ti.dvt.ui.views.table:ForCountAnalysis</string> 
+        </void> 
+        <void property="properties"> 
+         <object class="com.ti.dvt.ui.views.core.TableProp"> 
+          <void property="XFieldName"> 
+           <string>Time</string> 
+          </void> 
+          <void property="enableGroup"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="showEndOnUpdate"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="solutionName"> 
+           <string>TaskLoad</string> 
+          </void> 
+          <void property="tableMeta"> 
+           <void property="columnMetaMap"> 
+            <void method="put"> 
+             <string>Domain</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>50</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>EventClass</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>70</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Payload</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>53</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Event</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>43</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>ModuleID</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>60</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>EventID</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>54</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Module</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>112</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>SeqNo</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>46</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Source</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>111</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Arg1</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>55</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Arg0</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>80</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Time</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>172</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Arg4</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>38</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>CpuClk</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>48</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Arg3</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>38</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Arg2</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Master</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>86</int> 
+              </void> 
+             </object> 
+            </void> 
+           </void> 
+           <void property="columnOrder"> 
+            <array class="java.lang.String" length="5"> 
+             <void index="0"> 
+              <string></string> 
+             </void> 
+             <void index="1"> 
+              <string>Time</string> 
+             </void> 
+             <void index="2"> 
+              <string>Master</string> 
+             </void> 
+             <void index="3"> 
+              <string>Source</string> 
+             </void> 
+             <void index="4"> 
+              <string>Load</string> 
+             </void> 
+            </array> 
+           </void> 
+          </void> 
+         </object> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="title"> 
+      <string>Detail</string> 
+     </void> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.line:Graph</string> 
+    <object class="com.ti.dvt.ui.views.core.ViewInfo"> 
+     <void property="paneInfoColl"> 
+      <void method="add"> 
+       <object class="com.ti.dvt.ui.views.core.PaneInfo"> 
+        <void property="ID"> 
+         <string>com.ti.dvt.ui.views.line:Graph</string> 
+        </void> 
+        <void property="properties"> 
+         <object class="com.ti.dvt.ui.views.core.LineProp"> 
+          <void property="XDisplayFormat"> 
+           <string>Time ns!auto!#,##0.##</string> 
+          </void> 
+          <void property="XFieldName"> 
+           <string>Time</string> 
+          </void> 
+          <void property="XRange"> 
+           <void property="span"> 
+            <double>1.0E10</double> 
+           </void> 
+          </void> 
+          <void property="YFieldName"> 
+           <string>Load</string> 
+          </void> 
+          <void property="YTitle"> 
+           <string>Load%</string> 
+          </void> 
+          <void property="axesProps"> 
+           <void index="0"> 
+            <void property="XAxis"> 
+             <void property="title"> 
+              <string>Time</string> 
+             </void> 
+            </void> 
+           </void> 
+          </void> 
+          <void property="channelColumnDetectName"> 
+           <string>Source</string> 
+          </void> 
+          <void property="enableGroup"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="solutionName"> 
+           <string>TaskLoad</string> 
+          </void> 
+         </object> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="title"> 
+      <string>Graph</string> 
+     </void> 
+    </object> 
+   </void> 
+  </void> 
+ </object> 
+</java> 

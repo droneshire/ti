@@ -1,0 +1,21 @@
+<script type="text/ng-template" id="messageModal.html">
+	<div class="modal-header" style="padding:16px 16px 0 16px" ng-show="headerMsg!=''">
+		<span class="glyphicon glyphicon-remove-sign errorFG" ng-show="type=='error'" style="font-size:18px;float:left;position:relative;top:9px;margin-right:8px;"></span>
+		<span class="glyphicon glyphicon-info-sign" ng-show="type=='info'" style="font-size:18px;float:left;position:relative;top:9px;margin-right:8px;color:#118899;"></span>
+		<h3 class="modal-title">{{headerMsg}}</h3>
+	</div>
+	<div class="modal-body" style="padding:16px 16px 0 16px;">
+		<div ng-repeat="msg in bodyMsgs" style="margin-bottom:8px">
+			<div class="alert alert-danger" ng-show="type=='error'">{{msg}}</div>
+			<span ng-show="type=='info'">{{msg}}</span>
+		</div>
+
+		<ul ng-repeat="detailMsg in detailMsgs">
+			<li> {{detailMsg}} </li>
+		<ul>
+
+	</div>
+	<div class="modal-footer" style="padding:8px;">
+		<button class="btn btn-primary" ng-click="ok()">OK</button>
+	</div>
+</script>

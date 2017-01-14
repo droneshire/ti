@@ -1,0 +1,19 @@
+{
+  "//": "NOTE: The properties below override the ones in app_default.json",
+  "mode": "remoteserver",
+  "myHttpPort": "4000",
+  "webComponentsServer": "http://dev-sl.ti.com/components",
+  "contentPath": "~/ccs-cloud-storage/ti-rex/git/ti-rex-content",
+  "dbPath": "~/tirex-remoteserver-3.0.0/.db",
+  "contentPackagesConfig": "config/contentPackages/default.json",
+  "downloadsCache": "~/tirex-remoteserver-3.0.0/.downloads",
+  "ccsCloudUrl": "{ccs-url}",
+  "logsDir": "~/tirex-remoteserver-3.0.0/.logs",
+  "analyticsDir": "~/tirex-remoteserver-3.0.0/.tirex-analytics-data",
+  "remoteBundleZips": "",
+  "refreshDB": "false",
+  "allowRefreshFromWeb": "true",
+  "seaportHostIP": "127.0.0.1",
+  "seaportPort": "8002",
+  "myRole": ""
+}

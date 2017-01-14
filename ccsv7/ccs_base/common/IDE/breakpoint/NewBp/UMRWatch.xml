@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<newBreakpoint xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="schema.xsd" name="UMR" breakpointType="1">
+  <targets>
+    <target>
+      <type>sim</type>
+      <familyId>320</familyId>
+      <subfamilyId>64,67</subfamilyId>
+      <revision>*</revision>
+    </target>  
+  </targets>
+  <defaultProperty>
+    <property name="Miscellaneous.Name" value="Detect UMR" />
+  </defaultProperty>
+  <submitSequence>
+    <id>Hardware Configuration.Type.Start Location</id>
+    <id>Hardware Configuration.Type.End Location</id>
+    <id>Hardware Configuration.Type.Action</id>
+  </submitSequence>
+  <showIn>
+    <breakpointView autoSubmit="false" />
+    <editor autoSubmit="false" selectionType="source">
+		<property>
+  			<id>Hardware Configuration.Type.Start Location</id> 
+  			<selectionLocation>selection</selectionLocation> 
+  		</property>
+  	</editor>
+  	<disassemblyView autoSubmit="false" selectionType="source">
+  		<property>
+  			<id>Hardware Configuration.Type.Start Location</id>
+  			<selectionLocation>selection</selectionLocation> 
+  		</property>
+  	</disassemblyView>
+  </showIn>
+  
+  <dialog colCount="2">
+    <label id="label_startlocation" widthHint="70" heightHint="15" verticalAlign="center">
+      <text>Start Location:</text>
+    </label>
+    <textBox id="Hardware Configuration.Type.Start Location" widthHint="150" heightHint="15">
+      <text>0x00000000</text>
+    </textBox>
+    <label id="label_endlocation" widthHint="70" heightHint="15" verticalAlign="center">
+      <text>End Location:</text>
+    </label>
+    <textBox id="Hardware Configuration.Type.End Location" widthHint="150" heightHint="15">
+      <text>0xFFFFFFFF</text>
+    </textBox>
+    <label id="label_action" widthHint="70" heightHint="15" verticalAlign="center">
+      <text>Action:</text>
+    </label>
+    
+    <comboBox id="Hardware Configuration.Type.Action" widthHint="150" heightHint="15" verticalAlign="center" horizontalAlign="fill">
+      <text>Halt Target</text>
+      <choices>
+        <item>Halt Target</item>
+        <item>Issue Warning</item>
+        <item>Log Warning</item>
+      </choices>
+    </comboBox>
+  </dialog>
+</newBreakpoint>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<newBreakpoint xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="schema.xsd" enable="false" name="Set AEGEVT/External(8)" breakpointType="1">
+  <targets>
+    <target>
+      <type>dsk,emu</type>
+      <familyId>320</familyId>
+      <subfamilyId>64,66</subfamilyId>
+      <revision>55,127</revision>
+    </target>
+    <target>
+      <type>dsk,emu</type>
+      <familyId>320</familyId>
+      <subfamilyId>67</subfamilyId>
+      <revision>104,4*</revision>
+    </target>
+  </targets>
+  <defaultProperty>
+    <property name="Miscellaneous.Name" value="Set AEGEVT/External(8)" />
+    <property name="Hardware Configuration.Type" value="Set AEGEVT/External(8)" />
+	<property name="Hardware Configuration.Type.AEGEVT/External 0" value="Not Connected"/>
+  </defaultProperty>
+  <showIn>
+    <breakpointView autoSubmit="true" />
+  </showIn>
+</newBreakpoint>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<newBreakpoint xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="schema.xsd" name="Count Event" breakpointType="1">
+  <targets>
+    <target>
+      <type>dsk,emu</type>
+      <familyId>470</familyId>
+      <subfamilyId>d</subfamilyId>
+      <revision>*</revision>
+    </target>
+  </targets>
+  <defaultProperty>
+    <property name="Miscellaneous.Name" value="Count Event" />
+    <property name="Hardware Configuration.Type" value="Count Event"></property>
+  </defaultProperty>
+  <submitSequence>
+    <id>Hardware Configuration.Type.Event to Count</id>
+  </submitSequence>
+  <showIn>
+    <breakpointView autoSubmit="false" />
+  </showIn>
+  <dialog colCount="2">
+    <label id="label_CTC" widthHint="100" heightHint="15" verticalAlign="center">
+      <text>Event to Count:</text>
+    </label>
+    <comboBox id="Hardware Configuration.Type.Event to Count" widthHint="150" heightHint="15">
+      <text>Clock Cycles</text>
+      <choices>
+		<item>Clock Cycles</item>
+		<item>SW Increment</item>
+		<item>ICache Miss</item>
+		<item>DCache Miss</item>
+		<item>DCache Access</item>
+		<item>DRead Executed</item>
+		<item>DWrite Executed</item>
+		<item>Instruction Executed</item>
+		<item>Dual Instruction Excuted</item>
+		<item>Exception Taken</item>
+		<item>Exception Return Executed</item>
+		<item>Change to ContextID Executed</item>
+		<item>Software Change of PC</item>
+		<item>B,BL and(or) BLX Immediate Executed</item>
+		<item>Procedure Return Executed</item>
+		<item>Unaligned Access Executed</item>
+		<item>Branch Mispredicted(not predicted)</item>
+		<item>Branches</item>
+		<item>Instruction Buf. Full Stall</item>
+		<item>Data Dependency Stall</item>
+		<item>Data Cache Write-back</item>
+		<item>External Memory Request</item>
+		<item>LSU Busy Stall</item>
+		<item>Store Buf. Forced to Drain</item>
+		<item>Cycles of Disabled FIQ</item>
+		<item>ETMEXTOUT0</item>
+		<item>ETMEXTOUT1</item>
+		<item>Instruction Cache Tag ECC Error</item>
+		<item>Instruction Cache Data ECC Error</item>
+		<item>Data Cache Tag ECC Error</item>
+		<item>Data Cache Data ECC Error</item>
+		<item>TCM Error from Prefetch Unit</item>
+		<item>TCM Error from Load or Store Unit</item>
+		<item>Store Buffer Merge</item>
+		<item>Store Buf. Full LSU Stall</item>
+		<item>Store Queue Full LSU Stall</item>
+		<item>Integer Divide Instruction</item>
+		<item>Integer Divide Stall</item>
+		<item>Linefill Initialization</item>
+		<item>Resource Shortage Linefill Failure</item>
+		<item>Non-cacheable Access on AXI Bus</item>
+		<item>Store Buffer on Two Slots in Same Cache Line</item>
+		<item>Dual Issue Case A(branch)</item>
+		<item>Dual Issue Case B1,B2,F2,F2D</item>
+		<item>Dual Issue Other Case</item>
+		<item>Double Precision Floating Point Instruction</item>
+		<item>Data Cache Data RAM Fatal ECC Error</item>
+		<item>Data Cache Tag or Dirty RAM Fatal ECC Error</item>
+		<item>Processor Livelock</item>
+		<item>ATCM Multi-bit ECC ERROR</item>
+		<item>ATCM Multi-bit ECC ERROR</item>
+		<item>B0TCM Multi-bit ECC ERROR</item>
+		<item>B1TCM Multi-bit ECC ERROR</item>
+		<item>ATCM Multi-bit ECC ERROR</item>
+		<item>B0TCM Single-bit ECC ERROR</item>
+		<item>B1TCM Single-bit ECC ERROR</item>
+		<item>TCM Correctable ECC ERROR Reported by Load(Store)Unit</item>
+		<item>TCM Correctable ECC ERROR Reported by Prefetch Unit</item>
+		<item>TCM Fatal ECC ERROR Reported by AXI Slave Interface</item>
+		<item>TCM Correctable ECC ERROR Reported by AXI Slave Interface</item>
+      </choices>
+    </comboBox>
+  </dialog>
+</newBreakpoint>

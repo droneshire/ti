@@ -1,0 +1,145 @@
+/*--------------------------------------------------------------*/
+/* C64xplus_CrossTrigger.gel                                    */
+/* version 0.01                                                 */
+/*                                                              */
+/* SUMMARY:                                                     */
+/*                                                              */
+/* This gel file is to be used to configure the cross 		    */
+/* triggering on a C64x+ (GEM) based device.                    */
+/*                                                              */
+/* LIMITATIONS:                                                 */
+/*                                                              */
+/*                                                              */
+/*--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------*/
+/* FUNCTION SUMMARY                                             */
+/*                                                              */
+/*                      
+/* Sequence for emuX usage as a cross trigger
+/* When processor is halted:
+/*   1. EnableCrossTrigger_emuX
+/*   2. Before RUN do reenable_pulse_catcher_emuX 
+/*   NOTES:
+/*     (a) At step1. Cortex-A8 should be halted
+/*     (b) At step2, Cortex-A8 may be halted or running
+/*
+/*   After subsequent halts, do:
+/*     1. disable_pulse_catcher_emuX
+/*     2. enable_pulse_catcher_emuX 
+/*   NOTES:
+/*     (a) At step1, Cortex-A8 should be halted
+/*     (b) At step2, Cortex-A8 may or may not be halted    
+/*  Either Cortex-A8 or C64xx can be started first after 
+/*  a cross trigger halt                                     */
+/*--------------------------------------------------------------*/
+
+menuitem "Cross Triggering";
+
+#define	TCU_CLAIM			1 << 0
+#define	TCU_ENABLE			1 << 1
+#define TCU_RELEASE			0
+#define TCU_ETOEN			1 << 14
+#define TCU_STOP			1 << 12
+#define TCU_IMP0			1 << 11
+#define TCU_ETSEL0			1 << 7
+#define TCU_STATE			2
+#define TCU_ET1EN			1 << 15
+#define TCU_IMP1			1 << 6
+#define TCU_ETSEL1			1 << 2
+
+
+hotmenu EnableCrossTrigger_emu0()
+{
+// Configure the TCU for global breakpoint on EMU0
+   TCU_CNTL = 0x1;
+  
+
+// Enable TCU Breakpoints via BRKEN
+    
+   TCU_CNTL = 0x5882;
+
+   BRKEN    = 0x00000001;
+
+   disable_pulse_catcher_emu0();
+
+   GEL_TextOut("EMU0 I/O Mode is enabled\n","result");
+
+   GEL_TextOut("Cross triggering is enabled\n","result");
+
+}
+
+hotmenu disable_pulse_catcher_emu0( )
+{
+  TCU_CNTL = 0x0082;
+
+  GEL_StepInto( );
+  
+}
+
+
+hotmenu reenable_pulse_catcher_emu0( )
+{
+   /* Enable EMU0 */
+   TCU_CNTL = 0x5882; 
+
+    /* Enable EMU1 */
+//   TCU_CNTL = 0x9046;
+
+}
+
+hotmenu reenable_pulse_catcher_emu1( )
+{
+ 
+    /* Enable EMU1 */
+   TCU_CNTL = 0x9046;
+
+}
+
+
+
+
+hotmenu EnableCrossTrigger_Emu1()
+{
+// Configure the TCU for global breakpoint on EMU0
+   TCU_CNTL = TCU_CLAIM;
+  
+
+// Enable TCU Breakpoints via BRKEN
+    
+   TCU_CNTL = 0x9046;
+
+   BRKEN    = 0x00000001;
+
+   disable_pulse_catcher_emu1();
+
+   GEL_TextOut("EMU1 I/O Mode is enabled\n","result");
+
+   GEL_TextOut("Cross triggering is enabled\n","result");
+
+}
+
+hotmenu disable_pulse_catcher_emu1( )
+{
+  TCU_CNTL = 0x0006;
+
+  GEL_StepInto( );
+
+
+  
+}
+
+
+hotmenu DisableCrossTrigger()
+{
+// Remove all TCU_CNTL configuration then disable
+   TCU_CNTL = TCU_ENABLE;
+   TCU_CNTL = TCU_CLAIM;
+   TCU_CNTL = TCU_RELEASE;
+
+// Disable TCU Breakpoints via BRKEN
+   BRKEN   &= 0xFFFFFFFE;
+
+   GEL_TextOut("Cross-triggering is disabled\n","result");
+
+}

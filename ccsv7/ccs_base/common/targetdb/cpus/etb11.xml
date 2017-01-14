@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<cpu id="ETB11" isa="ETB11" HW_revision="1.0" XML_version="1.0" desc="" description="Embedded Trace Buffer">
+  <register id="ETB11_ID" acronym="ID" width="32" description="" />
+  <register id="ETB11_RDP" acronym="RDP" width="32" description="" />
+  <register id="ETB11_RWP" acronym="RWR" width="32" description="" />
+  <register id="ETB11_STS" acronym="STS" width="32" description="" />
+  <register id="ETB11_RRD" acronym="RRD" width="32" description="" />
+  <register id="ETB11_RRP" acronym="RRP" width="32" description="" />
+  <register id="ETB11_RWD" acronym="RWD" width="32" description="" />
+  <register id="ETB11_TRG" acronym="TRG" width="32" description="" />
+  <register id="ETB11_CTL" acronym="CTL" width="32" description="" />
+</cpu>

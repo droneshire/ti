@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cpu id="TMS192C2026" isa="hidden" HW_revision="1.0" XML_version="1.0" description="PRU Accelerator">
+    <register id="PC" acronym="PC" width="32" description="PCOUNTER Register"/>
+    <register id="R0" acronym="R0" width="32" description="R0 Register"/>
+    <register id="R1" acronym="R1" width="32" description="R1 Register"/>
+    <register id="R2" acronym="R2" width="32" description="R2 Register"/>
+    <register id="R3" acronym="R3" width="32" description="R3 Register"/>
+    <register id="R4" acronym="R4" width="32" description="R4 Register"/>
+    <register id="R5" acronym="R5" width="32" description="R5 Register"/>
+    <register id="R6" acronym="R6" width="32" description="R6 Register"/>
+    <register id="R7" acronym="R7" width="32" description="R7 Register"/>
+    <register id="R8" acronym="R8" width="32" description="R8 Register"/>
+    <register id="R9" acronym="R9" width="32" description="R9 Register"/>
+    <register id="R10" acronym="R10" width="32" description="R10 Register"/>
+    <register id="R11" acronym="R11" width="32" description="R11 Register"/>
+    <register id="R12" acronym="R12" width="32" description="R12 Register"/>
+    <register id="R13" acronym="R13" width="32" description="R13 Register"/>
+    <register id="R14" acronym="R14" width="32" description="R14 Register"/>
+    <register id="R15" acronym="R15" width="32" description="R15 Register"/>
+    <register id="R16" acronym="R16" width="32" description="R16 Register"/>
+    <register id="R17" acronym="R17" width="32" description="R17 Register"/>
+    <register id="R18" acronym="R18" width="32" description="R18 Register"/>
+    <register id="R19" acronym="R19" width="32" description="R19 Register"/>
+    <register id="R20" acronym="R20" width="32" description="R20 Register"/>
+    <register id="R21" acronym="R21" width="32" description="R21 Register"/>
+    <register id="R22" acronym="R22" width="32" description="R22 Register"/>
+    <register id="R23" acronym="R23" width="32" description="R23 Register"/>
+    <register id="R24" acronym="R24" width="32" description="R24 Register"/>
+    <register id="R25" acronym="R25" width="32" description="R25 Register"/>
+    <register id="R26" acronym="R26" width="32" description="R26 Register"/>
+    <register id="R27" acronym="R27" width="32" description="R27 Register"/>
+    <register id="R28" acronym="R28" width="32" description="R28 Register"/>
+    <register id="R29" acronym="R29" width="32" description="R29 Register"/>
+    <register id="R30" acronym="R30" width="32" description="R30 Register"/>
+    <register id="R31" acronym="R31" width="32" description="R31 Register"/>
+    <register id="C0" acronym="C0" width="32" description="Constants Table Entry 0"/>
+    <register id="C1" acronym="C1" width="32" description="Constants Table Entry 1"/>
+    <register id="C2" acronym="C2" width="32" description="Constants Table Entry 2"/>
+    <register id="C3" acronym="C3" width="32" description="Constants Table Entry 3"/>
+    <register id="C4" acronym="C4" width="32" description="Constants Table Entry 4"/>
+    <register id="C5" acronym="C5" width="32" description="Constants Table Entry 5"/>
+    <register id="C6" acronym="C6" width="32" description="Constants Table Entry 6"/>
+    <register id="C7" acronym="C7" width="32" description="Constants Table Entry 7"/>
+    <register id="C8" acronym="C8" width="32" description="Constants Table Entry 8"/>
+    <register id="C9" acronym="C9" width="32" description="Constants Table Entry 9"/>
+    <register id="C10" acronym="C10" width="32" description="Constants Table Entry 10"/>
+    <register id="C11" acronym="C11" width="32" description="Constants Table Entry 11"/>
+    <register id="C12" acronym="C12" width="32" description="Constants Table Entry 12"/>
+    <register id="C13" acronym="C13" width="32" description="Constants Table Entry 13"/>
+    <register id="C14" acronym="C14" width="32" description="Constants Table Entry 14"/>
+    <register id="C15" acronym="C15" width="32" description="Constants Table Entry 15"/>
+    <register id="C16" acronym="C16" width="32" description="Constants Table Entry 16"/>
+    <register id="C17" acronym="C17" width="32" description="Constants Table Entry 17"/>
+    <register id="C18" acronym="C18" width="32" description="Constants Table Entry 18"/>
+    <register id="C19" acronym="C19" width="32" description="Constants Table Entry 19"/>
+    <register id="C20" acronym="C20" width="32" description="Constants Table Entry 20"/>
+    <register id="C21" acronym="C21" width="32" description="Constants Table Entry 21"/>
+    <register id="C22" acronym="C22" width="32" description="Constants Table Entry 22"/>
+    <register id="C23" acronym="C23" width="32" description="Constants Table Entry 23"/>
+    <register id="C24" acronym="C24" width="32" description="Constants Table Entry 24"/>
+    <register id="C25" acronym="C25" width="32" description="Constants Table Entry 25"/>
+    <register id="C26" acronym="C26" width="32" description="Constants Table Entry 26"/>
+    <register id="C27" acronym="C27" width="32" description="Constants Table Entry 27"/>
+    <register id="C28" acronym="C28" width="32" description="Constants Table Entry 28"/>
+    <register id="C29" acronym="C29" width="32" description="Constants Table Entry 29"/>
+    <register id="C30" acronym="C30" width="32" description="Constants Table Entry 30"/>
+    <register id="C31" acronym="C31" width="32" description="Constants Table Entry 31"/>
+    <instance href="..\Modules\ihwa\pru_debug.xml" id="Debug" xml="pru_debug.xml" xmlpath="..\Modules\ihwa\" HW_revision="1.0" description="PRU Debug Registers" requestor="TMS192C2026" baseaddr="0" size="0" accessnumbytes="4" permissions="rw"/>
+    <instance href="..\Modules\ihwa\pru_notvisible.xml" id="" xml="pru_notvisible.xml" xmlpath="..\Modules\ihwa\" HW_revision="1.0" description="" requestor="TMS192C2026" baseaddr="0" size="0" accessnumbytes="4" permissions="rw"/>
+</cpu>

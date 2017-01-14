@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!-- ************************************************************ -->
+<!-- Files created by Spectrum Digital Inc.                       -->
+<!-- $Revision:: 1                                              $ -->
+<!-- $Date:: 4/13/09 11:17a                                     $ -->
+<!-- (C) Copyright 2004 by Spectrum Digital Incorporated          -->
+<!-- All rights reserved                                          -->
+<!-- ************************************************************ -->
+<connection id="Spectrum Digital DSK-EVM PLUS onboard USB Emulator" class="52574">
+    <connectionType Type="SD510DSK"/>
+    <property desc="DSK I/O Port" Type="hiddenfield" Value="1296" id="portAddr1" /> 
+</connection>

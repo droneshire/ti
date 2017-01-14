@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module id="CP14_Registers" HW_revision="1" XML_version="1" description="" hidden="false">
+	<register id="CP14_DEBUG_ID" acronym="CP14_DEBUG_ID" width="32" description=""/>
+	<register id="CP14_DEBUG_ROM_ADDRESS" acronym="CP14_DEBUG_ROM_ADDRESS" width="32" description=""/>
+	<register id="CP14_DEBUG_SELF_ADDRESS_OFFSET" acronym="CP14_DEBUG_SELF_ADDRESS_OFFSET" width="32" description=""/>
+	<register id="CP14_DATA_TRANSFER" acronym="CP14_DATA_TRANSFER" width="32" description=""/>
+	<register id="CP14_DEBUG_STATUS_AND_CONTROL" acronym="CP14_DEBUG_STATUS_AND_CONTROL" width="32" description=""/>
+</module>

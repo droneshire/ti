@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<translate name="dummy fields">
+  <stringParser delimiters=", " input="Line">	
+    <hexuint name="Program Address" translate="$1" />
+    <hexuint name="Load Address" input="$2" />
+  </stringParser>
+</translate>
+

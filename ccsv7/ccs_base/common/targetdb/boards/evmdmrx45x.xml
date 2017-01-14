@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<board 	id="EVMDMRX45X" XML_version="1" desc="EVMDMRX45X" description="Spectrum Digital EVMDMRX45X EVM Board">
+  <processors>
+      <instance XML_version="1.2" desc="IcePick_C_0" href="routers\icepick_c.xml" id="IcePick_C_0" xml="icepick_c.xml" xmlpath="routers"/>
+      <router HW_revision="1.0" XML_version="1.2" description="ICEPick_C Router" id="IcePick_C_0" isa="ICEPICK_C">
+        <subpath id="subpath_0">
+          <property Type="numericfield" Value="0x10" id="Port Number"/>
+          <property Type="choicelist" Value="1" id="Initial Configuration"/>
+          <property Type="choicelist" Value="1" id="Custom Configuration"/>
+          <property Type="choicelist" Value="0" id="Force Configuration"/>
+          <cpu HW_revision="" XML_version="1.2" desc="ARM9" description="" id="device_2" isa="ARM9">
+            <property Type="filepathfield" Value="..\..\emulation\gel\evmdrx45x_arm.gel" id="GEL File"/>
+          </cpu>
+        </subpath>
+      </router>
+    </processors>
+</board>

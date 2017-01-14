@@ -1,0 +1,32 @@
+[Name]
+Profile all Functions for CPU Cycles 
+
+[Events]
+dataclass.pcdt.events.cycle.CPU
+
+[EventClasses]
+pcdt
+
+[Attributes]
+SimulationOnly=true
+dataclass.pcdt.Enable Interrupt Awareness=0
+dataclass.pcdt.Record Buffer Size=10240
+dataclass.pcdt.Profile TI Libraries=0
+dataclass.pcdt.Maximum Memory Buffer=10
+dataclass.pcdt.Enable Thread Awareness=0
+dataclass.pcdt.Thread ID Address=0,dependsOn=dataclass.pcdt.Enable Thread Awareness
+dataclass.pcdt.Thread ID Byte Size=4,dependsOn=dataclass.pcdt.Enable Thread Awareness
+
+[ISA]
+TMS470R1
+TMS470R2
+TMS470R3
+TMS470Rd
+TMS470Re
+
+[Description]
+Collect profile information for all functions in the currently loaded executable.  By default, the CPU Cycle counts will be calculated for each function.  Additional target events and profiling options can be configured via this Activity's properties.
+
+[MetaData]
+collectionType=pc_discontinuity
+analysisType=Function Profile

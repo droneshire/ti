@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--                                                  -->
+<!-- Blackhawk XDS510 Emulator XML Definitions.       -->
+<!-- Date: 07 March 2016                              -->
+<!-- Vers: 6.0.83.001                                 -->
+<!--                                                  -->
+
+<drivers id="Cortex_R4">
+	<isa Type="Cortex_R4" ProcID="0x75803400">
+		<driver file="..\..\..\emulation\drivers\bhemucortexR.dvr">
+			<connectionType Type="BHEMU"/>
+			<!--Driver level property-->
+			<property Name="TraceDeviceId" Type="numericfield" Value="0x0" NumericType="HEX" UpperBound="0xFFFFFFFF" LowerBound="0" ID="device.traceId"/>
+			<property Name="Address" Type="numericfield" Value="0x0" NumericType="HEX" UpperBound="0xFFFFFFFF" LowerBound="0" ID="device.address"/>
+			<property Name="Access Port Designator" Type="numericfield" Value="0x02000100" NumericType="HEX" UpperBound="0xFFFFFFFF" LowerBound="0" ID="device.identify"/>		
+			<property id="Use Board Reset" Type="hiddenfield" Value="0" />
+		</driver>
+	</isa>
+
+    <isa Type="Cortex_R5" ProcID="0x75803400">
+		<driver file="..\..\..\emulation\drivers\bhemucortexR.dvr">
+			<connectionType Type="BHEMU"/>
+			<!--Driver level property-->
+			<property Name="TraceDeviceId" Type="numericfield" Value="0x0" NumericType="HEX" UpperBound="0xFFFFFFFF" LowerBound="0" ID="device.traceId"/>
+			<property Name="Address" Type="numericfield" Value="0x0" NumericType="HEX" UpperBound="0xFFFFFFFF" LowerBound="0" ID="device.address"/>
+			<property Name="Access Port Designator" Type="numericfield" Value="0x02000100" NumericType="HEX" UpperBound="0xFFFFFFFF" LowerBound="0" ID="device.identify"/>		
+			<property id="Use Board Reset" Type="hiddenfield" Value="0" />
+		</driver>
+	</isa>
+	
+</drivers>

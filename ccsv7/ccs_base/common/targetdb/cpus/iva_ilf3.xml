@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cpu id="TMS192C2002" isa="hidden" HW_revision="1.0" XML_version="1.0" description="IVA ILF3 Accelerator">
+    <register id="ILF_REVISION"        acronym="ILF_REVISION"        width="32" description="IP Revision Identifier register"/>
+    <register id="ILF_SYSCONFIG"       acronym="ILF_SYSCONFIG"       width="32" description="Clock Management Configuration register"/>
+    <register id="ILF_IRQ_EOI"         acronym="ILF_IRQ_EOI"         width="32" description="End of Interrupt Specification register"/>
+    <register id="ILF_IRQSTATUS_RAW_0" acronym="ILF_IRQSTATUS_RAW_0" width="32" description="Per Event Status Interrupt register, Line 0"/>
+    <register id="ILF_IRQSTATUS_0"     acronym="ILF_IRQSTATUS_0"     width="32" description="Per Event Enabled Status Interrupt register, Line 0"/>
+    <register id="ILF_IRQENABLE_SET_0" acronym="ILF_IRQENABLE_SET_0" width="32" description="Per Event Interrupt Enable Bit register, Line 0"/>
+    <register id="ILF_IRQENABLE_CLR_0" acronym="ILF_IRQENABLE_CLR_0" width="32" description="Per Event Interrupt Disable Bit register, Line 0"/>
+    <register id="ILF_CONFIG"          acronym="ILF_CONFIG"          width="32" description="Configuration register"/>
+    <register id="ILF_STATUS"          acronym="ILF_STATUS"          width="32" description="Execution Progress Status register"/>
+
+    <instance href="..\Modules\ihwa\iva_debug.xml" id="Debug" xml="iva_debug.xml" xmlpath="..\Modules\ihwa\" HW_revision="1.0" description="IVA IHWA Debug Registers" requestor="TMS192C2002" baseaddr="0" size="0" accessnumbytes="4" permissions="rw"/>
+    <instance href="..\Modules\ihwa\iva_syncbox.xml" id="SyncBox" xml="iva_syncbox.xml" xmlpath="..\Modules\ihwa\" HW_revision="1.0" description="IVA IHWA SyncBox Registers" requestor="TMS192C2002" baseaddr="0" size="0" accessnumbytes="4" permissions="rw"/>
+</cpu>

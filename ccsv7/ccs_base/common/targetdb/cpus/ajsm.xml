@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cpu id="AJSM" isa="AJSM" HW_revision="1.0" XML_version="1.0" description="AJSM">
+   <register id="IDCODE"    acronym="IDCODE" 	width="32" description="IDCODE" />
+   <instance href="..\Modules\ajsm_notvisible.xml" id="" xml="ajsm_notvisible.xml" xmlpath="..\Modules\" HW_revision="1.0" description="" requestor="AJSM" baseaddr="0" size="00" accessnumbytes="4" permissions="p" />
+</cpu>

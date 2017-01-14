@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cpu id="TMS192C2005" isa="hidden" HW_revision="1.0" XML_version="1.0" description="IVA MC3 Accelerator">
+    <register id="MC_PID"    acronym="MC_PID"    width="32" description="PID register"/>
+    <register id="MC_CNT"    acronym="MC_CNT"    width="32" description="Benchmark Counter register"/>
+    <register id="MC_CTRL"   acronym="MC_CTRL"   width="32" description="Control register"/>
+    <register id="MC_PARAM0" acronym="MC_PARAM0" width="32" description="MC Parameter register"/>
+    <register id="MC_PARAM1" acronym="MC_PARAM1" width="32" description="MC Parameter register"/>
+    <register id="MC_PARAM2" acronym="MC_PARAM2" width="32" description="MC Parameter register"/>
+    <register id="MC_ADDR_0" acronym="MC_ADDR_0" width="32" description="Base Address of Luma L0 register"/>
+    <register id="MC_ADDR_1" acronym="MC_ADDR_1" width="32" description="Base Address of Luma L1 register"/>
+    <register id="MC_ADDR_2" acronym="MC_ADDR_2" width="32" description="Base Address of Luma L2 register"/>
+    <register id="MC_ADDR_3" acronym="MC_ADDR_3" width="32" description="Base Address of Luma L3 register"/>
+
+    <instance href="..\Modules\ihwa\iva_debug.xml" id="Debug" xml="iva_debug.xml" xmlpath="..\Modules\ihwa\" HW_revision="1.0" description="IVA IHWA Debug Registers" requestor="TMS192C2005" baseaddr="0" size="0" accessnumbytes="4" permissions="rw"/>
+    <instance href="..\Modules\ihwa\iva_syncbox.xml" id="SyncBox" xml="iva_syncbox.xml" xmlpath="..\Modules\ihwa\" HW_revision="1.0" description="IVA IHWA SyncBox Registers" requestor="TMS192C2005" baseaddr="0" size="0" accessnumbytes="4" permissions="rw"/>
+</cpu>

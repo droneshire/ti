@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- 
+  TI File $Revision: 
+  Checkin $Date: 
+  --> 
+
+<!--  F2805x GPIO INT REGS Registers 
+     =================================== 
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     --> 
+<module id="GPIO INT REGS" HW_revision="" XML_version="1" description="GPIO INT REGS Registers">
+    <register id="GPIOXINT1SEL" acronym="GPIOXINT1SEL" offset="0" page="1" width="16" description="XINT1 GPIO Input Select Register (GPIO0 to 31)" />
+    <register id="GPIOXINT2SEL" acronym="GPIOXINT2SEL" offset="1" page="1" width="16" description="XINT2 GPIO Input Select Register (GPIO0 to 31)" />
+    <register id="GPIOXINT3SEL" acronym="GPIOXINT3SEL" offset="2" page="1" width="16" description="XINT3 GPIO Input Select Register (GPIO0 to 31)" />
+    <!--  5 empty  -->
+    <register id="GPIOLPMSEL" acronym="GPIOLPMSEL" offset="8" page="1" width="32" description="LPM GPIO Select Register (GPIO0 to 31)" />
+    <!--  22 empty  -->
+</module>

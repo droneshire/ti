@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="UIA Log Viewer" default="enable" basedir=".">
+	<import file="../../templates/dataprovider.xml"/>
+	
+	<!-- define the activity and data provider for the dataprovider template -->
+	<property name="dvt.activity.name" value="Viewers/${ant.project.name}"/>
+	<property name="dvt.activity.description" value="View UIA event logs."/>
+	<property name="dataProviderName" value="UiaLogViewer" />
+	<property name="dvt.data.type" value="UIA"/>
+
+	<!-- define local properties -->
+	<property name="viewName" value="Logs"/> 
+	
+	<!-- override the template target -->
+	<target name="postAddDataProvider" > 
+		<!-- [#1534] Automatically group views of a data provider and its child AFs by Time, OPS, 11/2/2010 --> 
+		<dvt.property refid="dataProviderRef" view="${viewName}" name="General:Reference field" value="Time"/>
+		<echo message="Connect"/>
+		<dvt.script language="javascript">
+		<![CDATA[
+			/*Packages.com.ti.dvt.datamodel.ui.views.PropertyUtil.Connect();*/
+			Packages.com.ti.uia.script.Util.Connect();
+		]]>
+		</dvt.script>  		
+		<dvt.configure refid="dataProviderRef"/>
+		<dvt.call target="setup">
+			<reference refid="dataProviderRef"/>
+		</dvt.call>
+		<dvt.view.show refid="dataProviderRef" view="${viewName}"/>	
+		
+		<dvt.call target="startAll">
+			<reference refid="dataProviderRef"/>
+		</dvt.call>		
+		
+	</target>
+
+	<!-- override the template target -->
+	<target name="createContextMenu">
+		<makeContextMenu menuid="contextMenuRef">
+			<menu>
+				<dvt.menu.context id="startLogging" refid="dataProviderRef" view="${viewName}" text="Start target logging.">
+					<dvt.call target="startAll">
+						<reference refid="dataProviderRef"/>
+					</dvt.call>
+				</dvt.menu.context>
+				<dvt.menu.context id="stopLogging" refid="dataProviderRef" view="${viewName}" text="Stop target logging.">
+					<dvt.call target="stopAll">
+						<reference refid="dataProviderRef"/>
+					</dvt.call>
+				</dvt.menu.context>
+			</menu>
+		</makeContextMenu>
+	</target>
+
+	<target name="refreshButton">	
+		<dvt.status>
+			<button refid="connect_disconnect" text="${connectText}" icon="${connectIcon}"/>
+		</dvt.status>
+	</target>
+	
+	<!-- override the template target -->
+	<target name="createConfigurationActions">
+		<!--
+		<dvt.configuration>		
+			<button text="Setup">
+				<dvt.call target="setup">
+					<reference refid="dataProviderRef"/>
+				</dvt.call>
+			</button>
+		</dvt.configuration>
+		-->
+			
+		<dvt.script language="javascript">
+		<![CDATA[
+			connected = Packages.com.ti.uia.script.Util.isConnected();
+			if (connected)
+			{
+				project.setProperty("connectText", "Disconnect");
+				project.setProperty("connectIcon", "disconnect.gif");
+			}
+			else
+			{
+				project.setProperty("connectText", "Connect");
+				project.setProperty("connectIcon", "connect.gif");
+			}
+		]]>
+		</dvt.script>  		
+		<dvt.status>
+			<button id="connect_disconnect" text="${connectText}" icon="${connectIcon}">
+				<dvt.script language="javascript">
+				<![CDATA[
+					/*Packages.com.ti.dvt.datamodel.ui.views.PropertyUtil.Connect();*/
+					Packages.com.ti.uia.script.Util.ConnectDisconnect();
+					
+					connected = Packages.com.ti.uia.script.Util.isConnected();
+					if (connected)
+					{
+						project.setProperty("connectText", "Disconnect");
+						project.setProperty("connectIcon", "disconnect.gif");
+					}
+					else
+					{
+						project.setProperty("connectText", "Connect");
+						project.setProperty("connectIcon", "connect.gif");
+					}
+				]]>
+				</dvt.script>  		
+				
+				<dvt.configure refid="dataProviderRef"/>
+				<dvt.call target="setup">
+					<reference refid="dataProviderRef"/>
+				</dvt.call>
+				<dvt.call target="startAll">
+					<reference refid="dataProviderRef"/>
+				</dvt.call>	
+				
+				<dvt.call target="refreshButton">
+					<reference refid="connect_disconnect"/>
+				</dvt.call>
+			</button>
+			<button text="Start" icon="run.gif" > 			
+				<!-- <property name="needSetup" value="false"/>  -->
+				<!-- <dvt.start refid="dataProviderRef"/> -->
+				<dvt.call target="startAll">
+					<reference refid="dataProviderRef"/>
+				</dvt.call>
+			</button>
+			<button text="Stop" icon="stop.gif">
+				<dvt.call target="stopAll">
+					<reference refid="dataProviderRef"/>
+				</dvt.call>
+			</button>
+		</dvt.status>
+
+		<!--
+		<dvt.configuration>
+			<button text="Start Logging">
+				<dvt.call target="startAll">
+					<reference refid="dataProviderRef"/>
+				</dvt.call>
+			</button>
+			<button text="Stop Logging">
+				<dvt.call target="stopAll">
+					<reference refid="dataProviderRef"/>
+				</dvt.call>
+			</button>
+		</dvt.configuration>
+		-->
+	</target>
+
+	<!-- Setup -->
+	<target name="setup">
+		<echo message="Setup"/>
+		<dvt.script language="javascript">
+			<![CDATA[
+			dataprovider = project.getReference("dataProviderRef").getDataProvider();
+		 	uiaSource = dataprovider.getDataProcessor("UIALogSource");
+		 	uiaEngine = uiaSource.getEngine();
+		 	if(uiaEngine == null) {
+		 		java.lang.System.out.println("configuring uia");
+		 		uiaSource.configureUIA();
+		 		uiaEngine = uiaSource.getEngine();
+			 	if (uiaEngine == null) {
+				 	Packages.com.ti.dvt.datamodel.ui.views.PropertyUtil.ShowMessage("Setup","Cannot perform 'Setup' there might be a connection problem. Please check your connection/setup.");
+				}
+				else {
+			 		uiaSession = uiaEngine.getUiaSession();
+			 		if(uiaSession != null) {
+			 			if(!uiaSession.isConnected()) {
+			 				uiaSource.shutdownEngine();
+			 				Packages.com.ti.dvt.datamodel.ui.views.PropertyUtil.ShowMessage("Setup","DVT is not setup properly. Please check your UIA configuration.");
+			 			}
+			 		}
+				}
+		 	}
+		 	if( uiaEngine != null ) {
+		 		uiaSession = uiaEngine.getUiaSession();
+		 		if(uiaSession != null) {
+					uiaSource.configureUIA();
+		 			if(uiaSession.isConnected()) {
+		 				uiaSource.setFlow(true);
+		 				uiaSession.startAgents(null);
+		 				project.addReference("dataProviderRef.uiaSession", uiaSession);
+		 				sessionName = uiaSession.getName();
+		 				project.setProperty("uiaSessionName", sessionName);
+		 			}
+		 			else {
+		 				uiaSession.stopAgents(null);
+		 				uiaSource.setFlow(false);
+		 				// execute <dvt.reset refid="dataProviderRef"/>:
+						ref = new Packages.org.apache.tools.ant.types.Reference();
+						ref.setProject(project);
+						ref.setRefId("dataProviderRef");						
+						reset = project.createTask("dvt.reset");
+						reset.setRefid(ref);
+						reset.perform();
+		 			}
+		 		}
+		 	}
+			]]>
+		</dvt.script>
+		<echo message="UIA Session: ${uiaSessionName}"/>
+	</target>
+
+	<target name="startAll">
+		<echo message="startAll"/>
+		<dvt.script language="javascript">
+			<![CDATA[
+			dataprovider = project.getReference("dataProviderRef").getDataProvider();
+		 	uiaSource = dataprovider.getDataProcessor("UIALogSource");
+		 	uiaEngine = uiaSource.getEngine();
+		 	if (uiaEngine == null) {
+			 	Packages.com.ti.dvt.datamodel.ui.views.PropertyUtil.ShowMessage("Start All","Cannot perform 'Start', there might be a connection problem. Please check your connection/setup.");
+			}
+			else {
+				uiaSession = uiaEngine.getUiaSession();
+ 				var parms = [ "100" ];
+ 				uiaSession.sendCommand(null, 3, "ChangePeriod", parms);
+				uiaSession.sendCommand(null, 3, "Start", null);
+			}
+			]]>
+		</dvt.script>
+	</target>
+	<target name="stopAll">
+		<echo message="stopAll"/>
+		
+		<dvt.script language="javascript">
+			<![CDATA[
+			dataprovider = project.getReference("dataProviderRef").getDataProvider();
+		 	uiaSource = dataprovider.getDataProcessor("UIALogSource");
+		 	uiaEngine = uiaSource.getEngine();
+		 	if (uiaEngine == null)
+			 	Packages.com.ti.dvt.datamodel.ui.views.PropertyUtil.ShowMessage("Stop All","Cannot perform 'Stop', there might be a connection problem. Please check your connection/setup.");
+			else {
+				uiaSession = uiaEngine.getUiaSession();
+				uiaSession.sendCommand(null, 3, "Stop", null);
+			}
+			]]>
+		</dvt.script>
+	</target>
+	
+	<!-- override the template target -->
+	<target name="preDisable">
+		<dvt.script language="javascript">
+		<![CDATA[
+			/*Packages.com.ti.dvt.datamodel.ui.views.PropertyUtil.Connect();*/
+			Packages.com.ti.uia.script.Util.Disconnect();
+		]]>
+		</dvt.script> 		
+		<!-- <dvt.view.show view="com.ti.uia.sessionmgr.view.ui.SmvView" show="false"/> -->
+		<dvt.remove refid="contextMenuRef"/>
+	</target>
+</project>

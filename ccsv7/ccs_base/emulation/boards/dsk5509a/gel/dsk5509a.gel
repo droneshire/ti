@@ -1,0 +1,157 @@
+/*--------------------------------------------------------------*/
+/* dsk5509a.gel                                                */
+/* Version 1.00                                                 */
+/*                                                              */
+/* This GEL file is designed to be used in conjunction with     */
+/* CCS 3.x and the TMS320VC5509A based DSK.                    */
+/*                                                              */
+/*--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------*/
+/* The StartUp() function is called each time CCS is started.   */
+/* Customize this function to perform desired initialization.   */
+/*--------------------------------------------------------------*/
+StartUp()
+{
+    C5509_Init();
+    /*OnTargetConnect();*/
+}
+
+/*--------------------------------------------------------------*/
+/* OnTargetConnect() -- this function is called after a target  */
+/* connect.                                                     */
+/*--------------------------------------------------------------*/
+OnTargetConnect()
+{
+    C5509_EVM_EMIF_Init();
+    GEL_TextOut("Gel StartUp Complete.\n");
+}
+
+/*--------------------------------------------------------------*/
+/* OnPreFileLoaded()                                            */
+/* This function is called automatically when the 'Load Program'*/
+/* Menu item is selected.                                       */
+/*--------------------------------------------------------------*/
+OnPreFileLoaded()
+{
+    /* Reset the CPU to clean up state */
+    GEL_Reset();
+	C5509_EVM_EMIF_Init();
+
+}
+/*--------------------------------------------------------------*/
+/* OnRestart()                                                  */
+/* This function is executed before a file is loaded. Disable   */
+/* interrupts and DMA from the current program so pending       */
+/* events and transfers don't interfere with the new program.   */
+/*--------------------------------------------------------------*/
+OnRestart()
+{
+    /* Disable interrupts */
+    *(int*)0x0003 = *(int*)0x0003 | 0x0800; // Set INTM
+    *(int*)0x0000 = 0;      // Clear IER0
+    *(int*)0x0045 = 0;      // Clear IER1
+
+    /* Disable each DMA channel */
+    *(int*)0xC01@io = 0;    // DMA0
+    *(int*)0xC21@io = 0;    // DMA1
+    *(int*)0xC41@io = 0;    // DMA2
+    *(int*)0xC61@io = 0;    // DMA3
+    *(int*)0xC81@io = 0;    // DMA4
+    *(int*)0xCA1@io = 0;    // DMA5
+}
+
+/*--------------------------------------------------------------*/
+/* CPU_Reset()                                                  */
+/*--------------------------------------------------------------*/
+menuitem "C5509_Configuration";
+hotmenu CPU_Reset()
+{
+    GEL_Reset();
+    GEL_TextOut("CPU Reset Complete.\n");
+}
+
+/*--------------------------------------------------------------*/
+/* C5509_Init()                                                 */
+/* Memory map based on MP/MC value=1 (BOOTM[2:0]=0).            */
+/*--------------------------------------------------------------*/
+hotmenu C5509_Init()
+{
+    /*GEL_Reset();*/
+
+    GEL_MapOn();
+    GEL_MapReset();
+
+    /* Program Space */
+    GEL_MapAdd(0x000100u,0,0x000100u,1,1);  /* VECT */
+    GEL_MapAdd(0x000200u,0,0x00fe00u,1,1);  /* DARAM */
+    GEL_MapAdd(0x010000u,0,0x030000u,1,1);  /* SARAM */
+    GEL_MapAdd(0x040000u,0,0x3c0000u,1,1);  /* External CE0 */
+    GEL_MapAdd(0x400000u,0,0x400000u,1,1);  /* External CE1 */
+    GEL_MapAdd(0x800000u,0,0x400000u,1,1);  /* External CE2 */
+    GEL_MapAdd(0xC00000u,0,0x400000u,1,1);  /* External CE3 */
+
+    /* Data Space */
+    GEL_MapAdd(0x000000u,1,0x000050u,1,1);  /* MMRs */
+    GEL_MapAdd(0x000060u,1,0x007FA0u,1,1);  /* DARAM */
+    GEL_MapAdd(0x008000u,1,0x018000u,1,1);  /* SARAM */
+    GEL_MapAdd(0x020000u,1,0x1fe000u,1,1);  /* External CE0 */
+    GEL_MapAdd(0x200000u,1,0x200000u,1,1);  /* External CE1 */
+    GEL_MapAdd(0x400000u,1,0x200000u,1,1);  /* External CE2 */
+    GEL_MapAdd(0x600000u,1,0x200000u,1,1);  /* External CE3 */
+
+    /* IO Space */
+    GEL_MapAdd(0x0000u,2,0x0400u,1,1);      /* RHEA 1KW */
+    GEL_MapAdd(0x07fdu,2,0x01u,1,1);       /* EMIF 1KW */
+
+    GEL_MapAdd(0x0800u,2,0x0400u,1,1);      /* EMIF 1KW */
+    GEL_MapAdd(0x0C00u,2,0x0400u,1,1);      /* DMA 1KW */
+    GEL_MapAdd(0x1000u,2,0x0400u,1,1);      /* TIMER#0 1KW */
+    GEL_MapAdd(0x1400u,2,0x0400u,1,1);      /* ICACHE 1KW */
+    GEL_MapAdd(0x1C00u,2,0x0400u,1,1);      /* CLKGEN 1KW */
+    GEL_MapAdd(0x2000u,2,0x0400u,1,1);      /* TRACE FIFO 1KW */
+    GEL_MapAdd(0x2400u,2,0x0400u,1,1);      /* TIMER#1 1KW */
+    GEL_MapAdd(0x2800u,2,0x0400u,1,1);      /* SERIAL PORT#0 1KW */
+    GEL_MapAdd(0x2C00u,2,0x0400u,1,1);      /* SERIAL PORT#1 1KW */
+    GEL_MapAdd(0x3000u,2,0x0400u,1,1);      /* SERIAL PORT#2 1KW */
+    GEL_MapAdd(0x3400u,2,0x0400u,1,1);      /* GPIO 1KW */
+    GEL_MapAdd(0x3800u,2,0x0400u,1,1);      /* ID 1KW */
+    GEL_MapAdd(0x3C00u,2,0x000cu,1,1);      /* I2C 1KW */
+    GEL_MapAdd(0x4800u,2,0x0400u,1,1);      /* MMC0 1KW */
+    GEL_MapAdd(0x4C00u,2,0x0400u,1,1);      /* MMC1 1KW */
+    GEL_MapAdd(0x5000u,2,0x0400u,1,1);      /* MS0 1KW */
+    GEL_MapAdd(0x5400u,2,0x0400u,1,1);      /* MS1 1KW */
+    GEL_MapAdd(0x6800u,2,0x0400u,1,1);      /* ADC 1KW */
+    GEL_MapAdd(0x6C00u,2,0x0400u,1,1);      /* EXTBUS 1KW */
+
+    GEL_TextOut("C5509_Init Complete.\n");
+}
+
+/*--------------------------------------------------------------*/
+/*  C5509_EVM_EMIF_Init()                                       */
+/*  Initialize the EMIF control registers to access             */
+/*  SDRAM in CE0 and Flash + CPLD in CE1                        */
+/*--------------------------------------------------------------*/
+hotmenu C5509_EVM_EMIF_Init()
+{
+  //*(unsigned int*)0x6C00@IO=0x0001;   /* EXBUSSEL   */
+  //*(unsigned int*)0x0801@IO=0xFFFF;   /* EMI_RST    */
+  //*(unsigned int*)0x0800@IO=0x0221;   /* EGCR       */
+  //*(unsigned int*)0x0803@IO=0x3FFF;   /* EMIF CE0_1 */
+  //*(unsigned int*)0x0804@IO=0x5FFF;   /* EMIF CE0_2 */
+  //*(unsigned int*)0x0805@IO=0x5FFF;   /* EMIF CE0_3 */
+  //*(unsigned int*)0x0806@IO=0x122A;   /* EMIF_CE1_1 */
+  //*(unsigned int*)0x0807@IO=0x522A;   /* EMIF_CE1_2 */
+  //*(unsigned int*)0x0808@IO=0x0000;   /* EMIF_CE1_3 */
+  //*(unsigned int*)0x0809@IO=0x122A;   /* EMIF_CE2_1 */
+  //*(unsigned int*)0x080A@IO=0x522A;   /* EMIF_CE2_2 */
+  //*(unsigned int*)0x080B@IO=0x0000;   /* EMIF_CE2_3 */
+  //*(unsigned int*)0x080C@IO=0x122A;   /* EMIF_CE3_1 */
+  //*(unsigned int*)0x080D@IO=0x522A;   /* EMIF_CE3_2 */
+  //*(unsigned int*)0x080E@IO=0x0000;   /* EMIF_CE3_3 */
+    *(unsigned int*)0x080F@IO=0x5938;   /* SDC1       */
+  //*(unsigned int*)0x0810@IO=0x091D;   /* SDPER      */
+  //*(unsigned int*)0x0811@IO=0x0FFF;   /* SDCNT      */
+    *(unsigned int*)0x0813@IO=0x035F;   /* SDC2       */
+    *(unsigned int*)0x0812@IO=0x0000;   /* INIT       */
+}

@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<breakpoints xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="breakpoints.xsd">
+
+  <breakpoint type="AET">
+    <property>
+      <name>Hardware Configuration</name>
+      <property>
+        <name>Type</name>
+        <string>Trace</string>
+        <property>
+          <name>STM Trace Type</name>
+          <string>CP_Tracer</string>
+          <property>
+            <name>Transaction Monitor</name>
+            <string>L2_0</string>
+          </property>
+          <property>
+            <name>Function</name>
+            <string>Transaction Statistics</string>
+            <property>
+              <name>Statistics Type</name>
+              <string></string>
+              <property>
+                <name>Bandwidth Type</name>
+                <string>Total Bandwidth Profile</string>
+              </property>
+              <property>
+                <name>Average Access Size</name>
+                <boolean>0</boolean>
+              </property>
+              <property>
+                <name>Average Access Rate</name>
+                <boolean>0</boolean>
+              </property>
+              <property>
+                <name>Percentage Wait Time</name>
+                <boolean>1</boolean>
+              </property>
+              <property>
+                <name>Average Latency</name>
+                <boolean>1</boolean>
+              </property>
+              <property>
+                <name>Transaction Master</name>
+                <string></string>
+                <property>
+                  <name>SRIO_CPPI</name>
+                  <boolean>0</boolean>
+                </property>
+                <property>
+                  <name>C66x</name>
+                  <boolean>1</boolean>
+                  <property>
+                    <name>C66x_0</name>
+                    <boolean>1</boolean>
+                  </property>
+                  <property>
+                    <name>C66x_1</name>
+                    <boolean>1</boolean>
+                  </property>
+                  <property>
+                    <name>C66x_2</name>
+                    <boolean>1</boolean>
+                  </property>
+                  <property>
+                    <name>C66x_3</name>
+                    <boolean>1</boolean>
+                  </property>
+                  <property>
+                    <name>C66x_0 CFG</name>
+                    <boolean>0</boolean>
+                  </property>
+                  <property>
+                    <name>C66x_1 CFG</name>
+                    <boolean>0</boolean>
+                  </property>
+                  <property>
+                    <name>C66x_2 CFG</name>
+                    <boolean>0</boolean>
+                  </property>
+                  <property>
+                    <name>C66x_3 CFG</name>
+                    <boolean>0</boolean>
+                  </property>
+                </property>
+                <property>
+                  <name>EDMA</name>
+                  <boolean>0</boolean>
+                </property>
+                <property>
+                  <name>FFTC</name>
+                  <boolean>0</boolean>
+                </property>
+                <property>
+                  <name>RAC</name>
+                  <boolean>0</boolean>
+                </property>
+                <property>
+                  <name>DAP</name>
+                  <boolean>0</boolean>
+                </property>
+                <property>
+                  <name>TPCC</name>
+                  <boolean>0</boolean>
+                </property>
+                <property>
+                  <name>MSMC</name>
+                  <boolean>0</boolean>
+                </property>
+                <property>
+                  <name>PCIe</name>
+                  <boolean>0</boolean>
+                </property>
+                <property>
+                  <name>SRIP_M</name>
+                  <boolean>0</boolean>
+                </property>
+                <property>
+                  <name>Hyperbridge</name>
+                  <boolean>0</boolean>
+                </property>
+                <property>
+                  <name>PA_SS</name>
+                  <boolean>0</boolean>
+                </property>
+                <property>
+                  <name>AIF</name>
+                  <boolean>0</boolean>
+                </property>
+                <property>
+                  <name>QM_CDMA</name>
+                  <boolean>0</boolean>
+                </property>
+                <property>
+                  <name>QM_second</name>
+                  <boolean>0</boolean>
+                </property>
+                <property>
+                  <name>TAC</name>
+                  <boolean>0</boolean>
+                </property>
+                <property>
+                  <name>TE_SS</name>
+                  <boolean>0</boolean>
+                </property>
+              </property>
+              <property>
+                <name>Transaction Filter</name>
+                <string></string>
+                <property>
+                  <name>Transaction Type</name>
+                  <string></string>
+                  <property>
+                    <name>CPU Data Access</name>
+                    <boolean>1</boolean>
+                  </property>
+                  <property>
+                    <name>CPU Instruction Access</name>
+                    <boolean>1</boolean>
+                  </property>
+                  <property>
+                    <name>DMA Access</name>
+                    <boolean>1</boolean>
+                  </property>
+                </property>
+                <property>
+                  <name>Access Type</name>
+                  <string>Any</string>
+                </property>
+              </property>
+            </property>
+            <property>
+              <name>Address Range Filter</name>
+              <boolean>0</boolean>
+            </property>
+            <property>
+              <name>EMU Trigger Filter</name>
+              <boolean>0</boolean>
+            </property>
+            <property>
+              <name>Sample Window</name>
+              <integer>65535</integer>
+            </property>
+            <property>
+              <name>Display Settings</name>
+              <string></string>
+              <property>
+                <name>Clock Rate(Mhz)</name>
+                <integer>1000</integer>
+              </property>
+              <property>
+                <name>Suppress Zeros</name>
+                <boolean>0</boolean>
+              </property>
+            </property>
+          </property>
+        </property>
+      </property>
+    </property>
+    <property>
+      <name>Miscellaneous</name>
+      <property>
+        <name>Group</name>
+        <string>Default Group</string>
+      </property>
+      <property>
+        <name>Name</name>
+        <string>L2_0 Throughput (DSPs only)</string>
+      </property>
+    </property>
+    <enabled>0</enabled>
+  </breakpoint>
+
+</breakpoints>

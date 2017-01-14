@@ -1,0 +1,90 @@
+<!-- 1. Design Summary tab -->
+<div id="designSummaryTab" class="panel panel-default shadow1">
+	<div class="panel-heading panel-heading-custom panel-heading-main" ng-click="setSummaryVisibility()">
+		<span ng-class="srvStyle.getTriangleGlyphClass(!showSummarySection)"></span>
+		<span id="designSummaryTitle">Design Summary</span>
+		<span id="warningSummaryText" ng-show="warningListArr.length && !showSummarySection" class="label label-warning shadow1" ng-click="setLibraryColumn(2)"> {{warningListArr.length}} warnings</span>
+		<span id="errorSummaryText" ng-show="errorListArr.length &&!showSummarySection" class="label label-danger shadow1" ng-click="setLibraryColumn(1)">{{errorListArr.length}} errors</span>
+	</div>
+	<div class="panel-body" ng-show="showSummarySection">
+		<ul id="libraryContentSelector">
+			<li ng-class="srvStyle.getLibraryTabClass(0,showLibraryColumn)" ng-click="setLibraryColumn(0,showLibraryColumn)">Summary</li>
+			<li ng-class="srvStyle.getLibraryTabClass(1,showLibraryColumn)" ng-click="setLibraryColumn(1,showLibraryColumn)">Errors <span ng-show="errorListArr.length" class="badge errorBG shadow1">{{errorListArr.length}}</span></li>
+			<li ng-class="srvStyle.getLibraryTabClass(2,showLibraryColumn)" ng-click="setLibraryColumn(2,showLibraryColumn)">Warnings <span ng-show="warningListArr.length" class="badge warningBG shadow1">{{warningListArr.length}}</span></li>
+		</ul>
+		<div id="libraryContent">
+			<div id="configurationLibraryContent" ng-if="showLibraryColumn===0">
+				<ul ng-show="interfaceArr.length > 0">
+					<li ng-repeat="interface in filteredInterfaceList = (interfaceArr | filter:interfaceWithRequirementsFilter | orderBy:$root.natural('name'))">
+						<span style="font-size:14px">{{interface.obj.peripheralRequirementsLength()}}x</span>
+						<span ng-click="summaryInterfaceClicked(interface.name);" class="label label-default shadow1 shadowButton interfaceLabel">{{interface.name}}</span><span class="glyphicon glyphicon-menu-right summaryGlyMenuRight"></span>
+						<span ng-repeat="perphReq in interface.obj.peripheralRequirements" ng-click="summaryRequirementClicked(interface.name,perphReq.requirement.name);">
+							<span ng-class="srvStyle.getRequirementLabelClass(perphReq.requirement)">{{perphReq.requirement.name}}</span>
+						</span>
+					</li>
+				</ul>
+				<div ng-show="filteredInterfaceList.length === 0" class="message">No configuration summary available in your current design.</div>
+			</div>
+			<div id="errorLibraryContent" ng-if="showLibraryColumn==1">
+				<span ng-show="!errorListArr.length" class="message">There are no errors in the current design.</span>
+				<span ng-show="errorListArr.length" class="message">
+					There <span ng-show="errorListArr.length == 1">is</span><span ng-show="errorListArr.length > 1">are</span> <span style="font-weight:bold;">{{errorListArr.length}}</span> in the current design:
+					<a href="" ng-click="expandList(errorListArr,'error')" ng-show="!errorListExpanded" class="link">Expand All</a>
+					<a href="" ng-click="minimizeList(errorListArr,'error')" ng-show="errorListExpanded" class="link">Minimize All</a>
+				</span>
+
+				<ul ng-show="errorListArr.length" class="list-group">
+					<li ng-repeat="error in errorListArr | orderBy:['-priority',$root.natural('pinName'),$root.natural('requirementName'),$root.natural('interfaceName')]" ng-class="srvStyle.getErrorWarningListClass(error)" ng-click="errorWarningClicked(error,'error')">
+						<span class="listGroupItemSpan">
+							<span ng-class="getTriangleGlyphClass(!error.showDetail)" style="font-size:10px;position:relative;top:-1px;"></span>
+							<span class="label label-default shadow1 interfaceLabel">{{error.interfaceName}}</span>
+							<span class="glyphicon glyphicon-menu-right summaryGlyMenuRight"></span>
+							<span class="label label-default shadow1 requirementLabel">{{error.requirementName}}</span>
+							<span class="glyphicon glyphicon-menu-right summaryGlyMenuRight" ng-show="error.pinName"></span>
+							<span class="label label-default shadow1 pinLabel" ng-show="error.pinName">{{error.pinName}}</span>
+							<span class="glyphicon glyphicon-menu-right summaryGlyMenuRight"></span>
+							<span class="label label-danger shadow1 errorLabel">{{error.text}}</span>
+						</span>
+						
+						<ul class="detailedErrorWarning" ng-show="error.showDetail">
+							<li ng-repeat="detailedError in error.detailList | orderBy:$root.natural('text')">
+								<span class="glyphicon glyphicon-ban-circle errorFG" style="float:left;font-size:14px;position:relative;left:3px;"></span>
+								<span style="display:block;margin-left:25px;">{{detailedError.text}}</span>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div id="warningLibraryContent" ng-if="showLibraryColumn==2">
+				<span ng-show="!warningListArr.length" class="message">There are no warnings in the current design.</span>
+				<span ng-show="warningListArr.length" class="message">
+					There <span ng-show="warningListArr.length == 1">is</span><span ng-show="warningListArr.length > 1">are</span> <span style="font-weight:bold;">{{warningListArr.length}} warnings</span> in the current design:
+					<a href="" ng-click="expandList(warningListArr,'warning')" ng-show="!warningListExpanded" class="link">Expand All</a>
+					<a href="" ng-click="minimizeList(warningListArr,'warning')" ng-show="warningListExpanded" class="link">Minimize All</a>
+				</span>
+				
+				<ul ng-show="warningListArr.length" class="list-group">
+					<li ng-repeat="warning in warningListArr | orderBy:['-priority',$root.natural('pinName'),$root.natural('requirementName'),$root.natural('interfaceName')]" ng-class="srvStyle.getErrorWarningListClass(warning)" ng-click="errorWarningClicked(warning,'warning')">
+						<span class="listGroupItemSpan">
+							<span ng-class="getTriangleGlyphClass(!warning.showDetail)" style="font-size:10px;position:relative;top:-1px;"></span>
+							<span class="label label-default shadow1 interfaceLabel">{{warning.interfaceName}}</span>
+							<span class="glyphicon glyphicon-menu-right summaryGlyMenuRight"></span>
+							<span class="label label-default shadow1 requirementLabel">{{warning.requirementName}}</span>
+							<span class="glyphicon glyphicon-menu-right summaryGlyMenuRight" ng-show="warning.pinName"></span>
+							<span class="label label-default shadow1 pinLabel" ng-show="warning.pinName">{{warning.pinName}}</span>
+							<span class="glyphicon glyphicon-menu-right summaryGlyMenuRight"></span>
+							<span class="label label-warning shadow1 warningLabel">{{warning.text}}</span>
+						</span>
+
+						<ul class="detailedErrorWarning" ng-show="warning.showDetail">
+							<li ng-repeat="detailedWarning in warning.detailList | orderBy:$root.natural('text')">
+								<span class="iconWarning"></span>
+								<span style="position:relative;top:2px;display:block;margin-left:25px;">{{detailedWarning.text}}</span>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

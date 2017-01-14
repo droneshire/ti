@@ -1,0 +1,60 @@
+<div class="panel-heading" style="padding:0px;background-color:#fff;">
+	<div class="btn-group btn-group-justified" role="group" style="border-bottom:1px solid #ddd">
+		<div class="btn-group" style="width:72%;color:#000;padding-left:10px;">
+			<span style="cursor:default;font-weight:bold;font-size:18px;position:relative;top:1px;">{{srvConfigVM.selectedInterface.name}}</span> 
+			<span style="font-size:12px">({{srvConfigVM.selectedInterface.peripheralRequirementsLength()}} of {{srvConfigVM.selectedInterface.maxAllowed}} Added)</span>
+			
+			<!-- Peripheral list dropdown as an alternate way to switch peripherals -->
+			<span>
+				<div role="group" dropdown style="cursor:pointer;border:none;">
+					<span dropdown-toggle title="Peripherial Quick Select">
+						<span class="caret" style="position:relative;bottom:1px;"></span>
+					</span>
+					<ul class="dropdown-menu shadow3" style="padding:0;height:200px;border:none;border-top:1px solid #dddddd;">
+						<li ng-repeat="peripheralInterface in interfaces" style="text-align:left;border-bottom:1px solid #eeeeee;text-align:center;margin:0 auto;">
+							<a href="" ng-click="interfaceClicked( peripheralInterface )" title="Show Requirements for {{peripheralInterface.name}}"><span style="font-weight:bold">{{peripheralInterface.name}} </span>({{peripheralInterface.peripheralRequirementsLength()}}/{{peripheralInterface.maxAllowed}})</a>
+						</li>
+					</ul>
+				</div>
+			</span>
+		</div>
+		<div id="viewRequirementAddBtn" class="btn-group" title="Add {{srvConfigVM.selectedInterface.name}}" ng-click="addClicked( srvConfigVM.selectedInterface )">
+			<button class="btn" ng-disabled="srvConfigVM.selectedInterface.peripheralRequirementsLength() == srvConfigVM.selectedInterface.maxAllowed">
+				<span class="requirementButtonText">Add</span> 
+				<span class="glyphicon glyphicon-plus requirementButtonIcon" style="font-size:10px;"></span>
+			</button>
+		</div>
+		<div id="viewRequirementRemoveBtn" class="btn-group" title="Remove all {{srvConfigVM.selectedInterface.name}}(s)" ng-click="removeAllRequirements()">
+			<button class="btn" ng-disabled="numRemovable() == 0">
+				<span class="requirementButtonText">Remove All</span> 
+				<span class="glyphicon glyphicon-minus requirementButtonIcon" style="font-size:10px;"></span>
+			</button>
+		</div>
+	</div>
+</div>
+
+<!-- Instructions -->
+<div ng-show="srvConfigVM.selectedInterface.peripheralRequirementsLength() == 0">
+	<div style="font-size:14px;text-align:center;margin:8px 0 8px 0;"><span class="glyphicon glyphicon-info-sign" style="color:#118899;font-size:16px;position:relative;top:2px;right:2px;"></span> Click the <span style="font-weight:bold">"Add"</span> button to add a {{srvConfigVM.selectedInterface.name}} to your design.</div>
+</div>
+	
+<!-- List of Added Peripherial -->
+<div style="margin:4px 0 8px 0" ng-show="srvConfigVM.selectedInterface.peripheralRequirementsLength() > 0">
+	<div id="addedRequirementsList" class="selectedPeripherals shadow1">
+		<div id="req{{$index}}" class="btn-group btn-group-justified" ng-repeat="req in srvConfigVM.selectedInterface.peripheralRequirements">
+			<div class="btn-group requirementTextButton" title="Configure requirements for {{req.requirement.name}}">
+				<button ng-class="srvStyle.getReqButtonClass( req, $first, $last, srvConfigVM.selectedRequirement )" ng-click="requirementClicked( req )">
+					<span ng-show="req.requirement.solution.errorText != ''" class="glyphicon glyphicon-ban-circle errorFG" style="margin:0 4px 0 2px;padding:0;"></span>
+					<span ng-show="((req.requirement.solution.warningText != '') && (req.requirement.solution.errorText == ''))" class="iconWarning" style="position:relative;top:1px;right:3px;"></span>
+					<span ng-show="((req.requirement.solution.warningText == '') && (req.requirement.solution.errorText == ''))" class="glyphicon glyphicon-ok validFG" style="margin:0 4px 0 2px;padding:0;"></span>
+					<span>{{req.requirement.name}}</span>
+				</button>
+			</div>
+			<div  class="btn-group requirementMinusButton" title="Remove {{req.requirement.name}}">
+				<button ng-disabled="!req.isRemovable()" ng-class="srvStyle.getReqMinusButtonClass( $first, $last )" ng-click="removeRequirement(req)">
+					<span class="glyphicon glyphicon-minus"></span>
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

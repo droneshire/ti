@@ -1,0 +1,62 @@
+<module id="MEMORY_ERROR_REGS" HW_revision="" description="MEMORY ERROR Registers">
+	<register id="UCERRFLG" width="32" page="1" offset="0x0" internal="0" description="Uncorrectable Error Flag Register">
+		<bitfield id="CPURDERR" description="CPU Uncorrectable Read Error Flag " begin="0" end="0" width="1" rwaccess="R"/>
+		<bitfield id="DMARDERR" description="DMA Uncorrectable Read Error Flag " begin="1" end="1" width="1" rwaccess="R"/>
+		<bitfield id="CLA1RDERR" description="CLA1 Uncorrectable Read Error Flag " begin="2" end="2" width="1" rwaccess="R"/>
+	</register>
+	<register id="UCERRSET" width="32" page="1" offset="0x2" internal="0" description="Uncorrectable Error Flag Set Register">
+		<bitfield id="CPURDERR" description="CPU Uncorrectable Read Error Flag Set" begin="0" end="0" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="DMARDERR" description="DMA Uncorrectable Read Error Flag Set" begin="1" end="1" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CLA1RDERR" description="CLA1 Uncorrectable Read Error Flag Set" begin="2" end="2" width="1" rwaccess="R=0/W=1"/>
+	</register>
+	<register id="UCERRCLR" width="32" page="1" offset="0x4" internal="0" description="Uncorrectable Error Flag Clear Register">
+		<bitfield id="CPURDERR" description="CPU Uncorrectable Read Error Flag Clear" begin="0" end="0" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="DMARDERR" description="DMA Uncorrectable Read Error Flag Clear" begin="1" end="1" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CLA1RDERR" description="CLA1 Uncorrectable Read Error Flag Clear" begin="2" end="2" width="1" rwaccess="R=0/W=1"/>
+	</register>
+	<register id="UCCPUREADDR" width="32" page="1" offset="0x6" internal="0" description="Uncorrectable CPU Read Error Address">
+		<bitfield id="UCCPUREADDR" description="Uncorrectable CPU read/fetch access address register. " begin="31" end="0" width="32" rwaccess="R"/>
+	</register>
+	<register id="UCDMAREADDR" width="32" page="1" offset="0x8" internal="0" description="Uncorrectable DMA Read Error Address">
+		<bitfield id="UCDMAREADDR" description="Uncorrectable DMA read access address register. " begin="31" end="0" width="32" rwaccess="R"/>
+	</register>
+	<register id="UCCLA1READDR" width="32" page="1" offset="0xa" internal="0" description="Uncorrectable CLA1 Read Error Address">
+		<bitfield id="UCCLA1READDR" description="Uncorrectable CLA1 read/fetch access address register. " begin="31" end="0" width="32" rwaccess="R"/>
+	</register>
+	<register id="CERRFLG" width="32" page="1" offset="0x20" internal="0" description="Correctable Error Flag Register">
+		<bitfield id="CPURDERR" description="CPU Correctable Read Error Flag " begin="0" end="0" width="1" rwaccess="R"/>
+		<bitfield id="DMARDERR" description="DMA Correctable Read Error Flag " begin="1" end="1" width="1" rwaccess="R"/>
+		<bitfield id="CLA1RDERR" description="CLA1 Correctable Read Error Flag " begin="2" end="2" width="1" rwaccess="R"/>
+	</register>
+	<register id="CERRSET" width="32" page="1" offset="0x22" internal="0" description="Correctable Error Flag Set Register">
+		<bitfield id="CPURDERR" description="CPU Correctable Read Error Flag Set" begin="0" end="0" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="DMARDERR" description="DMA Correctable Read Error Flag Set" begin="1" end="1" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CLA1RDERR" description="CLA1 Correctable Read Error Flag Set" begin="2" end="2" width="1" rwaccess="R=0/W=1"/>
+	</register>
+	<register id="CERRCLR" width="32" page="1" offset="0x24" internal="0" description="Correctable Error Flag Clear Register">
+		<bitfield id="CPURDERR" description="CPU Correctable Read Error Flag Clear" begin="0" end="0" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="DMARDERR" description="DMA Correctable Read Error Flag Clear" begin="1" end="1" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CLA1RDERR" description="CLA1 Correctable Read Error Flag Clear" begin="2" end="2" width="1" rwaccess="R=0/W=1"/>
+	</register>
+	<register id="CCPUREADDR" width="32" page="1" offset="0x26" internal="0" description="Correctable CPU Read Error Address">
+		<bitfield id="CCPUREADDR" description="Correctable CPU read/fetch access address register. " begin="31" end="0" width="32" rwaccess="R"/>
+	</register>
+	<register id="CERRCNT" width="32" page="1" offset="0x2e" internal="0" description="Correctable Error Count Register">
+		<bitfield id="CERRCNT" description="Correctable error count." begin="31" end="0" width="32" rwaccess="R"/>
+	</register>
+	<register id="CERRTHRES" width="32" page="1" offset="0x30" internal="0" description="Correctable Error Threshold Value Register">
+		<bitfield id="CERRTHRES" description="Correctable error threshold." begin="31" end="0" width="32" rwaccess="R/W"/>
+	</register>
+	<register id="CEINTFLG" width="32" page="1" offset="0x32" internal="0" description="Correctable Error Interrupt Flag Status Register">
+		<bitfield id="CEINTFLAG" description="Total corrected error count exceeded threshold flag." begin="0" end="0" width="1" rwaccess="R"/>
+	</register>
+	<register id="CEINTCLR" width="32" page="1" offset="0x34" internal="0" description="Correctable Error Interrupt Flag Clear Register">
+		<bitfield id="CEINTCLR" description="CPU Corrected Error Threshold Exceeded Error Clear." begin="0" end="0" width="1" rwaccess="R=0/W=1"/>
+	</register>
+	<register id="CEINTSET" width="32" page="1" offset="0x36" internal="0" description="Correctable Error Interrupt Flag Set Register">
+		<bitfield id="CEINTSET" description="Total corrected error count exceeded flag set." begin="0" end="0" width="1" rwaccess="R=0/W=1"/>
+	</register>
+	<register id="CEINTEN" width="32" page="1" offset="0x38" internal="0" description="Correctable Error Interrupt Enable Register">
+		<bitfield id="CEINTEN" description="CPU/DMA Correctable Error Interrupt Enable." begin="0" end="0" width="1" rwaccess="R/W"/>
+	</register>
+</module>

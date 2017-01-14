@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<translate name="ParseCoverageData">
+
+  <stringParser pattern="&quot;([^&quot;]+)&quot;,&quot;([^&quot;]+)&quot;,(\d+),(\d+),(\d+),(.*)" input="Line">
+
+<!--    <stringParser pattern="(\w+)\s+(\w+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\w+)\s*" input="Line"> -->
+
+  <string name="Filename" translate="$1" />
+
+ <string name="Function" translate="$2" />
+
+  <integer name="Line Number" translate="$3" />
+
+  <integer name="Column Number" translate="$4" />
+
+  <integer name="Frequency Count" translate="$5" />
+
+  <string name="Comment" translate="$6" />
+
+  </stringParser>
+
+</translate>

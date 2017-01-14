@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<translate name="EventsToChannels">
+	<!--<passthruAll>
+	</passthruAll>-->
+	<passthru name="Time"	input="Time"/>
+	<passthru name="Master"	input="Master"/>
+	<passthru name="Source"	input="EventClass==Data1 ? Data1 : EventClass + &quot;:&quot; + Data1"/>
+	<passthru name="Load"	input="Data2"/>
+</translate>
+

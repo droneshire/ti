@@ -1,0 +1,136 @@
+﻿<!--
+    /*__________________________________________________________________________*/
+    /* Coprocessor 15 - Overall System Configuration and Control                */
+    /*__________________________________________________________________________*/
+    {"RCP15_CONTROL_REGISTER",                RARM11_CP15_OVSC(0), 32, DSP_REG_MEM, BT_LONG },
+    {"RCP15_AUXILIARY_CONTROL",               RARM11_CP15_OVSC(1), 32, DSP_REG_MEM, BT_LONG },
+    {"RCP15_COPROCESSOR_ACCESS_CONTROL",      RARM11_CP15_OVSC(2), 32, DSP_REG_MEM, BT_LONG },
+    {"RCP15_CONTEXT_ID",                      RARM11_CP15_OVSC(3), 32, DSP_REG_MEM, BT_LONG },
+    {"RCP15_FCSE_PID",                        RARM11_CP15_OVSC(4), 32, DSP_REG_MEM, BT_LONG },
+    {"RCP15_ID_CODE",                         RARM11_CP15_OVSC(5), 32, DSP_REG_MEM, BT_LONG },
+
+    /*__________________________________________________________________________*/
+    /* Coprocessor 15 - TCM (Tightly Coupled Memory) and Configuration control Registers  
+    /*__________________________________________________________________________*/
+
+    {"RCP15_TCM_STATUS",                      RARM11_CP15_TCM(0), 32, DSP_REG_MEM, BT_LONG },
+    {"RCP15_TCM_DATA_TCM_REGION",             RARM11_CP15_TCM(1), 32, DSP_REG_MEM, BT_LONG },
+    {"RCP15_TCM_INST_TCM_REGION",             RARM11_CP15_TCM(2), 32, DSP_REG_MEM, BT_LONG },
+    {"RCP15_TCM_DOMAIN_ACCESS_CONTROL",       RARM11_CP15_TCM(3), 32, DSP_REG_MEM, BT_LONG },
+
+    /*__________________________________________________________________________*/
+
+    /* Coprocessor 15 - MMU and Configuration control Registers                 */
+    /*__________________________________________________________________________*/
+
+    {"RCP15_MMU_FAULT_ADDRESS",         RARM11_CP15_MMU(0), 32, DSP_REG_MEM, BT_LONG },
+    {"RCP15_MMU_DATA_FAULT_STATUS",     RARM11_CP15_MMU(1), 32, DSP_REG_MEM, BT_LONG },
+    {"RCP15_MMU_DOMAIN_ACCESS_CONTROL", RARM11_CP15_MMU(2), 32, DSP_REG_MEM, BT_LONG },
+    {"RCP15_MMU_I_FAULT_ADDRESS",       RARM11_CP15_MMU(3), 32, DSP_REG_MEM, BT_LONG },
+    {"RCP15_MMU_I_FAULT_STATUS",        RARM11_CP15_MMU(4), 32, DSP_REG_MEM, BT_LONG },
+
+    {"RCP15_MMU_MEM_REGION_REMAP_INS",  RARM11_CP15_MMU(5), 32, DSP_REG_MEM, BT_LONG },
+    {"RCP15_MMU_MEM_REGION_REMAP_DAT",  RARM11_CP15_MMU(6), 32, DSP_REG_MEM, BT_LONG },
+    {"RCP15_MMU_MEM_REGION_REMAP_DMA",  RARM11_CP15_MMU(7), 32, DSP_REG_MEM, BT_LONG },
+    {"RCP15_MMU_MEM_REGION_REMAP_PHE",  RARM11_CP15_MMU(8), 32, DSP_REG_MEM, BT_LONG },
+ 
+    {"RCP15_MMU_TLB_TYPE",              RARM11_CP15_MMU(9), 32, DSP_REG_MEM, BT_LONG },
+    {"RCP15_MMU_TLB_INVALID_INS",       RARM11_CP15_MMU(10), 32, DSP_REG_MEM, BT_LONG },
+    {"RCP15_MMU_TLB_INVALID_DAT",       RARM11_CP15_MMU(11), 32, DSP_REG_MEM, BT_LONG },
+    {"RCP15_MMU_TLB_INVALID_UND",       RARM11_CP15_MMU(12), 32, DSP_REG_MEM, BT_LONG },
+
+    {"RCP15_MMU_TLB_INVALID_MVA_INS",   RARM11_CP15_MMU(13), 32, DSP_REG_MEM, BT_LONG },
+    {"RCP15_MMU_TLB_INVALID_MVA_DAT",   RARM11_CP15_MMU(14), 32, DSP_REG_MEM, BT_LONG },
+    {"RCP15_MMU_TLB_INVALID_MVA_UND",   RARM11_CP15_MMU(15), 32, DSP_REG_MEM, BT_LONG },
+
+    {"RCP15_MMU_TLB_INVALID_ASID_INS",  RARM11_CP15_MMU(16), 32, DSP_REG_MEM, BT_LONG },
+    {"RCP15_MMU_TLB_INVALID_ASID_DAT",  RARM11_CP15_MMU(17), 32, DSP_REG_MEM, BT_LONG },
+    {"RCP15_MMU_TLB_INVALID_ASID_UND",  RARM11_CP15_MMU(18), 32, DSP_REG_MEM, BT_LONG },
+
+
+	CP15 now supports two translation table base registers: TTBR0 and TTBR1. 
+	The N most significant address bits of a virtual address use TTBR0
+	in virtual addresses that use TTBR0; 0 < N < 7. The device resets with N equal to zero, 
+	meaning all virtual addresses
+	use TTBR0, otherwise the address space 0-232-N will use TTBR0 and other addresses will
+	use TTBR1. The size of the first level page table required for TTBR0 will vary from 128
+	bytes to 16kB depending on the value of N, offering additional scope for memory savings
+	in resource critical systems, particularly where multiple tables are held in memory and
+	swapped on a context switch by updating the translation base register.
+
+    {"RCP15_MMU_TLB_LOCKDOWN",          RARM11_CP15_MMU(19), 32, DSP_REG_MEM, BT_LONG },
+    {"RCP15_MMU_XLATION_TABLE_BASE",    RARM11_CP15_MMU(20), 32, DSP_REG_MEM, BT_LONG },
+    {"RCP15_MMU_XLATION_TABLE_BASE_0",  RARM11_CP15_MMU(21), 32, DSP_REG_MEM, BT_LONG },
+    {"RCP15_MMU_XLATION_TABLE_BASE_1",  RARM11_CP15_MMU(22), 32, DSP_REG_MEM, BT_LONG },
+
+-->
+<Register>
+	<Name>CPSR</Name>
+	<Address>0x100000</Address>
+	<LengthInMAUs>4</LengthInMAUs>
+	<NumRegistersInSet>1</NumRegistersInSet>
+	<MemoryPageNumber>0</MemoryPageNumber>
+	<IsMemoryMapped>true</IsMemoryMapped>
+	<IsRegValueReadOnHalt>true</IsRegValueReadOnHalt>
+	<IsRegValueSetDuringPrefetch>false</IsRegValueSetDuringPrefetch>
+	<IsRegValueContextRestoreReqd>false</IsRegValueContextRestoreReqd>
+	<RegDecoder>GetModeStatusString</RegDecoder>
+	<RegDecoder>GetThumbModeStatusString</RegDecoder>
+</Register>
+<Register>
+	<Name>MmuControl</Name>
+	<!-- SymbolName RCP15_CONTROL_REGISTER-->
+	<Address>0x100004</Address>
+	<LengthInMAUs>4</LengthInMAUs>
+	<NumRegistersInSet>1</NumRegistersInSet>
+	<MemoryPageNumber>0</MemoryPageNumber>
+	<IsMemoryMapped>true</IsMemoryMapped>
+	<IsRegValueReadOnHalt>true</IsRegValueReadOnHalt>
+	<IsRegValueSetDuringPrefetch>false</IsRegValueSetDuringPrefetch>
+	<IsRegValueContextRestoreReqd>false</IsRegValueContextRestoreReqd>
+	<RegDecoder>IsMmuEnabled</RegDecoder>
+	<RegDecoder>IsSystemReadAccess</RegDecoder>
+	<RegDecoder>IsRomMode</RegDecoder>
+	<RegDecoder>IsArmV6MmuMode</RegDecoder>
+</Register>
+<Register>
+	<Name>MmuTranslationTableBaseAdrs</Name>
+	<!-- SymbolName RCP15_MMU_XLATION_TABLE_BASE-->
+	<Address>-0x100008</Address>
+	<LengthInMAUs>4</LengthInMAUs>
+	<NumRegistersInSet>1</NumRegistersInSet>
+	<MemoryPageNumber>0</MemoryPageNumber>
+	<IsMemoryMapped>true</IsMemoryMapped>
+	<IsRegValueReadOnHalt>true</IsRegValueReadOnHalt>
+	<IsRegValueSetDuringPrefetch>false</IsRegValueSetDuringPrefetch>
+	<IsRegValueContextRestoreReqd>false</IsRegValueContextRestoreReqd>
+	<RegDecoder>GetTranslationTableBaseAdrs</RegDecoder>
+</Register>
+<Register>
+	<Name>MmuDACR</Name>
+	<!-- RCP15_TCM_DOMAIN_ACCESS_CONTROL-->
+	<Address>-0x10000C</Address>
+	<LengthInMAUs>4</LengthInMAUs>
+	<NumRegistersInSet>1</NumRegistersInSet>
+	<MemoryPageNumber>0</MemoryPageNumber>
+	<IsMemoryMapped>true</IsMemoryMapped>
+	<IsRegValueReadOnHalt>true</IsRegValueReadOnHalt>
+	<IsRegValueSetDuringPrefetch>false</IsRegValueSetDuringPrefetch>
+	<IsRegValueContextRestoreReqd>false</IsRegValueContextRestoreReqd>
+	<RegDecoder>Getb1_b0</RegDecoder>
+	<RegDecoder>Getb3_b2</RegDecoder>
+	<RegDecoder>Getb5_b4</RegDecoder>
+	<RegDecoder>Getb7_b6</RegDecoder>
+	<RegDecoder>Getb9_b8</RegDecoder>
+	<RegDecoder>Getb11_b10</RegDecoder>
+	<RegDecoder>Getb13_b12</RegDecoder>
+	<RegDecoder>Getb15_b14</RegDecoder>
+	<RegDecoder>Getb17_b16</RegDecoder>
+	<RegDecoder>Getb19_b18</RegDecoder>
+	<RegDecoder>Getb21_b20</RegDecoder>
+	<RegDecoder>Getb23_b22</RegDecoder>
+	<RegDecoder>Getb25_b24</RegDecoder>
+	<RegDecoder>Getb27_b26</RegDecoder>
+	<RegDecoder>Getb29_b28</RegDecoder>
+	<RegDecoder>Getb31_b30</RegDecoder>
+</Register>

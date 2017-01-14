@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module id="VCOP_Status_Registers" HW_revision="0" XML_version="1" description="VCOP Status Registers">
+    <register id="vcop_pid"       acronym="vcop_pid"       offset="0x00" page="1" width="32" description="VCOP Peripheral ID" />
+    <register id="vcop_ctrl"      acronym="vcop_ctrl"      offset="0x04" page="1" width="32" description="VCOP Control Register" />
+    <register id="vcop_status"    acronym="vcop_status"    offset="0x08" page="1" width="32" description="VCOP Status Register" />
+    <register id="vcop_max_iters" acronym="vcop_max_iters" offset="0x0c" page="1" width="32" description="VCOP Max Iteration Count" />
+    <register id="vcop_error"     acronym="vcop_error"     offset="0x10" page="1" width="32" description="VCOP Error Register" />
+    <register id="vloop_ptr_dec"  acronym="vloop_ptr_dec"  offset="0x20" page="1" width="32" description="VLOOP Pointer (decoding)" />
+    <register id="vloop_ptr_exe"  acronym="vloop_ptr_exe"  offset="0x24" page="1" width="32" description="VLOOP Pointer (executing)" />
+    <register id="param_ptr"      acronym="param_ptr"      offset="0x28" page="1" width="32" description="Parameter Block Pointer" />
+    <register id="i0"             acronym="i0"             offset="0x30" page="1" width="16" description="VRPT Loop Variable (i0)" />
+    <register id="i1"             acronym="i1"             offset="0x32" page="1" width="16" description="VLOOP Loop Variable (i1)" />
+    <register id="i2"             acronym="i2"             offset="0x34" page="1" width="16" description="VLOOP Loop Variable (i2)" />
+    <register id="i3"             acronym="i3"             offset="0x36" page="1" width="16" description="VLOOP Loop Variable (i3)" />
+    <register id="i4"             acronym="i4"             offset="0x38" page="1" width="16" description="VLOOP Loop Variable (i4)" />
+</module>

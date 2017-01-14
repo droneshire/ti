@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_34" class="java.beans.XMLDecoder"> 
+ <object class="com.ti.dvt.gadget.model.LayoutModel"> 
+  <void property="autoLayout"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="layoutMap"> 
+   <void method="put"> 
+    <string>Tap</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>162</int> 
+     <int>141</int> 
+     <int>56</int> 
+     <int>36</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:Debug</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>616</int> 
+     <int>513</int> 
+     <int>62</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>CSVFileReader</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>128</int> 
+     <int>37</int> 
+     <int>106</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>ContextInterruptAwareFormer</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>3968</int> 
+     <int>529</int> 
+     <int>-1</int> 
+     <int>-1</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>$Input</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>110</int> 
+     <int>92</int> 
+     <int>137</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>Graph</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>151</int> 
+     <int>319</int> 
+     <int>114</int> 
+     <int>36</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>Create Event Source Name</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>113</int> 
+     <int>263</int> 
+     <int>151</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:Trace Analyzer ProfileAnalysis</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>190</int> 
+     <int>782</int> 
+     <int>115</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>$Debug.VirtualBuffer</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>271</int> 
+     <int>184</int> 
+     <int>170</int> 
+     <int>36</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.dvtgraph:Logic Analyzer</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>136</int> 
+     <int>367</int> 
+     <int>100</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>GroupBy</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>152</int> 
+     <int>222</int> 
+     <int>87</int> 
+     <int>31</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:$Debug.Log</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>337</int> 
+     <int>242</int> 
+     <int>112</int> 
+     <int>36</int> 
+    </object> 
+   </void> 
+  </void> 
+ </object> 
+</java> 

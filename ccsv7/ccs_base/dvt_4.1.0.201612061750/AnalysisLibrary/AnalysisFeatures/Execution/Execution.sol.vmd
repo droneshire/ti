@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_34" class="java.beans.XMLDecoder"> 
+ <object class="com.ti.dvt.ui.views.core.ViewModel"> 
+  <void property="viewConnectionMgr"> 
+   <void property="connections"> 
+    <void method="add"> 
+     <object class="com.ti.dvt.ui.views.core.ViewConnection"> 
+      <void property="source"> 
+       <string>$Debug.VirtualBuffer</string> 
+      </void> 
+      <void property="target"> 
+       <string>com.ti.dvt.ui.views.table:table.1268940961874</string> 
+      </void> 
+     </object> 
+    </void> 
+    <void method="add"> 
+     <object class="com.ti.dvt.ui.views.core.ViewConnection"> 
+      <void property="source"> 
+       <string>Graph</string> 
+      </void> 
+      <void property="target"> 
+       <string>com.ti.dvt.ui.views.table:ForGraph</string> 
+      </void> 
+     </object> 
+    </void> 
+    <void method="add"> 
+     <object class="com.ti.dvt.ui.views.core.ViewConnection"> 
+      <void property="source"> 
+       <string>Graph</string> 
+      </void> 
+      <void property="target"> 
+       <string>com.ti.dvt.ui.views.dvtgraph:Graph</string> 
+      </void> 
+     </object> 
+    </void> 
+   </void> 
+  </void> 
+  <void property="viewInfoMap"> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:ForGraph</string> 
+    <object class="com.ti.dvt.ui.views.core.ViewInfo"> 
+     <void property="paneInfoColl"> 
+      <void method="add"> 
+       <object class="com.ti.dvt.ui.views.core.PaneInfo"> 
+        <void property="ID"> 
+         <string>com.ti.dvt.ui.views.table:ForGraph</string> 
+        </void> 
+        <void property="properties"> 
+         <object class="com.ti.dvt.ui.views.core.TableProp"> 
+          <void property="enableGroup"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="scrollLock"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="solutionName"> 
+           <string>Execution</string> 
+          </void> 
+          <void property="tableMeta"> 
+           <void property="columnMetaMap"> 
+            <void method="put"> 
+             <string>time</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>35</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Time</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>48</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>source</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>57</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>state</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>409</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Presentation Type</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>132</int> 
+              </void> 
+             </object> 
+            </void> 
+           </void> 
+           <void property="columnOrder"> 
+            <array class="java.lang.String" length="5"> 
+             <void index="0"> 
+              <string></string> 
+             </void> 
+             <void index="1"> 
+              <string>Time</string> 
+             </void> 
+             <void index="2"> 
+              <string>source</string> 
+             </void> 
+             <void index="3"> 
+              <string>state</string> 
+             </void> 
+             <void index="4"> 
+              <string>Presentation Type</string> 
+             </void> 
+            </array> 
+           </void> 
+          </void> 
+         </object> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="title"> 
+      <string>$Debug.DataPreparation</string> 
+     </void> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.dvtgraph:Graph</string> 
+    <object class="com.ti.dvt.ui.views.core.ViewInfo"> 
+     <void property="paneInfoColl"> 
+      <void method="add"> 
+       <object class="com.ti.dvt.ui.views.core.PaneInfo"> 
+        <void property="ID"> 
+         <string>com.ti.dvt.ui.views.dvtgraph:Graph</string> 
+        </void> 
+        <void property="properties"> 
+         <object class="com.ti.dvt.ui.views.core.DVTGraphProperty"> 
+          <void property="XDisplayFormat"> 
+           <string>Time ns!auto!#,##0</string> 
+          </void> 
+          <void property="XFieldName"> 
+           <string>Time</string> 
+          </void> 
+          <void property="XRange"> 
+           <void property="span"> 
+            <double>1.0E8</double> 
+           </void> 
+          </void> 
+          <void property="YFieldName"> 
+           <string>state</string> 
+          </void> 
+          <void property="YRange"> 
+           <void property="end"> 
+            <double>5.0</double> 
+           </void> 
+          </void> 
+          <void property="autoAssignPresentation"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="axesProps"> 
+           <void index="0"> 
+            <void property="YAxis"> 
+             <void property="displayFormat"> 
+              <string>General</string> 
+             </void> 
+             <void property="labelWidth"> 
+              <int>44</int> 
+             </void> 
+             <void property="title"> 
+              <string>source</string> 
+             </void> 
+            </void> 
+           </void> 
+          </void> 
+          <void property="channelColumnDetectName"> 
+           <string>source</string> 
+          </void> 
+          <void property="channelDiscovery"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="presentationTypeFieldName"> 
+           <string>Presentation Type</string> 
+          </void> 
+          <void property="solutionName"> 
+           <string>Execution</string> 
+          </void> 
+          <void property="sort"> 
+           <string>Ascending</string> 
+          </void> 
+          <void property="stateCategoryMap"> 
+           <void method="put"> 
+            <string> Main</string> 
+            <object class="java.util.ArrayList"> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object class="org.eclipse.swt.graphics.RGB"> 
+                 <int>192</int> 
+                 <int>192</int> 
+                 <int>192</int> 
+                </object> 
+               </void> 
+               <void property="label"> 
+                <string>{Unknown}</string> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object class="org.eclipse.swt.graphics.RGB"> 
+                 <int>0</int> 
+                 <int>0</int> 
+                 <int>255</int> 
+                </object> 
+               </void> 
+               <void property="label"> 
+                <string>{BIOS Scheduler}</string> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object class="org.eclipse.swt.graphics.RGB"> 
+                 <int>255</int> 
+                 <int>255</int> 
+                 <int>255</int> 
+                </object> 
+               </void> 
+               <void property="label"> 
+                <string>Idle</string> 
+               </void> 
+               <void property="visible"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object class="org.eclipse.swt.graphics.RGB"> 
+                 <int>0</int> 
+                 <int>255</int> 
+                 <int>0</int> 
+                </object> 
+               </void> 
+               <void property="label"> 
+                <string>Running</string> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object class="org.eclipse.swt.graphics.RGB"> 
+                 <int>0</int> 
+                 <int>139</int> 
+                 <int>139</int> 
+                </object> 
+               </void> 
+               <void property="label"> 
+                <string>Pending</string> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object class="org.eclipse.swt.graphics.RGB"> 
+                 <int>0</int> 
+                 <int>0</int> 
+                 <int>0</int> 
+                </object> 
+               </void> 
+               <void property="errorCondition"> 
+                <boolean>true</boolean> 
+               </void> 
+               <void property="label"> 
+                <string>~data loss</string> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object class="org.eclipse.swt.graphics.RGB"> 
+                 <int>51</int> 
+                 <int>221</int> 
+                 <int>0</int> 
+                </object> 
+               </void> 
+               <void property="icon"> 
+                <string>begin</string> 
+               </void> 
+               <void property="label"> 
+                <string>Start</string> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object class="org.eclipse.swt.graphics.RGB"> 
+                 <int>0</int> 
+                 <int>51</int> 
+                 <int>221</int> 
+                </object> 
+               </void> 
+               <void property="icon"> 
+                <string>end</string> 
+               </void> 
+               <void property="label"> 
+                <string>Stop</string> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object class="org.eclipse.swt.graphics.RGB"> 
+                 <int>0</int> 
+                 <int>221</int> 
+                 <int>153</int> 
+                </object> 
+               </void> 
+               <void property="icon"> 
+                <string>swiPost</string> 
+               </void> 
+               <void property="label"> 
+                <string>Post</string> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object class="org.eclipse.swt.graphics.RGB"> 
+                 <int>221</int> 
+                 <int>153</int> 
+                 <int>0</int> 
+                </object> 
+               </void> 
+               <void property="icon"> 
+                <string>semPost</string> 
+               </void> 
+               <void property="label"> 
+                <string>Semaphore_LM_post</string> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object class="org.eclipse.swt.graphics.RGB"> 
+                 <int>51</int> 
+                 <int>0</int> 
+                 <int>221</int> 
+                </object> 
+               </void> 
+               <void property="icon"> 
+                <string>semPend</string> 
+               </void> 
+               <void property="label"> 
+                <string>Semaphore_LM_pend</string> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object class="org.eclipse.swt.graphics.RGB"> 
+                 <int>221</int> 
+                 <int>51</int> 
+                 <int>0</int> 
+                </object> 
+               </void> 
+               <void property="icon"> 
+                <string>evtPost</string> 
+               </void> 
+               <void property="label"> 
+                <string>Event_LM_post</string> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object class="org.eclipse.swt.graphics.RGB"> 
+                 <int>0</int> 
+                 <int>221</int> 
+                 <int>51</int> 
+                </object> 
+               </void> 
+               <void property="icon"> 
+                <string>evtPend</string> 
+               </void> 
+               <void property="label"> 
+                <string>Event_LM_pend</string> 
+               </void> 
+              </object> 
+             </void> 
+            </object> 
+           </void> 
+          </void> 
+         </object> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="title"> 
+      <string>Graph</string> 
+     </void> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:table.1268940961874</string> 
+    <object class="com.ti.dvt.ui.views.core.ViewInfo"> 
+     <void property="paneInfoColl"> 
+      <void method="add"> 
+       <object class="com.ti.dvt.ui.views.core.PaneInfo"> 
+        <void property="ID"> 
+         <string>com.ti.dvt.ui.views.table:table.1268940961874</string> 
+        </void> 
+        <void property="properties"> 
+         <object class="com.ti.dvt.ui.views.core.TableProp"> 
+          <void property="enableGroup"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="showEndOnUpdate"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="solutionName"> 
+           <string>Execution</string> 
+          </void> 
+          <void property="tableMeta"> 
+           <void property="columnMetaMap"> 
+            <void method="put"> 
+             <string>module</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>143</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>time</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>35</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>event</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>77</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>data</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>44</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>class</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>38</int> 
+              </void> 
+             </object> 
+            </void> 
+           </void> 
+           <void property="columnOrder"> 
+            <array class="java.lang.String" length="6"> 
+             <void index="0"> 
+              <string></string> 
+             </void> 
+             <void index="1"> 
+              <string>time</string> 
+             </void> 
+             <void index="2"> 
+              <string>module</string> 
+             </void> 
+             <void index="3"> 
+              <string>class</string> 
+             </void> 
+             <void index="4"> 
+              <string>data</string> 
+             </void> 
+             <void index="5"> 
+              <string>event</string> 
+             </void> 
+            </array> 
+           </void> 
+          </void> 
+         </object> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="title"> 
+      <string>$Debug.Input</string> 
+     </void> 
+    </object> 
+   </void> 
+  </void> 
+ </object> 
+</java> 

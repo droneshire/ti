@@ -1,0 +1,20 @@
+<div class="modal-header">
+    Installed Packages
+</div>
+
+<div class="modal-body">  
+    <div class="info-text">
+        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+        <span class="text" ng-model="addedPackagesMessage"> {{ addedPackagesMessage }}</span>
+    </div>
+</div>
+
+<div ng-show="show_progress">
+    <div class="download-message"> {{ waitingMessage }} </div>
+    <div class="progress">
+        <div class="progress-bar progress-bar-striped active" aria-valuemin="0" aria-valuemax="100" role="progressbar" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100" ng-style="{width : ( progress + '%' ) }" >{{progress}}%</div>
+    </div>
+</div>
+
+<div class="modal-footer">
+</div>

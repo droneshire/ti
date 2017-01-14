@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="CSV Viewer" default="enable" basedir=".">
+	
+	<dvt.setloglevel level="verbose"/>
+	
+	<import file="../../templates/dataprovider.xml"/>
+	
+	<!-- define the activity and data provider for the dataprovider template -->
+	<property name="dvt.activity" value="Viewers/${ant.project.name}"/>
+	<property name="dvt.activity.description" value="Opens a CSV file."/>
+	<property name="dvt.auto.run" value="true"/>
+	<property name="dataProviderName" value="CsvViewer" />
+	<property name="dvt.data.type" value="CSV"/>
+
+	<!-- define local properties -->
+	<property name="viewName" value="Log"/> <!-- the name of the view in the CSV Viewer solution --> 
+	
+	<!-- override the template target -->
+	<target name="createContextMenu">
+		<makeContextMenu menuid="contextMenuRef">
+			<menu>
+				<dvt.menu.context text="Open File...">
+					<property name="rereadFile" value="true"/>
+					<dvt.property name="csvFilePath"/>
+					<dvt.call target="rereadFile">
+						<reference refid="dataProviderRef"/>
+					</dvt.call>
+				</dvt.menu.context>
+			</menu>
+		</makeContextMenu>
+	</target>
+
+	<!-- override the template target -->
+	<target name="createConfigurationActions">
+		<!-- dvt.configuration>
+			<button text="Properties...">
+				<property name="rereadFile" value="true"/>
+				<dvt.property name="csvFilePath"/>
+				<dvt.call target="rereadFile">
+					<reference refid="dataProviderRef"/>
+				</dvt.call>
+			</button>
+		</dvt.configuration -->
+	</target>
+
+	<!-- override the template target -->
+	<target name="preAddDataProvider" depends="openFile" if="csvFilePath">
+		<!-- set the filename w/o path as the data context name -->
+		<echo message="${csvFilePath}"/>
+		<basename property="filename" file="${csvFilePath}"/>
+		<dvt.property id="activity_name" name="name"/>
+		<dvt.property name="name" value="${activity_name} - ${filename}"/>
+	</target>
+	
+	<!-- override the template target -->
+	<target name="postAddDataProvider" if="csvFilePath" depends="dvt.auto.run,run">
+		<!-- show the view -->
+		<dvt.view.show refid="dataProviderRef" view="${viewName}"/>
+		<dvt.property refid="dataProviderRef" view="${viewName}" name="General:Row count column" value="true"/>
+		
+		<!-- [#1534] Automatically group views of a data provider and its child AFs by Time, OPS, 11/2/2010 --> 
+		<dvt.property refid="dataProviderRef" view="${viewName}" name="General:Reference field" value="Time"/>
+	</target>
+	
+	<target name="dvt.auto.run">
+		<dvt.property name="dvt.run"/>
+		<condition property="dvt.run" value="true">
+			<and>
+				<equals arg1="${dvt.auto.run}" arg2="true"/>
+				<isset property="csvFilePath"/>
+			</and>
+		</condition>
+	</target>
+	
+	<target name="run" if="dvt.run">
+		<!-- set the 'File Name' property on the CSVFileReader DP -->
+		<dvt.property refid="dataProviderRef" dataprocessor="CSVFileReader" name="File Name" value="${csvFilePath}"/>
+		<!-- dvt.property refid="dataProviderRef" datacontext="${filename}"/ -->
+		<!-- run the data provider -->
+		<dvt.start refid="dataProviderRef"/>
+	</target>
+	
+	<!-- Open a new CSV file -->
+	<target name="openFile" depends="config.fileDialog,remove" if="csvFilePath">
+	</target>
+	
+	<target name="rereadFile" depends="preAddDataProvider,postAddDataProvider">
+	</target>
+
+    <target name="remove" if="remove">
+        <dvt.remove/>
+    </target>
+	
+	<!-- open a Open File dialog -->
+	<target name="config.fileDialog" unless="csvFilePath">
+		<condition property="csvFilePath" value="">
+			<not>
+				<isset property="csvFilePath"/>
+			</not>
+		</condition>
+		<dvt.config.file id="csvFilePath" text="Open File" path="" file="${csvFilePath}" extensions="*.csv"/>
+		<condition property="remove" value="true">
+			<and>
+				<not>
+					<isset property="csvFilePath"/>
+				</not>
+				<not>
+					<isset property="rereadFile"/>
+				</not>
+			</and>
+		</condition>
+		<dvt.property name="rereadFile"/>
+	</target>
+	
+	<target name="preDisable">
+		<dvt.remove refid="contextMenuRef"/>
+	</target>
+</project>

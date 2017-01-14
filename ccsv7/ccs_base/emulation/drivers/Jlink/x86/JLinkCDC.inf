@@ -1,0 +1,167 @@
+;
+; JLink with integrated CDC driver setup information file
+; Copyright (c) 2011-2014 by SEGGER Microcontroller GmbH & Co. KG
+;   
+; This file supports:
+;     x86: Windows XP, Windows Vista, Windows 7, 
+;          Windows 8,  Windows 8.1
+;     x64: Windows XP, Windows Vista, Windows 7, 
+;          Windows 8,  Windows 8.1
+;
+[Version] 
+Signature="$Windows NT$"
+Class=Ports
+ClassGuid={4D36E978-E325-11CE-BFC1-08002BE10318}
+Provider=%MFGNAME%
+DriverVer=08/28/2014,6.0.2601.5
+CatalogFile=JLinkCDC.cat
+
+[Manufacturer] 
+%MFGNAME%=CDCDevice, NT, NTamd64
+
+
+[CDCDevice.NT]
+%CDC.DESCRIPTION%=CDC.DriverInstall,USB\VID_1366&PID_0105&MI_00
+%CDC.DESCRIPTION%=CDC.DriverInstall,USB\VID_1366&PID_0106
+%CDC.DESCRIPTION%=CDC.DriverInstall,USB\VID_1366&PID_1004
+%CDC.DESCRIPTION%=CDC.DriverInstall,USB\VID_1366&PID_1005&MI_00
+%CDC.DESCRIPTION%=CDC.DriverInstall,USB\VID_1366&PID_1006&MI_02
+%CDC.DESCRIPTION%=CDC.DriverInstall,USB\VID_1366&PID_1007&MI_02
+%CDC.DESCRIPTION%=CDC.DriverInstall,USB\VID_1366&PID_100C&MI_00
+%CDC.DESCRIPTION%=CDC.DriverInstall,USB\VID_1366&PID_100D&MI_00
+%CDC.DESCRIPTION%=CDC.DriverInstall,USB\VID_1366&PID_100E&MI_02
+%CDC.DESCRIPTION%=CDC.DriverInstall,USB\VID_1366&PID_100F&MI_02
+%CDC.DESCRIPTION%=CDC.DriverInstall,USB\VID_1366&PID_1014&MI_00
+%CDC.DESCRIPTION%=CDC.DriverInstall,USB\VID_1366&PID_1015&MI_00
+%CDC.DESCRIPTION%=CDC.DriverInstall,USB\VID_1366&PID_1016&MI_02
+%CDC.DESCRIPTION%=CDC.DriverInstall,USB\VID_1366&PID_1017&MI_02
+%CDC.DESCRIPTION%=CDC.DriverInstall,USB\VID_1366&PID_101C&MI_00
+%CDC.DESCRIPTION%=CDC.DriverInstall,USB\VID_1366&PID_101D&MI_00
+%CDC.DESCRIPTION%=CDC.DriverInstall,USB\VID_1366&PID_101E&MI_02
+%CDC.DESCRIPTION%=CDC.DriverInstall,USB\VID_1366&PID_101F&MI_02
+
+[CDCDevice.NTamd64]
+%CDC.DESCRIPTION%=CDC.DriverInstall,USB\VID_1366&PID_0105&MI_00
+%CDC.DESCRIPTION%=CDC.DriverInstall,USB\VID_1366&PID_0106
+%CDC.DESCRIPTION%=CDC.DriverInstall,USB\VID_1366&PID_1004
+%CDC.DESCRIPTION%=CDC.DriverInstall,USB\VID_1366&PID_1005&MI_00
+%CDC.DESCRIPTION%=CDC.DriverInstall,USB\VID_1366&PID_1006&MI_02
+%CDC.DESCRIPTION%=CDC.DriverInstall,USB\VID_1366&PID_1007&MI_02
+%CDC.DESCRIPTION%=CDC.DriverInstall,USB\VID_1366&PID_100C&MI_00
+%CDC.DESCRIPTION%=CDC.DriverInstall,USB\VID_1366&PID_100D&MI_00
+%CDC.DESCRIPTION%=CDC.DriverInstall,USB\VID_1366&PID_100E&MI_02
+%CDC.DESCRIPTION%=CDC.DriverInstall,USB\VID_1366&PID_100F&MI_02
+%CDC.DESCRIPTION%=CDC.DriverInstall,USB\VID_1366&PID_1014&MI_00
+%CDC.DESCRIPTION%=CDC.DriverInstall,USB\VID_1366&PID_1015&MI_00
+%CDC.DESCRIPTION%=CDC.DriverInstall,USB\VID_1366&PID_1016&MI_02
+%CDC.DESCRIPTION%=CDC.DriverInstall,USB\VID_1366&PID_1017&MI_02
+%CDC.DESCRIPTION%=CDC.DriverInstall,USB\VID_1366&PID_101C&MI_00
+%CDC.DESCRIPTION%=CDC.DriverInstall,USB\VID_1366&PID_101D&MI_00
+%CDC.DESCRIPTION%=CDC.DriverInstall,USB\VID_1366&PID_101E&MI_02
+%CDC.DESCRIPTION%=CDC.DriverInstall,USB\VID_1366&PID_101F&MI_02
+
+[CDC.DriverInstall.ntx86]
+CopyFiles=_CopyFiles_sys_x86
+AddReg=_Common_AddReg
+
+[CDC.DriverInstall.ntx86.HW]
+AddReg=_AddReg_Param
+
+[CDC.DriverInstall.ntx86.Services]
+AddService = JLinkCDC, 0x00000002, _AddService_x86, _EventLog_x86
+
+[_AddService_x86]
+ServiceType    = 1
+StartType      = 3
+ErrorControl   = 1
+ServiceBinary  = %12%\JLinkCDC.sys
+
+[_EventLog_x86]
+AddReg=_EventLogAddReg_x86
+
+[_EventLogAddReg_x86]
+HKR,,EventMessageFile,%REG_EXPAND_SZ%,"%%SystemRoot%%\System32\IoLogMsg.dll;%%SystemRoot%%\System32\drivers\JLinkCDC.sys"
+HKR,,TypesSupported,  %REG_DWORD%, 7
+
+[CDC.DriverInstall.NTamd64]
+CopyFiles=_CopyFiles_sys_x64
+AddReg=_Common_AddReg
+
+[CDC.DriverInstall.NTamd64.HW]
+AddReg=_AddReg_Param
+
+[CDC.DriverInstall.NTamd64.Services]
+AddService = JLinkCDC_x64, 0x00000002, _AddService_x64, _EventLog_x64
+
+[_AddService_x64]
+ServiceType    = 1
+StartType      = 3
+ErrorControl   = 1
+ServiceBinary  = %12%\JLinkCDC_x64.sys
+
+[_EventLog_x64]
+AddReg=_EventLogAddReg_x64
+
+[_EventLogAddReg_x64]
+HKR,,EventMessageFile,%REG_EXPAND_SZ%,"%%SystemRoot%%\System32\IoLogMsg.dll;%%SystemRoot%%\System32\drivers\JLinkCDC_x64.sys"
+HKR,,TypesSupported,  %REG_DWORD%, 7
+
+[_AddReg_Param]
+HKR,,DriverUserInterfaceGuid, %REG_SZ%,    ""
+HKR,,ReadBufferSize,          %REG_DWORD%, 4096
+HKR,,WriteBufferSize,         %REG_DWORD%, 4096
+HKR,,UseLogicBuffer,          %REG_DWORD%, 0
+HKR,,ReadBufferCount,         %REG_DWORD%, 3
+HKR,,WriteBufferCount,        %REG_DWORD%, 3
+HKR,,SendLineCoding,          %REG_DWORD%, 1
+HKR,,SendLineState,           %REG_DWORD%, 1
+HKR,,SendBreak,               %REG_DWORD%, 1
+HKR,,OperationMode,           %REG_DWORD%, 1
+HKR,,DefaultLineState,        %REG_DWORD%, 0x30
+HKR,,ClearFeatureOnStart,     %REG_DWORD%, 0
+HKR,,VendorPipeReset,         %REG_DWORD%, 0
+HKR,,StaticDeviceObject,      %REG_DWORD%, 0
+HKR,,ClearRtsDtrOnClose,      %REG_DWORD%, 0
+HKR,,DisConWriteMode,         %REG_DWORD%, 0
+HKR,,IgnorePurgeTxClear,      %REG_DWORD%, 0
+HKR,,DeviceObjectName,        %REG_SZ%,    "thcdcacm"
+HKR,,DoNotSendShortPackets,   %REG_DWORD%, 0
+HKR,,DisableComLink,          %REG_DWORD%, 0
+
+[_Common_AddReg]
+HKR,,PortSubClass,1,01
+HKR,,EnumPropPages32,,"MsPorts.dll,SerialPortPropPageProvider"
+
+[_CopyFiles_sys_x86]
+JLinkCDC.sys,,,0x00000004
+
+[_CopyFiles_sys_x64]
+JLinkCDC_x64.sys,,,0x00000004
+
+[DestinationDirs]
+DefaultDestDir  = 12  ; %windir%\system32\drivers 
+_CopyFiles_sys_x86 = 12
+_CopyFiles_sys_x64 = 12
+
+[SourceDisksNames.x86]
+1=%DiskName%,,0
+[SourceDisksNames.amd64]
+1=%DiskName%,,0
+
+[SourceDisksFiles.x86]
+JLinkCDC.sys=1
+[SourceDisksFiles.amd64]
+JLinkCDC_x64.sys=1
+
+[Strings]
+MFGNAME         = "SEGGER"
+CDC.DESCRIPTION = "JLink CDC UART Port"
+SERVICE         = "USB CDC serial port emulation"
+DiskName        ="J-Link Installation Disk"
+REG_SZ          = 0x00000000
+REG_MULTI_SZ    = 0x00010000
+REG_EXPAND_SZ   = 0x00020000
+REG_BINARY      = 0x00000001
+REG_DWORD       = 0x00010001
+
+; *** EOF ***

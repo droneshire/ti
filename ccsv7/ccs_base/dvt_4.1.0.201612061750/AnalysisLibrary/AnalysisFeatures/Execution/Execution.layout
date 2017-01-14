@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_34" class="java.beans.XMLDecoder"> 
+ <object class="com.ti.dvt.gsb.model.LayoutModel"> 
+  <void property="autoLayout"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="layoutMap"> 
+   <void method="put"> 
+    <string>Tap</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>187</int> 
+     <int>114</int> 
+     <int>49</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>NewBios6SysExecutionDP</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>233</int> 
+     <int>230</int> 
+     <int>118</int> 
+     <int>36</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>$Input</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>151</int> 
+     <int>55</int> 
+     <int>112</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:ForGraph</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>179</int> 
+     <int>368</int> 
+     <int>117</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>CSVFileReader</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>149</int> 
+     <int>7</int> 
+     <int>101</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>Graph</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>256</int> 
+     <int>296</int> 
+     <int>97</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>Tap.5</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>235</int> 
+     <int>169</int> 
+     <int>59</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>$Debug.VirtualBuffer</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>56</int> 
+     <int>235</int> 
+     <int>141</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.dvtgraph:Graph</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>312</int> 
+     <int>367</int> 
+     <int>71</int> 
+     <int>36</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:table.1268940961874</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>84</int> 
+     <int>284</int> 
+     <int>67</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+  </void> 
+ </object> 
+</java> 

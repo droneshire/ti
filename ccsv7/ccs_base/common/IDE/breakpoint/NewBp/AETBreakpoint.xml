@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<newBreakpoint xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="schema.xsd" name="Hardware Breakpoint" breakpointType="1">
+	<targets>
+		<target>
+			<type>dsk,emu</type>
+			<familyId>320</familyId>
+			<subfamilyId>62,67,64,66</subfamilyId>
+			<revision>*</revision>
+		</target>
+	</targets>
+
+	<defaultProperty>
+		<property name="Miscellaneous.Name" value="Breakpoint"/>
+		<property name="Hardware Configuration.Type" value="Breakpoint"/>
+	</defaultProperty>
+
+	<submitSequence>
+		<id>Hardware Configuration.Type.Location Type.Location</id>
+	</submitSequence>
+
+	<showIn>
+		<breakpointView autoSubmit="false" />
+		<disassemblyView autoSubmit="true">
+		<property>
+			<id>Hardware Configuration.Type.Location Type.Location</id>
+			<selectionLocation>selection</selectionLocation>
+		</property>
+		</disassemblyView>
+		<editor autoSubmit="true" selectionType="source">
+		<property>
+			<id>Hardware Configuration.Type.Location Type.Location</id>
+			<selectionLocation>selection</selectionLocation>
+		</property>
+		</editor>
+		<methodObject autoSubmit="true">
+		<property>
+			<id>Hardware Configuration.Type.Location Type.Location</id>
+			<selectionLocation>selection</selectionLocation>
+		</property>
+		</methodObject>
+	</showIn>
+
+	<dialog colCount="2">
+		<label id="label_location" widthHint="50" heightHint="18" verticalAlign="center" horizontalAlign="fill">
+			<text>Location:</text>
+		</label>
+		
+		<textBox id="Hardware Configuration.Type.Location Type.Location" widthHint="190" heightHint="20" verticalAlign="center" horizontalAlign="center">
+			<text>Enter program location here...</text>
+		</textBox>
+	</dialog>
+</newBreakpoint>

@@ -1,0 +1,16 @@
+PinMux.
+
+Usage:
+  pmux [-t <file>]... [-o <dir>] [-d <dir>] <.pinmux file>
+  pmux -h | --help
+  pmux --version
+
+
+Options:
+  -d <dir>, --data <dir>        Device data directory root [default: ./pinmux].	
+  -o <dir>, --output <dir>      Output directory for generated content [default: ./generated].
+  -t <file>, --template <file>  Template files to process [default: all].
+  -h --help                     Show this screen.
+  --version                     Show version.
+ 
+

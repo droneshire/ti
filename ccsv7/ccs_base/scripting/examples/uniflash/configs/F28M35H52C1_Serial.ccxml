@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configurations XML_version="1.2" id="configurations_0">
+
+<configuration XML_version="1.2" id="Serial Connection_0">
+        <instance XML_version="1.2" desc="Serial Connection_0" href="connections/SerialConnection.xml" id="Serial Connection_0" xml="SerialConnection.xml" xmlpath="connections"/>
+        <connection XML_version="1.2" id="Serial Connection_0">
+            <instance XML_version="1.2" href="drivers/Serial_cortexM.xml" id="drivers" xml="Serial_cortexM.xml" xmlpath="drivers"/>
+            <instance XML_version="1.2" href="drivers/Serial_c28x.xml" id="drivers" xml="Serial_c28x.xml" xmlpath="drivers"/>
+            <platform XML_version="1.2" id="platform_0">
+                <instance XML_version="1.2" desc="F28M35H52C1_0" href="devices/f28m35h52c1_serial.xml" id="F28M35H52C1_0" xml="f28m35h52c1_serial.xml" xmlpath="devices"/>
+            </platform>
+        </connection>
+    </configuration>
+</configurations>

@@ -1,0 +1,117 @@
+<module id="HWBIST_REGS" HW_revision="" description="HWBIST Registers">
+  <register id="CSTCGCR1" width="32" page="1" offset="0x4" internal="0" description="STC Global Control Register1">
+    <bitfield id="MICROCFG" description="Micro Configuration" begin="31" end="0" width="32" rwaccess="R/W"/>
+  </register>
+  <register id="CSTCGCR3" width="32" page="1" offset="0xc" internal="0" description="STC Global Control Register3">
+    <bitfield id="ILS" description="Interrupt Logging Start" begin="3" end="0" width="4" rwaccess="R/W"/>
+  </register>
+  <register id="CSTCGCR4" width="32" page="1" offset="0x10" internal="0" description="STC Global Control Register4">
+    <bitfield id="BISTGO" description="BIST Start " begin="3" end="0" width="4" rwaccess="R/W"/>
+  </register>
+  <register id="CSTCGCR5" width="32" page="1" offset="0x14" internal="0" description="STC Global Control Register5">
+    <bitfield id="RESTART" description="Restart Enable" begin="3" end="0" width="4" rwaccess="R/W"/>
+    <bitfield id="SOFT_RESET" description="Soft reset to BIST controller" begin="31" end="31" width="1" rwaccess="R/W"/>
+  </register>
+  <register id="CSTCGCR6" width="32" page="1" offset="0x18" internal="0" description="STC Global Control Register6">
+    <bitfield id="COV" description="COVERAGE" begin="1" end="0" width="2" rwaccess="R/W"/>
+  </register>
+  <register id="CSTCGCR7" width="32" page="1" offset="0x1c" internal="0" description="STC Global Control Register7">
+    <bitfield id="MCL" description="MAX CHAIN LENGTH" begin="7" end="0" width="8" rwaccess="R/W"/>
+    <bitfield id="DC" description="DEAD CYCLES" begin="11" end="8" width="4" rwaccess="R/W"/>
+    <bitfield id="NP" description="NUM  OF PIPELINE STAGES" begin="15" end="12" width="4" rwaccess="R/W"/>
+    <bitfield id="PST" description="PATTERN SET TYPE" begin="17" end="16" width="2" rwaccess="R/W"/>
+    <bitfield id="SCD" description="SHIFT_CLOCK_DIVISION" begin="19" end="18" width="2" rwaccess="R/W"/>
+  </register>
+  <register id="CSTCGCR8" width="32" page="1" offset="0x20" internal="0" description="STC Global Control Register8">
+    <bitfield id="CPC" description="COMPARE PATTERN CNT" begin="15" end="0" width="16" rwaccess="R/W"/>
+  </register>
+  <register id="CSTCPCNT" width="32" page="1" offset="0x24" internal="0" description="STC Pattern Count Register">
+    <bitfield id="PCNT_95" description="PATTERNS FOR 95% COVERAGE" begin="15" end="0" width="16" rwaccess="R/W"/>
+    <bitfield id="PCNT_99" description="PATTERNS FOR 99% COVERAGE" begin="31" end="16" width="16" rwaccess="R/W"/>
+  </register>
+  <register id="CSTCCONFIG" width="32" page="1" offset="0x28" internal="0" description="STC Registers Configuration Status">
+    <bitfield id="CFGDONE" description="Configuration done" begin="3" end="0" width="4" rwaccess="R/W"/>
+  </register>
+  <register id="CSTCSADDR" width="32" page="1" offset="0x2c" internal="0" description="STC ROM Start Address">
+    <bitfield id="SAPAT" description="PATTERN ROM Start Address" begin="15" end="0" width="16" rwaccess="R/W"/>
+    <bitfield id="SAMISR" description="MISR ROM Start Address" begin="31" end="16" width="16" rwaccess="R/W"/>
+  </register>
+  <register id="CSTCTEST" width="32" page="1" offset="0x30" internal="0" description="C28 HW BIST Test Register ">
+    <bitfield id="TEST_TO" description="Test_ Time_Out" begin="3" end="0" width="4" rwaccess="R/W"/>
+    <bitfield id="TEST_CMP_FAIL" description="Test MISR compare fail" begin="7" end="4" width="4" rwaccess="R/W"/>
+    <bitfield id="TEST_NMI" description="Test_NMI" begin="11" end="8" width="4" rwaccess="R/W"/>
+    <bitfield id="TEST" description="TEST Bits" begin="31" end="12" width="20" rwaccess="R/W"/>
+  </register>
+  <register id="CSTCRET" width="32" page="1" offset="0x34" internal="0" description="C28 Return PC Address">
+    <bitfield id="RETADDR" description="Return Address " begin="31" end="0" width="32" rwaccess="R/W"/>
+  </register>
+  <register id="CSTCCRD" width="32" page="1" offset="0x38" internal="0" description="C28 Context Restore Done Register">
+    <bitfield id="Restore_Done" description="Context Restone Done" begin="3" end="0" width="4" rwaccess="R/W"/>
+  </register>
+  <register id="CSTCGSTAT" width="32" page="1" offset="0x40" internal="0" description="STC Global Status Register">
+    <bitfield id="BISTDONE" description="HW BIST Complete" begin="0" end="0" width="1" rwaccess="R/W"/>
+    <bitfield id="MACRODONE" description="Macro test slot Complete" begin="1" end="1" width="1" rwaccess="R/W"/>
+    <bitfield id="NMI" description="Exit due to NMI" begin="2" end="2" width="1" rwaccess="R/W"/>
+    <bitfield id="BISTFAIL" description="HW BIST Failure" begin="3" end="3" width="1" rwaccess="R/W"/>
+    <bitfield id="INTCMPF" description="Intermediate Comparison Failure" begin="4" end="4" width="1" rwaccess="R/W"/>
+    <bitfield id="TOFAIL" description="Time Out Failure" begin="5" end="5" width="1" rwaccess="R/W"/>
+  </register>
+  <register id="CSTCCPCR" width="32" page="1" offset="0x48" internal="0" description="STC Current Pattern Count Register">
+    <bitfield id="PATCNT" description="Current Pattern Count" begin="15" end="0" width="16" rwaccess="R/W"/>
+  </register>
+  <register id="CSTCCADDR" width="32" page="1" offset="0x4c" internal="0" description="STC Current ROM Address Register">
+    <bitfield id="PATADDR" description="Current Pattern ROM Address" begin="15" end="0" width="16" rwaccess="R/W"/>
+    <bitfield id="MISRADDR" description="Current MISR ROM Address" begin="31" end="16" width="16" rwaccess="R/W"/>
+  </register>
+  <register id="CSTCMISR0" width="32" page="1" offset="0x50" internal="0" description="MISR Result Register 0">
+    <bitfield id="MISR0" description="Final MISR Result[31:0]" begin="31" end="0" width="32" rwaccess="R/W"/>
+  </register>
+  <register id="CSTCMISR1" width="32" page="1" offset="0x54" internal="0" description="MISR Result Register 1">
+    <bitfield id="MISR1" description="Final MISR Result[63:32]" begin="31" end="0" width="32" rwaccess="R/W"/>
+  </register>
+  <register id="CSTCMISR2" width="32" page="1" offset="0x58" internal="0" description="MISR Result Register 2">
+    <bitfield id="MISR2" description="Final MISR Result[95:64]" begin="31" end="0" width="32" rwaccess="R/W"/>
+  </register>
+  <register id="CSTCMISR3" width="32" page="1" offset="0x5c" internal="0" description="MISR Result Register 3">
+    <bitfield id="MISR3" description="Final MISR Result[127:96]" begin="31" end="0" width="32" rwaccess="R/W"/>
+  </register>
+  <register id="CSTCMISR4" width="32" page="1" offset="0x60" internal="0" description="MISR Result Register 4">
+    <bitfield id="MISR4" description="Final MISR Result[159:128]" begin="31" end="0" width="32" rwaccess="R/W"/>
+  </register>
+  <register id="CSTCMISR5" width="32" page="1" offset="0x64" internal="0" description="MISR Result Register 5">
+    <bitfield id="MISR5" description="Final MISR Result[191:160]" begin="31" end="0" width="32" rwaccess="R/W"/>
+  </register>
+  <register id="CSTCMISR6" width="32" page="1" offset="0x68" internal="0" description="MISR Result Register 6">
+    <bitfield id="MISR6" description="Final MISR Result[223:192]" begin="31" end="0" width="32" rwaccess="R/W"/>
+  </register>
+  <register id="CSTCMISR7" width="32" page="1" offset="0x6c" internal="0" description="MISR Result Register 7">
+    <bitfield id="MISR7" description="Final MISR Result[255:224]" begin="31" end="0" width="32" rwaccess="R/W"/>
+  </register>
+  <register id="CSTCMISR8" width="32" page="1" offset="0x70" internal="0" description="MISR Result Register 8">
+    <bitfield id="MISR8" description="Final MISR Result[287:256]" begin="31" end="0" width="32" rwaccess="R/W"/>
+  </register>
+  <register id="CSTCMISR9" width="32" page="1" offset="0x74" internal="0" description="MISR Result Register 9">
+    <bitfield id="MISR9" description="Final MISR Result[319:288]" begin="31" end="0" width="32" rwaccess="R/W"/>
+  </register>
+  <register id="CSTCMISR10" width="32" page="1" offset="0x78" internal="0" description="MISR Result Register 10">
+    <bitfield id="MISR10" description="Final MISR Result[351:320]" begin="31" end="0" width="32" rwaccess="R/W"/>
+  </register>
+  <register id="CSTCMISR11" width="32" page="1" offset="0x7c" internal="0" description="MISR Result Register 11">
+    <bitfield id="MISR11" description="Final MISR Result[383:352]" begin="31" end="0" width="32" rwaccess="R/W"/>
+  </register>
+  <register id="CSTCMISR12" width="32" page="1" offset="0x80" internal="0" description="MISR Result Register 12">
+    <bitfield id="MISR12" description="Final MISR Result[415:384]" begin="31" end="0" width="32" rwaccess="R/W"/>
+  </register>
+  <register id="CSTCMISR13" width="32" page="1" offset="0x84" internal="0" description="MISR Result Register 13">
+    <bitfield id="MISR13" description="Final MISR Result[447:416]" begin="31" end="0" width="32" rwaccess="R/W"/>
+  </register>
+  <register id="CSTCMISR14" width="32" page="1" offset="0x88" internal="0" description="MISR Result Register 14">
+    <bitfield id="MISR14" description="Final MISR Result[479:448]" begin="31" end="0" width="32" rwaccess="R/W"/>
+  </register>
+  <register id="CSTCMISR15" width="32" page="1" offset="0x8c" internal="0" description="MISR Result Register 15">
+    <bitfield id="MISR15" description="Final MISR Result[511:480]" begin="31" end="0" width="32" rwaccess="R/W"/>
+  </register>
+  <register id="CSTCSEM" width="32" page="1" offset="0xa0" internal="0" description="STC Semaphore register">
+    <bitfield id="SEMAPHORE" description="Semaphore" begin="1" end="0" width="2" rwaccess="R/W"/>
+  </register>
+</module>

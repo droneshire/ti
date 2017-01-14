@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<translate name="Rename Fields">
+	<passthru name="Partial Profile"	input="Partial"/>
+	<passthru name="Function"			input="Name"/>
+	<passthru name="Excl"				input="Excl_Count"/>
+	<passthru name="Incl"				input="Incl_Count"/>
+</translate>

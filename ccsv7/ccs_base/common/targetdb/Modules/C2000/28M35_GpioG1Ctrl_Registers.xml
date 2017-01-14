@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- 
+  TI File $Revision: 
+  Checkin $Date: 
+  --> 
+
+<!--  C28M35x GPIOG1 CTRL REGS Registers 
+     =================================== 
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     --> 
+<module id="GPIOG1 CTRL REGS" HW_revision="" XML_version="1" description="GPIOG1 CTRL REGS Registers">
+    <register id="GPACTRL" acronym="GPACTRL" offset="0" page="1" width="32" description="GPIO A Control Register (GPIO0 to 31)" />
+    <register id="GPAQSEL1" acronym="GPAQSEL1" offset="2" page="1" width="32" description="GPIO A Qualifier Select 1 Register (GPIO0 to 15) " />
+    <register id="GPAQSEL2" acronym="GPAQSEL2" offset="4" page="1" width="32" description="GPIO A Qualifier Select 2 Register (GPIO16 to 31)" />
+    <register id="GPAMUX1" acronym="GPAMUX1" offset="6" page="1" width="32" description="GPIO A Mux 1 Register (GPIO0 to 15) " />
+    <register id="GPAMUX2" acronym="GPAMUX2" offset="8" page="1" width="32" description="GPIO A Mux 2 Register (GPIO16 to 31)" />
+    <register id="GPADIR" acronym="GPADIR" offset="10" page="1" width="32" description="GPIO A Direction Register (GPIO0 to 31) )" />
+    <!--  2 empty  -->
+    <!--  2 empty  -->
+    <register id="GPBCTRL" acronym="GPBCTRL" offset="16" page="1" width="32" description="GPIO B Control Register (GPIO32 to 63)" />
+    <register id="GPBQSEL1" acronym="GPBQSEL1" offset="18" page="1" width="32" description="GPIO B Qualifier Select 1 Register (GPIO32 to 47)" />
+    <register id="GPBQSEL2" acronym="GPBQSEL2" offset="20" page="1" width="32" description="GPIO B Qualifier Select 2 Register (GPIO48 to 63)" />
+    <register id="GPBMUX1" acronym="GPBMUX1" offset="22" page="1" width="32" description="GPIO B Mux 1 Register (GPIO32 to 47)" />
+    <register id="GPBMUX2" acronym="GPBMUX2" offset="24" page="1" width="32" description="GPIO B Mux 2 Register (GPIO48 to 63)" />
+    <register id="GPBDIR" acronym="GPBDIR" offset="26" page="1" width="32" description="GPIO B Direction Register (GPIO32 to 63)" />
+    <!--  2 empty  -->
+    <!--  2 empty  -->
+    <register id="GPCCTRL" acronym="GPCCTRL" offset="32" page="1" width="32" description="GPIO C Control Register (GPIO68 to 71)" />
+    <register id="GPCQSEL1" acronym="GPCQSEL1" offset="34" page="1" width="32" description="GPIO C Qualifier Select 1 Register (GPIO68 to 71)" />
+    <!--  2 empty  -->
+    <register id="GPCMUX1" acronym="GPCMUX1" offset="38" page="1" width="32" description="GPIO C Mux 1 Register (GPIO68 to 71)" />
+    <!--  2 empty  -->
+    <register id="GPCDIR" acronym="GPCDIR" offset="42" page="1" width="32" description="GPIO C Direction Register (GPIO68 to 71)" />
+    <!--  2 empty  -->
+    <!--  2 empty  -->
+    <!--  16 empty  -->
+</module>

@@ -1,0 +1,238 @@
+[
+  {
+    "display_name": "Header",
+    "type": "rectangular",
+    "pins": [
+      {
+        "pin_number": 1,
+        "ball": null
+      },
+      {
+        "pin_number": 2,
+        "ball": "54",
+        "name": "P6.0",
+        "display_name": "P6.0"
+      },
+      {
+        "pin_number": 3,
+        "ball": "34",
+        "name": "P3.2",
+        "display_name": "P3.2"
+      },
+      {
+        "pin_number": 4,
+        "ball": "35",
+        "name": "P3.3",
+        "display_name": "P3.3"
+      },
+      {
+        "pin_number": 5,
+        "ball": "57",
+        "name": "P4.1",
+        "display_name": "P4.1"
+      },
+      {
+        "pin_number": 6,
+        "ball": "59",
+        "name": "P4.3",
+        "display_name": "P4.3"
+      },
+      {
+        "pin_number": 7,
+        "ball": "9",
+        "name": "P1.5",
+        "display_name": "P1.5"
+      },
+      {
+        "pin_number": 8,
+        "ball": "62",
+        "name": "P4.6",
+        "display_name": "P4.6"
+      },
+      {
+        "pin_number": 9,
+        "ball": "79",
+        "name": "P6.5",
+        "display_name": "P6.5"
+      },
+      {
+        "pin_number": 10,
+        "ball": "78",
+        "name": "P6.4",
+        "display_name": "P6.4"
+      },
+      {
+        "pin_number": 11,
+        "ball": "38",
+        "name": "P3.6",
+        "display_name": "P3.6"
+      },
+      {
+        "pin_number": 12,
+        "ball": "66",
+        "name": "P5.2",
+        "display_name": "P5.2"
+      },
+      {
+        "pin_number": 13,
+        "ball": "64",
+        "name": "P5.0",
+        "display_name": "P5.0"
+      },
+      {
+        "pin_number": 14,
+        "ball": "11",
+        "name": "P1.7",
+        "display_name": "P1.7"
+      },
+      {
+        "pin_number": 15,
+        "ball": "10",
+        "name": "P1.6",
+        "display_name": "P1.6"
+      },
+      {
+        "pin_number": 16,
+        "ball": null
+      },
+      {
+        "pin_number": 17,
+        "ball": "71",
+        "name": "P5.7",
+        "display_name": "P5.7"
+      },
+      {
+        "pin_number": 18,
+        "ball": "32",
+        "name": "P3.0",
+        "display_name": "P3.0"
+      },
+      {
+        "pin_number": 19,
+        "ball": "21",
+        "name": "P2.5",
+        "display_name": "P2.5"
+      },
+      {
+        "pin_number": 20,
+        "ball": null
+      },
+      {
+        "pin_number": 21,
+        "ball": null
+      },
+      {
+        "pin_number": 22,
+        "ball": null
+      },
+      {
+        "pin_number": 23,
+        "ball": "55",
+        "name": "P6.1",
+        "display_name": "P6.1"
+      },
+      {
+        "pin_number": 24,
+        "ball": "56",
+        "name": "P4.0",
+        "display_name": "P4.0"
+      },
+      {
+        "pin_number": 25,
+        "ball": "58",
+        "name": "P4.2",
+        "display_name": "P4.2"
+      },
+      {
+        "pin_number": 26,
+        "ball": "60",
+        "name": "P4.4",
+        "display_name": "P4.4"
+      },
+      {
+        "pin_number": 27,
+        "ball": "61",
+        "name": "P4.5",
+        "display_name": "P4.5"
+      },
+      {
+        "pin_number": 28,
+        "ball": "63",
+        "name": "P4.7",
+        "display_name": "P4.7"
+      },
+      {
+        "pin_number": 29,
+        "ball": "68",
+        "name": "P5.4",
+        "display_name": "P5.4"
+      },
+      {
+        "pin_number": 30,
+        "ball": "69",
+        "name": "P5.5",
+        "display_name": "P5.5"
+      },
+      {
+        "pin_number": 31,
+        "ball": "39",
+        "name": "P3.7",
+        "display_name": "P3.7"
+      },
+      {
+        "pin_number": 32,
+        "ball": "37",
+        "name": "P3.5",
+        "display_name": "P3.5"
+      },
+      {
+        "pin_number": 33,
+        "ball": "65",
+        "name": "P5.1",
+        "display_name": "P5.1"
+      },
+      {
+        "pin_number": 34,
+        "ball": "19",
+        "name": "P2.3",
+        "display_name": "P2.3"
+      },
+      {
+        "pin_number": 35,
+        "ball": "81",
+        "name": "P6.7",
+        "display_name": "P6.7"
+      },
+      {
+        "pin_number": 36,
+        "ball": "80",
+        "name": "P6.6",
+        "display_name": "P6.6"
+      },
+      {
+        "pin_number": 37,
+        "ball": "70",
+        "name": "P5.6",
+        "display_name": "P5.6"
+      },
+      {
+        "pin_number": 38,
+        "ball": "20",
+        "name": "P2.4",
+        "display_name": "P2.4"
+      },
+      {
+        "pin_number": 39,
+        "ball": "22",
+        "name": "P2.6",
+        "display_name": "P2.6"
+      },
+      {
+        "pin_number": 40,
+        "ball": "23",
+        "name": "P2.7",
+        "display_name": "P2.7"
+      }
+    ]
+  }
+]

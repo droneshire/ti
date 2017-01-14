@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!-- **************************************************** -->
+<!-- * $Revision: /main/c64x_rel/1 $ -->
+<!-- * $Date: July 29, 2004   14:20:49 $ -->
+<!-- * Copyright (c) 2004, Texas Instruments Incorporated -->
+<!-- * All rights reserved -->
+<!-- **************************************************** -->
+<drivers id="TMS320C64XX">
+   <isa Type="TMS320C64XX" ProcID="0x500193F8">
+      <driver file="..\..\..\emulation\drivers\tixds6400_11.dvr">
+         <property Type="hiddenfield" Value="true" id="realtimeEnabled" />
+	 <property Name="TraceDeviceId" Type="numericfield" Value="0x0" NumericType="HEX" UpperBound="0xFFFFFFFF" LowerBound="0" ID="device.traceId"/>
+         <connectionType Type="TIXDS510"/>
+      </driver>
+   </isa>
+</drivers>

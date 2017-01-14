@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cpu id="CSSTM" isa="TMS470R26X" HW_revision="1.0" XML_version="1.0" description="CS System Trace">
+</cpu>

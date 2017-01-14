@@ -1,0 +1,327 @@
+<!-- Decoders perform the following sequence of operations:
+		1) XOR XorWithRegValue with register valuex
+		2) Mask with BitfieldMask property 
+		3) shift right by BitfieldShift bits 
+		4a) if a <StringTable> field is present with <NumStrings> > 0, use result of step 3 as index into lookup table of strings and 
+			set string result = value from table.  No further processing is done in this case.
+		4b) if a <DecoderTable> field is present with <NumDecoders> > 0, use result of step 3 as index into lookup table of decoders and
+			call the specified decoder and sets result = value and string result = string from the decoder 
+		4c) if a <LookupTable> field is present with <NumIndexValues> > 0, use result of step 3 as index into lookup table and set result = value from table 
+		5) multiply the result from step 4b or 4c by floating point Multiplier value (e.g. set to 0.25 to divide by 4)  
+		6) add AddToProduct value 
+		7) if IsTrueIfResultIsZero, decode_bool returns true if 0, false if non-zero
+		
+		If any of these properties are not defined, they are set to the
+		following default values:
+			XorWithRegValue = 0
+			BitfieldMask = 0xffffffff
+			BitfieldShift = 0
+			Multiplier = 1.0
+			AddToProduct = 0
+			IsTrueIfResultIsZero = false
+		-->
+<Decoder>
+	<DecoderName>GetL1CacheSize</DecoderName>
+	<BitfieldMask>0x07</BitfieldMask>
+	<BitfieldShift>0</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+	<LookupTable>
+		<!-- cache size in bytes -->
+		<NumIndexValues>8</NumIndexValues>
+		<Array index="0">0</Array>
+		<Array index="1">4096</Array>
+		<Array index="2">8192</Array>
+		<Array index="3">16384</Array>
+		<Array index="4">32768</Array>
+		<Array index="5">32768</Array>
+		<Array index="6">32768</Array>
+		<Array index="7">32768</Array>
+	</LookupTable>
+</Decoder>
+<Decoder>
+	<DecoderName>GetL1PNumCacheLines</DecoderName>
+	<BitfieldMask>0x07</BitfieldMask>
+	<BitfieldShift>0</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+	<LookupTable>
+		<!-- cache size / bytes per cache line -->
+		<NumIndexValues>8</NumIndexValues>
+		<Array index="0">0</Array>
+		<Array index="1">128</Array>
+		<Array index="2">256</Array>
+		<Array index="3">512</Array>
+		<Array index="4">1024</Array>
+		<Array index="5">1024</Array>
+		<Array index="6">1024</Array>
+		<Array index="7">1024</Array>
+	</LookupTable>
+</Decoder>
+<Decoder>
+	<!-- returns true if the cache has been configured with a non-zero size -->
+	<DecoderName>IsCacheEnabled</DecoderName>
+	<BitfieldMask>0x07</BitfieldMask>
+	<BitfieldShift>0</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+	<LookupTable>
+		<!-- cache size / bytes per cache line -->
+		<NumIndexValues>8</NumIndexValues>
+		<Array index="0">0</Array>
+		<Array index="1">1</Array>
+		<Array index="2">1</Array>
+		<Array index="3">1</Array>
+		<Array index="4">1</Array>
+		<Array index="5">1</Array>
+		<Array index="6">1</Array>
+		<Array index="7">1</Array>
+	</LookupTable>
+</Decoder>
+<Decoder>
+	<DecoderName>GetL1DNumCacheLines</DecoderName>
+	<BitfieldMask>0x07</BitfieldMask>
+	<BitfieldShift>0</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+	<LookupTable>
+		<!-- cache size / bytes per cache line -->
+		<NumIndexValues>8</NumIndexValues>
+		<Array index="0">0</Array>
+		<Array index="1">64</Array>
+		<Array index="2">128</Array>
+		<Array index="3">256</Array>
+		<Array index="4">512</Array>
+		<Array index="5">512</Array>
+		<Array index="6">512</Array>
+		<Array index="7">512</Array>
+	</LookupTable>
+</Decoder>
+<Decoder>
+	<DecoderName>GetL2CacheSize</DecoderName>
+	<BitfieldMask>0x07</BitfieldMask>
+	<BitfieldShift>0</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+	<LookupTable>
+		<NumIndexValues>8</NumIndexValues>
+		<!-- cache size in bytes -->
+		<Array index="0">0</Array>
+		<Array index="1">0x8000</Array>
+		<Array index="2">0x10000</Array>
+		<Array index="3">0x20000</Array>
+		<Array index="4">0x40000</Array>
+		<Array index="5">0x80000</Array>
+		<Array index="6">0x100000</Array>
+		<Array index="7">0x200000</Array>
+	</LookupTable>
+</Decoder>
+<Decoder>
+	<DecoderName>GetL2NumCacheLines</DecoderName>
+	<BitfieldMask>0x07</BitfieldMask>
+	<BitfieldShift>0</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+	<LookupTable>
+		<!-- cache size / bytes per cache line -->
+		<NumIndexValues>8</NumIndexValues>
+		<Array index="0">0</Array>
+		<Array index="1">256</Array>
+		<Array index="2">512</Array>
+		<Array index="3">1024</Array>
+		<Array index="4">2048</Array>
+		<Array index="5">4096</Array>
+		<Array index="6">8192</Array>
+		<Array index="7">16384</Array>
+	</LookupTable>
+</Decoder>
+<Decoder>
+	<DecoderName>GetUserRWX</DecoderName>
+	<BitfieldMask>0x07</BitfieldMask>
+	<BitfieldShift>0</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+	<StringTable>
+		<NumStrings>8</NumStrings>
+		<Array index="0">---</Array>
+		<Array index="1">--X)</Array>
+		<Array index="2">-W-</Array>
+		<Array index="3">-WX</Array>
+		<Array index="4">R--</Array>
+		<Array index="5">R-X</Array>
+		<Array index="6">RW-</Array>
+		<Array index="7">RWX</Array>
+	</StringTable>	
+</Decoder>
+<Decoder>
+	<DecoderName>GetSuperRWX</DecoderName>
+	<BitfieldMask>0x038</BitfieldMask>
+	<BitfieldShift>3</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+	<StringTable>
+		<NumStrings>8</NumStrings>
+		<Array index="0">---</Array>
+		<Array index="1">--X)</Array>
+		<Array index="2">-W-</Array>
+		<Array index="3">-WX</Array>
+		<Array index="4">R--</Array>
+		<Array index="5">R-X</Array>
+		<Array index="6">RW-</Array>
+		<Array index="7">RWX</Array>
+	</StringTable>	
+</Decoder>
+
+<!-- The following are no longer used
+<Decoder>
+	<DecoderName>IsUserExecutable</DecoderName>
+	<BitfieldMask>0x01</BitfieldMask>
+	<BitfieldShift>0</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>IsUserWriteable</DecoderName>
+	<BitfieldMask>0x02</BitfieldMask>
+	<BitfieldShift>1</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>IsUserReadable</DecoderName>
+	<BitfieldMask>0x04</BitfieldMask>
+	<BitfieldShift>2</BitfieldShift>
+</Decoder>
+<Decoder>
+	<DecoderName>IsSuperExecutable</DecoderName>
+	<BitfieldMask>0x08</BitfieldMask>
+	<BitfieldShift>3</BitfieldShift>
+</Decoder>
+<Decoder>
+	<DecoderName>IsSuperWriteable</DecoderName>
+	<BitfieldMask>0x10</BitfieldMask>
+	<BitfieldShift>4</BitfieldShift>
+</Decoder>
+<Decoder>
+	<DecoderName>IsSuperReadable</DecoderName>
+	<BitfieldMask>0x20</BitfieldMask>
+	<BitfieldShift>5</BitfieldShift>
+</Decoder>
+-->
+
+<Decoder>
+	<DecoderName>IsNonEmulatable</DecoderName>
+	<BitfieldMask>0x40</BitfieldMask>
+	<BitfieldShift>6</BitfieldShift>
+	<!-- convert from Emulatable = 1 to NonEmulatable = 1 by xoring value with 0x40 -->
+	<XorWithRegValue>0x40</XorWithRegValue>
+</Decoder>
+<Decoder>
+	<DecoderName>IsSecure</DecoderName>
+	<BitfieldMask>0x80</BitfieldMask>
+	<BitfieldShift>7</BitfieldShift>
+	<!-- convert from NonSecure = 1 to Secure = 1 by xoring value with 0x80 -->
+	<XorWithRegValue>0x80</XorWithRegValue>
+</Decoder>
+<Decoder>
+	<DecoderName>IsAccessID_LOCAL</DecoderName>
+	<BitfieldMask>0x100</BitfieldMask>
+	<BitfieldShift>8</BitfieldShift>
+</Decoder>
+<Decoder>
+	<DecoderName>IsAccessID_AIDX</DecoderName>
+	<BitfieldMask>0x200</BitfieldMask>
+	<BitfieldShift>9</BitfieldShift>
+</Decoder>
+<Decoder>
+	<DecoderName>IsAccessID_CPU</DecoderName>
+	<BitfieldMask>0x0FC00</BitfieldMask>
+	<BitfieldShift>10</BitfieldShift>
+</Decoder>
+<Decoder>
+	<DecoderName>L1DLruToWayMap</DecoderName>
+	<BitfieldMask>0x01</BitfieldMask>
+	<BitfieldShift>0</BitfieldShift>
+</Decoder>
+<Decoder>
+	<DecoderName>L2LruToWayMap</DecoderName>
+	<BitfieldMask>0x07</BitfieldMask>
+	<BitfieldShift>0</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+	<!--
+				From the GEM_UMC spec, table 46:
+				LRU Interpretation
+
+				b0 b1 b2 (MRU to LRU order)
+				0  0  0		0, 1, 2, 3
+				0  0  1		0, 1, 3, 2
+				0  1  0		1, 0, 2, 3
+				0  1  1		1, 0, 3, 2
+				1  0  0		2, 3, 0, 1
+				1  0  1		3, 2, 0, 1
+				1  1  0		2, 3, 1, 0
+				1  1  1		3, 2, 1, 0
+
+				reversing this to get b2-b1 as an index:
+				index:  LRU way
+					0	3
+					1	1
+					2	3
+					3	0
+					4	2
+					5	1
+					6	2
+					7	0
+				-->
+	<LookupTable>
+		<NumIndexValues>8</NumIndexValues>
+		<Array index="0">3</Array>
+		<Array index="1">1</Array>
+		<Array index="2">3</Array>
+		<Array index="3">0</Array>
+		<Array index="4">2</Array>
+		<Array index="5">1</Array>
+		<Array index="6">2</Array>
+		<Array index="7">0</Array>
+	</LookupTable>
+</Decoder>
+<!-- GetCoreNumber extracts the device number for the device core from the DNUM control register -->
+<Decoder>
+	<DecoderName>GetCoreNumber</DecoderName>
+	<XorWithRegValue>0x0</XorWithRegValue>
+	<BitfieldMask>0x0F</BitfieldMask>
+	<BitfieldShift>0</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+	<IsTrueIfResultIsZero>false</IsTrueIfResultIsZero>
+</Decoder>
+<!-- GetCoreNumber uses the core number from the DNUM control register as an index into a lookup table
+     that specifies the base global address for that core -->
+<Decoder>
+	<DecoderName>GetGlobalAdrsForThisCore</DecoderName>
+	<XorWithRegValue>0x00000000</XorWithRegValue>
+	<BitfieldMask>0x0F</BitfieldMask>
+	<BitfieldShift>0</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+	<LookupTable>
+		<NumIndexValues>16</NumIndexValues>
+		<Array index="0">0x010000000</Array>
+		<Array index="1">0x011000000</Array>
+		<Array index="2">0x012000000</Array>
+		<Array index="3">0x013000000</Array>
+		<Array index="4">0x014000000</Array>
+		<Array index="5">0x015000000</Array>
+		<Array index="6">0x016000000</Array>
+		<Array index="7">0x017000000</Array>   
+		<Array index="8">0x018000000</Array>
+		<Array index="9">0x019000000</Array>
+		<Array index="10">0x01A000000</Array>
+		<Array index="11">0x01B000000</Array>
+		<Array index="12">0x01C000000</Array>
+		<Array index="13">0x01D000000</Array>
+		<Array index="14">0x01E000000</Array>
+		<Array index="15">0x01F000000</Array>   
+	</LookupTable>
+</Decoder>

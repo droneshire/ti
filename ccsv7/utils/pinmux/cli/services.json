@@ -1,0 +1,20 @@
+{
+	"services": [
+		"services/utils.js",
+		"services/data.js",
+		"services/solver/debug.js",
+		"services/solver/choiceFactories.js",
+		"services/solver/choices.js",
+		"services/solver/clauseGeneration.js",
+		"services/solver/clauses.js",
+		"services/solver/errorLocation.js",
+		"services/solver/glucose.js",
+		"services/solver/glucoseFunctions.js",
+		"services/solver/solver.js",
+		"services/requirements.js",
+		"services/uiConfigurables.js",
+		"services/ui.js",
+		"services/codeGenerator.js",
+		"services/pinmuxRootScope.js"
+	]
+}

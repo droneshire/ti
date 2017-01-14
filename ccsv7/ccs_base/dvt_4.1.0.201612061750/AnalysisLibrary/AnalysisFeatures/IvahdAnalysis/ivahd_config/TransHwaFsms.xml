@@ -1,0 +1,5 @@
+<?xml version="1.0" ?>
+<translate name="TransHwaFsms">
+  <passthruAll/>
+  <passthru name="Duration" input="Idle - Active" />
+</translate>

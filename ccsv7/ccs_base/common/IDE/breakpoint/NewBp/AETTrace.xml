@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<newBreakpoint xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="schema.xsd" enable="false" name="Trace" breakpointType="1" hidden="true">
+  <targets>
+    <target>
+      <type>dsk,emu</type>
+      <familyId>320</familyId>
+      <subfamilyId>64,66,67</subfamilyId>
+      <revision>*</revision>
+    </target>
+    <target>
+      <type>dsk,emu</type>
+      <familyId>470</familyId>
+      <subfamilyId>2,9,c,e,15</subfamilyId>
+      <revision>*</revision>
+    </target>
+  </targets>
+  <defaultProperty>
+    <property name="Hardware Configuration.Type" value="Trace" />
+    <property name="Miscellaneous.Name" value="Trace" />
+  </defaultProperty>
+  <showIn>
+    <breakpointView autoSubmit="true" />
+  </showIn>
+</newBreakpoint>

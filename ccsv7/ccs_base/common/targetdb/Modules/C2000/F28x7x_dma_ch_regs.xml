@@ -1,0 +1,91 @@
+<module id="DMA_CH_REGS" HW_revision="" description="DMA CH Registers">
+	<register id="MODE" width="16" page="1" offset="0x0" internal="0" description="Mode Register">
+		<bitfield id="PERINTSEL" description="Peripheral Interrupt and Sync Select" begin="4" end="0" width="5" rwaccess="R/W"/>
+		<bitfield id="OVRINTE" description="Overflow Interrupt Enable" begin="7" end="7" width="1" rwaccess="R/W"/>
+		<bitfield id="PERINTE" description="Peripheral Interrupt Enable" begin="8" end="8" width="1" rwaccess="R/W"/>
+		<bitfield id="CHINTMODE" description="Channel Interrupt Mode" begin="9" end="9" width="1" rwaccess="R/W"/>
+		<bitfield id="ONESHOT" description="One Shot Mode Bit" begin="10" end="10" width="1" rwaccess="R/W"/>
+		<bitfield id="CONTINUOUS" description="Continuous Mode Bit" begin="11" end="11" width="1" rwaccess="R/W"/>
+		<bitfield id="DATASIZE" description="Data Size Mode Bit" begin="14" end="14" width="1" rwaccess="R/W"/>
+		<bitfield id="CHINTE" description="Channel Interrupt Enable Bit" begin="15" end="15" width="1" rwaccess="R/W"/>
+	</register>
+	<register id="CONTROL" width="16" page="1" offset="0x1" internal="0" description="Control Register">
+		<bitfield id="RUN" description="Run Bit" begin="0" end="0" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="HALT" description="Halt Bit" begin="1" end="1" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="SOFTRESET" description="Soft Reset Bit" begin="2" end="2" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="PERINTFRC" description="Interrupt Force Bit" begin="3" end="3" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="PERINTCLR" description="Interrupt Clear Bit" begin="4" end="4" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="ERRCLR" description="Error Clear Bit" begin="7" end="7" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="PERINTFLG" description="Interrupt Flag Bit" begin="8" end="8" width="1" rwaccess="R"/>
+		<bitfield id="TRANSFERSTS" description="Transfer Status Bit" begin="11" end="11" width="1" rwaccess="R"/>
+		<bitfield id="BURSTSTS" description="Burst Status Bit" begin="12" end="12" width="1" rwaccess="R"/>
+		<bitfield id="RUNSTS" description="Run Status Bit" begin="13" end="13" width="1" rwaccess="R"/>
+		<bitfield id="OVRFLG" description="Overflow Flag Bit" begin="14" end="14" width="1" rwaccess="R"/>
+	</register>
+	<register id="BURST_SIZE" width="16" page="1" offset="0x2" internal="0" description="Burst Size Register">
+		<bitfield id="BURSTSIZE" description="Burst Transfer Size" begin="4" end="0" width="5" rwaccess="R/W"/>
+	</register>
+	<register id="BURST_COUNT" width="16" page="1" offset="0x3" internal="0" description="Burst Count Register">
+		<bitfield id="BURSTCOUNT" description="Burst Transfer Size" begin="4" end="0" width="5" rwaccess="R"/>
+	</register>
+	<register id="SRC_BURST_STEP" width="16" page="1" offset="0x4" internal="0" description="Source Burst Step Register">
+		<bitfield id="SRCBURSTSTEP" description="Source post-increment/decrement step size of a burst" begin="15" end="0" width="16" rwaccess="R/W"/>
+	</register>
+	<register id="DST_BURST_STEP" width="16" page="1" offset="0x5" internal="0" description="Destination Burst Step Register">
+		<bitfield id="DSTBURSTSTEP" description="Destination post-increment/decrement step size of a burst" begin="15" end="0" width="16" rwaccess="R/W"/>
+	</register>
+	<register id="TRANSFER_SIZE" width="16" page="1" offset="0x6" internal="0" description="Transfer Size Register">
+		<bitfield id="TRANSFERSIZE" description="These bits specify the number of bursts to transfer:" begin="15" end="0" width="16" rwaccess="R/W"/>
+	</register>
+	<register id="TRANSFER_COUNT" width="16" page="1" offset="0x7" internal="0" description="Transfer Count Register">
+		<bitfield id="TRANSFERCOUNT" description="These bits specify the current transfer counter value:" begin="15" end="0" width="16" rwaccess="R/W"/>
+	</register>
+	<register id="SRC_TRANSFER_STEP" width="16" page="1" offset="0x8" internal="0" description="Source Transfer Step Register">
+		<bitfield id="SRCTRANSFERSTEP" description="Source post-increment/decrement step size of a transfer" begin="15" end="0" width="16" rwaccess="R/W"/>
+	</register>
+	<register id="DST_TRANSFER_STEP" width="16" page="1" offset="0x9" internal="0" description="Destination Transfer Step Register">
+		<bitfield id="DSTTRANSFERSTEP" description="Destination post-increment/decrement step size of a transfer" begin="15" end="0" width="16" rwaccess="R/W"/>
+	</register>
+	<register id="SRC_WRAP_SIZE" width="16" page="1" offset="0xa" internal="0" description="Source Wrap Size Register">
+		<bitfield id="WRAPSIZE" description="Number of bursts to transfer before wrapping" begin="15" end="0" width="16" rwaccess="R/W"/>
+	</register>
+	<register id="SRC_WRAP_COUNT" width="16" page="1" offset="0xb" internal="0" description="Source Wrap Count Register">
+		<bitfield id="WRAPSIZE" description="These bits indicate the current wrap counter value:" begin="15" end="0" width="16" rwaccess="R/W"/>
+	</register>
+	<register id="SRC_WRAP_STEP" width="16" page="1" offset="0xc" internal="0" description="Source Wrap Step Register">
+		<bitfield id="WRAPSTEP" description="Source post-increment/decrement step size for a wrap" begin="15" end="0" width="16" rwaccess="R/W"/>
+	</register>
+	<register id="DST_WRAP_SIZE" width="16" page="1" offset="0xd" internal="0" description="Destination Wrap Size Register">
+		<bitfield id="WRAPSIZE" description="Number of bursts to transfer before wrapping" begin="15" end="0" width="16" rwaccess="R/W"/>
+	</register>
+	<register id="DST_WRAP_COUNT" width="16" page="1" offset="0xe" internal="0" description="Destination Wrap Count Register">
+		<bitfield id="WRAPSIZE" description="These bits indicate the current wrap counter value:" begin="15" end="0" width="16" rwaccess="R/W"/>
+	</register>
+	<register id="DST_WRAP_STEP" width="16" page="1" offset="0xf" internal="0" description="Destination Wrap Step Register">
+		<bitfield id="WRAPSTEP" description="Destination post-increment/decrement step size for a wrap" begin="15" end="0" width="16" rwaccess="R/W"/>
+	</register>
+	<register id="SRC_BEG_ADDR_SHADOW" width="32" page="1" offset="0x10" internal="0" description="Source Begin Address Shadow Register">
+		<bitfield id="BEGADDR" description="32-bit address value" begin="31" end="0" width="32" rwaccess="R/W"/>
+	</register>
+	<register id="SRC_ADDR_SHADOW" width="32" page="1" offset="0x12" internal="0" description="Source Address Shadow Register">
+		<bitfield id="ADDR" description="32-bit address value" begin="31" end="0" width="32" rwaccess="R/W"/>
+	</register>
+	<register id="SRC_BEG_ADDR_ACTIVE" width="32" page="1" offset="0x14" internal="0" description="Source Begin Address Active Register">
+		<bitfield id="BEGADDR" description="32-bit address value" begin="31" end="0" width="32" rwaccess="R/W"/>
+	</register>
+	<register id="SRC_ADDR_ACTIVE" width="32" page="1" offset="0x16" internal="0" description="Source Address Active Register">
+		<bitfield id="ADDR" description="32-bit address value" begin="31" end="0" width="32" rwaccess="R/W"/>
+	</register>
+	<register id="DST_BEG_ADDR_SHADOW" width="32" page="1" offset="0x18" internal="0" description="Destination Begin Address Shadow Register">
+		<bitfield id="BEGADDR" description="32-bit address value" begin="31" end="0" width="32" rwaccess="R/W"/>
+	</register>
+	<register id="DST_ADDR_SHADOW" width="32" page="1" offset="0x1a" internal="0" description="Destination Address Shadow Register">
+		<bitfield id="ADDR" description="32-bit address value" begin="31" end="0" width="32" rwaccess="R/W"/>
+	</register>
+	<register id="DST_BEG_ADDR_ACTIVE" width="32" page="1" offset="0x1c" internal="0" description="Destination Begin Address Active Register">
+		<bitfield id="BEGADDR" description="32-bit address value" begin="31" end="0" width="32" rwaccess="R/W"/>
+	</register>
+	<register id="DST_ADDR_ACTIVE" width="32" page="1" offset="0x1e" internal="0" description="Destination Address Active Register">
+		<bitfield id="ADDR" description="32-bit address value" begin="31" end="0" width="32" rwaccess="R/W"/>
+	</register>
+</module>

@@ -1,0 +1,152 @@
+/* Copyright (C) 2016 Texas Instruments Incorporated - http://www.ti.com/ */
+body {
+    font-family: sans-serif;
+    border: none;
+    margin: 0;
+    padding: 0;
+    background: white;
+    color: black;
+}
+.banner {
+    font-family: serif;
+    font-variant: small-caps;
+    font-size: 200%;
+    margin: 0.2em;
+}
+.content {
+    padding-left: 1em;
+}
+.content.summary {
+    font-size: 120%;
+}
+.content.summary .key {
+    margin-top: 0.4em;
+}
+.content.summary .value {
+    font-weight: bold;
+}
+.content.summary .condition.stable .value {
+    color: #0aa;
+}
+.content.summary .condition.unstable .value {
+    color: #f70;
+}
+.content.checks h3.check span.status.stable {
+    color: #0aa;
+}
+.content.checks h3.check span.status.error {
+    color: #f70;
+}
+h1,h2 {
+    color: white;
+    background: #c00;
+}
+h1 {
+    margin-top: 0.2em;
+    padding: 0.2em;
+    font-size: 140%;
+}
+h2 {
+    margin-top: 0.2em;
+    padding: 0.2em;
+    font-size: 120%;
+}
+h3 {
+    font-size: 110%;
+}
+a,
+a:link,
+a:visited,
+a:active,
+a:hover {
+    color: black;
+}
+.json div.indent {
+    padding-left: 2em;
+}
+.title-buttons {
+    float: right;
+    color: white;
+}
+table.log-messages>thead>tr>th {
+    background: black;
+    vertical-align: top;
+    color: white;
+    text-align: left;
+    font-weight: normal;
+}
+table.log-messages>thead>tr>th.log-record-args {
+    width: 100%;
+}
+tr.log-record>td {
+    margin-top: 0.5ex;
+    vertical-align: top;
+}
+.log-record-priority {
+    padding: 0.25ex;
+    border: 0.1ex;
+}
+.log-record-sequence {
+    font-size: 80%;
+    font-family: monospace;
+}
+.log-record-facility {
+    font-size: 80%;
+}
+.log-record-service,
+.log-record-origin {
+    white-space: nowrap;
+}
+.log-record-arg {
+    font-family: monospace;
+}
+.log-record.log-priority-10 .log-record-priority { /* FINEST */
+    background: #888;
+}
+.log-record.log-priority-9 .log-record-priority { /* FINER */
+    background: #aaa;
+}
+.log-record.log-priority-8 .log-record-priority { /* FINE */
+    background: #ccc;
+}
+.log-record.log-priority-7 .log-record-priority { /* DEBUG */
+    background: #eee;
+}
+.log-record.log-priority-6 .log-record-priority { /* INFO */
+    /* nothing special - white is OK here */
+}
+.log-record.log-priority-5 .log-record-priority { /* NOTICE */
+    background: #286;
+    font-weight: bold;
+}
+.log-record.log-priority-4 .log-record-priority { /* WARNING */
+    background: #dc2;
+    font-weight: bold;
+}
+.log-record.log-priority-3 .log-record-priority { /* ERROR */
+    background: #f41;
+    font-weight: bold;
+}
+.log-record.log-priority-2 .log-record-priority { /* CRITICAL */
+    background: #e70;
+    font-weight: bold;
+    color: white;
+    border-style: solid;
+    border-color: black;
+}
+.log-record.log-priority-1 .log-record-priority { /* ALERT */
+    background: #f00;
+    color: white;
+    font-weight: bold;
+    border-style: solid;
+    border-color: black;
+}
+.log-record.log-priority-0 .log-record-priority { /* EMERG */
+    background: #808;
+    color: white;
+    font-weight: bold;
+    border-style: solid;
+    border-color: black;
+}
+.resource-listing .resource-line {
+}

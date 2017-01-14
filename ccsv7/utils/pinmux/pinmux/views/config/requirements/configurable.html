@@ -1,0 +1,41 @@
+<!-- CheckBox -->
+<span ng-hide="vm.uiConfigurable.hidden()">
+	<input id="{{vm.uiConfigurable.configurable.name}}" ng-if="vm.uiConfigurable.configurable.type === 'CheckBox'" 
+			id="chk{{vm.uiConfigurable.configurable.name}}{{pinRequirement.requirement.name}}" 
+			ng-disabled="vm.uiConfigurable.configurable.readOnly || vm.uiConfigurable.configurableOverride.readOnly"
+			type="checkbox"
+			ng-model="vm.uiConfigurable.model[vm.uiConfigurable.configurable.name]" 
+			ng-change="vm.changed()" />
+
+	<!-- DropDown -->
+	<div class="dropdown" ng-if="vm.uiConfigurable.configurable.type === 'DropDown'"  >
+
+		<select id="{{vm.uiConfigurable.configurable.name}}" title="{{vm.uiConfigurable.model[vm.uiConfigurable.configurable.name].displayName}}" 
+	 			ng-model="vm.uiConfigurable.model[vm.uiConfigurable.configurable.name]" 
+	 			ng-disabled="vm.uiConfigurable.configurable.readOnly || vm.uiConfigurable.configurableOverride.readOnly"
+	 			ng-change="vm.changed()" 
+	 			ng-options="option.displayName for option in vm.uiConfigurable.configurable.options track by option.name">
+	 	</select> 	
+	</div>
+
+	<!-- TextBox -->
+	<form name="form" novalidate pm-watch-validity ng-if="vm.uiConfigurable.configurable.type === 'TextBox'" >
+		 <input id="{{vm.uiConfigurable.configurable.name}}" type="text" 
+		 		ng-model="vm.uiConfigurable.model[vm.uiConfigurable.configurable.name]" 
+		 		ng-pattern="'{{vm.uiConfigurable.configurable.validationRegex}}'" 
+		 		name="input"
+		 		ng-change="vm.changed()"
+		 		ng-model-options="{ allowInvalid : true }"
+		 		ng-disabled="vm.uiConfigurable.configurable.readOnly || vm.uiConfigurable.configurableOverride.readOnly" />
+		  	<div id="{{vm.uiConfigurable.configurable.name}}Error" ng-show="!form.input.$valid">
+				<span>
+					<span class="label label-danger shadow1 shadowButton" 
+						  ng-click="vm.displayCurrentErrorWarning()"
+						  title="Click to show details">
+						<span class="glyphicon glyphicon-ban-circle errorFG marginLeft" style="position:relative;"></span>
+						  {{vm.uiConfigurable.configurable.validationFailMessage}}
+					</span>
+				</span>
+			</div>
+	</form>
+</span>

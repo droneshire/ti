@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<drivers id="ARM11">
+	<isa Type="ARM11" ProcID="0x75800D20">
+		<driver file="../../../emulation/drivers/sdgoarm11usb.dvr">
+			<connectionType Type="SD510USB"/>
+                        <property Name="TraceDeviceId" Type="numericfield" Value="0x0" NumericType="HEX" UpperBound="0xFFFFFFFF" LowerBound="0" ID="device.traceId"/>
+		</driver>
+	</isa>
+</drivers>

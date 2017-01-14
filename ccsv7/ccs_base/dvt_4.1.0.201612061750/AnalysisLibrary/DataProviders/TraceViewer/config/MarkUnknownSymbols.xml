@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<translate name="Mark Unknonw Symbols">
+	<passthruAll>
+		<removeField name = "Filename" />
+		<removeField name = "Function" />
+	</passthruAll>
+
+	<passthru name="Filename" input="((Filename==null)&amp;&amp;(Load_Address!=NAN))?&quot;UNKNOWN&quot;:Filename"/>	
+	<passthru name="Function" input="((Function==null)&amp;&amp;(Load_Address!=NAN))?&quot;UNKNOWN&quot;:Function"/>	
+
+	<passthru name="Delta Time" input="Delta_Cycles"/>	
+	<passthru name="Time" input="Cycle"/>	
+
+</translate>
+

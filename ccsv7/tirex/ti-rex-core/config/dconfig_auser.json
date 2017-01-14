@@ -1,0 +1,33 @@
+{
+  "origin": {
+    "landscape": "localhost",
+    "cluster": "local8000",
+    "instance": "localhost"
+  },
+  "logging": {
+    "console": true
+  },
+  "paths" : {
+  },
+  "databases": {
+    "destroyable": true,
+    "defaults": {
+      "user": "auser",
+      "type": "mysql",
+      "password": "auser",
+      "database": "ticloudtools"
+    },
+    "primary": {
+      "host": "127.0.0.1"
+    },
+    "secondary": {
+      "host": "127.0.0.1"
+    },
+    "tertiary": {
+      "host": "127.0.0.1"
+    },
+    "warehouse": {
+      "host": "127.0.0.1"
+    }
+  }
+}

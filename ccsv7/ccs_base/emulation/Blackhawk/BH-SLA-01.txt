@@ -1,0 +1,131 @@
+License
+Agreement
+
+EWA TECHNOLOGIES INC. LICENSE AGREEMENT
+
+IMPORTANT: This is a legal agreement (the "Agreement") between you (the "User") and EWA 
+Technologies Inc. and its parent company, Electronic Warfare Associates, Inc., with its principal place 
+of business at Herndon, Virginia, U.S.A. ("EWA").  It is important that you read this document before 
+opening the accompanying package containing the software (the "Software") or using the Software. By 
+opening the sealed package and/or using the Software, you acknowledge that you have read this 
+Agreement and agree to be bound by its terms. If you do not agree, promptly return the unopened 
+Software and accompanying items to EWA for a full refund of the amount, if any, paid by User to EWA for 
+license of the Software.
+
+1. License Grant: EWA grants you a non-exclusive, non-transferable, limited license to use the copy of the Software, and 
+accompanying materials enclosed in this package (collectively the "Product") on the Designated Computer (as defined 
+below) subject to the terms and conditions set forth in this Agreement. You may transfer the Software to the Designated 
+Computer provided you keep the original Software solely for backup or archival purposes.  "Designated Computer" for any 
+Software means the single computer processor that is owned or controlled and operated by User and designated as the 
+computer processor on which the Software will be used.  All rights not expressly granted to User herein are retained by 
+EWA.
+
+2. Ownership: All rights, title and interest to the Software, and accompanying materials related to the Software, and any 
+proprietary information contained on the media, are owned by EWA and are protected by copyright, trademark and trade 
+secret law and international treaties. You acquire only the right to use the Software and accompanying materials related to the 
+Software during the term of, and subject to, this Agreement. You agree not to develop separate software applications of any 
+kind derived from the Software, the User's documentation, or any other proprietary information of EWA. Any rights, express 
+or implied, in the Software and accompanying materials, and any proprietary information contained in the media are reserved 
+by EWA, except as expressly specified in this Agreement. You must treat the Software like any other copyrighted material 
+except as otherwise provided under this Agreement. You agree not to remove, deface or obscure EWA's copyright or 
+trademark notices and/or legends or proprietary notices on the Software and/or accompanying materials, and/or contained in 
+or on the media.
+
+3. Copies and Modifications: You may make one copy of the Software solely for back-up purposes, provided that you 
+reproduce and include all copyright/proprietary rights notice(s) on the copy. You may make copies of any of the 
+documentation included in the Product for your internal use only. You may not nor may you assist another to, modify, 
+translate, convert to another programming language, decompile, reverse engineer or disassemble any portions of the Product. 
+Except as otherwise provided by this agreement, you may not copy the Software. You agree to notify your employees 
+and/agents who may have access to the Software of the restrictions contained in this Agreement and to ensure their 
+compliance with such restrictions.
+
+4. Taxes: User shall be liable for and shall pay all charges and taxes (local, state and federal), including all sales and use 
+taxes, which may now or hereafter be imposed or levied upon the license or possession or use of the Software, excluding, 
+however, taxes based on EWA's income.
+
+5. Confidentiality: By accepting this license, you acknowledge that the Software and accompanying materials, and any 
+proprietary information contained in the media are proprietary in nature and contain valuable confidential information 
+developed or acquired at great expense. You agree not to disclose to others or utilize such trade secrets or proprietary 
+information except as provided herein.
+
+6. Term: This Agreement is effective from the date you open the sealed package and/or use the Software until terminated. 
+EWA and/or you may terminate this Agreement at any time by giving 30 days written notice of termination to the other party. 
+Notwithstanding the above, if you fail to comply with any term of this Agreement, or if you become the subject of a 
+voluntary or involuntary petition in bankruptcy or any proceeding relating to insolvency, receivership, liquidation, or 
+composition for the benefit of creditors, if that petition or proceeding is not dismissed with prejudice within 30 days after 
+filing, EWA may terminate this Agreement immediately upon notice to you. Upon termination of this Agreement, you agree 
+to then cease all use of the Software, and to either destroy or promptly return to EWA the Product together with any copies 
+you have made thereof. Notwithstanding the remedies provided above, EWA may enforce its other legal rights. Sections 2, 4, 
+5, 9, 10 and 12-16 will survive termination of this Agreement.
+
+7. Assignment: You may not assign, sublicense, rent, loan, lease, convey or otherwise transfer this Agreement or the Product 
+without permission, in writing, from EWA. Any unauthorized assignment, sublicense, rental, loan, lease, conveyance or other 
+transfer of any copy of the Software and/or accompanying materials shall be void and shall automatically terminate this 
+Agreement.
+
+8. Limited Warranty: EWA warrants that the Software provided to you shall operate as described in the accompanying 
+documentation under normal use for a period of ninety (90) days from the date of your receipt thereof.  For the purposes of 
+this Section 8, "Defective Software" means Software which does not operate as described in the accompanying 
+documentation under normal use during the warranty period.  EWA's warranty as set forth above shall not be enlarged, 
+diminished or affected by, and no liability shall arise out of, EWA's rendering of technical advice or service in connection 
+with the Product. EWA does not warrant that the Software will meet your requirements, operate without interruption or be 
+error free. Your sole remedy under this Section 8 shall be, at EWA's sole discretion, (i) repair or replacement of any 
+Defective Software, or (ii) return of the amount, if any, paid by the User to EWA for the Defective Software. Any 
+replacement Software will be warranted for the remainder of the warranty period for the original Software.
+
+9. Warranty Exceptions: THE SOFTWARE IS PROVIDED "AS IS," EXCEPT AS EXPRESSLY STATED IN 
+SECTION 8. TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, EWA DISCLAIMS ALL OTHER 
+WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, IMPLIED 
+WARRANTIES OF PERFORMANCE OR MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE OR 
+AGAINST INFRINGEMENT.
+YOU BEAR ALL RISK RELATING TO QUALITY AND PERFORMANCE OF THE SOFTWARE, AND ASSUME THE 
+ENTIRE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION UNLESS YOU AND EWA HAVE 
+EXECUTED AN AGREEMENT WITH RESPECT TO MAINTENANCE AND SUPPORT OF THE SOFTWARE, IN 
+WHICH CASE EWA WILL BE RESPONSIBLE FOR SERVICING, REPAIR OR CORRECTION OF THE SOFTWARE 
+IN ACCORDANCE WITH SUCH AGREEMENT.
+SOME JURISDICTIONS DO NOT ALLOW LIMITATIONS ON IMPLIED WARRANTIES, SO THE ABOVE 
+LIMITATION MAY NOT APPLY TO YOU. IN THAT EVENT, SUCH WARRANTIES ARE LIMITED TO THE 
+WARRANTY PERIOD. THIS WARRANTY GIVES YOU SPECIFIC LEGAL RIGHTS. YOU MAY ALSO HAVE 
+OTHER RIGHTS WHICH VARY FROM JURISDICTION TO JURISDICTION.
+
+10. Limitation of Remedies: EWA's maximum liability for any claim by you or anyone claiming through or on behalf of 
+you arising out of this Agreement shall not in any event exceed the actual amount paid by you for the license to the Software. 
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, EWA SHALL NOT BE LIABLE FOR THE LOSS 
+OF REVENUE OR PROFITS, EXPENSE OR INCONVENIENCE, OR FOR ANY OTHER DIRECT, INDIRECT, 
+SPECIAL, INCIDENTAL, EXEMPLARY OR CONSEQUENTIAL DAMAGES, ARISING OUT OF THIS AGREEMENT 
+OR CAUSED BY THE USE, MISUSE OR INABILITY TO USE THE SOFTWARE, EVEN IF EWA HAS BEEN 
+ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. THIS LIMITED WARRANTY SHALL NOT EXTEND TO 
+ANYONE OTHER THAN THE ORIGINAL USER OF THE SOFTWARE. SOME JURISDICTIONS DO NOT ALLOW 
+THE EXCLUSION OR LIMITATION OR INCIDENTAL OR CONSEQUENTIAL DAMAGES, SO THE ABOVE 
+LIMITATION OR EXCLUSION MAY NOT APPLY TO YOU.
+
+11. Support: EWA will provide technical support free of charge to the User for a period of thirty (30) days from the User's 
+receipt of the Software (the "Support Period"); such support will be provided solely via telephone and/or electronic mail 
+during EWA's normal business hours.
+
+12. Governing Law: This Agreement shall be governed by the laws of the Commonwealth of Virginia, U.S.A., exclusive of 
+its choice of law principles.
+
+13. General Provisions: If any provision of this Agreement is held to be void, invalid, unenforceable or illegal, the other 
+provisions shall continue in full force and effect. Failure of a party to enforce any provision of this Agreement shall not 
+constitute or be construed as a waiver of such provision or of the right to enforce such provision. If any legal action, 
+including arbitration, arises under this agreement or by any reason of any asserted breach of this Agreement, the prevailing 
+party shall be entitled to recover all costs and expenses, including reasonable attorneys' fees, incurred as a result of such legal 
+action.
+
+14. Export: You agree to comply fully with all laws and regulations of the United States and other countries ("Export 
+Laws") to assure that neither the Software nor its accompanying materials are (1) exported or imported, directly or indirectly, 
+in violation of Export Laws, or (2) used for any purpose prohibited by Export Laws.
+
+15. U.S. Government Restricted Rights: The Software and accompanying materials are provided with RESTRICTED 
+RIGHTS. Use, duplication or disclosure by the government is subject to restrictions as set forth in the Commercial Computer 
+Software Restricted Rights clause at FAR 52.227-19 subdivision (c)(1) and (2), as applicable.
+
+16. Acknowledgement:  THIS AGREEMENT IS THE COMPLETE AND EXCLUSIVE STATEMENT OF AGREEMENT 
+BETWEEN THE PARTIES AND SUPERSEDES ALL PROPOSALS OR PRIOR AGREEMENTS, VERBAL OR 
+WRITTEN, AND ANY OTHER COMMUNICATIONS BETWEEN THE PARTIES RELATING TO THE SUBJECT 
+MATTER OF THIS AGREEMENT.  NO AMENDMENT TO THIS AGREEMENT SHALL BE EFFECTIVE UNLESS 
+SIGNED BY AN OFFICER OF EWA.
+
+BH-SLA-01
+

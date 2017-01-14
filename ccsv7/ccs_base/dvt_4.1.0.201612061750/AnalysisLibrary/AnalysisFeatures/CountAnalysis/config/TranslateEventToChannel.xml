@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<translate name="EventsToChannels">
+	<passthru name="Time"	input="Time"/>
+	<passthru name="Error"	input="Error"/> 
+	<passthru name="Source"	input="Master + &quot;:&quot; + Data1"/>
+	<stringParser delimiters=" " input="Data2">
+           <integer name="DataValue" translate="$1" />
+        </stringParser>
+	<passthru name="AuxData1"	input="Arg2"/> 
+	<passthru name="AuxData2"	input="Arg3"/> 
+	<passthru name="Logger"	input="Logger"/> 
+</translate>
+

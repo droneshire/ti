@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cpu id="arm9" isa="ARM9" HW_revision="1.0" XML_version="1.0" desc="ARM9" description="The ARM9 Core">
+	<jtag>
+            <property id="USCIF.TCLK_PROGRAM" ID="USCIF.TCLK_PROGRAM" Type="choicelist" Value="adaptive" />
+	</jtag>
+	<register id="R0" acronym="R0" width="32" description="General Purpose Register 0" />
+	<register id="R1" acronym="R1" width="32" description="General Purpose Register 1" />
+	<register id="R2" acronym="R2" width="32" description="General Purpose Register 2" />
+	<register id="R3" acronym="R3" width="32" description="General Purpose Register 3" />
+	<register id="R4" acronym="R4" width="32" description="General Purpose Register 4" />
+	<register id="R5" acronym="R5" width="32" description="General Purpose Register 5" />
+	<register id="R6" acronym="R6" width="32" description="General Purpose Register 6" />
+	<register id="R7" acronym="R7" width="32" description="General Purpose Register 7" />
+	<register id="R8" acronym="R8" width="32" description="General Purpose Register 8" />
+	<register id="R9" acronym="R9" width="32" description="General Purpose Register 9" />
+	<register id="R10" acronym="R10" width="32" description="General Purpose Register 10" />
+	<register id="R11" acronym="R11" width="32" description="General Purpose Register 11" />
+	<register id="R12" acronym="R12" width="32" description="General Purpose Register 12" />
+	<register id="R13" acronym="R13" width="32" description="General Purpose Register 13" />
+	<register id="R14" acronym="R14" width="32" description="General Purpose Register 14" />
+	<register id="PC" acronym="PC" width="32" description="Program Counter" />
+	<register id="R13_SVC" acronym="R13_SVC" width="32" description="General Purpose Register 13 in Supervisor mode" />
+	<register id="R14_SVC" acronym="R14_SVC" width="32" description="General Purpose Register 14 in Supervisor mode" />
+	<register id="R13_ABT" acronym="R13_ABT" width="32" description="General Purpose Register 13 in Abort mode" />
+	<register id="R14_ABT" acronym="R14_ABT" width="32" description="General Purpose Register 14 in Abort mode" />
+	<register id="R13_UND" acronym="R13_UND" width="32" description="General Purpose Register 13 in Undefined mode" />
+	<register id="R14_UND" acronym="R14_UND" width="32" description="General Purpose Register 14 in Undefined mode" />
+	<register id="R13_IRQ" acronym="R13_IRQ" width="32" description="General Purpose Register 13 in IRQ mode" />
+	<register id="R14_IRQ" acronym="R14_IRQ" width="32" description="General Purpose Register 14 in IRQ" />
+	<register id="R13_FIQ" acronym="R13_FIQ" width="32" description="General Purpose Register 13 in Undefined mode" />
+	<register id="R14_FIQ" acronym="R14_FIQ" width="32" description="General Purpose Register 14 in Undefined mode" />
+	<register id="R8_FIQ" acronym="R8_FIQ" width="32" description="General Purpose Register 8 in FIQ mode" />
+	<register id="R9_FIQ" acronym="R9_FIQ" width="32" description="General Purpose Register 9 in FIQ mode" />
+	<register id="R10_FIQ" acronym="R10_FIQ" width="32" description="General Purpose Register 10 in FIQ mode" />
+	<register id="R11_FIQ" acronym="R11_FIQ" width="32" description="General Purpose Register 11 in FIQ mode" />
+	<register id="R12_FIQ" acronym="R12_FIQ" width="32" description="General Purpose Register 12 in FIQ mode" />
+    <register id="R8_USER" acronym="R8_USER" width="32" description="General Purpose Register 8 in User mode" />
+	<register id="R9_USER" acronym="R9_USER" width="32" description="General Purpose Register 9 in User mode" />
+	<register id="R10_USER" acronym="R10_USER" width="32" description="General Purpose Register 10 in User mode" />
+	<register id="R11_USER" acronym="R11_USER" width="32" description="General Purpose Register 11 in User mode" />
+	<register id="R12_USER" acronym="R12_USER" width="32" description="General Purpose Register 12 in User mode" />
+    <register id="R13_USER" acronym="R13_USER" width="32" description="General Purpose Register 13 in User mode" />
+	<register id="R14_USER" acronym="R14_USER" width="32" description="General Purpose Register 14 in User mode" />
+	<register id="CPSR" acronym="CPSR" width="32" description="Stores the status of interrupt enables and critical processor status signals">
+		<bitfield id="N" width="1" begin="31" end="31" resetval="0" description="Stores bit 31 of the result of the instruction. In other words stores the sign of the number" range="" rwaccess="R" />
+		<bitfield id="Z" width="1" begin="30" end="30" resetval="0" description="Is set to 1 if the result of the operation is zero else stays 0" range="" rwaccess="R" />
+		<bitfield id="C" width="1" begin="29" end="29" resetval="0" description="Stores the value of the carry bit if it occurred in an addition or the borrow bit in a subtraction. In a shift stores the last bit shifted out." range="" rwaccess="R" />
+		<bitfield id="V" width="1" begin="28" end="28" resetval="0" description="Set to 1 if an overflow occurred " range="" rwaccess="R" />
+		<bitfield id="Q" width="1" begin="27" end="27" resetval="0" description="Indicates whether an overflow or a saturation occurred in the enhanced DSP instructions" range="" rwaccess="R" />
+		<bitfield id="RESV" width="19" begin="26" end="8" resetval="0" description="Reserved" range="" rwaccess="R" />
+		<bitfield id="I" width="1" begin="7" end="7" resetval="1" description="If set, IRQ is disabled. If cleared IRQ is allowed" range="" rwaccess="RW" />
+		<bitfield id="F" width="1" begin="6" end="6" resetval="1" description="If set, FIQ is disabled. If cleared FIQ is allowed" range="" rwaccess="RW" />
+		<bitfield id="T" width="1" begin="5" end="5" resetval="0" description="If set ARM is in Thumb mode" range="" rwaccess="RW" />
+		<bitfield id="M" width="5" begin="4" end="0" resetval="0x13" description="Mode of ARM" range="" rwaccess="RW" />
+	</register>
+	<register id="SPSR_SVC" acronym="SPSR_SVC" width="32" description="Stores the status of interrupt enables and critical processor status signals in supervisor mode">
+		<bitfield id="N" width="1" begin="31" end="31" resetval="0" description="Stores bit 31 of the result of the instruction. In other words stores the sign of the number" range="" rwaccess="R" />
+		<bitfield id="Z" width="1" begin="30" end="30" resetval="0" description="Is set to 1 if the result of the operation is zero else stays 0" range="" rwaccess="R" />
+		<bitfield id="C" width="1" begin="29" end="29" resetval="0" description="Stores the value of the carry bit if it occurred in an addition or the borrow bit in a subtraction. In a shift stores the last bit shifted out." range="" rwaccess="R" />
+		<bitfield id="V" width="1" begin="28" end="28" resetval="0" description="Set to 1 if an overflow occurred " range="" rwaccess="R" />
+		<bitfield id="Q" width="1" begin="27" end="27" resetval="0" description="Indicates whether an overflow or a saturation occurred in the enhanced DSP instructions" range="" rwaccess="R" />
+		<bitfield id="RESV" width="19" begin="26" end="8" resetval="0" description="Reserved" range="" rwaccess="R" />
+		<bitfield id="I" width="1" begin="7" end="7" resetval="1" description="If set, IRQ is disabled. If cleared IRQ is allowed" range="" rwaccess="RW" />
+		<bitfield id="F" width="1" begin="6" end="6" resetval="1" description="If set, FIQ is disabled. If cleared FIQ is allowed" range="" rwaccess="RW" />
+		<bitfield id="T" width="1" begin="5" end="5" resetval="0" description="If set ARM is in Thumb mode" range="" rwaccess="RW" />
+		<bitfield id="M" width="5" begin="4" end="0" resetval="0x13" description="Mode of ARM" range="" rwaccess="RW" />
+	</register>
+	<register id="SPSR_ABT" acronym="SPSR_ABT" width="32" description="Stores the status of interrupt enables and critical processor status signals in abort mode">
+		<bitfield id="N" width="1" begin="31" end="31" resetval="0" description="Stores bit 31 of the result of the instruction. In other words stores the sign of the number" range="" rwaccess="R" />
+		<bitfield id="Z" width="1" begin="30" end="30" resetval="0" description="Is set to 1 if the result of the operation is zero else stays 0" range="" rwaccess="R" />
+		<bitfield id="C" width="1" begin="29" end="29" resetval="0" description="Stores the value of the carry bit if it occurred in an addition or the borrow bit in a subtraction. In a shift stores the last bit shifted out." range="" rwaccess="R" />
+		<bitfield id="V" width="1" begin="28" end="28" resetval="0" description="Set to 1 if an overflow occurred " range="" rwaccess="R" />
+		<bitfield id="Q" width="1" begin="27" end="27" resetval="0" description="Indicates whether an overflow or a saturation occurred in the enhanced DSP instructions" range="" rwaccess="R" />
+		<bitfield id="RESV" width="19" begin="26" end="8" resetval="0" description="Reserved" range="" rwaccess="R" />
+		<bitfield id="I" width="1" begin="7" end="7" resetval="1" description="If set, IRQ is disabled. If cleared IRQ is allowed" range="" rwaccess="RW" />
+		<bitfield id="F" width="1" begin="6" end="6" resetval="1" description="If set, FIQ is disabled. If cleared FIQ is allowed" range="" rwaccess="RW" />
+		<bitfield id="T" width="1" begin="5" end="5" resetval="0" description="If set ARM is in Thumb mode" range="" rwaccess="RW" />
+		<bitfield id="M" width="5" begin="4" end="0" resetval="0x13" description="Mode of ARM" range="" rwaccess="RW" />
+	</register>
+	<register id="SPSR_UND" acronym="SPSR_UND" width="32" description="Stores the status of interrupt enables and critical processor status signals">
+		<bitfield id="N" width="1" begin="31" end="31" resetval="0" description="Stores bit 31 of the result of the instruction. In other words stores the sign of the number" range="" rwaccess="R" />
+		<bitfield id="Z" width="1" begin="30" end="30" resetval="0" description="Is set to 1 if the result of the operation is zero else stays 0" range="" rwaccess="R" />
+		<bitfield id="C" width="1" begin="29" end="29" resetval="0" description="Stores the value of the carry bit if it occurred in an addition or the borrow bit in a subtraction. In a shift stores the last bit shifted out." range="" rwaccess="R" />
+		<bitfield id="V" width="1" begin="28" end="28" resetval="0" description="Set to 1 if an overflow occurred " range="" rwaccess="R" />
+		<bitfield id="Q" width="1" begin="27" end="27" resetval="0" description="Indicates whether an overflow or a saturation occurred in the enhanced DSP instructions" range="" rwaccess="R" />
+		<bitfield id="RESV" width="19" begin="26" end="8" resetval="0" description="Reserved" range="" rwaccess="R" />
+		<bitfield id="I" width="1" begin="7" end="7" resetval="1" description="If set, IRQ is disabled. If cleared IRQ is allowed" range="" rwaccess="RW" />
+		<bitfield id="F" width="1" begin="6" end="6" resetval="1" description="If set, FIQ is disabled. If cleared FIQ is allowed" range="" rwaccess="RW" />
+		<bitfield id="T" width="1" begin="5" end="5" resetval="0" description="If set ARM is in Thumb mode" range="" rwaccess="RW" />
+		<bitfield id="M" width="5" begin="4" end="0" resetval="0x13" description="Mode of ARM" range="" rwaccess="RW" />
+	</register>
+	<register id="SPSR_IRQ" acronym="SPSR_IRQ" width="32" description="Stores the status of interrupt enables and critical processor status signals">
+		<bitfield id="N" width="1" begin="31" end="31" resetval="0" description="Stores bit 31 of the result of the instruction. In other words stores the sign of the number" range="" rwaccess="R" />
+		<bitfield id="Z" width="1" begin="30" end="30" resetval="0" description="Is set to 1 if the result of the operation is zero else stays 0" range="" rwaccess="R" />
+		<bitfield id="C" width="1" begin="29" end="29" resetval="0" description="Stores the value of the carry bit if it occurred in an addition or the borrow bit in a subtraction. In a shift stores the last bit shifted out." range="" rwaccess="R" />
+		<bitfield id="V" width="1" begin="28" end="28" resetval="0" description="Set to 1 if an overflow occurred " range="" rwaccess="R" />
+		<bitfield id="Q" width="1" begin="27" end="27" resetval="0" description="Indicates whether an overflow or a saturation occurred in the enhanced DSP instructions" range="" rwaccess="R" />
+		<bitfield id="RESV" width="19" begin="26" end="8" resetval="0" description="Reserved" range="" rwaccess="R" />
+		<bitfield id="I" width="1" begin="7" end="7" resetval="1" description="If set, IRQ is disabled. If cleared IRQ is allowed" range="" rwaccess="RW" />
+		<bitfield id="F" width="1" begin="6" end="6" resetval="1" description="If set, FIQ is disabled. If cleared FIQ is allowed" range="" rwaccess="RW" />
+		<bitfield id="T" width="1" begin="5" end="5" resetval="0" description="If set ARM is in Thumb mode" range="" rwaccess="RW" />
+		<bitfield id="M" width="5" begin="4" end="0" resetval="0x13" description="Mode of ARM" range="" rwaccess="RW" />
+	</register>
+	<register id="SPSR_FIQ" acronym="SPSR_FIQ" width="32" description="Stores the status of interrupt enables and critical processor status signals">
+		<bitfield id="N" width="1" begin="31" end="31" resetval="0" description="Stores bit 31 of the result of the instruction. In other words stores the sign of the number" range="" rwaccess="R" />
+		<bitfield id="Z" width="1" begin="30" end="30" resetval="0" description="Is set to 1 if the result of the operation is zero else stays 0" range="" rwaccess="R" />
+		<bitfield id="C" width="1" begin="29" end="29" resetval="0" description="Stores the value of the carry bit if it occurred in an addition or the borrow bit in a subtraction. In a shift stores the last bit shifted out." range="" rwaccess="R" />
+		<bitfield id="V" width="1" begin="28" end="28" resetval="0" description="Set to 1 if an overflow occurred " range="" rwaccess="R" />
+		<bitfield id="Q" width="1" begin="27" end="27" resetval="0" description="Indicates whether an overflow or a saturation occurred in the enhanced DSP instructions" range="" rwaccess="R" />
+		<bitfield id="RESV" width="19" begin="26" end="8" resetval="0" description="Reserved" range="" rwaccess="R" />
+		<bitfield id="I" width="1" begin="7" end="7" resetval="1" description="If set, IRQ is disabled. If cleared IRQ is allowed" range="" rwaccess="RW" />
+		<bitfield id="F" width="1" begin="6" end="6" resetval="1" description="If set, FIQ is disabled. If cleared FIQ is allowed" range="" rwaccess="RW" />
+		<bitfield id="T" width="1" begin="5" end="5" resetval="0" description="If set ARM is in Thumb mode" range="" rwaccess="RW" />
+		<bitfield id="M" width="5" begin="4" end="0" resetval="0x13" description="Mode of ARM" range="" rwaccess="RW" />
+	</register>
+<instance href="..\Modules\ARM_R2X_NotVisible.xml" id="" xml="ARM_R2X_NotVisible.xml" xmlpath="..\Modules\" HW_revision="1.0" description="" requestor="TMS470R2X" baseaddr="0" size="00" accessnumbytes="4" permissions="p" />
+</cpu>

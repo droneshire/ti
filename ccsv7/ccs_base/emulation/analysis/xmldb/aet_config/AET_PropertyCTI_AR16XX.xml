@@ -1,0 +1,399 @@
+<?xml version="1.0"?>
+<!-- This file defines a job the AET can support for a specific ISA. -->
+
+<?CTOOLS version="1.1.0.0" Copyright="Copyright (c) 2016 Texas Instruments"?>
+<AET>
+    <JOB_MAJOR_V>1</JOB_MAJOR_V>
+    <JOB_MINOR_V>0</JOB_MINOR_V>
+
+<!--=============================================================================-->
+<!-- CTI base addresses                                                          -->
+<!--=============================================================================-->
+	<PROPERTY_INTEGER>
+	  <NAME>Total CTI</NAME>	
+ 	  <DESCRIPTION>Total number of CTI for the device</DESCRIPTION>		
+  	  <VALUE>1</VALUE>
+	</PROPERTY_INTEGER>
+
+	<PROPERTY_LOCATION>
+	  <NAME>Unit Address 0</NAME>	
+ 	  <DESCRIPTION>This base address is CTI 1 for R4_0 core</DESCRIPTION>		
+	  <VALUE>0xFFA1C000</VALUE>
+	  <PAGE>6</PAGE>	
+	</PROPERTY_LOCATION>
+
+
+<!--=============================================================================-->
+<!--                            Option of Global Breakpoint only CTI             -->
+<!-- Type                                                                        -->
+<!--  |--> Cross Trigger --> Not Used                                            -->
+<!--                     --> Global Breakpoint - 0x89000000                      -->
+<!--                     --> Enable SMP Mode   - 0x89000000                      -->
+<!--                     --> Channel Config    - 0x88000000                      -->
+<!-- These two numbers should be consistent to the value hard coded in the SW    -->
+<!--=============================================================================-->
+
+<!--=============================================================================-->
+<!--=============================================================================-->
+<PROPERTY_STRING>
+    <NAME>Type</NAME>
+    <VALUE>Cross Trigger</VALUE>
+    <CHILDKEY>CTI TOP</CHILDKEY>
+</PROPERTY_STRING>
+
+<!--=============================================================================-->
+<!-- The ENUMVALUE should follow the rule:                                       -->
+<!-- Global Breakpoint:                                                          -->
+<!--   0x89000xxx:                                                               -->
+<!--          |||-> index of CTITRIGIN for CPU halt event                        -->
+<!--          ||-> index of CTITRIGOUT for Stop CPU trigger                      -->
+<!--          |-> CTI unit number  (starting from 1)                             -->
+<!-- Sync Run Mode:                                                              -->
+<!--   0x8A00xxxx:                                                               -->
+<!--         ||||-> index of CTITRIGIN for SyncRun event                         -->
+<!--         |||-> CTI-x unit number  (starting from 0)                          -->
+<!--         ||-> index of CTITRIGOUT for Restart CPU trigger                    -->
+<!--         |-> CTI-y unit number (starting from 0)                             -->
+<!-- SMP Mode:                                                                   -->
+<!--   0x8Bxxxxxx:                                                               -->
+<!--       ||||||-> index of CTITRIGIN for CPU halt event   (chn 0)              -->
+<!--       |||||-> index of CTITRIGOUT for Stop CPU trigger (chn 0)              -->
+<!--       ||||-> CTI-x unit number                                              -->
+<!--       |||-> index of CTITRIGIN for SyncRun event       (chn 1)              -->
+<!--       ||-> index of CTITRIGOUT for Restart CPU trigger (chn 1, CTI-x)       -->
+<!--       |->CTI-y unit number for listen to SyncRun CTITRIGIN                  -->
+<!-- Channel configuration:                                                      -->
+<!--   0x8801xxxx: CTI input event                                               -->
+<!--   0x8802xxxx: CTI output event                                              -->
+<!--          ||-> index of CTITRIGIN or CTITRIGOUT signal                       -->
+<!--          |-> CTI unit number                                                -->
+<!--=============================================================================-->
+
+<!--=============================================================================-->
+<!-- Channel description for global BP                                           -->  
+<!--=============================================================================-->
+
+  <PROPERTY_STRING>
+	<NAME>Channel 0</NAME>	
+ 	<DESCRIPTION>The channel is reserved by global breakpoint</DESCRIPTION>	
+	<KEYITEM>
+		<KEYNAME>CTI TOP X</KEYNAME>	
+		<KEYNUMBER>0</KEYNUMBER>	
+	</KEYITEM>
+	<CHILDKEY>CPUS RX</CHILDKEY>
+	<EDITABLE>FALSE</EDITABLE>	
+	<VALUE>Global Breakpoint</VALUE>
+	<ENUMVALUE>0x89000000</ENUMVALUE>
+</PROPERTY_STRING>
+
+<PROPERTY_STRING>
+	<NAME>Channel 1</NAME>	
+ 	<DESCRIPTION>The channel is reserved by global breakpoint</DESCRIPTION>	
+	<KEYITEM>
+		<KEYNAME>CTI TOP X</KEYNAME>	
+		<KEYNUMBER>1</KEYNUMBER>	
+	</KEYITEM>
+	<CHILDKEY>CPUS RX</CHILDKEY>
+	<EDITABLE>FALSE</EDITABLE>	
+	<VALUE>Global Breakpoint</VALUE>
+	<ENUMVALUE>0x89000000</ENUMVALUE>
+</PROPERTY_STRING>
+
+<PROPERTY_STRING>
+	<NAME>Channel 2</NAME>	
+ 	<DESCRIPTION>The channel is reserved by global breakpoint</DESCRIPTION>	
+	<KEYITEM>
+		<KEYNAME>CTI TOP X</KEYNAME>	
+		<KEYNUMBER>2</KEYNUMBER>	
+	</KEYITEM>
+	<CHILDKEY>CPUS RX</CHILDKEY>
+	<EDITABLE>FALSE</EDITABLE>	
+	<VALUE>Global Breakpoint</VALUE>
+	<ENUMVALUE>0x89000000</ENUMVALUE>
+</PROPERTY_STRING>
+
+<PROPERTY_STRING>
+	<NAME>Channel 3</NAME>	
+ 	<DESCRIPTION>The channel is reserved by global breakpoint</DESCRIPTION>	
+	<KEYITEM>
+		<KEYNAME>CTI TOP X</KEYNAME>	
+		<KEYNUMBER>3</KEYNUMBER>	
+	</KEYITEM>
+	<CHILDKEY>CPUS RX</CHILDKEY>
+	<EDITABLE>FALSE</EDITABLE>	
+	<VALUE>Global Breakpoint</VALUE>
+	<ENUMVALUE>0x89000000</ENUMVALUE>
+</PROPERTY_STRING>
+
+<!--=============================================================================-->
+<!-- Channel description for Sync Run                                            -->
+<!--=============================================================================-->
+<PROPERTY_STRING>
+	<NAME>Channel 0</NAME>	
+ 	<DESCRIPTION>The channel is reserved by sync run</DESCRIPTION>	
+	<KEYITEM>
+		<KEYNAME>CTI TOP Y</KEYNAME>	
+		<KEYNUMBER>0</KEYNUMBER>	
+	</KEYITEM>
+	<CHILDKEY>SMP_CPUS RX</CHILDKEY>
+	<EDITABLE>FALSE</EDITABLE>	
+	<VALUE>Sync Run Group</VALUE>
+	<ENUMVALUE>0x8A000000</ENUMVALUE>
+</PROPERTY_STRING>
+
+<PROPERTY_STRING>
+	<NAME>Channel 1</NAME>	
+ 	<DESCRIPTION>The channel is reserved by sync run</DESCRIPTION>	
+	<KEYITEM>
+		<KEYNAME>CTI TOP Y</KEYNAME>	
+		<KEYNUMBER>1</KEYNUMBER>	
+	</KEYITEM>
+	<CHILDKEY>SMP_CPUS RX</CHILDKEY>
+	<EDITABLE>FALSE</EDITABLE>	
+	<VALUE>Sync Run Group</VALUE>
+	<ENUMVALUE>0x8A000000</ENUMVALUE>
+</PROPERTY_STRING>
+
+<PROPERTY_STRING>
+	<NAME>Channel 2</NAME>	
+ 	<DESCRIPTION>The channel is reserved by sync run</DESCRIPTION>	
+	<KEYITEM>
+		<KEYNAME>CTI TOP Y</KEYNAME>	
+		<KEYNUMBER>2</KEYNUMBER>	
+	</KEYITEM>
+	<CHILDKEY>SMP_CPUS RX</CHILDKEY>
+	<EDITABLE>FALSE</EDITABLE>	
+	<VALUE>Sync Run Group</VALUE>
+	<ENUMVALUE>0x8A000000</ENUMVALUE>
+</PROPERTY_STRING>
+
+<PROPERTY_STRING>
+	<NAME>Channel 3</NAME>	
+ 	<DESCRIPTION>The channel is reserved by sync run</DESCRIPTION>	
+	<KEYITEM>
+		<KEYNAME>CTI TOP Y</KEYNAME>	
+		<KEYNUMBER>3</KEYNUMBER>	
+	</KEYITEM>
+	<CHILDKEY>SMP_CPUS RX</CHILDKEY>
+	<EDITABLE>FALSE</EDITABLE>	
+	<VALUE>Sync Run Group</VALUE>
+	<ENUMVALUE>0x8A000000</ENUMVALUE>
+</PROPERTY_STRING>
+
+
+<!--=============================================================================-->
+<!-- Channel description for cross trigger functions                             -->
+<!-- this session is needed for global BP and Sync Run                           -->  
+<!--=============================================================================-->
+<PROPERTY_STRING>
+	<NAME>Channel 0</NAME>	
+ 	<DESCRIPTION>The option to configure cross trigger function for channel 0</DESCRIPTION>	
+	<KEYITEM>
+		<KEYNAME>CTI TOP</KEYNAME>	
+		<KEYNUMBER>0</KEYNUMBER>	
+	</KEYITEM>
+	<ALLOWEDLIST>
+		<ALLOWEDITEM>
+			<ALLOWED_STRING>Available</ALLOWED_STRING>
+			<ALLOWED_ENUM>0</ALLOWED_ENUM>
+		</ALLOWEDITEM>
+		<ALLOWEDITEM>
+			<ALLOWED_KEY>CHANNEL CFG 0</ALLOWED_KEY>
+			<ALLOWED_ENUM>0x88000000</ALLOWED_ENUM>
+			<ALLOWED_STRING>Channel Configured</ALLOWED_STRING>
+		</ALLOWEDITEM>
+	</ALLOWEDLIST>
+</PROPERTY_STRING>
+
+<PROPERTY_STRING>
+	<NAME>Channel 1</NAME>	
+ 	<DESCRIPTION>The option to configure cross trigger function for channel 0</DESCRIPTION>	
+	<KEYITEM>
+		<KEYNAME>CTI TOP</KEYNAME>	
+		<KEYNUMBER>1</KEYNUMBER>	
+	</KEYITEM>
+	<ALLOWEDLIST>
+		<ALLOWEDITEM>
+			<ALLOWED_STRING>Available</ALLOWED_STRING>
+			<ALLOWED_ENUM>0</ALLOWED_ENUM>
+		</ALLOWEDITEM>
+	      <ALLOWEDITEM>
+			<ALLOWED_KEY>CHANNEL CFG 1</ALLOWED_KEY>
+			<ALLOWED_ENUM>0x88000000</ALLOWED_ENUM>
+			<ALLOWED_STRING>Channel Configured</ALLOWED_STRING>
+		</ALLOWEDITEM>
+	</ALLOWEDLIST>
+</PROPERTY_STRING>
+
+<PROPERTY_STRING>
+	<NAME>Channel 2</NAME>	
+	<DESCRIPTION>The option to configure cross trigger function for channel 2</DESCRIPTION>	
+	<KEYITEM>
+		<KEYNAME>CTI TOP</KEYNAME>	
+		<KEYNUMBER>2</KEYNUMBER>	
+	</KEYITEM>
+	<ALLOWEDLIST>
+		<ALLOWEDITEM>
+			<ALLOWED_STRING>Available</ALLOWED_STRING>
+			<ALLOWED_ENUM>0</ALLOWED_ENUM>
+		</ALLOWEDITEM>
+		<ALLOWEDITEM>
+			<ALLOWED_KEY>CHANNEL CFG</ALLOWED_KEY>
+			<ALLOWED_ENUM>0x88000000</ALLOWED_ENUM>
+			<ALLOWED_STRING>Channel Configured</ALLOWED_STRING>
+		</ALLOWEDITEM>
+	</ALLOWEDLIST>
+</PROPERTY_STRING>
+
+<PROPERTY_STRING>
+	<NAME>Channel 3</NAME>	
+	<DESCRIPTION>The option to configure cross trigger function for channel 3</DESCRIPTION>	
+	<KEYITEM>
+		<KEYNAME>CTI TOP</KEYNAME>	
+		<KEYNUMBER>3</KEYNUMBER>	
+	</KEYITEM>
+	<ALLOWEDLIST>
+		<ALLOWEDITEM>
+			<ALLOWED_STRING>Available</ALLOWED_STRING>
+			<ALLOWED_ENUM>0</ALLOWED_ENUM>
+		</ALLOWEDITEM>
+ 		<ALLOWEDITEM>
+			<ALLOWED_KEY>CHANNEL CFG</ALLOWED_KEY>
+			<ALLOWED_ENUM>0x88000000</ALLOWED_ENUM>
+			<ALLOWED_STRING>Channel Configured</ALLOWED_STRING>
+		</ALLOWEDITEM>
+	</ALLOWEDLIST>
+</PROPERTY_STRING>
+
+<!--=============================================================================-->
+<!-- CHANNEL CFG 0                                                               -->
+<!--=============================================================================-->
+	<PROPERTY_STRING>
+	  <NAME>Event Watcher</NAME>	
+ 	  <DESCRIPTION>The option to enable event inputs for the channel</DESCRIPTION>	
+	  <KEYITEM>
+		  <KEYNAME>CHANNEL CFG 0</KEYNAME>	
+		  <KEYNUMBER>1</KEYNUMBER>	
+	  </KEYITEM>
+	  <EDITABLE>FALSE</EDITABLE>	
+	  <CHILDKEY>EVT INS 0</CHILDKEY>	
+	  <ENUMVALUE>0x88100000</ENUMVALUE>
+	</PROPERTY_STRING>
+
+	<PROPERTY_STRING>
+	  <NAME>Action Trigger</NAME>	
+ 	  <DESCRIPTION>The option to generate actions for the active events</DESCRIPTION>	
+	  <KEYITEM>
+		  <KEYNAME>CHANNEL CFG 0</KEYNAME>	
+		  <KEYNUMBER>1</KEYNUMBER>	
+	  </KEYITEM>
+	  <EDITABLE>FALSE</EDITABLE>	
+	  <CHILDKEY>EVT OUTS 0</CHILDKEY>	
+	  <ENUMVALUE>0x88200000</ENUMVALUE>
+	</PROPERTY_STRING>
+
+<!--=============================================================================-->
+<!-- CHANNEL CFG 1                                                               -->
+<!--=============================================================================-->
+	<PROPERTY_STRING>
+	  <NAME>Event Watcher</NAME>	
+ 	  <DESCRIPTION>The option to enable event inputs for the channel</DESCRIPTION>	
+	  <KEYITEM>
+		  <KEYNAME>CHANNEL CFG 1</KEYNAME>	
+		  <KEYNUMBER>1</KEYNUMBER>	
+	  </KEYITEM>
+	  <EDITABLE>FALSE</EDITABLE>	
+	  <CHILDKEY>EVT INS 1</CHILDKEY>	
+	  <ENUMVALUE>0x88100000</ENUMVALUE>
+	</PROPERTY_STRING>
+
+	<PROPERTY_STRING>
+	  <NAME>Action Trigger</NAME>	
+ 	  <DESCRIPTION>The option to generate actions for the active events</DESCRIPTION>	
+	  <KEYITEM>
+		  <KEYNAME>CHANNEL CFG 1</KEYNAME>	
+		  <KEYNUMBER>1</KEYNUMBER>	
+	  </KEYITEM>
+	  <EDITABLE>FALSE</EDITABLE>	
+	  <CHILDKEY>EVT OUTS 1</CHILDKEY>	
+	  <ENUMVALUE>0x88200000</ENUMVALUE>
+	</PROPERTY_STRING>
+
+<!--=============================================================================-->
+<!-- CHANNEL CFG                                                               -->
+<!--=============================================================================-->
+	<PROPERTY_STRING>
+	  <NAME>Event Watcher</NAME>	
+ 	  <DESCRIPTION>The option to enable event inputs for the channel</DESCRIPTION>	
+	  <KEYITEM>
+		  <KEYNAME>CHANNEL CFG</KEYNAME>	
+		  <KEYNUMBER>1</KEYNUMBER>	
+	  </KEYITEM>
+	  <EDITABLE>FALSE</EDITABLE>	
+	  <CHILDKEY>EVT INS</CHILDKEY>	
+	  <ENUMVALUE>0x88100000</ENUMVALUE>
+	</PROPERTY_STRING>
+
+	<PROPERTY_STRING>
+	  <NAME>Action Trigger</NAME>	
+ 	  <DESCRIPTION>The option to generate actions for the active events</DESCRIPTION>	
+	  <KEYITEM>
+		  <KEYNAME>CHANNEL CFG</KEYNAME>	
+		  <KEYNUMBER>1</KEYNUMBER>	
+	  </KEYITEM>
+	  <EDITABLE>FALSE</EDITABLE>	
+	  <CHILDKEY>EVT OUTS</CHILDKEY>	
+	  <ENUMVALUE>0x88200000</ENUMVALUE>
+	</PROPERTY_STRING>
+
+  <!--=============================================================================-->
+  <!-- CPU Description for Sync Run and SMP                                        -->
+  <!--=============================================================================-->
+
+  <!--=============================================================================-->
+  <!--Make sure the CPU names for SMP mode is ahead of other same CPU names. SMP   -->
+  <!--SW will dynamically enable or disable the CPU properties by using the name   -->
+  <!--of the CPU. Put it ahead will guarantee it will be got first.                -->
+  <!--=============================================================================-->
+  <PROPERTY_BOOL>
+	<NAME>Cortex R4 CPU 0</NAME>
+	<DESCRIPTION>CPU to be enabled in the sync mode</DESCRIPTION>
+	<KEYITEM>
+		<KEYNAME>SMP_CPUS RX</KEYNAME>
+		<KEYNUMBER>1</KEYNUMBER>
+	</KEYITEM>
+	<KEYITEM>
+		<KEYNAME>SMP_CPUS R</KEYNAME>
+		<KEYNUMBER>1</KEYNUMBER>
+	</KEYITEM>
+	<ENUMVALUE>0x8A000700</ENUMVALUE>
+	<DISABLE>TRUE</DISABLE>
+	<EDITABLE>FALSE</EDITABLE>	
+	<VALUE>0</VALUE>
+  </PROPERTY_BOOL>
+
+
+<!--=============================================================================-->
+<!-- CPU Description for Global BP                                               -->
+<!--=============================================================================-->	
+	
+
+<PROPERTY_BOOL>
+	<NAME>Cortex R4 CPU 0</NAME>
+	<DESCRIPTION>CPU to participate in the global breakpoint</DESCRIPTION>
+	<KEYITEM>
+	  <KEYNAME>CPUS RX</KEYNAME>	
+	  <KEYNUMBER>1</KEYNUMBER>	
+	</KEYITEM>
+	<KEYITEM>
+	  <KEYNAME>CPUS</KEYNAME>	
+	  <KEYNUMBER>1</KEYNUMBER>	
+	</KEYITEM>
+	<ENUMVALUE>0x89000100</ENUMVALUE>
+	<DISABLE>TRUE</DISABLE>
+	<EDITABLE>FALSE</EDITABLE>	
+	<VALUE>0</VALUE>
+</PROPERTY_BOOL>
+	
+
+</AET>

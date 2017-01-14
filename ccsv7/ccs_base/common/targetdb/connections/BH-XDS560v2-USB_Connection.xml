@@ -1,0 +1,219 @@
+<?xml version="1.0"?>
+<!--                                                  -->
+<!-- This is a USCIF v3.5 compatible XML.             -->
+<!--                                                  -->
+<!-- Blackhawk XDS560v2-USB Emulator XML Definitions. -->
+<!--                                                  -->
+<!-- 23 December 2011                                 -->
+<!-- v5.1.0.106                                       -->
+<!--                                                  -->
+
+<connection id="Blackhawk XDS560v2-USB System Trace Emulator" class="337601">
+
+    <connectionType Type="TIXDS560"/>
+
+    <property id="Emulator Filename" Type="hiddenfield" Value="bh560v2u.out" ID="USCIF.ECOM_DRVR" />
+
+    <property desc="Emulator I/O Port Number" Type="choicelist" Value="0" id="portAddr1" ID="DUMMY.PORT">
+        <choice Name="I/O Port = 0" value="0x0" >
+            <property id="Port 0" Type="hiddenfield" Value="0x0" ID="USCIF.ECOM_PORT"/>
+        </choice>
+        <choice Name="I/O Port = 1" value="0x1" >
+            <property id="Port 0" Type="hiddenfield" Value="0x1" ID="USCIF.ECOM_PORT"/>
+        </choice>
+        <choice Name="I/O Port = 2" value="0x2" >
+            <property id="Port 0" Type="hiddenfield" Value="0x2" ID="USCIF.ECOM_PORT"/>
+        </choice>
+        <choice Name="I/O Port = 3" value="0x3" >
+            <property id="Port 0" Type="hiddenfield" Value="0x3" ID="USCIF.ECOM_PORT"/>
+        </choice>
+        <choice Name="User Defined Port Number" value="0x4" >
+            <property id="Enter a User Defined Port Number" Type="stringfield" Value="4" ID="USCIF.ECOM_PORT"/>
+        </choice>
+    </property>
+
+    <property Name="JTAG TCLK Frequency (MHz)" Type="choicelist" Value="1" ID="USCIF.TCLK_PROGRAM">
+
+        <choice Name="Automatic with faster 35.0MHz limit" value="automatic">
+            <property Name="unused" Type="hiddenfield" Value="exchange" ID="USCIF.TCLK_FREQUENCY"/>
+        </choice>
+        <choice Name="Automatic with legacy 10.368MHz limit" value="automatic">
+            <property Name="unused" Type="hiddenfield" Value="legacy" ID="USCIF.TCLK_FREQUENCY"/>
+        </choice>
+        <choice Name="Automatic with user specified limit" value="automatic">
+            <property Name="-- Enter a value from 0.50MHz to 64.0MHz" Type="stringfield" Value="10.368MHz" ID="USCIF.TCLK_FREQUENCY"/>
+        </choice>
+        <choice Name="Adaptive with user specified limit" value="adaptive">
+            <property Name="-- Enter a value from 0.50MHz to 48.0MHz" Type="stringfield" Value="48.0MHz" ID="USCIF.TCLK_FREQUENCY"/>
+        </choice>
+        <choice Name="Adaptive without any limit at all" value="inverter">
+            <property Name="unused" Type="hiddenfield" Value="minimum" ID="USCIF.TCLK_FREQUENCY"/>
+        </choice>
+        <choice Name="Fixed with user specified faster value" value="specific">
+            <property Name="-- Enter a value from 0.5MHz to 64.0MHz" Type="stringfield" Value="35.0MHz" ID="USCIF.TCLK_FREQUENCY"/>
+        </choice>
+        <choice Name="Fixed with user specified slower value" value="specific">
+            <property Name="-- Enter a value from 488Hz to 0.5MHz" Type="stringfield" Value="100KHz" ID="USCIF.TCLK_FREQUENCY"/>
+        </choice>
+        <choice Name="TCLK looped-back with user specified limit" value="automatic">
+            <property Name="-- Enter a value from 0.5MHz to 64.0MHz" Type="stringfield" Value="10.368MHz" ID="USCIF.TCLK_FREQUENCY"/>
+            <property Name="unused1" Type="hiddenfield" Value="enable"  ID="USCIF.LOOPBACK_MODE"/>
+            <property Name="unused2" Type="hiddenfield" Value="clock"  ID="USCIF.LOOPBACK_VALUE"/>
+        </choice>
+    </property>
+
+    <property Name="TMS/TDO Output Timing" Type="choicelist" Value="1" ID="USCIF.TDOEDGE">
+        <choice Name="Rising edge allows faster TCLK" value="rise" />
+        <choice Name="Falling edge is JTAG standard"  value="fall" />
+    </property>
+
+    <property Name="The JTAG nTRST Boot-Mode" Type="choicelist" Value="0" ID="USCIF.JTAGBOOT_MODE">
+        <choice Name="Disabled - Both EMU pins remain hi-z" value="disable">
+            <property Name="unused" Type="hiddenfield" Value="hiz" ID="USCIF.JTAGBOOT_VALUE"/>
+        </choice>
+        <choice Name="Enabled - Both EMU pins are high" value="enable">
+            <property Name="unused" Type="hiddenfield" Value="11"  ID="USCIF.JTAGBOOT_VALUE"/>
+        </choice>
+        <choice Name="Enabled - EMU1 is high, EMU0 is low" value="enable">
+            <property Name="unused" Type="hiddenfield" Value="10"  ID="USCIF.JTAGBOOT_VALUE"/>
+        </choice>
+        <choice Name="Enabled - EMU1 is low, EMU0 is high" value="enable">
+            <property Name="unused" Type="hiddenfield" Value="01"  ID="USCIF.JTAGBOOT_VALUE"/>
+        </choice>
+        <choice Name="Enabled - Both EMU pins are low" value="enable">
+            <property Name="unused" Type="hiddenfield" Value="00"  ID="USCIF.JTAGBOOT_VALUE"/>
+        </choice>
+    </property>
+
+    <property Name="The Power-On-Reset Boot-Mode" Type="choicelist" Value="0" ID="USCIF.POWERBOOT_MODE">
+        <choice Name="Disabled - Both EMU pins remain hi-z" value="disable">
+            <property Name="unused" Type="hiddenfield" Value="hiz" ID="USCIF.POWERBOOT_VALUE"/>
+        </choice>
+        <choice Name="Enabled - Both EMU pins are high" value="enable">
+            <property Name="unused" Type="hiddenfield" Value="11"  ID="USCIF.POWERBOOT_VALUE"/>
+        </choice>
+        <choice Name="Enabled - EMU1 is high, EMU0 is low" value="enable">
+            <property Name="unused" Type="hiddenfield" Value="10"  ID="USCIF.POWERBOOT_VALUE"/>
+        </choice>
+        <choice Name="Enabled - EMU1 is low, EMU0 is high" value="enable">
+            <property Name="unused" Type="hiddenfield" Value="01"  ID="USCIF.POWERBOOT_VALUE"/>
+        </choice>
+        <choice Name="Enabled - Both EMU pins are low" value="enable">
+            <property Name="unused" Type="hiddenfield" Value="00"  ID="USCIF.POWERBOOT_VALUE"/>
+        </choice>
+    </property>
+
+    <property Name="The Boot-Mode Pin Map" Type="choicelist" Value="0" ID="USCIF.BOOT_PINMAP">
+        <choice Name="EMU1 = Pin TRD0.2 and EMU0 = Pin TRD0.1" value="TRD02_TRD01" />
+        <choice Name="EMU1 = Pin TRD0.1 and EMU0 = Pin TRD0.0" value="TRD01_TRD00" />
+        <choice Name="EMU1 = Pin EXTF and EMU0 = Pin EXTE" value="EXTF_EXTE" />
+    </property>
+
+    <property Name="The JTAG Signals Isolation Upon Disconnect" Type="choicelist" Value="0" ID="USCIF.JTAG_ISOLATE">
+        <choice Name="Do not isolate JTAG signals when the last client disconnects" value="disable" />
+        <choice Name="Isolate JTAG signals when the last client disconnects" value="enable" />
+    </property>
+
+
+
+
+    <property Name="The cJTAG Converter Features" Type="choicelist" Value="0" ID="DOT7.DTS_USAGE">
+
+        <choice Name="The converter is bypassed, use 1149.1" value="nothing">
+            <!-- "DOT7.DTS_USAGE=NOTHING" is equivalent to no "DOT7.DTS_???" or "DOT7.TS_???" variables at all.  -->
+            <!-- The converter is not-present - the link delay is zero.                                          -->
+            <!-- The capabilities are those of the 1149.1 standard.                                              -->
+        </choice>
+
+        <choice Name="Generate 1149.7 4-pin standard mode" value="enable">
+
+            <!-- "DOT7.DTS_USAGE=ENABLE" allows use of all the "DOT7.DTS_???" and "DOT7.TS_???" variables. -->
+            <!-- The converter is present - the link delay is three or two.                                -->
+            <!-- The capabilities are those of the 1149.7 JSCAN0 mode.                                     -->
+
+            <property Name="The Converter Type" Type="hiddenfield" Value="xds560v2" ID="DOT7.DTS_TYPE"/>
+
+            <property Name="The Converter 1149.7 Frequency Source" Type="choicelist" Value="0" ID="DOT7.DTS_PROGRAM">
+                <choice Name="Use the emulator clock"       value="emulator"     />
+                <choice Name="Use converter fixed clock"    value="dts_specific" />
+                <choice Name="Use converter adaptive clock" value="dts_adaptive" />
+            </property>
+
+            <property Name="The Converter 1149.7 Frequency Value"   Type="hiddenfield" Value="16.7MHz"  ID="DOT7.DTS_FREQUENCY"/>
+            <property Name="The Target Scan Format"                 Type="hiddenfield" Value="jscan0"   ID="DOT7.TS_FORMAT"    />
+
+            <property Name="The Target Pin Width" Type="choicelist" Value="0" ID="DOT7.TS_PIN_WIDTH">
+                <choice Name="The target hardware has 4 JTAG pins" value="all_four" />
+                <!-- TCKO/TMSC/TDI/TDO -->
+                <choice Name="The target hardware has 2 JTAG pins" value="only_two" />
+                <!-- TCKO/TMSC         -->
+            </property>
+
+        </choice>
+
+        <choice Name="Generate 1149.7 2-pin advanced modes" value="enable">
+
+            <!-- "DOT7.DTS_USAGE=ENABLE" allows use of all the "DOT7.DTS_???" and "DOT7.TS_???" variables. -->
+            <!-- The converter is present - the link delay is three or two.                                -->
+            <!-- The capabilities are those of the 1149.7 MSCAN and OSCAN0-7 modes.                        -->
+
+            <property Name="The Converter Type" Type="hiddenfield" Value="xds560v2" ID="DOT7.DTS_TYPE"/>
+
+            <property Name="The Converter 1149.7 Frequency Source" Type="choicelist" Value="2" ID="DOT7.DTS_PROGRAM">
+                <choice Name="Use the emulator clock"       value="emulator"     />
+                <choice Name="Use converter fixed clock"    value="dts_specific" />
+                <choice Name="Use converter adaptive clock" value="dts_adaptive" />
+            </property>
+
+            <property Name="The Converter 1149.7 Frequency Value" Type="choicelist" Value="0" ID="DOT7.DTS_FREQUENCY">
+                <choice Name="Overclock default 16.7MHz frequency" value="16.7MHz"/>
+                <choice Name="Overclock with user specified value" value="unused">
+                    <property Name="-- Choose a value from 1.0MHz to 50.0MHz" Type="choicelist" Value="7" ID="DOT7.DTS_FREQUENCY">
+                        <choice Name="1.00MHz" value="1.00MHz" />
+                        <!-- 50 / 50 -->
+                        <choice Name="2.00MHz" value="2.00MHz" />
+                        <!-- 50 / 25 -->
+                        <choice Name="3.33MHz" value="3.33MHz" />
+                        <!-- 50 / 15 -->
+                        <choice Name="5.00MHz" value="5.00MHz" />
+                        <!-- 50 / 10 -->
+                        <choice Name="7.14MHz" value="7.14MHz" />
+                        <!-- 50 /  7 -->
+                        <choice Name="10.0MHz" value="10.0MHz" />
+                        <!-- 50 /  5 -->
+                        <choice Name="12.5MHz" value="12.5MHz" />
+                        <!-- 50 /  4 -->
+                        <choice Name="16.7MHz" value="16.7MHz" />
+                        <!-- 50 /  3 -->
+                        <choice Name="25.0MHz" value="25.0MHz" />
+                        <!-- 50 /  2 -->
+                        <choice Name="50.0MHz" value="50.0MHz" />
+                        <!-- 50 /  1 -->
+                    </property>
+                </choice>
+            </property>
+
+            <property Name="The Target Scan Format" Type="choicelist" Value="4" ID="DOT7.TS_FORMAT">
+                <choice Name="Use MSCAN  format - do it all, don't optimise" value="mscan" />
+                <choice Name="Use OSCAN0 format - is adaptive, no escapes"   value="oscan0"/>
+                <choice Name="Use OSCAN1 format - non adaptive, no escapes"  value="oscan1"/>
+                <choice Name="Use OSCAN2 format - fast non-scan, no escapes" value="oscan2"/>
+                <choice Name="Use OSCAN4 format - is adaptive, fast scan"    value="oscan4"/>
+                <choice Name="Use OSCAN5 format - non adaptive, fast scan"   value="oscan5"/>
+                <choice Name="Use OSCAN6 format - fast non-scan, fast scan"  value="oscan6"/>
+            </property>
+
+            <property Name="The Target Pin Width" Type="choicelist"  Value="1" ID="DOT7.TS_PIN_WIDTH">
+                <choice Name="The target hardware has 4 JTAG pins" value="all_four" />
+                <!-- TCKO/TMSC/TDI/TDO -->
+                <choice Name="The target hardware has 2 JTAG pins" value="only_two" />
+                <!-- TCKO/TMSC         -->
+            </property>
+
+        </choice>
+    </property>
+
+
+    <property Name="Diagnostic Command" Type="hiddenfield" Value="%ccs_base%/common/uscif/dbgjtag.exe -f %boarddatafile% -rv -o -F inform,logfile=yes -S pathlength -S integrity" ID="DiagnosticCommand"/>
+
+</connection>

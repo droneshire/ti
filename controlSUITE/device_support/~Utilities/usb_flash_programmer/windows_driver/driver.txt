@@ -1,0 +1,26 @@
+Texas Instruments TMS320F28x7x USB Boot Loader Example Package
+
+
+This file explains how to install the boot loader Windows driver.
+
+
+Power up the microcontroller and run the USB boot loader. Attach the
+microcontroller to the PC. Windows will try to install a driver and fail.
+Go to the Device Manager. The boot loader will appear as "TMS320F28x7x USB
+Boot Loader" under "Other devices". Right-click on it and choose "Update
+driver software. Choose "Browse my computer for driver software", and select
+the windows_driver directory in this package. Windows will pop up a security
+warning. Install the driver anyway. Once installation completes, the boot
+loader will appear as "F28x7x USB Boot Loader" under the "Texas Instruments
+Microcontrollers" category. The boot loader is now ready for use. Test it
+using the following command line:
+
+	f28x7x_usb_loader.exe -l
+
+This should print the manufacturer, product ID, and serial number of the boot
+loader:
+
+Performing device check only
+Manufacturer: Texas Instruments
+Product ID: TMS320F28x7x USB Boot Loader
+Serial number: 2

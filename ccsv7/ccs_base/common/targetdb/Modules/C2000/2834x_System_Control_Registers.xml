@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  TI File $Revision: /main/1 $
+  Checkin $Date: June 24, 2009   15:25:20 $
+  -->
+
+
+<!-- TMS320C2834x System Control Registers
+     =========================================
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     -->
+
+
+
+<module id="SYSCTRL" HW_revision="" XML_version="1" description="PLL, Clocking, Watchdog, and Low Power Registers">
+        <!-- 1 reserved -->
+	<register id="PLLSTS" acronym="PLLSTS" offset="1" page="1" width="16" description="PLL Status Register" /> 
+	<!-- 7 reserved -->
+	<register id="PCLKCR2" acronym="PCLKCR2" offset="9" page="1" width="16" description="Peripheral Clock Control Register 2" /> 
+	<register id="HISPCP" acronym="HISPCP" offset="10" page="1" width="16" description="High-Speed Peripheral Clock Pre-Scaler Register" /> 
+	<register id="LOSPCP" acronym="LOSPCP" offset="11" page="1" width="16" description="Low-Speed Peripheral Clock Pre-Scaler Register" /> 
+	<register id="PCLKCR0" acronym="PCLKCR0" offset="12" page="1" width="16" description="Peripheral Clock Control Register 0" /> 
+	<register id="PCLKCR1" acronym="PCLKCR1" offset="13" page="1" width="16" description="Peripheral Clock Control Register 1" /> 
+	<register id="LPMCR0" acronym="LPMCR0" offset="14" page="1" width="16" description="Low Power Mode Control Register 0" /> 
+		<!-- 1 reserved -->
+	<register id="PCLKCR3" acronym="PCLKCR3" offset="16" page="1" width="16" description="Peripheral Clock Control Register 3" /> 
+	<register id="PLLCR" acronym="PLLCR" offset="17" page="1" width="16" description="PLL Control Register" /> 
+	<register id="SCSR" acronym="SCSR" offset="18" page="1" width="16" description="System Control and Status Register" /> 
+	<register id="WDCNTR" acronym="WDCNTR" offset="19" page="1" width="16" description="Watchdog Counter Register" /> 
+	<!-- 1 reserved -->
+	<register id="WDKEY" acronym="WDKEY" offset="21" page="1" width="16" description="Watchdog Reset Key Register" /> 
+	<!-- 3 reserved -->
+	<register id="WDCR" acronym="WDCR" offset="25" page="1" width="16" description="Watchdog Control Register" /> 
+	<!-- 3 reserved -->
+	<register id="EXTSOCCFG" acronym="EXTSOCCFG" offset="29" page="1" width="16" description="External ADC SOC Configuration Register" /> 
+	<!-- 1 reserved -->
+</module>

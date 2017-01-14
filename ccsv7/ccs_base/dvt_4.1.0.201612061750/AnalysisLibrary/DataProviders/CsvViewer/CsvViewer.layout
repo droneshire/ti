@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.5.0_14" class="java.beans.XMLDecoder"> 
+ <object class="com.ti.dvt.gsb.model.LayoutModel"> 
+  <void property="autoLayout"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="layoutMap"> 
+   <void method="put"> 
+    <string>BufferFlowCntrl</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>0</int> 
+     <int>106</int> 
+     <int>114</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>VirtualBuffer</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>26</int> 
+     <int>153</int> 
+     <int>78</int> 
+     <int>31</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>CSVFileReader</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>8</int> 
+     <int>10</int> 
+     <int>125</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>$HookIn</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>24</int> 
+     <int>60</int> 
+     <int>76</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:Data</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>40</int> 
+     <int>205</int> 
+     <int>54</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+  </void> 
+ </object> 
+</java> 

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- 
+  TI File $Revision: 
+  Checkin $Date: 
+  --> 
+
+<!--  F28M35x DCSM REGS Registers 
+     =================================== 
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     --> 
+<module id="DCSM REGS" HW_revision="" XML_version="1" description="DCSM REGS Registers">
+    <register id="Z1_CSMKEY0" acronym="Z1_CSMKEY0" offset="0" page="1" width="32" description="CSMKEY0 Register for C28X-Zone-1 security Zone" />
+    <register id="Z1_CSMKEY1" acronym="Z1_CSMKEY1" offset="2" page="1" width="32" description="CSMKEY1 Register for C28X-Zone-1 security Zone" />
+    <register id="Z1_CSMKEY2" acronym="Z1_CSMKEY2" offset="4" page="1" width="32" description="CSMKEY2 Register for C28X-Zone-1 security Zone" />
+    <register id="Z1_CSMKEY3" acronym="Z1_CSMKEY3" offset="6" page="1" width="32" description="CSMKEY3 Register for C28X-Zone-1 security Zone" />
+    <!--  2 empty  -->
+    <!--  2 empty  -->
+    <!--  2 empty  -->
+    <!--  1 empty  -->
+    <register id="Z1_CR" acronym="Z1_CR" offset="15" page="1" width="16" description="Status and Control Register for C28X-Zone-1 security Zone" />
+    <register id="Z1_ECSLKEY0" acronym="Z1_ECSLKEY0" offset="16" page="1" width="32" description="ECSLKEY0 Register for C28X-Zone-1 security Zone" />
+    <register id="Z1_ECSLKEY1" acronym="Z1_ECSLKEY1" offset="18" page="1" width="32" description="ECSLKEY1 Register for C28X-Zone-1 security Zone" />
+    <!--  1 empty  -->
+    <register id="Z1_EXEONLYR" acronym="Z1_EXEONLYR" offset="21" page="1" width="16" description="Execute-Only Select Register for flash sectors" />
+</module>

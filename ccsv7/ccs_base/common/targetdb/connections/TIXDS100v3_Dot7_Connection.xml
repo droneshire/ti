@@ -1,0 +1,198 @@
+<?xml version="1.0"?>
+
+<!-- This is a USCIF35 compatible XML.                        -->
+<!-- Copyright (c) 2012-2014, Texas Instruments Incorporated. -->
+
+<connection desc="Texas Instruments XDS100v3 USB Debug Probe" id="Texas Instruments XDS100v3 USB Emulator" class="185076">
+
+    <connectionType Type="TIXDS100v2"/>
+
+    <property Name="Diagnostic Command" Type="hiddenfield" Value="%ccs_base%/common/uscif/dbgjtag -f %boarddatafile% -rv -o -F inform,logfile=yes -S pathlength -S integrity" ID="DiagnosticCommand"/>
+    <property desc="Debug Probe Filename"  id="Emulator Filename"  Type="hiddenfield" Value="jioserdesusbv3.dll" ID="SEPK.POD_DRVR"/>
+    <property desc="Debug Probe Selection" id="Emulator Selection" Type="choicelist"  Value="0"                  ID="SEPK.POD_PORT">
+
+        <choice Name="Only one XDS100v3 installed" value="0">
+        </choice>
+        <choice Name="Select by serial number"   value="0">
+            <property Name="-- Enter the serial number" Type="stringfield" Value="Use xds100serial to get value" ID="SEPK.POD_SERIAL"/>
+        </choice>
+
+    </property>
+
+    <property Name="Title" Type="hiddenfield" Value="Texas Instruments XDS100v3 USB" ID="PRODUCT.TITLE"/>
+    <property Name="Alias" Type="hiddenfield" Value="TI_XDS100v3_USB"                ID="PRODUCT.ALIAS"/>
+    <property Name="Name"  Type="hiddenfield" Value="FTDI_FT2232"                    ID="PRODUCT.NAME"/>
+
+    <property Name="USB VID" Type="hiddenfield" Value="0x0403" ID="FTDI_FT2232.USB_VID"/>
+    <property Name="USB PID" Type="hiddenfield" Value="0xa6d1" ID="FTDI_FT2232.USB_PID"/>
+
+    <property Name="TRST"              Type="hiddenfield" Value="TRSTn,Active_Low"              ID="FTDI_FT2232.GPIO_L0"/>
+    <property Name="EMU Pin Enable"    Type="hiddenfield" Value="EMU_Pin_Enable,Active_Low"     ID="FTDI_FT2232.GPIO_L1"/>
+    <property Name="EMU0"              Type="hiddenfield" Value="EMU_Pin_0,Active_Low"          ID="FTDI_FT2232.GPIO_L2"/>
+    <property Name="RTCK"              Type="hiddenfield" Value="Adaptive_Clock,Active_High"    ID="FTDI_FT2232.GPIO_L3"/>
+    <property Name="SRST"              Type="hiddenfield" Value="SRSTn,Active_High"             ID="FTDI_FT2232.GPIO_H0"/>
+    <property Name="Clock_Fail_Detect" Type="hiddenfield" Value="Clock_Fail_Detect,Active_High" ID="FTDI_FT2232.GPIO_H1"/>
+    <property Name="Power Loss Detect" Type="hiddenfield" Value="Power_Loss_Detect,Active_Low"  ID="FTDI_FT2232.GPIO_H2"/>
+    <property Name="Power Loss Reset"  Type="hiddenfield" Value="Power_Loss_Reset,Active_High"  ID="FTDI_FT2232.GPIO_H3"/>
+    <property Name="EMU1"              Type="hiddenfield" Value="EMU_Pin_1,Active_Low"          ID="FTDI_FT2232.GPIO_H4"/>
+    <property Name="Cable Disconnect"  Type="hiddenfield" Value="Cable_Disconnect,Active_High"  ID="FTDI_FT2232.GPIO_H5"/>
+    <property Name="DOT7 Bypass"       Type="hiddenfield" Value="Dot7_Bypass,Active_Low"        ID="FTDI_FT2232.GPIO_H6"/>
+    <property Name="Alternate IO"      Type="hiddenfield" Value="Alternate_Io,Active_Low"       ID="FTDI_FT2232.GPIO_H7"/>
+
+    <property Name="Unused_APIO_L0"    Type="hiddenfield" Value="Unused"                        ID="FTDI_FT2232.APIO_L0"/>
+    <property Name="JTAG Isolate"      Type="hiddenfield" Value="Jtag_Isolate,Active_High"      ID="FTDI_FT2232.APIO_L1"/>
+    <property Name="Clock Fail Enable" Type="hiddenfield" Value="Clock_Fail_Enable,Active_High" ID="FTDI_FT2232.APIO_L2"/>
+    <property Name="Unused_APIO_L3"    Type="hiddenfield" Value="Unused"                        ID="FTDI_FT2232.APIO_L3"/>
+    <property Name="Unused_APIO_H0"    Type="hiddenfield" Value="Unused"                        ID="FTDI_FT2232.APIO_H0"/>
+    <property Name="Status 0"          Type="hiddenfield" Value="Status_0,Active_High"          ID="FTDI_FT2232.APIO_H1"/>
+    <property Name="Status 2"          Type="hiddenfield" Value="Status_2,Active_High"          ID="FTDI_FT2232.APIO_H2"/>
+    <property Name="Unused_APIO_H3"    Type="hiddenfield" Value="Unused"                        ID="FTDI_FT2232.APIO_H3"/>
+    <property Name="Unused_APIO_H4"    Type="hiddenfield" Value="Jtag_Loopback,Active_High"     ID="FTDI_FT2232.APIO_H4"/>
+    <property Name="Status 1"          Type="hiddenfield" Value="Status_1,Active_High"          ID="FTDI_FT2232.APIO_H5"/>
+    <property Name="Unused_APIO_H6"    Type="hiddenfield" Value="Unused"                        ID="FTDI_FT2232.APIO_H6"/>
+    <property Name="Unused_APIO_H7"    Type="hiddenfield" Value="Unused"                        ID="FTDI_FT2232.APIO_H7"/>
+
+    <property Name="TMS/TDO Output Timing" Type="hiddenfield" Value="FALL" ID="USCIF.TDOEDGE"/>
+
+    <property Name="The JTAG nTRST Boot-Mode" Type="choicelist" Value="0"  ID="USCIF.JTAGBOOT_MODE">
+
+        <choice Name="Disabled - Both EMU pins remain hi-z" value="disable">
+            <property Name="unused" Type="hiddenfield" Value="hiz" ID="USCIF.JTAGBOOT_VALUE"/>
+        </choice>
+        <choice Name="Enabled - Both EMU pins are high" value="enable">
+            <property Name="unused" Type="hiddenfield" Value="11"  ID="USCIF.JTAGBOOT_VALUE"/>
+        </choice>
+        <choice Name="Enabled - EMU1 is high, EMU0 is low" value="enable">
+            <property Name="unused" Type="hiddenfield" Value="10"  ID="USCIF.JTAGBOOT_VALUE"/>
+        </choice>
+        <choice Name="Enabled - EMU1 is low, EMU0 is high" value="enable">
+            <property Name="unused" Type="hiddenfield" Value="01"  ID="USCIF.JTAGBOOT_VALUE"/>
+        </choice>
+        <choice Name="Enabled - Both EMU pins are low" value="enable">
+            <property Name="unused" Type="hiddenfield" Value="00"  ID="USCIF.JTAGBOOT_VALUE"/>
+        </choice>
+
+    </property>
+
+    <property Name="The Power-On-Reset Boot-Mode" Type="choicelist" Value="0" ID="USCIF.POWERBOOT_MODE">
+
+        <choice Name="Disabled - Both EMU pins remain hi-z" value="disable">
+            <property Name="unused" Type="hiddenfield" Value="hiz" ID="USCIF.POWERBOOT_VALUE"/>
+        </choice>
+        <choice Name="Enabled - Both EMU pins are high" value="enable">
+            <property Name="unused" Type="hiddenfield" Value="11"  ID="USCIF.POWERBOOT_VALUE"/>
+        </choice>
+        <choice Name="Enabled - EMU1 is high, EMU0 is low" value="enable">
+            <property Name="unused" Type="hiddenfield" Value="10"  ID="USCIF.POWERBOOT_VALUE"/>
+        </choice>
+        <choice Name="Enabled - EMU1 is low, EMU0 is high" value="enable">
+            <property Name="unused" Type="hiddenfield" Value="01"  ID="USCIF.POWERBOOT_VALUE"/>
+        </choice>
+        <choice Name="Enabled - Both EMU pins are low" value="enable">
+            <property Name="unused" Type="hiddenfield" Value="00"  ID="USCIF.POWERBOOT_VALUE"/>
+        </choice>
+
+    </property>
+
+    <property Name="The JTAG Signal Isolation" Type="choicelist" Value="0" ID="USCIF.JTAG_ISOLATE">
+        <choice Name="Don't isolate JTAG signals at final disconnect" value="disable" />
+        <choice Name="Do isolate JTAG signals at final disconnect" value="enable" />
+    </property>
+
+    <property Name="The Converter Usage" Type="choicelist" Value="0" ID="DOT7.DTS_USAGE">
+        <choice Name="Its bypassed, use 1149.1, mimic XDS100v2" value="nothing">
+
+            <!-- "DOT7.DTS_USAGE=NOTHING" is equivalent to no "DOT7.DTS_???" or "DOT7.TS_???" variables at all.  -->
+            <!-- The converter is bypassed - the link delay is zero.                                             -->
+            <!-- The capabilities mimic those of the XDS100v2.                                                   -->
+
+            <property desc="The Debug Probe 1149.1 Frequency" id="The Emulator 1149.1 Frequency" Type="choicelist" Value="0" ID="USCIF.TCLK_PROGRAM">
+                <choice Name="Fixed default 1.0MHz frequency" value="SPECIFIC">
+                    <property Name="unused" Type="hiddenfield" Value="1.0" ID="USCIF.TCLK_FREQUENCY"/>
+                </choice>
+                <choice Name="Fixed with user specified faster value" value="specific">
+                    <property Name="-- Enter a value from 1.0MHz to 30.0MHz" Type="stringfield" Value="1.0MHz" ID="USCIF.TCLK_FREQUENCY"/>
+                </choice>
+                <choice Name="Fixed with user specified slower value" value="specific">
+                    <property Name="-- Enter a value from 488Hz to 1.0MHz" Type="stringfield" Value="100KHz" ID="USCIF.TCLK_FREQUENCY"/>
+                </choice>
+                <choice Name="Adaptive with user specified limit" value="adaptive">
+                    <property Name="-- Enter a value from 488Hz to 30.0MHz" Type="stringfield" Value="1.0MHz" ID="USCIF.TCLK_FREQUENCY"/>
+                </choice>
+            </property>
+
+        </choice>
+        <choice Name="Generate 1149.7 4-pin standard mode" value="enable">
+
+            <!-- "DOT7.DTS_USAGE=ENABLE" allows use of all the "DOT7.DTS_???" and "DOT7.TS_???" variables. -->
+            <!-- The converter is present - the link delay is three or two.                                -->
+            <!-- The mode JSCAN0 is supported here.                                                        -->
+
+            <property Name="The Converter Type" Type="hiddenfield" Value="xds100v3" ID="DOT7.DTS_TYPE" />
+            <property Name="4 JTAG pins" Type="hiddenfield" Value="all_four" ID="DOT7.TS_PIN_WIDTH" /> <!-- TCKO/TMSC/TDI/TDO -->
+
+            <property desc="The Debug Probe 1149.1 Frequency" id="The Emulator 1149.1 Frequency" Type="choicelist" Value="0" ID="USCIF.TCLK_PROGRAM">
+                <choice Name="Adaptive default 3.0MHz frequency" value="adaptive">
+                    <property Name="unused" Type="hiddenfield" Value="3.0" ID="USCIF.TCLK_FREQUENCY"/>
+                </choice>
+                <choice Name="Adaptive with user specified limit" value="adaptive">
+                    <property Name="-- Enter a value from 488Hz to 30.0MHz" Type="stringfield" Value="3.0MHz" ID="USCIF.TCLK_FREQUENCY"/>
+                </choice>
+            </property>
+
+            <property Name="The Converter 1149.7 Program"   Type="hiddenfield" Value="emulator" ID="DOT7.DTS_PROGRAM"  />
+            <property Name="The Converter 1149.7 Frequency" Type="hiddenfield" Value="16.7MHz"  ID="DOT7.DTS_FREQUENCY"/>
+            <property Name="The Target Scan Format"         Type="hiddenfield" Value="jscan0"   ID="DOT7.TS_FORMAT"    />
+
+        </choice>
+        <choice Name="Generate 1149.7 2-pin advanced modes" value="enable">
+
+            <!-- "DOT7.DTS_USAGE=ENABLE" allows use of all the "DOT7.DTS_???" and "DOT7.TS_???" variables. -->
+            <!-- The converter is present - the link delay is three or two.                                -->
+            <!-- The modes MSCAN and OSCAN0-7 are supported here.                                          -->
+
+            <property Name="The Converter Type" Type="hiddenfield" Value="xds100v3" ID="DOT7.DTS_TYPE" />
+            <property Name="2 JTAG pins" Type="hiddenfield" Value="only_two" ID="DOT7.TS_PIN_WIDTH" /> <!-- TCKO/TMSC -->
+
+            <property Name="The Converter 1149.7 Program"   Type="hiddenfield" Value="emulator" ID="DOT7.DTS_PROGRAM"  />
+            <property Name="The Converter 1149.7 Frequency" Type="choicelist"  Value="0"        ID="DOT7.DTS_FREQUENCY">
+                <choice Name="Overclock default 16.7MHz frequency" value="16.7MHz"/>
+                <choice Name="Overclock with user specified value" value="unused">
+                    <property Name="-- Choose a value from 1.0MHz to 50.0MHz" Type="choicelist" Value="7" ID="DOT7.DTS_FREQUENCY">
+                        <choice Name="1.00MHz" value="1.00MHz" /> <!-- 50 / 50 -->
+                        <choice Name="2.00MHz" value="2.00MHz" /> <!-- 50 / 25 -->
+                        <choice Name="3.33MHz" value="3.33MHz" /> <!-- 50 / 15 -->
+                        <choice Name="5.00MHz" value="5.00MHz" /> <!-- 50 / 10 -->
+                        <choice Name="7.14MHz" value="7.14MHz" /> <!-- 50 /  7 -->
+                        <choice Name="10.0MHz" value="10.0MHz" /> <!-- 50 /  5 -->
+                        <choice Name="12.5MHz" value="12.5MHz" /> <!-- 50 /  4 -->
+                        <choice Name="16.7MHz" value="16.7MHz" /> <!-- 50 /  3 -->
+                        <choice Name="25.0MHz" value="25.0MHz" /> <!-- 50 /  2 -->
+                        <choice Name="50.0MHz" value="50.0MHz" /> <!-- 50 /  1 -->
+                    </property>
+                </choice>
+            </property>
+
+            <property desc="The Debug Probe 1149.1 Frequency" id="The Emulator 1149.1 Frequency" Type="choicelist" Value="0" ID="USCIF.TCLK_PROGRAM">
+                <choice Name="Adaptive default 3.0MHz frequency" value="adaptive">
+                    <property Name="unused" Type="hiddenfield" Value="3.0" ID="USCIF.TCLK_FREQUENCY"/>
+                </choice>
+                <choice Name="Adaptive with user specified limit" value="adaptive">
+                    <property Name="-- Enter a value from 488Hz to 30.0MHz" Type="stringfield" Value="3.0MHz" ID="USCIF.TCLK_FREQUENCY"/>
+                </choice>
+            </property>
+
+            <property Name="The Target Scan Format" Type="choicelist" Value="4" ID="DOT7.TS_FORMAT">
+                <choice Name="Use MSCAN  format - do it all, don't optimise" value="mscan" />
+                <choice Name="Use OSCAN0 format - is adaptive, no escapes"   value="oscan0"/>
+                <choice Name="Use OSCAN1 format - non adaptive, no escapes"  value="oscan1"/>
+                <choice Name="Use OSCAN2 format - fast non-scan, no escapes" value="oscan2"/>
+                <choice Name="Use OSCAN4 format - is adaptive, fast scan"    value="oscan4"/>
+                <choice Name="Use OSCAN5 format - non adaptive, fast scan"   value="oscan5"/>
+                <choice Name="Use OSCAN6 format - fast non-scan, fast scan"  value="oscan6"/>
+            </property>
+
+        </choice>
+    </property>
+
+</connection>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="Load Analysis" basedir=".">
+
+	<property name="dvt.activity.name" value="RTOS Analyzer/${ant.project.name}"/>
+	<property name="dvt.activity.description" value="CPU and Task load info are collected from RTOS and displayed in graphs.&#10;Detailed and summary statistics views are also available."/>
+	<property name="dvt.activity.icon" value="platform:/plugin/com.ti.dvt.ui/icons/views/line.gif"/>
+
+	<property name="uc_name" value="Load Analysis" />
+	<dvt.import file="../../scripts/SystemAnalyzer.js"/>
+
+	<dvt.property>
+		version=1.0.0
+		dvt.activity.priority = 130
+
+		<!-- Data Provider and AF information-->
+		uiaMode=Live
+		dataproviders=UIA
+		UIA.name=UIA Log Viewer
+		UIA.analyzer=CPU Load,Task Load,Execution Graph:false,Printf Logs:false,Concurrency:false,Task Profiler:false,Duration:false,Count Analysis:false,Context Aware Profile:false
+
+		ExecutionGraph.Tip=Select this feature to see Execution Graph showing timeline of Tasks, SWIs and HWIs, Semaphore, RTOS events, Benchmark Start/Stop events and Profile Enter/Exit events. Events must be enabled and/or instrumented on target application to be visible. 
+		Concurrency.Tip=Select this feature to analyze how efficiently the application is utilizing multi-core. RTOS context switch events must be enabled on all required cores for this analysis.
+		ContextAwareProfile.Tip=Select this feature to get Function inclusive and exclusive time based on Profile Enter/Exit events instrumentation. Enable RTOS Context Switch events to get context aware profiling.
+		Duration.Tip=Select this feature to analyze Benchmark Start/Stop events.
+		TaskProfiler.Tip=Select this feature analyze the time tasks are spending in different states. RTOS Context Switch events must be enabled.
+		CPULoad.Tip=Select this feature to see CPU load graph and load summary statistics. RTOS load logging must be enabled.
+		TaskLoad.Tip=Select this feature to see the loading of each task, HWI and/or SWIs are putting on the CPU. The corresponding RTOS load logging must be enabled.
+		CountAnalysis.Tip=Select this feature to get statistics of any value logged in the application.
+		PrintfLogs.Tip=Select this feature to open the Printf log view showing Error, Warning, Info and Print Events
+
+
+	</dvt.property>
+</project>

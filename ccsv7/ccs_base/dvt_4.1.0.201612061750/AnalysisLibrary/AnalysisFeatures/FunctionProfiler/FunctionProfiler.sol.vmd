@@ -1,0 +1,2057 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_35" class="java.beans.XMLDecoder"> 
+ <object class="com.ti.dvt.ui.views.core.ViewModel"> 
+  <void property="viewConnectionMgr"> 
+   <void property="connections"> 
+    <void method="add"> 
+     <object class="com.ti.dvt.ui.views.core.ViewConnection"> 
+      <void property="source"> 
+       <string>Pipeline Stalls Counter</string> 
+      </void> 
+      <void property="target"> 
+       <string>com.ti.dvt.ui.views.table:Trace Analyzer Exclusive Total Stall Count</string> 
+      </void> 
+     </object> 
+    </void> 
+    <void method="add"> 
+     <object class="com.ti.dvt.ui.views.core.ViewConnection"> 
+      <void property="source"> 
+       <string>CPU Cycles Counter</string> 
+      </void> 
+      <void property="target"> 
+       <string>com.ti.dvt.ui.views.table:Trace Analyzer ProfileAnalysis2</string> 
+      </void> 
+     </object> 
+    </void> 
+    <void method="add"> 
+     <object class="com.ti.dvt.ui.views.core.ViewConnection"> 
+      <void property="source"> 
+       <string>CPU Cycles Counter</string> 
+      </void> 
+      <void property="target"> 
+       <string>com.ti.dvt.ui.views.bar:Trace Analyzer gFunction Analysis</string> 
+      </void> 
+     </object> 
+    </void> 
+    <void method="add"> 
+     <object class="com.ti.dvt.ui.views.core.ViewConnection"> 
+      <void property="source"> 
+       <string>Memory Events Counter</string> 
+      </void> 
+      <void property="target"> 
+       <string>com.ti.dvt.ui.views.table:Trace Analyzer Memory Event Profile</string> 
+      </void> 
+     </object> 
+    </void> 
+    <void method="add"> 
+     <object class="com.ti.dvt.ui.views.core.ViewConnection"> 
+      <void property="source"> 
+       <string>Last Stall Standing Counter</string> 
+      </void> 
+      <void property="target"> 
+       <string>com.ti.dvt.ui.views.table:Trace Analyzer LSS</string> 
+      </void> 
+     </object> 
+    </void> 
+    <void method="add"> 
+     <object class="com.ti.dvt.ui.views.core.ViewConnection"> 
+      <void property="source"> 
+       <string>VirtualBuffer</string> 
+      </void> 
+      <void property="target"> 
+       <string>com.ti.dvt.ui.views.table:Trace Analyzer Per-Call Function Profile</string> 
+      </void> 
+     </object> 
+    </void> 
+    <void method="add"> 
+     <object class="com.ti.dvt.ui.views.core.ViewConnection"> 
+      <void property="source"> 
+       <string>$Debug.VirtualBuffer</string> 
+      </void> 
+      <void property="target"> 
+       <string>com.ti.dvt.ui.views.table:$Debug.Log</string> 
+      </void> 
+     </object> 
+    </void> 
+   </void> 
+  </void> 
+  <void property="viewGroupMgr"> 
+   <void property="viewGroups"> 
+    <void method="put"> 
+     <string>Default</string> 
+     <object class="com.ti.dvt.ui.views.core.ViewGroup"> 
+      <void property="memberIDs"> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.line:Trace Analyzer line.1246978812745</string> 
+       </void> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.state:Trace Analyzer state.1246978812229</string> 
+       </void> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.table:Trace Analyzer Trace Display w/ 4 Data Trace Fields</string> 
+       </void> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.table:Trace Analyzer Log Table</string> 
+       </void> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.tracetableview:Trace Analyzer Trace Display</string> 
+       </void> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.state:Trace Analyzer state.1247072904215</string> 
+       </void> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.table:Trace Analyzer table.1246978701745</string> 
+       </void> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.line:Trace Analyzer Program Address vs. Cycle</string> 
+       </void> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.discrete:Trace Analyzer discrete.1246978701354</string> 
+       </void> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.line:Trace Analyzer APA</string> 
+       </void> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.discrete:Trace Analyzer Test</string> 
+       </void> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.discrete:Trace Analyzer Function Execution Graph</string> 
+       </void> 
+      </void> 
+      <void property="name"> 
+       <string>Default</string> 
+      </void> 
+     </object> 
+    </void> 
+    <void method="put"> 
+     <string>PMI_Global</string> 
+     <object class="com.ti.dvt.ui.views.core.ViewGroup"> 
+      <void property="memberIDs"> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.state:PMI Events@1</string> 
+       </void> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.state:Logic Power@1</string> 
+       </void> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.line:Logic OPP</string> 
+       </void> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.state:Mem Power@1</string> 
+       </void> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.line:Mem OPP</string> 
+       </void> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.table:PMI Logs</string> 
+       </void> 
+      </void> 
+      <void property="name"> 
+       <string>PMI_Global</string> 
+      </void> 
+     </object> 
+    </void> 
+    <void method="put"> 
+     <string>STM statistics</string> 
+     <object class="com.ti.dvt.ui.views.core.ViewGroup"> 
+      <void property="memberIDs"> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.line:line.1289845398068</string> 
+       </void> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.table:table.1289845395885</string> 
+       </void> 
+      </void> 
+      <void property="name"> 
+       <string>STM statistics</string> 
+      </void> 
+     </object> 
+    </void> 
+   </void> 
+  </void> 
+  <void property="viewInfoMap"> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:Trace Analyzer ProfileAnalysis2</string> 
+    <object class="com.ti.dvt.ui.views.core.ViewInfo"> 
+     <void property="paneInfoColl"> 
+      <void method="add"> 
+       <object class="com.ti.dvt.ui.views.core.PaneInfo"> 
+        <void property="ID"> 
+         <string>com.ti.dvt.ui.views.table:Trace Analyzer ProfileAnalysis2</string> 
+        </void> 
+        <void property="properties"> 
+         <object class="com.ti.dvt.ui.views.core.TableProp"> 
+          <void property="solutionName"> 
+           <string>FunctionProfiler</string> 
+          </void> 
+          <void property="tableMeta"> 
+           <void property="columnMetaMap"> 
+            <void method="put"> 
+             <string>Excl Total</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.0f</string> 
+              </void> 
+              <void property="width"> 
+               <int>64</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Excl Average</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.2f</string> 
+              </void> 
+              <void property="width"> 
+               <int>80</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Function</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>61</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Incl Total</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.0f</string> 
+              </void> 
+              <void property="width"> 
+               <int>63</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Incl Min</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.0f</string> 
+              </void> 
+              <void property="width"> 
+               <int>57</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Calls</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>39</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Incl Max</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.0f</string> 
+              </void> 
+              <void property="width"> 
+               <int>58</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Excl Min</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.0f</string> 
+              </void> 
+              <void property="width"> 
+               <int>58</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Index</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Excl Max</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.0f</string> 
+              </void> 
+              <void property="width"> 
+               <int>59</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Excl Percent</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %,.2f</string> 
+              </void> 
+              <void property="width"> 
+               <int>77</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Incl Average</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.2f</string> 
+              </void> 
+              <void property="width"> 
+               <int>79</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Incl Percent</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %,.2f</string> 
+              </void> 
+              <void property="width"> 
+               <int>76</int> 
+              </void> 
+             </object> 
+            </void> 
+           </void> 
+           <void property="columnOrder"> 
+            <array class="java.lang.String" length="14"> 
+             <void index="0"> 
+              <string></string> 
+             </void> 
+             <void index="1"> 
+              <string>Function</string> 
+             </void> 
+             <void index="2"> 
+              <string>Calls</string> 
+             </void> 
+             <void index="3"> 
+              <string>Excl Min</string> 
+             </void> 
+             <void index="4"> 
+              <string>Excl Max</string> 
+             </void> 
+             <void index="5"> 
+              <string>Excl Average</string> 
+             </void> 
+             <void index="6"> 
+              <string>Excl Total</string> 
+             </void> 
+             <void index="7"> 
+              <string>Incl Min</string> 
+             </void> 
+             <void index="8"> 
+              <string>Incl Max</string> 
+             </void> 
+             <void index="9"> 
+              <string>Incl Average</string> 
+             </void> 
+             <void index="10"> 
+              <string>Incl Total</string> 
+             </void> 
+             <void index="11"> 
+              <string>Index</string> 
+             </void> 
+             <void index="12"> 
+              <string>Excl Percent</string> 
+             </void> 
+             <void index="13"> 
+              <string>Incl Percent</string> 
+             </void> 
+            </array> 
+           </void> 
+          </void> 
+         </object> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="title"> 
+      <string>Function-level CPU Cycles Profile</string> 
+     </void> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:Trace Analyzer Per-Call Function Profile</string> 
+    <object class="com.ti.dvt.ui.views.core.ViewInfo"> 
+     <void property="paneInfoColl"> 
+      <void method="add"> 
+       <object class="com.ti.dvt.ui.views.core.PaneInfo"> 
+        <void property="ID"> 
+         <string>com.ti.dvt.ui.views.table:Trace Analyzer Per-Call Function Profile</string> 
+        </void> 
+        <void property="properties"> 
+         <object class="com.ti.dvt.ui.views.core.TableProp"> 
+          <void property="allowSort"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="indicatorProps"> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.IndicatorProp"> 
+             <void property="eventProps"> 
+              <void method="add"> 
+               <object class="com.ti.dvt.ui.views.core.IndicatorProp$EventProp"> 
+                <void property="icon"> 
+                 <string>warning</string> 
+                </void> 
+                <void property="value"> 
+                 <int>1</int> 
+                </void> 
+               </object> 
+              </void> 
+              <void method="add"> 
+               <object class="com.ti.dvt.ui.views.core.IndicatorProp$EventProp"> 
+                <void property="icon"> 
+                 <string>warning</string> 
+                </void> 
+                <void property="value"> 
+                 <int>-1</int> 
+                </void> 
+               </object> 
+              </void> 
+             </void> 
+             <void property="fieldName"> 
+              <string>Partial Profile</string> 
+             </void> 
+            </object> 
+           </void> 
+          </void> 
+          <void property="solutionName"> 
+           <string>FunctionProfiler</string> 
+          </void> 
+          <void property="tableMeta"> 
+           <void property="columnMetaMap"> 
+            <void method="put"> 
+             <string>End Address</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Hex %#010X</string> 
+              </void> 
+              <void property="width"> 
+               <int>75</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Incl CPU Cycles</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>96</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Excl CPU Cycles</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>97</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Function</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>61</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Entry Cycle</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>73</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Start Address</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Hex %#010X</string> 
+              </void> 
+              <void property="width"> 
+               <int>83</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Partial Profile</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Hex %#X</string> 
+              </void> 
+              <void property="width"> 
+               <int>84</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Exit Cycle</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>64</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Filename</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>57</int> 
+              </void> 
+             </object> 
+            </void> 
+           </void> 
+           <void property="columnOrder"> 
+            <array class="java.lang.String" length="8"> 
+             <void index="0"> 
+              <string></string> 
+             </void> 
+             <void index="1"> 
+              <string>Partial Profile</string> 
+             </void> 
+             <void index="2"> 
+              <string>Function</string> 
+             </void> 
+             <void index="3"> 
+              <string>Entry Cycle</string> 
+             </void> 
+             <void index="4"> 
+              <string>Exit Cycle</string> 
+             </void> 
+             <void index="5"> 
+              <string>Excl CPU Cycles</string> 
+             </void> 
+             <void index="6"> 
+              <string>Incl CPU Cycles</string> 
+             </void> 
+             <void index="7"> 
+              <string>Start Address</string> 
+             </void> 
+            </array> 
+           </void> 
+          </void> 
+         </object> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="title"> 
+      <string>Per-Call Function Profile</string> 
+     </void> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:Trace Analyzer Memory Event Profile</string> 
+    <object class="com.ti.dvt.ui.views.core.ViewInfo"> 
+     <void property="paneInfoColl"> 
+      <void method="add"> 
+       <object class="com.ti.dvt.ui.views.core.PaneInfo"> 
+        <void property="ID"> 
+         <string>com.ti.dvt.ui.views.table:Trace Analyzer Memory Event Profile</string> 
+        </void> 
+        <void property="properties"> 
+         <object class="com.ti.dvt.ui.views.core.TableProp"> 
+          <void property="solutionName"> 
+           <string>FunctionProfiler</string> 
+          </void> 
+          <void property="tableMeta"> 
+           <void property="columnMetaMap"> 
+            <void method="put"> 
+             <string>Count</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>44</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Memory Event 1 Total</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.0f</string> 
+              </void> 
+              <void property="width"> 
+               <int>120</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Memory Event 3 Min</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.0f</string> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>112</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Memory Event 3 Max</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.0f</string> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>116</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Memory Event 2 Total</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.0f</string> 
+              </void> 
+              <void property="width"> 
+               <int>120</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Memory Event 1 Average</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.2f</string> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>137</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Memory Event 1 Max</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.0f</string> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>116</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Memory Event 4 Max</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.0f</string> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>116</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Memory Event 1 Min</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.0f</string> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>112</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Memory Event 2 Min</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.0f</string> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>112</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>L1P Read Miss Min</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>102</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Memory Event 3 Average</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.2f</string> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>137</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>L1P Read Miss Average</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>127</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Memory Event 2 Average</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.2f</string> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>137</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Function</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>56</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Memory Event 2 Max</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.0f</string> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>116</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Calls</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>37</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Memory Event 4 Average</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.2f</string> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>137</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>&lt;N/A&gt;</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>49</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Memory Event 4 Min</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.0f</string> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>112</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>L1P Read Miss Max</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>106</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Index</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Memory Event 4 Total</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.0f</string> 
+              </void> 
+              <void property="width"> 
+               <int>120</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>L1P Read Miss Total</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>110</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Memory Event 3 Total</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.0f</string> 
+              </void> 
+              <void property="width"> 
+               <int>120</int> 
+              </void> 
+             </object> 
+            </void> 
+           </void> 
+           <void property="columnOrder"> 
+            <array class="java.lang.String" length="20"> 
+             <void index="0"> 
+              <string></string> 
+             </void> 
+             <void index="1"> 
+              <string>Function</string> 
+             </void> 
+             <void index="2"> 
+              <string>Memory Event 2 Min</string> 
+             </void> 
+             <void index="3"> 
+              <string>Memory Event 2 Max</string> 
+             </void> 
+             <void index="4"> 
+              <string>Memory Event 2 Average</string> 
+             </void> 
+             <void index="5"> 
+              <string>Memory Event 1 Total</string> 
+             </void> 
+             <void index="6"> 
+              <string>Memory Event 2 Total</string> 
+             </void> 
+             <void index="7"> 
+              <string>Memory Event 3 Min</string> 
+             </void> 
+             <void index="8"> 
+              <string>Memory Event 3 Max</string> 
+             </void> 
+             <void index="9"> 
+              <string>Memory Event 3 Average</string> 
+             </void> 
+             <void index="10"> 
+              <string>Memory Event 3 Total</string> 
+             </void> 
+             <void index="11"> 
+              <string>Memory Event 4 Min</string> 
+             </void> 
+             <void index="12"> 
+              <string>Memory Event 4 Max</string> 
+             </void> 
+             <void index="13"> 
+              <string>Memory Event 4 Average</string> 
+             </void> 
+             <void index="14"> 
+              <string>Memory Event 4 Total</string> 
+             </void> 
+             <void index="15"> 
+              <string>Memory Event 1 Min</string> 
+             </void> 
+             <void index="16"> 
+              <string>Memory Event 1 Max</string> 
+             </void> 
+             <void index="17"> 
+              <string>Memory Event 1 Average</string> 
+             </void> 
+             <void index="18"> 
+              <string>&lt;N/A&gt;</string> 
+             </void> 
+             <void index="19"> 
+              <string>Index</string> 
+             </void> 
+            </array> 
+           </void> 
+          </void> 
+         </object> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="title"> 
+      <string>Function-level Memory Event Profile</string> 
+     </void> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:Trace Analyzer LSS</string> 
+    <object class="com.ti.dvt.ui.views.core.ViewInfo"> 
+     <void property="paneInfoColl"> 
+      <void method="add"> 
+       <object class="com.ti.dvt.ui.views.core.PaneInfo"> 
+        <void property="ID"> 
+         <string>com.ti.dvt.ui.views.table:Trace Analyzer LSS</string> 
+        </void> 
+        <void property="properties"> 
+         <object class="com.ti.dvt.ui.views.core.TableProp"> 
+          <void property="solutionName"> 
+           <string>FunctionProfiler</string> 
+          </void> 
+          <void property="tableMeta"> 
+           <void property="columnMetaMap"> 
+            <void method="put"> 
+             <string>Count</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>44</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Stall Cycle Data 1 Max</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.0f</string> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>122</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Stall 3 Max</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>67</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Stall Cycle Data 3 Average</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.2f</string> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>143</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Stall Cycle Data 3 Min</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.0f</string> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>118</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Stall Cycle Data 3 Max</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.0f</string> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>122</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Stall 3 Average</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>88</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Stall 2 Max</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>67</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Stall Cycle Data 3 Total</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.0f</string> 
+              </void> 
+              <void property="width"> 
+               <int>126</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Stall Cycle Data 2 Average</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.2f</string> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>143</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Stall Cycle Data 4 Min</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.0f</string> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>118</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Max</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>35</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Average</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>56</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Stall 3 Min</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>63</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Stall 2 Average</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>88</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Stall1 Max</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>64</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Min</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>31</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Stall1 Total</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>68</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Stall1 Average</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>85</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Stall Cycle Data 2 Total</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.0f</string> 
+              </void> 
+              <void property="width"> 
+               <int>126</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Stall 4 Total</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>71</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Function</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>56</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Calls</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>37</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Stall Cycle Data 1 Total</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.0f</string> 
+              </void> 
+              <void property="width"> 
+               <int>126</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Stall 2 Total</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>71</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>&lt;N/A&gt;</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>49</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Stall Cycle Data 1 Min</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.0f</string> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>118</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Stall 2 Min</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>63</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Stall 4 Average</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>88</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Stall Cycle Data 4 Total</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.0f</string> 
+              </void> 
+              <void property="width"> 
+               <int>126</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Stall 4 Max</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>67</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Index</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Stall Cycle Data 4 Average</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.2f</string> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>143</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Stall 3 Total</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>71</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Stall Cycle Data 2 Max</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.0f</string> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>122</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Stall Cycle Data 2 Min</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.0f</string> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>118</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Stall Cycle Data 4 Max</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.0f</string> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>122</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Stall1 Min</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>60</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Stall Cycle Data 1 Average</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.2f</string> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>143</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Stall 4 Min</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+              <void property="width"> 
+               <int>63</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Total</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>39</int> 
+              </void> 
+             </object> 
+            </void> 
+           </void> 
+           <void property="columnOrder"> 
+            <array class="java.lang.String" length="20"> 
+             <void index="0"> 
+              <string></string> 
+             </void> 
+             <void index="1"> 
+              <string>Function</string> 
+             </void> 
+             <void index="2"> 
+              <string>&lt;N/A&gt;</string> 
+             </void> 
+             <void index="3"> 
+              <string>Stall1 Min</string> 
+             </void> 
+             <void index="4"> 
+              <string>Stall1 Max</string> 
+             </void> 
+             <void index="5"> 
+              <string>Stall1 Average</string> 
+             </void> 
+             <void index="6"> 
+              <string>Stall1 Total</string> 
+             </void> 
+             <void index="7"> 
+              <string>Stall 2 Min</string> 
+             </void> 
+             <void index="8"> 
+              <string>Stall 2 Max</string> 
+             </void> 
+             <void index="9"> 
+              <string>Stall 2 Average</string> 
+             </void> 
+             <void index="10"> 
+              <string>Stall 2 Total</string> 
+             </void> 
+             <void index="11"> 
+              <string>Stall 3 Min</string> 
+             </void> 
+             <void index="12"> 
+              <string>Stall 3 Max</string> 
+             </void> 
+             <void index="13"> 
+              <string>Stall 3 Average</string> 
+             </void> 
+             <void index="14"> 
+              <string>Stall 3 Total</string> 
+             </void> 
+             <void index="15"> 
+              <string>Stall 4 Min</string> 
+             </void> 
+             <void index="16"> 
+              <string>Stall 4 Max</string> 
+             </void> 
+             <void index="17"> 
+              <string>Stall 4 Average</string> 
+             </void> 
+             <void index="18"> 
+              <string>Stall 4 Total</string> 
+             </void> 
+             <void index="19"> 
+              <string>Index</string> 
+             </void> 
+            </array> 
+           </void> 
+          </void> 
+         </object> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="title"> 
+      <string>Function-level Last Stall Standing Profile</string> 
+     </void> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.bar:Trace Analyzer gFunction Analysis</string> 
+    <object class="com.ti.dvt.ui.views.core.ViewInfo"> 
+     <void property="paneInfoColl"> 
+      <void method="add"> 
+       <object class="com.ti.dvt.ui.views.core.PaneInfo"> 
+        <void property="ID"> 
+         <string>com.ti.dvt.ui.views.bar:Trace Analyzer gFunction Analysis</string> 
+        </void> 
+        <void property="properties"> 
+         <object class="com.ti.dvt.ui.views.core.BarProp"> 
+          <void property="YRange"> 
+           <void property="end"> 
+            <double>10.0</double> 
+           </void> 
+          </void> 
+          <void property="barFieldAxisName"> 
+           <string>Function</string> 
+          </void> 
+          <void property="barFieldName"> 
+           <string>Function</string> 
+          </void> 
+          <void property="defaultRange"> 
+           <void property="auto"> 
+            <boolean>true</boolean> 
+           </void> 
+           <void property="end"> 
+            <double>21919.8</double> 
+           </void> 
+          </void> 
+          <void property="solutionName"> 
+           <string>FunctionProfiler</string> 
+          </void> 
+          <void property="valueAxisName"> 
+           <string>Cycles</string> 
+          </void> 
+          <void property="valueProps"> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.ChannelProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>Excl Total</string> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+          </void> 
+         </object> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="title"> 
+      <string>Excl CPU Cycles Profile Histogram</string> 
+     </void> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:$Debug.Log</string> 
+    <object class="com.ti.dvt.ui.views.core.ViewInfo"> 
+     <void property="paneInfoColl"> 
+      <void method="add"> 
+       <object class="com.ti.dvt.ui.views.core.PaneInfo"> 
+        <void property="ID"> 
+         <string>com.ti.dvt.ui.views.table:$Debug.Log</string> 
+        </void> 
+        <void property="properties"> 
+         <object class="com.ti.dvt.ui.views.core.TableProp"> 
+          <void property="solutionName"> 
+           <string>FunctionProfiler</string> 
+          </void> 
+         </object> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="title"> 
+      <string>$Debug.Log</string> 
+     </void> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:Trace Analyzer Exclusive Total Stall Count</string> 
+    <object class="com.ti.dvt.ui.views.core.ViewInfo"> 
+     <void property="paneInfoColl"> 
+      <void method="add"> 
+       <object class="com.ti.dvt.ui.views.core.PaneInfo"> 
+        <void property="ID"> 
+         <string>com.ti.dvt.ui.views.table:Trace Analyzer Exclusive Total Stall Count</string> 
+        </void> 
+        <void property="properties"> 
+         <object class="com.ti.dvt.ui.views.core.TableProp"> 
+          <void property="solutionName"> 
+           <string>FunctionProfiler</string> 
+          </void> 
+          <void property="tableMeta"> 
+           <void property="columnMetaMap"> 
+            <void method="put"> 
+             <string>Excl Total</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.0f</string> 
+              </void> 
+              <void property="width"> 
+               <int>64</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Excl Average</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.2f</string> 
+              </void> 
+              <void property="width"> 
+               <int>80</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Function</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>61</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Incl Total</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.0f</string> 
+              </void> 
+              <void property="width"> 
+               <int>63</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Incl Min</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.0f</string> 
+              </void> 
+              <void property="width"> 
+               <int>57</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Calls</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>39</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Incl Max</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.0f</string> 
+              </void> 
+              <void property="width"> 
+               <int>58</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Excl Min</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.0f</string> 
+              </void> 
+              <void property="width"> 
+               <int>58</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Index</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Excl Max</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.0f</string> 
+              </void> 
+              <void property="width"> 
+               <int>59</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Excl Percent</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %,.2f</string> 
+              </void> 
+              <void property="width"> 
+               <int>77</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Incl Average</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.2f</string> 
+              </void> 
+              <void property="width"> 
+               <int>79</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Incl Percent</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %,.2f</string> 
+              </void> 
+              <void property="width"> 
+               <int>76</int> 
+              </void> 
+             </object> 
+            </void> 
+           </void> 
+           <void property="columnOrder"> 
+            <array class="java.lang.String" length="14"> 
+             <void index="0"> 
+              <string></string> 
+             </void> 
+             <void index="1"> 
+              <string>Function</string> 
+             </void> 
+             <void index="2"> 
+              <string>Calls</string> 
+             </void> 
+             <void index="3"> 
+              <string>Excl Min</string> 
+             </void> 
+             <void index="4"> 
+              <string>Excl Max</string> 
+             </void> 
+             <void index="5"> 
+              <string>Excl Average</string> 
+             </void> 
+             <void index="6"> 
+              <string>Excl Total</string> 
+             </void> 
+             <void index="7"> 
+              <string>Incl Min</string> 
+             </void> 
+             <void index="8"> 
+              <string>Incl Max</string> 
+             </void> 
+             <void index="9"> 
+              <string>Incl Average</string> 
+             </void> 
+             <void index="10"> 
+              <string>Incl Total</string> 
+             </void> 
+             <void index="11"> 
+              <string>Index</string> 
+             </void> 
+             <void index="12"> 
+              <string>Excl Percent</string> 
+             </void> 
+             <void index="13"> 
+              <string>Incl Percent</string> 
+             </void> 
+            </array> 
+           </void> 
+          </void> 
+         </object> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="title"> 
+      <string>Function-level Pipeline Stalls Profile</string> 
+     </void> 
+    </object> 
+   </void> 
+  </void> 
+ </object> 
+</java> 

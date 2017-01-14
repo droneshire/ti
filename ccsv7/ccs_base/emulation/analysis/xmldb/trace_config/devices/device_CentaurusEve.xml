@@ -1,0 +1,500 @@
+<?xml version="1.0"?>
+
+<!-- Trace subsystem setup attributes for device Centaraus and its derivants-->
+<device id="CentEVE" value="0x8B8F202F" mask="0x8FFFFFFF" HW_revision="1.0" XML_version="1.0">
+
+	<FileVersion version="2.0.0.0" Copyright="Copyright (c) 2009 Texas Instruments"></FileVersion>
+	
+	<!-- Trace route topology. Every route entry specifies a soure to sink/pin route for a given source.
+	Multiple routes shows multiple possible paths available for trace and user can select one for an 
+	active debug session -->
+			
+	<trace_routes> 
+		<!-- STM uses ETB as receiver -->
+		<route>
+			<source source="CSSTM_0"/>
+			<link module=""/>
+			<sink module="MOD_ETB0"/>
+			<pin module=""/>
+		</route> 
+
+		<!-- CortexA8 uses ETB as receiver -->
+		<route>
+			<source source="CortexA8_0"/>
+			<link module=""/>
+			<sink module="MOD_ETB0"/>
+			<pin module=""/>
+		</route>
+		
+		<!-- GEM uses ETB as receiver -->
+		<route>
+			<source source="C674X_0"/>
+			<link module=""/>
+			<sink module="MOD_ETB0"/>
+			<pin module=""/>
+		</route>
+
+		<!-- STM uses Pin (DRM) as receiver -->
+		<route>
+			<source source="CSSTM_0"/>
+			<link module=""/>
+			<sink module=""/>
+			<pin module="MOD_DRM"/>
+		</route>
+
+	</trace_routes>
+
+	<!-- Supported proc access mechanisms for the device -->
+	<procs>
+		<!-- Modena System CortexA8 -->
+		<proc id="CortexA8_0" kind="cortex_axx" traceid="1">
+			<identifier>
+				<register id="" address="" page="" addrunit="" width="" type="reg"/>
+				<value idvalue="" />
+			</identifier> 			
+		</proc>
+
+		<!-- Ducati System CortexM3_RTOS -->
+		<proc id="CortexM3_RTOS" kind="cortex_mxx" traceid="2">
+			<identifier>
+				<register id="PID0" address="0xE00FFFE0" page="0" addrunit="1" width="32" type="mem"/>
+				<value idvalue="0" />
+			</identifier> 
+			
+		</proc>
+	
+		<!-- Ducati System CortexM3_ISS -->
+		<proc id="CortexM3_ISS" kind="cortex_mxx" traceid="3">
+			<identifier>
+				<register id="PID0" address="0xE00FFFE0" page="0" addrunit="1" width="32" type="mem"/>
+				<value idvalue="1" />
+			</identifier> 
+			
+		</proc>
+
+		<!-- Secure system CortexM3-->
+		<proc id="CortexM3_secSS" kind="cortex_mxx" traceid="4">			
+		</proc>
+	
+		<!-- GEM system -->
+		<proc id="C674X_0" kind="tms320c674x" traceid="5">	
+			<components>
+				<component module="MOD_RADTF0"/>
+			</components> 		
+		</proc>
+		
+		<!-- TPPSS system Arm9, this the only arm9 supported in this system-->
+		<proc id="ARM9_TPPSS" kind="arm9xx" traceid="6">			
+		</proc>
+
+		<!-- IVAHD0_iCont-->
+		<proc id="ARP32_0" kind="arp32" traceid="7">			
+		</proc>
+
+		<!-- CSETB -->
+		<proc id="CSETB_0" kind="cs_etb">
+			<identifier>
+				<register id="BASE_ADDRESS" address="" page="" addrunit="" width="" type="reg"/>
+				<value idvalue="0x4B162000" />
+			</identifier> 
+			
+		</proc>
+				
+		<!-- STM -->
+		<proc id="CSSTM_0" kind="cs_stm">
+			<identifier>
+				<register id="BASE_ADDRESS" address="" page="" addrunit="" width="" type="reg"/>
+				<value idvalue="0x4B161000" />
+			</identifier> 
+		</proc >
+		
+	</procs>
+
+	<!-- Available Trace sources for the device -->
+	<sources>		
+		<!-- System Trace source -->
+		<source id="CortexM3_RTOS" proc="CortexM3_RTOS" stmmaster = "true">
+			<characteristics>
+				<characteristic id="DEV_CHAR_SCTMMODULENUM" value="1"/>
+				<characteristic id="DEV_CHAR_SCTMFILE" value="AET_PropertySCTM.xml"/>
+			</characteristics>
+		</source>
+
+		<source id="CortexM3_ISS" proc="CortexM3_ISS" stmmaster = "true">
+			<characteristics>
+				<characteristic id="DEV_CHAR_SCTMMODULENUM" value="1"/>
+				<characteristic id="DEV_CHAR_SCTMFILE" value="AET_PropertySCTM.xml"/>
+			</characteristics>
+		</source>
+		
+		<!-- ModemnaSS -->
+		<source id="CortexA8_0" proc="CortexA8_0" stmmaster = "true">
+			<characteristics>
+				<characteristic id="DEV_CHAR_ETMPTM_BASEADDR" value="0x80000000"/>
+			</characteristics>
+		</source>
+
+		<!-- TPPSS Arm9 -->
+		<source id="ARM9_TPPSS" proc="ARM9_TPPSS" stmmaster = "true">
+		</source>
+
+		<!-- Secure CortexM3 -->
+		<source id="CortexM3_secSS" proc="CortexM3_secSS" stmmaster = "true">
+		</source>
+
+		<source id="C674X_0" proc="C674X_0" stmmaster = "true">
+			<components>
+				<component module="MOD_RADTF0"/>
+			</components> 
+			<characteristics>
+				<characteristic id="DEV_CHAR_TRACEPLLUNIT" description="" value="13"/>
+				<characteristic id="DEV_CHAR_TRACEPLLBASE" value="0"/>
+				<characteristic id="DEV_CHAR_GEMTYPE" value="2"/> 
+			</characteristics>
+		</source>
+		
+		<source id="CSSTM_0" proc="CSSTM_0" stmmaster = "true">
+			<components>
+				<component module="MOD_STMMASTERS_CONTROL"/>
+				<component module="MOD_SWMASTER0"/>
+				<component module="MOD_OCPWP0"/>
+				<component module="MOD_SMSET0"/>
+				<component module="MOD_SC"/>
+				<component module="MOD_CONFIGINFO"/>
+			</components> 
+			<characteristics>
+				<characteristic id="CHAR_MAXEXPORTFREQMHZ" value="83"/>
+				<characteristic id="DEV_CHAR_STMTYPE" value="2"/>
+				<characteristic id="DEV_CHAR_STM_BASEADDRESS" value="0xCB161000"/>
+				<characteristic id="DEV_CHAR_PPFMODULENUM" value="4"/>
+				<!-- This base address need to confirm  -->
+				<characteristic id="DEV_CHAR_STM_CM_BASEADDRESS" value="0x4A307A00"/>
+				<!-- Default enable SW master of ModenaSS(0x0), IVA_HD0(0x08), GEM with MMU on (0x28),  and Ducati(0x38)  -->
+				<characteristic id="DEV_CHAR_STM_SW_MASTER_DEFAULT" value="0x38280800"/>
+				<!-- Default enable HW master of OCP probe, OCP profile, Static Collector0 and HVA_HD0 SMSET  -->
+				<characteristic id="DEV_CHAR_STM_HW_MASTER_DEFAULT" value="0xA4F8F4F0"/>
+			</characteristics>
+		</source>
+
+		<!-- IVAHD0_iCont0-->
+		<source id="ARP32_0" proc="ARP32_0" stmmaster = "true">
+			<characteristics>
+				<characteristic id="DEV_CHAR_SMSETDRIVER" value="1"/>
+			</characteristics>
+	     </source>
+
+	</sources> 
+
+	<!-- Available modules asscoiated with various modules in the device -->
+	<modules> 
+				
+		<!-- SM module associated with System Trace -->
+		<module id="MOD_STMMASTERS_CONTROL" kind="swmctrl" proc="CSSTM_0" version="1.0" >
+			<characteristics>				
+				<characteristic id="SWMSCTRL_TESLA" description="SW Master Control for  Tesla?" value="Teslae_None,Teslae_CPU0"/> 
+				<characteristic id="SWMSCTRL_IVAHD0" description="SW Master Control for IVA-HD 0?" value="IVAHD0_None,IVAHD0_CPU0"/>
+				<characteristic id="SWMSCTRL_DUCATI" description="SW Master Control for Ducati?" value="Ducati_None,Ducati_CPU0,Ducati_CPU1"/>
+				<characteristic id="SWMSCTRL_CHIRON" description="SW Master Control for Chiron?" value="Chiron_None,Chiron_CPU0"/>
+								
+			</characteristics> 
+			
+			<mapping id="value.username">
+				<map value="Chiron_None" username="None"/>
+				<map value="Chiron_CPU0" username="CPU0"/>
+				<map value="Chiron_CPU1" username="CPU1"/>
+				<map value="Chiron_Either" username="Either"/>
+				<!-- Add more...-->
+			</mapping>
+			
+			<mapping id="value.swmasterid">
+				<map value="Chiron_None" swmasterid="0x0??"/>
+				<map value="Chiron_CPU0" swmasterid="0x0??"/>
+				<map value="Chiron_CPU1" swmasterid="0x0??"/>
+				<map value="Chiron_Either" swmasterid="0x0??"/>
+				<!-- Add more...-->
+			</mapping>
+		
+		<mapping id="value.coreidmask">
+				<map value="Chiron_None" coreidmask="0x0??"/>
+				<map value="Chiron_CPU0" coreidmask="0x0??"/>
+				<map value="Chiron_CPU1" coreidmask="0x0??"/>
+				<map value="Chiron_Either" coreidmask="0x0??"/>
+				<!-- Add more...-->
+			</mapping>
+			
+		</module>	
+		
+		<module id="MOD_SWMASTER0" kind="STM" proc="CSSTM_0" version="2.0" >
+			<registers>
+				<register id="ATB_CONFIG" address="0x4B161044" page="0" addrunit="4" width="32" type="mem" />		
+				<register id="ATB_POINTER" address="0x4B161048" page="0" addrunit="4" width="32" type="mem" />		
+			</registers>
+
+			<mapping id="masterid.name">
+				<map masterid="0x00" name="CortexA8"/>						
+				<map masterid="0x08" name="ARP32_0"/>						
+				<map masterid="0x28" name="C674X_DSPSS"/>	  <!-- master id 0x28 is indeed representing C674X with MMU turned on  -->
+        <map masterid="0x10" name="CS_DAP"/>
+        <map masterid="0x40" name="TPPSS_ARM9"/>
+				<map masterid="0x38" name="Ducati_CortexM3_RTOS"/>				
+				<map masterid="0x39" name="Ducati_CortexM3_ISS"/>				
+				<map masterid="0x50" name="SecureSS_CortexM3"/>
+        <map masterid="0x64" name="TPTC_WR1"/>
+        <map masterid="0x6C" name="TPTC_WR2"/>
+      </mapping>
+			
+			<mapping id="masterid.proc">
+				<map masterid="0x00" proc="CortexA8_0"/>
+				<map masterid="0x08" name="ARP32_0"/>						
+				<map masterid="0x28" proc="C674X_0"/>	<!-- master id 0x28 is indeed representing C674X with MMU turned on  -->	
+				<map masterid="0x40" proc="TPPSS_ARM9"/>
+				<map masterid="0x38" proc="CortexM3_RTOS"/>
+				<map masterid="0x39" proc="CortexM3_ISS"/>
+        <map masterid="0x50" proc="CortexM3_secSS"/>
+        <map masterid="0x64" proc="EDMA_TPTC_WR1_Channel"/>
+				<map masterid="0x6C" proc="EDMA_TPTC_WR2_Channel"/>
+			</mapping>
+			
+			<mapping id="masterid.decoder">
+				<map masterid="*"  decoder="StmDecodeUnitSoftwareMessage"/>
+			</mapping>
+		
+		</module>	
+				
+		<!-- OCPWP module associated with System Trace -->
+		<module id="MOD_OCPWP0" kind="ocpwp" proc="CSSTM_0" version="1.0" >
+			<registers>
+				<register id="TFCR0" address="0x4A102030" page="0" addrunit="1" width="32" type="mem" />		
+				<register id="TFCR1" address="0x4A102034" page="0" addrunit="1" width="32" type="mem" />		
+				<register id="TFCR2" address="0x4A102038" page="0" addrunit="1" width="32" type="mem" />		
+				<register id="TFCR3" address="0x4A10203c" page="0" addrunit="1" width="32" type="mem" />		
+			</registers>
+			
+			<!-- Reverse lookup for UBM/AET database using key -->
+			<characteristics>
+				<characteristic id="CONTROL_EVENT" value="true"/>
+				<characteristic id="CONTROL_DATA " value="true"/>
+			</characteristics>
+		
+			<!-- Reverse lookup for UBM/AET database using key -->
+			<mapping id="eventbit.name">
+				<map eventbit="1" name="Interrupt"/>
+				<map eventbit="2" name="DMA Stop"/>
+			</mapping>			
+			
+			<mapping id="masterid.name">
+				<map masterid="0x84" name="OCPWP_Monitor"/>
+				<map masterid="0x88" name="OCPWP_Profier"/>			
+			</mapping>
+			
+			<mapping id="masterid.width">
+				<map masterid="0x84" width="32"/>
+				<map masterid="0x88" width="32"/>
+			</mapping>
+			
+			<mapping id="masterid.decoder">
+				<map masterid="*" decoder="OCPDecoderUnitH08"/>
+			</mapping>
+
+		</module> 	
+
+		<module id="MOD_SMSET0" kind="SMSET" proc="CSSTM_0" version="1.0" >
+		
+			<mapping id="eventid.module">
+				<map eventid="1" module="EDMA_TPCC_AET"/>
+				<map eventid="2" module="EDMA_TPCC_AET"/>
+				<map eventid="3" module="INTC_ARP32_INT4"/>
+				<map eventid="4" module="INTC_ARP32_INT5"/>
+				<map eventid="5" module="INTC_ARP32_INT6"/>
+				<map eventid="6" module="INTC_ARP32_INT7"/>
+				<map eventid="7" module="VCOP_EVE_LOOP"/>
+				<map eventid="8" module="VCOP_EVE_LOOP"/>
+				<map eventid="9" module="VCOP_ARP32_NMI"/>
+			</mapping>
+					
+			<mapping id="eventid.class">
+				<map eventid="1" class="computation"/>
+				<map eventid="2" class="computation"/>
+				<map eventid="3" class="computation"/>
+				<map eventid="4" class="computation"/>
+				<map eventid="5" class="computation"/>
+				<map eventid="6" class="computation"/>
+				<map eventid="7" class="computation"/>
+				<map eventid="8" class="computation"/>
+				<map eventid="9" class="computation"/>
+			</mapping>
+					
+			<mapping id="eventid.type">
+				<map eventid="1" type="Event"/>
+				<map eventid="2" type="Event"/>
+				<map eventid="3" type="Event"/>
+				<map eventid="4" type="Event"/>
+				<map eventid="5" type="Event"/>
+				<map eventid="6" type="Event"/>
+				<map eventid="7" type="Event"/>
+				<map eventid="8" type="Event"/>
+				<map eventid="9" type="Event"/>
+			</mapping>
+			
+					
+			<mapping id="eventid.msg">
+				<map eventid="1" msg="start"/>
+				<map eventid="2" msg="stop"/>
+				<map eventid="3" msg="occurred"/>
+				<map eventid="4" msg="occurred"/>
+				<map eventid="5" msg="occurred"/>
+				<map eventid="6" msg="occurred"/>
+				<map eventid="7" msg="start"/>
+				<map eventid="8" msg="stop"/>
+				<map eventid="9" msg="occurred"/>
+			</mapping>
+					
+			<mapping id="masterid.name">
+				<map masterid="0xA4" name="SMSET"/>
+			</mapping>
+			
+			<mapping id="masterid.decoder">
+					<map masterid="*"  decoder="SetDecoder"/>
+			</mapping>
+					
+		</module>	
+		
+		<module id ="MOD_SC"  kind="SC" proc="CSSTM_0" version="1.0" >
+			
+			<mapping id="masterid.name">
+				<map masterid="0xF0" name="SM_STATISTICS_UNIT0"/>
+				<map masterid="0xF4" name="SM_STATISTICS_UNIT1"/>
+				<map masterid="0xF8" name="SM_STATISTICS_UNIT2"/>
+				<map masterid="0xFC" name="SM_STATISTICS_UNIT3"/>
+				<map masterid="0xDC" name="SM_STATISTICS_UNIT4"/>
+			</mapping>
+
+			<mapping id="masterid.cntnum">
+				<map masterid="0xF0" cntnum="2"/>
+				<map masterid="0xF4" cntnum="8"/>
+				<map masterid="0xF8" cntnum="8"/>
+				<map masterid="0xFC" cntnum="4"/>
+				<map masterid="0xDC" cntnum="4"/>
+			</mapping>
+			
+			<mapping id="masterid.decoder">
+				<map masterid="*"  decoder="SCDecoderUnit"/>
+			</mapping>
+
+
+			<mapping id="unitname.moduletype">
+				<map unitname="SDRAM" moduletype="OCP"/>
+				<map unitname="LAT0" moduletype="NTTP"/>
+				<map unitname="LAT1" moduletype="NTTP"/>
+				<map unitname="LAT2" moduletype="NTTP"/>
+				<map unitname="LAT3" moduletype="NTTP"/>
+			</mapping>
+			
+			<mapping id="unitname.address">
+				<map unitname="SDRAM" address="0x44001000"/>
+				<map unitname="LAT0" address="0x44001400"/>
+				<map unitname="LAT1" address="0x44001800"/>
+				<map unitname="LAT2" address="0x44401000"/>
+				<map unitname="LAT3" address="0x44800E00"/>
+			</mapping>
+			
+	<!-- The first item in the value of cntinfor is the number of counters followed by the number of the filters-->
+	<!-- for each counter. If there are no numbers of the filter defined then each counter has one filter.      -->
+			<mapping id="unitname.cntinfor">
+				<map unitname="SDRAM" cntinfor="2^2^2^"/>
+				<map unitname="LAT0" cntinfor="8"/>
+				<map unitname="LAT1" cntinfor="8"/>
+				<map unitname="LAT2" cntinfor="4"/>
+				<map unitname="LAT3" cntinfor="4"/>
+			</mapping>
+			
+			<mapping id="unitname.probid">
+				<map unitname="SDRAM" probid="0^0^1^1"/>
+				<map unitname="LAT0" probid="2^2^3^3^4^4^5^5^6^6^7^7^8^8^9^9"/>
+				<map unitname="LAT1" probid="^10^10^11^11^12^12^13^13^14^14^15^15^16^16^17^17"/>
+				<map unitname="LAT2" probid="19^19^20^20^21^21^22^22^23^23^24^24^25^25^26^26^18^18"/>
+				<map unitname="LAT3" probid="27^27^28^28^29^29"/>
+			</mapping>
+			
+		</module> 
+		<module id ="MOD_CONFIGINFO"  kind="CONFIGINFO" proc="CSSTM_0" version="1.0" >
+			
+			<mapping id="ubmfunnum.filename">
+				<map ubmfunnum="0x80000000" filename="OCPType_2600_TI814xEVE.xml"/>
+				<map ubmfunnum="0x80000002" filename="AET_PropertyOCP_TI814xEVE.xml"/>
+				<map ubmfunnum="0x80000005" filename="AET_PropertySMSET_EVE.xml"/>
+				<map ubmfunnum="0xC000000A" filename="AET_PropertyPPF_TI814x.xml"/>
+				<map ubmfunnum="0x8000000F" filename="AET_PropertySTM_CentEVE.xml"/>
+			</mapping>
+			
+	<!-- Make sure this section should be consistent with OCPType_2600_TI814x.xml-->
+			<mapping id="ubmfunnum.funcname">
+				<map ubmfunnum="0x80000000" funcname="STM Functions"/>
+				<map ubmfunnum="0x80000002" funcname="OCP Traffic Monitoring"/>
+				<map ubmfunnum="0x80000005" funcname="EVE SMSET"/>
+				<map ubmfunnum="0xC000000A" funcname="Performance Probe"/>
+				<map ubmfunnum="0x8000000F" funcname="Trace Export Configuration"/>
+			</mapping>
+			
+		</module> 
+
+		<!-- ETB module. It is used as receiver -->
+		<module id="MOD_ETB0" kind="cs_etb" proc="CSETB_0" version="2.0" >
+			<registers>
+				<register id="ID" address="ETBCS_ID"  page="" addrunit="1" width="32" type="reg"/>		
+				<register id="RDP" address="ETBCS_RDP" page="" addrunit="1" width="32" type="reg"/>		
+				<register id="STS" address="ETBCS_STS" page="" addrunit="1" width="32" type="reg"/>		
+				<register id="RRD" address="ETBCS_RRD" page="" addrunit="1" width="32" type="reg"/>
+				<register id="RRP" address="ETBCS_RRP" page="" addrunit="1" width="32" type="reg"/>
+				<register id="RWD" address="ETBCS_RWD" page="" addrunit="1" width="32" type="reg"/>
+				<register id="RWP" address="ETBCS_RWP" page="" addrunit="1" width="32" type="reg"/>						
+				<register id="TRG" address="ETBCS_TRG" page="" addrunit="1" width="32" type="reg"/>		
+				<register id="CTL" address="ETBCS_CTL" page="" addrunit="1" width="32" type="reg"/>		
+				<register id="FFSR" address="ETBCS_FFSR" page="" addrunit="1" width="32" type="reg"/>
+				<register id="FFCR" address="ETBCS_FFCR" page="" addrunit="1" width="32" type="reg"/>
+				<register id="LOCK" address="ETBCS_LOCK_ACCESS" page="" addrunit="1" width="32" type="reg"/>
+				<register id="LOCK_STATUS" address="ETBCS_LOCK_STATUS" page="" addrunit="1" width="32" type="reg"/>
+			</registers>
+			
+			<characteristics>
+				<characteristic id="DEV_CHAR_PINMANAGER" description="" value="1"/> 
+				<characteristic id="DEV_CHAR_DATAPINCOUNT" description="" value="20"/>
+				<characteristic id="DEV_CHAR_CLOCKPINCOUNT" description="" value="2"/>
+				<characteristic id="DEV_CHAR_PRIMARYCLOCK" description="" value="20"/>
+				<characteristic id="DEV_CHAR_SECONDARYCLOCK" description="" value="21"/>
+				<characteristic id="DEV_CHAR_TRACEDATAORDER" description="" value="reverse"/>
+				<characteristic id="DEV_CHAR_FFCRDISABLE" value="0"/>	
+				<characteristic id="DEV_CHAR_CURIE" value="0"/> <!-- This is a curie type of device (using ADTF in general). Need special handling -->	
+				<characteristic id="DEV_CHAR_TRACEMODE" value="3"/> <!-- This is setting is giving a hint to channel driver to run at freeclock mode. It is here to deal with ADTF -->	
+			</characteristics> 
+			
+		</module>
+
+		<!-- Pins module -->
+		<module id ="MOD_DRM"  kind="drm" proc="" version="1.0" >
+			<registers>
+			</registers>
+			<mapping id="program.pinouts">
+				<map program="0" pinouts="pti=2,4,3,1,0" />
+				<map program="1" pinouts="pti=2,1,0" />
+				<map program="2" pinouts="pti=1,0" />
+			</mapping>
+		</module>
+
+		<!-- ADTF module associated with GEM DSP trace to ETB -->
+		<module id="MOD_RADTF0" kind="radtf" proc="C674X_0" version="1.0" >
+			<registers>
+				<register id="DTFCR" address="0x4B166000" page="0" addrunit="1" width="32" type="mem" />
+				<register id="TAGSET" address="0x4B166FA0" page="0" addrunit="1" width="32" type="mem" />	
+				<register id="TAGCLR" address="0x4B166FA4" page="0" addrunit="1" width="32" type="mem" />
+				<register id="LOCK" address="0x4B166FB0" page="0" addrunit="1" width="32" type="mem" />		
+				<register id="LOCK_STATUS" address="0x4B166FB4" page="0" addrunit="1" width="32" type="mem" />	
+				<register id="ID" address="0x4B166FC8" page="0" addrunit="1" width="32" type="mem" />	
+			</registers>
+			<characteristics>
+				<characteristic id="DEV_CHAR_TRACEMODE" description="" value="3"/>		
+			</characteristics> 
+		</module> 
+	</modules>
+
+</device>

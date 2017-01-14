@@ -1,0 +1,182 @@
+.datagrid table { 
+	border-collapse: collapse; 
+	background: #fff; 
+	-webkit-border-radius: 3px; 
+	-moz-border-radius: 3px; 
+	border-radius: 3px; 
+	min-width: 320px;
+}
+
+.datagrid table td, .datagrid table th { 
+	padding: 3px 10px; 
+}
+
+.datagrid table thead th {
+	color:#FFFFFF; 
+	font-size: 14px;
+	font-weight: bold; 
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+.datagrid table thead th:first-child { 
+	border: none; 
+}
+
+.datagrid table tbody td { 
+	color: #000000; 
+	/*border-left: 1px solid #E1EEF4;*/
+	font-weight: normal;
+	/* overflow: hidden; 
+    text-overflow: clip;
+    white-space: nowrap;*/
+}
+
+.datagrid table tbody td:first-child { 
+	border-left: none; 
+}
+
+.datagrid table tbody tr:last-child td { 
+	border-bottom: none; 
+}
+}
+
+.datagrid table tfoot td { 
+	padding: 2px 0 2px 0; 
+	font-size: 14px;
+	font-weight: bold;
+} 
+
+.datagrid table tfoot td div { 
+	padding: 2px; 
+}
+
+.datagrid table tfoot td ul { 
+	margin: 0; 
+	padding: 0; 
+	list-style: none; 
+	text-align: right; 
+}
+
+.datagrid table tfoot  li { 
+	display: inline; 
+}
+
+.datagrid table tfoot li a { 
+	text-decoration: none; 
+	display: inline-block;  
+	padding: 2px 8px; 
+	margin: 1px;
+	color: #FFFFFF;
+	-webkit-border-radius: 3px; 
+	-moz-border-radius: 3px; 
+	border-radius: 3px; 
+}
+
+.datagrid table tfoot ul.active, .datagrid table tfoot ul a:hover { 
+	text-decoration: none;
+	color: #FFFFFF; 
+	background: none;
+}
+
+div.dhtmlx_window_active, div.dhx_modal_cover_dv { 
+	position: fixed !important; 
+}
+
+/* Colour specific styles */
+/* Blue style */
+.datagridBlue table {
+	border: 1px solid #115566;
+}
+
+.datagridBlue table thead th {
+	background-color:#115566; 
+	border-bottom: 1px solid #115566; 
+}
+
+.datagridBlue table thead.altHead th {
+	background-color:#118899; 
+	border-bottom: 1px solid #115566; 
+}
+
+.datagridBlue table tbody .alt td { 
+	background: #E1EEF4; 
+	color: #000000; 
+}
+
+.datagridBlue table tfoot td div { 
+	border-top: 1px solid #115566;
+	background: #E1EEF4;
+} 
+
+.datagridBlue table tfoot td { 
+	border-top: 1px solid #115566;
+}
+
+.datagridBlue table tfoot li a { 
+	border: 1px solid #115566;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #115566), color-stop(1, #115566) );
+	background:-moz-linear-gradient( center top, #115566 5%, #115566 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#115566', endColorstr='#115566');
+	background-color:#115566; 
+}
+
+.datagridBlue table tfoot ul.active, .datagrid table tfoot ul a:hover { 
+	border-color: #115566; 
+	background-color:#115566;
+}
+/* End Blue style */
+
+/* Grey style */
+.datagridGrey table {
+	border: 1px solid #D8D8D8;
+	font-size: 14px;
+}
+
+.datagridGrey table thead th {
+	background-color:#D8D8D8; 
+	border-left: 0px solid #D8D8D8; 
+}
+
+.datagridGrey table tbody td { 
+	border: 1px solid #D8D8D8; 
+	background: #FAFAFA;
+}
+
+.datagridGrey table tbody .alt td { 
+	background: #ffffff; 
+	color: #000000; 
+}
+
+.datagridGrey table td, .datagridGrey table th { 
+	padding: 2px 5px; 
+}
+
+.datagridGrey table tfoot td div { 
+	border-top: 1px solid #D8D8D8;
+	background: #FAFAFA;
+} 
+
+.datagridGrey table tfoot td { 
+	border-top: 1px solid #D8D8D8;
+}
+
+.datagridGrey table tfoot li a { 
+	border: 1px solid #D8D8D8;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #D8D8D8), color-stop(1, #D8D8D8) );
+	background:-moz-linear-gradient( center top, #D8D8D8 5%, #D8D8D8 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#D8D8D8', endColorstr='#D8D8D8');
+	background-color:#D8D8D8; 
+}
+
+.datagridGrey table tfoot ul.active, .datagrid table tfoot ul a:hover { 
+	border-color: #D8D8D8; 
+	background-color:#D8D8D8;
+}
+
+.datagrid table thead th.configurableUI {
+	padding-bottom: 3px;
+}
+
+/* End Grey style */
+

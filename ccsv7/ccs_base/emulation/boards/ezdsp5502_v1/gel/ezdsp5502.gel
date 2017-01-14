@@ -1,0 +1,377 @@
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ * ezdsp5502.gel                                                            *
+ *   Version 1.00                                                           *
+ *                                                                          *
+ *     This GEL file is designed to be used in conjunction with             *
+ *     CCS 4.2 and the eZdsp5502.                                           *
+ *                                                                          *
+ *   History                                                                *
+ *     v0.01      Initial Release                                           *
+ *     v1.00      Public Release                                            *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  StartUp( )                                                              *
+ *    This function is called each time CCS is started.                     *
+ *      Setup Memory Map                                                    *
+ *      Do not touch the target                                             *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+StartUp()
+{
+    GEL_TextOut( "\nStartUp()\n" );
+    Setup_Memory_Map();
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  OnTargetConnect( )                                                      *
+ *    This function is call automatically when you connect to the target.   *
+ *    Under normal circumstances it should be used to fully intialize the   *
+ *    connected CPU and optionally the rest of the chip or board.           *
+ *                                                                          *
+ *    Operations that may be needed before the cpu/chip can be configured   *
+ *        GEL_Reset                                                         *
+ *        Disable MMU -  Important for ARM                                  *
+ *        Disable DMA                                                       *
+ *                                                                          *
+ *  Note: OnTargetConnect might not be appropriate if you are trying to     *
+ *        debug a running OS.  In general if debugging a running OS you     *
+ *        only want the memory map defined.                                 *
+ * ------------------------------------------------------------------------ */
+OnTargetConnect()
+{
+    GEL_TextOut( "\nOnTargetConnect()\n" );
+
+    GEL_Reset();
+    Setup_Memory_Map();
+    SystemCleanup();
+    SystemSetup();
+
+    GEL_TextOut("GEL StartUp Complete.\n");
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ * SystemSetup()                                                            *
+ *   Initialize system and peripherals                                      *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+SystemSetup()
+{
+    Setup_PLL ( );      // Setup for 300MHz
+    Init_Emif ( );      // EMIF setup for NOR Flash and Ethernet
+    Init_SDRAM( );      // Init SDRAM
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ * SystemCleanup()                                                          *
+ * Clean up DSP state                                                       *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+SystemCleanup()
+{
+    /* Disable interrupts */
+    *(int*)0x0003 = *(int*)0x0003 | 0x0800; // Set INTM
+    *(int*)0x0000 = 0;                      // Clear IER0
+    *(int*)0x0045 = 0;                      // Clear IER1
+    *(int*)0x0004 = *(int*)0x0004 | 0x2000; // Set CACLR (Clear Cache)
+
+    /* Disable each DMA channels */
+    *(int*)0xC01@io = 0;    // DMA0
+    *(int*)0xC21@io = 0;    // DMA1
+    *(int*)0xC41@io = 0;    // DMA2
+    *(int*)0xC61@io = 0;    // DMA3
+    *(int*)0xC81@io = 0;    // DMA4
+    *(int*)0xCA1@io = 0;    // DMA5
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  OnReset( )                                                              *
+ *      This function is called by CCS when you do a reset or GEL_Reset.    *
+ *      It can be used to configure/reconfigure portions of the chip that   *
+ *      are cleared by the reset.                                           *
+ *                                                                          *
+ *  Note: OnReset is generally used by older targets when reset/GEL_Reset   *
+ *        actually reset the chip.  On newer multi-core devices the reset   *
+ *        is basicly a SW reset of the connected CPU.                       *
+ *        If you want to catch an external reset or an IcePick reset then   *
+ *        OnResetDetected() can be used.                                    *
+ * ------------------------------------------------------------------------ */
+OnReset( int nErrorCode )
+{
+   GEL_TextOut( "\nOnReset()\n" ); 
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  OnRestart( )                                                            *
+ *      This function is called by CCS when you do Debug->Restart.          *
+ *      The assumption is that the target has not hung and program is still *
+ *      in memory.  If that is not the case then program should be reloaded *
+ *      vs restarted.                                                       *
+ *                                                                          *
+ *      Operations that may be needed:                                      *
+ *         Disable MMU                                                      *
+ *         Flush/Disable Caches                                             *
+ *         Clear/Disable Interrupts                                         *
+ *         Disable DMA                                                      *
+ *         For ARM set the CPSR. This effects exec mode IRQ/FIQ and Thumb.  *
+ *         Disable watchdogs                                                *
+ * ------------------------------------------------------------------------ */
+OnRestart( int nErrorCode )
+{
+    GEL_TextOut( "\nOnRestart()\n" ); 
+    SystemCleanup();
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  OnPreFileLoaded( )                                                      *
+ *      This function is called automatically when the 'Load Program'       *
+ *      Menu item is selected. This function should ensure that the cpu     *
+ *      is in a good enough state so that program, data and i/o memory is   *
+ *      readable and writeable.  Every chip is different especially the     *
+ *      reset so some things have to be done manually especially on ARM     *
+ *      devices.                                                            *
+ *                                                                          *
+ *      Operations that may be needed:                                      *
+ *        GEL_Reset                                                         *
+ *        Disable MMU -  Important for ARM                                  *
+ *        Disable DMA                                                       *
+ *        Reconfigure EMIF if GEL_Reset reset it.                           *
+ *                                                                          *
+ *      Note: OnRestart if present is called after the file is loaded so    *
+ *            there is some reduncancy but this can be minimized.           *
+ * ------------------------------------------------------------------------ */
+OnPreFileLoaded()
+{
+    GEL_TextOut( "\nOnPreFileLoaded()\n" );
+    SystemCleanup();
+    SystemSetup();
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ * Setup_Memory_Map()                                                       *
+ * Memory map setup                                                         *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+Setup_Memory_Map()
+{
+    GEL_MapOn();
+    GEL_MapReset();
+
+    /* Program Space */
+    GEL_MapAdd( 0x0000C0u, 0, 0x00FF40u, 1, 1 );    // DARAM
+    GEL_MapAdd( 0x010000u, 0, 0x3F0000u, 1, 1 );    // External CE0 (SDRAM)
+    GEL_MapAdd( 0x400000u, 0, 0x400000u, 1, 1 );    // External CE1 (Not Used)
+    GEL_MapAdd( 0x800000u, 0, 0x400000u, 1, 1 );    // External CE2 (Not Used)
+    GEL_MapAdd( 0xC00000u, 0, 0x3F8000u, 1, 1 );    // External CE3 (Ethernet)
+    GEL_MapAdd( 0xFF8000u, 0, 0x008000u, 1, 0 );    // On-chip ROM
+
+    /* Data Space */
+    GEL_MapAdd( 0x000000u, 1, 0x000060u, 1, 1 );    // MMRs
+    GEL_MapAdd( 0x000060u, 1, 0x007FA0u, 1, 1 );    // DARAM
+    GEL_MapAdd( 0x008000u, 1, 0x1F8000u, 1, 1 );    // External CE0 (SDRAM)
+    GEL_MapAdd( 0x200000u, 1, 0x200000u, 1, 1 );    // External CE1 (Not Used)
+    GEL_MapAdd( 0x400000u, 1, 0x200000u, 1, 1 );    // External CE2 (Not Used)
+    GEL_MapAdd( 0x600000u, 1, 0x1FC000u, 1, 1 );    // External CE3 (Ethernet)
+    GEL_MapAdd( 0x7FC000u, 1, 0x004000u, 1, 0 );    // On-chip ROM
+
+
+    /* IO Space */
+    GEL_MapAdd( 0x0001u, 2, 0x0002u, 1, 1 );        // Idle Control
+    GEL_MapAdd( 0x000Fu, 2, 0x0001u, 1, 1 );        // Bootmode
+    GEL_MapAdd( 0x0100u, 2, 0x0003u, 1, 1 );        // XPORT Reg
+    GEL_MapAdd( 0x0200u, 2, 0x0003u, 1, 1 );        // DPORT Reg
+    GEL_MapAdd( 0x0302u, 2, 0x0001u, 1, 1 );        // IPORT Reg
+    GEL_MapAdd( 0x07FDu, 2, 0x0001u, 1, 1 );        // Systems Config Reg
+    GEL_MapAdd( 0x0800u, 2, 0x002Cu, 1, 1 );        // EMIF
+    GEL_MapAdd( 0x0C00u, 2, 0x00B0u, 1, 1 );        // DMA
+    GEL_MapAdd( 0x0E00u, 2, 0x0002u, 1, 1 );        // DMA
+    GEL_MapAdd( 0x1000u, 2, 0x0013u, 1, 1 );        // Timers
+    GEL_MapAdd( 0x1400u, 2, 0x0004u, 1, 1 );        // ICACHE
+    GEL_MapAdd( 0x1C80u, 2, 0x0019u, 1, 1 );        // Clock Generator
+    GEL_MapAdd( 0x2000u, 2, 0x0055u, 1, 1 );        // Trace FIFO
+    GEL_MapAdd( 0x2400u, 2, 0x0013u, 1, 1 );        // Timers
+    GEL_MapAdd( 0x2800u, 2, 0x0020u, 1, 1 );        // MCBSP#0
+    GEL_MapAdd( 0x2C00u, 2, 0x0020u, 1, 1 );        // MCBSP#1
+    GEL_MapAdd( 0x3000u, 2, 0x0020u, 1, 1 );        // MCBSP#2
+    GEL_MapAdd( 0x3400u, 2, 0x0002u, 1, 1 );        // GPIO
+    GEL_MapAdd( 0x3800u, 2, 0x0008u, 1, 1 );        // Die ID
+    GEL_MapAdd( 0x3C00u, 2, 0x000Fu, 1, 1 );        // I2C
+    GEL_MapAdd( 0x4000u, 2, 0x0016u, 1, 1 );        // Timers
+    GEL_MapAdd( 0x4400u, 2, 0x0009u, 1, 1 );        // Parallel GPIO
+    GEL_MapAdd( 0x6C00u, 2, 0x0002u, 1, 1 );        // External Bus
+    GEL_MapAdd( 0x8000u, 2, 0x0001u, 1, 1 );        // Timer Signal Selection
+    GEL_MapAdd( 0x8400u, 2, 0x0001u, 1, 1 );        // CLKOUT Selection
+    GEL_MapAdd( 0x8c00u, 2, 0x0001u, 1, 1 );        // Clock Mode
+    GEL_MapAdd( 0x9000u, 2, 0x0001u, 1, 1 );        // Timeout Control
+    GEL_MapAdd( 0x9400u, 2, 0x0004u, 1, 1 );        // Idle Control
+    GEL_MapAdd( 0x9C00u, 2, 0x000Du, 1, 1 );        // UART
+    GEL_MapAdd( 0xA000u, 2, 0x0021u, 1, 1 );        // HPI
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ * Init_Emif()                                                              *
+ * Emif initialization                                                      *
+ *                                                                          *
+ *--------------------------------------------------------------------------*/
+Init_Emif()
+{
+    Init_CE1_16bit_Async();
+    Init_CE3_16bit_Async();
+}
+
+/*************************************************/
+/* C5502 REGISTERS                               */
+/*************************************************/
+    /* CPU Registers */
+    #define ST3_55          0x0004
+
+    /* Chip Registers */
+    #define XBSR            0x6c00
+
+    /* EMIF Registers */
+    #define EMIF_GCTL1      0x0800
+    #define EMIF_GCTL2      0x0801
+    #define EMIF_CE11       0x0802
+    #define EMIF_CE12       0x0803
+    #define EMIF_CE01       0x0804
+    #define EMIF_CE02       0x0805
+    #define EMIF_CE21       0x0808
+    #define EMIF_CE22       0x0809
+    #define EMIF_CE31       0x080A
+    #define EMIF_CE32       0x080B
+    #define EMIF_SDCNT1     0x080C
+    #define EMIF_SDCNT2     0x080D
+    #define EMIF_SDREF1     0x080E
+    #define EMIF_SDREF2     0x080F
+    #define EMIF_SDEXT1     0x0810
+    #define EMIF_SDEXT2     0x0811
+    #define EMIF_CE1SECCTL1 0x0822
+    #define EMIF_CE1SECCTL2 0x0823
+    #define EMIF_CE0SECCTL1 0x0824
+    #define EMIF_CE0SECCTL2 0x0825
+    #define EMIF_CE2SECCTL1 0x0828
+    #define EMIF_CE2SECCTL2 0x0829
+    #define EMIF_CE3SECCTL1 0x082A
+    #define EMIF_CE3SECCTL2 0x082B
+    #define EMIF_CECTL1     0x0840
+    #define EMIF_CECTL2     0x0841
+
+    /* PLL Registers */
+    #define PLLCSR          0x1C80
+    #define CK3SEL          0x1C81
+    #define PLLM            0x1C88
+    #define PLLDIV0         0x1C8A
+    #define PLLDIV1         0x1C8C
+    #define PLLDIV2         0x1C8E
+    #define PLLDIV3         0x1C90
+    #define OSCDIV1         0x1C92
+    #define WAKEUP          0x1C98
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ * Setup_PLL( )                                                             *
+ * Setup PLL for 300MHz clock to core.                                      *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+Setup_PLL( )
+{
+    int lock, i;
+
+    *(short *)PLLCSR@IO &= 0xFFFE;              // PLL bypass mode
+    *(short *)PLLCSR@IO |= 0x0008;              // PLL reset
+    *(short *)PLLM@IO    = 0x000F;              // PLLM
+    *(short *)PLLDIV0@IO = 0x8000;              // PLLDIV0
+    *(short *)PLLDIV3@IO = 0x8003;              // PLLDIV3
+    *(short *)PLLCSR@IO &= 0xFFF7;              // Take PLL out of reset
+
+    lock = 0;
+    /* number of iterations in loop can be increased if needed*/
+    for ( i = 0 ; i < 1000 ; i++ )
+    {
+        if ( *(short *)PLLCSR@IO | 0x0020 )
+        {
+            lock = 1;
+        }
+    }
+    if (lock)
+    {
+        *(short *)PLLCSR@IO |= 0x0001;
+        GEL_TextOut("PLL configured successfully.\n");
+    }
+    else
+    {
+        GEL_TextOut("PLL did not lock.\n");
+    }
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ * Init_CE1_16bit_Async()                                                   *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+Init_CE1_16bit_Async()
+{
+    /* Configure CE1 */
+    *(short *)EMIF_CE11@IO = 0x8711;            /* 16-bit async in CE1 space. */
+    *(short *)EMIF_CE11@IO = 0x30B4;
+
+    GEL_TextOut("CE1 configured for 16-bit asynchronous memory.\n");
+
+
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ * Init_CE3_16bit_Async()                                                   *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+Init_CE3_16bit_Async()
+{
+    /* Configure CE2 */
+    *(short *)EMIF_CE31@IO = 0x4310;            // 16-bit async in CE3 space.
+    *(short *)EMIF_CE32@IO = 0x11d1;
+
+    GEL_MapAdd(0xC00000u, 0, 0x400000u, 1, 1);  // External CE3
+    GEL_MapAdd(0x600000u, 1, 0x200000u, 1, 1);  // External CE3
+
+    GEL_TextOut("CE3 configured for 16-bit Ethernet.\n");
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ * Init_CE0_32bit_SDRAM()                                                   *
+ * For MT48LC2M32B2 Micron Memory use.                                      *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+hotmenu Init_SDRAM()
+{
+    if ( *(short *)XBSR@IO & 0x0001 )
+    {
+        *(short *)EMIF_GCTL1    |= 0x0020;          /* enable ECLKOUT1 */
+        *(short *)EMIF_CE01@IO   = 0xFF33;          /* 32-bit SDRAM in CE0 space. */
+        *(short *)EMIF_SDCNT1@IO = 0xF000;
+        *(short *)EMIF_SDCNT2@IO = 0x4748;
+        *(short *)EMIF_SDREF1@IO = 0x0001;
+        *(short *)EMIF_SDREF2@IO = 0x0000;
+
+        GEL_MapAdd(0x010000u, 0, 0x3B0000u, 1, 1);  /* External CE0 - program space */
+        GEL_MapAdd(0x008000u, 1, 0x1D8000u, 1, 1);  /* External CE0 - data space */
+
+        GEL_TextOut("CE0 configured for 32-bit SDRAM memory.\n");
+    }
+    else
+    {
+        GEL_TextOut("EMIF is not enabled. GPIO6 must be high at reset to enable EMIF.\n");
+    }
+}

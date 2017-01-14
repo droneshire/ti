@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cpu id="CS_ETB" isa="CS_ETB" HW_revision="1.0" XML_version="1.0" description="Embedded Trace Buffer">
+    <register id="ID"          acronym="ID"          width="32" description="ETB Device ID Register" />
+    <register id="RDP"         acronym="RDP"         width="32" description="ETB RAM Depth Register" />
+    <register id="STS"         acronym="STS"         width="32" description="ETB Status Register" />
+    <register id="RRD"         acronym="RRD"         width="32" description="ETB RAM Read Data Register" />
+    <register id="RRP"         acronym="RRP"         width="32" description="ETB RAM Read Pointer Register" />
+    <register id="RWD"         acronym="RWD"         width="32" description="ETB RAM Write Data Register" />
+    <register id="RWP"         acronym="RWP"         width="32" description="ETB RAM Write Pointer Register" />
+    <register id="TRG"         acronym="TRG"         width="32" description="ETB Trigger Counter Register" />
+    <register id="CTL"         acronym="CTL"         width="32" description="ETB Control Register" />
+    <register id="FFSR"        acronym="FFSR"        width="32" description="ETB Formatter and Flush Status Register" />
+    <register id="FFCR"        acronym="FFCR"        width="32" description="ETB Formatter and Flush Control Register" />
+    <register id="LOCK"        acronym="LOCK"        width="32" description="ETB Lock Access Register" />
+    <register id="LOCK_STATUS" acronym="LOCK_STATUS" width="32" description="ETB Lock Status Register" />
+    <instance href="..\Modules\etb_hidden_registers.xml" id="" xml="etb_hidden_registers.xml" 
+              xmlpath="..\Modules\" HW_revision="1.0" description="" requestor="CS_ETB" 
+              baseaddr="0" size="00" accessnumbytes="4" permissions="p" />
+</cpu>

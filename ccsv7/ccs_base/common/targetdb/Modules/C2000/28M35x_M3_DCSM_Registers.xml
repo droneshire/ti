@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- 
+  TI File $Revision: 
+  Checkin $Date: 
+  --> 
+
+<!--  28M35x DCSM REGS Registers 
+     =================================== 
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     --> 
+<module id="DCSM REGS" HW_revision="" XML_version="1" description="DCSM REGS Registers">
+    <register id="Z1_CSMKEY0" acronym="Z1_CSMKEY0" offset="0" page="1" width="32" description="CSMKEY Register for M3-Zone-1 security Zone" />
+    <register id="Z1_CSMKEY1" acronym="Z1_CSMKEY1" offset="4" page="1" width="32" description="CSMKEY Register for M3-Zone-1 security Zone" />
+    <register id="Z1_CSMKEY2" acronym="Z1_CSMKEY2" offset="8" page="1" width="32" description="CSMKEY Register for M3-Zone-1 security Zone" />
+    <register id="Z1_CSMKEY3" acronym="Z1_CSMKEY3" offset="12" page="1" width="32" description="CSMKEY Register for M3-Zone-1 security Zone" />
+    <register id="Z1_ECSLKEY0" acronym="Z1_ECSLKEY0" offset="16" page="1" width="32" description="ECSLKEY Register for M3-Zone-1 security Zone" />
+    <register id="Z1_ECSLKEY1" acronym="Z1_ECSLKEY1" offset="20" page="1" width="32" description="ECSLKEY Register for M3-Zone-1 security Zone" />
+    <register id="Z2_CSMKEY0" acronym="Z2_CSMKEY0" offset="24" page="1" width="32" description="CSMKEY Register for M3-Zone-2 security Zone" />
+    <register id="Z2_CSMKEY1" acronym="Z2_CSMKEY1" offset="28" page="1" width="32" description="CSMKEY Register for M3-Zone-2 security Zone" />
+    <register id="Z2_CSMKEY2" acronym="Z2_CSMKEY2" offset="32" page="1" width="32" description="CSMKEY Register for M3-Zone-2 security Zone" />
+    <register id="Z2_CSMKEY3" acronym="Z2_CSMKEY3" offset="36" page="1" width="32" description="CSMKEY Register for M3-Zone-2 security Zone" />
+    <register id="Z2_ECSLKEY0" acronym="Z2_ECSLKEY0" offset="40" page="1" width="32" description="ECSLKEY Register for M3-Zone-2 security Zone" />
+    <register id="Z2_ECSLKEY1" acronym="Z2_ECSLKEY1" offset="44" page="1" width="32" description="ECSLKEY Register for M3-Zone-2 security Zone" />
+    <!--  48 empty  -->
+    <register id="Z1_CSMLOCKSR" acronym="Z1_CSMLOCKSR" offset="96" page="1" width="32" description="Locked Status Register for CSM passwords of M3-Zone-1 security Zone" />
+    <register id="Z1_ECSLLOCKSR" acronym="Z1_ECSLLOCKSR" offset="100" page="1" width="32" description="Locked Status Register for ECSL passwords of M3-Zone-1 security Zone" />
+    <register id="Z2_CSMLOCKSR" acronym="Z2_CSMLOCKSR" offset="104" page="1" width="32" description="Locked Status Register for CSM passwords of M3-Zone-2 security Zone" />
+    <register id="Z2_ECSLLOCKSR" acronym="Z2_ECSLLOCKSR" offset="108" page="1" width="32" description="Locked Status Register for ECSL passwords of M3-Zone-2 security Zone" />
+    <!--  16 empty  -->
+    <register id="Z1_CR" acronym="Z1_CR" offset="128" page="1" width="32" description="Status and Control Register for M3-Zone-1 security Zone" />
+    <register id="Z2_CR" acronym="Z2_CR" offset="132" page="1" width="32" description="Status and Control Register for M3-Zone-2 security Zone" />
+    <!--  8 empty  -->
+    <register id="Z1_GRABSECTR" acronym="Z1_GRABSECTR" offset="144" page="1" width="32" description="Grab Flash-Sectors Register for M3-Zone-1 security Zone" />
+    <register id="Z1_GRABRAMR" acronym="Z1_GRABRAMR" offset="148" page="1" width="32" description="Grab RAM-blocks Register for M3-Zone-1 security Zone" />
+    <register id="Z2_GRABSECTR" acronym="Z2_GRABSECTR" offset="152" page="1" width="32" description="Grab Flash-Sectors Register for M3-Zone-2 security Zone" />
+    <register id="Z2_GRABRAMR" acronym="Z2_GRABRAMR" offset="156" page="1" width="32" description="Grab RAM-blocks Register for M3-Zone-2 security Zone" />
+    <!--  16 empty  -->
+    <register id="Z1_EXEONLYR" acronym="Z1_EXEONLYR" offset="176" page="1" width="32" description="Execute-Only Select Register for flash sectors mapped to M3-Zone-1 security Zone" />
+    <register id="Z2_EXEONLYR" acronym="Z2_EXEONLYR" offset="180" page="1" width="32" description="Execute-Only Select Register for flash sectors mapped to M3-Zone-2 security Zone" />
+</module>

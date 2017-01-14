@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- 
+  TI File $Revision: 
+  Checkin $Date: 
+  --> 
+
+<!--  28M35x FLASH ERR REGS Registers 
+     =================================== 
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     --> 
+<module id="FLASH ERR REGS" HW_revision="" XML_version="1" description="FLASH ERR REGS Registers">
+    <register id="ECC_ENABLE" acronym="ECC_ENABLE" offset="0" page="1" width="32" description="ECC Enable Register" />
+    <register id="SINGLE_ERR_ADDR" acronym="SINGLE_ERR_ADDR" offset="4" page="1" width="32" description="Single Error Address Register" />
+    <register id="UNC_ERR_ADDR" acronym="UNC_ERR_ADDR" offset="8" page="1" width="32" description="Uncorrectable Error Address Register" />
+    <register id="ERR_STATUS" acronym="ERR_STATUS" offset="12" page="1" width="32" description="Error Status Register" />
+    <register id="ERR_POS" acronym="ERR_POS" offset="16" page="1" width="32" description="Error Position Register" />
+    <register id="ERR_STATUS_CLR" acronym="ERR_STATUS_CLR" offset="20" page="1" width="32" description="Error Status Clear Register" />
+    <register id="ERR_CNT" acronym="ERR_CNT" offset="24" page="1" width="32" description="Error Count Register" />
+    <register id="ERR_THRESHOLD" acronym="ERR_THRESHOLD" offset="28" page="1" width="32" description="Error Threshold Register" />
+    <register id="ERR_INTFLG" acronym="ERR_INTFLG" offset="32" page="1" width="32" description="Error Interrupt Flag Register" />
+    <register id="ERR_INTCLR" acronym="ERR_INTCLR" offset="36" page="1" width="32" description="Error Interrupt Clear Register" />
+    <register id="FDATAH_TEST" acronym="FDATAH_TEST" offset="40" page="1" width="32" description="Test Data High Register" />
+    <register id="FDATAL_TEST" acronym="FDATAL_TEST" offset="44" page="1" width="32" description="Test Data Low Register" />
+    <register id="FADDR_TEST" acronym="FADDR_TEST" offset="48" page="1" width="32" description="Test Data Address Register" />
+    <register id="FECC_TEST" acronym="FECC_TEST" offset="52" page="1" width="32" description="Test Data ECC Register" />
+    <register id="FECC_CTRL" acronym="FECC_CTRL" offset="56" page="1" width="32" description="ECC Test Control Register" />
+    <register id="FECC_FOUTH_TEST" acronym="FECC_FOUTH_TEST" offset="60" page="1" width="32" description="Test Data Out High Register" />
+    <register id="FECC_FOUTL_TEST" acronym="FECC_FOUTL_TEST" offset="64" page="1" width="32" description="Test Data Out Low Register" />
+    <register id="FECC_STATUS" acronym="FECC_STATUS" offset="68" page="1" width="32" description="Test Status Register" />
+</module>

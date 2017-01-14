@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Context Aware Duration" default="enable" basedir=".">
+	<import file="../../templates/analysisfeature.xml"/>
+	
+	<property name="dvt.activity.name" value="Profiling/${ant.project.name}"/>
+	<property name="dvt.activity.description" value="Calculates the context-aware duration between two events."/>
+	<property name="dvt.views" value="Summary,Detail,Graph(Incl),Graph(Excl)"/>
+	<property name="dvt.views.show" value="Summary"/>
+	<property name="analysisFeatureName" value="ContextAwareDuration" />
+
+	<!-- override template target -->
+	<target name="configureAnalysisFeature" depends="wizard,remove,cond-signle,cond-multi" if="ConfigWizard">
+		<echo message="${bufferbypass.text}"/>
+		<echo message="${wizard.page1.masterlist.text}"/>
+	</target>
+
+
+
+    <target name="remove" unless="ConfigWizard">
+        <dvt.remove/>
+    </target>
+	
+	<target name="check-cond">
+		  <condition property="cond-single-true">
+		        <not> <equals arg1="${wizard.page1.masterlist.text}" arg2="ALL" /> </not>
+		  </condition>
+		</target>
+
+		 
+		<target name="cond-signle" depends="check-cond" if="cond-single-true">
+			<echo message="Single core"/>
+			
+			<dvt.property refid="analysisFeatureRef" dataprocessor="Tap.5" name="Filter" value="(Master == &quot;${wizard.page1.masterlist.text}&quot;)"/>
+			<!-- set data context name to identify the data set (shown in the views) -->
+			<dvt.property refid="analysisFeatureRef" datacontext="${wizard.page1.masterlist.text}"/>
+		</target>
+
+		<target name="cond-multi" depends="check-cond" unless="cond-single-true">
+		   <echo message="All cores"/>
+			
+			<!-- set data context name to identify the data set (shown in the views) -->
+			<dvt.property refid="analysisFeatureRef" datacontext="ALL"/>	
+	</target>
+	
+	<target name="wizard">
+		
+		<dvt.script language="javascript">
+				                  <![CDATA[ 
+										activity = project.getReference("dvt.activity");
+				                        list = Packages.com.ti.dvt.uia.utils.Util.getEndPointNames(activity, ",");
+				                        project.setNewProperty("myList", list);
+				                  ]]>
+		</dvt.script>
+		
+		<dvt.config.wizard id="ConfigWizard" text="Open File">
+			<page text="${ant.project.name} Configuration" numColumns="1">
+				<label text="Core or Master"/>
+				<combo id="wizard.page1.masterlist" text="ALL" edit="true" >
+										<item text = "ALL"/>
+							        	<list text="${myList}" delimiter=","/>
+				</combo>
+				<!--
+				<label text="Analyze new incoming data only and ignore existing data"/>
+				<combo id="bufferbypass" selection="1">
+				    <item text = "true"/>
+				    <item text = "false"/>
+	            		</combo>
+				-->
+			</page>
+		</dvt.config.wizard>
+	</target>
+
+	<!-- override template target -->
+	<target name="postAddAnalysisFeature">
+		<dvt.start refid="analysisFeatureRef"/>
+		<dvt.view.show refid="analysisFeatureRef" view="${dvt.views.show}"/>
+	</target>
+
+	<target name="createStandardContextMenu">
+	</target>
+
+</project>

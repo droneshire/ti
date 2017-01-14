@@ -1,0 +1,7 @@
+# Color Scheme File for state graph 
+# This overrides state color assignments and uses the value from "color field name" as the key
+# key = r,g,b
+On = 0, 0, 255
+Off = 0, 0, 0
+Sleep = 128, 255, 255
+Retain = 128, 128, 255

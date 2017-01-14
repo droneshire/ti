@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<translate name="InstTranslate">
+<passthru name="Filename" input ="Filename"/>
+<passthru name="Function" input ="Function"/>
+<passthru name="Line Number" input ="Line_Number"/>
+
+<passthru name="LineCountMax"      input="0" />
+<passthru name="LineCountMin"      input="0" />
+<passthru name="PC Count"      input="0" />
+<passthru name="FirstPCCount"      input="0" />
+<passthru name="Coverage"      input="Coverage" />
+<passthru name="inst exec count"      input="Coverage == &quot;YES&quot;?1:0" />
+<!--<passthru name="ColumnNumber" input ="ColumnNumber"/>-->
+<!--<passthru name="Coverage"      input="Frequency_Count>0 ? &quot;YES&quot; : &quot;NO&quot;" /> -->
+<!--<passthru name="FrequencyCount" input ="FrequencyCount"/>   -->
+<passthru name="Comment" input ="Comment"/>
+</translate>

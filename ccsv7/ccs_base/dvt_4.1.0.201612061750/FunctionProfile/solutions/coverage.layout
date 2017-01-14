@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.5.0_14" class="java.beans.XMLDecoder"> 
+ <object class="com.ti.dvt.gadget.model.LayoutModel"> 
+  <void property="autoLayout"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="layoutMap"> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.restorable.table:Line Coverage</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>276</int> 
+     <int>421</int> 
+     <int>78</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.restorable.table:Function Coverage</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>97</int> 
+     <int>467</int> 
+     <int>126</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>FunctionCountAnalyser</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>90</int> 
+     <int>424</int> 
+     <int>143</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>PCCountAnalyser</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>88</int> 
+     <int>215</int> 
+     <int>115</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>UnlimitedBuffer</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>87</int> 
+     <int>74</int> 
+     <int>104</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>LineCountAnalyser</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>95</int> 
+     <int>337</int> 
+     <int>121</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>FieldTranslator</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>232</int> 
+     <int>181</int> 
+     <int>102</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>Tap.DataSource</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>87</int> 
+     <int>144</int> 
+     <int>109</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>SymbolicTranslator</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>86</int> 
+     <int>271</int> 
+     <int>121</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.restorable.table:PCCountAnalyser</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>269</int> 
+     <int>269</int> 
+     <int>94</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+  </void> 
+ </object> 
+</java> 

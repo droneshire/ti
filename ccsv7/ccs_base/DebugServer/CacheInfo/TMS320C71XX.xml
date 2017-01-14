@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>  
+
+<CodeComposer>
+	<CcsMemoryServer>
+		<XMLFileVersion>1.0.0.0</XMLFileVersion>
+		<Device>
+			<Name>TMS320C71XX</Name>
+			<NumCores>1</NumCores>
+			<Core index="0">
+				<Name>TMS320C71XX</Name>
+				<NumAddressSpaces>1</NumAddressSpaces>
+				<IsMemoryColoringSupported>true</IsMemoryColoringSupported>
+				<IsGTI_GetMemWithStatSupported>true</IsGTI_GetMemWithStatSupported>
+				<IsVirtualMemorySupported>false</IsVirtualMemorySupported>
+			</Core>
+		</Device>
+	</CcsMemoryServer>
+</CodeComposer>

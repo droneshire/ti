@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--                                                  -->
+<!-- Blackhawk XDS510 Emulator XML Definitions.       -->
+<!-- Date: 07 March 2016                              -->
+<!-- Vers: 6.0.83.001                                 -->
+<!--                                                  -->
+
+<drivers id="CortexA15">
+    <isa Type="CortexA15" ProcID="0x75805400">
+        <driver file="..\..\..\emulation\drivers\bhemucortexA15.dvr">
+            <connectionType Type="BHEMU"/>
+            <property Name="TraceDeviceId" Type="numericfield" Value="0x0" NumericType="HEX" UpperBound="0xFFFFFFFF" LowerBound="0" ID="device.traceId"/>
+            <!--Driver level property-->
+            <property Name="Address" Type="numericfield" Value="0x0" NumericType="HEX" UpperBound="0xFFFFFFFF" LowerBound="0" ID="device.address"/>
+            <property Name="Access Port Designator" Type="numericfield" Value="0x0" NumericType="HEX" UpperBound="0xFFFFFFFF" LowerBound="0" ID="device.identify"/>
+			<property Type="hiddenfield" Value="true" id="supportsNonIntrusiveConnect" />
+			<property Type="hiddenfield" Value="true" id="haltOnConnectByDefault"  />
+        </driver>
+    </isa>
+</drivers>

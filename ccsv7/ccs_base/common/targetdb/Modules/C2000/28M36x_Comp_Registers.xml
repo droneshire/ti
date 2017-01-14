@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- 
+  TI File $Revision: 
+  Checkin $Date: 
+  --> 
+
+<!--  C28M35x COMP REGS Registers 
+     =================================== 
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     --> 
+<module id="COMP REGS" HW_revision="" XML_version="1" description="COMP REGS Registers">
+    <register id="COMPCTL" acronym="COMPCTL" offset="0" page="1" width="16" description="Comparator Control" />
+    <!--  1 empty  -->
+    <register id="COMPSTS" acronym="COMPSTS" offset="2" page="1" width="16" description="Compare Output States" />
+    <!--  1 empty  -->
+    <!--  1 empty  -->
+    <!--  1 empty  -->
+    <register id="DACVAL" acronym="DACVAL" offset="6" page="1" width="16" description="10-bit DAV Value" />
+    <!--  1 empty  -->
+    <!--  1 empty  -->
+    <!--  1 empty  -->
+    <!--  1 empty  -->
+    <!--  1 empty  -->
+    <!--  1 empty  -->
+    <!--  1 empty  -->
+    <!--  1 empty  -->
+    <!--  1 empty  -->
+    <!--  1 empty  -->
+    <!--  1 empty  -->
+    <!--  2 empty  -->
+</module>

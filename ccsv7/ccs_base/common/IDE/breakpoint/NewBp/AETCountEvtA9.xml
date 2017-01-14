@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<newBreakpoint xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="schema.xsd" name="Count Event" breakpointType="1">
+  <targets>
+    <target>
+      <type>dsk,emu</type>
+      <familyId>470</familyId>
+      <subfamilyId>9</subfamilyId>
+      <revision>*</revision>
+    </target>
+  </targets>
+  <defaultProperty>
+    <property name="Miscellaneous.Name" value="Count Event" />
+    <property name="Hardware Configuration.Type" value="Count Event"></property>
+  </defaultProperty>
+  <submitSequence>
+    <id>Hardware Configuration.Type.Event to Count</id>
+  </submitSequence>
+  <showIn>
+    <breakpointView autoSubmit="false" />
+  </showIn>
+  <dialog colCount="2">
+    <label id="label_CTC" widthHint="100" heightHint="15" verticalAlign="center">
+      <text>Event to Count:</text>
+    </label>
+    <comboBox id="Hardware Configuration.Type.Event to Count" widthHint="150" heightHint="15">
+      <text>Clock Cycles</text>
+      <choices>
+        <item>Clock Cycles</item>
+        <item>Software increment</item>
+        <item>Instruction cache miss</item>
+        <item>Instruction micro TLB miss</item>
+        <item>Data cache miss</item>
+        <item>Data cache access</item>
+        <item>Data micro TLB miss</item>
+        <item>Data read</item>
+        <item>Data writes</item>
+        <item>Exception taken</item>
+        <item>Exception return</item>
+        <item>Write context ID</item>
+        <item>Software change of the PC</item>
+        <item>Immediate branch</item>
+        <item>Unaligned load or store</item>
+        <item>Branch mispredict or not predicted</item>
+        <item>Predictable branches</item>
+        <item>Java bytecode execute</item>
+        <item>Software Java bytecode executed</item>
+        <item>Jazelle backward branches executed</item>
+        <item>Jazelle backward branches executed</item>
+        <item>Coherent linefill miss</item>
+        <item>Coherent linefill hit</item>
+        <item>Instruction cache dependent stall cycles</item>
+        <item>Data cache dependent stall cycles</item>
+        <item>Main TLB miss stall cycles</item>
+        <item>STREX passed</item>
+        <item>STREX failed</item>
+        <item>Data eviction</item>
+        <item>Issue does not dispatch any instruction</item>
+        <item>Issue is empty</item>
+        <item>Instructions coming out of the core renaming stage</item>
+        <item>Predictable function returns</item>
+        <item>Main execution unit instructions</item>
+        <item>Second execution unit instructions</item>
+        <item>Load/Store instructions</item>
+        <item>Floating-point instructions</item>
+        <item>NEON instructions</item>
+        <item>Processor stalls because of PLDs</item>
+        <item>Processor stalled because of a write to memory</item>
+        <item>Processor stalled because of instruction side main TLB miss</item>
+        <item>Processor stalled because of data side main TLB miss</item>
+        <item>Processor stalled because of isntruction micro TLB miss</item>
+        <item>Processor stalled because of data micro TLB miss</item>
+        <item>Processor stalled because of DMB</item>
+        <item>Integer clock enabled</item>
+        <item>Data Engine clock enabled</item>
+        <item>ISB instructions</item>
+        <item>DSB instructions</item>
+        <item>DMB instructions</item>
+        <item>External interrupts</item>
+        <item>PLE cache line request completed</item>
+        <item>PLE cache line request skipped</item>
+        <item>PLE FIFO flush</item>
+        <item>PLE request completed</item>
+        <item>PLE FIFO overflow</item>
+        <item>PLE request programmed</item>
+      </choices>
+    </comboBox>
+  </dialog>
+</newBreakpoint>

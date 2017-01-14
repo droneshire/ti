@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<drivers id="TMS700C40XX">
+    <isa id="TMS700C40XX" ProcID="0xaf010010">
+        <driver file="..\..\..\emulation\drivers\sdgoarp32usb.dvr">
+            <connectionType Type="SD510USB"/>
+            <property id="debugParent" Type="hiddenfield" Value="" />
+            <property id="IHWA Base Address" Type="hiddenfield" Value="0x00" />
+        </driver>
+    </isa>
+</drivers>

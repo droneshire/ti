@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<!-- ************************************************************ -->
+<!-- Files created by Spectrum Digital Inc.                       -->
+<!-- $Revision:: 2                                              $ -->
+<!-- $Date:: 1/25/12 12:11p                                     $ -->
+<!-- (C) Copyright 2004 by Spectrum Digital Incorporated          -->
+<!-- All rights reserved                                          -->
+<!-- ************************************************************ -->
+<connection id="Spectrum Digital XDS510USB Emulator TI-JSC" class="574025">
+
+    <connectionType Type="SD510USBPLUSJSC"/>
+    
+    <property id="Emulator Filename" Type="hiddenfield" Value="sdemujsc.dll" ID="SEPK.POD_DRVR"/>
+
+ 	<property desc="Emulator I/O Port" Type="choicelist" Value="0" id="portAddr1" ID="SEPK.POD_PORT">
+
+		<choice Name="USB Emulator address is 0x510" value="0x510" />
+		<choice Name="USB Emulator address is 0x511" value="0x511" />
+		<choice Name="USB Emulator address is 0x512" value="0x512" />
+		<choice Name="USB Emulator address is 0x513" value="0x513" />
+	</property>
+
+ 
+
+
+    <property Name="TMS/TDO Output Timing" Type="hiddenfield" Value="FALL" ID="USCIF.TDOEDGE"/>
+
+    
+    <property Name="The JTAG nTRST Boot-Mode" Type="choicelist" Value="0"  ID="USCIF.JTAGBOOT_MODE">
+
+        <choice Name="Disabled - Both EMU pins remain hi-z" value="disable">
+
+            <property Name="unused" Type="hiddenfield" Value="hiz" ID="USCIF.JTAGBOOT_VALUE"/>
+
+        </choice>
+
+        <choice Name="Enabled - Both EMU pins are high" value="enable">
+
+            <property Name="unused" Type="hiddenfield" Value="11"  ID="USCIF.JTAGBOOT_VALUE"/>
+
+        </choice>
+
+        <choice Name="Enabled - EMU1 is high, EMU0 is low" value="enable">
+
+            <property Name="unused" Type="hiddenfield" Value="10"  ID="USCIF.JTAGBOOT_VALUE"/>
+
+        </choice>
+
+        <choice Name="Enabled - EMU1 is low, EMU0 is high" value="enable">
+
+            <property Name="unused" Type="hiddenfield" Value="01"  ID="USCIF.JTAGBOOT_VALUE"/>
+
+        </choice>
+
+        <choice Name="Enabled - Both EMU pins are low" value="enable">
+
+            <property Name="unused" Type="hiddenfield" Value="00"  ID="USCIF.JTAGBOOT_VALUE"/>
+
+        </choice>
+
+    </property>
+
+
+    <property Name="The Power-On-Reset Boot-Mode" Type="choicelist" Value="0" ID="USCIF.POWERBOOT_MODE">
+
+        <choice Name="Disabled - Both EMU pins remain hi-z" value="disable">
+
+            <property Name="unused" Type="hiddenfield" Value="hiz" ID="USCIF.POWERBOOT_VALUE"/>
+
+        </choice>
+
+        <choice Name="Enabled - Both EMU pins are high" value="enable">
+
+            <property Name="unused" Type="hiddenfield" Value="11"  ID="USCIF.POWERBOOT_VALUE"/>
+
+        </choice>
+
+        <choice Name="Enabled - EMU1 is high, EMU0 is low" value="enable">
+
+            <property Name="unused" Type="hiddenfield" Value="10"  ID="USCIF.POWERBOOT_VALUE"/>
+
+        </choice>
+
+        <choice Name="Enabled - EMU1 is low, EMU0 is high" value="enable">
+
+            <property Name="unused" Type="hiddenfield" Value="01"  ID="USCIF.POWERBOOT_VALUE"/>
+
+        </choice>
+
+        <choice Name="Enabled - Both EMU pins are low" value="enable">
+
+            <property Name="unused" Type="hiddenfield" Value="00"  ID="USCIF.POWERBOOT_VALUE"/>
+
+        </choice>
+
+    </property>
+
+    <property Name="The JTAG TCLK Frequency (MHz)" Type="choicelist" Value="0" ID="USCIF.TCLK_PROGRAM">
+
+        <choice Name="Fixed default 13.0MHz frequency" value="SPECIFIC">
+
+            <property Name="unused" Type="hiddenfield" Value="13.0" ID="USCIF.TCLK_FREQUENCY"/>
+
+        </choice>
+
+        <choice Name="Fixed with user specified faster value" value="SPECIFIC">
+
+            <property Name="-- Enter a value from 1.0MHz to 30.0MHz" Type="stringfield" Value="13.0MHz" ID="USCIF.TCLK_FREQUENCY"/>
+
+        </choice>
+
+        <choice Name="Fixed with user specified slower value" value="SPECIFIC">
+
+            <property Name="-- Enter a value from 488Hz to 1.0MHz" Type="stringfield" Value="100KHz" ID="USCIF.TCLK_FREQUENCY"/>
+
+        </choice>
+
+        <choice Name="Adaptive with user specified limit" value="ADAPTIVE">
+
+            <property Name="-- Enter a value from 488Hz to 30.0MHz" Type="stringfield" Value="13.0MHz" ID="USCIF.TCLK_FREQUENCY"/>
+
+        </choice>
+
+    </property>
+
+
+    <property id="TCK loop-back" Type="choicelist" Value="" ID="USCIF.LOOPBACK_MODE">
+        <choice Name="Disabled (default)" value="disable"/>
+        <choice Name="Enabled" value="enable">
+            <property id="Loop-back type" Type="choicelist" Value="" ID="USCIF.LOOPBACK_VALUE">
+                <choice Name="Clock" value="clock"/>
+            </property>
+        </choice>
+    </property>
+
+    <property id="Enable Scan Loop Feature" Type="hiddenfield" Value="1" ID="SEPK.POD_SCANLOOP"/>
+
+
+</connection>

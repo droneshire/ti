@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<translate name="Coverage Filter">
+	<passthruAll>
+		<removeField name = "StartAddress" />
+		<removeField name = "EndAddress" />
+		<removeField name = "Source" />
+	</passthruAll>
+
+</translate>

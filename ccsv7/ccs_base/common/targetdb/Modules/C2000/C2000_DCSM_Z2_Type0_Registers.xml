@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- 
+  TI File $Revision: 
+  Checkin $Date: 
+  --> 
+
+<!--  F2805x DCSM REGS Z2 Registers 
+     =================================== 
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     --> 
+<module id="DCSM REGS Z2" HW_revision="" XML_version="1" description="DCSM REGS Z2 Registers">
+    <register id="Z2_LINKPOINTER" acronym="Z2_LINKPOINTER" offset="0" page="1" width="32" description="Zone 2 Link Pointer" />
+    <register id="Z2_OTPSECLOCK" acronym="Z2_OTPSECLOCK" offset="2" page="1" width="32" description="Zone 2 OTP Secure JTAG lock" />
+    <register id="BOOTMODE" acronym="BOOTMODE" offset="4" page="1" width="32" description="Boot Mode" />
+    <!--  10 empty  -->
+    <register id="Z2_CSMKEY0" acronym="Z2_CSMKEY0" offset="16" page="1" width="32" description="Zone 2 CSM Key 0" />
+    <register id="Z2_CSMKEY1" acronym="Z2_CSMKEY1" offset="18" page="1" width="32" description="Zone 2 CSM Key 1" />
+    <register id="Z2_CSMKEY2" acronym="Z2_CSMKEY2" offset="20" page="1" width="32" description="Zone 2 CSM Key 2" />
+    <register id="Z2_CSMKEY3" acronym="Z2_CSMKEY3" offset="22" page="1" width="32" description="Zone 2 CSM Key 3" />
+    <!--  1 empty  -->
+    <register id="Z2_CR" acronym="Z2_CR" offset="25" page="1" width="16" description="Zone 2 CSM Control Register" />
+    <register id="Z2_GRABSECTR" acronym="Z2_GRABSECTR" offset="26" page="1" width="32" description="Zone 2 Grab Flash Sectors Register" />
+    <register id="Z2_GRABRAMR" acronym="Z2_GRABRAMR" offset="28" page="1" width="32" description="Zone 2 Grab RAM Blocks Register" />
+    <register id="Z2_EXEONLYSECTR" acronym="Z2_EXEONLYSECTR" offset="30" page="1" width="32" description="Zone 2 Flash Execute_Only Sector Register" />
+    <register id="Z2_EXEONLYRAMR" acronym="Z2_EXEONLYRAMR" offset="32" page="1" width="32" description="Zone 2 RAM Execute_Only Block Register" />
+    <!--  1 empty  -->
+</module>

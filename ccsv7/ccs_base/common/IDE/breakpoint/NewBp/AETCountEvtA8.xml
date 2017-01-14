@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<newBreakpoint xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="schema.xsd" name="Count Event" breakpointType="1">
+  <targets>
+    <target>
+      <type>dsk,emu</type>
+      <familyId>470</familyId>
+      <subfamilyId>c</subfamilyId>
+      <revision>*</revision>
+    </target>
+  </targets>
+  <defaultProperty>
+    <property name="Miscellaneous.Name" value="Count Event" />
+    <property name="Hardware Configuration.Type" value="Count Event"></property>
+  </defaultProperty>
+  <submitSequence>
+    <id>Hardware Configuration.Type.Event to Count</id>
+  </submitSequence>
+  <showIn>
+    <breakpointView autoSubmit="false" />
+  </showIn>
+  <dialog colCount="2">
+    <label id="label_CTC" widthHint="100" heightHint="15" verticalAlign="center">
+      <text>Event to Count:</text>
+    </label>
+    <comboBox id="Hardware Configuration.Type.Event to Count" widthHint="150" heightHint="15">
+      <text>Clock Cycles</text>
+      <choices>
+        <item>Clock Cycles</item>
+        <item>SW Increment</item>
+        <item>ICache Miss</item>
+        <item>TLB Miss on IFETCH</item>
+        <item>DCache Miss</item>
+        <item>DCache Access</item>
+        <item>TLB Miss on Daccess</item>
+        <item>Dread Executed</item>
+	<item>DWrite Executed</item>
+        <item>Instruction Executed</item>
+        <item>Exception Taken</item>
+        <item>Exception Return Executed</item>
+        <item>Change to ContextID Retired</item>
+        <item>Software Change of PC</item>
+        <item>B,BL and(or) BLX Immediate</item>
+        <item>Unaligned Access Executed</item>
+        <item>Branch Mispredicted(not predicted)</item>
+        <item>Branches</item>
+	  <item>Write Buffer Full Cycle</item>
+	  <item>Store Merged in L2</item>
+  	  <item>Bufferable Store from Load or Store to L2 Cache</item>
+	  <item>Access to L2 Cache</item>
+	  <item>Cacheable Miss in L2 Cache</item>
+	  <item>AXI Read Data Transfer</item>
+	  <item>AXI Write Data Transfer</item>
+	  <item>Replay Event in Memory System</item>
+	  <item>Unaligned Memory Access that Results in a Replay</item>
+	  <item>L1 Data Memory Miss in Cache</item>
+	  <item>L1 Instruction Memory Miss in Cache</item>
+	  <item>Coloring Alias Occurs in L1 Data Memory</item>
+	  <item>NEON Access Hits in L1 Data Cache</item>
+	  <item>NEON Cacheable Accesses for L1 Data Cache</item>
+	  <item>L2 Cache Access Caused by L1 Data Cache</item>
+	  <item>NEON Hit in L2 Cache</item>
+	  <item>L1 Instruction Cache Access</item>
+	  <item>Return Stack Misprediction</item>
+	  <item>Branch Direction Misprediction</item>
+	  <item>Predictable Branch is Predicted to be Taken</item>
+	  <item>Predictable Branch is Executed and Taken</item>
+	  <item>Operation Issued</item>
+	  <item>Cycles for No Instructions</item>
+	  <item>Cycles with Issued Instruction</item>
+	  <item>Stall Cycles Waiting for MRC Data from NEON</item>
+	  <item>Stall Cycles for Full NEON Queue</item>
+	  <item>Cycles of Non-idle NEON and Integer Processors</item>
+	  <item>Cycles of PMUEXTIN0</item>
+	  <item>Cycles of PMUEXTIN1</item>
+	  <item>Cycles of PMUEXTIN0 and PMUEXTIN1</item>
+      </choices>
+    </comboBox>
+  </dialog>
+</newBreakpoint>

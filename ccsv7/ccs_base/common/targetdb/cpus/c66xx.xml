@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cpu HW_revision="1.0" XML_version="1.2" id="TMS320C66XX" isa="TMS320C66XX" desc="C66xx" description="C66xx CGEM+FP CPU">
+    <register id="PC" acronym="PC" width="32" description="" />
+    <register id="CLK" acronym="CLK" width="32" description="" />
+    <register id="SP" acronym="SP" width="32" description="" />
+    <register id="FP" acronym="FP" width="32" description="" />
+    <register id="A0" acronym="A0" width="32" description="" />
+    <register id="A1" acronym="A1" width="32" description="" />
+    <register id="A2" acronym="A2" width="32" description="" />
+    <register id="A3" acronym="A3" width="32" description="" />
+    <register id="A4" acronym="A4" width="32" description="" />
+    <register id="A5" acronym="A5" width="32" description="" />
+    <register id="A6" acronym="A6" width="32" description="" />
+    <register id="A7" acronym="A7" width="32" description="" />
+    <register id="A8" acronym="A8" width="32" description="" />
+    <register id="A9" acronym="A9" width="32" description="" />
+    <register id="A10" acronym="A10" width="32" description="" />
+    <register id="A11" acronym="A11" width="32" description="" />
+    <register id="A12" acronym="A12" width="32" description="" />
+    <register id="A13" acronym="A13" width="32" description="" />
+    <register id="A14" acronym="A14" width="32" description="" />
+    <register id="A15" acronym="A15" width="32" description="" />
+    <register id="A16" acronym="A16" width="32" description="" />
+    <register id="A17" acronym="A17" width="32" description="" />
+    <register id="A18" acronym="A18" width="32" description="" />
+    <register id="A19" acronym="A19" width="32" description="" />
+    <register id="A20" acronym="A20" width="32" description="" />
+    <register id="A21" acronym="A21" width="32" description="" />
+    <register id="A22" acronym="A22" width="32" description="" />
+    <register id="A23" acronym="A23" width="32" description="" />
+    <register id="A24" acronym="A24" width="32" description="" />
+    <register id="A25" acronym="A25" width="32" description="" />
+    <register id="A26" acronym="A26" width="32" description="" />
+    <register id="A27" acronym="A27" width="32" description="" />
+    <register id="A28" acronym="A28" width="32" description="" />
+    <register id="A29" acronym="A29" width="32" description="" />
+    <register id="A30" acronym="A30" width="32" description="" />
+    <register id="A31" acronym="A31" width="32" description="" />
+    <register id="B0" acronym="B0" width="32" description="" />
+    <register id="B1" acronym="B1" width="32" description="" />
+    <register id="B2" acronym="B2" width="32" description="" />
+    <register id="B3" acronym="B3" width="32" description="" />
+    <register id="B4" acronym="B4" width="32" description="" />
+    <register id="B5" acronym="B5" width="32" description="" />
+    <register id="B6" acronym="B6" width="32" description="" />
+    <register id="B7" acronym="B7" width="32" description="" />
+    <register id="B8" acronym="B8" width="32" description="" />
+    <register id="B9" acronym="B9" width="32" description="" />
+    <register id="B10" acronym="B10" width="32" description="" />
+    <register id="B11" acronym="B11" width="32" description="" />
+    <register id="B12" acronym="B12" width="32" description="" />
+    <register id="B13" acronym="B13" width="32" description="" />
+    <register id="B14" acronym="B14" width="32" description="" />
+    <register id="B15" acronym="B15" width="32" description="" />
+    <register id="B16" acronym="B16" width="32" description="" />
+    <register id="B17" acronym="B17" width="32" description="" />
+    <register id="B18" acronym="B18" width="32" description="" />
+    <register id="B19" acronym="B19" width="32" description="" />
+    <register id="B20" acronym="B20" width="32" description="" />
+    <register id="B21" acronym="B21" width="32" description="" />
+    <register id="B22" acronym="B22" width="32" description="" />
+    <register id="B23" acronym="B23" width="32" description="" />
+    <register id="B24" acronym="B24" width="32" description="" />
+    <register id="B25" acronym="B25" width="32" description="" />
+    <register id="B26" acronym="B26" width="32" description="" />
+    <register id="B27" acronym="B27" width="32" description="" />
+    <register id="B28" acronym="B28" width="32" description="" />
+    <register id="B29" acronym="B29" width="32" description="" />
+    <register id="B30" acronym="B30" width="32" description="" />
+    <register id="B31" acronym="B31" width="32" description="" />
+    <register id="ERP" acronym="ERP" width="32" description="Exception return pointer" />
+    <register id="ARP" acronym="ARP" width="32" description="Analysis return pointer" />
+    <register id="DIER" acronym="DIER" width="32" description="Debug interrupt enable register" />
+    <register id="ETSR" acronym="ETSR" width="32" description="Exception TSR snapshot">
+        <bitfield id="_RESV" width="16" begin="31" end="16" resetval="0" description="Reserved" range="" rwaccess="RW" />
+        <bitfield id="IB" width="1" begin="15" end="15" resetval="0" description="Interrupts blocked" range="" rwaccess="R" />
+        <bitfield id="SPLX" width="1" begin="14" end="14" resetval="0" description="SPLOOP Executing " range="" rwaccess="R" />
+        <bitfield id="_RESV" width="3" begin="13" end="11" resetval="0" description="Reserved" range="" rwaccess="R" />
+        <bitfield id="EXC" width="1" begin="10" end="10" resetval="0" description="Execption Processing" range="" rwaccess="R" />
+        <bitfield id="INT" width="1" begin="9" end="9" resetval="0" description="Interrupt Processing" range="" rwaccess="RW" />
+        <bitfield id="_RESV" width="1" begin="8" end="8" resetval="0" description="Reserved" range="" rwaccess="RW" />
+        <bitfield id="CXM" width="2" begin="7" end="6" resetval="0" description="Current Execution Mode" range="" rwaccess="R" />
+        <bitfield id="_RESV" width="1" begin="5" end="5" resetval="0" description="Reserved" range="" rwaccess="R" />
+        <bitfield id="DBGM" width="1" begin="4" end="4" resetval="0" description="Emulator debug mask" range="" rwaccess="R" />
+        <bitfield id="XEN" width="1" begin="3" end="3" resetval="0" description="Maskable exception enable" range="" rwaccess="RW" />
+        <bitfield id="GEE" width="1" begin="2" end="2" resetval="0" description="Globale exception enable" range="" rwaccess="RW" />
+        <bitfield id="SGIE" width="1" begin="1" end="1" resetval="0" description="Saved global interrupt enable" range="" rwaccess="RW" />
+        <bitfield id="GIE" width="1" begin="0" end="0" resetval="0" description="Global interrupt enable" range="" rwaccess="RW" />
+    </register>
+    <instance href="..\Modules\c66xx_control_registers.xml" id="ControlRegisters" xml="c66xx_control_registers.xml" xmlpath="..\Modules\" HW_revision="1.0" description="ControlRegisters" requestor="TMS320C64XX" baseaddr="0" size="00" accessnumbytes="4" permissions="p" />
+    <instance href="..\Modules\c66xx_hidden_registers.xml" id="" xml="c66xx_hidden_registers.xml" xmlpath="..\Modules\" HW_revision="1.0" description="" requestor="TMS320C64XX" baseaddr="0" size="00" accessnumbytes="4" permissions="p" />
+    <instance href="..\Modules\64x+NotVisible.xml" id="" xml="64x+NotVisible.xml" xmlpath="..\Modules\" HW_revision="1.0" description="" requestor="TMS320C64XX" baseaddr="0" size="00" accessnumbytes="4" permissions="p" />
+    <instance href="..\Modules\c6000RegisterPairs.xml" id="RegisterPairs" xml="c6000RegisterPairs.xml" xmlpath="..\Modules\" HW_revision="1.0" description="RegisterPairs" requestor="TMS320C64XX" baseaddr="0" size="00" accessnumbytes="4" permissions="p" />
+</cpu>

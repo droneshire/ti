@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<drivers id="tixds510sec_ap">
+    <isa Type="SEC_AP" ProcID="0x38400004">
+        <driver file="..\..\..\emulation\drivers\tixds510sec_ap.dvr">
+            <connectionType Type="TIXDS510"/>
+	    <connectionType Type="TIXDS110"/>
+	    <connectionType Type="TIXDS100v2"/>
+	    <property Name="Access Port Designator" Type="numericfield" Value="0x02000003" NumericType="HEX" UpperBound="0xFFFFFFFF" LowerBound="0" ID="device.identify"/>	
+        </driver>
+    </isa>
+</drivers>

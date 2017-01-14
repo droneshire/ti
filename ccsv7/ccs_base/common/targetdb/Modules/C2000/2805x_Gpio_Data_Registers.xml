@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- 
+  TI File $Revision: 
+  Checkin $Date: 
+  --> 
+
+<!--  F2805x GPIO DATA REGS Registers 
+     =================================== 
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     --> 
+<module id="GPIO DATA REGS" HW_revision="" XML_version="1" description="GPIO DATA REGS Registers">
+    <register id="GPADAT" acronym="GPADAT" offset="0" page="1" width="32" description="GPIO A Data Register (GPIO0 to 31)" />
+    <register id="GPASET" acronym="GPASET" offset="2" page="1" width="32" description="GPIO A Data Set Register (GPIO0 to 31)" />
+    <register id="GPACLEAR" acronym="GPACLEAR" offset="4" page="1" width="32" description="GPIO A Data Clear Register (GPIO0 to 31)" />
+    <register id="GPATOGGLE" acronym="GPATOGGLE" offset="6" page="1" width="32" description="GPIO A Data Toggle Register (GPIO0 to 31) " />
+    <register id="GPBDAT" acronym="GPBDAT" offset="8" page="1" width="32" description="GPIO B Data Register (GPIO32 to 44)" />
+    <register id="GPBSET" acronym="GPBSET" offset="10" page="1" width="32" description="GPIO B Data Set Register (GPIO32 to 44)" />
+    <register id="GPBCLEAR" acronym="GPBCLEAR" offset="12" page="1" width="32" description="GPIO B Data Clear Register (GPIO32 to 44)" />
+    <register id="GPBTOGGLE" acronym="GPBTOGGLE" offset="14" page="1" width="32" description="GPIO B Data Toggle Register (GPIO32 to 44) " />
+    <!--  16 empty  -->
+</module>

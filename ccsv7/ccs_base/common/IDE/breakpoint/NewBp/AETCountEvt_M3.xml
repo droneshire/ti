@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<newBreakpoint xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="schema.xsd" name="Count Event" breakpointType="1">
+	<targets>
+		<target>
+			<type>dsk,emu</type>
+			<familyid>470</familyid>
+			<subfamilyid>e</subfamilyid>
+			<revision>*</revision>
+		</target>
+	</targets>
+   
+	<defaultProperty>
+		<property name="Hardware Configuration.Type" value="Count Event" />
+		<property name="Miscellaneous.Name" value="Count Event" />
+	</defaultProperty>
+	
+	<submitSequence>
+		<id>Hardware Configuration.Type.System Event</id>
+	</submitSequence>
+	
+	<showIn> 	
+		<breakpointView autoSubmit="false" />
+	</showIn>
+
+	<dialog colCount="2">
+		<label id="label_CTC" widthHint="100" heightHint="15" verticalAlign="center">
+			<text>Event to Count:</text>
+		</label>
+		<comboBox id="Hardware Configuration.Type.System Event" widthHint="150" heightHint="15">
+			<text>Clock Cycles</text>
+			<choices>
+				<item>Clock Cycles</item>
+				<item>CPI Event</item>
+				<item>Exception Overhead</item>
+				<item>Sleep Cycles</item>
+				<item>LSU Cycles</item>
+				<item>Folded Instructions</item>
+			</choices>
+		</comboBox>
+	</dialog>
+</newBreakpoint>

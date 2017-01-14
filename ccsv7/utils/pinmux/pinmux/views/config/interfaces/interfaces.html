@@ -1,0 +1,36 @@
+<ul id="peripheralHeadingAlt3" class="nav nav-tabs" style="margin-top:5px; padding:0 4px;">
+	<li id="peripheralTab1" class="active">
+		<a href="">
+			<span class="viewHeading">Peripherals</span>
+		</a>
+	</li>
+	<li id="peripheralTab2" ng-class="srvStyle.getPeripheralTab2Class()" >
+		<a href="" ng-click="srvLayout.showColOnly(2)">
+			<span class="viewHeadingAlt">Requirements</span>
+		</a>
+	</li>
+	<li id="peripheralTab3" title="Move Requirements Tab to this column">
+		<a href="" ng-click="srvLayout.moveRequirementTab(1)" ng-class="srvStyle.getPeripheralTab3Class()">
+			<span class="viewHeadingAlt" style="font-size:14px">+Req</span>
+		</a>
+	</li>
+</ul>
+
+<div id="viewInterfaces">
+	<input id="peripheralFilterInput" title="{{srvToolTip.filterPeripherals}}" class="listFilter form-control" placeholder="Type filter text..." ng-model="search.name">
+	<div class="btn-group btn-group-justified shadow1" ng-repeat="peripheralInterface in interfaces | filter:search" ng-class="srvStyle.getInterfaceDivClass(peripheralInterface)">
+		<div class="btn-group interfaceTextButton">
+			<button id="interface{{peripheralInterface.name}}" ng-class="srvStyle.getInterfaceButtonClass( peripheralInterface,$first,$last, srvConfigVM.selectedInterface )" title="Show requirements for {{peripheralInterface.name}}" ng-click="interfaceClicked( peripheralInterface )">
+				<span ng-class="srvStyle.getBadgeClass(peripheralInterface)">{{peripheralInterface.peripheralRequirementsLength()}}</span> 
+				<span>(/{{peripheralInterface.maxAllowed}})&nbsp;</span>
+				<span class="interfaceTextName">{{peripheralInterface.name}}</span>
+				<span id="validStatusImg{{peripheralInterface.name}}" ng-class="srvStyle.getInterfaceStatusGlyphClass(peripheralInterface)"></span>
+			</button>
+		</div>
+		<div class="btn-group interfacePlusButton">
+			<button id="addReqBtn{{peripheralInterface.name}}" ng-class="srvStyle.getInterfacePlusButtonClass($first,$last)" ng-click="addClicked( peripheralInterface )" title="Add {{peripheralInterface.name}}" ng-disabled="peripheralInterface.peripheralRequirementsLength()==peripheralInterface.maxAllowed">
+				<span class="glyphicon glyphicon-plus"></span>
+			</button>
+		</div>
+	</div>
+</div>

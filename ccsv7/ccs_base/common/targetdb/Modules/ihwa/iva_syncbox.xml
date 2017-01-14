@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module id="SyncBox" HW_revision="1" XML_version="1" description="IVA IHWA SyncBox Registers" hidden="false" >
+    <register id="SYNCBOX_REVISION" acronym="SYNCBOX_REVISION" width="32" description="SyncBox Revision Register" />
+    <register id="SYSCONFIG"        acronym="SYSCONFIG"        width="32" description="OCP Interface Configuration Register" />
+    <register id="RXMESSAGE"        acronym="RXMESSAGE"        width="32" description="Received Message Register" />
+    <register id="NODEIDENTIFIER"   acronym="NODEIDENTIFIER"   width="32" description="Node Identifier Register" />
+    <register id="ERRORMSGDEST"     acronym="ERRORMSGDEST"     width="32" description="Error Message Destination Register" />
+    <register id="ERRORLOG"         acronym="ERRORLOG"         width="32" description="Error Log Register" />
+    <register id="ASYNCEVENTACKREQ" acronym="ASYNCEVENTACKREQ" width="32" description="Async Event Acknowledge Register" />
+    <register id="PARAMADDR_MOD"    acronym="PARAMADDR_MOD"    width="32" description="Parameter Address MOdulo Value Register" />
+    <register id="STATUS"           acronym="STATUS"           width="32" description="Status Register" />
+</module>

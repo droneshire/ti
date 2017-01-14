@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_29" class="java.beans.XMLDecoder"> 
+ <object class="com.ti.dvt.ui.views.core.ViewModel"> 
+  <void property="viewConnectionMgr"> 
+   <void property="connections"> 
+    <void method="add"> 
+     <object class="com.ti.dvt.ui.views.core.ViewConnection"> 
+      <void property="source"> 
+       <string>CircularBuffer</string> 
+      </void> 
+      <void property="target"> 
+       <string>com.ti.dvt.ui.views.line:SingleTime</string> 
+      </void> 
+     </object> 
+    </void> 
+   </void> 
+  </void> 
+  <void property="viewInfoMap"> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.line:SingleTime</string> 
+    <object class="com.ti.dvt.ui.views.core.ViewInfo"> 
+     <void property="paneInfoColl"> 
+      <void method="add"> 
+       <object class="com.ti.dvt.ui.views.core.PaneInfo"> 
+        <void property="ID"> 
+         <string>com.ti.dvt.ui.views.line:SingleTime</string> 
+        </void> 
+        <void property="properties"> 
+         <object class="com.ti.dvt.ui.views.core.LineProp"> 
+          <void property="XDisplayFormat"> 
+           <string>General</string> 
+          </void> 
+          <void property="XFieldName"> 
+           <string>sample</string> 
+          </void> 
+          <void property="XRange"> 
+           <void property="span"> 
+            <double>-1.0</double> 
+           </void> 
+          </void> 
+          <void property="XRelativeLabel"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="YRange"> 
+           <void property="auto"> 
+            <boolean>true</boolean> 
+           </void> 
+          </void> 
+          <void property="alreadySorted"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="axesProps"> 
+           <void index="0"> 
+            <void property="XAxis"> 
+             <void property="showGridLines"> 
+              <string>None</string> 
+             </void> 
+            </void> 
+           </void> 
+          </void> 
+          <void property="channelProps"> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="fieldName"> 
+              <string>Data</string> 
+             </void> 
+            </object> 
+           </void> 
+          </void> 
+          <void property="foregroundRGB"> 
+           <object class="org.eclipse.swt.graphics.RGB"> 
+            <int>128</int> 
+            <int>128</int> 
+            <int>128</int> 
+           </object> 
+          </void> 
+          <void property="gridOption"> 
+           <string>Automatic</string> 
+          </void> 
+          <void property="refreshPeriod"> 
+           <int>10</int> 
+          </void> 
+          <void property="showLegend"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="showRefresh"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="solutionName"> 
+           <string>singletime</string> 
+          </void> 
+         </object> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="title"> 
+      <string>Single Time</string> 
+     </void> 
+    </object> 
+   </void> 
+  </void> 
+ </object> 
+</java> 

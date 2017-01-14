@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.5.0_14" class="java.beans.XMLDecoder"> 
+ <object class="com.ti.dvt.ui.views.core.ViewModel"> 
+  <void property="viewConnectionMgr"> 
+   <void property="connections"> 
+    <void method="add"> 
+     <object class="com.ti.dvt.ui.views.core.ViewConnection"> 
+      <void property="source"> 
+       <string>FunctionProfile</string> 
+      </void> 
+      <void property="target"> 
+       <string>com.ti.dvt.ui.views.restorable.table:Profile</string> 
+      </void> 
+     </object> 
+    </void> 
+   </void> 
+  </void> 
+  <void property="viewInfoMap"> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.restorable.table:Profile</string> 
+    <object class="com.ti.dvt.ui.views.core.ViewInfo"> 
+     <void property="paneInfoColl"> 
+      <void method="add"> 
+       <object class="com.ti.dvt.ui.views.core.PaneInfo"> 
+        <void property="ID"> 
+         <string>com.ti.dvt.ui.views.restorable.table:Profile</string> 
+        </void> 
+        <void property="properties"> 
+         <object class="com.ti.dvt.ui.views.core.TableProp"> 
+          <void property="XFieldName"> 
+           <string>Index</string> 
+          </void> 
+          <void property="tableMeta"> 
+           <void property="columnMetaMap"> 
+            <void method="put"> 
+             <string>Index</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="visible"> 
+               <boolean>false</boolean> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Excl Count Max</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>80</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Incl Count Max</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>80</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Excl Count Average</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.2f</string> 
+              </void> 
+              <void property="width"> 
+               <int>80</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Calls</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>37</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Name</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>86</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Incl Count Total</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.0f</string> 
+              </void> 
+              <void property="width"> 
+               <int>80</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Incl Count Average</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.2f</string> 
+              </void> 
+              <void property="width"> 
+               <int>80</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Excl Count Total</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="displayFormat"> 
+               <string>Decimal %.0f</string> 
+              </void> 
+              <void property="width"> 
+               <int>80</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Incl Count Min</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>80</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Excl Count Min</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>80</int> 
+              </void> 
+             </object> 
+            </void> 
+           </void> 
+           <void property="columnOrder"> 
+            <array class="java.lang.String" length="11"> 
+             <void index="0"> 
+              <string></string> 
+             </void> 
+             <void index="1"> 
+              <string>Name</string> 
+             </void> 
+             <void index="2"> 
+              <string>Calls</string> 
+             </void> 
+             <void index="3"> 
+              <string>Excl Count Min</string> 
+             </void> 
+             <void index="4"> 
+              <string>Excl Count Max</string> 
+             </void> 
+             <void index="5"> 
+              <string>Excl Count Average</string> 
+             </void> 
+             <void index="6"> 
+              <string>Excl Count Total</string> 
+             </void> 
+             <void index="7"> 
+              <string>Incl Count Min</string> 
+             </void> 
+             <void index="8"> 
+              <string>Incl Count Max</string> 
+             </void> 
+             <void index="9"> 
+              <string>Incl Count Average</string> 
+             </void> 
+             <void index="10"> 
+              <string>Incl Count Total</string> 
+             </void> 
+            </array> 
+           </void> 
+          </void> 
+         </object> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="title"> 
+      <string>Profile</string> 
+     </void> 
+    </object> 
+   </void> 
+  </void> 
+ </object> 
+</java> 

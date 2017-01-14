@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  TI File $Revision: /main/2 $
+  Checkin $Date: November 5, 2010   14:29:27 $
+  -->
+
+
+<!-- TMS320C2000 ePWM Mirror Registers
+     ==================================
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     -->
+<module id="EWM_MIRROR" HW_revision="" XML_version="1" description="ePWM Control and Status Registers">
+	<register id="TBCTL" acronym="TBCTL" offset="0" page="1" width="16" description="ePWM Time Base Control Register" /> 
+	<register id="TBSTS" acronym="TBSTS" offset="1" page="1" width="16" description="ePWM Time Base Status Register" />
+	<register id="TBPHSHR" acronym="TBPHSHR" offset="2" page="1" width="16" description="ePWM Time Base Phase HRPWM Register" />
+	<register id="TBPHS" acronym="TBPHS" offset="3" page="1" width="16" description="ePWM Time Base Phase Register" />
+	<register id="TBCTR" acronym="TBCTR" offset="4" page="1" width="16" description="ePWM Time Base Counter Register" />
+	<register id="TBPRD" acronym="TBPRD" offset="5" page="1" width="16" description="ePWM Time Base Period Register Set" />
+	<!-- 1 empty -->
+	<register id="CMPCTL" acronym="CMPCTL" offset="7" page="1" width="16" description="ePWM Counter Compare Control Register" />
+	<register id="CMPAHR" acronym="CMPAHR" offset="8" page="1" width="16" description="ePWM Time Base Compare A HRPWM Register" />
+	<register id="CMPA" acronym="CMPA" offset="9" page="1" width="16" description="ePWM Counter Compare A Register Set" />
+	<register id="CMPB" acronym="CMPB" offset="10" page="1" width="16" description="ePWM Counter Compare B Register Set" />
+	<register id="AQCTLA" acronym="AQCTLA" offset="11" page="1" width="16" description="ePWM Action Qualifier Control Register For Output A" />
+	<register id="AQCTLB" acronym="AQCTLB" offset="12" page="1" width="16" description="ePWM Action Qualifier Control Register For Output B" />
+	<register id="AQSFRC" acronym="AQSFRC" offset="13" page="1" width="16" description="ePWM Action Qualifier Software Force Register" />
+	<register id="AQCSFRC" acronym="AQCSFRC" offset="14" page="1" width="16" description="ePWM Action Qualifier Continuous S/W Force Register Set" />
+	<register id="DBCTL" acronym="DBCTL" offset="15" page="1" width="16" description="ePWM Dead-Band Generator Control Register" />
+	<register id="DBRED" acronym="DBRED" offset="16" page="1" width="16" description="ePWM Dead-Band Generator Rising Edge Delay Count Register" />
+	<register id="DBFED" acronym="DBFED" offset="17" page="1" width="16" description="ePWM Dead-Band Generator Falling Edge Delay Count Register" />
+	<register id="TZSEL" acronym="TZSEL" offset="18" page="1" width="16" description="ePWM Trip Zone Select Register" />
+	<!-- 1 empty -->
+	<register id="TZCTL" acronym="TZCTL" offset="20" page="1" width="16" description="ePWM Trip Zone Control Register" />
+	<register id="TZEINT" acronym="TZEINT" offset="21" page="1" width="16" description="ePWM Trip Zone Enable Interrupt Register" />
+	<register id="TZFLG" acronym="TZFLG" offset="22" page="1" width="16" description="ePWM Trip Zone Flag Register" />
+	<register id="TZCLR" acronym="TZCLR" offset="23" page="1" width="16" description="ePWM Trip Zone Clear Register" />
+	<register id="TZFRC" acronym="TZFRC" offset="24" page="1" width="16" description="ePWM Trip Zone Force Register" />
+	<register id="ETSEL" acronym="ETSEL" offset="25" page="1" width="16" description="ePWM Event Trigger Selection Register" />
+	<register id="ETPS" acronym="ETPS" offset="26" page="1" width="16" description="ePWM Event Trigger Prescale Register" />
+	<register id="ETFLG" acronym="ETFLG" offset="27" page="1" width="16" description="ePWM Event Trigger Flag Register" />
+	<register id="ETCLR" acronym="ETCLR" offset="28" page="1" width="16" description="ePWM Event Trigger Clear Register" />
+	<register id="ETFRC" acronym="ETFRC" offset="29" page="1" width="16" description="ePWM Event Trigger Force Register" />
+	<register id="PCCTL" acronym="PCCTL" offset="30" page="1" width="16" description="ePWM PWM Chopper Control Register" />
+	<!-- 1 empty -->
+	<register id="HRCNFG" acronym="HRCNFG" offset="32" page="1" width="16" description="ePWM HRPWM Configuration Register" />
+</module>

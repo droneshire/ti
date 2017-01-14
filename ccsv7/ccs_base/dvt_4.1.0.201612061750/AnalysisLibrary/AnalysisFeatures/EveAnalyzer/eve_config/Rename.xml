@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<translate name="Rename Fields">
+<!-- remove all spaces in field names because of bug in Find dialog -->
+   <passthru name="Local Timestamp" input="Local_Timestamp" />
+   <passthru name="Event" 				input="Data" />
+   <passthru name="EventString"   input="Master_Name+&quot;.&quot;+Domain+&quot;.&quot;+Class+&quot;.&quot;+Data_Message" />
+</translate>

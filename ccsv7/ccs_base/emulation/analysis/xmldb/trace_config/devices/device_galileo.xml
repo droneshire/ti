@@ -1,0 +1,632 @@
+<?xml version="1.0"?>
+
+<!-- Trace subsystem setup attributes for device -->
+<device id="Edison_ES1" value="0x0bb0602f" mask="0x0FFFFFFF" HW_revision="1.0" XML_version="1.0">
+
+	<FileVersion version="2.0.0.0" Copyright="Copyright (c) 2009 Texas Instruments"></FileVersion>
+	
+	<!-- Trace route topology. Every route entry specifies a soure to sink/pin route for a given source.
+	Multiple routes shows multiple possible paths available for trace and user can select one for an 
+	active debug session -->
+			
+	<trace_routes>
+    <route>
+      <source source="C66X_0"/>
+      <link module=""/>
+      <sink module=""/>
+      <pin module="MOD_DRM"/>
+    </route>
+
+    <route>
+      <source source="C66X_0"/>
+      <link module=""/>
+      <sink module="MOD_ETB0"/>
+      <pin module=""/>
+    </route>
+
+    <!-- STM uses ETB as receiver -->
+    <route>
+      <source source="CSSTM_0"/>
+      <link module=""/>
+      <sink module="MOD_ETBSYS"/>
+      <pin module=""/>
+    </route>
+
+    <!-- STM uses Pin (DRM) as receiver -->
+    <route>
+      <source source="CSSTM_0"/>
+      <link module=""/>
+      <sink module=""/>
+      <pin module="MOD_DRM"/>
+    </route>
+
+     <route>
+      <source source="CortexA15_0"/>
+      <link module=""/>
+      <sink module="MOD_TBR"/>
+      <pin module=""/>
+    </route>
+
+     <route>
+      <source source="CortexA15_0"/>
+      <link module=""/>
+      <sink module="MOD_TPIU"/>
+      <pin module="MOD_DRM"/>
+    </route>
+
+    <route>
+      <source source="Cortex_M3_0"/>
+      <link module=""/>
+      <sink module="MOD_TBR_M3"/>
+      <pin module=""/>
+    </route>
+
+    <route>
+      <source source="Cortex_M3_0"/>
+      <link module=""/>
+      <sink module="MOD_TPIU"/>
+      <pin module="MOD_DRM"/>
+    </route>
+
+  </trace_routes>
+
+	<!-- Supported proc access mechanisms for the device -->
+	<procs>
+    <!-- C66x DSP core -->
+    <proc id="C66X_0" kind="tms320c66xx" traceid="1">
+      <identifier>
+        <register id="DNUM" address="DNUM" page="" addrunit="" width="32" type="reg"/>
+        <value idvalue="0x0" />
+      </identifier>
+
+    </proc>
+
+    <!-- MPU Sub System A15_0 -->
+    <proc id="CortexA15_0" kind="cortex_axx" traceid="1">
+      <identifier>
+        <register id="REG_CTXA9_CP15_C0_MPIDR" address="REG_CTXA9_CP15_C0_MPIDR" page="" addrunit="" width="" type="reg"/>
+        <value idvalue="0x80000000" />
+      </identifier> 			
+    </proc>
+
+    <!-- STM -->
+    <proc id="CSSTM_0" kind="cs_stm">
+      <identifier>
+        <register id="BASE_ADDRESS" address="" page="" addrunit="" width="" type="reg"/>
+        <value idvalue="0x03018000" />
+      </identifier>
+    </proc>
+
+    <!-- CSETB -->
+    <proc id="CSETB_SYS" kind="cs_etb" traceid="10">
+      <identifier>
+        <register id="BASE_ADDRESS" address="" page="1" addrunit="" width="" type="reg"/>
+        <value idvalue="0x03019000" />
+      </identifier>
+    </proc>
+
+    <proc id="CSTBR" kind="cs_etb" traceid="11">
+      <identifier>
+        <register id="BASE_ADDRESS" address="" page="" addrunit="" width="" type="reg"/>
+        <value idvalue="0x03020000" />
+      </identifier>
+    </proc>
+
+    <proc id="CSTBR_M3" kind="cs_etb" traceid="12">
+      <identifier>
+        <register id="BASE_ADDRESS" address="" page="" addrunit="" width="" type="reg"/>
+        <value idvalue="0x03021000" />
+      </identifier>
+    </proc>
+
+    <!-- DAP PC access -->
+	<proc id="CS_DAP_DebugSS"  kind="cs_dap" traceid="1">
+		<identifier idvalue="" idregister="" />
+	</proc>
+
+    <!-- Ducati System M3_1 -->
+    <proc id="Cortex_M3_0" kind="cortex_mxx" traceid="3">
+      <identifier>
+        <register id="PID0" address="0xE00FFFE0" page="0" addrunit="1" width="32" type="mem"/>
+        <value idvalue="0" />
+      </identifier>
+    </proc>
+
+  </procs>
+
+	<!-- Available Trace sources for the device -->
+	<sources>
+    <!-- DSP Trace source -->
+    <source id="C66X_0" proc="C66X_0" stmmaster = "true">
+      <components>
+        <component module="MOD_RADTF0"/>
+        <component module="MOD_DRMMAP"/>
+        <component module="MOD_CROSS_TRIGGERING_XTRIG"/>
+      </components>
+      <characteristics>
+        <characteristic id="DEV_CHAR_TRACEPLLUNIT" description="" value="3"/>
+        <characteristic id="DEV_CHAR_TRACEPLLBASE" value="0x02310000"/>
+        <characteristic id="DEV_CHAR_TRACEPINCNT" value="20"/>
+        <characteristic id="DEV_CHAR_GEMTYPE" value="0"/>
+        <characteristic id="DEV_CHAR_DRM_COREID" value="0"/>
+        <characteristic id="DEV_CHAR_DRMBASE_ADDR" value="0x80017000"/>
+        <characteristic id="DEV_CHAR_DRM_FIRST_DATA_PIN" value="2"/>
+        <characteristic id="DEV_CHAR_CTI" value="0"/> 
+        <characteristic id="DEV_CHAR_CTIFUNNAME" value="Cross Trigger(XTRIG)"/> 
+        <characteristic id="DEV_CHAR_CTIFILE" value="AET_PropertyCTI_GB1.xml"/> 
+      </characteristics>
+    </source>
+
+    <source id="CSSTM_0" proc="CSSTM_0" stmmaster = "true">
+      <components>
+        <component module="MOD_STMMASTERS_CONTROL"/>
+        <component module="MOD_SWMASTER0"/>
+        <component module="MOD_PREPROCESS"/>
+        <component module="MOD_CPTRACER0"/>
+        <component module="MOD_CONFIGINFO"/>
+      </components>
+      <characteristics>
+        <characteristic id="CHAR_MAXEXPORTFREQMHZ" value="83"/>
+        <characteristic id="DEV_CHAR_STMTYPE" value="3"/>
+        <characteristic id="DEV_CHAR_STM_BASEADDRESS" value="0x80018000"/>
+        <characteristic id="DEV_CHAR_PPFMODULENUM" value="2"/>
+        <!-- This is the base address for STM clock control register -->
+        <characteristic id="DEV_CHAR_STM_CM_BASEADDRESS" value="0x02310000"/>
+        <!-- Default enable SW master of GEM0(0x0), MPU0(0x08) GEM0_CFG(0x10), M3(0x1F) -->
+        <characteristic id="DEV_CHAR_STM_SW_MASTER_DEFAULT" value="0x0008101F"/>
+        <!-- Default enable HW master of CPT Local L2 0-7, MSMIC0-3, SM-QM_M  -->
+        <characteristic id="DEV_CHAR_STM_HW_MASTER_DEFAULT" value="0x8C888480"/>
+        <!-- This is the PLL_DIV unit number used by STM -->
+        <characteristic id="DEV_CHAR_STM_PLL_UNIT_NUM" value="3"/>
+        <!-- This is the DRM base address -->
+        <characteristic id="DEV_CHAR_DRMBASE_ADDR" value="0x80017000"/>
+        <characteristic id="DEV_CHAR_ATB_ID" value="0x40"/> 
+        <characteristic id="DEV_CHAR_ATB_STP_VERSION" value="2"/> 
+      </characteristics>
+    </source>
+
+    <source id="CortexA15_0" proc="CortexA15_0" stmmaster = "true">
+       <components>
+         <component module="MOD_CROSS_TRIGGERING_A15_0"/>
+       </components> 
+       <characteristics>
+          <characteristic id="DEV_CHAR_CTI" value="1"/> 
+          <characteristic id="DEV_CHAR_CTIFUNNAME" value="Cross Trigger"/> 
+          <characteristic id="DEV_CHAR_CTIFILE" value="AET_PropertyCTI_Lamarr.xml"/> 
+          <characteristic id="DEV_CHAR_CTIFUNNUM" value="0x90001000"/> 
+          <characteristic id="DEV_CHAR_CT_MOD_EXT" value="A15_0"/>
+          <characteristic id="DEV_CHAR_ATB_ID" value="0x20"/>
+          <characteristic id="DEV_CHAR_ETMPTM_BASEADDR" value="0x8306C000"/>
+      </characteristics>
+
+    </source>
+
+
+    <!-- System Trace source -->
+    <source id="Cortex_M3_0" proc="Cortex_M3_0" stmmaster = "true">
+      <components>
+        <component module="MOD_ITM"/>
+        <component module="MOD_CROSS_TRIGGERING_XTRIG"/>
+      </components>
+      <characteristics>
+        <characteristic id="DEV_CHAR_ITM_SUPPORT" value="1"/>
+        <characteristic id="DEV_CHAR_SCTMFILE" value="AET_PropertyARM_M3_DWT.xml"/>
+        <characteristic id="DEV_CHAR_CTI" value="0"/>
+        <characteristic id="DEV_CHAR_CTIFUNNAME" value="Cross Trigger(XTRIG)"/>
+        <characteristic id="DEV_CHAR_CTIFILE" value="AET_PropertyCTI_GB1.xml"/>
+        <characteristic id="DEV_CHAR_LOCAL_CTI" value="1"/>
+        <characteristic id="DEV_CHAR_ATB_ID" value="0x30"/> 
+      </characteristics>
+    </source>
+
+    <source id="CS_DAP_DebugSS" proc="CS_DAP_DebugSS" stmmaster = "true">
+       <components>
+         <component module="MOD_DRMMAP"/>
+       </components> 
+       <characteristics>
+       </characteristics>
+    </source> 
+		
+   </sources> 
+
+	<!-- Available modules asscoiated with various modules in the device -->
+	<modules>
+
+    <module id="MOD_SWMASTER0" kind="STM" proc="CSSTM_0" version="2.0" >
+      <registers>
+        <register id="ATB_CONFIG" address="0x00018044" page="0" addrunit="4" width="32" type="mem" />
+        <register id="ATB_POINTER" address="0x00018048" page="0" addrunit="4" width="32" type="mem" />
+      </registers>
+
+      <mapping id="masterid.name">
+        <map masterid="0x00" name="C66X_0"/>
+        <map masterid="0x08" name="CortexA15_0"/>
+        <map masterid="0x1F" name="CortexM3_0"/>
+      </mapping>
+
+      <mapping id="masterid.proc">
+        <map masterid="0x00" proc="C66X_0"/>
+        <map masterid="0x08" proc="CortexA15_0"/>
+        <map masterid="0x1F" name="CortexM3_0"/>
+      </mapping>
+
+      <mapping id="masterid.decoder">
+        <map masterid="*"  decoder="StmDecodeUnitSoftwareMessage"/>
+      </mapping>
+    </module>
+
+
+    <module id="MOD_PREPROCESS" kind="STM" proc="CSSTM_0" version="2.0" >
+      <registers>
+        <register id="ATB_CONFIG" address="0x00018044" page="0" addrunit="4" width="32" type="mem" />
+        <register id="ATB_POINTER" address="0x00018048" page="0" addrunit="4" width="32" type="mem" />
+      </registers>
+
+      <mapping id="masterid.name">
+        <map masterid="0x00" name="C66X_0"/>
+      </mapping>
+
+      <mapping id="masterid.proc">
+        <map masterid="0x00" proc="C66X_0"/>
+      </mapping>
+
+      <mapping id="masterid.decoder">
+        <map masterid="*"  decoder="StmDecodeUnitPreprocessor"/>
+      </mapping>
+    </module>
+
+    <module id="MOD_CPTRACER0" kind="STM" proc="CSSTM_0" version="2.0" >
+
+      <mapping id="masterid.name">
+        <map masterid="0x80" name="CPTracer"/>
+      </mapping>
+
+      <!-- The following mapping is taken from memory_map.xls G_MSTID page  -->
+      <mapping id="cptmasterid.name">
+        <map cptmasterid="0x0" name="C66x_0"/>
+        <map cptmasterid="0x8" name="A15_0"/>
+        <map cptmasterid="0x10" name="C66x_COREPAC_0_CFG"/>
+        <map cptmasterid="0x1A" name="PCIE_0_MST"/>
+        <map cptmasterid="0x1B" name="ICSS_0_MST0"/>
+        <map cptmasterid="0x1C" name="ICSS_0_MST1"/>
+        <map cptmasterid="0x1D" name="ICSS_1_MST0"/>
+        <map cptmasterid="0x1E" name="ICSS_1_MST1"/>
+        <map cptmasterid="0x1F" name="CortexM3_0"/>
+        <map cptmasterid="0x20" name="NSSL MSTID=32"/>
+        <map cptmasterid="0x21" name="NSSL MSTID=33"/>
+        <map cptmasterid="0x22" name="NSSL MSTID=34"/>
+        <map cptmasterid="0x23" name="NSSL MSTID=35"/>
+        <map cptmasterid="0x27" name="EDMA_0_CC_TR"/>
+        <map cptmasterid="0x28" name="EDMA_1_CC_TR"/>
+        <map cptmasterid="0x29" name="EDMA0_TC0_Read"/>
+        <map cptmasterid="0x2A" name="EDMA0_TC0_Write"/>
+        <map cptmasterid="0x2B" name="EDMA0_TC1_Read"/>
+        <map cptmasterid="0x2C" name="EDMA0_TC1_Write"/>
+        <map cptmasterid="0x2D" name="EDMA1_TC0_Read"/>
+        <map cptmasterid="0x2E" name="EDMA1_TC0_Write"/>
+        <map cptmasterid="0x2F" name="EDMA1_TC1_Read"/>
+        <map cptmasterid="0x30" name="EDMA1_TC1_Write"/>
+        <map cptmasterid="0x32" name="USB_0_MST"/>
+        <map cptmasterid="0x33" name="USB_1_MST"/>
+        <map cptmasterid="0x39" name="DEBUGSS_0_DAP"/>
+        <map cptmasterid="0x3B" name="MLB_0_M"/>
+        <map cptmasterid="0x3E" name="MMCHS_0_M"/>
+        <map cptmasterid="0x3F" name="MMCHS_1_M"/>
+        <map cptmasterid="0x60" name="DSSUL MSTID=96"/>
+        <map cptmasterid="0x61" name="DSSUL MSTID=97"/>
+        <map cptmasterid="0x62" name="DSSUL MSTID=98"/>
+        <map cptmasterid="0x63" name="DSSUL MSTID=99"/>
+        <map cptmasterid="0x64" name="DSSUL MSTID=100"/>
+        <map cptmasterid="0x65" name="DSSUL MSTID=101"/>
+        <map cptmasterid="0x66" name="DSSUL MSTID=102"/>
+        <map cptmasterid="0x67" name="DSSUL MSTID=103"/>
+        <map cptmasterid="0x68" name="DSSUL MSTID=104"/>
+        <map cptmasterid="0x69" name="DSSUL MSTID=105"/>
+        <map cptmasterid="0x6a" name="DSSUL MSTID=106"/>
+        <map cptmasterid="0x6b" name="DSSUL MSTID=107"/>
+        <map cptmasterid="0x6c" name="DSSUL MSTID=108"/>
+        <map cptmasterid="0x6d" name="DSSUL MSTID=109"/>
+        <map cptmasterid="0x6e" name="DSSUL MSTID=110"/>
+        <map cptmasterid="0x6f" name="DSSUL MSTID=111"/>
+      </mapping>
+
+      <!-- The following mapping is taken from IP_Integration spec  -->
+      <mapping id="cptslaveid.name">
+        <map cptslaveid="0x0" name="MSMC_0"/>
+        <map cptslaveid="0x8" name="DDR"/>
+        <map cptslaveid="0x2" name="L2_0"/>
+        <map cptslaveid="0x3" name="PCIE"/>
+        <map cptslaveid="0x4" name="DXB"/>
+        <map cptslaveid="0x5" name="MCASP_MCBSP"/>
+        <map cptslaveid="0x6" name="GPMC_MMC_QSPI"/>
+        <map cptslaveid="0x7" name="TPCC0_1"/>
+        <map cptslaveid="0x9" name="ALWAYSON_CFG"/>
+        <map cptslaveid="0xa" name="GIC"/>
+        <map cptslaveid="0xb" name="CIC"/>
+        <map cptslaveid="0xc" name="ROM_SPI"/>
+        <map cptslaveid="0xd" name="ALWAYSON_MAN"/>
+        <map cptslaveid="0xe" name="ICSS_ASRC"/>
+        <map cptslaveid="0xf" name="CFG"/>
+      </mapping>
+      
+      <mapping id="masterid.proc">
+        <map masterid="0x80" proc="CSSTM_0"/>
+      </mapping>
+
+      <mapping id="masterid.decoder">
+        <map masterid="*"  decoder="StmCPTracerDecoder"/>
+      </mapping>
+    </module>
+    <!-- ETB module associated with C66x+ DSP-->
+    <module id="MOD_ETB0" kind="tietb" proc="C66X_0" version="1.0" >
+      <registers>
+        <register id="RDP" address="0x20800004" page="" addrunit="1" width="32" type="mem" />
+        <register id="RRD" address="0x20800010" page="" addrunit="1" width="32" type="mem" />
+        <register id="RRP" address="0x20800014" page="" addrunit="1" width="32" type="mem" />
+        <register id="STS" address="0x2080000C" page="" addrunit="1" width="32" type="mem" />
+        <register id="RWP" address="0x20800018" page="" addrunit="1" width="32" type="mem" />
+        <register id="TRG" address="0x2080001C" page="" addrunit="1" width="32" type="mem" />
+        <register id="CTL" address="0x20800020" page="" addrunit="1" width="32" type="mem" />
+        <register id="RWD" address="0x20800024" page="" addrunit="1" width="32" type="mem" />
+        <register id="FFSR" address="0x20800300" page="" addrunit="1" width="32" type="mem" />
+        <register id="FFCR" address="0x20800304" page="" addrunit="1" width="32" type="mem" />
+        <register id="TIETB_CNTL" address="0x20800E20" page="" addrunit="1" width="32" type="mem" />
+        <register id="LOCK" address="0x20800FB0" page="" addrunit="1" width="32" type="mem" />
+        <register id="LOCK_STATUS" address="0x20800FB4" page="" addrunit="1" width="32" type="mem" />
+      </registers>
+
+      <characteristics>
+        <characteristic id="DEV_CHAR_PINMANAGER" description="" value="1"/>
+        <characteristic id="DEV_CHAR_DATAPINCOUNT" description="" value="20"/>
+        <characteristic id="DEV_CHAR_CLOCKPINCOUNT" description="" value="2"/>
+        <characteristic id="DEV_CHAR_PRIMARYCLOCK" description="" value="20"/>
+        <characteristic id="DEV_CHAR_SECONDARYCLOCK" description="" value="21"/>
+        <characteristic id="DEV_CHAR_TRACEDATAORDER" description="" value="reverse"/>
+        <characteristic id="DEV_CHAR_FFCRDISABLE" value="1"/>
+        <characteristic id="DEV_CHAR_CURIE" value="0"/>
+        <characteristic id="DEV_CHAR_TRACEMODE" value="3"/>
+        <!-- This is setting is giving a hint to channel driver to run at freeclock mode. It is here to deal with ADTF -->
+      </characteristics>
+    </module>
+
+    <!-- TBR module. It is used as receiver for STM. we need to use CSSTM to access to these TBR registers-->
+    <!-- through CSSTM's memory interface because this TBR module can only be accessed through AHB interface -->
+    <module id="MOD_ETBSYS" kind="cs_tbr" proc="CSETB_SYS" version="2.0" >
+    <registers>
+      <register id="DEVID" address="DEVID"  page="" addrunit="1" width="32" type="reg"/>		
+      <register id="RAMSZ" address="RAMSZ" page="" addrunit="1" width="32" type="reg"/>		
+      <register id="STAT" address="STAT" page="" addrunit="1" width="32" type="reg"/>		
+      <register id="RAMRDAT" address="RAMRDAT" page="" addrunit="1" width="32" type="reg"/>
+      <register id="RAMRPTR" address="RAMRPTR" page="" addrunit="1" width="32" type="reg"/>
+      <register id="RAMWPTR" address="RAMWPTR" page="" addrunit="1" width="32" type="reg"/>
+      <register id="TRGCNT" address="TRGCNT" page="" addrunit="1" width="32" type="reg"/>
+      <register id="CTRL" address="CTRL" page="" addrunit="1" width="32" type="reg"/>		
+      <register id="RAMWDAT" address="RAMWDAT" page="" addrunit="1" width="32" type="reg"/>		
+      <register id="IDPERIOD" address="IDPERIOD" page="" addrunit="1" width="32" type="reg"/>
+      <register id="OPSTAT" address="OPSTAT" page="" addrunit="1" width="32" type="reg"/>
+      <register id="OPCTRL" address="OPCTRL" page="" addrunit="1" width="32" type="reg"/>
+      <register id="LOCKACC" address="LOCKACC" page="" addrunit="1" width="32" type="reg"/>
+      <register id="LOCKSTAT" address="LOCKSTAT" page="" addrunit="1" width="32" type="reg"/>
+      <register id="SEQCNTL" address="SEQCNTL" page="" addrunit="1" width="32" type="reg"/>	  
+    </registers>
+      <characteristics>
+        <characteristic id="DEV_CHAR_PINMANAGER" description="" value="1"/>
+        <characteristic id="DEV_CHAR_DATAPINCOUNT" description="" value="20"/>
+        <characteristic id="DEV_CHAR_CLOCKPINCOUNT" description="" value="2"/>
+        <characteristic id="DEV_CHAR_PRIMARYCLOCK" description="" value="20"/>
+        <characteristic id="DEV_CHAR_SECONDARYCLOCK" description="" value="21"/>
+        <characteristic id="DEV_CHAR_TRACEDATAORDER" description="" value="reverse"/>
+        <characteristic id="DEV_CHAR_FFCRDISABLE" value="0"/>
+        <!-- Needs to flush STM ETB   -->
+        <characteristic id="DEV_CHAR_CURIE" value="0"/>
+        <characteristic id="DEV_CHAR_TRACEMODE" value="3"/>
+        <!-- This is setting is giving a hint to channel driver to run at freeclock mode. It is here to deal with ADTF -->
+      </characteristics>
+
+    </module>
+
+    <module id="MOD_TBR" kind="cs_tbr" proc="CSTBR" version="2.0" >
+    <registers>
+      <register id="DEVID" address="DEVID"  page="" addrunit="1" width="32" type="reg"/>		
+      <register id="RAMSZ" address="RAMSZ" page="" addrunit="1" width="32" type="reg"/>		
+      <register id="STAT" address="STAT" page="" addrunit="1" width="32" type="reg"/>		
+      <register id="RAMRDAT" address="RAMRDAT" page="" addrunit="1" width="32" type="reg"/>
+      <register id="RAMRPTR" address="RAMRPTR" page="" addrunit="1" width="32" type="reg"/>
+      <register id="RAMWPTR" address="RAMWPTR" page="" addrunit="1" width="32" type="reg"/>
+      <register id="TRGCNT" address="TRGCNT" page="" addrunit="1" width="32" type="reg"/>
+      <register id="CTRL" address="CTRL" page="" addrunit="1" width="32" type="reg"/>		
+      <register id="RAMWDAT" address="RAMWDAT" page="" addrunit="1" width="32" type="reg"/>		
+      <register id="IDPERIOD" address="IDPERIOD" page="" addrunit="1" width="32" type="reg"/>
+      <register id="OPSTAT" address="OPSTAT" page="" addrunit="1" width="32" type="reg"/>
+      <register id="OPCTRL" address="OPCTRL" page="" addrunit="1" width="32" type="reg"/>
+      <register id="LOCKACC" address="LOCKACC" page="" addrunit="1" width="32" type="reg"/>
+      <register id="LOCKSTAT" address="LOCKSTAT" page="" addrunit="1" width="32" type="reg"/>
+      <register id="SEQCNTL" address="SEQCNTL" page="" addrunit="1" width="32" type="reg"/>	  
+    </registers>
+      <characteristics>
+        <characteristic id="DEV_CHAR_PINMANAGER" description="" value="1"/>
+        <characteristic id="DEV_CHAR_DATAPINCOUNT" description="" value="20"/>
+        <characteristic id="DEV_CHAR_CLOCKPINCOUNT" description="" value="2"/>
+        <characteristic id="DEV_CHAR_PRIMARYCLOCK" description="" value="20"/>
+        <characteristic id="DEV_CHAR_SECONDARYCLOCK" description="" value="21"/>
+        <characteristic id="DEV_CHAR_TRACEDATAORDER" description="" value="reverse"/>
+        <characteristic id="DEV_CHAR_FFCRDISABLE" value="0"/>
+        <!-- Needs to flush STM ETB   -->
+        <characteristic id="DEV_CHAR_CURIE" value="0"/>
+        <characteristic id="DEV_CHAR_TRACEMODE" value="3"/>
+        <!-- This is setting is giving a hint to channel driver to run at freeclock mode. It is here to deal with ADTF -->
+      </characteristics>
+
+    </module>
+
+     <module id="MOD_TBR_M3" kind="cs_tbr" proc="CSTBR_M3" version="2.0" >
+    <registers>
+      <register id="DEVID" address="DEVID"  page="" addrunit="1" width="32" type="reg"/>		
+      <register id="RAMSZ" address="RAMSZ" page="" addrunit="1" width="32" type="reg"/>		
+      <register id="STAT" address="STAT" page="" addrunit="1" width="32" type="reg"/>		
+      <register id="RAMRDAT" address="RAMRDAT" page="" addrunit="1" width="32" type="reg"/>
+      <register id="RAMRPTR" address="RAMRPTR" page="" addrunit="1" width="32" type="reg"/>
+      <register id="RAMWPTR" address="RAMWPTR" page="" addrunit="1" width="32" type="reg"/>
+      <register id="TRGCNT" address="TRGCNT" page="" addrunit="1" width="32" type="reg"/>
+      <register id="CTRL" address="CTRL" page="" addrunit="1" width="32" type="reg"/>		
+      <register id="RAMWDAT" address="RAMWDAT" page="" addrunit="1" width="32" type="reg"/>		
+      <register id="IDPERIOD" address="IDPERIOD" page="" addrunit="1" width="32" type="reg"/>
+      <register id="OPSTAT" address="OPSTAT" page="" addrunit="1" width="32" type="reg"/>
+      <register id="OPCTRL" address="OPCTRL" page="" addrunit="1" width="32" type="reg"/>
+      <register id="LOCKACC" address="LOCKACC" page="" addrunit="1" width="32" type="reg"/>
+      <register id="LOCKSTAT" address="LOCKSTAT" page="" addrunit="1" width="32" type="reg"/>
+      <register id="SEQCNTL" address="SEQCNTL" page="" addrunit="1" width="32" type="reg"/>	  
+    </registers>
+      <characteristics>
+        <characteristic id="DEV_CHAR_PINMANAGER" description="" value="1"/>
+        <characteristic id="DEV_CHAR_DATAPINCOUNT" description="" value="20"/>
+        <characteristic id="DEV_CHAR_CLOCKPINCOUNT" description="" value="2"/>
+        <characteristic id="DEV_CHAR_PRIMARYCLOCK" description="" value="20"/>
+        <characteristic id="DEV_CHAR_SECONDARYCLOCK" description="" value="21"/>
+        <characteristic id="DEV_CHAR_TRACEDATAORDER" description="" value="reverse"/>
+        <characteristic id="DEV_CHAR_FFCRDISABLE" value="0"/>
+        <characteristic id="DEV_CHAR_CURIE" value="0"/>
+        <characteristic id="DEV_CHAR_TRACEMODE" value="3"/>
+        <!-- This is setting is giving a hint to channel driver to run at freeclock mode. It is here to deal with ADTF -->
+      </characteristics>
+
+    </module>
+
+   <!-- ADTF module associated with C66 DSP trace to ETB -->
+    <module id="MOD_RADTF0" kind="radtf" proc="C66X_0" version="1.0" >
+      <registers>
+        <register id="DTFCR" address="0x02440000" page="0" addrunit="1" width="32" type="mem" />
+        <register id="TAGSET" address="0x02440FA0" page="0" addrunit="1" width="32" type="mem" />
+        <register id="TAGCLR" address="0x02440FA4" page="0" addrunit="1" width="32" type="mem" />
+        <register id="LOCK" address="0x02440FB0" page="0" addrunit="1" width="32" type="mem" />
+        <register id="LOCK_STATUS" address="0x02440FB4" page="0" addrunit="1" width="32" type="mem" />
+        <register id="ID" address="0x02440FC8" page="0" addrunit="1" width="32" type="mem" />
+      </registers>
+    </module>
+
+
+    <!-- Pin module -->
+    <module id ="MOD_DRM"  kind="drm" proc="" version="1.0" >
+     <registers>
+     </registers>
+     <mapping id="program.pinouts">
+      <map program="0" pinouts="dsp=3,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,1,0" />
+      <map program="1" pinouts="dsp=3,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,1,0" />
+      <map program="2" pinouts="dsp=3,17,16,15,14,13,12,11,10,9,8,7,6,5,4,1,0" />
+      <map program="3" pinouts="dsp=3,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4;pti=0,1" />
+      <map program="4" pinouts="dsp=3,17,16,15,14,13,12,11,10,9,8,7,6,5,4;pti=18,1,0" />
+      <map program="5" pinouts="dsp=3,17,16,15,14,13,12,11,10,9,8,7,6,5,4;pti=18,1" />      <!-- NO EMU0   -->
+      <map program="6" pinouts="dsp=3,16,15,14,13,12,11,10,9,8,7,6,5,4;pti=18,17" />        <!-- NO EMU0/1 -->
+      <map program="7" pinouts="dsp=3,16,15,14,13,12,11,10,9,8,7,6,5,4;pti=18,17,1" />      <!-- NO EMU0   -->
+      <map program="8" pinouts="dsp=3,15,14,13,12,11,10,9,8,7,6,5,4;pti=18,17,16" />        <!-- NO EMU0/1 -->
+      <map program="9" pinouts="dsp=3,15,14,13,12,11,10,9,8,7,6,5,4;pti=18,17,16,1,0" />
+      <map program="10" pinouts="dsp=3,14,13,12,11,10,9,8,7,6,5,4;pti=18,17,16,15,1" />      <!-- NO EMU0   -->
+      <map program="11" pinouts="dsp=3,13,12,11,10,9,8,7,6,5,4;pti=18,17,16,15,14" />        <!-- NO EMU0/1 -->
+      <map program="12" pinouts="pti=0,4,3,2,1" />
+      <map program="13" pinouts="pti=0,2,1" />
+      <map program="25" pinouts="tpiu=2,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,1,0" />
+      <map program="26" pinouts="tpiu=2,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,1,0" />
+      <map program="25" pinouts="tpiu=2,17,16,15,14,13,12,11,10,9,8,7,6,5,4,1" />
+      <map program="26" pinouts="tpiu=2,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4" />      
+      <map program="14" pinouts="tpiu=2,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4;pti=3,0" />  
+      <map program="15" pinouts="tpiu=2,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4;pti=3,1" />
+      <map program="16" pinouts="tpiu=2,17,16,15,14,13,12,11,10,9,8,7,6,5,4;pti=18,3,0" />  
+      <map program="17" pinouts="tpiu=2,17,16,15,14,13,12,11,10,9,8,7,6,5,4;pti=18,3,1" />
+      <map program="18" pinouts="tpiu=2,16,15,14,13,12,11,10,9,8,7,6,5,4;pti=18,17,3" />
+      <map program="19" pinouts="tpiu=2,15,14,13,12,11,10,9,8,7,6,5,4;pti=18,17,16,3,0" />
+      <map program="20" pinouts="tpiu=2,15,14,13,12,11,10,9,8,7,6,5,4;pti=18,17,16,3,1" />
+      <map program="21" pinouts="tpiu=2,14,13,12,11,10,9,8,7,6,5,4;pti=18,17,16,15,3" />
+      <map program="22" pinouts="tpiu=2,13,12,11,10,9,8,7,6,5,4;pti=18,17,16,15,14" />
+      <map program="23" pinouts="tpiu=2,7,6,5,4;pti=18,17,16,15,14" />
+      <map program="24" pinouts="tpiu=2,6,5,4;pti=18,17,16,15,14" />
+
+    </mapping>
+   </module>
+
+	<!-- version 1 indicates a regular TPIU type -->
+	<module id ="MOD_TPIU"  kind="tpiu" proc="CS_DAP_DebugSS" version="1" >
+		<registers>
+		</registers>
+		<characteristics>
+			<characteristic id="DEV_CHAR_TPIUTYPE" value="1"/> 
+			<characteristic id="DEV_CHAR_TPIUBASE" value="0x80001000"/> 
+		</characteristics>
+	</module>	
+
+    <module id ="MOD_CONFIGINFO"  kind="CONFIGINFO" proc="CSSTM_0" version="1.0" >
+
+      <mapping id="ubmfunnum.filename">
+        <map ubmfunnum="0x80000000" filename="OCPType_2600_ShNy.xml"/>
+        <map ubmfunnum="0xC000000B" filename="AET_PropertyCP_Tracer_Galileo.xml"/>
+        <map ubmfunnum="0x8000000F" filename="AET_PropertySTM_Lamarr.xml"/>
+      </mapping>
+
+      <!-- Make sure this section should be consistent with OCPTYPE_2600_ShNy.xml-->
+      <mapping id="ubmfunnum.funcname">
+        <map ubmfunnum="0x80000000" funcname="STM Functions"/>
+        <map ubmfunnum="0xC000000B" funcname="CP_Tracer"/>
+        <map ubmfunnum="0x8000000F" funcname="Trace Export Configuration"/>
+      </mapping>
+
+    </module>
+
+    <module id ="MOD_DRMMAP"  kind="DRMMAP" proc="CS_DAP_DebugSS" version="1.0" >
+
+      <mapping id="coreemu.drmemu">
+        <map coreemu="0" drmemu="19"/>
+        <map coreemu="1" drmemu="18"/>
+        <map coreemu="2" drmemu="20"/>
+        <map coreemu="3" drmemu="21"/>
+        <map coreemu="4" drmemu="17"/>
+        <map coreemu="5" drmemu="16"/>
+        <map coreemu="6" drmemu="15"/>
+        <map coreemu="7" drmemu="14"/>
+        <map coreemu="8" drmemu="13"/>
+        <map coreemu="9" drmemu="12"/>
+        <map coreemu="10" drmemu="11"/>
+        <map coreemu="11" drmemu="10"/>
+        <map coreemu="12" drmemu="9"/>
+        <map coreemu="13" drmemu="8"/>
+        <map coreemu="14" drmemu="7"/>
+        <map coreemu="15" drmemu="6"/>
+        <map coreemu="16" drmemu="5"/>
+        <map coreemu="17" drmemu="4"/>
+        <map coreemu="18" drmemu="3"/>
+        <map coreemu="19" drmemu="2"/>
+      </mapping>
+
+      <characteristics>
+        <characteristic id="DEV_CHAR_DRMBASE_ADDR" value="0x03017000"/>
+        <characteristic id="DEV_CHAR_DRMBASE_ADDR_DAP" value="0x80017000"/>
+        <characteristic id="DEV_CHAR_DRM_FIRST_DATA_PIN" value="3"/>
+        <characteristic id="DEV_CHAR_CLOCK_VERSION" value="1"/>
+      </characteristics>
+    </module>
+
+    <module id ="MOD_CROSS_TRIGGERING_A15_0"  kind="CHANNELS" proc="CortexA15_0" version="1.0" >
+      <mapping id="gbgroup.channels">
+        <!-- This is the group within MPU -->
+        <map gbgroup="0" channels="0^1^2^3"/>
+      </mapping>
+      <mapping id="syncgroup.channels">
+        <map syncgroup="0" channels="0^1^2^3"/>
+      </mapping>
+      <characteristics>
+         <!-- This name should be consistent with the name defined in DEV_CHAR_CTIFILE -->
+         <characteristic id="DEV_CHAR_SMP_CPUNAME" value="Cortex A15 CPU 1"/> 
+         <!-- This value should be consistent with the value defined in DEV_CHAR_CTIFILE -->
+         <characteristic id="DEV_CHAR_GBBPCPU_ID" value="0x89000100"/> 
+         <!-- This value should be consistent with the value defined in DEV_CHAR_CTIFILE -->
+         <characteristic id="DEV_CHAR_SYNCCPU_ID" value="0x8A000740"/> 
+      </characteristics>
+    </module> 
+		
+	<module id ="MOD_ITM"  kind="itm" proc="Cortex_M4_0" version="1.0" >
+		<mapping id="masterid.decoder">
+			<map masterid="1"   decoder="ItmDWTDecodeUnit"/>
+			<map masterid="2"   decoder="ItmSWDecodeUnit"/>
+		</mapping>
+	</module>
+ </modules>
+
+</device>

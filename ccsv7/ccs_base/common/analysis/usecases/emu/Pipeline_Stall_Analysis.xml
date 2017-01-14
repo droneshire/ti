@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+
+<UCdeviceinfo>
+	<targets>
+		<target>
+			<type>dsk,emu</type>
+			<familyId>320</familyId>
+			<subfamilyId>64,67</subfamilyId>
+			<revision>*</revision>
+			<RcvrJobs>
+				DSP_ETB.xml,
+				DSP_PRO.xml
+			</RcvrJobs>
+			<Trigger_Jobs>
+				<job name="DSP/Pipeline_Stall_Analysis.xml" active="true"/>
+			</Trigger_Jobs>
+			<gel>
+				<run_for_devices>
+          <!-- TI814x, TI811x  -->
+          <deviceId>0x0B8F202F,0x1B96802F</deviceId>
+          <deviceIdMask>0x8FFFFFFF,0x1FFFFFFF</deviceIdMask>
+        </run_for_devices>
+				<with_receiver receiver="ETB" gel_funcs="Enable_ETB_C64XP_Trace()" />
+			</gel>
+		</target>
+		<target>
+			<type>dsk,emu</type>
+			<familyId>320</familyId>
+			<subfamilyId>66</subfamilyId>
+			<revision>*</revision>
+			<RcvrJobs>
+				DSP_ETB.xml,
+				DSP_PRO.xml
+			</RcvrJobs>
+			<Trigger_Jobs>
+				<job name="DSP/Pipeline_Stall_Analysis.xml" active="true"/>
+			</Trigger_Jobs>
+      <gel>
+        <run_for_devices>
+            <!-- Vayu, J6ECO, ADAS_Low, ADAS_Low_2.0 -->
+            <deviceId>0x0B99002F,0x0B9BC02F,0x0B9B202F,0x0BB4C02F</deviceId>
+            <deviceIdMask>0x0FFFFFFF,0x0FFFFFFF,0x0FFFFFFF,0x0FFFFFFF</deviceIdMask>
+        </run_for_devices>
+        <!-- Funnel is configured in trace software -->
+        <with_receiver receiver="ETB" gel_funcs="disable_TPIU()" />
+        <with_receiver receiver="Pro Trace" pins="18 pin" gel_funcs="Configure_EMU0_19_For_TPIU()" />
+        <with_receiver receiver="Pro Trace" pins="17 pin" gel_funcs="Configure_EMU0_19_For_TPIU()" />
+        <with_receiver receiver="Pro Trace" pins="16 pin" gel_funcs="Configure_EMU2_19_For_TPIU()" />
+        <with_receiver receiver="Pro Trace" pins="15 pin" gel_funcs="Configure_EMU2_19_For_TPIU()" />
+        <with_receiver receiver="Pro Trace" pins="14 pin" gel_funcs="Configure_EMU2_19_For_TPIU()" />
+        <with_receiver receiver="Pro Trace" pins="13 pin" gel_funcs="Configure_EMU2_19_For_TPIU()" />
+        <with_receiver receiver="Pro Trace" pins="12 pin" gel_funcs="Configure_EMU2_19_For_TPIU()" />
+        <with_receiver receiver="Pro Trace" pins="11 pin" gel_funcs="Configure_EMU2_19_For_TPIU()" />
+        <with_receiver receiver="Pro Trace" pins="10 pin" gel_funcs="Configure_EMU2_19_For_TPIU()" />
+      </gel>
+    </target>
+	</targets>
+</UCdeviceinfo>
+

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!-- ************************************************************ -->
+<!-- Files created by Spectrum Digital Inc.                       -->
+<!-- $Revision:: 4                                              $ -->
+<!-- $Date:: 4/13/09 11:16a                                     $ -->
+<!-- (C) Copyright 2004 by Spectrum Digital Incorporated          -->
+<!-- All rights reserved                                          -->
+<!-- ************************************************************ -->
+<connection id="Spectrum Digital C2000 XDS510LC Emulator" class="49470">
+
+	<connectionType Type="SD2000USB"/>
+
+	<property desc="Emulator I/O Port" Type="hiddenfield" Value="1296" id="portAddr1" /> 
+</connection>

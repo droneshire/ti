@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.5.0_14" class="java.beans.XMLDecoder"> 
+ <object class="com.ti.dvt.gsb.model.LayoutModel"> 
+  <void property="autoLayout"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="layoutMap"> 
+   <void method="put"> 
+    <string>$Debug.VirtualBuffer.2</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>489</int> 
+     <int>266</int> 
+     <int>106</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:table.1321913640695</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>519</int> 
+     <int>386</int> 
+     <int>92</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>CSVFileReader.1</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>410</int> 
+     <int>41</int> 
+     <int>115</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:Log</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>116</int> 
+     <int>374</int> 
+     <int>51</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>$Debug.VirtualBuffer</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>106</int> 
+     <int>255</int> 
+     <int>97</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:table.1321543453202</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>236</int> 
+     <int>389</int> 
+     <int>101</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>CSVFileReader</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>232</int> 
+     <int>45</int> 
+     <int>106</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>Tap.1</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>437</int> 
+     <int>113</int> 
+     <int>60</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>VirtualBuffer.1</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>265</int> 
+     <int>323</int> 
+     <int>106</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>Tap</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>253</int> 
+     <int>110</int> 
+     <int>51</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>CompareDataPreparator</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>263</int> 
+     <int>260</int> 
+     <int>159</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+  </void> 
+ </object> 
+</java> 

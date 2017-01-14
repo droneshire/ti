@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!--                                                  -->
+<!-- Blackhawk USB510W Emulator XML Definitions.      -->
+<!--                                                  -->
+<!-- This is a CCStudio v4 compatible XML.            -->
+<!--                                                  -->
+<!-- 03 February 2012                                 -->
+<!-- v5.1.0.200                                       -->
+<!--                                                  -->
+
+<connection id="Blackhawk USB510W Emulator" class="337405">
+
+	<connectionType Type="BHEMU"/>
+
+	<property id="Emulator Filename" Type="hiddenfield" Value="bhemujscl.dll" ID="SEPK.POD_DRVR"/>
+
+	<property id="Enable Scan Loop Feature" Type="hiddenfield" Value="1" ID="SEPK.POD_SCANLOOP"/>
+
+	<property id="Connection type" Type="choicelist" Value="0" ID="">
+		<choice Name="USB" value="">
+			<property desc="Emulator I/O Port" Type="stringfield" Value="0x0" id="portAddr1" ID="SEPK.POD_PORT"/>
+		</choice>
+		<choice Name="WiFi" value="">
+			<property id="Emulator IP address / name" Type="stringfield" Value="x.x.x.x" ID="SEPK.RMT_HOST"/>
+		</choice>
+	</property>
+
+	<property id="JTAG TCLK Frequency (MHz)" Type="choicelist" Value="0" ID="USCIF.TCLK_PROGRAM">
+
+		<choice Name="Automatic with faster limit" value="AUTOMATIC">
+			<property id="Automatic" Type="hiddenfield" Value="EXCHANGE" ID="USCIF.TCLK_FREQUENCY"/>
+		</choice>
+		<choice Name="Automatic with legacy 10.368MHz limit" value="AUTOMATIC">
+			<property id="Automatic" Type="hiddenfield" Value="LEGACY" ID="USCIF.TCLK_FREQUENCY"/>
+		</choice>
+		<choice Name="Automatic with user specified limit" value="AUTOMATIC">
+			<property id="Enter any value from 0.50 to 35.0" Type="stringfield" Value="10.368" ID="USCIF.TCLK_FREQUENCY"/>
+		</choice>
+		<choice Name="Fixed with user specified value" value="SPECIFIC">
+			<property id="Enter any value from 0.50 to 35.0" Type="stringfield" Value="10.368" ID="USCIF.TCLK_FREQUENCY"/>
+		</choice>
+
+	</property>
+
+	<property id="TMS/TDO Output Timing" Type="choicelist" Value="0" ID="USCIF.TDOEDGE">
+
+		<choice Name="Rising edge allows faster TCLK" value="RISE" />
+		<choice Name="Falling edge is JTAG standard"  value="FALL" />
+
+	</property>
+
+    <property Name="Diagnostic Command" Type="hiddenfield" Value="%ccs_base%/common/uscif/dbgjtag -f %boarddatafile% -rv -o -F inform,logfile=yes -S pathlength -S integrity" ID="DiagnosticCommand"/>
+
+</connection>

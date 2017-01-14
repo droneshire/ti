@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Count Analysis" default="enable" basedir=".">
+	<import file="../../templates/analysisfeature.xml"/>
+	
+	<property name="dvt.activity.name" value="Load/${ant.project.name}"/>
+	<property name="dvt.activity.description" value="${ant.project.name}"/>
+	<property name="dvt.activity.icon" value="platform:/plugin/com.ti.dvt.ui/icons/views/table.gif"/>
+	<property name="dvt.data.type" value="CSV,UIA"/>
+	<property name="dvt.views" value="Summary,Detail,Graph"/>
+	<property name="dvt.views.show" value="Summary"/>
+	<property name="analysisFeatureName" value="CountAnalysis" />
+
+
+	<!-- override template target -->
+	<target name="configureAnalysisFeature" depends="wizard,remove,cond-core-signle,cond-core-multi,cond-plotx-sample,cond-plotx-time" if="ConfigWizard">
+		<echo message="${wizard.page1.plotx.text}"/>
+		<echo message="${wizard.page1.masterlist.text}"/>
+	</target>
+
+	<target name="checkWizard">
+		<condition property="checkWizard">
+			<or>
+				<isset property="wizard.page1.masterlist.text"/>
+				<isset property="ConfigWizard"/>
+			</or>
+		</condition>
+	</target>
+
+	<target name="remove" depends="checkWizard" unless="checkWizard">
+        <dvt.remove/>
+    </target>
+    
+    	<!-- **************************Multi/Single Core condition checks -->
+	<target name="cond-check-core">
+		<condition property="cond-core-single-true">
+			<not> <equals arg1="${wizard.page1.masterlist.text}" arg2="ALL" /> </not>
+		</condition>
+	</target>
+
+	<target name="cond-core-signle" depends="cond-check-core" if="cond-core-single-true">
+		<echo message="Single core"/>
+		<dvt.property refid="analysisFeatureRef" dataprocessor="Tap.5" name="Filter" value="(Master == &quot;${wizard.page1.masterlist.text}&quot;)"/>
+		<!-- set data context name to identify the data set (shown in the views) -->
+		<dvt.property refid="analysisFeatureRef" datacontext="${wizard.page1.masterlist.text}"/>
+	</target>
+
+	<target name="cond-core-multi" depends="cond-check-core" unless="cond-core-single-true">
+		<echo message="All cores"/>
+		<!-- set data context name to identify the data set (shown in the views) -->
+		<dvt.property refid="analysisFeatureRef" datacontext="ALL"/>	
+	</target>
+
+
+        <!-- **************************Plot on X condition checks -->
+	<target name="cond-check-plotx">
+		<condition property="cond-plotx-time-true">
+			<equals arg1="${wizard.page1.plotx.text}" arg2="Time" />
+		</condition>
+		<condition property="cond-plotx-sample-true">
+			<equals arg1="${wizard.page1.plotx.text}" arg2="Source Sample" />
+		</condition>
+	</target>
+
+	<target name="cond-plotx-time" depends="cond-check-plotx" if="cond-plotx-time-true">
+		<echo message="PlotX: Time"/>
+
+		<dvt.property refid="analysisFeatureRef" dataprocessor="SequenceGenerator" name="Generate Sequence" value="false"/>
+		
+		<dvt.property refid="analysisFeatureRef" view="Graph" name="X-Axis:Data field" value="Time"/>
+		<dvt.property refid="analysisFeatureRef" view="Graph" name="X and Y Axis:Number of axis:Axis 1:X-Axis:Title" value="Time"/>
+		<dvt.property refid="analysisFeatureRef" view="Graph" name="X and Y Axis:Number of axis:Axis 1:X-Axis:Display format" value="Time ns!auto!#,##0.##"/>
+		<dvt.property refid="analysisFeatureRef" view="Graph" name="X and Y Axis:Number of axis:Axis 1:X-Axis:Range:Span" value="1.0E9"/>
+		
+	</target>
+
+	<target name="cond-plotx-sample" depends="cond-check-plotx" if="cond-plotx-sample-true">
+		<echo message="PlotX: Source Sample"/>
+
+		<dvt.property refid="analysisFeatureRef" dataprocessor="SequenceGenerator" name="Generate Sequence" value="true"/>
+		<dvt.property refid="analysisFeatureRef" dataprocessor="SequenceGenerator" name="Sequence Output Field Name" value="Sample"/>
+		
+		<dvt.property refid="analysisFeatureRef" view="Graph" name="X-Axis:Data field" value="Sample"/>
+		<dvt.property refid="analysisFeatureRef" view="Graph" name="X and Y Axis:Number of axis:Axis 1:X-Axis:Title" value="Sample"/>
+		<dvt.property refid="analysisFeatureRef" view="Graph" name="X and Y Axis:Number of axis:Axis 1:X-Axis:Display format" value="General"/>
+		<dvt.property refid="analysisFeatureRef" view="Graph" name="X and Y Axis:Number of axis:Axis 1:X-Axis:Range:Span" value="20.0"/>
+	</target>
+
+
+	<target name="wizard" unless="wizard.page1.masterlist.text">
+		<dvt.script language="javascript">
+			<![CDATA[ 
+				activity = project.getReference("dvt.activity");
+	            list = Packages.com.ti.dvt.uia.utils.Util.getEndPointNames(activity, ",");
+	            project.setNewProperty("myList", list);
+            ]]>
+		</dvt.script>
+			
+		<dvt.config.wizard id="ConfigWizard" text="Analysis Feature Configuration">
+           	<page text="CountAnalysis Configuration" numColumns="1">
+				<label text="Core or Master"/>
+				<combo id="wizard.page1.masterlist" text="ALL" edit="true" >
+				    <item text = "ALL"/>
+			       	<list text="${myList}" delimiter=","/>
+		           	</combo>
+
+			   	<label text="Plot against"/>
+				<combo id="wizard.page1.plotx" selection="0">
+				    <item text = "Time"/>
+				    <item text = "Source Sample"/>
+			        </combo>
+
+			   	<label text="Time: Graph will plot Value against the Time field."/>
+			   	<label text="Source Sample: Graph will plot Value against a generated sample number(starts from 0 for each unique Source)."/>
+		</page>
+		</dvt.config.wizard>
+	</target>
+	
+	<!-- override template target -->
+	<target name="postAddAnalysisFeature">
+		<dvt.start refid="analysisFeatureRef"/>
+		<dvt.view.show refid="analysisFeatureRef" view="${dvt.views.show}"/>
+	</target>
+</project>

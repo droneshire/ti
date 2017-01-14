@@ -1,0 +1,37 @@
+<status_indicator>
+	<!-- this is the ice-pick status (note: the emulator and test value is reverted? -->
+	<indicator isa="TMS240C1" type="router" description="Device Type" status_reg="IP_CNTL">
+		<status mask="0x0000000E" value="0x00000000" icon="" icon_text="Test" description="Test Device Type" />
+		<status mask="0x0000000E" value="0x00000002" icon="" icon_text="Emulator" description="Emulator Device Type" />
+		<status mask="0x0000000E" value="0x00000004" icon="" icon_text="Secure" description="Secure Device Type" />
+		<status mask="0x0000000E" value="0x00000006" icon="" icon_text="GP" description="General Purpose Device Type" />
+	</indicator>
+	
+	
+	<!-- this is the ice-pick sub-path status (.port is an internal variable) -->
+	<indicator isa="TMS240C1" type="*" subpath="true" description="Clock" status_reg="IP_TAP_CNTL_$(index)" index="$(.port)">
+		<status mask="0x00000004" value="0x00000004" icon="" icon_text="CLK On" description="Clock is On" />
+	</indicator>
+	
+	<indicator isa="TMS240C1" type="*" subpath="true" description="Power" status_reg="IP_TAP_CNTL_$(index)" index="$(.port)">
+		<status mask="0x00000020" value="0x00000020" icon="" icon_text="Power On" description="Power is On" />
+	</indicator>
+	
+	<indicator isa="TMS240C1" type="*" subpath="true" description="Clock Down Desired" status_reg="IP_TAP_CNTL_$(index)" index="$(.port)">
+		<status mask="0x00000010" value="0x00000010" icon="" icon_text="CLK Down" description="Clock Down Desired" />
+	</indicator>
+	
+	<indicator isa="TMS240C1" type="*" subpath="true"  description="Power Down Desired" status_reg="IP_TAP_CNTL_$(index)" index="$(.port)">
+		<status mask="0x00000080" value="0x00000080" icon="" icon_text="Power Down" description="Power Down Desired" />
+	</indicator>
+
+	<indicator isa="TMS240C1" type="*" subpath="true" description="In Reset" status_reg="IP_TAP_CNTL_$(index)" index="$(.port)">
+		<status mask="0x00020000" value="0x00020000" icon="" icon_text="In Reset" description="In Reset" />
+	</indicator>
+	
+	<indicator isa="TMS240C1" type="*" subpath="true" description="Reset Control" status_reg="IP_TAP_CNTL_$(index)" index="$(.port)">
+		<status mask="0x0000C000" value="0x00000000" icon="" icon_text="Reset (None)" description="Reset Control (None)" />
+		<status mask="0x0000C000" value="0x00000400" icon="" icon_text="Reset (Wait)" description="Reset Control (Wait-In-Reset)" />
+		<status mask="0x0000C000" value="0x00000800" icon="" icon_text="Reset (Block)" description="Reset Control (Block Reset)" />
+	</indicator>
+</status_indicator>

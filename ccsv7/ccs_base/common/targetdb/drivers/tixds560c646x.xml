@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<drivers id="TMS320C64XP">
+   <isa Type="TMS320C646X" ProcID="0x50019350">
+      <driver file="..\..\..\emulation\drivers\tixds560c64x_plus.dvr">
+         <property Type="hiddenfield" Value="true" id="realtimeEnabled" />
+         <property Name="TraceDeviceId" Type="numericfield" Value="0x0" NumericType="HEX" UpperBound="0xFFFFFFFF" LowerBound="0" ID="device.traceId"/>
+         <connectionType Type="TIXDS560"/>
+         <connectionType Type="TIXDS200"/>
+      </driver>
+   </isa>
+</drivers>

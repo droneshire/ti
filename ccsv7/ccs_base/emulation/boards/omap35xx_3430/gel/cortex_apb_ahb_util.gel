@@ -1,0 +1,176 @@
+//---------------------------------------------------------
+// Spectrum Digital Cortex A8/R4 APB AHB Utilities
+//
+//  REG_AHB_DOWNLOAD
+//   0 - Enable block writes via AHB
+//   1 - Enable block reads via AHB
+//   2 - Enable optimized block writes over APB
+//   3 - Enable optimized block read over APB
+//
+// Under normal operation the emulation drivers issue APB
+// accesses for memory operations by supplying a full address
+// and completion checks on a per word, 1/2 word or byte
+// basis.
+// 
+// When AHB accesses are enabled blocks of data are accessed
+// using AHB and only supplying a starting address and
+// checking the end of block xfer was completed. Note that not
+// all memory regions are AHB accessable.  Check your specific
+// chip data sheet for details. AHB accesses are not affected by
+// the MMU.  When loading code it is best to disable the MMU,
+// enable AHB then load the code.  All of this can be handled
+// 
+//
+// When APB block accesses are enabled blocks of data are accessed
+// using APB and only supplying a starting address and
+// checking the end of block xfer was completed. All memory
+// regions should be accessable via APB.
+//
+// For backward compatibility these features are disabled
+// by default and have to be enabled by the user.
+//
+// If both AHB and APB operations are enabled AHB accesses
+// will be used.  AHB will generally be faster then APB but
+// APB has less restrictions.
+//
+// APB operations were added to SD drivers starting with
+// emulation driver package 5.1.0.6.
+// 
+//---------------------------------------------------------
+
+menuitem "Cortex APB_AHB Utility"
+
+
+hotmenu AHB_block_write_ON()
+{
+
+  int reg;
+
+  REG_AHB_DOWNLOAD |= 1;
+
+  reg = REG_AHB_DOWNLOAD;
+  reg &= 1;
+  
+ 
+  if (reg == 1)
+  {
+     GEL_TextOut("Block write over AHB is turned ON.\n");
+  }
+}
+
+hotmenu AHB_block_write_OFF()
+{
+
+  int reg;
+
+  REG_AHB_DOWNLOAD &= ~1;
+
+  reg = REG_AHB_DOWNLOAD;
+  reg &= 1;
+  
+ 
+  if (reg == 0)
+  {
+     GEL_TextOut("Block write over AHB is turned OFF.\n");
+  }
+}
+
+hotmenu AHB_block_read_ON()
+{
+
+  int reg;
+
+  REG_AHB_DOWNLOAD |= 2;
+
+  reg = REG_AHB_DOWNLOAD;
+  reg &= 2;
+  
+ 
+  if (reg == 2)
+  {
+     GEL_TextOut("Block read over AHB is turned ON.\n");
+  }
+}
+
+hotmenu AHB_block_read_OFF()
+{
+
+  int reg;
+
+  REG_AHB_DOWNLOAD &= ~2;
+
+  reg = REG_AHB_DOWNLOAD;
+  reg &= 2;
+  
+ 
+  if (reg == 0)
+  {
+     GEL_TextOut("Block read over AHB is turned OFF.\n");
+  }
+}
+
+hotmenu APB_block_write_ON()
+{
+
+  int reg;
+
+  REG_AHB_DOWNLOAD |= 4;
+
+  reg = REG_AHB_DOWNLOAD;
+  reg &= 4;
+  
+ 
+  if (reg == 4)
+  {
+     GEL_TextOut("Block write over APB is turned ON.\n");
+  }
+}
+
+hotmenu APB_block_write_OFF()
+{
+
+  int reg;
+
+  REG_AHB_DOWNLOAD &= ~4;
+
+  reg = REG_AHB_DOWNLOAD;
+  reg &= 4;
+ 
+  if (reg == 0)
+  {
+    GEL_TextOut("Block write over APB is turned OFF.\n");
+  }
+}
+
+hotmenu APB_block_read_ON()
+{
+
+  int reg;
+
+  REG_AHB_DOWNLOAD |= 8;
+
+  reg = REG_AHB_DOWNLOAD;
+  reg &= 8;
+  
+ 
+  if (reg == 8)
+  {
+     GEL_TextOut("Block read over APB is turned ON.\n");
+  }
+}
+
+hotmenu APB_block_read_OFF()
+{
+
+  int reg;
+
+  REG_AHB_DOWNLOAD &= ~8;
+
+  reg = REG_AHB_DOWNLOAD;
+  reg &= 8;
+ 
+  if (reg == 0)
+  {
+    GEL_TextOut("Block read over APB is turned OFF.\n");
+  }
+}

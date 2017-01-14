@@ -1,0 +1,12 @@
+# Remove other ad-hoc files and dirs not needed for distribution:
+exclude **/.git/***
+exclude **/.git*
+exclude **/.idea/***
+exclude **/obsolete/***
+exclude **/downloads/***
+exclude **/*.log
+
+# This ensures that the /ti-rex-core dir is matched, but that any other
+# dirs are excluded
+include /tirex/ti-rex-core/
+exclude /tirex/*

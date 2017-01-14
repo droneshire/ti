@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<drivers id="ARM7">
+	<isa Type="ARM7" ProcID="0x75800418">
+		<driver file="../../../emulation/drivers/sdgo470r1xdsk.dvr">
+			<connectionType Type="SDDSKUSB"/>
+		</driver>
+	</isa>
+</drivers>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- 
+  TI File $Revision: 
+  Checkin $Date: 
+  --> 
+
+<!--  F2805x ANALOG SUBSYS REGS Registers 
+     =================================== 
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     --> 
+<module id="ANALOG SUBSYS REGS" HW_revision="" XML_version="1" description="ANALOG SUBSYS REGS Registers">
+    <register id="DAC1CTL" acronym="DAC1CTL" offset="0" page="1" width="16" description="DAC1 control" />
+    <register id="DAC2CTL" acronym="DAC2CTL" offset="1" page="1" width="16" description="DAC2 control" />
+    <register id="DAC3CTL" acronym="DAC3CTL" offset="2" page="1" width="16" description="DAC3 control" />
+    <register id="DAC4CTL" acronym="DAC4CTL" offset="3" page="1" width="16" description="DAC4 control" />
+    <register id="DAC5CTL" acronym="DAC5CTL" offset="4" page="1" width="16" description="DAC5 control" />
+    <register id="VREFOUTCTL" acronym="VREFOUTCTL" offset="5" page="1" width="16" description="VREFOUT (DAC6) control" />
+    <!--  10 empty  -->
+    <register id="DACEN" acronym="DACEN" offset="16" page="1" width="16" description="DAC Enables" />
+    <register id="VREFOUTEN" acronym="VREFOUTEN" offset="17" page="1" width="16" description="VREFOUT Enable" />
+    <register id="PGAEN" acronym="PGAEN" offset="18" page="1" width="16" description="Programmable Gain Amplifier Enable" />
+    <register id="COMPEN" acronym="COMPEN" offset="19" page="1" width="16" description="Comparator Enable" />
+    <register id="AMPM1_GAIN" acronym="AMPM1_GAIN" offset="20" page="1" width="16" description="Motor Unit 1 PGA Gain controls" />
+    <register id="AMPM2_GAIN" acronym="AMPM2_GAIN" offset="21" page="1" width="16" description="Motor Unit 2 PGA Gain controls" />
+    <register id="AMPPFC_GAIN" acronym="AMPPFC_GAIN" offset="22" page="1" width="16" description="PFC PGA Gain controls" />
+    <!--  9 empty  -->
+    <!--  1 empty  -->
+    <register id="ADCINSWITCH" acronym="ADCINSWITCH" offset="33" page="1" width="16" description="ADC input-select switch control" />
+    <!--  2 empty  -->
+    <!--  1 empty  -->
+    <!--  1 empty  -->
+    <!--  1 empty  -->
+    <!--  1 empty  -->
+    <!--  1 empty  -->
+    <register id="COMPHYSTCTL" acronym="COMPHYSTCTL" offset="41" page="1" width="16" description="Comparator  High AND Low hysteresis enable/disable" />
+    <!--  6 empty  -->
+    <register id="CTRIPA1ICTL" acronym="CTRIPA1ICTL" offset="48" page="1" width="16" description="CTRIPA1 Filter Input and function Control" />
+    <register id="CTRIPA1FILCTL" acronym="CTRIPA1FILCTL" offset="49" page="1" width="16" description="CTRIPA1 Filter parameters" />
+    <register id="CTRIPA1FILCLKCTL" acronym="CTRIPA1FILCLKCTL" offset="50" page="1" width="16" description="CTRIPA1 Filter Sample Clock Control" />
+    <!--  1 empty  -->
+    <register id="CTRIPA3ICTL" acronym="CTRIPA3ICTL" offset="52" page="1" width="16" description="CTRIPA3 Filter Input and function Control" />
+    <register id="CTRIPA3FILCTL" acronym="CTRIPA3FILCTL" offset="53" page="1" width="16" description="CTRIPA3 Filter parameters" />
+    <register id="CTRIPA3FILCLKCTL" acronym="CTRIPA3FILCLKCTL" offset="54" page="1" width="16" description="CTRIPA3 Filter Sample Clock Control" />
+    <!--  1 empty  -->
+    <register id="CTRIPB1ICTL" acronym="CTRIPB1ICTL" offset="56" page="1" width="16" description="CTRIPB1 Filter Input and function Control" />
+    <register id="CTRIPB1FILCTL" acronym="CTRIPB1FILCTL" offset="57" page="1" width="16" description="CTRIPB1 Filter parameters" />
+    <register id="CTRIPB1FILCLKCTL" acronym="CTRIPB1FILCLKCTL" offset="58" page="1" width="16" description="CTRIPB1 Filter Sample Clock Control" />
+    <!--  1 empty  -->
+    <!--  1 empty  -->
+    <register id="CTRIPM1OCTL" acronym="CTRIPM1OCTL" offset="61" page="1" width="16" description="CTRIPM1 CTRIP Filter Output Control" />
+    <register id="CTRIPM1STS" acronym="CTRIPM1STS" offset="62" page="1" width="16" description="CTRIPM1 CTRIPx outputs status" />
+    <register id="CTRIPM1FLGCLR" acronym="CTRIPM1FLGCLR" offset="63" page="1" width="16" description="CTRIPM1 CTRIPx flag clear" />
+    <!--  16 empty  -->
+    <register id="CTRIPA6ICTL" acronym="CTRIPA6ICTL" offset="80" page="1" width="16" description="CTRIPA6 Filter Input and function Control" />
+    <register id="CTRIPA6FILCTL" acronym="CTRIPA6FILCTL" offset="81" page="1" width="16" description="CTRIPA6 Filter parameters" />
+    <register id="CTRIPA6FILCLKCTL" acronym="CTRIPA6FILCLKCTL" offset="82" page="1" width="16" description="CTRIPA6 Filter Sample Clock Control" />
+    <!--  1 empty  -->
+    <register id="CTRIPB4ICTL" acronym="CTRIPB4ICTL" offset="84" page="1" width="16" description="CTRIPB4 Filter Input and function Control" />
+    <register id="CTRIPB4FILCTL" acronym="CTRIPB4FILCTL" offset="85" page="1" width="16" description="CTRIPB4 Filter parameters" />
+    <register id="CTRIPB4FILCLKCTL" acronym="CTRIPB4FILCLKCTL" offset="86" page="1" width="16" description="CTRIPB4 Filter Sample Clock Control" />
+    <!--  1 empty  -->
+    <register id="CTRIPB6ICTL" acronym="CTRIPB6ICTL" offset="88" page="1" width="16" description="CTRIPB6 Filter Input and function Control" />
+    <register id="CTRIPB6FILCTL" acronym="CTRIPB6FILCTL" offset="89" page="1" width="16" description="CTRIPB6 Filter parameters" />
+    <register id="CTRIPB6FILCLKCTL" acronym="CTRIPB6FILCLKCTL" offset="90" page="1" width="16" description="CTRIPB6 Filter Sample Clock Control" />
+    <!--  1 empty  -->
+    <!--  1 empty  -->
+    <register id="CTRIPM2OCTL" acronym="CTRIPM2OCTL" offset="93" page="1" width="16" description="CTRIPM2 CTRIP Filter Output Control" />
+    <register id="CTRIPM2STS" acronym="CTRIPM2STS" offset="94" page="1" width="16" description="CTRIPM2 CTRIPx outputs status" />
+    <register id="CTRIPM2FLGCLR" acronym="CTRIPM2FLGCLR" offset="95" page="1" width="16" description="CTRIPM2 CTRIPx flag clear" />
+    <!--  16 empty  -->
+    <register id="CTRIPB7ICTL" acronym="CTRIPB7ICTL" offset="112" page="1" width="16" description="CTRIPB7 Filter Input and function Control" />
+    <register id="CTRIPB7FILCTL" acronym="CTRIPB7FILCTL" offset="113" page="1" width="16" description="CTRIPB7 Filter parameters" />
+    <register id="CTRIPB7FILCLKCTL" acronym="CTRIPB7FILCLKCTL" offset="114" page="1" width="16" description="CTRIPB7 Filter Sample Clock Control" />
+    <!--  9 empty  -->
+    <!--  1 empty  -->
+    <register id="CTRIPPFCOCTL" acronym="CTRIPPFCOCTL" offset="125" page="1" width="16" description="CTRIPPFC CTRIPx outputs status" />
+    <register id="CTRIPPFCSTS" acronym="CTRIPPFCSTS" offset="126" page="1" width="16" description="CTRIPPFC CTRIPx flag clear" />
+    <register id="CTRIPPFCFLGCLR" acronym="CTRIPPFCFLGCLR" offset="127" page="1" width="16" description="CTRIPPFC COMP Test Control" />
+    <!--  112 empty  -->
+    <register id="LOCKCTRIP" acronym="LOCKCTRIP" offset="240" page="1" width="16" description="Lock Register for CTRIP Filters" />
+    <!--  1 empty  -->
+    <register id="LOCKDAC" acronym="LOCKDAC" offset="242" page="1" width="16" description="Lock Register for DACs" />
+    <!--  1 empty  -->
+    <register id="LOCKAMPCOMP" acronym="LOCKAMPCOMP" offset="244" page="1" width="16" description="Lock Register for Amplifiers and Comparators" />
+    <!--  1 empty  -->
+    <register id="LOCKSWITCH" acronym="LOCKSWITCH" offset="246" page="1" width="16" description="Lock Register for Switches" />
+    <!--  9 empty  -->
+</module>

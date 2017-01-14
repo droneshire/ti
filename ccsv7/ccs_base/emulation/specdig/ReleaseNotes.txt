@@ -1,0 +1,514 @@
+##############################################################
+#  4.2.X.X releases on Windows include support for the 
+#  XDS560v2 emulator and should only be released with CCS 
+#  v4.2 and higher.     
+#    
+# 4.2.x.x release on Linux include support for XDS510USB and
+#  XDS560v2 emulators.
+# 
+# XDS560R is not supported in CCS v4.1.3.x and higer.
+#   
+# August 12, 2014                                              
+##############################################################
+
+Release  5.2.0.14 Windows/Linux
+- Update the XDS2xx firmware for SWO support using eDMA.
+  This update must be programmed into the XDS2xx. See readme.txt in the
+
+  <CCS_INSTALL_DIR>\ccs_base\emulation\specdig\xds2xx directory.
+
+Release  5.2.0.13 Windows/Linux
+- Update the XDS2xx firmware to address the following bugs as
+  reported by TI. New firmware is v1.0.0.6.
+
+	SDSCM00050714 XDS200: bcdUSB should be 0x0200 or 0x0210
+	SDSCM00050694 XDS200: HIgh-Speed Bulk wMaxPacketSize must be 512
+	SDSCM00050691 XDS200 emulators do not work with USB3.0 host ports
+
+  This update must be programmed into the XDS2xx. See readme.txt in the
+
+  <CCS_INSTALL_DIR>\ccs_base\emulation\specdig\xds2xx directory.
+
+Release  5.2.0.12 Windows/Linux
+- Work around a trace induced bug in CCS v6. The trace driver
+  started calling an APB function during startup which would
+  hang. Unfortunately there is no clean way to disable trace
+  even when you do not want it.  Affected files:
+    sdgodap_pc.dvr  - xds510 pp
+    sdgocs_dap.dvr  - xds510 pp
+    sdxds510usbplus_v12.out - xds510 usb
+    sdxds510usb_v11.out - xds510 usb
+
+Release  5.2.0.11 Windows
+- Add driver xml support for Cortex R5
+    sdxds510usbjsccortexR.XML
+    sdgocortexRusb.xml
+    sdgocortexR.XML
+
+Release  5.2.0.10 Windows 
+- Update sddllmgt2.dll to support newer C28x CLA.
+- Add XDS510USB driver xml for new C28x CLA.
+
+Release  5.2.0.09 Windows : 5.2.0.09 Linux
+- Update xds2xx_conf time out for the boot command from 15 secnds
+  to 25 seconds.
+- Update the XDS560v2 PRO connection xml to support a RTCK loopback
+  mode.  This is used to work around poor emulation TCK/RTCK
+  routing on some TCI66xx boards.
+
+Release  5.2.0.08 Windows : 5.2.0.08 Linux
+- Added Cortex M SWD/SWO support files.  This requires a firmware
+  and CPLD update to your XDS200/XDS220.  See the readme in the
+  specdig\xds2xx directory for details.
+- Cleaned up some C55 gel files.
+
+Release  5.2.0.07 Windows : 5.2.0.07 Linux
+- Windows only: Fix Sd560v2Config "Update" command. Release
+  5.2.0.04 introduced a bug that would prevent updates.
+- Update the XDS2xx LAN connection file to use TIXDS200 vs
+  TIXDS560 as the connection type.  This fix was requested by
+  TI and is dependent on TI emulation pack 5.0.952.0 which has
+  updated driver connection files.  This fix resolves the issue
+  of older unsupported processors being available on XDS2xx
+  class products.
+
+Release  5.2.0.06 Windows : 5.2.0.06 Linux
+- Remove "STM" from XDS560v2 PRO connection files. It seems TI
+  removed "STM" from it's version of the files after making request
+  for SD to add.
+
+Release  5.2.0.05 Windows : 5.2.0.05 Linux
+- TMS470/CortexM FLASH work around. The erase algo appears to 
+  cause a reset vector catch event which SD drivers report
+  back as a HW breakpoint which causes the algo to exit.  This
+  only occurs when erasing a blank FLASH.  Work around is to
+  filter this event and suppress the HW breakpoint status.
+- Update XDS220 current measurement application.
+- Add in XDS560v2 PRO connection files so that TI can remove
+  from its emupack.
+
+Release  5.2.0.04 Windows : 5.2.0.04 Linux
+- Add xds200 support utilities (emulation\specdig\xds2xx).
+- Add xds220 emulation drivers and connection support.
+- Fix Sd560v2Config "restore" command.  On XDS560v2 LC
+  Traveler a "restore" command did not set the LC Traveler
+  specific parameters after the restore.  The result is that
+  the wrong FPGA image would be loaded and USCIF would fail.
+
+Release  5.2.0.03 Windows : 5.2.0.03 Linux
+- Update ARP32 support to include it's own emulation driver,
+  sdgoarp32usb.dvr. This addresses ARP32 slow download. APR32 
+  and IHWA support is only included on Windows releases for 
+  the XDS510USB and XDS510USB-PLUS.
+
+Release  5.2.0.02 Windows : 5.2.0.02 Linux
+- Rebuild with TI's latest P2 installer for improved update support.
+
+Release  5.2.0.01 Windows
+- Update sddllmgt2.dll to suport arp32.
+- Add driver xml to support arp32, sdxds510usbarp32usb.xml.
+
+Release  5.2.0.00 Windows : Linux CCS 5.2.0.00
+- Update sdjtag to fix "Test Connection" error seen on XDS510USB.
+- Update xds510pp-plus drivers to resolve an "emulator reset" failure.
+- Add hardware disconnect flag on ccs disconnect to xds510usb connection xml
+    for flash470 support.
+- Add config xml and gel files for ezdsp5535 and ezdsp5502.
+- Update board xml to work in both windows and linux environments.
+
+Release  5.1.1.08 Windows : Linux CCS 5.1.1.08
+- Update installers to better support CCSv5.1 p2 update process.
+- Update ARM9 drivers to re-enable "System Reset".
+- Change connection description for XDS510USB JSC drivers to:
+    "Spectrum Digital XDS510USB Emulator TI-JSC"
+  Having "Plus" in the name gives the user the impression
+  that the JSC drivers should be used on the XDS510USB-Plus by default. 
+  The TI-JSC drivers only work on the XDS510USB-Plus but should
+  only be used as a last resort on TI devices which may have unknown
+  processor configurations.  TI-JSC drivers use XDS100v2 class drivers
+  and have roughly the same performance.
+
+Release  5.1.1.07 Windows : Linux CCS 5.1.1.07
+- Add sdgopruusb.dvr for DAP based pru support. Can not use
+   the TI xds510 driver for DAP.
+- Update sdgoihwausb.dvr to current DAP based ihwa support.
+- Update pru and ihwa driver xml.
+- Remove unused iva1 and iva2 driver xml.
+- Update sdgoetidapusb.dll error support for pru and ihwa.
+
+Release  5.1.1.06 Windows : Linux CCS 5.1.1.06
+-  Add Cortex M4 to driver xml.
+-  Update evmam1707.xml to fix to fix Linux / issue.
+-  Modify the XDS560v2 connection xml to set the default freqency in adaptive
+   mode to the legacy 10.368MHz.
+-  Modify XDS560v2 connection xml to add the -o options for the Diagnostic Command.
+-  Add Diagnostic Command support for XDS510USB/PLUS xml.
+-  Update XDS560v2 host side USB support to handle Linux target side musb dropping
+   a packet every so often.
+-  Include XDS560v2 firmware sd_xds560v2_firmware_2.2.0.5.  This firmware was
+   already available on the SD xds560v2 site.  See the xds560v2 website for details.
+
+Release   4.2.3.03
+-  Patch TI ecom/fpga files into CCSv4 to support XDS560v2 LC Traveler. 
+   Customers should update to CCS v5.1 for more complete support.
+
+Release   5.1.1.05 Windows : Linux CCS 5.1.1.05
+-  Windows, update SDFlash to v1.65 to support device unlock for newer F28xx devices.
+-  Windows, add prog28x.exe to the SDFlash release for command line programming support. 
+   Source to prog28x.exe is posted on the SD web site at
+        http://emulators.spectrumdigital.com/utilities/sdflash/.
+-  Update InstallJammer logfile path at TI request.
+-  Update sdgoxds510dsk.xml to fix C674x ProcID and add in TraceDeviceId.
+
+
+Release   5.1.1.04 Windows : Linux CCS 5.1.1.04
+-  Update XDS560v2 configuration xml to include "Diagnostic Command" settings.
+
+Release   5.1.1.03 Windows : Linux CCS 5.1.1.03
+-  Update XDS560v2 configuration xml to include cjtag settings.
+
+Release   4.2.3.02, 5.1.1.02 Windows : Linux CCS 5.1.1.02
+-  Update the  CortexM3 cio breakpoint work around to resolve issue of
+   skipping over hardware breakpoints on Stellaris.
+
+Release   5.1.1.01 Windows : Linux CCS 5.1.1.01
+-   Windows only 5.1.x.x: Installer update to put jsc files into the uscif
+    directory, again!!
+-   Reenable XDS510USB STM driver support. TI no longer wants to support the 
+    no-stm xml in CCS 5.1.  Also resolve issue where TI wants additional
+    functions exposed in Linux drivers that are not exposed in Windows.
+-   Update the XDS560v2 connection xml at TI request to set default TCK
+    mode to legacy and falling edge timing.  This provides better timing
+    margin and connection success on many targets.  User can increase
+    the TCK speed if desired.  The slower TCK will have little
+    impact on CCS performance for devices that include an IcePick or Cortex
+    device.
+
+Release  4.2.2.9, 5.1.0.9 Windows : Linux CCS 5.1.0.9
+- Add a cio breakpoint work around in CortexM3 drivers. When interrupts are
+  enabled and an interrupts occurs concurrently with execution of a breakpoint
+  instruction then Cortex M3 stops at the ISR instead of the breakpoint 
+  instruction address. The work around is to detect this condition and silently
+  run the CortexM3 which will re-execute the breakpoint instruction.
+- Update XDS560v2 drivers and firmware to support new products and minor bug
+  fixes in utilities.  XDS560v2 firmware updated to 2.2.0.3.
+ 
+Release 5.1.0.8 Windows : Linux CCS 5.1.0.8 (SD development build, not released)
+- Add cache/mmu disable in OnTargetConnect for davanci, am1707 and dm365
+  evm gels.  This should prevent the OnTargetConnect from hanging during
+  chip configuration when the EVM is running Linux.
+- Update installer to InstallJammer 1.2.15.  This resolves some
+  InstallJammer silent mode installation issues in Windows 7.
+- Turn on installer logging.
+- Remove sddllmgt.dll and sdsmg51095.dll.  These two files were used by
+  the obsolete products XDS510PP (original not the PPLUS) and XDS510-ISA.
+  These two obsolete products may still work in CCSv4 and higher if a CCS 3.3
+  driver pack is installed, however these components are not actively 
+  supported in CCSv4 and higher.
+- Update USB driver file sdusb2em.inf to add new products.
+- NOTE: If build x.x.x.2 or higher is installed in standalone mode then you may 
+  need to install the msvc80 updates included in the CCS image.  Newer versions
+  of SdConfigEx and SdFlash require the updated runtimes. Runtime updates are
+  also available from Microsoft.
+ 
+Release 5.1.0.7 Windows : Linux CCS 5.1.0.7
+- Remove ccstm driver and xml files.  This forces the use of the "no_STM"
+  configuration for STM enabled targets.
+
+Release 4.2.2.6, 5.0.0.6, 5.1.0.6 Windows : Linux CCS 5.0.0.6, 5.1.0.6
+-   Windows only 5.1.x.x: Installer update to put jsc files into the uscif
+    directory.
+-   Fix upper/lower case issues on tci6482 Linux board xml.
+-   Added options for Cortex A8/R4 to improve memory download and
+    upload over APB. This feature has to be enabled similar to AHB
+    download for backward compatibility. A gel file cortex_apb_ahb_util.gel
+    is added in boards\omap35xx_3430\gel with functions to control both
+    APB and AHB.
+-   Fix bug in Cortex A9 download over APB. On a download the
+    very last section downloaded may not be written properly due to bug
+    in TI EPK TRG_END_DOWNLOAD handling. The problem occurs when the last
+    section requires multiple download passes to complete.
+-   Fixed a linkage issue in linux for cs_dap drivers where uscif directory
+    was not consistantly found while loading libxdsfast3.so.
+-   Added additional debug support to eti_dap and M3 to help find
+    APB/AHB transport problems for preliminary Cortex M0/M4 support.
+
+Release 5.1.0.5 Windows : Linux CCS v5.1.0.5
+-   Updated installer package to create timestap file at TI request.
+-   Updated installer package product guids to be CCSv5.1 specific.
+-   Changed the IcePick_C lower bound port# from 0x10 to 0x0 to enable
+    access to test ports.
+-   Set the default TCK in SD510USB_Connection.xml to 10MHz to better
+    support MCU products (Stellaris) which have 10MHz TCK limit.
+-   Removed SD510USB_ConnectionWithOpts.xml.  For CCS5.1 and higher move
+    the options into the standard SD510USB_Connection.xml.  This also
+    eliminates the need to manually edit the sdopts.cfg file in most setups.
+-   Windows only 5.1.x.x: Added drivers and xml to support limited use of the 
+    XDS510USB-PLUS emulator via the TI JSC interface. This allows TI 
+    XDS510 class emulation drivers to run with the XDS510USB-PLUS in 
+    same manner as XDS100v2.  The performance in this configuration is
+    roughly the same as the XDS100v2. This is not supported on the XDS510USB
+    as the USB 1.1 full speed port in combination with TI JSC is to slow
+    to be usefull.
+
+Release 4.2.2.4 and 5.0.0.4 Windows : Linux CCS v5.0.0.4
+-   Rebuild/downgrade Linux drivers to remove glibc_2.4 dependency in RH4.
+-   Update installation and scripts to deal with RH4.
+-   Unwind some memory error/warning filters on Cortex A/R/M.
+    Previous release was filtering memory write errors to match XDS560
+    memory error handling in attempt to let gel files proceed for harmless
+    errors/warnings.  Netra DDR3 testing showed up a gel file corner case
+    where a memory write fail followed by a gel while{} memory read loop
+    essentially causes CCS to hang in the while loop. The memory write
+    fail needs to be passed back to CCS so that the endless gel while{} 
+    loop is not executed. Endless gel while loops are bad style but they
+    exist everywhere so best to just remove the filtering.
+-   Recreate TCI6488 and C6474 EVM xml to work around a bug in CCS that was
+    improperly generating device id's when multiple ice_pick devices were
+    instanced.  This bug shows up on commands like system reset.  When
+    trying to reset the 2nd multi-core device on the EVM the reset was
+    always directed to th 1st multi-core device.  Once this bug is fixed
+    in CCS the xml will revert back to the previous version.
+    
+Release 4.2.2.3 and 5.0.0.3 Windows : Linux CCS v5.0.0.3
+- Add SD510USB_ConnectionWithOpts.xml and associated driver support.
+    This allows the most popular sdopts.cfg options to be set or
+    overriden from the ccxml.  The default is to read from sdopts.cfg
+    and then override options from CCS. 
+- SDSCM00038253 - failure to load symbols on C674x of omapl138: 
+    Could not reproduce but suspect the issue was driver
+    xml related which was fixed in 4.2.2.2/5.0.0.2.
+- SDSCM00038256 - failure to halt c674x of omapl138 under Linux running
+    BIOS examples. Issue resolved in C64Plus driver by not "disconnecting" on WIR.
+    User must also set EmuIcePickRtrExtended=YES to enable extended IcePick router
+    support. This flag can be set from CCS when using SD510USB_ConnectionWithOpts
+    or by editing the sdopts.cfg file. When set more extensive but slower tap insertion
+    is done.  This also requires TI PRSC properly manage/release targets for WIR.
+    Note that PRSC is only available when running in a CCS/DSS environment. When
+    extended router support is not enabled SD drivers will automaticly force
+    clocks, power and clear WIR.
+
+Release 4.2.2.2 and 5.0.0.2 Windows : Linux CCS v5.0.0.2
+- Change proc id tag for C674x driver xml.  This tag was set to
+   generic C64P.
+- Add TraceId to xml as needed.
+- Remove config xml and drivers for C671x, c672x, c641x under Linux.
+    These drivers processors are not currently supported by CCS.
+- Enable IceCrusher Lite support for Coretx M.
+- Fix XDS560v2 config utility crashing if .zip file was in same directory
+    as the firmware updates.
+- XDS560v2 firmware update 2.2.0.2 to resolve USB port stalling for long
+    periods during large trace uploads. 
+- Print error number for PRSC generated errors to help identify PRSC
+    problems when targets are held in reset or not responding.
+- Move temp file/log from driver/uscif directory to user local
+    temp directory, os dependent.
+    Windows XP:  C:\Documents and Settings\<user>\Application Data\.spectrumdigital
+    Windows 7:   C:\Users\<username>\AppData\Roaming\.spectrumdigital
+    Linux user:  /home/<username>/.spectrumdigital
+    Linux root:  /root/.spectrumdigital
+- Update evmc6747_dsp.gel to remove ARM references.
+- Release 4.2.2.2 picks up some random EPK changes from the 5.xxx release,
+    minux IVA support.
+- Remove sdxds560usb.dll from the release package.
+- Move SD docs to "emulation\specdig\docs" directory.
+
+Release 5.0.0.1 Windows and Linux CCS v5.0.0.x
+- Update with 4.2.1.9 fixes
+- Fix memory load size issue on C2000 XDS510USBLC.
+- Fix IcePickD USCIF bug that was causing Netra/Centarus to hard
+   fault during Cortex M3 execution. 
+
+Release 4.2.2.0 Windows CCS v4.2.x.x
+- Repackage 4.2.1.9 for public release
+
+Release 4.2.1.9 Windows CCS v4.2.x.x
+- Fix memory load size issue on C2000 XDS510USBLC.
+- Fix IcePickD USCIF bug that was causing Netra/Centarus to hard
+   fault during Cortex M3 execution. 
+- Fixed bug in Windows XDS560v2 config utility that prevented
+   firmware updating.
+
+Release 5.0.0.0 Windows and Linux CCS v5.0.0.x
+- 4.2.1.8 updates applied to Linux.
+- Add IVA support for XDS510USB class products (Windows only)
+- Updates for EPK 5.0.0.144-161 excluding CortexA8/A9 PTI merging.
+- Add XDS560v2 gui based config utility for Linux.
+- Fixed bug in Windows XDS560v2 config utility that prevented
+   firmware updating.
+- Updated XDS560v2 readme for Linux specific support.
+- Update Linux installer package for common install scripts to
+  be executed with root permissions.
+
+Release 4.2.1.8 Windows
+- Add PRU support.
+- Update CLA xml support.
+- Updated sddllmgt2.dll to support IVA and PRU device names.
+  The long names for IVA components exposed a naming problem with
+  older versions of CCS 4.x and 3.3 which share this component. The
+  problem was worked around and tested for backward compatibility.
+- Update DM365 GEL to reflect NAND EMIF bus sizing.
+
+Release 4.2.1.7 Windows and Linux
+- Update F28xx driver to fix SDSCM00037379 reported by TI.
+- Update Cortex M/R driver xml to use "Access Port Designator" vs
+  AHB port.  The new default value assigned by TI for Cortex M is
+  0x02000003 and works for OMAP4/Netra class devices but causes
+  a problem with LM3S devices.  For LM3S devices the user has to
+  set the valaue to 0x02000000 or 0 until this is resolved by TI.
+- Add usbstk5515 gel.
+- Add XDS560v2 Linux support.
+- Remove manually generated configurations to prevent conflicts
+  with TI device based autogenerated configurations.
+- Update ARM9 drivers to work around Netra silicon issue.
+  Netra silicon responds to back to back Run1Dpuase by
+  switching to cJtag mode.
+  
+Release 4.2.1.6 Windows and Linux
+- Update F28xx driver to support AET
+- Reset fix for ARM9 drivers to set PC to 0xFFFF0000 when reset high
+  is enabled.
+- Update Linux uSB drivers and sdjtag to lock USB port access
+  to match Windows behavior.
+- Update XDS560v2 documentation.
+- Add in missing libsdgoetidapusb.so for etbcs support on omap.
+
+Release 4.1.1.6 Windows
+- Release 4.1.1.6 and higher is built from the CCS 4.2 code base
+  (M7 EPK with F28xx M9 patches)
+- Update F28xx driver to support AET
+- Reset fix for ARM9 drivers to set PC to 0xFFFF0000 when reset high
+  is enabled.
+
+Release 4.1.1.5 Windows
+- Update F28xx drivers to better support BIOS6 with larger RTDX buffers.
+
+Release 4.2.1.5 Windows and Linux
+- Add basic OMAP4 support. This support is not completely validated due
+  to limited OMAP4 HW availability.
+- Update F28xx drivers to better support BIOS6 with larger RTDX buffers.
+- Add "sdjtag" command line utility to Linux build.
+
+Release 4.2.1.4 Windows and Linux
+- Add IcePick_D support for windows drivers and verify on Netra.
+- Update various emulation drivers for EPK CCS 4.2 M7
+- Linux drivers tested on XDS510USB, XDS510USB-PLUS and C2000 XDS510USBLC
+
+Release 4.1.1.4
+- Update C54x driver to correct accumulator A/B accesses
+
+Release 4.1.1.3
+- Add cla xml for c2000 xds510usb
+- Add board and gel for AM1707
+
+Rlease  4.2.0.7 Linux
+- Fix low level usb connection issue for back to back debug
+  sessions.
+
+Release 4.1.1.2 and 4.2.1.2
+- Add TraceDeviceId to driver xml.
+
+Release 4.2.1.1 Windows (XDS560v2 only updates)
+- Major enhancements to XDS560v2 config utility
+- Update USB drivers, server, and Linux gadget driver to
+  support config utility.
+- Added in addtional parameters for controlling USB drivers.
+
+Release 4.2.0.6 Linux
+- Add in XDS510USB emulator driver support.
+
+Release 4.1.0.5 and Release 4.2.0.5
+- Update ARM9 driver to not claim benchmark counter so that BIOS can use it.
+
+Release 4.1.0.4 and Release 4.2.0.4
+- Update Cortex A8 driver to support OMAP35xx ES3.0.
+- Add gel files for EVM5515
+
+Release 4.1.0.2 and Release 4.2.0.2
+- Increased the DAP stall timeout to support Stellaris Flash
+  programming.
+
+Release 4.1.0.1 and Release 4.2.0.0
+- Includes fixes for XDS510USB class emulators for fast close/open
+  issues seen with GSS and DSS.  Each release goes into their
+  respective CCS version. 
+
+Release 4.0.32.36
+- Initial release for CCS 4.2 ONLY. 
+
+Release 4.0.0.32.27
+- Partial work around CCS bug SDSCM00032477. TI to fix in CCS 4.1.
+   Affects USB emulation drivers.  No updates to non-USB drivers, wait for
+   CCS 4.1 fix.
+
+- Update evmtci6488.xml for fast xml load
+
+- Remove some of the original configurations for old processors that
+    are now covered by cpu/device files.
+
+- Update EVM5505 gel file.
+
+- Add USBSTK5505 board and gel (preliminary).
+
+- Remove use of "revert.exe" from the IJ installer.  Instead let IJ
+    manage the update by uninstalling and reinstalling or patching
+    as required.  In future releases revert.exe may be called
+    from the install/uninstall xml during the update process using
+    an external file list.
+
+- Update SdConfigEx xml to support TCK loop back mode.  This will enable
+   support for TI/Luminary M3 devices which do not have a return TCK.
+
+Release 4.0.0.32.26
+- Same as .25 with version bumped to test eclipse updates via web
+
+Release 4.0.0.32.25
+- Add/Test update support using revert.
+
+Release 4.0.0.32.24
+- Update C6474 and TCI6488 board xml to work around ccs anuto naming.
+
+- Add CounterITckr option to sdConfigEx.  This enables XDS510USB-PLUS with
+   TCK internal loopbck for Cortex M3 from Luminary.  Feature was actually
+   tested on STM M3 part which is equivalent.
+- Update installer per TI request for UpdateManager.
+- Add in eclipse feature update boiler plate and setup the website.
+  Cannot fully test until we understand how to wrap update installers
+  for CCSv4.
+
+- Update installer to not call DPInst.exe if directory already exists.
+   DPInst.exe blindly re-installs or updates the .sys and .inf files which
+   causes a new HW wizard to popup on a re-install. Just cutting down
+   on annoyances.
+
+- Ran some basic intall checks on Windows 7 with no significant issues,
+  just a few dialogs to click through.
+
+Release 4.0.0.32.20
+- new xds510usb, cortex A8, C64+ to pickup SR12 updates all emulators
+
+- added in xds560r SR12.  This adds the core windows files in the install
+  but the CCS files are in a package for web install so that we do not
+  over write the TI supplied files.
+
+- Update xml board files
+
+- change intaller to not remove the "program files\Spectrumdigital" directory.
+  This seems to work on XP but does not work on Vista 64.  Looks to be a IJ
+  issue as it is confused by "Program Files (x86)"
+
+- Created automated build script to copy in SR12, xml, build, and pack the
+  release.
+
+
+Release 4.0.0.32.16
+- new xds510usb to pickup Cortex M HW breakpoint fix. AET is now setting
+  HW bps and has it normal issues.
+
+- new PP driver for cortex M same as above.
+
+- Remove icepick_bypass drivers and xml for emulators.
+
+- Update configuration xml to use real ice_pick drivers.
+
+- add a boards directory for configurations.

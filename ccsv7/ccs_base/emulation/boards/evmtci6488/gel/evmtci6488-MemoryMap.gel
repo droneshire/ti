@@ -1,0 +1,252 @@
+/*--------------------------------------------------------------*/
+/* evmtci6488-MemoryMap.gel                                     */
+/* Version 3.31                                                 */
+/*                                                              */
+/* This GEL file is designed to be used in conjunction with     */
+/* CCS 3.3 and the TCI6488 EVM.  It performs the memory map     */
+/* setup from evmtci6488.gel without executing the PLL or EMIF  */
+/* initialization.  The GEL file should be used with the        */
+/* secondary cores on a TCI6488 as only the primary core should */
+/* set up the PLL and EMIF.                                     */
+/*                                                              */
+/*--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------*/
+/* StartUp()                                                    */
+/* This function is called each time CCS is started.            */
+/* Customize this function to perform desired initialization.   */
+/*--------------------------------------------------------------*/
+StartUp()
+{
+    setup_memory_map();
+}
+
+#define PERLOCK	    0x02AC0004	// Peripheral Lock Register
+#define PERCFG0     0x02AC0008	// Peripheral Configuration register
+#define PERSTAT0    0x02AC0014	// Peripheral Status 0
+#define PERSTAT1    0x02AC002C	// Peripheral Status 1
+#define PERCFG1	    0x02AC002C	// Peripheral configuration 1
+
+#define DEVSTAT	    0x02A80000  // Device Status Register
+
+/*--------------------------------------------------------------*/
+/* OnTargetConnect()                                            */
+/* This function is called by CCS when you do Debug->Connect on */
+/* CCS 3.X.                                                     */
+/*--------------------------------------------------------------*/
+OnTargetConnect()
+{
+    /*------------------------------------------------------*/
+    /* GEL_Reset() is used to deal with the worst case      */
+    /* senario of unknown target state.  If for some reason */
+    /* a reset is not desired upon target connection,       */
+    /* GEL_Reset() may be removed and replaced with         */
+    /* something "less brutal" like a cache initialization  */
+    /* function.                                            */
+    /*------------------------------------------------------*/
+    GEL_Reset();
+
+    GEL_TextOut("GEL StartUp Complete.\n","2");
+}
+
+/*--------------------------------------------------------------*/
+/* OnReset()                                                    */
+/* This function is called by CCS when you do Debug->Resest.    */
+/* The goal is to put the C6x into a known good state with      */
+/* respect to cache, edma and interrupts.                       */
+/*--------------------------------------------------------------*/
+OnReset( int nErrorCode )
+{
+    init_emif();
+}
+
+/*--------------------------------------------------------------*/
+/* OnPreFileLoaded()                                            */
+/* This function is called automatically when the 'Load Program'*/
+/* Menu item is selected.                                       */
+/*--------------------------------------------------------------*/
+OnPreFileLoaded()
+{
+    /*------------------------------------------------------*/
+    /* GEL_Reset() is used to deal with the worst case      */
+    /* senario of unknown target state.  If for some reason */
+    /* a reset is not desired upon target connection,       */
+    /* GEL_Reset() may be removed and replaced with         */
+    /* something "less brutal" like a cache initialization  */
+    /* function.                                            */
+    /*------------------------------------------------------*/
+    GEL_Reset();
+
+    flush_cache();
+    IER = 0;
+    IFR = 0;
+    init_emif();
+}
+
+/*--------------------------------------------------------------*/
+/* OnRestart()                                                  */
+/* This function is called by CCS when you do Debug->Restart.   */
+/* The goal is to put the C6x into a known good state with      */
+/* respect to cache, edma and interrupts.                       */
+/* Failure to do this can cause problems when you restart and   */
+/* run your application code multiple times.  This is different */
+/* then OnPreFileLoaded() which will do a GEL_Reset() to get the*/
+/* C6x into a known good state.                                 */
+/*--------------------------------------------------------------*/
+OnRestart( int nErrorCode )
+{
+    /*------------------------------------------------------*/
+    /* Turn off L2 for DDR.  The app should           	*/
+    /* manage these for coherency in the application.       */
+    /*------------------------------------------------------*/
+    GEL_TextOut("Turn off cache segment\n");
+   
+    GEL_MemoryFill(0x01848200, 0, 0x10, 0x0);
+
+    /*------------------------------------------------------*/
+    /* Disable EDMA events and interrupts and clear any     */
+    /* pending events.                                      */
+    /*------------------------------------------------------*/
+    GEL_TextOut("Disable EDMA events\n");
+    *(int*)0x02A0105C = 0xFFFFFFFF; // IERH (disable high interrupts)
+    *(int*)0x02A0102C = 0xFFFFFFFF; // EERH (disable high events)
+    *(int*)0x02A01074 = 0xFFFFFFFF; // ICRH (clear high interrupts)
+    *(int*)0x02A0100C = 0xFFFFFFFF; // ICRH (clear high events)
+
+    *(int*)0x02A01058 = 0xFFFFFFFF; // IER  (disable low interrupts)
+    *(int*)0x02A01028 = 0xFFFFFFFF; // EER  (disable low events)
+    *(int*)0x02A01070 = 0xFFFFFFFF; // ICR  (clear low interrupts)
+    *(int*)0x02A01008 = 0xFFFFFFFF; // ICRH (clear low events)
+
+    /* Disable other interrupts */
+    IER = 0;
+    IFR = 0;
+}
+
+/*--------------------------------------------------------------*/
+/* setup_memory_map()                                           */
+/* Memory map setup                                             */
+/*--------------------------------------------------------------*/
+setup_memory_map()
+{
+    GEL_MapOn();
+    GEL_MapReset();
+
+    /* On-chip memory map */
+    GEL_MapAdd(0x00100000, 0, 0x00008000, 1, 1);   /* Internal ROM      */
+    GEL_MapAdd(0x00800000, 0, 0x00180000, 1, 1);   /* L2 SRAM	     	*/    
+    GEL_MapAdd(0x00E00000, 0, 0x00008000, 1, 1);   /* L1P SRAM	        */    
+    GEL_MapAdd(0x00F00000, 0, 0x00008000, 1, 1);   /* L1D SRAM          */   
+    GEL_MapAdd(0x01800000, 0, 0x00010000, 1, 1);   /* INT CTL REGS      */
+    GEL_MapAdd(0x01810000, 0, 0x00010000, 1, 1);   /* Power-down Control*/
+    GEL_MapAdd(0x01820000, 0, 0x00010000, 1, 1);   /* EMC REGS   	*/
+    GEL_MapAdd(0x01840000, 0, 0x00020000, 1, 1);   /* L1/L2 control     */
+    GEL_MapAdd(0x01BC0000, 0, 0x00040000, 1, 1);   /* Emulation         */
+    GEL_MapAdd(0x028C0000, 0, 0x00000100, 1, 1);   /* McBSP0            */
+    GEL_MapAdd(0x028D0000, 0, 0x00000100, 1, 1);   /* McBSP1            */
+    GEL_MapAdd(0x02910000, 0, 0x00000040, 1, 1);   /* Timer0            */
+    GEL_MapAdd(0x02920000, 0, 0x00000040, 1, 1);   /* Timer1            */
+    GEL_MapAdd(0x02930000, 0, 0x00000040, 1, 1);   /* Timer2            */
+    GEL_MapAdd(0x02940000, 0, 0x00000040, 1, 1);   /* Timer3            */
+    GEL_MapAdd(0x02950000, 0, 0x00000040, 1, 1);   /* Timer4            */
+    GEL_MapAdd(0x02960000, 0, 0x00000040, 1, 1);   /* Timer5            */
+    GEL_MapAdd(0x029A0000, 0, 0x00000200, 1, 1);   /* PLL Controller 1  */
+    GEL_MapAdd(0x029C0000, 0, 0x00000200, 1, 1);   /* PLL Controller 2  */
+    GEL_MapAdd(0x02A00000, 0, 0x00008000, 1, 1);   /* EDMA3 -TPCC       */
+    GEL_MapAdd(0x02A20000, 0, 0x00008000, 1, 1);   /* EDMA3 -TPTC0      */
+    GEL_MapAdd(0x02A28000, 0, 0x00008000, 1, 1);   /* EDMA3 -TPTC1      */
+    GEL_MapAdd(0x02A30000, 0, 0x00008000, 1, 1);   /* EDMA3 -TPTC2      */
+    GEL_MapAdd(0x02A38000, 0, 0x00008000, 1, 1);   /* EDMA3 -TPTC3      */
+    GEL_MapAdd(0x02A80000, 0, 0x00000500, 1, 1);   /* Chip level registers */
+    GEL_MapAdd(0x02AC0000, 0, 0x00020000, 1, 1);   /* Power saver       */
+    GEL_MapAdd(0x02B00000, 0, 0x00000100, 1, 1);   /* GPIO              */
+    GEL_MapAdd(0x02B04000, 0, 0x00000080, 1, 1);   /* I2C               */
+    GEL_MapAdd(0x02B40000, 0, 0x00000200, 1, 1);   /* Utopia            */
+    GEL_MapAdd(0x02B80000, 0, 0x00020000, 1, 1);   /* VCP2              */
+    GEL_MapAdd(0x02BA0000, 0, 0x00020000, 1, 1);   /* TCP2              */
+    GEL_MapAdd(0x02c00000, 0, 0x00020000, 1, 1);   /* TCP2              */
+    GEL_MapAdd(0x02c40000, 0, 0x00000100, 1, 1);   /* SGMII Gasket      */
+    GEL_MapAdd(0x02C80000, 0, 0x00001000, 1, 1);   /* EMAC CTL REGS     */
+    GEL_MapAdd(0x02C81000, 0, 0x00000800, 1, 1);   /* EMAC Control Module */
+    GEL_MapAdd(0x02C81800, 0, 0x00000800, 1, 1);   /* MDIO REGS         */
+    GEL_MapAdd(0x02C82000, 0, 0x00040000, 1, 1);   /* ECTL RAM          */
+    GEL_MapAdd(0x02D00000, 0, 0x00040000, 1, 1);   /* RapidIO Control   */
+    GEL_MapAdd(0x02E00000, 0, 0x00004000, 1, 1);   /* RapidIO CPPI RAM  */
+    GEL_MapAdd(0x10800000, 0, 0x00180000, 1, 1);   /* L2 SRAM ALT     	*/   
+    GEL_MapAdd(0x70000000, 0, 0x00000100, 1, 1 );  /* DDR Config        */
+
+    GEL_MapAdd(0x80000000, 0, 0x10000000, 1, 1 );  /* DDR             */
+}
+
+/*--------------------------------------------------------------*/
+/* clear_memory_map()                                           */
+/* Memory map disable                                           */
+/*--------------------------------------------------------------*/
+clear_memory_map()
+{
+    GEL_MapOff();
+}
+
+/*--------------------------------------------------------------*/
+/* flush_cache()                                                */
+/* Flush L1 & L2 cache                                          */
+/*--------------------------------------------------------------*/
+flush_cache()
+{
+    /* Invalidate L1I and L1D */
+    *(int*)0x01840000 = (*(int*)0x01840000 | 0x00000300);
+
+    /* Clean L2 */
+    *(int*)0x01845004 = 0x1;
+}
+
+/*--------------------------------------------------------------*/
+/* init_emif()                                                  */
+/* Empty for slaves                                             */
+/*--------------------------------------------------------------*/
+init_emif()
+{
+}
+
+/*--------------------------------------------------------------*/
+/* EVMTCI6488 MENU                                              */
+/*--------------------------------------------------------------*/
+menuitem "EVMTCI6488 Functions";
+
+hotmenu Reset()
+{
+    GEL_Reset( );
+}
+
+/*--------------------------------------------------------------*/
+/* RESET MENU                                                   */
+/*--------------------------------------------------------------*/
+menuitem "Resets";
+
+hotmenu ClearBreakPts_Reset_EMIFset()
+{
+    GEL_BreakPtReset();
+    GEL_Reset();
+    init_emif();
+}
+
+hotmenu FlushCache()
+{
+    flush_cache();
+}
+
+/*--------------------------------------------------------------*/
+/* MEMORY MAP MENU                                              */
+/*--------------------------------------------------------------*/
+menuitem "Memory Map";
+
+hotmenu SetMemoryMap()
+{
+    setup_memory_map();
+}
+
+hotmenu ClearMemoryMap()
+{
+    clear_memory_map();
+}
+

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<breakpoints xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="breakpoints.xsd">
+
+  <breakpoint type="AET">
+    <property>
+      <name>Hardware Configuration</name>
+      <property>
+        <name>Type</name>
+        <string>Trace</string>
+        <property>
+          <name>STM Trace Type</name>
+          <string>Power Management Profiling</string>
+          <property>
+            <name>Idle Mode</name>
+            <string>Force Idle</string>
+          </property>
+          <property>
+            <name>Sampling Window(cycles)</name>
+            <integer>8</integer>
+          </property>
+          <property>
+            <name>Clock Divide Factor</name>
+            <integer>1</integer>
+          </property>
+          <property>
+            <name>Start on Ext. Trigger</name>
+            <boolean>0</boolean>
+          </property>
+          <property>
+            <name>Stop on Ext. Trigger</name>
+            <boolean>0</boolean>
+          </property>
+          <property>
+            <name>Event Class Enable</name>
+            <string></string>
+            <property>
+              <name>LVD OPP Change</name>
+              <boolean>1</boolean>
+            </property>
+            <property>
+              <name>MVD OPP Change</name>
+              <boolean>1</boolean>
+            </property>
+            <property>
+              <name>LPD State Change</name>
+              <boolean>1</boolean>
+            </property>
+            <property>
+              <name>MPD State Change</name>
+              <boolean>1</boolean>
+            </property>
+          </property>
+        </property>
+      </property>
+    </property>
+    <property>
+      <name>Miscellaneous</name>
+      <property>
+        <name>Group</name>
+        <string>Default Group</string>
+      </property>
+      <property>
+        <name>Name</name>
+        <string>Power Management Profiling</string>
+      </property>
+    </property>
+    <enabled>0</enabled>
+  </breakpoint>
+
+</breakpoints>

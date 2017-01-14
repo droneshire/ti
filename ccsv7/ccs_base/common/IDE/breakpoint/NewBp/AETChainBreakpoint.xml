@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<newBreakpoint xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="schema.xsd" name="Chained Breakpoint" breakpointType="1">
+	<targets>
+		<target>
+			<type>dsk,emu</type>
+			<familyId>320</familyId>
+			<subfamilyId>62,64,66,67</subfamilyId>
+			<revision>*</revision>
+		</target>
+		<target>
+			<type>dsk,emu</type>
+			<familyId>470</familyId>
+			<subfamilyId>1,2,3</subfamilyId>
+			<revision>*</revision>
+		</target>
+	</targets>
+
+	<defaultProperty>
+		<property name="Miscellaneous.Name" value="Chained Breakpoint"/>
+		<property name="Hardware Configuration.Type" value="Chained Breakpoint"/>
+	</defaultProperty>
+
+	<submitSequence>
+		<id>Hardware Configuration.Type.First Location</id>
+		<id>Hardware Configuration.Type.Second Location</id>
+	</submitSequence>
+
+	<showIn>
+		<breakpointView autoSubmit="false" />
+	</showIn>
+
+	<dialog colCount="2">
+		<label id="label_first_location" widthHint="95" heightHint="18" verticalAlign="center" horizontalAlign="fill">
+			<text>First Location:</text>
+		</label>
+		
+		<textBox id="Hardware Configuration.Type.First Location" widthHint="190" heightHint="20" verticalAlign="center" horizontalAlign="center">
+			<text>Enter first program location here...</text>
+		</textBox>
+
+		<label id="label_second_location" widthHint="95" heightHint="18" verticalAlign="center" horizontalAlign="fill">
+			<text>Second Location:</text>
+		</label>
+		
+		<textBox id="Hardware Configuration.Type.Second Location" widthHint="190" heightHint="20" verticalAlign="center" horizontalAlign="center">
+			<text>Enter second program location here...</text>
+		</textBox>
+
+	</dialog>
+</newBreakpoint>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_29" class="java.beans.XMLDecoder"> 
+ <object class="com.ti.dvt.gsb.model.LayoutModel"> 
+  <void property="autoLayout"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="layoutMap"> 
+   <void method="put"> 
+    <string>FieldTranslator</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>176</int> 
+     <int>131</int> 
+     <int>129</int> 
+     <int>36</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>CSVFileReader</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>168</int> 
+     <int>7</int> 
+     <int>101</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:ForGraph</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>107</int> 
+     <int>344</int> 
+     <int>161</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>$Input</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>163</int> 
+     <int>63</int> 
+     <int>141</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.line:line.1347650277970</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>296</int> 
+     <int>340</int> 
+     <int>214</int> 
+     <int>36</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>Program Address vs Cycle</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>184</int> 
+     <int>272</int> 
+     <int>191</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+  </void> 
+ </object> 
+</java> 

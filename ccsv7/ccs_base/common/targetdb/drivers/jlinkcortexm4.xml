@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<drivers id="Cortex_M4">
+	<isa Type="Cortex_M4" ProcID="0x75803800">
+		<driver file="..\..\..\DebugServer\drivers\jlink2gtiadapter.dvr">
+			<property Type="hiddenfield" Value="CortexM4" id="Core Type" />
+      <property Type="hiddenfield" Value="true" id="disableInternalFlashManager" />
+      <property Type="hiddenfield" Value="true" id="disableMemoryMapOnDownload" />
+      <property Type="hiddenfield" id="disableArmAdvancedFeatures" />
+			<property Type="stringfield" Value="auto" id="JTAG Frequency (Hz)" />
+			<property Name="Target Interface" desc="Target Interface" Type="choicelist" id="Target Interface Type" Value="0">
+				<choice Name="JTAG" value="0"/>
+				<choice Name="SWD" value="1"/>
+			</property>
+			<connectionType Type="JLink"/>
+		</driver>
+	</isa>
+</drivers>

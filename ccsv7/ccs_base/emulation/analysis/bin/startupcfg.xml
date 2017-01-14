@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!-- Some emulators may support multiple headers, the 'HDR-NUM' field defines what header the pin is on. Typically '0'-->
+<!-- The 'PIN-NUM' definitions are defined by the layout of the 60 pin emulation header, the standard is defined in   -->
+<!-- SPRU655 page 7.-->
+<!-- The function names must exactly match what's defined in the 'default_fns.xml' file. If they fail to match, or if -->
+<!-- you attempt to use a function here that is not defined in the other file, initialization will fail.              -->
+
+<PIN-SETUP version="1.0">
+	<HDR-NUM> 0 </HDR-NUM>
+	<PIN> 
+		<PIN-NUM>B12</PIN-NUM>
+		<FUNCTION>TCLK</FUNCTION>
+	</PIN>
+	<PIN> 
+		<PIN-NUM>B04</PIN-NUM>
+		<FUNCTION>TDI</FUNCTION>
+	</PIN>
+	<PIN> 
+		<PIN-NUM>C03</PIN-NUM>
+		<FUNCTION>TLR</FUNCTION>
+	</PIN>
+	<PIN> 
+		<PIN-NUM>B02</PIN-NUM>
+		<FUNCTION>TMS</FUNCTION>
+	</PIN>
+	<PIN> 
+		<PIN-NUM>B07</PIN-NUM>
+		<FUNCTION>TDO</FUNCTION>
+	</PIN>
+
+</PIN-SETUP>

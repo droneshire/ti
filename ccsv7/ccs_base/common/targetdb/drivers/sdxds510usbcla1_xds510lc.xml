@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<drivers id="TMS192C2007" XML_version="1.2">
+	<isa id="TMS192C2007" ProcID="0x30008038" XML_version="1.2">
+		<driver file="../../../emulation/drivers/tixds510ihwa.dvr">
+			<connectionType Type="SD2000USB"/>
+			<property id="debugParent" Type="hiddenfield" Value="" />
+		</driver>
+	</isa>
+</drivers>

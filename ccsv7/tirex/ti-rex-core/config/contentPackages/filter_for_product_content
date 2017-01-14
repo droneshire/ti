@@ -1,0 +1,12 @@
+################################################
+# Mandatory exclusions from deployment
+exclude **/.git/***
+exclude **/.git*
+# do not pull in any other git folders
+exclude **/*__git/***
+
+exclude /ti-rex/git/ti-rex-content/db/***
+exclude /ti-rex/git/ti-rex-content/project0/***
+exclude /ti-rex/git/ti-rex-content/zips/***
+
+# everything else is included

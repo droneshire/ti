@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="Data Variable Tracing" basedir=".">
+
+	<property name="dvt.activity.name" value="Hardware Trace Analyzer/${ant.project.name}"/>
+  	<property name="dvt.activity.description" value="Collect Data Variable trace data."/>
+
+   	<property name="uc_name" value="Data_Variable_Tracing" />
+	<property name="technology" value="Hardware Core Trace" />
+
+	<dvt.import file="../../scripts/DataVariableTracingDialog.js"/>
+	<dvt.import file="../../scripts/CoreTrace.js"/>
+
+
+	<dvt.property>
+		version=1.0.0
+		dvt.activity.priority = 80
+		<!-- Data Provider and AF information-->
+		dataproviders=Trace
+		Trace.name=Trace Viewer
+		Trace.analyzer=Data Trace
+	</dvt.property>
+	
+</project>

@@ -1,0 +1,15 @@
+{
+  "origin": {
+    "landscape": "localhost",
+    "cluster": "none",
+    "instance": "localhost"
+  },
+  "paths": {
+  },
+  "logging": {
+    "base-path": "ti/tirex-localserver-3.0.0/.logs", "//": "will be prefixed with user's home dir",
+    "indent": -1,
+    "indent-error": 4,
+    "style": "loose"
+  }
+}

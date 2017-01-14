@@ -1,0 +1,117 @@
+//----------------------------------------------------------------------------
+// This GEL file supports the register visualization for the Embedded Trace 
+// Macrocell registers.
+//
+// It supports the following ETM register classes as described in the ARM TRM
+// (See Reference 1)
+// 1. ETM Trace Registers
+// 2. ETM_Trace_Enable_Config
+// 3. ETM_FIFOFULL_Config
+// 4. ETM_VIEWDATA_Config
+// 5. ETM_Address_Comparators
+// 6. ETM_Data_Comparators
+// 7. ETM_Counter_Registers
+// 8. ETM_Sequencer_Registers
+// 9. ETM_ContextID_Registers
+// 10. ETM_Miscellaneous_Trace_Registers
+// 11. ETM_Management_Registers
+// 12. ETM_Miscellaneous_Management_Registers
+// 13. ETM_Peripheral_Identification_Registers
+// 14. ETM_Component_Identification_Registers
+//
+// REFERENCES:        1.  Embedded Trace Macrocell, ETMv1.0 to ETMv3.4 
+//                        Architecture Specification, ARM Limited.
+//                        Doc #: ARM IHI 0014O (IHI0014O_ETM_Archspec.pdf)
+//
+//                    2.  Cortex-A8n, Revision r0p0, Technical Reference Manual
+//                        ARM Ltd., Doc #: ARM DDI 03441A-01e 
+//                        (DDI0344A01e_cortex_a8n_r0p0_trm.pdf)
+//
+//                    3.  Cortex-A8n, Revision r1p1, Technical Reference Manual
+//                        ARM Ltd., Doc #: ARM DDI 0344B (DDI0344.pdf)
+//----------------------------------------------------------------------------
+
+#define ETM_IN_CORTEXA8_R0P0 0x410FC080                 // OMAP34xx ES1.0
+#define ETM_IN_CORTEXA8_R1P1 0x411FC081                 // OMAP34xx/35xx ES2.0
+#define ETM_IN_CORTEXA8_R1P2 0x411FC082                 // OMAP34xx/35xx ES2.1
+#define ETM_IN_CORTEXA8_R1P3 0x411FC083                 // OMAP34xx/35xx ES3.0
+
+#define CORTEXA8_RXPX_MASK   0x00F0000F
+#define CORTEXA8_IS_R1P3     0x00100003
+#define CORTEXA8_IS_R1P2     0x00100002
+#define CORTEXA8_IS_R1P1     0x00100001
+#define CORTEXA8_IS_R0P0     0x00000000
+
+#define ETM_ID_VERSION3_POINT3 0x410CF230               // OMAP34xx ES1.0
+#define ETM_ID_VERSION3_POINT3_VERSION2 0x410CF232      // OMAP34xx/35xx ES2.0
+
+#define ETM_VERSION_MASK       0x00000F0F 
+#define ETM_ID_THREE_THREE_V2  0x00000202               // OMAP34xx/35xx ES2.0
+#define ETM_ID_THREE_THREE_V0  0x00000200         
+
+
+menuitem "Embedded_Trace_Macrocell(ETM)_Registers"
+
+hotmenu ETM_Enable_Access()
+{
+    int cp15_IDCode = 0;
+    int isR1P1ORP2=0;
+    int readVal = 0;
+
+    int etmId = 0;
+
+    cp15_IDCode = CP15_ID_CODE;                    // Read Processor ID
+    isR1P1ORP2 = cp15_IDCode & CORTEXA8_RXPX_MASK;
+
+    GEL_TextOut(" \tCORTEXA8_CORE_VERSION = %x\n",,,,, cp15_IDCode );
+
+    if (( isR1P1ORP2 == CORTEXA8_IS_R1P1 ) || ( isR1P1ORP2 == CORTEXA8_IS_R1P2 ) || ( isR1P1ORP2 == CORTEXA8_IS_R1P3 ))
+    {
+        if ( isR1P1ORP2 == CORTEXA8_IS_R1P1 )
+        {
+            GEL_TextOut("Target contains version r1p1 of the CortexA8...\n");
+        }
+        else if ( isR1P1ORP2 == CORTEXA8_IS_R1P2 )
+        {
+            GEL_TextOut("Target contains version r1p2 of the CortexA8...\n");
+        }
+        else if ( isR1P1ORP2 == CORTEXA8_IS_R1P3 )
+        {
+            GEL_TextOut("Target contains version r1p3 of the CortexA8...\n");
+        }
+        GEL_TextOut("\tRead the ETM_POWER_DOWN_STATUS register...\n");
+        readVal = ETM_POWER_DOWN_STATUS;
+        GEL_TextOut(" \tETM_POWER_DOWN_STATUS = %x\n",,,,, readVal );
+        GEL_TextOut("\tETM Access is enabled!\n");
+    }
+    else if ( isR1P1ORP2 == CORTEXA8_IS_R0P0 )
+    {
+        GEL_TextOut("Target contains version r0p0 of the CortexA8");
+        GEL_TextOut("ETM Access is already enabled!");
+    }
+    else
+    {
+        GEL_TextOut(" \tCORE_REVISION = %x\n",,,,, isR1P1ORP2 );
+        GEL_TextOut(" \tIS NOT COMPREHENDED BY THIS GEL FILE");
+    }
+
+    // Read the ETM ID register
+    readVal = ETM_ID;
+
+    GEL_TextOut("\tETM_ID = %x\n",,,,, readVal );
+
+    etmId = readVal & ETM_VERSION_MASK;
+
+    if ( etmId == ETM_ID_THREE_THREE_V2 )
+    {
+        GEL_TextOut("ETM Version is: 3.3v2\n");
+    }
+    else
+    {
+        if ( etmId == ETM_ID_THREE_THREE_V0 )
+        {
+            GEL_TextOut("ETM Version is: 3.3v0\n");
+        }
+    }
+}
+

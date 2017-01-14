@@ -1,0 +1,342 @@
+Master ID:hexuint,Master Name:string,Channel Number:uinteger,Module0:string,Domain:string,Class:string,Type:string,Data Message:string,Data:uinteger,Data Size:uinteger,Address:uinteger:hex,Time:ulong,Delta Time:ulong,Trace Status:string,Receiver Status:string
+0x88,CortexA9_0,14,STM,SW,STMXport_printf,Msg,Hello World, ,,,10,,,
+0x88,CortexA9_0,14,STM,SW,STMXport_printf,Msg,My thread id is 6,,,,12,,,
+0x88,CortexA9_0,14,STM,SW,STMXport_printf,Msg,Dumping App Object,,,,14,,,
+0x88,CortexA9_0,14,STM,SW,STMXport_putBuf,Msg,,12345678,,,16,,,
+,,,,,,,,76543210,,,16,,,
+0x88,CortexA9_0,23,PM,SW,Instrumentation Event,Msg,Start Monitoring,,,,20,,,
+0x88,CortexA9_0,23,PM,SW,Instrumentation Logging,Msg,Memory Power should be off in 500usecs,,,,22,,,
+0x88,CortexA9_0,55,PM,SW,Sampling Window ,Value,Sample window in system clocks, ,,,24,,,
+0x88,CortexA9_0,55,PM,MPU L2 ,Memory Power State ,Event,On, ,,,26,,,
+0x00f4,PM,,PM,MPU L2 ,Memory Power State ,State,On,3,,,35,,,
+0x00f4,PM,,PM,TESLA L2,Memory Power State ,State,Ret,1,,,50,,,
+0x00f4,PM,,PM,SRAM MPU ,Memory Voltage OPP ,State,Sleep,0,,,63,,,
+0x00f4,PM,,PM,CORE,Logic Voltage OPP ,Value,600.0 mV,1,,,81,,,
+0x00f4,PM,,PM,CORE,Logic Voltage OPP ,Value,612.5 mV,2,,,81,,,
+0x00f4,PM,,PM,MPU,Logic Power State ,State,Off,0,,,81,,,
+0x88,CortexA9_0,12,PM,SW,PM_LogMsg,Msg,Stop Monitoring,1234,,,96,,
+0x54,CortexA9_0,33,SMSET,iCONT1,Instrumentation,Msg,I am here,,,,96,,
+0x66,IVAHD,,SMSET,ECD3 ,Load,Event,Start,32,,,100,9,
+0x106,IVAHD, --,SMSET,MC3,Computation,Event,Start,29,,,111,11,
+0x66,IVAHD,,SMSET,ECD3 ,Load,Event,Stop,33,,,120,12,
+0x88,IVAHD, --,SMSET,iCONT1,Task1,Event,Start,1,,,126,33,
+0x00f2,CM1,,CM1,MPU DPLL ,Clock Domain State ,State,On,1,,,130,,Overflow
+0x00f2,CM1,,CM1,CLKSEL OPP ,Clock Frequency Divider Ratio ,Value,0x2,2,,,135,,
+0x108,IVAHD, --,SMSET,MC3,Store,Event,Start,29,,,146,11,
+0x00f2,CM1,,CM1,CORE L4,Clock Source Selection ,State,On,1,,,140,,
+0x00f2,CM1,,CM1,CORE,DPLL Status,Value,LPStop,0,,,150,,
+0x00f2,CM1,,CM1,CORE,DPLL Setting N,Value,0x1,1,,,150,,
+0x00f2,CM1,,CM1,CORE,DPLL Setting M,Value,0x1,1,,,150,,
+0x00f2,CM1,,CM1,CORE,DPLL Setting M2,Value,0x1,1,,,150,,
+0x00f2,CM1,,CM1,CORE,DPLL Setting HS-DIV1,Value,0x1,1,,,150,,
+0x00f2,CM1,,CM1,CORE,DPLL Setting HS-DIV2,Value,0x1,1,,,150,,
+0x00f2,CM1,,CM1,CORE,DPLL Setting HS-DIV3,Value,0x1,1,,,150,,,
+0x00f2,CM1,,CM1,CORE,DPLL Setting HS-DIV4,Value,0x1,1,,,150,,,
+0x92,IVAHD, --,SMSET,ECD3,Computation,Event,Start,29,,,170,20,,
+0x00f2,CM1,,CM1,Cortex A9_0,Target Activity Ratio,Value,0x2,2,,,160,,,
+0x00f2,CM1,,CM1,DMIC,Target Activity Ratio,Value,0x1,1,,,160,,Error,
+0x89,IVAHD, --,SMSET,iCONT1,Task1,Event,Stop,2,,,179,24,,
+00f4,PM,--,PM,CAM,Memory Power State,State,On,0,--,,191,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,DSS,Memory Power State,State,On,0,--,,191,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,GFX,Memory Power State,State,On,0,--,,191,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,MPU L2,Memory Power State,State,???,3,--,,191,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,PERPH MEM,Memory Power State,State,On,0,--,,191,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,SL2,Memory Power State,State,On,0,--,,191,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA EDMA,Memory Power State,State,On,0,--,,191,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA L1,Memory Power State,State,On,0,--,,191,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA L2,Memory Power State,State,On,0,--,,191,0,Multi-transitions detected; export lantency overflow,----------------
+0x104,IVAHD, --,SMSET,MC3,Load,Event,Start,29,,,213,22,,
+0x90,IVAHD, --,SMSET,ECD3,Load,Event,Start,29,,,201,34,,
+0x102,IVAHD, --,SMSET,iCONT1,Task3,Event,Start,29,,,231,30,,
+0x96,IVAHD, --,SMSET,iCONT1,Task2,Event,Start,29,,,264,33,,
+00f4,PM,--,PM,CAM,Logic Power State,State,On,0,--,,240,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,CORE,Logic Power State,State,???,3,--,,240,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,Cortex-A9-C0,Logic Power State,State,???,3,--,,240,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,Cortex-A9-C1,Logic Power State,State,???,3,--,,240,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,DSS,Logic Power State,State,On,0,--,,240,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,GFX,Logic Power State,State,On,0,--,,240,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,IVAHD,Logic Power State,State,On,0,--,,240,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA,Logic Power State,State,On,0,--,,240,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,MPU,Logic Power State,State,???,3,--,,240,49,--,----------------
+0x94,IVAHD, --,SMSET,ECD3,Store,Event,Start,29,,,276,36,,
+00f4,PM,--,PM,CAM,Memory Power State,State,Off,1,--,,277,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,DSS,Memory Power State,State,???,3,--,,277,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,GFX,Memory Power State,State,Off,1,--,,277,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,MPU L2,Memory Power State,State,???,3,--,,277,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,PERPH MEM,Memory Power State,State,Off,1,--,,277,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,SL2,Memory Power State,State,Off,1,--,,277,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA EDMA,Memory Power State,State,Off,1,--,,277,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA L1,Memory Power State,State,Off,1,--,,277,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA L2,Memory Power State,State,Off,1,--,,277,0,Multi-transitions detected; export lantency overflow,----------------
+0x93,IVAHD, --,SMSET,ECD3,Computation,Event,Stop,29,,,318,41,,
+00f4,PM,--,PM,CAM,Logic Power State,State,Off,1,--,,327,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,CORE,Logic Power State,State,???,3,--,,327,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,Cortex-A9-C0,Logic Power State,State,???,3,--,,327,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,Cortex-A9-C1,Logic Power State,State,???,3,--,,327,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,DSS,Logic Power State,State,???,3,--,,327,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,GFX,Logic Power State,State,Off,1,--,,327,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,IVAHD,Logic Power State,State,Off,1,--,,327,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA,Logic Power State,State,Off,1,--,,327,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,MPU,Logic Power State,State,???,3,--,,327,50,Multi-transitions detected; export lantency overflow,----------------
+0x99,IVAHD, --,SMSET,iCONT2,Task2,Event,Stop,29,,,371,44,,
+00f4,PM,--,PM,CAM,Memory Power State,State,On,1,--,,358,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,DSS,Memory Power State,State,On,1,--,,358,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,GFX,Memory Power State,State,On,1,--,,358,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,MPU L2,Memory Power State,State,???,3,--,,358,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,PERPH MEM,Memory Power State,State,On,1,--,,358,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,SL2,Memory Power State,State,On,1,--,,358,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA EDMA,Memory Power State,State,On,1,--,,358,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA L1,Memory Power State,State,On,1,--,,358,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA L2,Memory Power State,State,On,1,--,,358,0,Multi-transitions detected; export lantency overflow,----------------
+0x105,IVAHD, --,SMSET,MC3,Load,Event,Stop,29,,,403,45,,
+00f4,PM,--,PM,CAM,Logic Power State,State,On,1,--,,407,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,CORE,Logic Power State,State,???,3,--,,407,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,Cortex-A9-C0,Logic Power State,State,???,3,--,,407,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,Cortex-A9-C1,Logic Power State,State,???,3,--,,407,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,DSS,Logic Power State,State,On,1,--,,407,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,GFX,Logic Power State,State,On,1,--,,407,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,IVAHD,Logic Power State,State,On,1,--,,407,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA,Logic Power State,State,On,1,--,,407,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,MPU,Logic Power State,State,???,3,--,,407,49,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,CAM,Memory Power State,State,Off,1,--,,444,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,DSS,Memory Power State,State,???,3,--,,444,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,GFX,Memory Power State,State,Off,1,--,,444,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,MPU L2,Memory Power State,State,???,3,--,,444,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,PERPH MEM,Memory Power State,State,Off,1,--,,444,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,SL2,Memory Power State,State,Off,1,--,,444,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA EDMA,Memory Power State,State,Off,1,--,,444,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA L1,Memory Power State,State,Off,1,--,,444,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA L2,Memory Power State,State,Off,1,--,,444,0,Multi-transitions detected; export lantency overflow,----------------
+0x101,IVAHD, --,SMSET,iCONT2,Task1,Event,Stop,29,,,499,55,,
+00f4,PM,--,PM,CAM,Logic Power State,State,Off,1,--,,494,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,CORE,Logic Power State,State,???,3,--,,494,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,Cortex-A9-C0,Logic Power State,State,???,3,--,,494,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,Cortex-A9-C1,Logic Power State,State,???,3,--,,494,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,DSS,Logic Power State,State,???,3,--,,494,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,GFX,Logic Power State,State,Off,1,--,,494,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,IVAHD,Logic Power State,State,Off,1,--,,494,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA,Logic Power State,State,Off,1,--,,494,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,MPU,Logic Power State,State,???,3,--,,494,50,Multi-transitions detected; export lantency overflow,----------------
+0x91,IVAHD, --,SMSET,ECD3,Load,Event,Stop,29,,,558,64,,
+00f4,PM,--,PM,CAM,Memory Power State,State,On,0,--,,525,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,DSS,Memory Power State,State,On,0,--,,525,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,GFX,Memory Power State,State,On,0,--,,525,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,MPU L2,Memory Power State,State,???,3,--,,525,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,PERPH MEM,Memory Power State,State,On,0,--,,525,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,SL2,Memory Power State,State,On,0,--,,525,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA EDMA,Memory Power State,State,On,0,--,,525,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA L1,Memory Power State,State,On,0,--,,525,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA L2,Memory Power State,State,On,0,--,,525,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,CAM,Logic Power State,State,On,0,--,,574,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,CORE,Logic Power State,State,???,3,--,,574,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,Cortex-A9-C0,Logic Power State,State,???,3,--,,574,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,Cortex-A9-C1,Logic Power State,State,???,3,--,,574,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,DSS,Logic Power State,State,On,0,--,,574,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,GFX,Logic Power State,State,On,0,--,,574,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,IVAHD,Logic Power State,State,On,0,--,,574,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA,Logic Power State,State,On,0,--,,574,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,MPU,Logic Power State,State,???,3,--,,574,49,Multi-transitions detected; export lantency overflow,----------------
+0x103,IVAHD, --,SMSET,iCONT1,Task3,Event,Stop,29,,,640,66,,
+00f4,PM,--,PM,CAM,Memory Power State,State,Off,1,--,,611,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,DSS,Memory Power State,State,???,3,--,,611,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,GFX,Memory Power State,State,Off,1,--,,611,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,MPU L2,Memory Power State,State,???,3,--,,611,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,PERPH MEM,Memory Power State,State,Off,1,--,,611,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,SL2,Memory Power State,State,Off,1,--,,611,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA EDMA,Memory Power State,State,Off,1,--,,611,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA L1,Memory Power State,State,Off,1,--,,611,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA L2,Memory Power State,State,Off,1,--,,611,0,Multi-transitions detected; export lantency overflow,----------------
+0x97,IVAHD, --,SMSET,iCONT1,Task2,Event,Stop,29,,,678,67,,
+00f4,PM,--,PM,CAM,Logic Power State,State,Off,1,--,,661,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,CORE,Logic Power State,State,???,3,--,,661,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,Cortex-A9-C0,Logic Power State,State,???,3,--,,661,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,Cortex-A9-C1,Logic Power State,State,???,3,--,,661,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,DSS,Logic Power State,State,???,3,--,,661,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,GFX,Logic Power State,State,Off,1,--,,661,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,IVAHD,Logic Power State,State,Off,1,--,,661,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA,Logic Power State,State,Off,1,--,,661,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,MPU,Logic Power State,State,???,3,--,,661,50,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,CAM,Memory Power State,State,On,1,--,,692,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,DSS,Memory Power State,State,On,1,--,,692,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,GFX,Memory Power State,State,On,1,--,,692,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,MPU L2,Memory Power State,State,???,3,--,,692,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,PERPH MEM,Memory Power State,State,On,1,--,,692,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,SL2,Memory Power State,State,On,1,--,,692,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA EDMA,Memory Power State,State,On,1,--,,692,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA L1,Memory Power State,State,On,1,--,,692,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA L2,Memory Power State,State,On,1,--,,692,0,Multi-transitions detected; export lantency overflow,----------------
+0x98,IVAHD, --,SMSET,iCONT2,Task2,Event,Start,29,,,762,70,,
+00f4,PM,--,PM,CAM,Logic Power State,State,On,1,--,,741,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,CORE,Logic Power State,State,???,3,--,,741,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,Cortex-A9-C0,Logic Power State,State,???,3,--,,741,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,Cortex-A9-C1,Logic Power State,State,???,3,--,,741,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,DSS,Logic Power State,State,On,1,--,,741,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,GFX,Logic Power State,State,On,1,--,,741,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,IVAHD,Logic Power State,State,On,1,--,,741,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA,Logic Power State,State,On,1,--,,741,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,MPU,Logic Power State,State,???,3,--,,741,49,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,CAM,Memory Power State,State,Off,1,--,,778,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,DSS,Memory Power State,State,???,3,--,,778,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,GFX,Memory Power State,State,Off,1,--,,778,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,MPU L2,Memory Power State,State,???,3,--,,778,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,PERPH MEM,Memory Power State,State,Off,1,--,,778,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,SL2,Memory Power State,State,Off,1,--,,778,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA EDMA,Memory Power State,State,Off,1,--,,778,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA L1,Memory Power State,State,Off,1,--,,778,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA L2,Memory Power State,State,Off,1,--,,778,0,Multi-transitions detected; export lantency overflow,----------------
+0x100,IVAHD, --,SMSET,iCONT2,Task1,Event,Start,29,,,850,72,,
+00f4,PM,--,PM,CAM,Logic Power State,State,Off,1,--,,828,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,CORE,Logic Power State,State,???,3,--,,828,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,Cortex-A9-C0,Logic Power State,State,???,3,--,,828,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,Cortex-A9-C1,Logic Power State,State,???,3,--,,828,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,DSS,Logic Power State,State,???,3,--,,828,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,GFX,Logic Power State,State,Off,1,--,,828,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,IVAHD,Logic Power State,State,Off,1,--,,828,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA,Logic Power State,State,Off,1,--,,828,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,MPU,Logic Power State,State,???,3,--,,828,50,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,CAM,Memory Power State,State,On,0,--,,859,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,DSS,Memory Power State,State,On,0,--,,859,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,GFX,Memory Power State,State,On,0,--,,859,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,MPU L2,Memory Power State,State,???,3,--,,859,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,PERPH MEM,Memory Power State,State,On,0,--,,859,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,SL2,Memory Power State,State,On,0,--,,859,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA EDMA,Memory Power State,State,On,0,--,,859,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA L1,Memory Power State,State,On,0,--,,859,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA L2,Memory Power State,State,On,0,--,,859,0,Multi-transitions detected; export lantency overflow,----------------
+0x95,IVAHD, --,SMSET,ECD3,Store,Event,Stop,29,,,941,82,,
+00f4,PM,--,PM,CAM,Logic Power State,State,On,0,--,,908,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,CORE,Logic Power State,State,???,3,--,,908,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,Cortex-A9-C0,Logic Power State,State,???,3,--,,908,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,Cortex-A9-C1,Logic Power State,State,???,3,--,,908,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,DSS,Logic Power State,State,On,0,--,,908,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,GFX,Logic Power State,State,On,0,--,,908,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,IVAHD,Logic Power State,State,On,0,--,,908,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA,Logic Power State,State,On,0,--,,908,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,MPU,Logic Power State,State,???,3,--,,908,49,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,CAM,Memory Power State,State,Off,1,--,,945,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,DSS,Memory Power State,State,???,3,--,,945,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,GFX,Memory Power State,State,Off,1,--,,945,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,MPU L2,Memory Power State,State,???,3,--,,945,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,PERPH MEM,Memory Power State,State,Off,1,--,,945,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,SL2,Memory Power State,State,Off,1,--,,945,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA EDMA,Memory Power State,State,Off,1,--,,945,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA L1,Memory Power State,State,Off,1,--,,945,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA L2,Memory Power State,State,Off,1,--,,945,0,Multi-transitions detected; export lantency overflow,----------------
+0x107,IVAHD, --,SMSET,MC3,Computation,Event,Stop,29,,,1027,82,,
+00f4,PM,--,PM,CAM,Logic Power State,State,Off,1,--,,995,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,CORE,Logic Power State,State,???,3,--,,995,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,Cortex-A9-C0,Logic Power State,State,???,3,--,,995,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,Cortex-A9-C1,Logic Power State,State,???,3,--,,995,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,DSS,Logic Power State,State,???,3,--,,995,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,GFX,Logic Power State,State,Off,1,--,,995,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,IVAHD,Logic Power State,State,Off,1,--,,995,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA,Logic Power State,State,Off,1,--,,995,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,MPU,Logic Power State,State,???,3,--,,995,50,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,CAM,Memory Power State,State,On,1,--,,1026,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,DSS,Memory Power State,State,On,1,--,,1026,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,GFX,Memory Power State,State,On,1,--,,1026,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,MPU L2,Memory Power State,State,???,3,--,,1026,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,PERPH MEM,Memory Power State,State,On,1,--,,1026,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,SL2,Memory Power State,State,On,1,--,,1026,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA EDMA,Memory Power State,State,On,1,--,,1026,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA L1,Memory Power State,State,On,1,--,,1026,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA L2,Memory Power State,State,On,1,--,,1026,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,CAM,Logic Power State,State,On,1,--,,1075,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,CORE,Logic Power State,State,???,3,--,,1075,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,Cortex-A9-C0,Logic Power State,State,???,3,--,,1075,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,Cortex-A9-C1,Logic Power State,State,???,3,--,,1075,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,DSS,Logic Power State,State,On,1,--,,1075,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,GFX,Logic Power State,State,On,1,--,,1075,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,IVAHD,Logic Power State,State,On,1,--,,1075,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA,Logic Power State,State,On,1,--,,1075,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,MPU,Logic Power State,State,???,3,--,,1075,49,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,CAM,Memory Power State,State,Off,1,--,,1112,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,DSS,Memory Power State,State,???,3,--,,1112,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,GFX,Memory Power State,State,Off,1,--,,1112,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,MPU L2,Memory Power State,State,???,3,--,,1112,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,PERPH MEM,Memory Power State,State,Off,1,--,,1112,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,SL2,Memory Power State,State,Off,1,--,,1112,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA EDMA,Memory Power State,State,Off,1,--,,1112,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA L1,Memory Power State,State,Off,1,--,,1112,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA L2,Memory Power State,State,Off,1,--,,1112,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,CAM,Logic Power State,State,Off,1,--,,1162,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,CORE,Logic Power State,State,???,3,--,,1162,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,Cortex-A9-C0,Logic Power State,State,???,3,--,,1162,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,Cortex-A9-C1,Logic Power State,State,???,3,--,,1162,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,DSS,Logic Power State,State,???,3,--,,1162,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,GFX,Logic Power State,State,Off,1,--,,1162,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,IVAHD,Logic Power State,State,Off,1,--,,1162,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA,Logic Power State,State,Off,1,--,,1162,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,MPU,Logic Power State,State,???,3,--,,1162,50,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,CAM,Memory Power State,State,On,0,--,,1193,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,DSS,Memory Power State,State,On,0,--,,1193,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,GFX,Memory Power State,State,On,0,--,,1193,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,MPU L2,Memory Power State,State,???,3,--,,1193,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,PERPH MEM,Memory Power State,State,On,0,--,,1193,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,SL2,Memory Power State,State,On,0,--,,1193,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA EDMA,Memory Power State,State,On,0,--,,1193,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA L1,Memory Power State,State,On,0,--,,1193,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA L2,Memory Power State,State,On,0,--,,1193,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,CAM,Logic Power State,State,On,0,--,,1242,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,CORE,Logic Power State,State,???,3,--,,1242,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,Cortex-A9-C0,Logic Power State,State,???,3,--,,1242,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,Cortex-A9-C1,Logic Power State,State,???,3,--,,1242,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,DSS,Logic Power State,State,On,0,--,,1242,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,GFX,Logic Power State,State,On,0,--,,1242,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,IVAHD,Logic Power State,State,On,0,--,,1242,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA,Logic Power State,State,On,0,--,,1242,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,MPU,Logic Power State,State,???,3,--,,1242,49,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,CAM,Memory Power State,State,Off,1,--,,1279,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,DSS,Memory Power State,State,???,3,--,,1279,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,GFX,Memory Power State,State,Off,1,--,,1279,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,MPU L2,Memory Power State,State,???,3,--,,1279,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,PERPH MEM,Memory Power State,State,Off,1,--,,1279,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,SL2,Memory Power State,State,Off,1,--,,1279,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA EDMA,Memory Power State,State,Off,1,--,,1279,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA L1,Memory Power State,State,Off,1,--,,1279,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA L2,Memory Power State,State,Off,1,--,,1279,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,CAM,Logic Power State,State,Off,1,--,,1329,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,CORE,Logic Power State,State,???,3,--,,1329,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,Cortex-A9-C0,Logic Power State,State,???,3,--,,1329,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,Cortex-A9-C1,Logic Power State,State,???,3,--,,1329,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,DSS,Logic Power State,State,???,3,--,,1329,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,GFX,Logic Power State,State,Off,1,--,,1329,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,IVAHD,Logic Power State,State,Off,1,--,,1329,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA,Logic Power State,State,Off,1,--,,1329,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,MPU,Logic Power State,State,???,3,--,,1329,50,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,CAM,Memory Power State,State,On,1,--,,1360,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,DSS,Memory Power State,State,On,1,--,,1360,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,GFX,Memory Power State,State,On,1,--,,1360,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,MPU L2,Memory Power State,State,???,3,--,,1360,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,PERPH MEM,Memory Power State,State,On,1,--,,1360,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,SL2,Memory Power State,State,On,1,--,,1360,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA EDMA,Memory Power State,State,On,1,--,,1360,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA L1,Memory Power State,State,On,1,--,,1360,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA L2,Memory Power State,State,On,1,--,,1360,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,CAM,Logic Power State,State,On,1,--,,1409,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,CORE,Logic Power State,State,???,3,--,,1409,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,Cortex-A9-C0,Logic Power State,State,???,3,--,,1409,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,Cortex-A9-C1,Logic Power State,State,???,3,--,,1409,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,DSS,Logic Power State,State,On,1,--,,1409,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,GFX,Logic Power State,State,On,1,--,,1409,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,IVAHD,Logic Power State,State,On,1,--,,1409,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA,Logic Power State,State,On,1,--,,1409,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,MPU,Logic Power State,State,???,3,--,,1409,49,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,CAM,Memory Power State,State,Off,1,--,,1446,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,DSS,Memory Power State,State,???,3,--,,1446,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,GFX,Memory Power State,State,Off,1,--,,1446,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,MPU L2,Memory Power State,State,???,3,--,,1446,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,PERPH MEM,Memory Power State,State,Off,1,--,,1446,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,SL2,Memory Power State,State,Off,1,--,,1446,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA EDMA,Memory Power State,State,Off,1,--,,1446,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA L1,Memory Power State,State,Off,1,--,,1446,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA L2,Memory Power State,State,Off,1,--,,1446,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,CAM,Logic Power State,State,Off,1,--,,1496,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,CORE,Logic Power State,State,???,3,--,,1496,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,Cortex-A9-C0,Logic Power State,State,???,3,--,,1496,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,Cortex-A9-C1,Logic Power State,State,???,3,--,,1496,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,DSS,Logic Power State,State,???,3,--,,1496,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,GFX,Logic Power State,State,Off,1,--,,1496,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,IVAHD,Logic Power State,State,Off,1,--,,1496,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,TESLA,Logic Power State,State,Off,1,--,,1496,0,Multi-transitions detected; export lantency overflow,----------------
+00f4,PM,--,PM,MPU,Logic Power State,State,???,3,--,,1496,50,Multi-transitions detected; export lantency overflow,----------------

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<module id="Hidden" HW_revision="1" XML_version="1" description="" hidden="true">
+    <register id="AMR" acronym="AMR" width="32" description="" />
+    <register id="CSR" acronym="CSR" width="32" description=""/>
+    <register id="GFPGFR" acronym="GFPGFR" width="32" description="" />
+    <register id="ICR" acronym="ICR" width="32" description="" />
+    <register id="IER" acronym="IER" width="32" description="" />
+    <register id="IFR" acronym="IFR" width="32" description=""/>
+    <register id="IRP" acronym="IRP" width="32" description="" />
+    <register id="ISR" acronym="ISR" width="32" description="" />
+    <register id="ISTP" acronym="ISTP" width="32" description="" />
+    <register id="NRP" acronym="NRP" width="32" description="" />
+    <register id="PCE1" acronym="PCE1" width="32" description="" />
+    <register id="DNUM" acronym="DNUM" width="32" description="" />
+    <register id="ECR" acronym="ECR" width="32" description="" />
+    <register id="EFR" acronym="EFR" width="32" description="" />
+    <register id="GPLYA" acronym="GPLYA" width="32" description="" />
+    <register id="GPLYB" acronym="GPLYB" width="32" description="" />
+    <register id="IERR" acronym="IERR" width="32" description="" />
+    <register id="ILC" acronym="ILC" width="32" description="" />
+    <register id="ITSR" acronym="ITSR" width="32" description="" />
+    <register id="NTSR" acronym="NTSR" width="32" description="" />
+    <register id="REP" acronym="REP" width="32" description="" />
+    <register id="RILC" acronym="RILC" width="32" description="" />
+    <register id="SSR" acronym="SSR" width="32" description="" />
+    <register id="TSCH" acronym="TSCH" width="32" description="" />
+    <register id="TSCL" acronym="TSCL" width="32" description="" />
+    <register id="TSR" acronym="TSR" width="32" description="" />
+    <register id="FADCR" acronym="FADCR" width="32" description="" />
+    <register id="FAUCR" acronym="FAUCR" width="32" description="" />
+    <register id="FMCR" acronym="FMCR" width="32" description="" />
+</module>

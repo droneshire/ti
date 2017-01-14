@@ -1,0 +1,19 @@
+/*
+// TI File $Revision: /main/2 $
+// Checkin $Date: December 17, 2009   14:34:20 $
+//###########################################################################
+//
+// This .gel file can be used to help demonstrate the example project.
+//
+//###########################################################################
+// $TI Release: 2802x C/C++ Header Files V1.25 $
+// $Release Date: December 18, 2009 $
+//###########################################################################
+*/
+
+menuitem "DSP2802x HRPWM FineDutySlider"
+slider FineDutySlider(1, 254, 1, 1, finedutyvalue)
+{
+
+ DutyFine = finedutyvalue;
+}

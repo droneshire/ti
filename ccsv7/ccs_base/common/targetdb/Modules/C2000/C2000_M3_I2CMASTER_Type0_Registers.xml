@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- 
+  TI File $Revision: 
+  Checkin $Date: 
+  --> 
+
+<!--  28M35x I2C MASTER REGS Registers 
+     =================================== 
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     --> 
+<module id="I2C MASTER REGS" HW_revision="" XML_version="1" description="I2C MASTER REGS Registers">
+    <register id="I2CMSA" acronym="I2CMSA" offset="0" page="1" width="32" description="I2C Master Slave Address" />
+    <register id="I2CMCS" acronym="I2CMCS" offset="4" page="1" width="32" description="I2C Master Control/Status" />
+    <register id="I2CMDR" acronym="I2CMDR" offset="8" page="1" width="32" description="I2C Master Data" />
+    <register id="I2CMTPR" acronym="I2CMTPR" offset="12" page="1" width="32" description="I2C Master Timer Period" />
+    <register id="I2CMIMR" acronym="I2CMIMR" offset="16" page="1" width="32" description="I2C Master Interrupt Mask" />
+    <register id="I2CMRIS" acronym="I2CMRIS" offset="20" page="1" width="32" description="I2C Master Raw Interrupt Status" />
+    <register id="I2CMMIS" acronym="I2CMMIS" offset="24" page="1" width="32" description="I2C Master Masked Interrupt Status" />
+    <register id="I2CMICR" acronym="I2CMICR" offset="28" page="1" width="32" description="I2C Master Interrupt Clear" />
+    <register id="I2CMCR" acronym="I2CMCR" offset="32" page="1" width="32" description="I2C Master Configuration" />
+</module>

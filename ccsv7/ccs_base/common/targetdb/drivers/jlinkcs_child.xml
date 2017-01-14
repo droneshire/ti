@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<drivers id="cs_child">
+	<isa Type="cs_child" ProcID="0x38000006">
+		<driver file="NONE">
+			<connectionType Type="JLink"/>
+		</driver>
+	</isa>
+</drivers>

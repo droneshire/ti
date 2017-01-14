@@ -1,0 +1,37 @@
+<tr  id="idPinReq{{pinRequirement.requirement.name}}" ng-if="pinRequirement.devicePinSelections.length > 1" ng-repeat="pinRequirement in pinRequirements | orderBy:$root.natural('sortKey'):reverseSort" >
+    <td ng-if="pinRequirement.devicePinSelections.length > 1" valign="top" class="reqCol1 pinName" style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap;cursor:pointer;" title="Toggle {{pinRequirement.getDisplayName()}}">
+		
+		<label>
+			<input id="chk{{pinRequirement.requirement.name}}" class="labelInput" title="{{srvToolTip.checkPinRequirement}}" ng-change="pinUsedChanged(pinRequirement)" type="checkbox" ng-model="pinRequirement.requirement.used" /> 
+
+			{{pinRequirement.getDisplayName()}} </label>
+	</td>
+	<td ng-if="pinRequirement.devicePinSelections.length > 1" valign="top" class="reqCol2 pinSelect">
+		<div class="dropdown pinSelCol">
+        <filtered-select tooltip="srvToolTip.pinSelection" tooltip-trigger="false" selection-changed="pinChanged" current-selection="pinRequirement.devicePinSelection" selection-changed-arg="pinRequirement" selections="pinRequirement.devicePinSelections">
+		</filtered-select></div>
+
+		<span ng-show="!pinRequirement.devicePinSelection.isAny()" title="{{srvToolTip.lockedSelection}}" class="glyphicon glyphicon-lock">
+		</span> 
+		<br ng-show="pinRequirement.requirement.solution.errorText != '' || pinRequirement.requirement.solution.warningText != '' ">
+		
+		<span class="validation pinError" ng-show="pinRequirement.requirement.solution.errorText != ''"> 
+			<span class="label label-danger shadow1 shadowButton" ng-click="displayCurrentErrorWarning('pin',pinRequirement.requirement.name,pinRequirement.requirement.solution.errorText,'error')" title="Click to show details">
+				<span class="glyphicon glyphicon-ban-circle errorFG marginLeft" style="position:relative;"></span>
+				{{pinRequirement.requirement.solution.errorText}}
+			</span>
+	
+		</span>
+		
+		<span class="validation pinWarning" ng-show="pinRequirement.requirement.solution.warningText != ''" style="position:relative;right:16px"> 
+			<span class="label label-warning shadow1 warningShadowButton" style="" ng-click="displayCurrentErrorWarning('pin',pinRequirement.requirement.name,pinRequirement.requirement.solution.warningText,'warning')" title="Click to show details">
+				<img class="warningImg" src="icons/warning_18.png" >
+				<span>{{pinRequirement.requirement.solution.warningText}}</span>
+			</span>
+		</span>
+		
+	</td> 
+	<td class="req2ColnHead" ng-repeat="uiConfigurable in pinRequirement.uiConfigurables">	
+	 	<pm-configurable ui-configurable="uiConfigurable"/>
+	</td>
+</tr>

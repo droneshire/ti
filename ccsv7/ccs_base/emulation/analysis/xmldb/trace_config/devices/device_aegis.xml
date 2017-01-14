@@ -1,0 +1,453 @@
+<?xml version="1.0"?>
+
+<!-- Trace subsystem setup attributes for device Centaraus and its derivants-->
+<device id="AEGIS" value="0x0B98C02F" mask="0x0FFFFFFF" HW_revision="1.0" XML_version="1.0">
+
+	<FileVersion version="2.0.0.0" Copyright="Copyright (c) 2009 Texas Instruments"></FileVersion>
+	
+	<!-- Trace route topology. Every route entry specifies a soure to sink/pin route for a given source.
+	Multiple routes shows multiple possible paths available for trace and user can select one for an 
+	active debug session -->
+			
+	<trace_routes> 
+		<!-- STM uses TPIU as receiver -->
+		<route>
+			<source source="CSSTM_0"/>
+			<link module=""/>
+			<sink module="MOD_TPIU"/>
+			<pin module="MOD_DRM"/>
+		</route>
+		
+		<!-- STM uses Pin (DRM) as receiver -->
+		<route>
+			<source source="CSSTM_0"/>
+			<link module=""/>
+			<sink module=""/>
+			<pin module="MOD_DRM"/>
+		</route>
+
+		<!-- STM uses ETB as receiver -->
+		<route>
+			<source source="CSSTM_0"/>
+			<link module=""/>
+			<sink module="MOD_ETB0"/>
+			<pin module=""/>
+		</route> 
+
+		<!-- CortexA8 uses ETB as receiver -->
+		<route>
+			<source source="CortexA9_0"/>
+			<link module=""/>
+			<sink module="MOD_ETB0"/>
+			<pin module=""/>
+		</route>
+		
+		<route>
+			<source source="CortexA9_0"/>
+			<link module=""/>
+			<sink module="MOD_TPIU"/>
+			<pin module="MOD_DRM"/>
+		</route> 
+
+	</trace_routes>
+
+	<!-- Supported proc access mechanisms for the device -->
+	<procs>
+		<!-- CortexA9 -->
+		<proc id="CortexA9_0" kind="cortex_axx" traceid="1">
+			<identifier>
+				<register id="" address="" page="" addrunit="" width="" type="reg"/>
+				<value idvalue="" />
+			</identifier> 			
+		</proc>
+
+		<!-- CortexM3-SS -->
+		<proc id="CortexM3_0" kind="cortex_mxx" traceid="2">
+			<identifier>
+				<register id="PID0" address="0xE00FFFE0" page="0" addrunit="1" width="32" type="mem"/>
+				<value idvalue="0" />
+			</identifier> 
+			
+		</proc>
+	
+		<!-- CSETB -->
+		<proc id="CSETB_0" kind="cs_etb">
+			<identifier>
+				<register id="BASE_ADDRESS" address="" page="" addrunit="" width="" type="reg"/>
+				<value idvalue="0x4B162000" />
+			</identifier> 
+			
+		</proc>
+				
+		<!-- STM -->
+		<proc id="CSSTM_0" kind="cs_stm">
+			<identifier>
+				<register id="BASE_ADDRESS" address="" page="" addrunit="" width="" type="reg"/>
+				<value idvalue="0x4B161000" />
+			</identifier> 
+		</proc >
+		
+		<!-- DAP PC access -->
+		<!-- kind should be exact the type of the DAP and the traceid should be matched with-->
+		<!-- CCS target configuration. traceid will be useful for multiple DAPs device.     -->
+		<proc id="CS_DAP_DebugSS"  kind="cs_dap" traceid="1">
+			<identifier idvalue="" idregister="" />
+		</proc>
+
+	</procs>
+
+	<!-- Available Trace sources for the device -->
+	<sources>		
+		<!-- System Trace source -->
+		<source id="CortexM3_0" proc="CortexM3_0" stmmaster = "true">
+      <components>
+        <component module="MOD_CROSS_TRIGGERING_XTRIG"/>
+      </components>
+      <characteristics>
+        <characteristic id="DEV_CHAR_CTI" value="0"/>
+        <characteristic id="DEV_CHAR_CTIFUNNAME" value="Cross Trigger(XTRIG)"/>
+        <characteristic id="DEV_CHAR_CTIFILE" value="AET_PropertyCTI_GB1.xml"/>
+      </characteristics>
+    </source>
+
+    <!-- MPU SS -->
+    <source id="CortexA9_0" proc="CortexA9_0" stmmaster = "true">
+      <components>
+        <component module="MOD_CROSS_TRIGGERING_A9"/>
+      </components>
+      <characteristics>
+        <characteristic id="DEV_CHAR_CTI" value="1"/> 
+        <characteristic id="DEV_CHAR_CTIFUNNAME" value="Cross Trigger"/> 
+        <characteristic id="DEV_CHAR_CTIFILE" value="AET_PropertyCTI_AEGIS.xml"/> 
+        <characteristic id="DEV_CHAR_CTIFUNNUM" value="0x90001000"/> 
+        <characteristic id="DEV_CHAR_CT_MOD_EXT" value="A9"/> 
+        <characteristic id="DEV_CHAR_ATB_ID" value="0x20"/>
+        <characteristic id="DEV_CHAR_ETMPTM_BASEADDR" value="0x8000C000"/>
+     </characteristics>
+    </source>
+
+    <source id="CSSTM_0" proc="CSSTM_0" stmmaster = "true">
+      <components>
+        <component module="MOD_STMMASTERS_CONTROL"/>
+        <component module="MOD_SWMASTER0"/>
+        <component module="MOD_OCPWP0"/>
+        <component module="MOD_SC"/>
+        <component module="MOD_CONFIGINFO"/>
+        <component module="MOD_PREPROCESS"/>
+      </components> 
+      <characteristics>
+        <characteristic id="CHAR_MAXEXPORTFREQMHZ" value="83"/>
+        <characteristic id="DEV_CHAR_STMTYPE" value="2"/>
+        <characteristic id="DEV_CHAR_STM_BASEADDRESS" value="0xCB161000"/>
+        <characteristic id="DEV_CHAR_PPFMODULENUM" value="3"/>
+        <!-- This base address need to confirm  -->
+        <characteristic id="DEV_CHAR_STM_CM_BASEADDRESS" value="0x4A307A00"/>
+        <!-- Default enable SW master of A9, M3, PRU0, PRU1  -->
+        <characteristic id="DEV_CHAR_STM_SW_MASTER_DEFAULT" value="0x04283034"/>
+        <!-- Default enable HW master of Static Collector0, 1, 2, 3  -->
+        <characteristic id="DEV_CHAR_STM_HW_MASTER_DEFAULT" value="0xFCF8F4F0"/>
+        <characteristic id="DEV_CHAR_ATB_ID" value="0x40"/> 
+        <characteristic id="DEV_CHAR_ATB_STP_VERSION" value="1"/> 
+        <characteristic id="DEV_CHAR_DRMBASE_ADDR" value="0xCB160000"/>
+      </characteristics>
+    </source>
+
+    <!-- MPU SS -->
+    <source id="CS_DAP_DebugSS" proc="CS_DAP_DebugSS" stmmaster = "true">
+      <components>
+      </components>
+      <characteristics>
+     </characteristics>
+    </source>
+
+   </sources> 
+
+	<!-- Available modules asscoiated with various modules in the device -->
+	<modules> 
+				
+		<!-- SM module associated with System Trace -->
+		<module id="MOD_STMMASTERS_CONTROL" kind="swmctrl" proc="CSSTM_0" version="1.0" >
+			<characteristics>				
+			</characteristics> 
+			
+			<mapping id="value.username">
+			</mapping>
+			
+			<mapping id="value.swmasterid">
+			</mapping>
+		
+		<mapping id="value.coreidmask">
+			</mapping>
+			
+		</module>	
+		
+		<module id="MOD_SWMASTER0" kind="STM" proc="CSSTM_0" version="1.0" >
+			<registers>
+				<register id="ATB_CONFIG" address="0x4B161044" page="0" addrunit="4" width="32" type="mem" />		
+				<register id="ATB_POINTER" address="0x4B161048" page="0" addrunit="4" width="32" type="mem" />		
+			</registers>
+
+			<mapping id="masterid.name">
+				<map masterid="0x04" name="CortexA9"/>						
+				<map masterid="0x10" name="DAP"/>						
+				<map masterid="0x50" name="CortexM3"/>
+				<map masterid="0x30" name="PRU0"/>	  
+				<map masterid="0x34" name="PRU1"/>	  
+				<map masterid="0x64" name="Data Logging"/>						
+			</mapping>
+			
+			<mapping id="masterid.proc">
+				<map masterid="0x04" name="CortexA9"/>						
+				<map masterid="0x10" name="DAP"/>						
+				<map masterid="0x50" name="CortexM3"/>
+				<map masterid="0x30" name="PRU0"/>	  
+				<map masterid="0x34" name="PRU1"/>	  
+				<map masterid="0x64" name="Data Logging"/>						
+			</mapping>
+			
+			<mapping id="masterid.decoder">
+				<map masterid="*"  decoder="StmDecodeUnitSoftwareMessage"/>
+			</mapping>
+		
+		</module>	
+				
+		<module id="MOD_PREPROCESS" kind="STM" proc="CSSTM_0" version="1.0" >
+			<mapping id="masterid.name">
+				<map masterid="0x04" name="CortexA9"/>						
+				<map masterid="0x10" name="DAP"/>						
+				<map masterid="0x50" name="CortexM3"/>
+				<map masterid="0x30" name="PRU0"/>	  
+				<map masterid="0x34" name="PRU1"/>	  
+				<map masterid="0x64" name="Data Logging"/>						
+			</mapping>
+			
+			<mapping id="masterid.proc">
+				<map masterid="0x04" name="CortexA9"/>						
+				<map masterid="0x10" name="DAP"/>						
+				<map masterid="0x50" name="CortexM3"/>
+				<map masterid="0x30" name="PRU0"/>	  
+				<map masterid="0x34" name="PRU1"/>	  
+				<map masterid="0x64" name="Data Logging"/>						
+			</mapping>
+			
+			<mapping id="masterid.decoder">
+				<map masterid="*"  decoder="StmDecodeUnitPreprocessor"/>
+			</mapping>
+		</module>	
+		<!-- OCPWP module associated with System Trace -->
+		<module id="MOD_OCPWP0" kind="ocpwp" proc="CSSTM_0" version="1.0" >
+			<registers>
+			</registers>
+			
+			<!-- Reverse lookup for UBM/AET database using key -->
+			<characteristics>
+				<characteristic id="CONTROL_EVENT" value="true"/>
+				<characteristic id="CONTROL_DATA " value="true"/>
+			</characteristics>
+		
+			<!-- Reverse lookup for UBM/AET database using key -->
+			<mapping id="eventbit.name">
+				<map eventbit="1" name="Interrupt"/>
+				<map eventbit="2" name="DMA Stop"/>
+			</mapping>			
+			
+			<mapping id="masterid.name">
+				<map masterid="0x80" name="OCPWP_Monitor"/>
+				<map masterid="0x84" name="DMA Profiling"/>
+				<map masterid="0x88" name="OCPWP_Event"/>			
+			</mapping>
+			
+			<mapping id="masterid.width">
+				<map masterid="0x80" width="32"/>
+				<map masterid="0x84" width="32"/>
+			</mapping>
+			
+			<mapping id="masterid.decoder">
+				<map masterid="*" decoder="OCPDecoderUnitH08"/>
+			</mapping>
+
+      <mapping id="modelid.masterid">
+        <map modelid="0" masterid="0x80"/>
+        <map modelid="1" masterid="0x84"/>
+        <map modelid="2" masterid="0x88"/>
+      </mapping>
+		</module> 	
+
+		<module id ="MOD_SC"  kind="SC" proc="CSSTM_0" version="1.0" >
+			
+			<mapping id="masterid.name">
+				<map masterid="0xF0" name="SM_STATISTICS_UNIT0"/>
+				<map masterid="0xF4" name="SM_STATISTICS_UNIT1"/>
+				<map masterid="0xF8" name="SM_STATISTICS_UNIT2"/>
+				<map masterid="0xFC" name="SM_STATISTICS_UNIT3"/>
+			</mapping>
+
+			<mapping id="masterid.cntnum">
+				<map masterid="0xF0" cntnum="4"/>
+				<map masterid="0xF4" cntnum="6"/>
+				<map masterid="0xF8" cntnum="4"/>
+				<map masterid="0xFC" cntnum="4"/>
+			</mapping>
+			
+			<mapping id="masterid.decoder">
+				<map masterid="*"  decoder="SCDecoderUnit"/>
+			</mapping>
+
+			<mapping id="unitname.moduletype">
+				<map unitname="LAT0" moduletype="NTTP"/>
+				<map unitname="LAT1" moduletype="NTTP"/>
+				<map unitname="LAT2" moduletype="NTTP"/>
+				<map unitname="LAT3" moduletype="NTTP"/>
+			</mapping>
+			
+			<mapping id="unitname.address">
+				<map unitname="LAT0" address="0x44002000"/>
+				<map unitname="LAT1" address="0x44003000"/>
+				<map unitname="LAT2" address="0x44004000"/>
+				<map unitname="LAT3" address="0x44804000"/>
+			</mapping>
+			
+			<mapping id="unitname.cntinfor">
+				<map unitname="LAT0" cntinfor="4"/>
+				<map unitname="LAT1" cntinfor="6"/>
+				<map unitname="LAT2" cntinfor="4"/>
+				<map unitname="LAT3" cntinfor="4"/>
+			</mapping>
+			
+			<mapping id="unitname.probid">
+				<map unitname="LAT0" probid="0^0^1^1^2^2^3^3^4^4"/>
+				<map unitname="LAT1" probid="5^5^6^6^7^7^8^8^9^9^10^10"/>
+				<map unitname="LAT2" probid="11^11^12^12^13^13^14^14^15^15"/>
+				<map unitname="LAT3" probid="16^16^16^16^17^17^18^18^19^19^20^20^21^21^21^21"/>
+			</mapping>
+			
+			<mapping id="unitname.probtype">
+				<map unitname="LAT0" probtype=""/>
+				<map unitname="LAT1" probtype=""/>
+				<map unitname="LAT2" probtype=""/>
+				<map unitname="LAT3" probtype="req^res^req^res"/>
+			</mapping>
+			
+		<!-- This the value to be programmed in to DumpMstAddr register. It uses 6 bit of MConnID which is-->
+		<!-- right shifted 2 bits of original master ID of 0xF0. Only Subarctic needs to do it.           -->
+			<mapping id="unitname.masterdumpid">
+				<map unitname="LAT0" masterdumpid="0x3C"/>
+				<map unitname="LAT1" masterdumpid="0x3C"/>
+				<map unitname="LAT2" masterdumpid="0x3C"/>
+				<map unitname="LAT3" masterdumpid="0x3C"/>
+			</mapping>
+			
+      <mapping id="modelid.masterid">
+        <map modelid="0" masterid="0xF0"/>
+        <map modelid="1" masterid="0xF4"/>
+        <map modelid="2" masterid="0xF8"/>
+        <map modelid="3" masterid="0xFC"/>
+      </mapping>
+		</module> 
+		<module id ="MOD_CONFIGINFO"  kind="CONFIGINFO" proc="CSSTM_0" version="1.0" >
+			
+			<mapping id="ubmfunnum.filename">
+				<map ubmfunnum="0x80000000" filename="OCPType_2600_Aegis.xml"/>
+				<map ubmfunnum="0x80000002" filename="AET_PropertyOCP_Aegis.xml"/>
+			     <map ubmfunnum="0xC000000A" filename="AET_PropertyPPF_Aegis.xml"/>
+				<map ubmfunnum="0x8000000F" filename="AET_PropertySTM_Aegis.xml"/>
+			</mapping>
+			
+	<!-- Make sure this section should be consistent with OCPType_2600_TI814x.xml-->
+			<mapping id="ubmfunnum.funcname">
+				<map ubmfunnum="0x80000000" funcname="STM Functions"/>
+          			<map ubmfunnum="0x80000002" funcname="OCP Traffic Monitoring"/>
+				<map ubmfunnum="0xC000000A" funcname="Performance Probe"/>
+				<map ubmfunnum="0x8000000F" funcname="Trace Export Configuration"/>
+			</mapping>
+			
+			<mapping id="ubmfunnum.baseaddr">
+				<map ubmfunnum="0x80000005" baseaddr="0x58041000"/>
+			</mapping>
+			
+      <mapping id="ubmfunnum.modulename">
+        <map ubmfunnum="0x80000000" modulename=""/>
+        <map ubmfunnum="0x80000002" modulename="MOD_OCPWP0"/>
+        <map ubmfunnum="0xC000000A" modulename="MOD_SC"/>
+        <map ubmfunnum="0x8000000F" modulename=""/>
+      </mapping>
+		</module> 
+
+		<!-- ETB module. It is used as receiver -->
+		<module id="MOD_ETB0" kind="cs_etb" proc="CSETB_0" version="2.0" >
+			<registers>
+				<register id="ID" address="ETBCS_ID"  page="" addrunit="1" width="32" type="reg"/>		
+				<register id="RDP" address="ETBCS_RDP" page="" addrunit="1" width="32" type="reg"/>		
+				<register id="STS" address="ETBCS_STS" page="" addrunit="1" width="32" type="reg"/>		
+				<register id="RRD" address="ETBCS_RRD" page="" addrunit="1" width="32" type="reg"/>
+				<register id="RRP" address="ETBCS_RRP" page="" addrunit="1" width="32" type="reg"/>
+				<register id="RWD" address="ETBCS_RWD" page="" addrunit="1" width="32" type="reg"/>
+				<register id="RWP" address="ETBCS_RWP" page="" addrunit="1" width="32" type="reg"/>						
+				<register id="TRG" address="ETBCS_TRG" page="" addrunit="1" width="32" type="reg"/>		
+				<register id="CTL" address="ETBCS_CTL" page="" addrunit="1" width="32" type="reg"/>		
+				<register id="FFSR" address="ETBCS_FFSR" page="" addrunit="1" width="32" type="reg"/>
+				<register id="FFCR" address="ETBCS_FFCR" page="" addrunit="1" width="32" type="reg"/>
+				<register id="LOCK" address="ETBCS_LOCK_ACCESS" page="" addrunit="1" width="32" type="reg"/>
+				<register id="LOCK_STATUS" address="ETBCS_LOCK_STATUS" page="" addrunit="1" width="32" type="reg"/>
+			</registers>
+			
+			<characteristics>
+				<characteristic id="DEV_CHAR_PINMANAGER" description="" value="1"/> 
+				<characteristic id="DEV_CHAR_DATAPINCOUNT" description="" value="20"/>
+				<characteristic id="DEV_CHAR_CLOCKPINCOUNT" description="" value="2"/>
+				<characteristic id="DEV_CHAR_PRIMARYCLOCK" description="" value="20"/>
+				<characteristic id="DEV_CHAR_SECONDARYCLOCK" description="" value="21"/>
+				<characteristic id="DEV_CHAR_TRACEDATAORDER" description="" value="reverse"/>
+				<characteristic id="CHAR_FFCRDISABLE" value="1"/>	
+				<characteristic id="DEV_CHAR_CURIE" value="0"/> <!-- This is a curie type of device (using ADTF in general). Need special handling -->	
+				<characteristic id="DEV_CHAR_TRACEMODE" value="3"/> <!-- This is setting is giving a hint to channel driver to run at freeclock mode. It is here to deal with ADTF -->	
+				<characteristic id="DEV_CHAR_FFCRDISABLE" value="0"/>
+			</characteristics> 
+			
+		</module>
+
+		<!-- Pins module -->
+		<module id ="MOD_DRM"  kind="drm" proc="" version="1.0" >
+			<registers>
+			</registers>
+			<mapping id="program.pinouts">
+				<map program="0" pinouts="pti=2,4,3,1,0" />
+				<map program="1" pinouts="pti=2,1,0" />
+				<map program="2" pinouts="pti=1,0" />
+			</mapping>
+		</module>
+
+    <!-- For the CPU that refer this section of cross trigger it should define -->
+    <!-- MOD_CROSS_TRIGGERING_xxx as its components module -->
+    <module id ="MOD_CROSS_TRIGGERING_A9"  kind="CHANNELS" proc="CortexA9_0" version="1.0" >
+      <mapping id="gbgroup.channels">
+        <map gbgroup="0" channels="2^3^1^0"/>
+      </mapping>
+      <mapping id="syncgroup.channels">
+        <map syncgroup="0" channels=""/>
+      </mapping>
+      <characteristics>
+        <!-- This name should be consistent with the name defined in DEV_CHAR_CTIFILE -->
+        <characteristic id="DEV_CHAR_SMP_CPUNAME" value="Cortex A9 CPU"/>
+        <!-- This value should be consistent with the value defined in DEV_CHAR_CTIFILE -->
+        <characteristic id="DEV_CHAR_GBBPCPU_ID" value="0x89000100"/>
+        <!-- This value should be consistent with the value defined in DEV_CHAR_CTIFILE -->
+        <characteristic id="DEV_CHAR_SYNCCPU_ID" value="0x8A000720"/>
+      </characteristics>
+    </module>
+
+    <module id ="MOD_CROSS_TRIGGERING_XTRIG"  kind="CHANNELS" proc="XTRIG" version="1.0" >
+      <mapping id="gbgroup.channels">
+        <map gbgroup="1" channels="NA"/>
+      </mapping>
+      <mapping id="syncgroup.channels">
+        <map syncgroup="0" channels=""/>
+      </mapping>
+      <characteristics>
+        <characteristic id="DEV_CHAR_SMP_CPUNAME" value="XTRIG"/>
+      </characteristics>
+    </module>
+
+  </modules>
+
+</device>

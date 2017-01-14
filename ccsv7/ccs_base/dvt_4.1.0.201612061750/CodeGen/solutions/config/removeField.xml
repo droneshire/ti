@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<translate name="testData">
+	<passthruAll>
+		<removeField name = "Filename" />
+		<removeField name = "Function" />
+		<removeField name = "Line Number" />
+		<removeField name = "LineCountMax" />
+		<removeField name = "LineCountMin" />
+		<removeField name = "PC Count" />
+		<removeField name = "FirstPCCount" />
+		<removeField name = "Coverage" />
+		<removeField name = "inst exec count" />
+		<removeField name = "Comment" />
+		<removeField name = "Times called" />
+		<removeField name = "size" />
+		<removeField name = "Lines of code"/>
+		<removeField name = "Lines executed"/>
+	</passthruAll>
+	<passthru name="Filename" input ="Filename"/>
+        <passthru name="Function" input ="Function"/>
+        <passthru name="Lines of code" input ="Lines_of_code"/>
+        <passthru name="Lines executed" input ="Lines_executed"/>
+</translate>
+

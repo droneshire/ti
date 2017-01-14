@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.5.0_14" class="java.beans.XMLDecoder"> 
+ <object class="com.ti.dvt.gadget.model.LayoutModel"> 
+  <void property="autoLayout"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="layoutMap"> 
+   <void method="put"> 
+    <string>CSVFileReader</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>265</int> 
+     <int>95</int> 
+     <int>82</int> 
+     <int>29</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>UnlimitedBuffer</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>270</int> 
+     <int>172</int> 
+     <int>104</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.restorable.table:Data</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>263</int> 
+     <int>247</int> 
+     <int>128</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+  </void> 
+ </object> 
+</java> 

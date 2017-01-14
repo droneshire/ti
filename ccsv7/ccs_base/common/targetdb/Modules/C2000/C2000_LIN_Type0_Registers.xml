@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  TI File $Revision: /main/2 $
+  Checkin $Date: November 5, 2010   14:50:21 $
+  -->
+
+<!-- C2803x Lin Registers
+     ===================================
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     -->
+<module id="LIN" HW_revision="" XML_version="1" description="LIN Registers">
+	<register id="SCIGCR0" acronym="SCIGCR0" offset="0" page="1" width="32" description="Global Control Register 0" />
+	<register id="SCIGCR1" acronym="SCIGCR1" offset="2" page="1" width="32" description="Global Control Register 1" />
+	<register id="SCIGCR2" acronym="SCIGCR2" offset="4" page="1" width="32" description="Global Control Register 2" />
+	<register id="SCISETINT" acronym="SCISETINT" offset="6" page="1" width="32" description="Interrupt Enable Register" />
+	<register id="SCICLEARINT" acronym="SCICLEARINT" offset="8" page="1" width="32" description="Interrupt Disable Register" />
+	<register id="SCISETINTLVL" acronym="SCISETINTLVL" offset="10" page="1" width="32" description="Set Interrupt Level Register" />
+	<register id="SCICLEARINTLVL" acronym="SCICLEARINTLVL" offset="12" page="1" width="32" description="Clear Interrupt Level Register" />
+	<register id="SCIFLR" acronym="SCIFLR" offset="14" page="1" width="32" description="Flag Register" />
+	<register id="SCIINTVECT0" acronym="SCIINTVECT0" offset="16" page="1" width="32" description="Interrupt Vector Offset Register 0" />
+	<register id="SCIINTVECT1" acronym="SCIINTVECT1" offset="18" page="1" width="32" description="Interrupt Vector Offset Register 1" />
+	<register id="SCIFORMAT" acronym="SCIFORMAT" offset="20" page="1" width="32" description="Length Control Register" />
+	<register id="BRSR" acronym="BRSR" offset="22" page="1" width="32" description="Baud Rate Selection Register" />
+	<register id="SCIED" acronym="SCIED" offset="24" page="1" width="32" description="Emulation buffer Register" />
+	<register id="SCIRD" acronym="SCIRD" offset="26" page="1" width="32" description="Receiver data buffer Register" />
+	<register id="SCITD" acronym="SCITD" offset="28" page="1" width="32" description="Transmit data buffer Register" />
+	<!-- 4 empty -->        
+	<register id="SCIPIO2" acronym="SCIPIO2" offset="34" page="1" width="32" description="Pin control Register 2" />
+	<!-- 12 empty -->        
+	<register id="LINCOMP" acronym="LINCOMP" offset="48" page="1" width="32" description="Compare register" />
+	<register id="LINRD0" acronym="LINRD0" offset="50" page="1" width="32" description="Receive data register 0" />
+	<register id="LINRD1" acronym="LINRD1" offset="52" page="1" width="32" description="Receive data register 1" />
+	<register id="LINMASK" acronym="LINMASK" offset="54" page="1" width="32" description="Acceptance mask register" />
+	<register id="LINID" acronym="LINID" offset="56" page="1" width="32" description="LIN ID Register" />
+	<register id="LINTD0" acronym="LINTD0" offset="58" page="1" width="32" description="Transmit Data Register 0" />
+	<register id="LINTD1" acronym="LINTD1" offset="60" page="1" width="32" description="Transmit Data Register 1" />
+	<register id="MBRSR" acronym="MBRSR" offset="62" page="1" width="32" description="Baud Rate Selection Register" />
+	<!-- 8 empty -->        
+	<register id="IODFTCTRL" acronym="IODFTCTRL" offset="72" page="1" width="32" description="IODFT for LIN" />
+</module>

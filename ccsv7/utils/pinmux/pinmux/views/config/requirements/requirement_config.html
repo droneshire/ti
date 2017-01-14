@@ -1,0 +1,110 @@
+	<!-- Requirement Configuration -->
+	<div class="datagrid datagridBlue">
+		
+		<table id="mainRequirementTable" class="reqDetails_{{srvConfigVM.selectedInterface.interfaceRequirement.requirements.length > 0}}" style="margin-bottom:8px;border-color:#118899;">
+
+			<tbody>
+				<tr class="alt" title="Give an unique name for identifying the current peripheral">
+					<td class="reqCol1" style="font-weight:bold;">Name: </td>
+					<td class="reqCol2"> 
+				
+					<pm-requirement-name 
+								display-current-validation-error-warning="displayCurrentValidationErrorWarning"
+								input-id="'reqName'"
+								/>
+						
+					</td>  
+				</tr>
+				<tr class="alt" ng-if="srvConfigVM.selectedRequirement.useCaseSelections.length > 1" title="Browse and select from one of the available use cases"> 
+					<td class="reqCol1" style="font-weight:bold;">Use Case: </td> 
+					<td class="reqCol2">
+						<div class="dropdown" style="width:95%;color:#000000;background-color:#ffffff;">
+							<select id="reqUseCase" ng-change="useCaseChanged()" ng-model="srvConfigVM.selectedRequirement.useCaseSelection" ng-options="selection.getDisplay() for selection in srvConfigVM.selectedRequirement.useCaseSelections"></select>
+						</div>
+					</td>
+				</tr>
+				<tr class="alt" 
+				id="usePeripheralRow" 
+					ng-if="showUserPeripheralRow(srvConfigVM.selectedRequirement)"> 
+					<td class="reqCol1" title="{{srvToolTip.reqPreferredPreph}}" style="font-weight:bold;">Use Peripheral:</td> 
+					<td class="reqCol2">
+						<div class="dropdown" style="width:95%;">
+							<filtered-select tooltip="srvToolTip.peripheralSelection" tooltip-trigger="false" current-selection="srvConfigVM.selectedRequirement.peripheralSelection" selection-changed="peripheralChanged" selection-changed-arg="srvConfigVM.selectedRequirement" selections="srvConfigVM.selectedRequirement.peripheralSelections">
+							</filtered-select>
+						</div>
+						<span ng-show="!srvConfigVM.selectedRequirement.peripheralSelection.isAny()" title="{{srvToolTip.lockedSelection}}" class="glyphicon glyphicon-lock"></span>
+						<div>
+							<!-- error case for Peripheral selection -->
+							<span ng-show="srvConfigVM.selectedRequirement.requirement.peripheralSolution.errorText != ''"> 
+								<span class="label label-danger shadow1 shadowButton" ng-click="srvConfigVM.displayCurrentErrorWarning('peripheral','',srvConfigVM.selectedRequirement.requirement.peripheralSolution.errorText,'error')" title="Click to show details">
+									<span class="glyphicon glyphicon-ban-circle errorFG marginLeft" style="position:relative;"></span>
+									{{srvConfigVM.selectedRequirement.requirement.peripheralSolution.errorText}}
+								</span>
+							</span>
+							
+							<!-- warning case for Peripheral selection -->
+							<span class="validation pinWarning" ng-show="srvConfigVM.selectedRequirement.requirement.peripheralSolution.warningText != ''" style="position:relative;right:16px"> 
+								<span class="label label-warning shadow1 warningShadowButton" ng-click="srvConfigVM.displayCurrentErrorWarning('peripheral','',srvConfigVM.selectedRequirement.requirement.peripheralSolution.warningText,'warning')" title="Click to show details">
+									<img class="warningImg" src="icons/warning_18.png" >
+									<span>{{srvConfigVM.selectedRequirement.requirement.peripheralSolution.warningText}}</span>
+								</span>
+							</span>
+						</div>
+					</td>
+				</tr>
+			
+				<tr class="alt" ng-if="showPreferredVoltage"> 
+					<td class="reqCol1" style="font-weight:bold;">Preferred Voltage: </td> 
+					<td class="reqCol2"> 
+						<div id="selectVoltageDiv" class="dropdown reqDetails_{{powerDomainSettingsEnabled}}">
+							<select title="{{srvToolTip.reqPreferredVoltage}}" id="reqVoltage" ng-model="srvConfigVM.selectedRequirement.voltageSelection" ng-change="onVoltageChanged()" ng-options="selection.getDisplay() for selection in srvConfigVM.selectedRequirement.voltageSelections"></select>
+						</div>
+						<a id="configurePowerDomainBtn" title="{{srvToolTip.configurePowerDomains}}" class="aReset requirementButtonText" href="" ng-click="configurePowerDomains()">Configure</a>
+						<button id="configurePowerDomainBtnAlt" type="button" class="btn btn-default btn-sm requirementButtonIcon" ng-click="configurePowerDomains()">
+							<span class="glyphicon glyphicon-edit"></span>
+						</button>
+					</td>
+				</tr>
+				<tr class="alt" ng-show="((srvConfigVM.selectedRequirement.requirement.voltageSolution.errorText != '') || (srvConfigVM.selectedRequirement.requirement.voltageSolution.warningText != ''))">
+					<td></td>
+					<td>
+						<!-- error case for Voltage selection -->
+						<span class="label label-danger" ng-show="srvConfigVM.selectedRequirement.requirement.voltageSolution.errorText != ''">
+							<span class="glyphicon glyphicon-ban-circle errorFG marginLeft" style="position:relative;"></span>
+							{{srvConfigVM.selectedRequirement.requirement.voltageSolution.errorText}}
+						</span>
+
+						<!-- warning case for Voltage selection -->
+						<span class="validation pinWarning" ng-show="srvConfigVM.selectedRequirement.requirement.voltageSolution.warningText != ''" style="position:relative;right:16px">
+							<span class="label label-warning warningShadowButton" style="padding:1px 4px 1px 18px;margin-right:2px;">
+								<img class="warningImg" src="icons/warning_18.png" >
+								<span>{{srvConfigVM.selectedRequirement.requirement.voltageSolution.warningText}}</span>
+							</span>
+						</span>
+					</td>
+				</tr>
+				<tr ng-if="showIOSets" class="alt">
+					<td class="reqCol1" style="font-weight:bold;"> IO Set: </td>
+					<td class="reqCol2"> 
+						<span class="disabled">{{srvConfigVM.selectedRequirement.requirement.peripheralSolution.ioSet}}</span>
+						<a id="ioSetBtn" class="requirementButtonText" title="{{srvToolTip.viewIOSets}}" href="" ng-click="viewIOSets()">View IO Sets</a>
+						<button id="ioSetBtnAlt" type="button" class="btn btn-default btn-sm requirementButtonIcon" ng-click="viewIOSets()">
+							<span class="glyphicon glyphicon-search"></span>
+						</button>
+					</td>
+				</tr>
+				
+				<tr ng-hide="uiConfigurable.hidden()" class="alt" ng-repeat="uiConfigurable in srvConfigVM.selectedRequirement.uiConfigurables">
+					<td style="font-weight:bold;" class="reqCol1" >
+					{{uiConfigurable.configurable.displayName}}:
+					</td>
+					<td class="reqCol2">
+						<pm-configurable ui-configurable="uiConfigurable" 
+										 on-invalid="onConfigurableInvalid"
+										 on-valid="onConfigurableValid"
+										 display-current-error-warning="displayCurrentValidationErrorWarning"/>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>

@@ -1,0 +1,215 @@
+<div ng-controller="nav">
+	<!-- The following input tags are needed to support file dialogs in node-webkit -->
+	<div ng-if="isNode">
+		<input style="display:none;" id="fileSaveDialog" type="file" accept=".pinmux" nwsaveas="{{getNWSaveAsPath()}}" />
+		<input style="display:none" id="fileLoadDialog" type="file" accept=".pinmux" />
+		<input style="display:none" id="chooseDirDialog" type="file" nwworkingdir="{{srvSettings.getLastGenerateDir()}}" nwdirectory/>
+	</div>
+
+	<!-- needed for logout event -->
+	<iframe id="authIFrame" style="display: none;"></iframe>
+
+	<!-- main navigation -->
+	<header>
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div id="navBar" ng-show="!isEclipse()">
+			<!-- TI logo div -->
+			<div id="navMenuLogo" ng-show="!isNode" ng-class="getNavTILogoClass()" ng-mouseenter="showAppMenu()" ng-click="showTIToolsMenu=!showTIToolsMenu"
+				ng-mouseleave="hideAppMenu(500)">
+				<span>
+					<i id="appsIcon" class="material-icons">apps</i>
+				</span>
+				<!-- TI App Drawer -->
+				<div id="tiToolsHoverMenu" ng-show="!isNode&&showTIToolsMenu" class="bubble">
+					<a ng-click="openLink('/','ticloudportal','ticloudportal')" href="" target="ticloudportal" class="tiToolsApp">
+						<div title="TI Cloud Tools Home Page">
+							<img src="icons/apps/cloud_tools.png" /><span>TI Cloud Tools</span>
+						</div>
+					</a>
+					<a ng-click="openLink('../tirex/','ticloudportal','tirex')" href="" target="ticloudportal" class="tiToolsApp">
+						<div title="Explore Documentation, Examples and Resources for your device">
+							<img src="icons/apps/trex.png" />Resource Explorer
+						</div>
+					</a>
+					<a ng-click="openLink('../pinmux/','_self','pinmux')" href="" target="_self" class="tiToolsApp">
+						<div title="Configure device peripherals and pin multiplexing options">
+							<img src="icons/apps/pinmux.png" />TI PinMux
+						</div>
+					</a>
+
+					<a ng-click="openLink('../ide/','ticloudportal','ccscloud')" href="" target="ccscloud" class="tiToolsApp">
+						<div title="Edit, Build and download your project to your device">
+							<img src="icons/apps/ccs_cloud.png" />CCS Cloud IDE
+						</div>
+					</a>
+					<a ng-click="openLink('../bpchecker/','ticloudportal','bpchecker')" href="" target="bpchecker" class="tiToolsApp">
+						<div title="Check compatibility between LaunchPads and BoosterPacks">
+							<img src="icons/apps/bpchecker.png" />BoosterPack Checker
+						</div>
+					</a>
+					<a ng-click="openLink('http://e2e.ti.com','e2e','E2E')" href="" target="e2e" class="tiToolsApp">
+						<div title="Explore and interact with other Engineers via forums, videos, and blogs">
+							<img src="icons/apps/launchpad-social-e2e.png" />TI E2E Community
+						</div>
+					</a>
+					<a ng-click="openLink('http://www.ti.com/general/docs/refdesignsearch.tsp','tidesigns','TIDesigns')" href="" target="tidesigns"
+						class="tiToolsApp ">
+						<div title="Explore robust reference design libraries spanning analog, embedded processor and connectivity">
+							<img src="icons/apps/TIDesignsLogo.png" style="width:60px;height:auto;padding-top:11px;padding-bottom:11px;" />TI
+							Designs
+						</div>
+					</a>
+					<a ng-click="openLink('http://www.ti.com','ticom','ticom')" href="" target="ticom" class="tiToolsApp">
+						<div title="TI.com">
+							<img src="icons/apps/ti_logo_red.svg" />TI.com
+						</div>
+					</a>
+				</div>
+			</div>
+			<div id="navMenuLogoAlt" ng-show="isNode">
+				<!-- TI logo image -->
+				<a title="Texas Instruments Inc."><img id="tiLogoImg" src="icons/ti_logo_white.svg" /></a>
+			</div>
+
+			<ul id="navMenuList">
+				<!-- nav Title - TI PinMux -->
+				<li id="navMenuToolNameContainer" title="TI PinMux">
+					<a id="navMenuToolNameText" ng-show="!isNode" href="app.html#/default/">TI&nbsp;PinMux</a>
+					<span id="navMenuToolNameText" ng-show="isNode">TI&nbsp;PinMux</span>
+				</li>
+
+				<!-- New (Device) menu element -->
+				<li id="navMenuDeviceContainer" class="navMenuListLi navMenuListLiLeft" ng-show="init" ng-mouseenter="setInDeviceConfigContainer(true)"
+					ng-mouseleave="setInDeviceConfigContainer(false)">
+					<span title="Start a New Design" class="iconButton" id="btnDevices">New</span>
+					<div ng-show="showDeviceSelection" class="hoverMenu shadow3">
+						<device-config/>
+					</div>
+				</li>
+
+				<!-- Open menu element -->
+				<li id="navMenuOpenContainer" class="navMenuListLi navMenuListLiLeft" title="Open an existing design" ng-show="init" ng-mouseenter="showPopUp('showOpenCloudMenu')"
+					ng-mouseleave="hidePopUp('showOpenCloudMenu')">
+					<input style="display:none" type="file" id="openProjectInputNav" />
+					<span class="iconButton" id="loadBtn" ng-click="load()" ng-show="!username">Open</span>
+					<span class="iconButton" id="loadMenu" ng-show="username" style="pointer:auto">Open<!--<span class="glyphicon glyphicon-triangle-bottom" style="font-size:8px;position:relative;top:-1px;left:3px;"></span>--></span>
+					<ul class="hoverMenu shadow2 hoverMenuList" ng-show="showOpenCloudMenu&&username">
+						<li title="Open design from local machine" ng-click="load()"><span class="glyphicon glyphicon-hdd"></span> Local Drive</li>
+						<li title="Open design saved on the TI Cloud Server" ng-click="loadCloud()"><span class="glyphicon glyphicon-cloud-download"></span> Cloud Storage</li>
+					</ul>
+				</li>
+
+				<!-- Save menu element -->
+				<li id="navMenuSaveContainer" class="navMenuListLi navMenuListLiLeft" title="Save the current design" ng-show="init" ng-mouseenter="showPopUp('showSaveCloudMenu')"
+					ng-mouseleave="hidePopUp('showSaveCloudMenu')">
+					<span class="iconButton" id="saveBtn" ng-click="save()" ng-show="!username">Save</span>
+					<span class="iconButton" id="saveMenu" ng-show="username" style="pointer:auto">Save<!--<span class="glyphicon glyphicon-triangle-bottom" style="font-size:8px;position:relative;top:-1px;left:3px;"></span>--></span>
+					<ul class="hoverMenu shadow2 hoverMenuList" ng-show="showSaveCloudMenu&&username">
+						<li title="Save design to local machine" ng-click="save()"><span class="glyphicon glyphicon-hdd"></span> Local Drive</li>
+						<li title="Save design to TI Cloud Server" ng-click="saveCloud()"><span class="glyphicon glyphicon-cloud-upload"></span> Cloud Storage</li>
+					</ul>
+				</li>
+
+				<!-- myTI entry -->
+				<li id="navMenuUsernameContainer" class="navMenuListLi navMenuListLiRight" title="Username: {{username}}" ng-show="username"
+					ng-mouseenter="showPopUp('showUsername')" ng-mouseleave="hidePopUp('showUsername')">
+					<!--<span id="navMenuUsernameText" class="iconButton">>myTI</span>-->
+					<span style="padding:0px 8px;top:-5px;position:relative;font-size:14px;color:#fff;">
+						<span class="ti-icon-myti ti-icon-myti-menu"></span><span id="usernameText">{{username.substring(0,20)}}</span>
+					</span>
+				</li>
+
+				<!-- About menu element -->
+				<li id="navMenuAboutContainer" class="navMenuListLi navMenuListLiLeft" ng-show="init" ng-mouseenter="showPopUp('showAbout')"
+					ng-mouseleave="hidePopUp('showAbout')" ng-style="!init && {'display':'initial','border-left':'1px solid #990000'}">
+					<span title="Displays version and additional information about the tool" class="iconButton" id="aboutBtn" href="">About</span>
+					<div ng-show="showAbout" id="aboutMenu" class="hoverMenu shadow2">
+						<div id="aboutMainTextAndImg"><img src="icons/apps/pinmux.png" /><span id="aboutMainText">Texas Instruments <span style="color:#117788;">PinMux</span></span>
+						</div>
+
+						<div style="padding-top:8px;padding-left:3px;">&#149; Version: <span style="font-weight:bold;">{{getVersion()}}</span></div>
+						<div style="padding-bottom:8px;padding-left:3px;">&#149; See the <a href="" target="_blank" class="aReset" ng-click="openLink('http://processors.wiki.ti.com/index.php/TI_PinMux_Tool','_blank','wiki')">PinMux Wiki</a>							for more information</div>
+
+						<div id="copyrightText">&#169; Copyright <img src="icons/apps/ti_logo_red.svg" style="height:16px;padding:0 1px;" /><span style="font-weight:bold;">Texas Instruments</span>							2016. All rights reserved. </div>
+					</div>
+				</li>
+
+				<!-- right hamburger menu icon -->
+				<li id="navMenuRightHam" class="navMenuListLiRight" ng-click="showHideActionHam();" ng-show="init||username">
+					<i id="hamMenuIcon" class="material-icons">menu</i>
+					<!-- the menu -->
+					<div id="hamHoverMenu" ng-show="showActionHam" class="title">
+						<ul>
+							<li class="info" ng-show="username" title="Username: {{username}}">
+								<span class="ti-icon-myti" style="font-size:20px;top:2px;padding-right:6px;position:relative;color:#cc0000;"></span>
+								<span style="position:relative;right:7px">{{username}}</span>
+							</li>
+							<li ng-show="init" class="link" ng-click="openLink('app.html#/default/','_self','pinmux')" title="{{srvToolTip.configure}}">
+								<a href="">
+									<span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+									<span class="hamMenuText">New Design</span>
+								</a>
+							</li>
+							<li ng-show="init" ng-click="load()" class="link" title="{{srvToolTip.loadProject}}">
+								<a href="">
+									<span class="glyphicon glyphicon-open" aria-hidden="true"></span>
+									<span class="hamMenuText">Open (Local Drive)</span>
+								</a>
+							</li>
+							<li ng-show="username&&init" ng-click="loadCloud()" class="link" title="{{srvToolTip.loadProject}}">
+								<a href="">
+									<span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span>
+									<span class="hamMenuText">Open (Cloud Storage)</span>
+								</a>
+							</li>
+							<li ng-show="init" ng-click="save()" class="link" title="{{srvToolTip.saveProject}}">
+								<a href="">
+									<span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+									<span class="hamMenuText">Save (Local Drive)</span>
+								</a>
+							</li>
+							<li ng-show="username&&init" ng-click="saveCloud()" ng-show="username" class="link" title="{{srvToolTip.saveProject}}">
+								<a href="">
+									<span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span>
+									<span class="hamMenuText">Save (Cloud Storage)</span>
+								</a>
+							</li>
+
+						</ul>
+					</div>
+				</li>
+
+				<!-- Project menu -->
+				<li id="navMenuProjectContainer" ng-show="init" ng-mouseenter="showPopUp('showProject')" ng-mouseleave="hidePopUp('showProject')">
+					<span class="navBtn" title="The configured device: {{deviceDisplayName}}">{{deviceDisplayName}}</span>
+				</li>
+
+				<!-- Reload button for desktop version -->
+				<li id="navMenuResetContainer" class="navMenuListLi navMenuListLiRight" ng-show="init&&isNode" title="{{srvToolTip.reset}}"
+					ng-click="reset()">
+					<span id="resetBtn" class="glyphicon glyphicon-repeat glyphicon-icon-button iconButton"></span>
+				</li>
+
+				<li id="navUserPrefsContainer" class="navMenuListLi navMenuListLiRight" ng-show="init" ng-mouseenter="setInPrefsContainer(true)"
+					ng-mouseleave="setInPrefsContainer(false)">
+					<span id="userPrefsBtn" class="glyphicon glyphicon-wrench glyphicon-icon-button"></span>
+					<div id="navUserPrefsPopDiv" ng-show="showPrefs" class="hoverMenu shadow2">
+						<user-prefs/>
+					</div>
+				</li>
+
+			</ul>
+		</div>
+	</header>
+</div>
+
+<!-- include the save file modal code -->
+<ng-include src="'views/modals/saveFileModal.html'"></ng-include>
+<!-- include the message modal code -->
+<ng-include src="'views/modals/messageModal.html'"></ng-include>
+<!-- include the delete modal code -->
+<ng-include src="'views/modals/filelistModal.html'"></ng-include>
+<!-- include the confirm modal code -->
+<ng-include src="'views/modals/confirmModal.html'"></ng-include>
+<!-- include the message/delete modal code -->
+<ng-include src="'views/modals/deleteConfirmModal.html'"></ng-include>

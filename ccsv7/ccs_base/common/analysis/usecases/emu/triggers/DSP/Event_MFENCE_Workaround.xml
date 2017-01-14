@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<breakpoints xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="breakpoints.xsd">
+
+  <breakpoint type="AET">
+    <property>
+      <name>Hardware Configuration</name>
+      <property>
+        <name>Type</name>
+        <string>Trace</string>
+        <property>
+          <name>Trace Type</name>
+          <string>Event</string>
+        </property>
+        <property>
+          <name>Actions</name>
+          <string>Don't Store Sample</string>
+        </property>
+        <property>
+          <name>Trigger Type</name>
+          <string>Event</string>
+          <property>
+            <name>System Event</name>
+            <string>MARK 0</string>
+          </property>
+        </property>
+        <property>
+          <name>What to Not Store</name>
+          <string>(Select data not to store)</string>
+          <property>
+            <name>Program Address</name>
+            <boolean>1</boolean>
+          </property>
+          <property>
+            <name>Time Stamp</name>
+            <boolean>0</boolean>
+          </property>
+        </property>
+      </property>
+    </property>
+    <property>
+      <name>Miscellaneous</name>
+      <property>
+        <name>Group</name>
+        <string>Default Group</string>
+      </property>
+      <property>
+        <name>Name</name>
+        <string>MFENCE Workaround</string>
+      </property>
+    </property>
+    <enabled>0</enabled>
+  </breakpoint>
+
+</breakpoints>

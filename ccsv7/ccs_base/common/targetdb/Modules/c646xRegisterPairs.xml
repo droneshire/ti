@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module id="Pairs" HW_revision="1" XML_version="1" description="Pairs">
+	<register id="A1_A0" acronym="A1_A0" width="64" description=""/>
+	<register id="A3_A2" acronym="A3_A2" width="64" description=""/>
+	<register id="A5_A4" acronym="A5_A4" width="64" description=""/>
+	<register id="A7_A6" acronym="A7_A6" width="64" description=""/>
+	<register id="A9_A8" acronym="A9_A8" width="64" description=""/>
+	<register id="A11_A10" acronym="A11_A10" width="64" description=""/>
+	<register id="A13_A12" acronym="A13_A12" width="64" description=""/>
+	<register id="A15_A14" acronym="A15_A14" width="64" description=""/>
+	<register id="B1_B0" acronym="B1_B0" width="64" description=""/>
+	<register id="B3_B2" acronym="B3_B2" width="64" description=""/>
+	<register id="B5_B4" acronym="B5_B4" width="64" description=""/>
+	<register id="B7_B6" acronym="B7_B6" width="64" description=""/>
+	<register id="B9_B8" acronym="B9_B8" width="64" description=""/>
+	<register id="B11_B10" acronym="B11_B10" width="64" description=""/>
+	<register id="B13_B12" acronym="B13_B12" width="64" description=""/>
+	<register id="B15_B14" acronym="B15_B14" width="64" description=""/>
+</module>

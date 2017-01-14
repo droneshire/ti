@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Running Tasks (VirtualBuffer)" default="enable" basedir=".">
+	<import file="../../templates/analysisfeature.xml"/>
+	
+	<property name="dvt.activity.name" value="Graph/${ant.project.name}"/>
+	<property name="dvt.activity.description" value="${ant.project.name}"/>
+	<property name="dvt.views" value="Graph"/>
+	<property name="dvt.views.show" value="Graph"/>
+	<property name="analysisFeatureName" value="RunningTasks" />
+
+	<!-- override template target -->
+	<target name="postAddAnalysisFeature" depends="configure" if="ConfigWizard">
+		<dvt.start refid="analysisFeatureRef"/>
+		<dvt.view.show refid="analysisFeatureRef" view="${dvt.views.show}"/>
+	</target>
+
+	<target name="configure" depends="wizard,remove" if="ConfigWizard">
+		<dvt.property refid="analysisFeatureRef" dataprocessor="Tap.5" name="Filter" value="(Master == &quot;${wizard.page1.masterfield}&quot;)"/>
+		<!-- set data context name to identify the data set (shown in the views) -->
+		<dvt.property refid="analysisFeatureRef" datacontext="${wizard.page1.masterlist.text}"/>
+	</target>
+	
+    <target name="remove" unless="ConfigWizard">
+        <dvt.remove/>
+    </target>
+
+	<target name="wizard">
+		<dvt.config.wizard id="ConfigWizard" text="Open File">
+        	<page text="${ant.project.name} Configuration" numColumns="3">
+				<label text="Master Core"/>
+				<edit id="wizard.page1.masterfield" text="Core0"/>
+			</page>
+		</dvt.config.wizard>
+	</target>
+
+	<target name="createStandardContextMenu">
+	</target>
+
+</project>

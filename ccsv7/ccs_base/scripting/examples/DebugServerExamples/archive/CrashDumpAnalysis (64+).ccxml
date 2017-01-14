@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+
+<configurations XML_version="1.2" id="configurations_0">
+	<configuration XML_version="1.2" id="configuration_0" description="">
+		<instance XML_version="1.2" href="connections/DataSnapshotViewer.xml" id="Crash Dump Analysis" xml="DataSnapshotViewer.xml" xmlpath="connections/"/>
+		<connection XML_version="1.2" id="Crash Dump Analysis">
+			<instance XML_version="1.2" href="drivers/DataSnapshotDecoder_c64xp.xml" id="drivers" xml="DataSnapshotDecoder_c64xp.xml" xmlpath="drivers/"/>
+			<drivers XML_version="1.2" id="drivers"/>
+			<platform XML_version="1.2" id="platform_1">
+				<cpu HW_revision="" XML_version="1.2" desc="TMS320C64+" description="" id="device_0" isa="TMS320C64XP">
+				</cpu>
+			</platform>
+		</connection>
+	</configuration>
+</configurations>

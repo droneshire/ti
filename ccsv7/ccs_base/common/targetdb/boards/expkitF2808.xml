@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<board  id="EXPKITF2808" XML_version="1" desc="Experimenter's Kit - F2808" description="F2808 Experimenter's Kit">
+    <instance XML_version="1.2" href="devices/f2808.xml" id="F2808" xml="f2808.xml" xmlpath="." /> 
+</board>

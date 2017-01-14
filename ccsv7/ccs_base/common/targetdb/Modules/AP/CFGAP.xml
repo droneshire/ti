@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module id="Hidden" HW_revision="1" XML_version="1" description="" hidden="true">
+	<register id="CFGAP_IDCODE" offset="0x0000" width="32" page="121" acronym="CFGAP_IDCODE"/>
+	<register id="CFGAP_USERCODE" offset="0x0004" width="32" page="121" acronym="CFGAP_USERCODE"/>
+	<register id="CFGAP_DBGCR" offset="0x0008" width="32" page="121" acronym="CFGAP_DBGCR"/>
+	<register id="CFGAP_IDR" offset="0x00FC" width="32" page="121" acronym="CFGAP_IDR"/>
+</module>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- 
+  TI File $Revision: 
+  Checkin $Date: 
+  --> 
+
+<!--  F2805x GPIO CTRL REGS Registers 
+     =================================== 
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     --> 
+<module id="GPIO CTRL REGS" HW_revision="" XML_version="1" description="GPIO CTRL REGS Registers">
+    <register id="GPACTRL" acronym="GPACTRL" offset="0" page="1" width="32" description="GPIO A Control Register (GPIO0 to 31)" />
+    <register id="GPAQSEL1" acronym="GPAQSEL1" offset="2" page="1" width="32" description="GPIO A Qualifier Select 1 Register (GPIO0 to 15) " />
+    <register id="GPAQSEL2" acronym="GPAQSEL2" offset="4" page="1" width="32" description="GPIO A Qualifier Select 2 Register (GPIO16 to 31)" />
+    <register id="GPAMUX1" acronym="GPAMUX1" offset="6" page="1" width="32" description="GPIO A Mux 1 Register (GPIO0 to 15) " />
+    <register id="GPAMUX2" acronym="GPAMUX2" offset="8" page="1" width="32" description="GPIO A Mux 2 Register (GPIO16 to 31)" />
+    <register id="GPADIR" acronym="GPADIR" offset="10" page="1" width="32" description="GPIO A Direction Register (GPIO0 to 31) )" />
+    <register id="GPAPUD" acronym="GPAPUD" offset="12" page="1" width="32" description="GPIO A Pull-Up Disable Register" />
+    <!--  2 empty  -->
+    <register id="GPBCTRL" acronym="GPBCTRL" offset="16" page="1" width="32" description="GPIO B Control Register (GPIO32 to 44)" />
+    <register id="GPBQSEL1" acronym="GPBQSEL1" offset="18" page="1" width="32" description="GPIO B Qualifier Select 1 Register (GPIO32 to 44)" />
+    <!--  2 empty  -->
+    <register id="GPBMUX1" acronym="GPBMUX1" offset="22" page="1" width="32" description="GPIO B Mux 1 Register (GPIO32 to 44)" />
+    <!--  2 empty  -->
+    <register id="GPBDIR" acronym="GPBDIR" offset="26" page="1" width="32" description="GPIO B Direction Register (GPIO32 to 44)" />
+    <register id="GPBPUD" acronym="GPBPUD" offset="28" page="1" width="32" description="GPIO B Pull-Up Disable Register" />
+    <!--  34 empty  -->
+</module>

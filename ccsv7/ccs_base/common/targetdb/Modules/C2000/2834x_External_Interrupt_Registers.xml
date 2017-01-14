@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  TI File $Revision: /main/1 $
+  Checkin $Date: June 24, 2009   15:25:08 $
+  -->
+
+
+<!-- TMS320C2834x External Interrupt Registers
+     ========================================
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     -->
+
+
+
+<module id="XINT" HW_revision="" XML_version="1" description="External Interrupt Registers">
+	<register id="XINT1CR" acronym="XINT1CR" offset="0" page="1" width="16" description="XINT1 configuration register" /> 
+	<register id="XINT2CR" acronym="XINT2CR" offset="1" page="1" width="16" description="XINT2 configuration register" />
+	<register id="XINT3CR" acronym="XINT3CR" offset="2" page="1" width="16" description="XINT3 configuration register" />
+	<register id="XINT4CR" acronym="XINT4CR" offset="3" page="1" width="16" description="XINT4 configuration register" />
+	<register id="XINT5CR" acronym="XINT5CR" offset="4" page="1" width="16" description="XINT5 configuration register" />
+	<register id="XINT6CR" acronym="XINT6CR" offset="5" page="1" width="16" description="XINT6 configuration register" />
+	<register id="XINT7CR" acronym="XINT7CR" offset="6" page="1" width="16" description="XINT7 configuration register" />
+	<register id="XNMICR" acronym="XNMICR" offset="7" page="1" width="16" description="XNMI configuration register" />
+	<register id="XINT1CTR" acronym="XINT1CTR" offset="8" page="1" width="16" description="XINT1 counter register" />
+	<register id="XINT2CTR" acronym="XINT2CTR" offset="9" page="1" width="16" description="XINT2 counter register" />
+	<!-- 5 reserved -->
+	<register id="XNMICTR" acronym="XNMICTR" offset="15" page="1" width="16" description="XNMI counter register" />
+</module>

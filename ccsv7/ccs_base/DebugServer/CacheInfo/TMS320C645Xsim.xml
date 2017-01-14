@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Himalaya Simulation Target - based on simTCI6482.cfg -->
+<!DOCTYPE CodeComposer [                 
+<!ENTITY MemoryBase SYSTEM "include/TMS320C64XXPlus_MemoryBase.xml">
+<!ENTITY RegisterBase SYSTEM "include/TMS320C64XXPlus_RegisterBase.xml">
+<!ENTITY DecoderBase SYSTEM "include/TMS320C64XXPlus_DecoderBase.xml">
+
+<!ENTITY L1PRegion0StartAdrs "0x00000000">
+<!ENTITY L1PRegion0Length "0x00000000">
+<!ENTITY L1PRegion0MemoryProtectionPageSize "0x00000000">
+<!ENTITY L1PRegion0MemorySecurityPageSize "0x00000000">
+<!ENTITY L1PRegion0CanBeSecured "false">
+<!ENTITY L1PRegion0CanBeProtected "false">
+<!ENTITY L1PRegion0IsROM "false">
+<!ENTITY L1PRegion1StartAdrs "0x0E00000">
+<!ENTITY L1PRegion1Length "0x08000">
+<!ENTITY L1PRegion1MemoryProtectionPageSize "0x00000800">
+<!ENTITY L1PRegion1MemorySecurityPageSize "0x0000800">
+<!ENTITY L1PRegion1CanBeSecured "false">
+<!ENTITY L1PRegion1CanBeProtected "true">
+<!ENTITY L1PRegion1IsROM "false">
+
+<!ENTITY L1DRegion0StartAdrs "0x00000000">
+<!ENTITY L1DRegion0Length "0x00000000">
+<!ENTITY L1DRegion0MemoryProtectionPageSize "0x00000000">
+<!ENTITY L1DRegion0MemorySecurityPageSize "0x00000000">
+<!ENTITY L1DRegion0CanBeSecured "false">
+<!ENTITY L1DRegion0CanBeProtected "false">
+<!ENTITY L1DRegion1StartAdrs "0x00F00000">
+<!ENTITY L1DRegion1Length "0x08000">
+<!ENTITY L1DRegion1MemoryProtectionPageSize "0x00000800">
+<!ENTITY L1DRegion1MemorySecurityPageSize "0x0000800">
+<!ENTITY L1DRegion1CanBeSecured "false">
+<!ENTITY L1DRegion1CanBeProtected "true">
+
+<!ENTITY L2Region0StartAdrs "0x00000000">
+<!ENTITY L2Region0Length "0x00000000">
+<!ENTITY L2Region0MemoryProtectionPageSize "0x00000000">
+<!ENTITY L2Region0MemorySecurityPageSize "0x00000000">
+<!ENTITY L2Region0CanBeSecured "false">
+<!ENTITY L2Region0CanBeProtected "false">
+<!ENTITY L2Region0IsROM "false">
+<!ENTITY L2Region1StartAdrs "0x00800000">
+<!ENTITY L2Region1Length "0x0200000">
+<!ENTITY L2Region1MemoryProtectionPageSize "0x10000">
+<!ENTITY L2Region1MemorySecurityPageSize "0x10000">
+<!ENTITY L2Region1CanBeSecured "false">
+<!ENTITY L2Region1CanBeProtected "true">
+<!ENTITY L2Region1IsROM "false">
+
+<!ENTITY ExternalStartAdrs "0x00000000">
+<!ENTITY ExternalLength "0x100000000">
+
+<!ENTITY IsCacheTagRamDecodingSupported "true">
+
+]>
+<CodeComposer>
+	<CcsMemoryServer>
+		<XMLFileVersion>1.0.0.0</XMLFileVersion>
+		<!-- TraceLevel 0=off,1=error,2=warning,3=transactions,4=events,5=info,6=verbose -->
+		<!-- CtrvTraceLevel 0=off,1=error,2=warning,3=transactions,4=events,5=info,6=verbose -->
+		<!-- MptvTraceLevel 0=off,1=error,2=warning,3=transactions,4=events,5=info,6=verbose -->
+		<!-- set SendTraceEventsToOutputWindow true to output trace data to the CCS Output window-->
+		<!-- set LogTraceEventsToFile to the name of the file to log events to -->
+		<!-- set TraceRequestLifecycle true to trace construction and recycling of request descriptors -->
+		<!-- set TraceVerboseMinAdrs to the first hex address to trace in detail -->
+		<!-- set TraceVerboseMaxAdrs to the last hex address to trace in detail -->
+		<Device>
+			<Name>TMS320C645X</Name>
+			<NumCores>1</NumCores>
+			<Core index="0">
+				<Name>TMS320C645X</Name>
+				<NumAddressSpaces>1</NumAddressSpaces>
+				<IsMemoryColoringSupported>true</IsMemoryColoringSupported>
+				<IsGTI_GetMemWithStatSupported>true</IsGTI_GetMemWithStatSupported>
+				<IsVirtualMemorySupported>false</IsVirtualMemorySupported>
+				<!-- set MinNumMausPerMemoryRead = number of minimum addressable units per line of memory -->
+				<MinNumMausPerMemoryRead>256</MinNumMausPerMemoryRead>
+				<DeviceId>
+					<IsDeviceIdSupported>false</IsDeviceIdSupported>
+				</DeviceId>
+				<CoreNumber>
+					<ConfigReg>CORENUMBER</ConfigReg>
+					<DecoderName>GetCoreNumber</DecoderName>
+				</CoreNumber>
+				<AddressSpace page="0">
+					<!-- The GEM Memory hierarchy consists of the following:
+	L1P Memory: Region 0, Region 1 (PMC - Program Memory Controller)
+	L1P Cache 
+	L1D Memory: Region 0, Region 1 (DMC - Data Memory Controller)
+	L1D Cache 
+	L2 Memory: Region 0, Region 1  (UMC - Unified Memory Controller)
+	L2 Cache 
+	External Memory 
+	
+	The following variables are defined as External Entity Parameters:
+	
+	-->
+					&MemoryBase;
+				</AddressSpace>
+				<!-- the following registers are used to configure the 
+				memory, cache, memory protection and memory security features of this device-->
+				<RegisterDefinitions>
+				&RegisterBase;			
+				</RegisterDefinitions>
+				<!-- the following register decoders are used to decode bitfields in
+				the registers defined for this device-->
+				<DecoderDefinitions>
+				 &DecoderBase;		 
+				</DecoderDefinitions>
+			</Core>
+		</Device>
+	</CcsMemoryServer>
+</CodeComposer>

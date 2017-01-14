@@ -1,0 +1,25 @@
+/* This GEL file is loaded on the command line of Code Composer 
+ * The StartUp() function is called every time you start
+ * Code Composer.  You can customize this function to
+ * initialize wait states or to perform other initialization.
+ */
+
+StartUp()
+{
+}
+
+OnTargetConnect()
+{
+}
+
+menuitem "TMS470"
+
+/* This function should be used instead of the Debug->Restart menu */
+/* selection when running ARM programs in mixed or 16 BIS (Thumb)  */
+/* mode.  It ensures the processor is in ARM mode at the entry     */
+/* point of TI C runtimes.                                         */
+hotmenu ResetRestart()
+{
+	GEL_Reset();
+	GEL_Restart();
+}

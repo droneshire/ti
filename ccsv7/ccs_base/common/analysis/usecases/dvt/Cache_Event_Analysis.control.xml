@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="Cache Analysis" basedir=".">
+
+	<property name="dvt.activity.name" value="Hardware Trace Analyzer/${ant.project.name}"/>
+  	<property name="dvt.activity.description" 
+  		value="Count the number cache events"/>
+		
+		<!-- doesn't fit in the two lines... where to put? "&#10;&#10; 
+  		L1P Cache Miss Analysis: L1P Read Miss Hits L2 SRAM, L1P Read Miss Hits L2 Cache, L1P Read Miss Hits External&#10;
+  		L1D Cache Miss Analysis: L1D Read Miss Path A, L1D Read Miss Path B, Write Buffer Full Path A, Write Buffer Full Path B&#10;
+  		Non-cacheable Analysis:  L1D Read Miss Path A Hits External Non-Cacheable, L1D Read Miss Path B Hits External Non-Cacheable
+  		"/-->
+
+   	<property name="uc_name" value="Cache_Event_Analysis" />
+	<property name="technology" value="Hardware Core Trace" />
+
+	<dvt.import file="../../scripts/CacheEventAnalysisDialog.js"/>
+	<dvt.import file="../../scripts/CoreTrace.js"/>
+
+	<!-- target mapping file(s) must be named emu\<uc_name>.xml to be found -->
+	
+	<dvt.property>
+		version=1.0.0
+		dvt.activity.priority = 60
+
+		<!-- Data Provider and AF information-->
+		dataproviders=Trace
+		Trace.name=Trace Viewer
+		Trace.analyzer=Cache Event Profiler
+	</dvt.property>
+	
+</project>

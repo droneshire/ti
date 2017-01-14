@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<register_ids id="TMS470R4x" XML_version="2.0">
+	<register_id id="ETB11_ID" value="268435456" address="0" page="0" />
+	<register_id id="ETB11_RDP" value="268435457" address="0" page="0" />
+	<register_id id="ETB11_RWD" value="268435458" address="0" page="0" />
+	<register_id id="ETB11_STS" value="268435459" address="0" page="0" />
+	<register_id id="ETB11_RRD" value="268435460" address="0" page="0" />
+	<register_id id="ETB11_RRP" value="805306373" address="0" page="0" />
+	<register_id id="ETB11_RWP" value="805306374" address="0" page="0" />
+	<register_id id="ETB11_TRG" value="805306375" address="0" page="0" />
+	<register_id id="ETB11_CTL" value="805306376" address="0" page="0" />	
+</register_ids>

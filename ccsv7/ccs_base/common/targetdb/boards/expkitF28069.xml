@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<board  id="EXPKITF28069" XML_version="1" desc="Experimenter's Kit - Piccolo F28069" description="Piccolo F28069 Experimenter's Kit">
+    <instance XML_version="1.2" href="devices/f28069.xml" id="F28069" xml="f28069.xml" xmlpath="." /> 
+</board>

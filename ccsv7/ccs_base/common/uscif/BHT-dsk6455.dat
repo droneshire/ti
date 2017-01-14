@@ -1,0 +1,14 @@
+# config version=3.5
+
+$ uscif
+  loopback_mode=enable
+  loopback_value=clock
+$ /
+
+@ icepick_c_0 family=icepick_c subpaths=1
+  & subpath_1 address=16 default=no custom=no
+    @ cpu0 family=tms320c64plus
+  & /
+
+# /
+

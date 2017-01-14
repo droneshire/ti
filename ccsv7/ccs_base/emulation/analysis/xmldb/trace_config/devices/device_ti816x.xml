@@ -1,0 +1,1211 @@
+<?xml version="1.0"?>
+
+<!-- Trace subsystem setup attributes for device -->
+<device id="TI816x" value="0x0B81E02F" mask="0x0FFFFFFF" HW_revision="1.0" XML_version="1.0">
+
+	<FileVersion version="2.0.0.0" Copyright="Copyright (c) 2009 Texas Instruments"></FileVersion>
+	
+	<!-- Trace route topology. Every route entry specifies a soure to sink/pin route for a given source.
+	Multiple routes shows multiple possible paths available for trace and user can select one for an 
+	active debug session -->
+			
+	<trace_routes> 
+		<!-- STM uses ETB as receiver -->
+		<route>
+			<source source="CSSTM_0"/>
+			<link module=""/>
+			<sink module="MOD_ETB0"/>
+			<pin module=""/>
+		</route> 
+
+		<!-- CortexA8 uses ETB as receiver -->
+		<route>
+			<source source="CortexA8_0"/>
+			<link module=""/>
+			<sink module="MOD_ETB0"/>
+			<pin module=""/>
+		</route>
+		
+		<!-- GEM uses ETB as receiver -->
+		<route>
+			<source source="C674X_0"/>
+			<link module=""/>
+			<sink module="MOD_ETB0"/>
+			<pin module=""/>
+		</route>
+
+		<!-- STM uses Pin (DRM) as receiver -->
+		<route>
+			<source source="CSSTM_0"/>
+			<link module=""/>
+			<sink module=""/>
+			<pin module="MOD_DRM"/>
+		</route>
+
+	</trace_routes>
+
+	<!-- Supported proc access mechanisms for the device -->
+	<procs>
+		<!-- Modena System CortexA8 -->
+		<proc id="CortexA8_0" kind="cortex_axx" traceid="1">
+			<identifier>
+				<register id="" address="" page="" addrunit="" width="" type="reg"/>
+				<value idvalue="" />
+			</identifier> 			
+		</proc>
+
+		<!-- Ducati System CortexM3_RTOS -->
+		<proc id="CortexM3_RTOS" kind="cortex_mxx" traceid="2">
+			<identifier>
+				<register id="PID0" address="0xE00FFFE0" page="0" addrunit="1" width="32" type="mem"/>
+				<value idvalue="0" />
+			</identifier> 
+			
+		</proc>
+	
+		<!-- Ducati System CortexM3_ISS -->
+		<proc id="CortexM3_ISS" kind="cortex_mxx" traceid="3">
+			<identifier>
+				<register id="PID0" address="0xE00FFFE0" page="0" addrunit="1" width="32" type="mem"/>
+				<value idvalue="1" />
+			</identifier> 
+			
+		</proc>
+
+		<!-- Secure system CortexM3-->
+		<proc id="CortexM3_secSS" kind="cortex_mxx" traceid="4">			
+		</proc>
+	
+		<!-- GEM system -->
+		<proc id="C674X_0" kind="tms320c674x" traceid="5">	
+			<components>
+				<component module="MOD_RADTF0"/>
+			</components> 		
+		</proc>
+		
+		<!-- TPPSS system Arm9, this the only arm9 supported in this system-->
+		<proc id="ARM9_TPPSS" kind="arm9xx" traceid="6">			
+		</proc>
+
+		<!-- IVAHD0_iCont0-->
+		<proc id="ARM9_0" kind="arm9xx" traceid="7">			
+		</proc>
+
+		<!-- IVAHD0_iCont1-->
+		<proc id="ARM9_1" kind="arm9xx" traceid="8">			
+		</proc>
+
+		<!-- IVAHD1_iCont2-->
+		<proc id="ARM9_2" kind="arm9xx" traceid="9">			
+		</proc>
+
+		<!-- IVAHD1_iCont3-->
+		<proc id="ARM9_3" kind="arm9xx" traceid="10">			
+		</proc>
+
+		<!-- IVAHD2_iCont2-->
+		<proc id="ARM9_4" kind="arm9xx" traceid="11">			
+		</proc>
+
+		<!-- IVAHD2_iCont3-->
+		<proc id="ARM9_5" kind="arm9xx" traceid="12">			
+		</proc>
+
+		<!-- CSETB -->
+		<proc id="CSETB_0" kind="cs_etb">
+			<identifier>
+				<register id="BASE_ADDRESS" address="" page="" addrunit="" width="" type="reg"/>
+				<value idvalue="0x4B162000" />
+			</identifier> 
+			
+		</proc>
+				
+		<!-- STM -->
+		<proc id="CSSTM_0" kind="cs_stm">
+			<identifier>
+				<register id="BASE_ADDRESS" address="" page="" addrunit="" width="" type="reg"/>
+				<value idvalue="0x4B161000" />
+			</identifier> 
+		</proc >
+		
+	</procs>
+
+	<!-- Available Trace sources for the device -->
+	<sources>		
+		<!-- System Trace source -->
+		<source id="CortexM3_RTOS" proc="CortexM3_RTOS" stmmaster = "true">
+			<characteristics>
+				<characteristic id="DEV_CHAR_SCTMMODULENUM" value="1"/>
+				<characteristic id="DEV_CHAR_SCTMFILE" value="AET_PropertySCTM.xml"/>
+			</characteristics>
+		</source>
+
+		<source id="CortexM3_ISS" proc="CortexM3_ISS" stmmaster = "true">
+			<characteristics>
+				<characteristic id="DEV_CHAR_SCTMMODULENUM" value="1"/>
+				<characteristic id="DEV_CHAR_SCTMFILE" value="AET_PropertySCTM.xml"/>
+			</characteristics>
+		</source>
+		
+		<!-- ModemnaSS -->
+		<source id="CortexA8_0" proc="CortexA8_0" stmmaster = "true">
+			<characteristics>
+				<characteristic id="DEV_CHAR_ETMPTM_BASEADDR" value="0x80000000"/>
+			</characteristics>
+		</source>
+
+		<!-- TPPSS Arm9 -->
+		<source id="ARM9_TPPSS" proc="ARM9_TPPSS" stmmaster = "true">
+		</source>
+
+		<!-- Secure CortexM3 -->
+		<source id="CortexM3_secSS" proc="CortexM3_secSS" stmmaster = "true">
+		</source>
+
+		<source id="C674X_0" proc="C674X_0" stmmaster = "true">
+			<components>
+				<component module="MOD_RADTF0"/>
+			</components> 
+			<characteristics>
+				<characteristic id="DEV_CHAR_TRACEPLLUNIT" description="" value="13"/>
+				<characteristic id="DEV_CHAR_TRACEPLLBASE" value="0"/>
+				<characteristic id="DEV_CHAR_GEMTYPE" value="2"/> 
+			</characteristics>
+		</source>
+		
+		<source id="CSSTM_0" proc="CSSTM_0" stmmaster = "true">
+			<components>
+				<component module="MOD_STMMASTERS_CONTROL"/>
+				<component module="MOD_SWMASTER0"/>
+				<component module="MOD_OCPWP0"/>
+				<component module="MOD_SMSET0"/>
+				<component module="MOD_SMSET1"/>
+				<component module="MOD_SMSET2"/>
+				<component module="MOD_SC"/>
+				<component module="MOD_CONFIGINFO"/>
+			</components> 
+			<characteristics>
+				<characteristic id="CHAR_MAXEXPORTFREQMHZ" value="83"/>
+				<characteristic id="DEV_CHAR_STMTYPE" value="2"/>
+				<characteristic id="DEV_CHAR_STM_BASEADDRESS" value="0xCB161000"/>
+				<characteristic id="DEV_CHAR_PPFMODULENUM" value="2"/>
+				<!-- This base address need to confirm  -->
+				<characteristic id="DEV_CHAR_STM_CM_BASEADDRESS" value="0x4A307A00"/>
+				<!-- Default enable SW master of ModenaSS(0x0), IVA_HD0(0x08), GEM with MMU on (0x28),  and Ducati(0x38)  -->
+				<characteristic id="DEV_CHAR_STM_SW_MASTER_DEFAULT" value="0x38280800"/>
+				<!-- Default enable HW master of OCP probe, OCP profile, Static Collector0 and HVA_HD0 SMSET  -->
+				<characteristic id="DEV_CHAR_STM_HW_MASTER_DEFAULT" value="0xFCF8F4F0"/>
+			</characteristics>
+		</source>
+
+		<!-- IVAHD0_iCont0-->
+		<source id="ARM9_0" proc="ARM9_0" stmmaster = "true">
+		</source>
+
+		<!-- IVAHD0_iCont1-->
+		<source id="ARM9_1" proc="ARM9_1" stmmaster = "true">
+		</source>
+
+		<!-- IVAHD1_iCont0-->
+		<source id="ARM9_2" proc="ARM9_2" stmmaster = "true">
+		</source>
+
+		<!-- IVAHD1_iCont1-->
+		<source id="ARM9_3" proc="ARM9_3" stmmaster = "true">
+		</source>
+
+		<!-- IVAHD2_iCont0-->
+		<source id="ARM9_4" proc="ARM9_4" stmmaster = "true">
+		</source>
+
+		<!-- IVAHD2_iCont1-->
+		<source id="ARM9_5" proc="ARM9_5" stmmaster = "true">
+		</source>
+
+	</sources> 
+
+	<!-- Available modules asscoiated with various modules in the device -->
+	<modules> 
+				
+		<!-- SM module associated with System Trace -->
+		<module id="MOD_STMMASTERS_CONTROL" kind="swmctrl" proc="CSSTM_0" version="1.0" >
+			<characteristics>				
+				<characteristic id="SWMSCTRL_TESLA" description="SW Master Control for  Tesla?" value="Teslae_None,Teslae_CPU0"/> 
+				<characteristic id="SWMSCTRL_IVAHD0" description="SW Master Control for IVA-HD 0?" value="IVAHD0_None,IVAHD0_CPU0"/>
+				<characteristic id="SWMSCTRL_IVAHD1" description="SW Master Control for IVA-HD 1?" value="IVAHD1_None,IVAHD1_CPU1"/>
+				<characteristic id="SWMSCTRL_DUCATI" description="SW Master Control for Ducati?" value="Ducati_None,Ducati_CPU0,Ducati_CPU1"/>
+				<characteristic id="SWMSCTRL_CHIRON" description="SW Master Control for Chiron?" value="Chiron_None,Chiron_CPU0"/>
+								
+			</characteristics> 
+			
+			<mapping id="value.username">
+				<map value="Chiron_None" username="None"/>
+				<map value="Chiron_CPU0" username="CPU0"/>
+				<map value="Chiron_CPU1" username="CPU1"/>
+				<map value="Chiron_Either" username="Either"/>
+				<!-- Add more...-->
+			</mapping>
+			
+			<mapping id="value.swmasterid">
+				<map value="Chiron_None" swmasterid="0x0??"/>
+				<map value="Chiron_CPU0" swmasterid="0x0??"/>
+				<map value="Chiron_CPU1" swmasterid="0x0??"/>
+				<map value="Chiron_Either" swmasterid="0x0??"/>
+				<!-- Add more...-->
+			</mapping>
+		
+		<mapping id="value.coreidmask">
+				<map value="Chiron_None" coreidmask="0x0??"/>
+				<map value="Chiron_CPU0" coreidmask="0x0??"/>
+				<map value="Chiron_CPU1" coreidmask="0x0??"/>
+				<map value="Chiron_Either" coreidmask="0x0??"/>
+				<!-- Add more...-->
+			</mapping>
+			
+		</module>	
+		
+		<module id="MOD_SWMASTER0" kind="STM" proc="CSSTM_0" version="2.0" >
+			<registers>
+				<register id="ATB_CONFIG" address="0x4B161044" page="0" addrunit="4" width="32" type="mem" />		
+				<register id="ATB_POINTER" address="0x4B161048" page="0" addrunit="4" width="32" type="mem" />		
+			</registers>
+
+			<mapping id="masterid.name">
+				<map masterid="0x00" name="CortexA8"/>						
+				<map masterid="0x08" name="IVAHD0_ICON1"/>						
+				<map masterid="0x0C" name="IVAHD0_ICON2"/>
+				<map masterid="0x18" name="IVAHD1_ICON1"/>						
+				<map masterid="0x1C" name="IVAHD1_ICON2"/>
+				<map masterid="0x30" name="IVAHD2_ICON1"/>						
+				<map masterid="0x34" name="IVAHD2_ICON2"/>
+				<map masterid="0x20" name="C674X_DSPSS"/>
+				<map masterid="0x28" name="C674X_DSPSS"/>	  <!-- master id 0x28 is indeed representing C674X with MMU turned on  -->													
+				<map masterid="0x40" name="TPPSS_ARM9"/>
+				<map masterid="0x38" name="Ducati_CortexM3_RTOS"/>				
+				<map masterid="0x39" name="Ducati_CortexM3_ISS"/>				
+				<map masterid="0x3A" name="Ducati_System"/>
+				<map masterid="0x3B" name="Ducati_System"/>
+				<map masterid="0x50" name="SecureSS_CortexM3"/>						
+			</mapping>
+			
+			<mapping id="masterid.proc">
+				<map masterid="0x00" proc="CortexA8_0"/>
+				<map masterid="0x08" name="ARM9_0"/>						
+				<map masterid="0x0C" name="ARM9_1"/>
+				<map masterid="0x18" name="ARM9_2"/>						
+				<map masterid="0x1C" name="ARM9_3"/>
+				<map masterid="0x30" name="ARM9_4"/>						
+				<map masterid="0x34" name="ARM9_5"/>
+				<map masterid="0x20" proc="C674X_0"/>
+				<map masterid="0x28" proc="C674X_0"/>	<!-- master id 0x28 is indeed representing C674X with MMU turned on  -->	
+				<map masterid="0x40" proc="TPPSS_ARM9"/>
+				<map masterid="0x38" proc="CortexM3_RTOS"/>
+				<map masterid="0x39" proc="CortexM3_ISS"/>		
+				<map masterid="0x3A" proc="CortexM3_System"/>
+				<map masterid="0x3B" proc="CortexM3_ISS"/>
+				<map masterid="0x50" proc="CortexM3_secSS"/>						
+			</mapping>
+			
+			<mapping id="masterid.decoder">
+				<map masterid="*"  decoder="StmDecodeUnitSoftwareMessage"/>
+			</mapping>
+		
+		</module>	
+				
+		<!-- OCPWP module associated with System Trace -->
+		<module id="MOD_OCPWP0" kind="ocpwp" proc="CSSTM_0" version="1.0" >
+			<registers>
+				<register id="TFCR0" address="0x4A102030" page="0" addrunit="1" width="32" type="mem" />		
+				<register id="TFCR1" address="0x4A102034" page="0" addrunit="1" width="32" type="mem" />		
+				<register id="TFCR2" address="0x4A102038" page="0" addrunit="1" width="32" type="mem" />		
+				<register id="TFCR3" address="0x4A10203c" page="0" addrunit="1" width="32" type="mem" />		
+			</registers>
+			
+			<!-- Reverse lookup for UBM/AET database using key -->
+			<characteristics>
+				<characteristic id="CONTROL_EVENT" value="true"/>
+				<characteristic id="CONTROL_DATA " value="true"/>
+			</characteristics>
+		
+			<!-- Reverse lookup for UBM/AET database using key -->
+			<mapping id="eventbit.name">
+				<map eventbit="1" name="Interrupt"/>
+				<map eventbit="2" name="DMA Stop"/>
+			</mapping>			
+			
+			<mapping id="masterid.name">
+				<map masterid="0x84" name="OCPWP_Monitor"/>
+				<map masterid="0x88" name="OCPWP_Profier"/>			
+			</mapping>
+			
+			<mapping id="masterid.width">
+				<map masterid="0x84" width="32"/>
+				<map masterid="0x88" width="32"/>
+			</mapping>
+			
+			<mapping id="masterid.decoder">
+				<map masterid="*" decoder="OCPDecoderUnitH08"/>
+			</mapping>
+
+		</module> 	
+
+		<module id="MOD_SMSET0" kind="SMSET" proc="CSSTM_0" version="1.0" >
+		
+			<mapping id="eventid.module">
+				<map eventid="0" module="Invalid"/>
+				<map eventid="1" module="IVA0-iCONT1"/>
+				<map eventid="2" module="IVA0-iCONT1"/>
+				<map eventid="3" module="IVA0-iCONT1"/>
+				<map eventid="4" module="IVA0-iCONT1"/>
+				<map eventid="5" module="IVA0-iCONT1"/>
+				<map eventid="6" module="IVA0-iCONT1"/>
+				<map eventid="7" module="IVA0-iCONT1"/>
+				<map eventid="8" module="IVA0-iCONT1"/>
+				<map eventid="9" module="IVA0-iCONT1"/>
+				<map eventid="10" module="IVA0-iCONT1"/>
+				<map eventid="11" module="IVA0-iCONT1"/>
+				<map eventid="12" module="IVA0-iCONT1"/>
+				<map eventid="13" module="IVA0-iCONT2"/>
+				<map eventid="14" module="IVA0-iCONT2"/>
+				<map eventid="15" module="IVA0-iCONT2"/>
+				<map eventid="16" module="IVA0-iCONT2"/>
+				<map eventid="17" module="IVA0-iCONT2"/>
+				<map eventid="18" module="IVA0-iCONT2"/>
+				<map eventid="19" module="IVA0-iCONT2"/>
+				<map eventid="20" module="IVA0-iCONT2"/>
+				<map eventid="21" module="IVA0-iCONT2"/>
+				<map eventid="22" module="IVA0-iCONT2"/>
+				<map eventid="23" module="IVA0-iCONT2"/>
+				<map eventid="24" module="IVA0-iCONT2"/>
+				<map eventid="25" module="IVA0-iME3"/>
+				<map eventid="26" module="IVA0-iME3"/>
+				<map eventid="27" module="IVA0-iLF3"/>
+				<map eventid="28" module="IVA0-iLF3"/>
+				<map eventid="29" module="IVA0-iPE3"/>
+				<map eventid="30" module="IVA0-iPE3"/>
+				<map eventid="31" module="IVA0-iPE3"/>
+				<map eventid="32" module="IVA0-iPE3"/>
+				<map eventid="33" module="IVA0-iPE3"/>
+				<map eventid="34" module="IVA0-iPE3"/>
+				<map eventid="35" module="IVA0-CALC3"/>
+				<map eventid="36" module="IVA0-CALC3"/>
+				<map eventid="37" module="IVA0-CALC3"/>
+				<map eventid="38" module="IVA0-CALC3"/>
+				<map eventid="39" module="IVA0-CALC3"/>
+				<map eventid="40" module="IVA0-CALC3"/>
+				<map eventid="41" module="IVA0-ECD3"/>
+				<map eventid="42" module="IVA0-ECD3"/>
+				<map eventid="43" module="IVA0-ECD3"/>
+				<map eventid="44" module="IVA0-ECD3"/>
+				<map eventid="45" module="IVA0-ECD3"/>
+				<map eventid="46" module="IVA0-ECD3"/>
+				<map eventid="47" module="IVA0-MC3"/>
+				<map eventid="48" module="IVA0-MC3"/>
+				<map eventid="49" module="IVA0-MC3"/>
+				<map eventid="50" module="IVA0-MC3"/>
+				<map eventid="51" module="IVA0-MC3"/>
+				<map eventid="52" module="IVA0-MC3"/>
+			</mapping>
+					
+			<mapping id="eventid.class">
+				<map eventid="0" class="Invalid"/>
+				<map eventid="1" class="task1"/>
+				<map eventid="2" class="task1"/>
+				<map eventid="3" class="task2"/>
+				<map eventid="4" class="task2"/>
+				<map eventid="5" class="task3"/>
+				<map eventid="6" class="task3"/>
+				<map eventid="7" class="task4"/>
+				<map eventid="8" class="task4"/>
+				<map eventid="9" class="task5"/>
+				<map eventid="10" class="task5"/>
+				<map eventid="11" class="task5"/>
+				<map eventid="12" class="task5"/>
+				<map eventid="13" class="task1"/>
+				<map eventid="14" class="task1"/>
+				<map eventid="15" class="task2"/>
+				<map eventid="16" class="task2"/>
+				<map eventid="17" class="task2"/>
+				<map eventid="18" class="task2"/>
+				<map eventid="19" class="task3"/>
+				<map eventid="20" class="task3"/>
+				<map eventid="21" class="task4"/>
+				<map eventid="22" class="task4"/>
+				<map eventid="23" class="task6"/>
+				<map eventid="24" class="task6"/>
+				<map eventid="25" class="computation"/>
+				<map eventid="26" class="computation"/>
+				<map eventid="27" class="computation"/>
+				<map eventid="28" class="computation"/>
+				<map eventid="29" class="load"/>
+				<map eventid="30" class="load"/>
+				<map eventid="31" class="computation"/>
+				<map eventid="32" class="computation"/>
+				<map eventid="33" class="store"/>
+				<map eventid="34" class="store"/>
+				<map eventid="35" class="load"/>
+				<map eventid="36" class="load"/>
+				<map eventid="37" class="computation"/>
+				<map eventid="38" class="computation"/>
+				<map eventid="39" class="store"/>
+				<map eventid="40" class="store"/>
+				<map eventid="41" class="load"/>
+				<map eventid="42" class="load"/>
+				<map eventid="43" class="computation"/>
+				<map eventid="44" class="computation"/>
+				<map eventid="45" class="store"/>
+				<map eventid="46" class="store"/>
+				<map eventid="47" class="load"/>
+				<map eventid="48" class="load"/>
+				<map eventid="49" class="computation"/>
+				<map eventid="50" class="computation"/>
+				<map eventid="51" class="store"/>
+				<map eventid="52" class="store"/>
+			</mapping>
+					
+			<mapping id="eventid.type">
+				<map eventid="0" type="Invalid"/>
+				<map eventid="1" type="Event"/>
+				<map eventid="2" type="Event"/>
+				<map eventid="3" type="Event"/>
+				<map eventid="4" type="Event"/>
+				<map eventid="5" type="Event"/>
+				<map eventid="6" type="Event"/>
+				<map eventid="7" type="Event"/>
+				<map eventid="8" type="Event"/>
+				<map eventid="9" type="Event"/>
+				<map eventid="10" type="Event"/>
+				<map eventid="11" type="Event"/>
+				<map eventid="12" type="Event"/>
+				<map eventid="13" type="Event"/>
+				<map eventid="14" type="Event"/>
+				<map eventid="15" type="Event"/>
+				<map eventid="16" type="Event"/>
+				<map eventid="17" type="Event"/>
+				<map eventid="18" type="Event"/>
+				<map eventid="19" type="Event"/>
+				<map eventid="20" type="Event"/>
+				<map eventid="21" type="Event"/>
+				<map eventid="22" type="Event"/>
+				<map eventid="23" type="Event"/>
+				<map eventid="24" type="Event"/>
+				<map eventid="25" type="Event"/>
+				<map eventid="26" type="Event"/>
+				<map eventid="27" type="Event"/>
+				<map eventid="28" type="Event"/>
+				<map eventid="29" type="Event"/>
+				<map eventid="30" type="Event"/>
+				<map eventid="31" type="Event"/>
+				<map eventid="32" type="Event"/>
+				<map eventid="33" type="Event"/>
+				<map eventid="34" type="Event"/>
+				<map eventid="35" type="Event"/>
+				<map eventid="36" type="Event"/>
+				<map eventid="37" type="Event"/>
+				<map eventid="38" type="Event"/>
+				<map eventid="39" type="Event"/>
+				<map eventid="40" type="Event"/>
+				<map eventid="41" type="Event"/>
+				<map eventid="42" type="Event"/>
+				<map eventid="43" type="Event"/>
+				<map eventid="44" type="Event"/>
+				<map eventid="45" type="Event"/>
+				<map eventid="46" type="Event"/>
+				<map eventid="47" type="Event"/>
+				<map eventid="48" type="Event"/>
+				<map eventid="49" type="Event"/>
+				<map eventid="50" type="Event"/>
+				<map eventid="51" type="Event"/>
+				<map eventid="52" type="Event"/>
+			</mapping>
+			
+					
+			<mapping id="eventid.msg">
+				<map eventid="0" msg="Invalid"/>
+				<map eventid="1" msg="start"/>
+				<map eventid="2" msg="stop"/>
+				<map eventid="3" msg="start"/>
+				<map eventid="4" msg="stop"/>
+				<map eventid="5" msg="start"/>
+				<map eventid="6" msg="stop"/>
+				<map eventid="7" msg="start"/>
+				<map eventid="8" msg="stop"/>
+				<map eventid="9" msg="start"/>
+				<map eventid="10" msg="stop"/>
+				<map eventid="11" msg="start"/>
+				<map eventid="12" msg="stop"/>
+				<map eventid="13" msg="start"/>
+				<map eventid="14" msg="stop"/>
+				<map eventid="15" msg="start"/>
+				<map eventid="16" msg="stop"/>
+				<map eventid="17" msg="start"/>
+				<map eventid="18" msg="stop"/>
+				<map eventid="19" msg="start"/>
+				<map eventid="20" msg="stop"/>
+				<map eventid="21" msg="start"/>
+				<map eventid="22" msg="stop"/>
+				<map eventid="23" msg="start"/>
+				<map eventid="24" msg="stop"/>
+				<map eventid="25" msg="start"/>
+				<map eventid="26" msg="stop"/>
+				<map eventid="27" msg="start"/>
+				<map eventid="28" msg="stop"/>
+				<map eventid="29" msg="start"/>
+				<map eventid="30" msg="stop"/>
+				<map eventid="31" msg="start"/>
+				<map eventid="32" msg="stop"/>
+				<map eventid="33" msg="start"/>
+				<map eventid="34" msg="stop"/>
+				<map eventid="35" msg="start"/>
+				<map eventid="36" msg="stop"/>
+				<map eventid="37" msg="start"/>
+				<map eventid="38" msg="stop"/>
+				<map eventid="39" msg="start"/>
+				<map eventid="40" msg="stop"/>
+				<map eventid="41" msg="start"/>
+				<map eventid="42" msg="stop"/>
+				<map eventid="43" msg="start"/>
+				<map eventid="44" msg="stop"/>
+				<map eventid="45" msg="start"/>
+				<map eventid="46" msg="stop"/>
+				<map eventid="47" msg="start"/>
+				<map eventid="48" msg="stop"/>
+				<map eventid="49" msg="start"/>
+				<map eventid="50" msg="stop"/>
+				<map eventid="51" msg="start"/>
+				<map eventid="52" msg="stop"/>
+			</mapping>
+					
+			<mapping id="masterid.name">
+				<map masterid="0xA4" name="SMSET"/>
+			</mapping>
+			
+			<mapping id="masterid.decoder">
+					<map masterid="*"  decoder="SetDecoder"/>
+			</mapping>
+					
+		</module>	
+
+		<module id="MOD_SMSET1" kind="SMSET" proc="CSSTM_0" version="1.0" >
+		
+			<mapping id="eventid.module">
+				<map eventid="0" module="Invalid"/>
+				<map eventid="1" module="IVA1-iCONT1"/>
+				<map eventid="2" module="IVA1-iCONT1"/>
+				<map eventid="3" module="IVA1-iCONT1"/>
+				<map eventid="4" module="IVA1-iCONT1"/>
+				<map eventid="5" module="IVA1-iCONT1"/>
+				<map eventid="6" module="IVA1-iCONT1"/>
+				<map eventid="7" module="IVA1-iCONT1"/>
+				<map eventid="8" module="IVA1-iCONT1"/>
+				<map eventid="9" module="IVA1-iCONT1"/>
+				<map eventid="10" module="IVA1-iCONT1"/>
+				<map eventid="11" module="IVA1-iCONT1"/>
+				<map eventid="12" module="IVA1-iCONT1"/>
+				<map eventid="13" module="IVA1-iCONT2"/>
+				<map eventid="14" module="IVA1-iCONT2"/>
+				<map eventid="15" module="IVA1-iCONT2"/>
+				<map eventid="16" module="IVA1-iCONT2"/>
+				<map eventid="17" module="IVA1-iCONT2"/>
+				<map eventid="18" module="IVA1-iCONT2"/>
+				<map eventid="19" module="IVA1-iCONT2"/>
+				<map eventid="20" module="IVA1-iCONT2"/>
+				<map eventid="21" module="IVA1-iCONT2"/>
+				<map eventid="22" module="IVA1-iCONT2"/>
+				<map eventid="23" module="IVA1-iCONT2"/>
+				<map eventid="24" module="IVA1-iCONT2"/>
+				<map eventid="25" module="IVA1-iME3"/>
+				<map eventid="26" module="IVA1-iME3"/>
+				<map eventid="27" module="IVA1-iLF3"/>
+				<map eventid="28" module="IVA1-iLF3"/>
+				<map eventid="29" module="IVA1-iPE3"/>
+				<map eventid="30" module="IVA1-iPE3"/>
+				<map eventid="31" module="IVA1-iPE3"/>
+				<map eventid="32" module="IVA1-iPE3"/>
+				<map eventid="33" module="IVA1-iPE3"/>
+				<map eventid="34" module="IVA1-iPE3"/>
+				<map eventid="35" module="IVA1-CALC3"/>
+				<map eventid="36" module="IVA1-CALC3"/>
+				<map eventid="37" module="IVA1-CALC3"/>
+				<map eventid="38" module="IVA1-CALC3"/>
+				<map eventid="39" module="IVA1-CALC3"/>
+				<map eventid="40" module="IVA1-CALC3"/>
+				<map eventid="41" module="IVA1-ECD3"/>
+				<map eventid="42" module="IVA1-ECD3"/>
+				<map eventid="43" module="IVA1-ECD3"/>
+				<map eventid="44" module="IVA1-ECD3"/>
+				<map eventid="45" module="IVA1-ECD3"/>
+				<map eventid="46" module="IVA1-ECD3"/>
+				<map eventid="47" module="IVA1-MC3"/>
+				<map eventid="48" module="IVA1-MC3"/>
+				<map eventid="49" module="IVA1-MC3"/>
+				<map eventid="50" module="IVA1-MC3"/>
+				<map eventid="51" module="IVA1-MC3"/>
+				<map eventid="52" module="IVA1-MC3"/>
+			</mapping>
+					
+			<mapping id="eventid.class">
+				<map eventid="0" class="Invalid"/>
+				<map eventid="1" class="task1"/>
+				<map eventid="2" class="task1"/>
+				<map eventid="3" class="task2"/>
+				<map eventid="4" class="task2"/>
+				<map eventid="5" class="task3"/>
+				<map eventid="6" class="task3"/>
+				<map eventid="7" class="task4"/>
+				<map eventid="8" class="task4"/>
+				<map eventid="9" class="task5"/>
+				<map eventid="10" class="task5"/>
+				<map eventid="11" class="task5"/>
+				<map eventid="12" class="task5"/>
+				<map eventid="13" class="task1"/>
+				<map eventid="14" class="task1"/>
+				<map eventid="15" class="task2"/>
+				<map eventid="16" class="task2"/>
+				<map eventid="17" class="task2"/>
+				<map eventid="18" class="task2"/>
+				<map eventid="19" class="task3"/>
+				<map eventid="20" class="task3"/>
+				<map eventid="21" class="task4"/>
+				<map eventid="22" class="task4"/>
+				<map eventid="23" class="task6"/>
+				<map eventid="24" class="task6"/>
+				<map eventid="25" class="computation"/>
+				<map eventid="26" class="computation"/>
+				<map eventid="27" class="computation"/>
+				<map eventid="28" class="computation"/>
+				<map eventid="29" class="load"/>
+				<map eventid="30" class="load"/>
+				<map eventid="31" class="computation"/>
+				<map eventid="32" class="computation"/>
+				<map eventid="33" class="store"/>
+				<map eventid="34" class="store"/>
+				<map eventid="35" class="load"/>
+				<map eventid="36" class="load"/>
+				<map eventid="37" class="computation"/>
+				<map eventid="38" class="computation"/>
+				<map eventid="39" class="store"/>
+				<map eventid="40" class="store"/>
+				<map eventid="41" class="load"/>
+				<map eventid="42" class="load"/>
+				<map eventid="43" class="computation"/>
+				<map eventid="44" class="computation"/>
+				<map eventid="45" class="store"/>
+				<map eventid="46" class="store"/>
+				<map eventid="47" class="load"/>
+				<map eventid="48" class="load"/>
+				<map eventid="49" class="computation"/>
+				<map eventid="50" class="computation"/>
+				<map eventid="51" class="store"/>
+				<map eventid="52" class="store"/>
+			</mapping>
+					
+			<mapping id="eventid.type">
+				<map eventid="0" type="Invalid"/>
+				<map eventid="1" type="Event"/>
+				<map eventid="2" type="Event"/>
+				<map eventid="3" type="Event"/>
+				<map eventid="4" type="Event"/>
+				<map eventid="5" type="Event"/>
+				<map eventid="6" type="Event"/>
+				<map eventid="7" type="Event"/>
+				<map eventid="8" type="Event"/>
+				<map eventid="9" type="Event"/>
+				<map eventid="10" type="Event"/>
+				<map eventid="11" type="Event"/>
+				<map eventid="12" type="Event"/>
+				<map eventid="13" type="Event"/>
+				<map eventid="14" type="Event"/>
+				<map eventid="15" type="Event"/>
+				<map eventid="16" type="Event"/>
+				<map eventid="17" type="Event"/>
+				<map eventid="18" type="Event"/>
+				<map eventid="19" type="Event"/>
+				<map eventid="20" type="Event"/>
+				<map eventid="21" type="Event"/>
+				<map eventid="22" type="Event"/>
+				<map eventid="23" type="Event"/>
+				<map eventid="24" type="Event"/>
+				<map eventid="25" type="Event"/>
+				<map eventid="26" type="Event"/>
+				<map eventid="27" type="Event"/>
+				<map eventid="28" type="Event"/>
+				<map eventid="29" type="Event"/>
+				<map eventid="30" type="Event"/>
+				<map eventid="31" type="Event"/>
+				<map eventid="32" type="Event"/>
+				<map eventid="33" type="Event"/>
+				<map eventid="34" type="Event"/>
+				<map eventid="35" type="Event"/>
+				<map eventid="36" type="Event"/>
+				<map eventid="37" type="Event"/>
+				<map eventid="38" type="Event"/>
+				<map eventid="39" type="Event"/>
+				<map eventid="40" type="Event"/>
+				<map eventid="41" type="Event"/>
+				<map eventid="42" type="Event"/>
+				<map eventid="43" type="Event"/>
+				<map eventid="44" type="Event"/>
+				<map eventid="45" type="Event"/>
+				<map eventid="46" type="Event"/>
+				<map eventid="47" type="Event"/>
+				<map eventid="48" type="Event"/>
+				<map eventid="49" type="Event"/>
+				<map eventid="50" type="Event"/>
+				<map eventid="51" type="Event"/>
+				<map eventid="52" type="Event"/>
+			</mapping>
+			
+					
+			<mapping id="eventid.msg">
+				<map eventid="0" msg="Invalid"/>
+				<map eventid="1" msg="start"/>
+				<map eventid="2" msg="stop"/>
+				<map eventid="3" msg="start"/>
+				<map eventid="4" msg="stop"/>
+				<map eventid="5" msg="start"/>
+				<map eventid="6" msg="stop"/>
+				<map eventid="7" msg="start"/>
+				<map eventid="8" msg="stop"/>
+				<map eventid="9" msg="start"/>
+				<map eventid="10" msg="stop"/>
+				<map eventid="11" msg="start"/>
+				<map eventid="12" msg="stop"/>
+				<map eventid="13" msg="start"/>
+				<map eventid="14" msg="stop"/>
+				<map eventid="15" msg="start"/>
+				<map eventid="16" msg="stop"/>
+				<map eventid="17" msg="start"/>
+				<map eventid="18" msg="stop"/>
+				<map eventid="19" msg="start"/>
+				<map eventid="20" msg="stop"/>
+				<map eventid="21" msg="start"/>
+				<map eventid="22" msg="stop"/>
+				<map eventid="23" msg="start"/>
+				<map eventid="24" msg="stop"/>
+				<map eventid="25" msg="start"/>
+				<map eventid="26" msg="stop"/>
+				<map eventid="27" msg="start"/>
+				<map eventid="28" msg="stop"/>
+				<map eventid="29" msg="start"/>
+				<map eventid="30" msg="stop"/>
+				<map eventid="31" msg="start"/>
+				<map eventid="32" msg="stop"/>
+				<map eventid="33" msg="start"/>
+				<map eventid="34" msg="stop"/>
+				<map eventid="35" msg="start"/>
+				<map eventid="36" msg="stop"/>
+				<map eventid="37" msg="start"/>
+				<map eventid="38" msg="stop"/>
+				<map eventid="39" msg="start"/>
+				<map eventid="40" msg="stop"/>
+				<map eventid="41" msg="start"/>
+				<map eventid="42" msg="stop"/>
+				<map eventid="43" msg="start"/>
+				<map eventid="44" msg="stop"/>
+				<map eventid="45" msg="start"/>
+				<map eventid="46" msg="stop"/>
+				<map eventid="47" msg="start"/>
+				<map eventid="48" msg="stop"/>
+				<map eventid="49" msg="start"/>
+				<map eventid="50" msg="stop"/>
+				<map eventid="51" msg="start"/>
+				<map eventid="52" msg="stop"/>
+			</mapping>
+					
+			<mapping id="masterid.name">
+				<map masterid="0xA8" name="SMSET"/>
+			</mapping>
+			
+			<mapping id="masterid.decoder">
+					<map masterid="*"  decoder="SetDecoder"/>
+			</mapping>
+					
+		</module>
+
+		<module id="MOD_SMSET2" kind="SMSET" proc="CSSTM_0" version="1.0" >
+		
+			<mapping id="eventid.module">
+				<map eventid="0" module="Invalid"/>
+				<map eventid="1" module="IVA2-iCONT1"/>
+				<map eventid="2" module="IVA2-iCONT1"/>
+				<map eventid="3" module="IVA2-iCONT1"/>
+				<map eventid="4" module="IVA2-iCONT1"/>
+				<map eventid="5" module="IVA2-iCONT1"/>
+				<map eventid="6" module="IVA2-iCONT1"/>
+				<map eventid="7" module="IVA2-iCONT1"/>
+				<map eventid="8" module="IVA2-iCONT1"/>
+				<map eventid="9" module="IVA2-iCONT1"/>
+				<map eventid="10" module="IVA2-iCONT1"/>
+				<map eventid="11" module="IVA2-iCONT1"/>
+				<map eventid="12" module="IVA2-iCONT1"/>
+				<map eventid="13" module="IVA2-iCONT2"/>
+				<map eventid="14" module="IVA2-iCONT2"/>
+				<map eventid="15" module="IVA2-iCONT2"/>
+				<map eventid="16" module="IVA2-iCONT2"/>
+				<map eventid="17" module="IVA2-iCONT2"/>
+				<map eventid="18" module="IVA2-iCONT2"/>
+				<map eventid="19" module="IVA2-iCONT2"/>
+				<map eventid="20" module="IVA2-iCONT2"/>
+				<map eventid="21" module="IVA2-iCONT2"/>
+				<map eventid="22" module="IVA2-iCONT2"/>
+				<map eventid="23" module="IVA2-iCONT2"/>
+				<map eventid="24" module="IVA2-iCONT2"/>
+				<map eventid="25" module="IVA2-iME3"/>
+				<map eventid="26" module="IVA2-iME3"/>
+				<map eventid="27" module="IVA2-iLF3"/>
+				<map eventid="28" module="IVA2-iLF3"/>
+				<map eventid="29" module="IVA2-iPE3"/>
+				<map eventid="30" module="IVA2-iPE3"/>
+				<map eventid="31" module="IVA2-iPE3"/>
+				<map eventid="32" module="IVA2-iPE3"/>
+				<map eventid="33" module="IVA2-iPE3"/>
+				<map eventid="34" module="IVA2-iPE3"/>
+				<map eventid="35" module="IVA2-CALC3"/>
+				<map eventid="36" module="IVA2-CALC3"/>
+				<map eventid="37" module="IVA2-CALC3"/>
+				<map eventid="38" module="IVA2-CALC3"/>
+				<map eventid="39" module="IVA2-CALC3"/>
+				<map eventid="40" module="IVA2-CALC3"/>
+				<map eventid="41" module="IVA2-ECD3"/>
+				<map eventid="42" module="IVA2-ECD3"/>
+				<map eventid="43" module="IVA2-ECD3"/>
+				<map eventid="44" module="IVA2-ECD3"/>
+				<map eventid="45" module="IVA2-ECD3"/>
+				<map eventid="46" module="IVA2-ECD3"/>
+				<map eventid="47" module="IVA2-MC3"/>
+				<map eventid="48" module="IVA2-MC3"/>
+				<map eventid="49" module="IVA2-MC3"/>
+				<map eventid="50" module="IVA2-MC3"/>
+				<map eventid="51" module="IVA2-MC3"/>
+				<map eventid="52" module="IVA2-MC3"/>
+			</mapping>
+					
+			<mapping id="eventid.class">
+				<map eventid="0" class="Invalid"/>
+				<map eventid="1" class="task1"/>
+				<map eventid="2" class="task1"/>
+				<map eventid="3" class="task2"/>
+				<map eventid="4" class="task2"/>
+				<map eventid="5" class="task3"/>
+				<map eventid="6" class="task3"/>
+				<map eventid="7" class="task4"/>
+				<map eventid="8" class="task4"/>
+				<map eventid="9" class="task5"/>
+				<map eventid="10" class="task5"/>
+				<map eventid="11" class="task5"/>
+				<map eventid="12" class="task5"/>
+				<map eventid="13" class="task1"/>
+				<map eventid="14" class="task1"/>
+				<map eventid="15" class="task2"/>
+				<map eventid="16" class="task2"/>
+				<map eventid="17" class="task2"/>
+				<map eventid="18" class="task2"/>
+				<map eventid="19" class="task3"/>
+				<map eventid="20" class="task3"/>
+				<map eventid="21" class="task4"/>
+				<map eventid="22" class="task4"/>
+				<map eventid="23" class="task6"/>
+				<map eventid="24" class="task6"/>
+				<map eventid="25" class="computation"/>
+				<map eventid="26" class="computation"/>
+				<map eventid="27" class="computation"/>
+				<map eventid="28" class="computation"/>
+				<map eventid="29" class="load"/>
+				<map eventid="30" class="load"/>
+				<map eventid="31" class="computation"/>
+				<map eventid="32" class="computation"/>
+				<map eventid="33" class="store"/>
+				<map eventid="34" class="store"/>
+				<map eventid="35" class="load"/>
+				<map eventid="36" class="load"/>
+				<map eventid="37" class="computation"/>
+				<map eventid="38" class="computation"/>
+				<map eventid="39" class="store"/>
+				<map eventid="40" class="store"/>
+				<map eventid="41" class="load"/>
+				<map eventid="42" class="load"/>
+				<map eventid="43" class="computation"/>
+				<map eventid="44" class="computation"/>
+				<map eventid="45" class="store"/>
+				<map eventid="46" class="store"/>
+				<map eventid="47" class="load"/>
+				<map eventid="48" class="load"/>
+				<map eventid="49" class="computation"/>
+				<map eventid="50" class="computation"/>
+				<map eventid="51" class="store"/>
+				<map eventid="52" class="store"/>
+			</mapping>
+					
+			<mapping id="eventid.type">
+				<map eventid="0" type="Invalid"/>
+				<map eventid="1" type="Event"/>
+				<map eventid="2" type="Event"/>
+				<map eventid="3" type="Event"/>
+				<map eventid="4" type="Event"/>
+				<map eventid="5" type="Event"/>
+				<map eventid="6" type="Event"/>
+				<map eventid="7" type="Event"/>
+				<map eventid="8" type="Event"/>
+				<map eventid="9" type="Event"/>
+				<map eventid="10" type="Event"/>
+				<map eventid="11" type="Event"/>
+				<map eventid="12" type="Event"/>
+				<map eventid="13" type="Event"/>
+				<map eventid="14" type="Event"/>
+				<map eventid="15" type="Event"/>
+				<map eventid="16" type="Event"/>
+				<map eventid="17" type="Event"/>
+				<map eventid="18" type="Event"/>
+				<map eventid="19" type="Event"/>
+				<map eventid="20" type="Event"/>
+				<map eventid="21" type="Event"/>
+				<map eventid="22" type="Event"/>
+				<map eventid="23" type="Event"/>
+				<map eventid="24" type="Event"/>
+				<map eventid="25" type="Event"/>
+				<map eventid="26" type="Event"/>
+				<map eventid="27" type="Event"/>
+				<map eventid="28" type="Event"/>
+				<map eventid="29" type="Event"/>
+				<map eventid="30" type="Event"/>
+				<map eventid="31" type="Event"/>
+				<map eventid="32" type="Event"/>
+				<map eventid="33" type="Event"/>
+				<map eventid="34" type="Event"/>
+				<map eventid="35" type="Event"/>
+				<map eventid="36" type="Event"/>
+				<map eventid="37" type="Event"/>
+				<map eventid="38" type="Event"/>
+				<map eventid="39" type="Event"/>
+				<map eventid="40" type="Event"/>
+				<map eventid="41" type="Event"/>
+				<map eventid="42" type="Event"/>
+				<map eventid="43" type="Event"/>
+				<map eventid="44" type="Event"/>
+				<map eventid="45" type="Event"/>
+				<map eventid="46" type="Event"/>
+				<map eventid="47" type="Event"/>
+				<map eventid="48" type="Event"/>
+				<map eventid="49" type="Event"/>
+				<map eventid="50" type="Event"/>
+				<map eventid="51" type="Event"/>
+				<map eventid="52" type="Event"/>
+			</mapping>
+			
+					
+			<mapping id="eventid.msg">
+				<map eventid="0" msg="Invalid"/>
+				<map eventid="1" msg="start"/>
+				<map eventid="2" msg="stop"/>
+				<map eventid="3" msg="start"/>
+				<map eventid="4" msg="stop"/>
+				<map eventid="5" msg="start"/>
+				<map eventid="6" msg="stop"/>
+				<map eventid="7" msg="start"/>
+				<map eventid="8" msg="stop"/>
+				<map eventid="9" msg="start"/>
+				<map eventid="10" msg="stop"/>
+				<map eventid="11" msg="start"/>
+				<map eventid="12" msg="stop"/>
+				<map eventid="13" msg="start"/>
+				<map eventid="14" msg="stop"/>
+				<map eventid="15" msg="start"/>
+				<map eventid="16" msg="stop"/>
+				<map eventid="17" msg="start"/>
+				<map eventid="18" msg="stop"/>
+				<map eventid="19" msg="start"/>
+				<map eventid="20" msg="stop"/>
+				<map eventid="21" msg="start"/>
+				<map eventid="22" msg="stop"/>
+				<map eventid="23" msg="start"/>
+				<map eventid="24" msg="stop"/>
+				<map eventid="25" msg="start"/>
+				<map eventid="26" msg="stop"/>
+				<map eventid="27" msg="start"/>
+				<map eventid="28" msg="stop"/>
+				<map eventid="29" msg="start"/>
+				<map eventid="30" msg="stop"/>
+				<map eventid="31" msg="start"/>
+				<map eventid="32" msg="stop"/>
+				<map eventid="33" msg="start"/>
+				<map eventid="34" msg="stop"/>
+				<map eventid="35" msg="start"/>
+				<map eventid="36" msg="stop"/>
+				<map eventid="37" msg="start"/>
+				<map eventid="38" msg="stop"/>
+				<map eventid="39" msg="start"/>
+				<map eventid="40" msg="stop"/>
+				<map eventid="41" msg="start"/>
+				<map eventid="42" msg="stop"/>
+				<map eventid="43" msg="start"/>
+				<map eventid="44" msg="stop"/>
+				<map eventid="45" msg="start"/>
+				<map eventid="46" msg="stop"/>
+				<map eventid="47" msg="start"/>
+				<map eventid="48" msg="stop"/>
+				<map eventid="49" msg="start"/>
+				<map eventid="50" msg="stop"/>
+				<map eventid="51" msg="start"/>
+				<map eventid="52" msg="stop"/>
+			</mapping>
+					
+			<mapping id="masterid.name">
+				<map masterid="0xAC" name="SMSET"/>
+			</mapping>
+			
+			<mapping id="masterid.decoder">
+					<map masterid="*"  decoder="SetDecoder"/>
+			</mapping>
+					
+		</module>
+
+		<module id ="MOD_SC"  kind="SC" proc="CSSTM_0" version="1.0" >
+			
+			<mapping id="masterid.name">
+				<map masterid="0xF0" name="SM_STATISTICS_UNIT0"/>
+				<map masterid="0xF4" name="SM_STATISTICS_UNIT1"/>
+				<map masterid="0xF8" name="SM_STATISTICS_UNIT2"/>
+				<map masterid="0xFC" name="SM_STATISTICS_UNIT3"/>
+			</mapping>
+			
+			<mapping id="masterid.cntnum">
+				<map masterid="0xF0" cntnum="2"/>
+				<map masterid="0xF4" cntnum="8"/>
+				<map masterid="0xF8" cntnum="8"/>
+				<map masterid="0xFC" cntnum="4"/>
+			</mapping>
+			
+			<mapping id="masterid.width">
+				<map masterid="0xF0" width="64"/>
+				<map masterid="0xF4" width="64"/>
+				<map masterid="0xF8" width="64"/>
+				<map masterid="0xFC" width="64"/>
+			</mapping>
+			
+			<mapping id="masterid.decoder">
+				<map masterid="*"  decoder="SCDecoderUnit"/>
+			</mapping>
+
+			<mapping id="unitname.moduletype">
+				<map unitname="SDRAM" moduletype="OCP"/>
+				<map unitname="LAT0" moduletype="NTTP"/>
+				<map unitname="LAT1" moduletype="NTTP"/>
+				<map unitname="LAT2" moduletype="NTTP"/>
+			</mapping>
+			
+			<mapping id="unitname.address">
+				<map unitname="SDRAM" address="0x44001000"/>
+				<map unitname="LAT0" address="0x44001400"/>
+				<map unitname="LAT1" address="0x44001800"/>
+				<map unitname="LAT1" address="0x44401000"/>
+			</mapping>
+			
+	<!-- The first item in the value of cntinfor is the number of counters followed by the number of the filters-->
+	<!-- for each counter. If there are no numbers of the filter defined then each counter has one filter.      -->
+			<mapping id="unitname.cntinfor">
+				<map unitname="SDRAM" cntinfor="2^2^2^"/>
+				<map unitname="LAT0" cntinfor="8"/>
+				<map unitname="LAT1" cntinfor="8"/>
+				<map unitname="LAT2" cntinfor="4"/>
+			</mapping>
+			
+			<mapping id="unitname.probid">
+				<map unitname="SDRAM" probid="0^0^1^1"/>
+				<map unitname="LAT0" probid="2^2^3^3^4^4^5^5^6^6^7^7^8^8^9^9"/>
+				<map unitname="LAT1" probid="^10^10^11^11^12^12^13^13^14^14^15^15^16^16^17^17"/>
+				<map unitname="LAT2" probid="^18^18^19^19^20^20^21^21^22^22^23^23^24^24^25^25"/>
+			</mapping>
+			
+		</module> 
+		<module id ="MOD_CONFIGINFO"  kind="CONFIGINFO" proc="CSSTM_0" version="1.0" >
+			
+			<mapping id="ubmfunnum.filename">
+				<map ubmfunnum="0x80000000" filename="OCPType_2600_TI816x.xml"/>
+				<map ubmfunnum="0x80000002" filename="AET_PropertyOCP_TI816x.xml"/>
+				<map ubmfunnum="0x80000005" filename="AET_PropertySMSET.xml"/>
+				<map ubmfunnum="0x80001005" filename="AET_PropertySMSET.xml"/>
+				<map ubmfunnum="0x80002005" filename="AET_PropertySMSET.xml"/>
+				<map ubmfunnum="0xC000000A" filename="AET_PropertyPPF_TI816x.xml"/>
+				<map ubmfunnum="0x8000000F" filename="AET_PropertySTM_TI816x.xml"/>
+			</mapping>
+			
+	<!-- Make sure this section should be consistent with OCPType_2600_TI816x.xml-->
+			<mapping id="ubmfunnum.funcname">
+				<map ubmfunnum="0x80000000" funcname="STM Functions"/>
+				<map ubmfunnum="0x80000002" funcname="OCP Traffic Monitoring"/>
+				<map ubmfunnum="0x80000005" funcname="IVA_HD0 SMSET"/>
+				<map ubmfunnum="0x80001005" funcname="IVA_HD1 SMSET"/>
+				<map ubmfunnum="0x80002005" funcname="IVA_HD2 SMSET"/>
+				<map ubmfunnum="0xC000000A" funcname="Performance Probe"/>
+				<map ubmfunnum="0x8000000F" funcname="Trace Export Configuration"/>
+			</mapping>
+			
+			<mapping id="ubmfunnum.baseaddr">
+				<map ubmfunnum="0x80000005" baseaddr="0x58041000"/>
+				<map ubmfunnum="0x80001005" baseaddr="0x5A041000"/>
+				<map ubmfunnum="0x80002005" baseaddr="0x53041000"/>
+			</mapping>
+			
+		</module> 
+
+		<!-- ETB module. It is used as receiver -->
+		<module id="MOD_ETB0" kind="cs_etb" proc="CSETB_0" version="2.0" >
+			<registers>
+				<register id="ID" address="ETBCS_ID"  page="" addrunit="1" width="32" type="reg"/>		
+				<register id="RDP" address="ETBCS_RDP" page="" addrunit="1" width="32" type="reg"/>		
+				<register id="STS" address="ETBCS_STS" page="" addrunit="1" width="32" type="reg"/>		
+				<register id="RRD" address="ETBCS_RRD" page="" addrunit="1" width="32" type="reg"/>
+				<register id="RRP" address="ETBCS_RRP" page="" addrunit="1" width="32" type="reg"/>
+				<register id="RWD" address="ETBCS_RWD" page="" addrunit="1" width="32" type="reg"/>
+				<register id="RWP" address="ETBCS_RWP" page="" addrunit="1" width="32" type="reg"/>						
+				<register id="TRG" address="ETBCS_TRG" page="" addrunit="1" width="32" type="reg"/>		
+				<register id="CTL" address="ETBCS_CTL" page="" addrunit="1" width="32" type="reg"/>		
+				<register id="FFSR" address="ETBCS_FFSR" page="" addrunit="1" width="32" type="reg"/>
+				<register id="FFCR" address="ETBCS_FFCR" page="" addrunit="1" width="32" type="reg"/>
+				<register id="LOCK" address="ETBCS_LOCK_ACCESS" page="" addrunit="1" width="32" type="reg"/>
+				<register id="LOCK_STATUS" address="ETBCS_LOCK_STATUS" page="" addrunit="1" width="32" type="reg"/>
+			</registers>
+			
+			<characteristics>
+				<characteristic id="DEV_CHAR_PINMANAGER" description="" value="1"/> 
+				<characteristic id="DEV_CHAR_DATAPINCOUNT" description="" value="20"/>
+				<characteristic id="DEV_CHAR_CLOCKPINCOUNT" description="" value="2"/>
+				<characteristic id="DEV_CHAR_PRIMARYCLOCK" description="" value="20"/>
+				<characteristic id="DEV_CHAR_SECONDARYCLOCK" description="" value="21"/>
+				<characteristic id="DEV_CHAR_TRACEDATAORDER" description="" value="reverse"/>
+				<characteristic id="DEV_CHAR_FFCRDISABLE" value="1"/>	
+				<characteristic id="DEV_CHAR_CURIE" value="0"/>
+				<characteristic id="DEV_CHAR_TRACEMODE" value="3"/> <!-- This is setting is giving a hint to channel driver to run at freeclock mode. It is here to deal with ADTF -->	
+			</characteristics> 
+			
+		</module>
+
+		<!-- Pins module -->
+		<module id ="MOD_DRM"  kind="drm" proc="" version="1.0" >
+			<registers>
+			</registers>
+			<mapping id="program.pinouts">
+				<map program="0" pinouts="pti=2,0,1,3,4" />
+				<map program="1" pinouts="pti=2,0,1" />
+				<map program="2" pinouts="pti=1,0" />
+			</mapping>
+		</module>
+
+		<!-- ADTF module associated with GEM DSP trace to ETB -->
+		<module id="MOD_RADTF0" kind="radtf" proc="C674X_0" version="1.0" >
+			<registers>
+				<register id="DTFCR" address="0x4B166000" page="0" addrunit="1" width="32" type="mem" />
+				<register id="TAGSET" address="0x4B166FA0" page="0" addrunit="1" width="32" type="mem" />	
+				<register id="TAGCLR" address="0x4B166FA4" page="0" addrunit="1" width="32" type="mem" />
+				<register id="LOCK" address="0x4B166FB0" page="0" addrunit="1" width="32" type="mem" />		
+				<register id="LOCK_STATUS" address="0x4B166FB4" page="0" addrunit="1" width="32" type="mem" />	
+				<register id="ID" address="0x4B166FC8" page="0" addrunit="1" width="32" type="mem" />	
+			</registers>
+			<characteristics>
+				<characteristic id="DEV_CHAR_TRACEMODE" description="" value="3"/>		
+			</characteristics> 
+		</module> 
+	</modules>
+
+</device>

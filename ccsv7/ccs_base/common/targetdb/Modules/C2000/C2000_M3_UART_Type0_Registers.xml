@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- 
+  TI File $Revision: 
+  Checkin $Date: 
+  --> 
+
+<!--  28M35x UART REGS Registers 
+     =================================== 
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     --> 
+<module id="UART REGS" HW_revision="" XML_version="1" description="UART REGS Registers">
+    <register id="UARTDR" acronym="UARTDR" offset="0" page="1" width="32" description="UART Data" />
+    <register id="UARTRSR_TECR" acronym="UARTRSR_TECR" offset="4" page="1" width="32" description="UART Receive Status / Error Clear" />
+    <!--  16 empty  -->
+    <register id="UARTFR" acronym="UARTFR" offset="24" page="1" width="32" description="UART Flag" />
+    <!--  4 empty  -->
+    <register id="UARTILPR" acronym="UARTILPR" offset="32" page="1" width="32" description="UART IrDA Low-Power Register" />
+    <register id="UARTIBRD" acronym="UARTIBRD" offset="36" page="1" width="32" description="UART Integer Baud-Rate Divisor" />
+    <register id="UARTFBRD" acronym="UARTFBRD" offset="40" page="1" width="32" description="UART Fractional Baud-Rate Divisor" />
+    <register id="UARTLCRH" acronym="UARTLCRH" offset="44" page="1" width="32" description="UART Line Control" />
+    <register id="UARTCTL" acronym="UARTCTL" offset="48" page="1" width="32" description="UART Control" />
+    <register id="UARTIFLS" acronym="UARTIFLS" offset="52" page="1" width="32" description="UART Interrupt FIFO Level Select" />
+    <register id="UARTIM" acronym="UARTIM" offset="56" page="1" width="32" description="UART Interrupt Mask" />
+    <register id="UARTRIS" acronym="UARTRIS" offset="60" page="1" width="32" description="UART Raw Interrupt Status" />
+    <register id="UARTMIS" acronym="UARTMIS" offset="64" page="1" width="32" description="UART Masked Interrupt Status" />
+    <register id="UARTICR" acronym="UARTICR" offset="68" page="1" width="32" description="UART Interrupt Clear" />
+    <register id="UARTDMACTL" acronym="UARTDMACTL" offset="72" page="1" width="32" description="UART DMA Control" />
+    <!--  68 empty  -->
+    <register id="UARTLCTL" acronym="UARTLCTL" offset="144" page="1" width="32" description="UART LIN Control" />
+    <register id="UARTLSS" acronym="UARTLSS" offset="148" page="1" width="32" description="UART LIN Snap Shot" />
+    <register id="UARTLTIM" acronym="UARTLTIM" offset="152" page="1" width="32" description="UART LIN Timer" />
+    <!--  3892 empty  -->
+    <register id="UARTPERIPHID4" acronym="UARTPERIPHID4" offset="4048" page="1" width="32" description="UART Peripheral Identification 4" />
+    <register id="UARTPERIPHID5" acronym="UARTPERIPHID5" offset="4052" page="1" width="32" description="UART Peripheral Identification 5" />
+    <register id="UARTPERIPHID6" acronym="UARTPERIPHID6" offset="4056" page="1" width="32" description="UART Peripheral Identification 6" />
+    <register id="UARTPERIPHID7" acronym="UARTPERIPHID7" offset="4060" page="1" width="32" description="UART Peripheral Identification 7" />
+    <register id="UARTPERIPHID0" acronym="UARTPERIPHID0" offset="4064" page="1" width="32" description="UART Peripheral Identification 0" />
+    <register id="UARTPERIPHID1" acronym="UARTPERIPHID1" offset="4068" page="1" width="32" description="UART Peripheral Identification 1" />
+    <register id="UARTPERIPHID2" acronym="UARTPERIPHID2" offset="4072" page="1" width="32" description="UART Peripheral Identification 2" />
+    <register id="UARTPERIPHID3" acronym="UARTPERIPHID3" offset="4076" page="1" width="32" description="UART Peripheral Identification 3" />
+    <register id="UARTPCELLID0" acronym="UARTPCELLID0" offset="4080" page="1" width="32" description="UART PrimeCell Identification 0" />
+    <register id="UARTPCELLID1" acronym="UARTPCELLID1" offset="4084" page="1" width="32" description="UART PrimeCell Identification 1" />
+    <register id="UARTPCELLID2" acronym="UARTPCELLID2" offset="4088" page="1" width="32" description="UART PrimeCell Identification 2" />
+    <register id="UARTPCELLID3" acronym="UARTPCELLID3" offset="4092" page="1" width="32" description="UART PrimeCell Identification 3" />
+</module>

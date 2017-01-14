@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<newBreakpoint xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="schema.xsd" name="Macroblock Breakpoint" breakpointType="1">
+  <targets>
+    <target>
+      <type>dsk,emu</type>
+      <familyId>192</familyId>
+      <subfamilyId>*</subfamilyId>
+      <revision>*</revision>
+    </target>
+  </targets>
+  <defaultProperty>
+    <property name="Miscellaneous.Name" value="Macroblock Breakpoint" />
+    <property name="Hardware Configuration.Type" value="Macroblock Breakpoint"></property>
+  </defaultProperty>
+  <submitSequence>
+    <id>Hardware Configuration.Type.MB ID X Index</id>
+    <id>Hardware Configuration.Type.MB ID Y Index</id>
+    <id>Hardware Configuration.Type.Thread ID</id>
+  </submitSequence>
+  <showIn>
+    <breakpointView autoSubmit="false" />
+  </showIn>
+  <dialog colCount="2">
+    <label id="label_location" widthHint="50" heightHint="18" verticalAlign="center" horizontalAlign="fill">
+      <text>Macroblock ID X Index:</text>
+    </label>
+    <textBox id="Hardware Configuration.Type.MB ID X Index" widthHint="180" heightHint="20" verticalAlign="center" horizontalAlign="center">
+      <text>Enter Column index here...</text>
+    </textBox>
+    <label id="label_location" widthHint="50" heightHint="18" verticalAlign="center" horizontalAlign="fill">
+      <text>Macroblock ID Y Index:</text>
+    </label>
+    <textBox id="Hardware Configuration.Type.MB ID Y Index" widthHint="180" heightHint="20" verticalAlign="center" horizontalAlign="center">
+      <text>Enter Row index here...</text>
+    </textBox>
+    <label id="label_location" widthHint="50" heightHint="18" verticalAlign="center" horizontalAlign="fill">
+      <text>Thread ID:</text>
+    </label>
+    <textBox id="Hardware Configuration.Type.Thread ID" widthHint="180" heightHint="20" verticalAlign="center" horizontalAlign="center">
+      <text>Enter Thread ID here...</text>
+    </textBox>
+  </dialog>
+</newBreakpoint>

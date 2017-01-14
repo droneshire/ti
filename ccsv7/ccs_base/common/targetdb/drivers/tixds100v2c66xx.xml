@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<drivers id="TMS320C64XP">
+    <isa Type="TMS320C66xx" ProcID="0x50019BF8">
+        <driver file="..\..\..\emulation\drivers\tixds6400_plus.dvr">
+            <property Type="hiddenfield" Value="true" id="realtimeEnabled" />
+            <connectionType Type="TIXDS100v2" />
+        </driver>
+    </isa>
+    <driverProperties>
+        <version number="1.0"/>
+        <choicelist id="Domain Power Loss Mode" type="string_list">
+            <choice value="Legacy"/>
+            <choice value="Auto"/>
+        </choicelist>
+        <hierarchy>
+            <hchoice depends="none" key="Domain Power Loss Mode"/>
+        </hierarchy>
+        <current>
+            <cchoice key="Domain Power Loss Mode" value="Legacy"/>
+        </current>
+    </driverProperties>
+</drivers>

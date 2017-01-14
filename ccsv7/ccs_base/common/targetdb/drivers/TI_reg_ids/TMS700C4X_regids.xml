@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<register_ids id="TMS700C040" XML_version="2.0">
+    <!-- ARP32 core CPU Registers for EVE -->
+    <register_id id="PC"  value="0x100" address="0" page="0" />
+	<register_id id="R0"  value="0x10" address="0" page="0" />
+	<register_id id="R1"  value="0x11" address="0" page="0" />
+	<register_id id="R2"  value="0x12" address="0" page="0" />
+	<register_id id="R3"  value="0x13" address="0" page="0" />
+	<register_id id="R4"  value="0x14" address="0" page="0" />
+	<register_id id="R5"  value="0x15" address="0" page="0" />
+	<register_id id="R6"  value="0x16" address="0" page="0" />
+	<register_id id="R7"  value="0x17" address="0" page="0" />
+
+	<register_id id="CSR"  value="0x00" address="0" page="0" />
+	<register_id id="IER"  value="0x01" address="0" page="0" />
+	<register_id id="IFR"  value="0x02" address="0" page="0" />
+	<register_id id="ISR"  value="0x03" address="0" page="0" />
+	<register_id id="ICR"  value="0x04" address="0" page="0" />
+	<register_id id="NRP"  value="0x05" address="0" page="0" />
+	<register_id id="IRP"  value="0x06" address="0" page="0" />
+	<register_id id="SP"   value="0x07" address="0" page="0" />
+	<register_id id="LSA0" value="0x09" address="0" page="0" />
+	<register_id id="LEA0" value="0x0a" address="0" page="0" />
+	<register_id id="LCNT0" value="0x0b" address="0" page="0" />
+	<register_id id="LSA1"  value="0x0c" address="0" page="0" />
+	<register_id id="LEA1"  value="0x0d" address="0" page="0" />
+	<register_id id="LCNT1"  value="0x0e" address="0" page="0" />
+
+	<register_id id="SCSR" value="0x0f" address="0" page="0" />
+	<register_id id="GDP" value="0x18" address="0" page="0" />
+	<register_id id="LCNT0RLD" value="0x19" address="0" page="0" />
+	<register_id id="NMISCSR"  value="0x1a" address="0" page="0" />
+	<register_id id="CPUID"  value="0x1b" address="0" page="0" />
+	<register_id id="DPC"  value="0x1c" address="0" page="0" />
+	<register_id id="TSCL"  value="0x1d" address="0" page="0" />
+	<register_id id="TSCH"  value="0x1e" address="0" page="0" />
+	<register_id id="LR"  value="0x1f" address="0" page="0" />
+
+	<register_id id="SR0" value="0x20" address="0" page="0" />
+	<register_id id="SR1" value="0x21" address="0" page="0" />
+	<register_id id="SR2" value="   0x22" address="0" page="0" />
+	<register_id id="SR3" value="  0x23" address="0" page="0" />
+	<register_id id="SR4" value="  0x24" address="0" page="0" />
+	<register_id id="SR5" value="  0x25" address="0" page="0" />
+	<register_id id="SR6" value="  0x26" address="0" page="0" />
+	<register_id id="SR7" value="  0x27" address="0" page="0" />
+	<register_id id="SLSA0" value=" 0x28" address="0" page="0" />
+	<register_id id="SLEA0" value=" 0x29" address="0" page="0" />
+	<register_id id="SLCNT0" value=" 0x2a" address="0" page="0" />
+	<register_id id="SLSA1"  value=" 0x2b" address="0" page="0" />
+	<register_id id="SLEA1"  value=" 0x2c" address="0" page="0" />
+	<register_id id="SLCNT1"  value="0x2d" address="0" page="0" />
+	<register_id id="SLCNT0RLD"  value="0x2e" address="0" page="0" />
+
+	<register_id id="CCR0"  value="8000" address="0" page="0" />
+
+    <!-- VCOP Status Registers -->
+    <register_id id="ctrl"      value="2003" address="0" page="0" />
+    <register_id id="status"    value="2004" address="0" page="0" />
+    <register_id id="vloop_ptr" value="2002" address="0" page="0" />
+    <register_id id="param_ptr" value="2000" address="0" page="0" />
+    <register_id id="i0"        value="7010" address="0" page="0" />
+    <register_id id="i1"        value="7011" address="0" page="0" />
+    <register_id id="i2"        value="7012" address="0" page="0" />
+    <register_id id="i3"        value="7013" address="0" page="0" />
+    <register_id id="i4"        value="7014" address="0" page="0" />
+
+    <register_id id="I0"        value="7010" address="0" page="0" />
+    <register_id id="I1"        value="7011" address="0" page="0" />
+    <register_id id="I2"        value="7012" address="0" page="0" />
+    <register_id id="I3"        value="7013" address="0" page="0" />
+    <register_id id="I4"        value="7014" address="0" page="0" />
+
+    <!-- VCOP Load Registers -->
+    <register_id id="ld_ptr0" value="7021" address="0" page="0" />
+    <register_id id="ld_ptr1" value="7022" address="0" page="0" />
+    <register_id id="ld_ptr2" value="7023" address="0" page="0" />
+    <register_id id="ld_ptr3" value="7024" address="0" page="0" />
+    <register_id id="ld_ptr4" value="7025" address="0" page="0" />
+    <register_id id="ld_ptr5" value="7026" address="0" page="0" />
+    <register_id id="ld_ptr6" value="7027" address="0" page="0" />
+    <register_id id="ld_ptr7" value="7028" address="0" page="0" />
+    <register_id id="st_ptr0" value="7031" address="0" page="0" />
+    <register_id id="st_ptr1" value="7032" address="0" page="0" />
+    <register_id id="st_ptr2" value="7033" address="0" page="0" />
+    <register_id id="st_ptr3" value="7034" address="0" page="0" />
+    <register_id id="st_ptr4" value="7035" address="0" page="0" />
+    <register_id id="st_ptr5" value="7036" address="0" page="0" />
+    <register_id id="st_ptr6" value="7037" address="0" page="0" />
+    <register_id id="st_ptr7" value="7038" address="0" page="0" />
+
+    <!-- VCOP Vector Registers -->
+    <register_id id="V0_0"	value="1000" address="0" page="0" />
+    <register_id id="V0_1"	value="1002" address="0" page="0" />
+    <register_id id="V0_2"	value="1004" address="0" page="0" />
+    <register_id id="V0_3"	value="1006" address="0" page="0" />
+    <register_id id="V0_4"	value="1008" address="0" page="0" />
+    <register_id id="V0_5"	value="1010" address="0" page="0" />
+    <register_id id="V0_6"	value="1012" address="0" page="0" />
+    <register_id id="V0_7"	value="1014" address="0" page="0" />
+    <register_id id="V1_0"	value="1016" address="0" page="0" />
+    <register_id id="V1_1"	value="1018" address="0" page="0" />
+    <register_id id="V1_2"	value="1020" address="0" page="0" />
+    <register_id id="V1_3"	value="1022" address="0" page="0" />
+    <register_id id="V1_4"	value="1024" address="0" page="0" />
+    <register_id id="V1_5"	value="1026" address="0" page="0" />
+    <register_id id="V1_6"	value="1028" address="0" page="0" />
+    <register_id id="V1_7"	value="1030" address="0" page="0" />
+    <register_id id="V2_0"	value="1032" address="0" page="0" />
+    <register_id id="V2_1"	value="1034" address="0" page="0" />
+    <register_id id="V2_2"	value="1036" address="0" page="0" />
+    <register_id id="V2_3"	value="1038" address="0" page="0" />
+    <register_id id="V2_4"	value="1040" address="0" page="0" />
+    <register_id id="V2_5"	value="1042" address="0" page="0" />
+    <register_id id="V2_6"	value="1044" address="0" page="0" />
+    <register_id id="V2_7"	value="1046" address="0" page="0" />
+    <register_id id="V3_0"	value="1048" address="0" page="0" />
+    <register_id id="V3_1"	value="1050" address="0" page="0" />
+    <register_id id="V3_2"	value="1052" address="0" page="0" />
+    <register_id id="V3_3"	value="1054" address="0" page="0" />
+    <register_id id="V3_4"	value="1056" address="0" page="0" />
+    <register_id id="V3_5"	value="1058" address="0" page="0" />
+    <register_id id="V3_6"	value="1060" address="0" page="0" />
+    <register_id id="V3_7"	value="1062" address="0" page="0" />
+    <register_id id="V4_0"	value="1064" address="0" page="0" />
+    <register_id id="V4_1"	value="1066" address="0" page="0" />
+    <register_id id="V4_2"	value="1068" address="0" page="0" />
+    <register_id id="V4_3"	value="1070" address="0" page="0" />
+    <register_id id="V4_4"	value="1072" address="0" page="0" />
+    <register_id id="V4_5"	value="1074" address="0" page="0" />
+    <register_id id="V4_6"	value="1076" address="0" page="0" />
+    <register_id id="V4_7"	value="1078" address="0" page="0" />
+    <register_id id="V5_0"	value="1080" address="0" page="0" />
+    <register_id id="V5_1"	value="1082" address="0" page="0" />
+    <register_id id="V5_2"	value="1084" address="0" page="0" />
+    <register_id id="V5_3"	value="1086" address="0" page="0" />
+    <register_id id="V5_4"	value="1088" address="0" page="0" />
+    <register_id id="V5_5"	value="1090" address="0" page="0" />
+    <register_id id="V5_6"	value="1092" address="0" page="0" />
+    <register_id id="V5_7"	value="1094" address="0" page="0" />
+    <register_id id="V6_0"	value="1096" address="0" page="0" />
+    <register_id id="V6_1"	value="1098" address="0" page="0" />
+    <register_id id="V6_2"	value="1100" address="0" page="0" />
+    <register_id id="V6_3"	value="1102" address="0" page="0" />
+    <register_id id="V6_4"	value="1104" address="0" page="0" />
+    <register_id id="V6_5"	value="1106" address="0" page="0" />
+    <register_id id="V6_6"	value="1108" address="0" page="0" />
+    <register_id id="V6_7"	value="1110" address="0" page="0" />
+    <register_id id="V7_0"	value="1112" address="0" page="0" />
+    <register_id id="V7_1"	value="1114" address="0" page="0" />
+    <register_id id="V7_2"	value="1116" address="0" page="0" />
+    <register_id id="V7_3"	value="1118" address="0" page="0" />
+    <register_id id="V7_4"	value="1120" address="0" page="0" />
+    <register_id id="V7_5"	value="1122" address="0" page="0" />
+    <register_id id="V7_6"	value="1124" address="0" page="0" />
+    <register_id id="V7_7"	value="1126" address="0" page="0" />
+    <register_id id="V8_0"	value="1128" address="0" page="0" />
+    <register_id id="V8_1"	value="1130" address="0" page="0" />
+    <register_id id="V8_2"	value="1132" address="0" page="0" />
+    <register_id id="V8_3"	value="1134" address="0" page="0" />
+    <register_id id="V8_4"	value="1136" address="0" page="0" />
+    <register_id id="V8_5"	value="1138" address="0" page="0" />
+    <register_id id="V8_6"	value="1140" address="0" page="0" />
+    <register_id id="V8_7"	value="1142" address="0" page="0" />
+    <register_id id="V9_0"	value="1144" address="0" page="0" />
+    <register_id id="V9_1"	value="1146" address="0" page="0" />
+    <register_id id="V9_2"	value="1148" address="0" page="0" />
+    <register_id id="V9_3"	value="1150" address="0" page="0" />
+    <register_id id="V9_4"	value="1152" address="0" page="0" />
+    <register_id id="V9_5"	value="1154" address="0" page="0" />
+    <register_id id="V9_6"	value="1156" address="0" page="0" />
+    <register_id id="V9_7"	value="1158" address="0" page="0" />
+    <register_id id="V10_0"	value="1160" address="0" page="0" />
+    <register_id id="V10_1"	value="1162" address="0" page="0" />
+    <register_id id="V10_2"	value="1164" address="0" page="0" />
+    <register_id id="V10_3"	value="1166" address="0" page="0" />
+    <register_id id="V10_4"	value="1168" address="0" page="0" />
+    <register_id id="V10_5"	value="1170" address="0" page="0" />
+    <register_id id="V10_6"	value="1172" address="0" page="0" />
+    <register_id id="V10_7"	value="1174" address="0" page="0" />
+    <register_id id="V11_0"	value="1176" address="0" page="0" />
+    <register_id id="V11_1"	value="1178" address="0" page="0" />
+    <register_id id="V11_2"	value="1180" address="0" page="0" />
+    <register_id id="V11_3"	value="1182" address="0" page="0" />
+    <register_id id="V11_4"	value="1184" address="0" page="0" />
+    <register_id id="V11_5"	value="1186" address="0" page="0" />
+    <register_id id="V11_6"	value="1188" address="0" page="0" />
+    <register_id id="V11_7"	value="1190" address="0" page="0" />
+    <register_id id="V12_0"	value="1192" address="0" page="0" />
+    <register_id id="V12_1"	value="1194" address="0" page="0" />
+    <register_id id="V12_2"	value="1196" address="0" page="0" />
+    <register_id id="V12_3"	value="1198" address="0" page="0" />
+    <register_id id="V12_4"	value="1200" address="0" page="0" />
+    <register_id id="V12_5"	value="1202" address="0" page="0" />
+    <register_id id="V12_6"	value="1204" address="0" page="0" />
+    <register_id id="V12_7"	value="1206" address="0" page="0" />
+    <register_id id="V13_0"	value="1208" address="0" page="0" />
+    <register_id id="V13_1"	value="1210" address="0" page="0" />
+    <register_id id="V13_2"	value="1212" address="0" page="0" />
+    <register_id id="V13_3"	value="1214" address="0" page="0" />
+    <register_id id="V13_4"	value="1216" address="0" page="0" />
+    <register_id id="V13_5"	value="1218" address="0" page="0" />
+    <register_id id="V13_6"	value="1220" address="0" page="0" />
+    <register_id id="V13_7"	value="1222" address="0" page="0" />
+    <register_id id="V14_0"	value="1224" address="0" page="0" />
+    <register_id id="V14_1"	value="1226" address="0" page="0" />
+    <register_id id="V14_2"	value="1228" address="0" page="0" />
+    <register_id id="V14_3"	value="1230" address="0" page="0" />
+    <register_id id="V14_4"	value="1232" address="0" page="0" />
+    <register_id id="V14_5"	value="1234" address="0" page="0" />
+    <register_id id="V14_6"	value="1236" address="0" page="0" />
+    <register_id id="V14_7"	value="1238" address="0" page="0" />
+    <register_id id="V15_0"	value="1240" address="0" page="0" />
+    <register_id id="V15_1"	value="1242" address="0" page="0" />
+    <register_id id="V15_2"	value="1244" address="0" page="0" />
+    <register_id id="V15_3"	value="1246" address="0" page="0" />
+    <register_id id="V15_4"	value="1248" address="0" page="0" />
+    <register_id id="V15_5"	value="1250" address="0" page="0" />
+    <register_id id="V15_6"	value="1252" address="0" page="0" />
+    <register_id id="V15_7"	value="1254" address="0" page="0" />
+
+    <register_id id="V0"	value="1000" address="0" page="0" />
+    <register_id id="V1"	value="1016" address="0" page="0" />
+    <register_id id="V2"	value="1032" address="0" page="0" />
+    <register_id id="V3"	value="1048" address="0" page="0" />
+    <register_id id="V4"	value="1064" address="0" page="0" />
+    <register_id id="V5"	value="1080" address="0" page="0" />
+    <register_id id="V6"	value="1096" address="0" page="0" />
+    <register_id id="V7"	value="1112" address="0" page="0" />
+    <register_id id="V8"	value="1128" address="0" page="0" />
+    <register_id id="V9"	value="1144" address="0" page="0" />
+    <register_id id="V10"	value="1160" address="0" page="0" />
+    <register_id id="V11"	value="1176" address="0" page="0" />
+    <register_id id="V12"	value="1192" address="0" page="0" />
+    <register_id id="V13"	value="1208" address="0" page="0" />
+    <register_id id="V14"	value="1224" address="0" page="0" />
+    <register_id id="V15"	value="1240" address="0" page="0" />
+    
+    <!-- VCOP Sim Status Registers -->
+    <register_id id="RPT_END"         value="2001" address="0" page="0" />
+    <register_id id="cmd_ctrl_lpend1" value="7001" address="0" page="0" />
+    <register_id id="cmd_ctrl_lpend2" value="7002" address="0" page="0" />
+    <register_id id="cmd_ctrl_lpend3" value="7003" address="0" page="0" />
+    <register_id id="cmd_ctrl_lpend4" value="7004" address="0" page="0" />
+    <register_id id="Iteration_Count" value="3014" address="0" page="0" />
+    <register_id id="cycle_count"     value="7040" address="0" page="0" />
+    <register_id id="param_ld_overhead"  value="7041" address="0" page="0" />
+    <register_id id="decode_overhead"  value="7042" address="0" page="0" />
+    <register_id id="Total_cycle_count"  value="7043" address="0" page="0" />
+    <register_id id="load_store_cycle_count"     value="7044" address="0" page="0" />
+    <register_id id="operation_cycle_count"     value="7045" address="0" page="0" />
+    <register_id id="Cummulative_VCOP_cyc_count"  value="7046" address="0" page="0" />
+
+    <!-- VCOP_Address_Generators -->
+    <register_id id="VCOP_VAGEN_0" value="1300" address="0" page="0" />
+    <register_id id="VCOP_VAGEN_1" value="1301" address="0" page="0" />
+    <register_id id="VCOP_VAGEN_2" value="1302" address="0" page="0" />
+    <register_id id="VCOP_VAGEN_3" value="1303" address="0" page="0" />
+    <register_id id="VCOP_VAGEN_4" value="1304" address="0" page="0" />
+    <register_id id="VCOP_VAGEN_5" value="1305" address="0" page="0" />
+    <register_id id="VCOP_VAGEN_6" value="1306" address="0" page="0" />
+    <register_id id="VCOP_VAGEN_7" value="1307" address="0" page="0" />
+    
+    <register_id id="A0" value="1300" address="0" page="0" />
+    <register_id id="A1" value="1301" address="0" page="0" />
+    <register_id id="A2" value="1302" address="0" page="0" />
+    <register_id id="A3" value="1303" address="0" page="0" />
+    <register_id id="A4" value="1304" address="0" page="0" />
+    <register_id id="A5" value="1305" address="0" page="0" />
+    <register_id id="A6" value="1306" address="0" page="0" />
+    <register_id id="A7" value="1307" address="0" page="0" />
+
+    <register_id id="cmd_agen_active_0" value="6900" address="0" page="0" />
+    <register_id id="cmd_agen_active_1" value="6901" address="0" page="0" />
+    <register_id id="cmd_agen_active_2" value="6902" address="0" page="0" />
+    <register_id id="cmd_agen_active_3" value="6903" address="0" page="0" />
+    <register_id id="cmd_agen_active_4" value="6904" address="0" page="0" />
+    <register_id id="cmd_agen_active_5" value="6905" address="0" page="0" />
+    <register_id id="cmd_agen_active_6" value="6906" address="0" page="0" />
+    <register_id id="cmd_agen_active_7" value="6907" address="0" page="0" />
+
+    <register_id id="cmd_agen_pinc_0_1" value="6010" address="0" page="0" />
+    <register_id id="cmd_agen_pinc_0_2" value="6020" address="0" page="0" />
+    <register_id id="cmd_agen_pinc_0_3" value="6030" address="0" page="0" />
+    <register_id id="cmd_agen_pinc_0_4" value="6040" address="0" page="0" />
+    <register_id id="cmd_agen_pinc_1_1" value="6011" address="0" page="0" />
+    <register_id id="cmd_agen_pinc_1_2" value="6021" address="0" page="0" />
+    <register_id id="cmd_agen_pinc_1_3" value="6031" address="0" page="0" />
+    <register_id id="cmd_agen_pinc_1_4" value="6041" address="0" page="0" />
+    <register_id id="cmd_agen_pinc_2_1" value="6012" address="0" page="0" />
+    <register_id id="cmd_agen_pinc_2_2" value="6022" address="0" page="0" />
+    <register_id id="cmd_agen_pinc_2_3" value="6032" address="0" page="0" />
+    <register_id id="cmd_agen_pinc_2_4" value="6042" address="0" page="0" />
+    <register_id id="cmd_agen_pinc_3_1" value="6013" address="0" page="0" />
+    <register_id id="cmd_agen_pinc_3_2" value="6023" address="0" page="0" />
+    <register_id id="cmd_agen_pinc_3_3" value="6033" address="0" page="0" />
+    <register_id id="cmd_agen_pinc_3_4" value="6034" address="0" page="0" />
+    <register_id id="cmd_agen_pinc_4_1" value="6014" address="0" page="0" />
+    <register_id id="cmd_agen_pinc_4_2" value="6024" address="0" page="0" />
+    <register_id id="cmd_agen_pinc_4_3" value="6034" address="0" page="0" />
+    <register_id id="cmd_agen_pinc_4_4" value="6044" address="0" page="0" />
+    <register_id id="cmd_agen_pinc_5_1" value="6015" address="0" page="0" />
+    <register_id id="cmd_agen_pinc_5_2" value="6025" address="0" page="0" />
+    <register_id id="cmd_agen_pinc_5_3" value="6035" address="0" page="0" />
+    <register_id id="cmd_agen_pinc_5_4" value="6045" address="0" page="0" />
+    <register_id id="cmd_agen_pinc_6_1" value="6016" address="0" page="0" />
+    <register_id id="cmd_agen_pinc_6_2" value="6026" address="0" page="0" />
+    <register_id id="cmd_agen_pinc_6_3" value="6036" address="0" page="0" />
+    <register_id id="cmd_agen_pinc_6_4" value="6046" address="0" page="0" />
+    <register_id id="cmd_agen_pinc_7_1" value="6017" address="0" page="0" />
+    <register_id id="cmd_agen_pinc_7_2" value="6027" address="0" page="0" />
+    <register_id id="cmd_agen_pinc_7_3" value="6037" address="0" page="0" />
+    <register_id id="cmd_agen_pinc_7_4" value="6047" address="0" page="0" />
+
+    <!-- VCOP Parameter Registers -->
+    <register_id id="CMD_PARAM_0"  value="5000" address="0" page="0" />
+    <register_id id="CMD_PARAM_1"  value="5001" address="0" page="0" />
+    <register_id id="CMD_PARAM_2"  value="5002" address="0" page="0" />
+    <register_id id="CMD_PARAM_3"  value="5003" address="0" page="0" />
+    <register_id id="CMD_PARAM_4"  value="5004" address="0" page="0" />
+    <register_id id="CMD_PARAM_5"  value="5005" address="0" page="0" />
+    <register_id id="CMD_PARAM_6"  value="5006" address="0" page="0" />
+    <register_id id="CMD_PARAM_7"  value="5007" address="0" page="0" />
+    <register_id id="CMD_PARAM_8"  value="5008" address="0" page="0" />
+    <register_id id="CMD_PARAM_9"  value="5009" address="0" page="0" />
+    <register_id id="CMD_PARAM_10" value="5010" address="0" page="0" />
+    <register_id id="CMD_PARAM_11" value="5011" address="0" page="0" />
+    <register_id id="CMD_PARAM_12" value="5012" address="0" page="0" />
+    <register_id id="CMD_PARAM_13" value="5013" address="0" page="0" />
+    <register_id id="CMD_PARAM_14" value="5014" address="0" page="0" />
+    <register_id id="CMD_PARAM_15" value="5015" address="0" page="0" />
+    <register_id id="CMD_PARAM_16" value="5016" address="0" page="0" />
+    <register_id id="CMD_PARAM_17" value="5017" address="0" page="0" />
+    <register_id id="CMD_PARAM_18" value="5018" address="0" page="0" />
+    <register_id id="CMD_PARAM_19" value="5019" address="0" page="0" />
+    <register_id id="CMD_PARAM_20" value="5020" address="0" page="0" />
+    <register_id id="CMD_PARAM_21" value="5021" address="0" page="0" />
+    <register_id id="CMD_PARAM_22" value="5022" address="0" page="0" />
+    <register_id id="CMD_PARAM_23" value="5023" address="0" page="0" />
+    <register_id id="CMD_PARAM_24" value="5024" address="0" page="0" />
+    <register_id id="CMD_PARAM_25" value="5025" address="0" page="0" />
+    <register_id id="CMD_PARAM_26" value="5026" address="0" page="0" />
+    <register_id id="CMD_PARAM_27" value="5027" address="0" page="0" />
+    <register_id id="CMD_PARAM_28" value="5028" address="0" page="0" />
+    <register_id id="CMD_PARAM_29" value="5029" address="0" page="0" />
+    <register_id id="CMD_PARAM_30" value="5030" address="0" page="0" />
+    <register_id id="CMD_PARAM_31" value="5031" address="0" page="0" />
+    <register_id id="CMD_PARAM_32" value="5032" address="0" page="0" />
+    <register_id id="CMD_PARAM_33" value="5033" address="0" page="0" />
+    <register_id id="CMD_PARAM_34" value="5034" address="0" page="0" />
+    <register_id id="CMD_PARAM_35" value="5035" address="0" page="0" />
+    <register_id id="CMD_PARAM_36" value="5036" address="0" page="0" />
+    <register_id id="CMD_PARAM_37" value="5037" address="0" page="0" />
+    <register_id id="CMD_PARAM_38" value="5038" address="0" page="0" />
+    <register_id id="CMD_PARAM_39" value="5039" address="0" page="0" />
+    <register_id id="CMD_PARAM_40" value="5040" address="0" page="0" />
+    <register_id id="CMD_PARAM_41" value="5041" address="0" page="0" />
+    <register_id id="CMD_PARAM_42" value="5042" address="0" page="0" />
+    <register_id id="CMD_PARAM_43" value="5043" address="0" page="0" />
+    <register_id id="CMD_PARAM_44" value="5044" address="0" page="0" />
+    <register_id id="CMD_PARAM_45" value="5045" address="0" page="0" />
+    <register_id id="CMD_PARAM_46" value="5046" address="0" page="0" />
+    <register_id id="CMD_PARAM_47" value="5047" address="0" page="0" />
+    <register_id id="CMD_PARAM_48" value="5048" address="0" page="0" />
+    <register_id id="CMD_PARAM_49" value="5049" address="0" page="0" />
+    <register_id id="CMD_PARAM_50" value="5050" address="0" page="0" />
+    <register_id id="CMD_PARAM_51" value="5051" address="0" page="0" />
+    <register_id id="CMD_PARAM_52" value="5052" address="0" page="0" />
+    <register_id id="CMD_PARAM_53" value="5053" address="0" page="0" />
+    <register_id id="CMD_PARAM_54" value="5054" address="0" page="0" />
+    <register_id id="CMD_PARAM_55" value="5055" address="0" page="0" />
+    <register_id id="CMD_PARAM_56" value="5056" address="0" page="0" />
+    <register_id id="CMD_PARAM_57" value="5057" address="0" page="0" />
+    <register_id id="CMD_PARAM_58" value="5058" address="0" page="0" />
+    <register_id id="CMD_PARAM_59" value="5059" address="0" page="0" />
+    <register_id id="CMD_PARAM_60" value="5060" address="0" page="0" />
+    <register_id id="CMD_PARAM_61" value="5061" address="0" page="0" />
+    <register_id id="CMD_PARAM_62" value="5062" address="0" page="0" />
+    <register_id id="CMD_PARAM_63" value="5063" address="0" page="0" />
+
+    <!-- VCOP Visualizer Registers -->
+    <register_id id="STEP_EN"  value="2003" address="0" page="0" />
+    <register_id id="STEP_GO"  value="2004" address="0" page="0" />
+    <register_id id="STEP_RDY" value="2005" address="0" page="0" />
+
+    <!-- ARP32 Hidden Registers -->
+    <register_id id="FP"  value="0x07"  address="0" page="0" />
+    <register_id id="CLK" value="0x90b" address="0" page="0" />
+</register_ids>

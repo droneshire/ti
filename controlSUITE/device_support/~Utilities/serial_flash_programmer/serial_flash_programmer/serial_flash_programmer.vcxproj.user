@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LocalDebuggerCommandArguments>-d f2802x -k "c:\Users\Ross Yeager\Documents\f28027_flash_kernel.txt" -a proj_lab01.txt -p COM4 -b 115200 -v</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LocalDebuggerCommandArguments>-w -v -d f2802x -k "c:\Users\Ross Yeager\Documents\f28027_flash_kernel.txt" -a "C:\ti\motorware\motorware_1_01_00_17\sw\solutions\instaspin_foc\boards\boostxldrv8305_revA\f28x\f2802xF\projects\ccs5\proj_lab01\Flash\proj_lab01.txt" -p COM4 -b 9600 -v</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+</Project>

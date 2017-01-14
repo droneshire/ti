@@ -1,0 +1,81 @@
+<!-- This xml include file defines registers that need to be read from the C64XX+ device.
+	<Name> specifies the name that is used in the XML file to refer to this register
+	<SymbolName> specifies the symbolic name for the register used by the Debug Server.  Do not include this element for memory mapped registers.
+	<Address> specifies the memory mapped address for the register.  Set to -1 if the symbolic name is to be used.
+	<LengthInMAUs> specifies the number of bytes that the register contains multiplied by the number of registers in the set.
+	<NumRegistersInSet> specifies the number of (memory mapped) registers in the set.  These are read as a block.
+	<MemoryPageNumber> specifies the address space ID to use when reading memory mapped registers
+	<IsMemoryMapped> set to true for a memory mapped register, false to use the symbol name specified
+	<IsRegValueReadOnHalt> set to true if the register is to be read from the target each time the target halts
+	<IsOnlyForMemAnalysis> set to false if the register is not used for normal clients (default), true if used for advanced memory analysis or cache view
+	<IsRegValueSetDuringPrefetch> set to false (obsolete)
+	<IsRegValueContextRestoreReqd> set to false (obsolete)
+	<RegDecoder> for each decoder type that is associated with this register, add a <RegDecoder> element that specifies the (case-sensitive) name of the decoder
+	    as defined in the XML file.
+    NOTE: this file uses different decoders than the CCS 3.3 version of this file!
+-->
+<Register>
+	<Name>L1INFO</Name>
+	<Address>0x1C30000</Address>
+	<LengthInMAUs>4</LengthInMAUs>
+	<NumRegistersInSet>1</NumRegistersInSet>
+	<MemoryPageNumber>0</MemoryPageNumber>
+	<IsMemoryMapped>true</IsMemoryMapped>
+	<IsRegValueReadOnHalt>true</IsRegValueReadOnHalt>
+	<IsRegValueSetDuringPrefetch>false</IsRegValueSetDuringPrefetch>
+	<IsRegValueContextRestoreReqd>false</IsRegValueContextRestoreReqd>
+	<RegDecoder>GetL1CacheSize</RegDecoder>
+	<RegDecoder>GetL1NumCacheLines</RegDecoder>
+	<RegDecoder>GetL1NumWays</RegDecoder>
+</Register>
+<Register>
+	<Name>L1CONFIG</Name>
+	<Address>0x1C30004</Address>
+	<LengthInMAUs>4</LengthInMAUs>
+	<NumRegistersInSet>1</NumRegistersInSet>
+	<MemoryPageNumber>0</MemoryPageNumber>
+	<IsMemoryMapped>true</IsMemoryMapped>
+	<IsRegValueReadOnHalt>true</IsRegValueReadOnHalt>
+	<IsRegValueSetDuringPrefetch>false</IsRegValueSetDuringPrefetch>
+	<IsRegValueContextRestoreReqd>false</IsRegValueContextRestoreReqd>
+	<RegDecoder>IsCacheEnabled</RegDecoder>
+</Register>
+<Register>
+	<Name>L2INFO</Name>
+	<Address>0x01C30200</Address>
+	<LengthInMAUs>4</LengthInMAUs>
+	<NumRegistersInSet>1</NumRegistersInSet>
+	<MemoryPageNumber>0</MemoryPageNumber>
+	<IsMemoryMapped>true</IsMemoryMapped>
+	<IsRegValueReadOnHalt>true</IsRegValueReadOnHalt>
+	<IsRegValueSetDuringPrefetch>false</IsRegValueSetDuringPrefetch>
+	<IsRegValueContextRestoreReqd>false</IsRegValueContextRestoreReqd>
+	<RegDecoder>GetL2CacheSize</RegDecoder>
+	<RegDecoder>GetL2NumCacheLines</RegDecoder>
+	<RegDecoder>GetL2NumWays</RegDecoder>
+</Register>
+<Register>
+	<Name>L2CONFIG</Name>
+	<Address>0x01C30204</Address>
+	<LengthInMAUs>4</LengthInMAUs>
+	<NumRegistersInSet>1</NumRegistersInSet>
+	<MemoryPageNumber>0</MemoryPageNumber>
+	<IsMemoryMapped>true</IsMemoryMapped>
+	<IsRegValueReadOnHalt>true</IsRegValueReadOnHalt>
+	<IsRegValueSetDuringPrefetch>false</IsRegValueSetDuringPrefetch>
+	<IsRegValueContextRestoreReqd>false</IsRegValueContextRestoreReqd>
+	<RegDecoder>IsCacheEnabled</RegDecoder>
+</Register><Register>
+	<Name>CORENUMBER</Name>
+	<SymbolName>DNUM</SymbolName>
+	<Address>-1</Address>
+	<LengthInMAUs>4</LengthInMAUs>
+	<NumRegistersInSet>1</NumRegistersInSet>
+	<MemoryPageNumber>0</MemoryPageNumber>
+	<IsMemoryMapped>false</IsMemoryMapped>
+	<IsRegValueReadOnHalt>true</IsRegValueReadOnHalt>
+	<IsRegValueSetDuringPrefetch>false</IsRegValueSetDuringPrefetch>
+	<IsRegValueContextRestoreReqd>false</IsRegValueContextRestoreReqd>
+	<RegDecoder>GetGlobalAdrsForThisCore</RegDecoder>
+	<RegDecoder>GetCoreNumber</RegDecoder>
+</Register>	

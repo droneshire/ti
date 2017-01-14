@@ -1,0 +1,3518 @@
+<?xml version="1.0"?>
+
+<!-- Trace subsystem setup attributes for device -->
+<device id="ADAS" value="0x0B9B202F" mask="0x0FFFFFFF" HW_revision="1.0" XML_version="1.0">
+
+	<FileVersion version="2.0.0.0" Copyright="Copyright (c) 2009 Texas Instruments"></FileVersion>
+	
+	<!-- Trace route topology. Every route entry specifies a soure to sink/pin route for a given source.
+	Multiple routes shows multiple possible paths available for trace and user can select one for an 
+	active debug session -->
+			
+	<trace_routes> 
+		<route>
+			<source source="CSSTM_0"/>
+			<link module=""/>
+			<sink module="MOD_TPIU"/>
+			<pin module="MOD_DRM"/>
+		</route>
+		
+		<route>
+			<source source="CSSTM_0"/>
+			<link module=""/>
+			<sink module="MOD_ETB0"/>
+			<pin module=""/>
+		</route> 
+
+    <!-- GEM uses ETB as receiver -->
+    <route>
+      <source source="C66XX_0"/>
+      <link module=""/>
+      <sink module="MOD_ETB0"/>
+      <pin module=""/>
+    </route>
+
+    <route>
+      <source source="C66XX_1"/>
+      <link module=""/>
+      <sink module="MOD_ETB0"/>
+      <pin module=""/>
+    </route>
+
+	<route>
+		<source source="C66XX_0"/>
+		<link module=""/>
+		<sink module="MOD_TPIU"/>
+		<pin module="MOD_DRM"/>
+	</route>
+	<route>
+		<source source="C66XX_1"/>
+		<link module=""/>
+		<sink module="MOD_TPIU"/>
+		<pin module="MOD_DRM"/>
+	</route>
+  </trace_routes>
+
+	<!-- Supported proc access mechanisms for the device -->
+	<procs>
+		<!-- IPU System M4_1 -->
+		<proc id="Cortex_M4_1" kind="cortex_mxx" traceid="1">
+			<identifier>
+				<register id="PID0" address="0xE00FFFE0" page="0" addrunit="1" width="32" type="mem"/>
+				<value idvalue="0" />
+			</identifier> 
+			
+		</proc>
+	
+		<!-- IPU System M4_2 -->
+		<proc id="Cortex_M4_2" kind="cortex_mxx" traceid="2">
+			<identifier>
+				<register id="PID0" address="0xE00FFFE0" page="0" addrunit="1" width="32" type="mem"/>
+				<value idvalue="1" />
+			</identifier> 
+			
+		</proc>
+
+		<!-- DSP1 -->
+		<proc id="C66XX_0" kind="tms320c66xx" traceid="1">
+			<identifier>
+				<register id="DNUM" address="DNUM" page="" addrunit="" width="32" type="reg"/>
+				<value idvalue="0x0" />
+			</identifier>
+		</proc>
+		
+		<!-- DSP2 -->
+		<proc id="C66XX_1" kind="tms320c66xx" traceid="2">
+			<identifier>
+				<register id="DNUM" address="DNUM" page="" addrunit="" width="32" type="reg"/>
+				<value idvalue="0x1" />
+			</identifier>		
+		</proc>
+		
+    
+    <!-- SYSTEM Trace ETB -->
+		<proc id="CSETB_0" kind="cs_etb" >
+			<identifier>
+				<register id="BASE_ADDRESS" address="" page="" addrunit="" width="" type="reg"/>
+				<value idvalue="0x4B167000" />
+			</identifier> 
+			
+		</proc>
+				
+		<!-- STM -->
+		<proc id="CSSTM_0" kind="cs_stm" traceid="8">
+			<identifier>
+				<register id="BASE_ADDRESS" address="" page="" addrunit="" width="" type="reg"/>
+				<value idvalue="0xC4161000" />
+			</identifier> 
+		</proc >
+		
+		<!-- DAP PC access -->
+		<proc id="CS_DAP_DebugSS"  kind="cs_dap">
+			<identifier idvalue="" idregister="" />
+		</proc>
+
+		<!-- EVE paccess -->
+		<proc id="ARP32_EVE_1"  kind="arp32" traceid="1">
+			<identifier idvalue="" idregister="" />
+		</proc>
+
+	</procs>
+
+	<!-- Available Trace sources for the device -->
+	<sources>		
+		<!-- System Trace source -->
+		<source id="Cortex_M4_1" proc="Cortex_M4_1" stmmaster = "true">
+			<components>
+				<component module="MOD_CROSS_TRIGGERING_XTRIG"/>
+			</components> 
+			<characteristics>
+				<characteristic id="DEV_CHAR_SCTMMODULENUM" value="1"/>
+				<characteristic id="DEV_CHAR_SCTMFILE" value="AET_PropertySCTM_IPU.xml"/>
+				<characteristic id="DEV_CHAR_CTI" value="0"/> 
+				<characteristic id="DEV_CHAR_CTIFUNNAME" value="Cross Trigger(XTRIG)"/> 
+				<characteristic id="DEV_CHAR_CTIFILE" value="AET_PropertyCTI_GB1.xml"/> 
+			</characteristics>
+		</source>
+
+		<source id="Cortex_M4_2" proc="Cortex_M4_2" stmmaster = "true">
+			<components>
+				<component module="MOD_CROSS_TRIGGERING_XTRIG"/>
+			</components> 
+			<characteristics>
+				<characteristic id="DEV_CHAR_SCTMMODULENUM" value="1"/>
+				<characteristic id="DEV_CHAR_SCTMFILE" value="AET_PropertySCTM_IPU.xml"/>
+				<characteristic id="DEV_CHAR_CTI" value="0"/> 
+				<characteristic id="DEV_CHAR_CTIFUNNAME" value="Cross Trigger(XTRIG)"/> 
+				<characteristic id="DEV_CHAR_CTIFILE" value="AET_PropertyCTI_GB1.xml"/> 
+			</characteristics>
+		</source>
+
+		<source id="C66XX_0" proc="C66XX_0" stmmaster = "true">
+			<components>
+				<component module="MOD_RADTF0"/>
+				<component module="MOD_CROSS_TRIGGERING_XTRIG"/>
+				<component module="MOD_DRMMAP"/>
+			</components>
+		<characteristics>
+			<characteristic id="DEV_CHAR_PINMANAGER" description="" value="1" />
+			<characteristic id="DEV_CHAR_DATAPINCOUNT" description="" value="20" />
+			<characteristic id="DEV_CHAR_CLOCKPINCOUNT" description="" value="2" />
+			<characteristic id="DEV_CHAR_PRIMARYCLOCK" description="" value="20" />
+			<characteristic id="DEV_CHAR_SECONDARYCLOCK" description="" value="21" />
+			<characteristic id="DEV_CHAR_TRACEDATAORDER" description="" value="reverse" />
+			<characteristic id="DEV_CHAR_FFCRDISABLE" value="1" />
+			<characteristic id="DEV_CHAR_CURIE" value="0" />
+			<characteristic id="DEV_CHAR_TRACEPLLUNIT" description="" value="3"/>
+			<characteristic id="DEV_CHAR_TRACEPLLBASE" value="0x02310000"/>
+			<characteristic id="DEV_CHAR_GEMTYPE" value="2"/>
+			<characteristic id="DEV_CHAR_CTI" value="0"/>
+			<characteristic id="DEV_CHAR_CTIFUNNAME" value="Cross Trigger(XTRIG)"/>
+			<characteristic id="DEV_CHAR_CTIFILE" value="AET_PropertyCTI_GB1.xml"/>
+			<characteristic id="DEV_CHAR_ATB_ID" value="0x01"/>
+			<characteristic id="DEV_CHAR_TF_BASE" value="0x54164000"/> 
+			<characteristic id="DEV_CHAR_TF_CONFIG" value="0x00000302"/> 
+			<characteristic id="DEV_CHAR_TF_RESET" value="0x00000300"/> 
+			<characteristic id="DEV_CHAR_DSP_VIA_TPIU" value="1"/> 
+		</characteristics>
+	</source>
+
+	<source id="C66XX_1" proc="C66XX_1" stmmaster = "true">
+		<components>
+			<component module="MOD_RADTF0"/>
+			<component module="MOD_CROSS_TRIGGERING_XTRIG"/>
+			<component module="MOD_DRMMAP"/>
+		</components>
+		<characteristics>
+			<characteristic id="DEV_CHAR_PINMANAGER" description="" value="1" />
+			<characteristic id="DEV_CHAR_DATAPINCOUNT" description="" value="20" />
+			<characteristic id="DEV_CHAR_CLOCKPINCOUNT" description="" value="2" />
+			<characteristic id="DEV_CHAR_PRIMARYCLOCK" description="" value="20" />
+			<characteristic id="DEV_CHAR_SECONDARYCLOCK" description="" value="21" />
+			<characteristic id="DEV_CHAR_TRACEDATAORDER" description="" value="reverse" />
+			<characteristic id="DEV_CHAR_FFCRDISABLE" value="1" />
+			<characteristic id="DEV_CHAR_CURIE" value="0" />
+			<characteristic id="DEV_CHAR_TRACEPLLUNIT" description="" value="3"/>
+			<characteristic id="DEV_CHAR_TRACEPLLBASE" value="0x02310000"/>
+			<characteristic id="DEV_CHAR_GEMTYPE" value="2"/>
+			<characteristic id="DEV_CHAR_CTI" value="0"/>
+			<characteristic id="DEV_CHAR_CTIFUNNAME" value="Cross Trigger(XTRIG)"/>
+			<characteristic id="DEV_CHAR_CTIFILE" value="AET_PropertyCTI_GB1.xml"/>
+			<characteristic id="DEV_CHAR_ATB_ID" value="0x02"/> 
+			<characteristic id="DEV_CHAR_TF_BASE" value="0x54164000"/> 
+			<characteristic id="DEV_CHAR_TF_CONFIG" value="0x00000304"/> 
+			<characteristic id="DEV_CHAR_TF_RESET" value="0x00000300"/> 
+			<characteristic id="DEV_CHAR_DSP_VIA_TPIU" value="1"/> 
+		</characteristics>
+	</source>
+
+		<!-- This is primary STM source which contains total number of STM module -->
+		<source id="CSSTM_0" proc="CSSTM_0" stmmaster = "true">
+			<components>
+				<component module="MOD_POWERPRO"/>
+				<component module="MOD_CLOCKPRO"/>
+				<component module="MOD_STMMASTERS_CONTROL"/>
+				<component module="MOD_SWMASTER0"/>
+				<component module="MOD_OCPWP0"/>
+				<component module="MOD_SMSET0"/>
+				<component module="MOD_SMSET1"/>
+				<component module="MOD_SC"/>
+				<component module="MOD_CTSET"/>
+				<component module="MOD_CONFIGINFO"/>
+				<component module="MOD_PREPROCESS"/>
+			</components> 
+			<characteristics>
+				<characteristic id="CHAR_MAXEXPORTFREQMHZ" value="83"/>
+				<characteristic id="DEV_CHAR_STMTYPE" value="2"/>
+				<characteristic id="DEV_CHAR_PPFMODULENUM" value="3"/>
+				<characteristic id="DEV_CHAR_STM_BASEADDRESS" value="0xCB161000"/>
+				<characteristic id="DEV_CHAR_STM_CM_BASEADDRESS" value="0x4A307A00"/>
+				<characteristic id="DEV_CHAR_STM_SW_MASTER_DEFAULT" value="0x20406034"/>
+				<!-- Enable CT-SET, PMI, SC and SMSET by default. -->
+				<characteristic id="DEV_CHAR_STM_HW_MASTER_DEFAULT" value="0xF8F4E0D0"/>
+				<characteristic id="DEV_CHAR_STM_SC_MASTER_SHIFT" value="true"/>
+				<characteristic id="DEV_CHAR_STM_TOTAL_NUMBER" value="2"/>
+				<!-- Defines how many CS_STM units to create. Not supported yet. -->
+				<!-- <characteristic id="DEV_CHAR_CS_STM_UNITS" value="1"/> -->
+				<!-- Defines DLL name which includes the function to create CS_STM export -->
+				<characteristic id="DEV_CHAR_CS_STM_DLL" value="CS_STM_Export"/>
+				<!-- Defines the trace id of the first CS_STM unit -->
+				<characteristic id="DEV_CHAR_CS_STM_TRACE_ID_0" value="32"/>
+				<!-- Defines the base address of the first CS_STM unit -->
+				<characteristic id="DEV_CHAR_ATB_ID" value="0x40"/> 
+				<characteristic id="DEV_CHAR_ATB_STP_VERSION" value="2"/> 
+				<characteristic id="DEV_CHAR_DRMBASE_ADDR" value="0xC4160000"/>
+			</characteristics>
+		</source>
+    
+		<source id="CS_DAP_DebugSS" proc="CS_DAP_DebugSS" stmmaster = "true">
+			<components>
+				<component module="MOD_DRMMAP"/>
+			</components> 
+			<characteristics>
+			</characteristics>
+		</source> 
+		
+		<source id="ARP32_EVE_1" proc="ARP32_EVE_1" stmmaster = "true">
+			<characteristics>
+				<characteristic id="DEV_CHAR_SMSETDRIVER" value="1"/>
+			</characteristics>
+	     </source>
+
+	</sources> 
+
+	<!-- Available modules asscoiated with various modules in the device -->
+	<modules> 
+				
+		<!-- SM module associated with System Trace -->
+		<module id="MOD_STMMASTERS_CONTROL" kind="swmctrl" proc="CSSTM_0" version="1.0" >
+			<characteristics>				
+				<characteristic id="SWMSCTRL_DSP" description="SW Master Control for DSP?" value="DSP_None,DSP_CPU0"/> 
+				<characteristic id="SWMSCTRL_IVAHD0" description="SW Master Control for IVA-HD 0?" value="IVAHD0_None,IVAHD0_CPU0"/>
+				<characteristic id="SWMSCTRL_IVAHD1" description="SW Master Control for IVA-HD 1?" value="IVAHD1_None,IVAHD1_CPU1"/>
+				<characteristic id="SWMSCTRL_IPU" description="SW Master Control for IPU?" value="IPU_None,IPU_CPU0,IPU_CPU1"/>
+				<characteristic id="SWMSCTRL_MPUSS" description="SW Master Control for MPUSS?" value="MPUSS_None,MPUSS_CPU0"/>
+								
+			</characteristics> 
+			
+			<mapping id="value.username">
+				<map value="MPUSS_None" username="None"/>
+				<map value="MPUSS_CPU0" username="CPU0"/>
+				<map value="MPUSS_CPU1" username="CPU1"/>
+				<map value="MPUSS_Either" username="Either"/>
+				<!-- Add more...-->
+			</mapping>
+			
+			<mapping id="value.swmasterid">
+				<map value="MPUSS_None" swmasterid="0x0??"/>
+				<map value="MPUSS_CPU0" swmasterid="0x0??"/>
+				<map value="MPUSS_CPU1" swmasterid="0x0??"/>
+				<map value="MPUSS_Either" swmasterid="0x0??"/>
+				<!-- Add more...-->
+			</mapping>
+		
+		<mapping id="value.coreidmask">
+				<map value="MPUSS_None" coreidmask="0x0??"/>
+				<map value="MPUSS_CPU0" coreidmask="0x0??"/>
+				<map value="MPUSS_CPU1" coreidmask="0x0??"/>
+				<map value="MPUSS_Either" coreidmask="0x0??"/>
+				<!-- Add more...-->
+			</mapping>
+			
+		</module>	
+		
+		<module id="MOD_SWMASTER0" kind="STM" proc="CSSTM_0" version="2.0" >
+			<registers>
+				<register id="ATB_CONFIG" address="0xC4161044" page="0" addrunit="4" width="32" type="mem" />		
+				<register id="ATB_POINTER" address="0xC4161048" page="0" addrunit="4" width="32" type="mem" />		
+			</registers>
+
+			<mapping id="masterid.name">
+				<map masterid="0x10" name="DAP"/>		
+				<map masterid="0x20" name="DSP1 MDMA"/>
+				<map masterid="0x24" name="DSP1 CFG"/>
+				<map masterid="0x28" name="DSP1 DMA"/>
+				<map masterid="0x2C" name="DSP2 DMA"/>
+				<map masterid="0x30" name="DSP2 CFG"/>
+				<map masterid="0x34" name="DSP2 MDMA"/>
+				<map masterid="0x40" name="ARP32_EVE_1"/>
+				<map masterid="0x60" name="IPU1"/>
+				<map masterid="0x61" name="IPU2"/>
+				<map masterid="0x70" name="EDMA_TC1"/>						
+				<map masterid="0x74" name="EDMA_TC2"/>						
+			</mapping>
+			
+			<mapping id="masterid.proc">
+				<map masterid="0x10" proc="DAP"/>			
+				<map masterid="0x20" proc="C66XX_0"/>
+				<map masterid="0x24" proc="C66XX_0"/>
+				<map masterid="0x28" proc="C66XX_0"/>
+				<map masterid="0x2C" proc="C66XX_1"/>
+				<map masterid="0x30" proc="C66XX_1"/>
+				<map masterid="0x34" proc="C66XX_1"/>
+				<map masterid="0x40" proc="ARP32_EVE_1"/>
+				<map masterid="0x60" proc="IPU1"/>
+				<map masterid="0x61" proc="IPU2"/>
+				<map masterid="0x70" proc="EDMA_TC1"/>						
+				<map masterid="0x74" proc="EDMA_TC2"/>						
+			</mapping>
+			
+			<mapping id="masterid.decoder">
+				<map masterid="*"  decoder="StmDecodeUnitSoftwareMessage"/>
+			</mapping>
+		
+		</module>	
+				
+		<module id="MOD_PREPROCESS" kind="STM" proc="CSSTM_0" version="2.0" >
+			<mapping id="masterid.name">
+        <map masterid="0x10" name="DAP"/>
+        <map masterid="0x20" name="DSP1 MDMA"/>
+        <map masterid="0x24" name="DSP1 CFG"/>
+        <map masterid="0x28" name="DSP1 DMA"/>
+        <map masterid="0x2C" name="DSP2 DMA"/>
+        <map masterid="0x30" name="DSP2 CFG"/>
+        <map masterid="0x34" name="DSP2 MDMA"/>
+        <map masterid="0x40" name="ARP32_EVE_1"/>
+        <map masterid="0x60" name="IPU1"/>
+        <map masterid="0x61" name="IPU2"/>
+      </mapping>
+			
+			<mapping id="masterid.proc">
+				<map masterid="0x10" proc="DAP"/>			
+				<map masterid="0x20" proc="DSP1 MDMA"/>
+				<map masterid="0x24" proc="DSP1 CFG"/>
+				<map masterid="0x28" proc="DSP1 DMA"/>
+				<map masterid="0x2C" proc="DSP2 DMA"/>
+				<map masterid="0x30" proc="DSP2 CFG"/>
+				<map masterid="0x34" proc="DSP2 MDMA"/>
+				<map masterid="0x40" proc="ARP32_EVE_1"/>
+				<map masterid="0x60" proc="IPU1"/>
+				<map masterid="0x61" proc="IPU2"/>
+			</mapping>
+			
+			<mapping id="masterid.decoder">
+				<map masterid="*"  decoder="StmDecodeUnitPreprocessor"/>
+			</mapping>
+		</module>	
+
+		<!-- OCPWP module associated with System Trace -->
+		<module id="MOD_OCPWP0" kind="ocpwp" proc="CSSTM_0" version="1.0" >
+			<!-- Reverse lookup for UBM/AET database using key -->
+			<characteristics>
+				<characteristic id="CONTROL_EVENT" value="true"/>
+				<characteristic id="CONTROL_DATA " value="true"/>
+			</characteristics>
+		
+			<!-- Reverse lookup for UBM/AET database using key -->
+			<mapping id="eventbit.name">
+				<map eventbit="1" name="Interrupt"/>
+				<map eventbit="2" name="DMA Stop"/>
+			</mapping>			
+			
+			<mapping id="masterid.name">
+				<map masterid="0xE4" name="OCP Watch-point"/>
+				<map masterid="0xE8" name="DMA Profiling"/>
+				<map masterid="0xEC" name="System Events"/>
+			</mapping>
+			
+			<mapping id="masterid.width">
+				<map masterid="0xE4" width="64"/>
+				<map masterid="0xE8" width="64"/>
+				<map masterid="0xEC" width="64"/>
+			</mapping>
+			
+			<mapping id="event.name">
+				<map event="0x0" name="NOT_USED"/>
+			</mapping>
+			
+			<mapping id="event.type">
+				<map event="0x0" type="initiator"/>
+			</mapping>
+			
+			<mapping id="masterid.decoder">
+				<map masterid="*" decoder="OCPDecoderUnitH08"/>
+			</mapping>
+
+      <mapping id="modelid.masterid">
+        <map modelid="0" masterid="0xE4"/>
+      </mapping>
+    </module> 
+
+		<!-- ETB module -->
+		<module id="MOD_ETB0" kind="cs_tbr" proc="CSETB_0" version="2.0" >
+			<registers>
+				<register id="DEVID" address="DEVID"  page="" addrunit="1" width="32" type="reg"/>		
+				<register id="RAMSZ" address="RAMSZ" page="" addrunit="1" width="32" type="reg"/>	
+				<register id="STAT" address="STAT" page="" addrunit="1" width="32" type="reg"/>		
+				<register id="RAMRDAT" address="RAMRDAT" page="" addrunit="1" width="32" type="reg"/>
+				<register id="RAMRPTR" address="RAMRPTR" page="" addrunit="1" width="32" type="reg"/>
+				<register id="RAMWPTR" address="RAMWPTR" page="" addrunit="1" width="32" type="reg"/>
+				<register id="TRGCNT" address="TRGCNT" page="" addrunit="1" width="32" type="reg"/>
+				<register id="CTRL" address="CTRL" page="" addrunit="1" width="32" type="reg"/>		
+				<register id="RAMWDAT" address="RAMWDAT" page="" addrunit="1" width="32" type="reg"/>		
+				<register id="IDPERIOD" address="IDPERIOD" page="" addrunit="1" width="32" type="reg"/>
+				<register id="OPSTAT" address="OPSTAT" page="" addrunit="1" width="32" type="reg"/>
+				<register id="OPCTRL" address="OPCTRL" page="" addrunit="1" width="32" type="reg"/>
+				<register id="LOCKACC" address="LOCKACC" page="" addrunit="1" width="32" type="reg"/>
+				<register id="LOCKSTAT" address="LOCKSTAT" page="" addrunit="1" width="32" type="reg"/>
+				<register id="SEQCNTL" address="SEQCNTL" page="" addrunit="1" width="32" type="reg"/>
+				
+			</registers>
+			<characteristics>
+				<characteristic id="DEV_CHAR_PINMANAGER" description="" value="1"/> 
+				<characteristic id="DEV_CHAR_DATAPINCOUNT" description="" value="20"/>
+				<characteristic id="DEV_CHAR_CLOCKPINCOUNT" description="" value="2"/>
+				<characteristic id="DEV_CHAR_PRIMARYCLOCK" description="" value="20"/>
+				<characteristic id="DEV_CHAR_SECONDARYCLOCK" description="" value="21"/>
+				<characteristic id="DEV_CHAR_TRACEDATAORDER" description="" value="reverse"/>
+				<characteristic id="DEV_CHAR_VAYU" value="1" />
+				<characteristic id="DEV_CHAR_TRACEMODE" value="3"/> <!-- This is setting is giving a hint to channel driver to run at freeclock mode. It is here to deal with ADTF -->	
+			</characteristics> 	
+		</module>
+
+		<!-- ADTF module associated with GEM DSP trace to ETB -->
+		<module id="MOD_RADTF0" kind="radtf" proc="C66XX_0" version="1.0" >
+			<registers>
+					<register id="DTFCR" address="0x01D0F000" page="0" addrunit="1" width="32" type="mem" />
+					<register id="ATBID" address="0x01D0F400" page="0" addrunit="1" width="32" type="mem" />
+                		<register id="TAGSET" address="0x01D0FFA0" page="0" addrunit="1" width="32" type="mem" />
+                		<register id="TAGCLR" address="0x01D0FFA4" page="0" addrunit="1" width="32" type="mem" />
+                		<register id="LOCK" address="0x01D0FFB0" page="0" addrunit="1" width="32" type="mem" />
+                		<register id="LOCK_STATUS" address="0x01D0FFB4" page="0" addrunit="1" width="32" type="mem" />
+                		<register id="ID" address="0x01D0FFC8" page="0" addrunit="1" width="32" type="mem" />
+			</registers>
+		</module> 
+		<module id="MOD_RADTF1" kind="radtf" proc="C66XX_1" version="1.0" >
+			<registers>
+						<register id="DTFCR" address="0x01D0F000" page="0" addrunit="1" width="32" type="mem" />
+						<register id="ATBID" address="0x01D0F400" page="0" addrunit="1" width="32" type="mem" />
+                		<register id="TAGSET" address="0x01D0FFA0" page="0" addrunit="1" width="32" type="mem" />
+                		<register id="TAGCLR" address="0x01D0FFA4" page="0" addrunit="1" width="32" type="mem" />
+                		<register id="LOCK" address="0x01D0FFB0" page="0" addrunit="1" width="32" type="mem" />
+                		<register id="LOCK_STATUS" address="0x01D0FFB4" page="0" addrunit="1" width="32" type="mem" />
+                		<register id="ID" address="0x01D0FFC8" page="0" addrunit="1" width="32" type="mem" />
+			</registers>
+		</module>    
+
+    <module id="MOD_POWERPRO" kind="clockpro" proc="CSSTM_0" version="1.0" >
+
+      <!-- Reverse lookup for UBM/AET database using key -->
+      <characteristics>
+      </characteristics>
+
+      <mapping id="modelid.masterid">
+        <map modelid="0" masterid="0xF8"/>
+      </mapping>
+    </module>
+
+
+    <!-- Clock Profiler module associated with System Trace -->
+
+    <module id="MOD_CLOCKPRO" kind="clockpro" proc="CSSTM_0" version="1.0" >
+			
+    <!-- Reverse lookup for UBM/AET database using key -->
+       <characteristics>
+          <characteristic id="CONTROL_EVENT" value="true"/>
+          <characteristic id="CONTROL_DATA " value="true"/>
+       </characteristics>
+
+      <mapping id="modelid.masterid">
+        <map modelid="0" masterid="0xF8"/>
+      </mapping>
+
+      <!-- MasterId ^ ClassStartingIndex (Class Name)  ^ ClassEndingIndex ^ Master ID Name -->
+      <mapping id="cmmasterclassmapping.name">
+          <map cmmasterclassmapping="1" name="f8^0^19^CM1"/>
+          <map cmmasterclassmapping="2" name="f4^20^23^PM"/>				
+      </mapping>
+
+
+			<!-- Lookup for CM Event Class Names (m_sClassNames[ClassIndex]) -->
+			<!-- ClassNames ^ ModuleEventId (Id in D8 data) ^ ModuleMapping (index to listing below) ^ SwapClassAndDomain columns in output -->
+
+			<mapping id="cmeventclass.name">
+				<map cmeventclass="0" name="Clock Domain State^0^0^0"/>
+				<map cmeventclass="1" name="Clock frequency divider ratio update^2^1^0"/>
+				<map cmeventclass="2" name="Clock source selection update^3^2^0"/>
+				<map cmeventclass="3" name="CORE^16^3^1"/>
+				<map cmeventclass="4" name="MPU^17^4^1"/>
+				<map cmeventclass="5" name="IVA^18^5^1"/>
+				<map cmeventclass="6" name="ABE^19^6^1"/>
+				<map cmeventclass="7" name="DDR^20^7^1"/>
+				<map cmeventclass="8" name="PER^21^8^1"/>
+				<map cmeventclass="9" name="DSP^22^9^1"/>
+				<map cmeventclass="10" name="EVE^23^10^1"/>
+				<map cmeventclass="11" name="GMAC^24^11^1"/>
+				<map cmeventclass="12" name="GPU^25^12^1"/>
+				<map cmeventclass="13" name="USB^26^13^1"/>
+				<map cmeventclass="14" name="PCIE^27^14^1"/>
+				<map cmeventclass="15" name="PCIE_REF^28^15^1"/>
+				<map cmeventclass="16" name="Target activity^32^16^0"/>
+				<map cmeventclass="17" name="Target activity^33^17^0"/>
+				<map cmeventclass="18" name="Initiator activity^34^16^0"/>
+				<map cmeventclass="19" name="Initiator activity^35^19^0"/>
+				<map cmeventclass="21" name="Logic Voltage(500mV-1650mV)^0^20^0"/>
+				<map cmeventclass="22" name="Memory Voltage(mV)^1^21^0"/>
+				<map cmeventclass="23" name="Logic Power State^2^22^0"/>
+				<map cmeventclass="24" name="Memory Power State^3^23^0"/>
+			</mapping>	
+
+
+	<!-- Class string ^ class string type ^ module bit size ^ Data message ID ^ MessageIsDataValue-->
+
+			<!-- x Lookup for clk domain state Names (m_sModuleStrings[ClassIndex]) Size:m_NumberOfModules[ClassIndex]-->
+			<mapping id="modulesclass0.name">
+				<map modulesclass0="0" name="ADC GFCLK^State^1^1^0"/>
+				<map modulesclass0="1" name="ATL GFCLK^State^1^1^0"/>
+				<map modulesclass0="2" name="ATL L3 GFCLK^State^1^1^0"/>
+				<map modulesclass0="3" name="BB2D GFCLK^State^1^1^0"/>
+				<map modulesclass0="4" name="COREAO 32K GFCLK^State^1^1^0"/>
+				<map modulesclass0="5" name="COREAO IO SCROMP GFCLK^State^1^1^0"/>
+				<map modulesclass0="6" name="COREAO L4 GICLK^State^1^1^0"/>
+				<map modulesclass0="7" name="CUSTEFU L4 GICLK^State^1^1^0"/>
+				<map modulesclass0="8" name="CUSTEFU SYS GFCLK^State^1^1^0"/>
+				<map modulesclass0="9" name="DCAN1 SYS CLK^State^1^1^0"/>
+				<map modulesclass0="10" name="DCAN2 SYS CLK^State^1^1^0"/>
+				<map modulesclass0="11" name="DMA L3 GICLK^State^1^1^0"/>
+				<map modulesclass0="12" name="DSP1 GFCLK^State^1^1^0"/>
+				<map modulesclass0="13" name="DSP2 GFCLK^State^1^1^0"/>
+				<map modulesclass0="14" name="DSS GFCLK^State^1^1^0"/>
+				<map modulesclass0="15" name="DSS L3 GICLK^State^1^1^0"/>
+				<map modulesclass0="16" name="EMIF DLL GCLK^State^1^1^0"/>
+				<map modulesclass0="17" name="EMIF L3 GCLK^State^1^1^0"/>
+				<map modulesclass0="18" name="EMIF PHY GCLK^State^1^1^0"/>
+				<map modulesclass0="19" name="EVE1 GFCLK^State^1^1^0"/>
+				<map modulesclass0="20" name="EVE2 GFCLK^State^1^1^0"/>
+				<map modulesclass0="21" name="EVE3 GFCLK^State^1^1^0"/>
+				<map modulesclass0="22" name="EVE4 GFCLK^State^1^1^0"/>
+				<map modulesclass0="23" name="GMAC MAIN CLK^State^1^1^0"/>
+				<map modulesclass0="24" name="GMAC RFT CLK^State^1^1^0"/>
+				<map modulesclass0="25" name="GMII 250 HMZ CLK^State^1^1^0"/>
+				<map modulesclass0="26" name="GPIO GFCLK^State^1^1^0"/>
+				<map modulesclass0="27" name="GPU CORE GCLK^State^1^1^0"/>
+				<map modulesclass0="28" name="GPU HYD GCLK^State^1^1^0"/>
+				<map modulesclass0="29" name="GPU L3 GICLK^State^1^1^0"/>
+				<map modulesclass0="30" name="HDMI DPLL CLK^State^1^1^0"/>
+				<map modulesclass0="31" name="ICSS IEP CLK^State^1^1^0"/>
+				<map modulesclass0="32" name="IPU1 GFCLK^State^1^1^0"/>
+				<map modulesclass0="33" name="IPU2 GFCLK^State^1^1^0"/>
+				<map modulesclass0="34" name="IPU 96M GFCLK^State^1^1^0"/>
+				<map modulesclass0="35" name="IPU L3 GICLK^State^1^1^0"/>
+				<map modulesclass0="36" name="VPE GCLK^State^1^1^0"/>
+				<map modulesclass0="37" name="IVA GCCLK^State^1^1^0"/>
+				<map modulesclass0="38" name="L3INIT 480M GFCLK^State^1^1^0"/>
+				<map modulesclass0="39" name="L3INIT 48M GFCLK^State^1^1^0"/>
+				<map modulesclass0="40" name="PCIE 32K GFCLK^State^1^1^0"/>
+				<map modulesclass0="41" name="L3INIT L3 GICLK^State^1^1^0"/>
+				<map modulesclass0="42" name="L3INIT L4 GICLK^State^1^1^0"/>
+				<map modulesclass0="43" name="USB LFPS TX GFCLK^State^1^1^0"/>
+				<map modulesclass0="44" name="L3INSTR DLL AGING GCLK^State^1^1^0"/>
+				<map modulesclass0="45" name="L3INSTR L3 GICLK^State^1^1^0"/>
+				<map modulesclass0="46" name="L3INSTR TS GCLK^State^1^1^0"/>
+				<map modulesclass0="47" name="L3MAIN1 L3 GICLK^State^1^1^0"/>
+				<map modulesclass0="48" name="L3MAIN1 L4 GICLK^State^1^1^0"/>
+				<map modulesclass0="49" name="L4CFG L3 GICLK^State^1^1^0"/>
+				<map modulesclass0="50" name="L4CFG L4 GICLK^State^1^1^0"/>
+				<map modulesclass0="51" name="L4PER2 L3 GICLK^State^1^1^0"/>
+				<map modulesclass0="52" name="L4PER3 L3 GICLK^State^1^1^0"/>
+				<map modulesclass0="53" name="L4PER L3 GICLK^State^1^1^0"/>
+				<map modulesclass0="54" name="L4SEC L3 GICLK^State^1^1^0"/>
+				<map modulesclass0="55" name="LVDSRX 96M GFCLK^State^1^1^0"/>
+				<map modulesclass0="56" name="MCASP1 AHCLKR^State^1^1^0"/>
+				<map modulesclass0="57" name="MCASP1 AHCLKX^State^1^1^0"/>
+				<map modulesclass0="58" name="MCASP1 AUX GFCLK^State^1^1^0"/>
+				<map modulesclass0="59" name="MCASP2 AHCLKR^State^1^1^0"/>
+				<map modulesclass0="60" name="MCASP2 AHCLKX^State^1^1^0"/>
+				<map modulesclass0="61" name="MCASP2 AUX GFCLK^State^1^1^0"/>
+				<map modulesclass0="62" name="MCASP3 AHCLKX^State^1^1^0"/>
+				<map modulesclass0="63" name="MCASP3 AUX GFCLK^State^1^1^0"/>
+				<map modulesclass0="64" name="MCASP4 AHCLKX^State^1^1^0"/>
+				<map modulesclass0="65" name="MCASP4 AUX GFCLK^State^1^1^0"/>
+				<map modulesclass0="66" name="MCASP5 AHCLKX^State^1^1^0"/>
+				<map modulesclass0="67" name="MCASP5 AUX GFCLK^State^1^1^0"/>
+				<map modulesclass0="68" name="MCASP6 AHCLKX^State^1^1^0"/>
+				<map modulesclass0="69" name="MCASP6 AUX GFCLK^State^1^1^0"/>
+				<map modulesclass0="70" name="MCASP7 AHCLKX^State^1^1^0"/>
+				<map modulesclass0="71" name="MCASP7 AUX GFCLK^State^1^1^0"/>
+				<map modulesclass0="72" name="MCASP8 AHCLKX^State^1^1^0"/>
+				<map modulesclass0="73" name="MCASP8 AUX GFCLK^State^1^1^0"/>
+				<map modulesclass0="74" name="MLB SYS L3 GFCLK^State^1^1^0"/>
+				<map modulesclass0="75" name="MMC1 GFCLK^State^1^1^0"/>
+				<map modulesclass0="76" name="MMC2 GFCLK^State^1^1^0"/>
+				<map modulesclass0="77" name="MMC3 GFCLK^State^1^1^0"/>
+				<map modulesclass0="78" name="MMC4 GFCLK^State^1^1^0"/>
+				<map modulesclass0="79" name="MMC GFCLK^State^1^1^0"/>
+				<map modulesclass0="80" name="PCIE L3 GICLK^State^1^1^0"/>
+				<map modulesclass0="81" name="PCIE PHY DIV GCLK^State^1^1^0"/>
+				<map modulesclass0="82" name="PCIE PHY GCLK^State^1^1^0"/>
+				<map modulesclass0="83" name="PCIE REF GFCLK^State^1^1^0"/>
+				<map modulesclass0="84" name="PCIE SYS GFCLK^State^1^1^0"/>
+				<map modulesclass0="85" name="PER 12M GFCLK^State^1^1^0"/>
+				<map modulesclass0="86" name="PER 192M GFCLK^State^1^1^0"/>
+				<map modulesclass0="87" name="PER 48M GFCLK^State^1^1^0"/>
+				<map modulesclass0="88" name="PER 96M GFCLK^State^1^1^0"/>
+				<map modulesclass0="89" name="QSPI GFCLK^State^1^1^0"/>
+				<map modulesclass0="90" name="RGMII 5MHZ CLK^State^1^1^0"/>
+				<map modulesclass0="91" name="RGMII 50MHZ CLK^State^1^1^0"/>
+				<map modulesclass0="92" name="RTC AUX CLK^State^1^1^0"/>
+				<map modulesclass0="93" name="RTC L4 GICLK^State^1^1^0"/>
+				<map modulesclass0="94" name="SDVENC GFCLK^State^1^1^0"/>
+				<map modulesclass0="95" name="SR CORE SYS GFCLK^State^1^1^0"/>
+				<map modulesclass0="96" name="SR DSPEVE SYS GFCLK^State^1^1^0"/>
+				<map modulesclass0="97" name="SR GPU SYS GFCLK^State^1^1^0"/>
+				<map modulesclass0="98" name="SR MPU SYS GFCLK^State^1^1^0"/>
+				<map modulesclass0="99" name="SYS CLK OTHER THAN EMU VIP1 GCLK^State^1^1^0"/>
+				<map modulesclass0="100" name="TIMER13 GFCLK^State^1^1^0"/>
+				<map modulesclass0="101" name="TIMER10 GFCLK^State^1^1^0"/>
+				<map modulesclass0="102" name="TIMER11 GFCLK^State^1^1^0"/>
+				<map modulesclass0="103" name="WKUPAO CLK MUX INP 0^State^1^1^0"/>
+				<map modulesclass0="104" name="TIMER14 GFCLK^State^1^1^0"/>
+				<map modulesclass0="105" name="TIMER15 GFCLK^State^1^1^0"/>
+				<map modulesclass0="106" name="TIMER16 GFCLK^State^1^1^0"/>
+				<map modulesclass0="107" name="TIMER1 GFCLK^State^1^1^0"/>
+				<map modulesclass0="108" name="TIMER2 GFCLK^State^1^1^0"/>
+				<map modulesclass0="109" name="TIMER3 GFCLK^State^1^1^0"/>
+				<map modulesclass0="110" name="TIMER4 GFCLK^State^1^1^0"/>
+				<map modulesclass0="111" name="TIMER5 GFCLK^State^1^1^0"/>
+				<map modulesclass0="112" name="TIMER6 GFCLK^State^1^1^0"/>
+				<map modulesclass0="113" name="TIMER7 GFCLK^State^1^1^0"/>
+				<map modulesclass0="114" name="TIMER8 GFCLK^State^1^1^0"/>
+				<map modulesclass0="115" name="TIMER9 GFCLK^State^1^1^0"/>
+				<map modulesclass0="116" name="UART10 GFCLK^State^1^1^0"/>
+				<map modulesclass0="117" name="UART1 GFCLK^State^1^1^0"/>
+				<map modulesclass0="118" name="UART2 GFCLK^State^1^1^0"/>
+				<map modulesclass0="119" name="UART3 GFCLK^State^1^1^0"/>
+				<map modulesclass0="120" name="UART4 GFCLK^State^1^1^0"/>
+				<map modulesclass0="121" name="UART5 GFCLK^State^1^1^0"/>
+				<map modulesclass0="122" name="UART6 GFCLK^State^1^1^0"/>
+				<map modulesclass0="123" name="UART7 GFCLK^State^1^1^0"/>
+				<map modulesclass0="124" name="UART8 GFCLK^State^1^1^0"/>
+				<map modulesclass0="125" name="UART9 GFCLK^State^1^1^0"/>
+				<map modulesclass0="126" name="L4PER 32K GFCLK^State^1^1^0"/>
+				<map modulesclass0="127" name="L3INIT 32K GFCLK^State^1^1^0"/>
+				<map modulesclass0="128" name="USB OTG SS REF CLK^State^1^1^0"/>
+				<map modulesclass0="129" name="VIDEO1 DPLL CLK^State^1^1^0"/>
+				<map modulesclass0="130" name="VIDEO2 DPLL CLK^State^1^1^0"/>
+				<map modulesclass0="131" name="VIP1 GCLK^State^1^1^0"/>
+				<map modulesclass0="132" name="VIP2 GCLK^State^1^1^0"/>
+				<map modulesclass0="133" name="VIP3 GCLK^State^1^1^0"/>
+				<map modulesclass0="134" name="WKUPAO GICLK^State^1^1^0"/>
+				<map modulesclass0="135" name="WKUPAO IO SRCOMP GFCLK^State^1^1^0"/>
+				<map modulesclass0="136" name="WKUPAO SYS GFCLK^State^1^1^0"/>
+				<map modulesclass0="137" name="EMU SYS CLK^State^1^1^0"/>
+				<map modulesclass0="138" name="EMU DSS CLK^State^1^1^0"/>
+				<map modulesclass0="139" name="HDMI CEC GICLK^State^1^1^0"/>
+				<map modulesclass0="140" name="HDMI PHY GFCLK^State^1^1^0"/>
+				<map modulesclass0="141" name="ICSS CLK^State^1^1^0"/>
+				<map modulesclass0="142" name="L3INIT 96M GFCLK^State^1^1^0"/>
+				<map modulesclass0="143" name="LVDSRX L4 GICLK^State^1^1^0"/>
+				<map modulesclass0="144" name="MLB SHB L3 GICLK^State^1^1^0"/>
+				<map modulesclass0="145" name="MLB SHP L3 GICLK^State^1^1^0"/>
+			</mapping>	
+
+
+
+			<!-- x Lookup for clk freq divider ratio Names -->
+			<mapping id="modulesclass1.name">
+				<map modulesclass1="1" name="DSP HS CLK DIV^Value^2^0^0"/>
+				<map modulesclass1="2" name="---RESERVED---^Value^2^0^0"/>
+				<map modulesclass1="3" name="EVE HS CLK DIV^Value^2^0^0"/>
+				<map modulesclass1="4" name="---RESERVED---^Value^2^0^0"/>
+				<map modulesclass1="5" name="IVA HS CLK DIV^Value^2^0^0"/>
+				<map modulesclass1="6" name="---RESERVED---^Value^2^0^0"/>
+				<map modulesclass1="7" name="MPU HS CLK DIV^Value^2^0^0"/>
+				<map modulesclass1="8" name="---RESERVED---^Value^2^0^0"/>
+				<map modulesclass1="9" name="ABE CLK^Value^3^0^0"/>
+				<map modulesclass1="10" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass1="11" name="ABE GICLK DIV^Value^1^0^0"/>
+				<map modulesclass1="12" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass1="13" name="ABE LP CLK DIV^Value^1^0^0"/>
+				<map modulesclass1="14" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass1="15" name="ABE SYS CLK DIV^Value^1^0^0"/>
+				<map modulesclass1="16" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass1="17" name="AESS FCLK^Value^1^0^0"/>
+				<map modulesclass1="18" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass1="19" name="L3 ICLD DIV^Value^1^0^0"/>
+				<map modulesclass1="20" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass1="21" name="MMC4 GFCLK DIV^Value^2^0^0"/>
+				<map modulesclass1="22" name="---RESERVED---^Value^2^0^0"/>
+				<map modulesclass1="23" name="CORE OUT DCLK DIV^Value^3^0^0"/>
+				<map modulesclass1="24" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass1="25" name="DSP GCLK DIV^Value^3^0^0"/>
+				<map modulesclass1="26" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass1="27" name="EMIF PHY DCLK DIV^Value^3^0^0"/>
+				<map modulesclass1="28" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass1="29" name="EMU DCLK DIV^Value^3^0^0"/>
+				<map modulesclass1="30" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass1="31" name="FUNC 96M AON DCLK DIV^Value^3^0^0"/>
+				<map modulesclass1="32" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass1="33" name="GMAC 250M DCLK DIV^Value^3^0^0"/>
+				<map modulesclass1="34" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass1="35" name="GPU DCLK^Value^3^0^0"/>
+				<map modulesclass1="36" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass1="37" name="HDMI DCLK DIV^Value^3^0^0"/>
+				<map modulesclass1="38" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass1="39" name="HDMI CLK2 DIV^Value^3^0^0"/>
+				<map modulesclass1="40" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass1="41" name="HDMI DIV CLK^Value^3^0^0"/>
+				<map modulesclass1="42" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass1="43" name="IVA DCLK^Value^3^0^0"/>
+				<map modulesclass1="44" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass1="45" name="L3INIT 480 DCLK DIV^Value^3^0^0"/>
+				<map modulesclass1="46" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass1="47" name="ABE 24M FCLK^Value^1^0^0"/>
+				<map modulesclass1="48" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass1="49" name="MLBP CLK^Value^3^0^0"/>
+				<map modulesclass1="50" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass1="51" name="MLB CLK^Value^3^0^0"/>
+				<map modulesclass1="52" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass1="53" name="MPU DCLK DIV^Value^3^0^0"/>
+				<map modulesclass1="54" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass1="55" name="PCIE DCLK DIV^Value^3^0^0"/>
+				<map modulesclass1="56" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass1="57" name="PCIE2 DCLK DIV^Value^3^0^0"/>
+				<map modulesclass1="58" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass1="59" name="PER ABEx1 DCLK DIV^Value^3^0^0"/>
+				<map modulesclass1="60" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass1="61" name="PER ABEx1 GFCLK2 DIV^Value^3^0^0"/>
+				<map modulesclass1="62" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass1="63" name="SATA DCLK DIV^Value^3^0^0"/>
+				<map modulesclass1="64" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass1="65" name="SECURE 32K DCLK DIV^Value^3^0^0"/>
+				<map modulesclass1="66" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass1="67" name="SYS CLK1 DCLK DIV^Value^3^0^0"/>
+				<map modulesclass1="68" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass1="69" name="SYS CLK2 DCLK DIV^Value^3^0^0"/>
+				<map modulesclass1="70" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass1="71" name="TIMER SYS CLK DIV^Value^1^0^0"/>
+				<map modulesclass1="72" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass1="73" name="USB OTG DCLK DIV^Value^3^0^0"/>
+				<map modulesclass1="74" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass1="75" name="VIDEO1 DCLK DIV^Value^3^0^0"/>
+				<map modulesclass1="76" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass1="77" name="VIDEO1 CLK2 DIV^Value^3^0^0"/>
+				<map modulesclass1="78" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass1="79" name="VIDEO1 DIV CLK^Value^3^0^0"/>
+				<map modulesclass1="80" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass1="81" name="VIDEO2 DCLK DIV^Value^3^0^0"/>
+				<map modulesclass1="82" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass1="83" name="VIDEO2 CLK2 DIV^Value^3^0^0"/>
+				<map modulesclass1="84" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass1="85" name="VIDEO2 DIV CLK^Value^3^0^0"/>
+				<map modulesclass1="86" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass1="87" name="MMC1 FCLK DIV^Value^2^0^0"/>
+				<map modulesclass1="88" name="---RESERVED---^Value^2^0^0"/>
+				<map modulesclass1="89" name="MMC2 FCLK DIV^Value^2^0^0"/>
+				<map modulesclass1="90" name="---RESERVED---^Value^2^0^0"/>
+				<map modulesclass1="91" name="L2INSTR TS GCLK DIV^Value^2^0^0"/>
+				<map modulesclass1="92" name="---RESERVED---^Value^2^0^0"/>
+				<map modulesclass1="93" name="QSPI GFLCK DIV^Value^2^0^0"/>
+				<map modulesclass1="94" name="---RESERVED---^Value^2^0^0"/>
+				<map modulesclass1="95" name="MMC3 GFCLK DIV^Value^2^0^0"/>
+				<map modulesclass1="96" name="---RESERVED---^Value^2^0^0"/>
+				<map modulesclass1="97" name="EVE DCLK DIV^Value^3^0^0"/>
+				<map modulesclass1="98" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass1="99" name="L4 ROOT CLK DIV^Value^1^0^0"/>
+			</mapping>	
+
+
+			<!-- x Lookup for clk source selection update names -->
+			<mapping id="modulesclass2.name">
+				<map modulesclass2="1" name="ATL DPLL CLK MUX^Value^2^0^0"/>
+				<map modulesclass2="2" name="---RESERVED---^Value^2^0^0"/>
+				<map modulesclass2="3" name="ATL GFCLK MUX^Value^2^0^0"/>
+				<map modulesclass2="4" name="---RESERVED---^Value^2^0^0"/>
+				<map modulesclass2="5" name="VIP1 GCLK MUX^Value^1^0^0"/>
+				<map modulesclass2="6" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="7" name="VIP2 GCLK MUX^Value^1^0^0"/>
+				<map modulesclass2="8" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="9" name="VIP3 GCLK MUX^Value^1^0^0"/>
+				<map modulesclass2="10" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="11" name="ABE DPLL BYPASS CLK MUX^Value^1^0^0"/>
+				<map modulesclass2="12" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="13" name="ABE DPLL CLK MUX^Value^1^0^0"/>
+				<map modulesclass2="14" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="15" name="ABE DPLL SYS CLK MUX^Value^1^0^0"/>
+				<map modulesclass2="16" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="17" name="ADC GFCLK MUX^Value^2^0^0"/>
+				<map modulesclass2="18" name="---RESERVED---^Value^2^0^0"/>
+				<map modulesclass2="19" name="MCASP1 AHCLKR MUX^Value^4^0^0"/>
+				<map modulesclass2="20" name="MCASP1 AHCLKX MUX^Value^4^0^0"/>
+				<map modulesclass2="21" name="MCASP1 AUX GFCLK MUX^Value^2^0^0"/>
+				<map modulesclass2="22" name="---RESERVED---^Value^2^0^0"/>
+				<map modulesclass2="23" name="DPLL ABE BYP M2^Value^1^0^0"/>
+				<map modulesclass2="24" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="25" name="DPLL CORE BYP M2^Value^1^0^0"/>
+				<map modulesclass2="26" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="27" name="DPLL GMAC BYP M3^Value^1^0^0"/>
+				<map modulesclass2="28" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="29" name="DPLL DDR BYP M2^Value^1^0^0"/>
+				<map modulesclass2="30" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="31" name="DPLL DSP BYP M2^Value^1^0^0"/>
+				<map modulesclass2="32" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="33" name="DPLL EVE BYP M2^Value^1^0^0"/>
+				<map modulesclass2="34" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="35" name="DPLL GMAC BYP M2^Value^1^0^0"/>
+				<map modulesclass2="36" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="37" name="DPLL GPU BYP M2^Value^1^0^0"/>
+				<map modulesclass2="38" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="39" name="---RESERVED---^Value^4^0^0"/>
+				<map modulesclass2="40" name="DPLL IVA BYP M2^Value^1^0^0"/>
+				<map modulesclass2="41" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="42" name="DPLL MPU BYP M2^Value^1^0^0"/>
+				<map modulesclass2="43" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="44" name="---RESERVED---^Value^4^0^0"/>
+				<map modulesclass2="45" name="DPLL PER BYP M2^Value^1^0^0"/>
+				<map modulesclass2="46" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="47" name="DPLL USB BYP M2^Value^1^0^0"/>
+				<map modulesclass2="48" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="49" name="EVE CLK^Value^1^0^0"/>
+				<map modulesclass2="50" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="51" name="HDMI DPLL CLK MUX^Value^1^0^0"/>
+				<map modulesclass2="52" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="53" name="IPU1 GFCLK MUX^Value^1^0^0"/>
+				<map modulesclass2="54" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="55" name="VIDEO1 DPLL CLK MUX^Value^1^0^0"/>
+				<map modulesclass2="56" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="57" name="VIDEO2 DPLL CLK MUX^Value^1^0^0"/>
+				<map modulesclass2="58" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="59" name="WKUPAO CLK MUX^Value^1^0^0"/>
+				<map modulesclass2="60" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="61" name="RMII REF CLK MUX^Value^1^0^0"/>
+				<map modulesclass2="62" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="63" name="GMAC RET CLK MUX^Value^3^0^0"/>
+				<map modulesclass2="64" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass2="65" name="GPU CORE GCLK MUX^Value^2^0^0"/>
+				<map modulesclass2="66" name="---RESERVED---^Value^2^0^0"/>
+				<map modulesclass2="67" name="GPU HYD GCLK MUX^Value^2^0^0"/>
+				<map modulesclass2="68" name="---RESERVED---^Value^2^0^0"/>
+				<map modulesclass2="69" name="TIMER5 GCLK MUX^Value^4^0^0"/>
+				<map modulesclass2="70" name="TIMER6 GCLK MUX^Value^4^0^0"/>
+				<map modulesclass2="71" name="TIMER7 GCLK MUX^Value^4^0^0"/>
+				<map modulesclass2="72" name="TIMER8 GCLK MUX^Value^4^0^0"/>
+				<map modulesclass2="73" name="UART6 GFCLK MUX^Value^1^0^0"/>
+				<map modulesclass2="74" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="75" name="MMC1 FCLK MUX^Value^1^0^0"/>
+				<map modulesclass2="76" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="77" name="MMC2 FCLK MUX^Value^1^0^0"/>
+				<map modulesclass2="78" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="79" name="MCASP2 AHCLKR MUX^Value^4^0^0"/>
+				<map modulesclass2="79" name="MCASP2 AHCLKX MUX^Value^4^0^0"/>
+				<map modulesclass2="80" name="MCASP2 AUX GCLK MUX^Value^2^0^0"/>
+				<map modulesclass2="81" name="---RESERVED---^Value^2^0^0"/>
+				<map modulesclass2="82" name="MCASP3 AHCLKX MUX^Value^4^0^0"/>
+				<map modulesclass2="83" name="MCASP3 AUX GCLK MUX^Value^2^0^0"/>
+				<map modulesclass2="84" name="---RESERVED---^Value^2^0^0"/>
+				<map modulesclass2="85" name="MCASP4 AHCLKX MUX^Value^4^0^0"/>
+				<map modulesclass2="86" name="MCASP4 AUX GCLK MUX^Value^2^0^0"/>
+				<map modulesclass2="87" name="---RESERVED---^Value^2^0^0"/>
+				<map modulesclass2="88" name="MCASP5 AHCLKX MUX^Value^4^0^0"/>
+				<map modulesclass2="89" name="MCASP5 AUX GCLK MUX^Value^2^0^0"/>
+				<map modulesclass2="90" name="---RESERVED---^Value^2^0^0"/>
+				<map modulesclass2="91" name="MCASP6 AHCLKX MUX^Value^4^0^0"/>
+				<map modulesclass2="92" name="MCASP6 AUX GCLK MUX^Value^2^0^0"/>
+				<map modulesclass2="93" name="---RESERVED---^Value^2^0^0"/>
+				<map modulesclass2="94" name="MCASP7 AHCLKX MUX^Value^4^0^0"/>
+				<map modulesclass2="95" name="MCASP7 AUX GCLK MUX^Value^2^0^0"/>
+				<map modulesclass2="96" name="---RESERVED---^Value^2^0^0"/>
+				<map modulesclass2="97" name="MCASP8 AHCLKX MUX^Value^4^0^0"/>
+				<map modulesclass2="98" name="MCASP8 AUX GCLK MUX^Value^2^0^0"/>
+				<map modulesclass2="99" name="---RESERVED---^Value^2^0^0"/>
+				<map modulesclass2="100" name="QSPI GFCLK MUX^Value^1^0^0"/>
+				<map modulesclass2="101" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="102" name="UART7 GFCLK MUX^Value^1^0^0"/>
+				<map modulesclass2="103" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="104" name="UART8 GFCLK MUX^Value^1^0^0"/>
+				<map modulesclass2="105" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="106" name="UART9 GFCLK MUX^Value^1^0^0"/>
+				<map modulesclass2="107" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="108" name="TIMER13 GFCLK MUX^Value^4^0^0"/>
+				<map modulesclass2="109" name="TIMER14 GFCLK MUX^Value^4^0^0"/>
+				<map modulesclass2="110" name="TIMER15 GFCLK MUX^Value^4^0^0"/>
+				<map modulesclass2="111" name="TIMER16 GFCLK MUX^Value^4^0^0"/>
+				<map modulesclass2="112" name="MMC3 GFCLK MUX^Value^1^0^0"/>
+				<map modulesclass2="113" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="114" name="MMC4 GFCLK MUX^Value^1^0^0"/>
+				<map modulesclass2="115" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="116" name="TIMER10 GFCLK MUX^Value^4^0^0"/>
+				<map modulesclass2="117" name="TIMER11 GFCLK MUX^Value^4^0^0"/>
+				<map modulesclass2="118" name="TIMER2 GFCLK MUX^Value^4^0^0"/>
+				<map modulesclass2="119" name="TIMER3 GFCLK MUX^Value^4^0^0"/>
+				<map modulesclass2="120" name="TIMER4 GFCLK MUX^Value^4^0^0"/>
+				<map modulesclass2="121" name="TIMER9 GFCLK MUX^Value^4^0^0"/>
+				<map modulesclass2="122" name="UART1 GFCLK MUX^Value^1^0^0"/>
+				<map modulesclass2="123" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="124" name="UART2 GFCLK MUX^Value^1^0^0"/>
+				<map modulesclass2="125" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="126" name="UART3 GFCLK MUX^Value^1^0^0"/>
+				<map modulesclass2="127" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="128" name="UART4 GFCLK MUX^Value^1^0^0"/>
+				<map modulesclass2="129" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="130" name="UART5 GFCLK MUX^Value^1^0^0"/>
+				<map modulesclass2="131" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="132" name="DCAN1 SYS CLK MUX^Value^1^0^0"/>
+				<map modulesclass2="133" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="134" name="TIMER1 GFCLK MUX^Value^4^0^0"/>
+				<map modulesclass2="135" name="UART10 GFCLK MUX^Value^1^0^0"/>
+				<map modulesclass2="136" name="---RESERVED---^Value^3^0^0"/>
+			</mapping>	
+
+
+	<!-- Class string ^ class string type ^ module bit size ^ Data message ID ^ MessageIsDataValue-->
+			<!-- x Lookup for CORE dpll settings update names -->
+			<mapping id="modulesclass3.name">
+				<map modulesclass3="0" name="DPLL Status^State^3^2^0"/>
+				<map modulesclass3="1" name="---RESERVED---^Value^5^0^0"/>
+				<map modulesclass3="2" name="DPLL Setting N^Value^7^0^0"/>
+				<map modulesclass3="3" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass3="4" name="DPLL Setting M^Value^11^0^0"/>
+				<map modulesclass3="5" name="---RESERVED---^Value^5^0^0"/>
+				<map modulesclass3="6" name="DPLL Setting M2^Value^5^0^0"/>
+				<map modulesclass3="7" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass3="8" name="---RESERVED---^Value^24^0^0"/>
+				<map modulesclass3="9" name="---RESERVED---^Value^8^0^0"/>
+				<map modulesclass3="10" name="DPLL Setting H12^Value^6^0^0"/>
+				<map modulesclass3="11" name="---RESERVED---^Value^2^0^0"/>
+				<map modulesclass3="12" name="DPLL Setting H13^Value^6^0^0"/>
+				<map modulesclass3="13" name="---RESERVED---^Value^2^0^0"/>
+				<map modulesclass3="14" name="DPLL Setting H14^Value^6^0^0"/>
+				<map modulesclass3="15" name="---RESERVED---^value^2^0^0"/>
+				<map modulesclass3="16" name="---RESERVED---^value^8^0^0"/>
+				<map modulesclass3="17" name="DPLL Setting H22^Value^6^0^0"/>
+				<map modulesclass3="18" name="---RESERVED---^Value^2^0^0"/>
+				<map modulesclass3="19" name="DPLL Setting H23^Value^6^0^0"/>
+				<map modulesclass3="20" name="---RESERVED---^Value^2^0^0"/>
+				<map modulesclass3="21" name="DPLL Setting H24^Value^6^0^0"/>
+				<map modulesclass3="22" name="---RESERVED---^Value^2^0^0"/>
+			</mapping>	
+
+			<!-- x Lookup for MPU dpll settings update names -->
+			<mapping id="modulesclass4.name">
+				<map modulesclass4="0" name="DPLL Status^State^3^2^0"/>
+				<map modulesclass4="1" name="---RESERVED---^Value^5^0^0"/>
+				<map modulesclass4="2" name="DPLL Setting N^Value^7^0^0"/>
+				<map modulesclass4="3" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass4="4" name="DPLL Setting M^Value^11^0^0"/>
+				<map modulesclass4="5" name="---RESERVED---^Value^5^0^0"/>
+				<map modulesclass4="6" name="DPLL Setting M2^Value^5^0^0"/>
+				<map modulesclass4="7" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass4="8" name="---RESERVED---^Value^24^0^0"/>
+				<map modulesclass4="9" name="---RESERVED---^Value^32^0^0"/>
+				<map modulesclass4="10" name="---RESERVED---^Value^32^0^0"/>
+			</mapping>	
+
+			<!-- x Lookup for IVA dpll settings update names -->
+			<mapping id="modulesclass5.name">
+				<map modulesclass5="0" name="DPLL Status^State^3^2^0"/>
+				<map modulesclass5="1" name="---RESERVED---^Value^5^0^0"/>
+				<map modulesclass5="2" name="DPLL Setting N^Value^7^0^0"/>
+				<map modulesclass5="3" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass5="4" name="DPLL Setting M^Value^11^0^0"/>
+				<map modulesclass5="5" name="---RESERVED---^Value^5^0^0"/>
+				<map modulesclass5="6" name="DPLL Setting M2^Value^5^0^0"/>
+				<map modulesclass5="7" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass5="8" name="---RESERVED---^Value^24^0^0"/>
+				<map modulesclass5="9" name="---RESERVED---^Value^32^0^0"/>
+				<map modulesclass5="10" name="---RESERVED---^Value^32^0^0"/>
+			</mapping>	
+
+			<!-- x Lookup for ABE dpll settings update names -->
+			<mapping id="modulesclass6.name">
+				<map modulesclass6="0" name="DPLL Status^State^3^2^0"/>
+				<map modulesclass6="1" name="---RESERVED---^Value^5^0^0"/>
+				<map modulesclass6="2" name="DPLL Setting N^Value^7^0^0"/>
+				<map modulesclass6="3" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass6="4" name="DPLL Setting M^Value^11^0^0"/>
+				<map modulesclass6="5" name="---RESERVED---^Value^5^0^0"/>
+				<map modulesclass6="6" name="DPLL Setting M2^Value^5^0^0"/>
+				<map modulesclass6="7" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass6="8" name="DPLL Setting M3^Value^5^0^0"/>
+				<map modulesclass6="9" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass6="10" name="---RESERVED---^Value^16^0^0"/>
+				<map modulesclass6="11" name="---RESERVED---^Value^32^0^0"/>
+				<map modulesclass6="12" name="---RESERVED---^Value^32^0^0"/>
+			</mapping>	
+
+			<!-- x Lookup for DDR dpll settings update names -->
+			<mapping id="modulesclass7.name">
+				<map modulesclass7="0" name="DPLL Status^State^3^2^0"/>
+				<map modulesclass7="1" name="---RESERVED---^Value^5^0^0"/>
+				<map modulesclass7="2" name="DPLL Setting N^Value^7^0^0"/>
+				<map modulesclass7="3" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass7="4" name="DPLL Setting M^Value^11^0^0"/>
+				<map modulesclass7="5" name="---RESERVED---^Value^5^0^0"/>
+				<map modulesclass7="6" name="DPLL Setting M2^Value^5^0^0"/>
+				<map modulesclass7="7" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass7="8" name="---RESERVED---^Value^24^0^0"/>
+				<map modulesclass7="9" name="DPLL Setting H11^Value^6^0^0"/>
+				<map modulesclass7="10" name="---RESERVED---^Value^2^0^0"/>
+				<map modulesclass7="9" name="---RESERVED---^Value^24^0^0"/>
+				<map modulesclass7="10" name="---RESERVED---^Value^32^0^0"/>
+			</mapping>	
+
+			<!-- x Lookup for PER dpll settings update names -->
+			<mapping id="modulesclass8.name">
+				<map modulesclass8="0" name="DPLL Status^State^3^2^0"/>
+				<map modulesclass8="1" name="---RESERVED---^Value^5^0^0"/>
+				<map modulesclass8="2" name="DPLL Setting N^Value^7^0^0"/>
+				<map modulesclass8="3" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass8="4" name="DPLL Setting M^Value^11^0^0"/>
+				<map modulesclass8="5" name="---RESERVED---^Value^5^0^0"/>
+				<map modulesclass8="6" name="DPLL Setting M2^Value^5^0^0"/>
+				<map modulesclass8="7" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass8="8" name="---RESERVED---^Value^24^0^0"/>
+				<map modulesclass7="9" name="DPLL Setting H11^Value^6^0^0"/>
+				<map modulesclass7="10" name="---RESERVED---^Value^2^0^0"/>
+				<map modulesclass8="11" name="DPLL Setting H12^Value^6^0^0"/>
+				<map modulesclass8="12" name="---RESERVED---^Value^2^0^0"/>
+				<map modulesclass8="13" name="DPLL Setting H13^Value^6^0^0"/>
+				<map modulesclass8="14" name="---RESERVED---^Value^2^0^0"/>
+				<map modulesclass8="15" name="DPLL Setting H14^Value^6^0^0"/>
+				<map modulesclass8="16" name="---RESERVED---^value^2^0^0"/>
+				<map modulesclass8="17" name="---RESERVED---^value^32^0^0"/>
+			</mapping>	
+
+			<!-- x Lookup for DSP dpll settings update names -->
+			<mapping id="modulesclass6.name">
+				<map modulesclass9="0" name="DPLL Status^State^3^2^0"/>
+				<map modulesclass9="1" name="---RESERVED---^Value^5^0^0"/>
+				<map modulesclass9="2" name="DPLL Setting N^Value^7^0^0"/>
+				<map modulesclass9="3" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass9="4" name="DPLL Setting M^Value^11^0^0"/>
+				<map modulesclass9="5" name="---RESERVED---^Value^5^0^0"/>
+				<map modulesclass9="6" name="DPLL Setting M2^Value^5^0^0"/>
+				<map modulesclass9="7" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass9="8" name="DPLL Setting M3^Value^5^0^0"/>
+				<map modulesclass9="9" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass9="10" name="---RESERVED---^Value^16^0^0"/>
+				<map modulesclass9="11" name="---RESERVED---^Value^32^0^0"/>
+				<map modulesclass9="12" name="---RESERVED---^Value^32^0^0"/>
+			</mapping>	
+
+			<!-- x Lookup for EVE dpll settings update names -->
+			<mapping id="modulesclass10.name">
+				<map modulesclass10="0" name="DPLL Status^State^3^2^0"/>
+				<map modulesclass10="1" name="---RESERVED---^Value^5^0^0"/>
+				<map modulesclass10="2" name="DPLL Setting N^Value^7^0^0"/>
+				<map modulesclass10="3" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass10="4" name="DPLL Setting M^Value^11^0^0"/>
+				<map modulesclass10="5" name="---RESERVED---^Value^5^0^0"/>
+				<map modulesclass10="6" name="DPLL Setting M2^Value^5^0^0"/>
+				<map modulesclass10="7" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass10="8" name="---RESERVED---^Value^24^0^0"/>
+				<map modulesclass10="9" name="---RESERVED---^Value^32^0^0"/>
+				<map modulesclass10="10" name="---RESERVED---^Value^32^0^0"/>
+			</mapping>	
+
+			<!-- x Lookup for GMAC dpll settings update names -->
+			<mapping id="modulesclass11.name">
+				<map modulesclass11="0" name="DPLL Status^State^3^2^0"/>
+				<map modulesclass11="1" name="---RESERVED---^Value^5^0^0"/>
+				<map modulesclass11="2" name="DPLL Setting N^Value^7^0^0"/>
+				<map modulesclass11="3" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass11="4" name="DPLL Setting M^Value^11^0^0"/>
+				<map modulesclass11="5" name="---RESERVED---^Value^5^0^0"/>
+				<map modulesclass11="6" name="DPLL Setting M2^Value^5^0^0"/>
+				<map modulesclass11="7" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass11="8" name="DPLL Setting M3^Value^5^0^0"/>
+				<map modulesclass11="9" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass11="10" name="---RESERVED---^Value^16^0^0"/>
+				<map modulesclass11="11" name="DPLL Setting H11^Value^6^0^0"/>
+				<map modulesclass11="12" name="---RESERVED---^Value^2^0^0"/>
+				<map modulesclass11="13" name="DPLL Setting H12^Value^6^0^0"/>
+				<map modulesclass11="14" name="---RESERVED---^Value^2^0^0"/>
+				<map modulesclass11="15" name="DPLL Setting H13^Value^6^0^0"/>
+				<map modulesclass11="16" name="---RESERVED---^Value^10^0^0"/>
+				<map modulesclass11="17" name="---RESERVED---^value^32^0^0"/>
+			</mapping>	
+
+			<!-- x Lookup for GPU dpll settings update names -->
+			<mapping id="modulesclass12.name">
+				<map modulesclass12="0" name="DPLL Status^State^3^2^0"/>
+				<map modulesclass12="1" name="---RESERVED---^Value^5^0^0"/>
+				<map modulesclass12="2" name="DPLL Setting N^Value^7^0^0"/>
+				<map modulesclass12="3" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass12="4" name="DPLL Setting M^Value^11^0^0"/>
+				<map modulesclass12="5" name="---RESERVED---^Value^5^0^0"/>
+				<map modulesclass12="6" name="DPLL Setting M2^Value^5^0^0"/>
+				<map modulesclass12="7" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass12="8" name="---RESERVED---^Value^24^0^0"/>
+				<map modulesclass12="9" name="---RESERVED---^Value^32^0^0"/>
+				<map modulesclass12="10" name="---RESERVED---^Value^32^0^0"/>
+			</mapping>	
+
+			<!-- x Lookup for USB dpll settings update names -->
+			<mapping id="modulesclass13.name">
+				<map modulesclass13="0" name="DPLL Status^State^3^2^0"/>
+				<map modulesclass13="1" name="---RESERVED---^Value^5^0^0"/>
+				<map modulesclass13="2" name="DPLL Setting N^Value^8^0^0"/>
+				<map modulesclass13="3" name="DPLL Setting M^Value^12^0^0"/>
+				<map modulesclass13="4" name="---RESERVED---^Value^4^0^0"/>
+				<map modulesclass13="5" name="DPLL Setting M2^Value^7^0^0"/>
+				<map modulesclass13="6" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass13="7" name="---RESERVED---^Value^24^0^0"/>
+				<map modulesclass13="8" name="---RESERVED---^Value^32^0^0"/>
+				<map modulesclass13="9" name="---RESERVED---^Value^32^0^0"/>
+			</mapping>	
+
+			<!-- x Lookup for PCIE dpll settings update names -->
+			<mapping id="modulesclass14.name">
+				<map modulesclass14="0" name="DPLL Status^State^3^2^0"/>
+				<map modulesclass14="1" name="---RESERVED---^Value^5^0^0"/>
+				<map modulesclass14="2" name="DPLL Setting N^Value^1^0^0"/>
+				<map modulesclass14="3" name="---RESERVED---^Value^7^0^0"/>
+				<map modulesclass14="4" name="DPLL Setting M^Value^1^0^0"/>
+				<map modulesclass14="5" name="---RESERVED---^Value^7^0^0"/>
+				<map modulesclass14="6" name="DPLL Setting M2^Value^1^0^0"/>
+				<map modulesclass14="7" name="---RESERVED---^Value^7^0^0"/>
+				<map modulesclass14="8" name="---RESERVED---^Value^32^0^0"/>
+				<map modulesclass14="9" name="---RESERVED---^Value^32^0^0"/>
+				<map modulesclass14="10" name="---RESERVED---^Value^32^0^0"/>
+			</mapping>	
+
+			<!-- x Lookup for PCIE_REF dpll settings update names -->
+			<mapping id="modulesclass15.name">
+				<map modulesclass15="0" name="DPLL Status^State^3^2^0"/>
+				<map modulesclass15="1" name="---RESERVED---^Value^5^0^0"/>
+				<map modulesclass15="2" name="DPLL Setting N^Value^8^0^0"/>
+				<map modulesclass15="4" name="DPLL Setting M^Value^12^0^0"/>
+				<map modulesclass15="5" name="---RESERVED---^Value^4^0^0"/>
+				<map modulesclass15="6" name="DPLL Setting M2^Value^7^0^0"/>
+				<map modulesclass15="7" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass15="8" name="---RESERVED---^Value^24^0^0"/>
+				<map modulesclass15="9" name="---RESERVED---^Value^32^0^0"/>
+				<map modulesclass15="10" name="---RESERVED---^Value^32^0^0"/>
+			</mapping>	
+
+	<!-- Class string ^ class string type ^ module bit size ^ Data message ID ^ MessageIsDataValue-->
+			<!-- x Lookup for Target activity (8-bit counters) ACT_CM1 -->
+			<mapping id="modulesclass16.name">
+				<map modulesclass16="0" name="SECURITY IDLE^Value^8^0^0"/>
+				<map modulesclass16="1" name="CORE IDLE^Value^8^0^0"/>
+				<map modulesclass16="2" name="BB2D IDLE^Value^8^0^0"/>
+				<map modulesclass16="3" name="L2INIT IDLE^Value^8^0^0"/>
+				<map modulesclass16="4" name="L4PER IDLE^Value^8^0^0"/>
+				<map modulesclass16="5" name="UART IDLE^Value^8^0^0"/>
+				<map modulesclass16="6" name="SMARTREFLEX IDLE^Value^8^0^0"/>
+				<map modulesclass16="7" name="DMA IDLE^Value^8^0^0"/>
+				<map modulesclass16="8" name="DMM IDLE^Value^8^0^0"/>
+				<map modulesclass16="9" name="DSP1 IDLE^Value^8^0^0"/>
+				<map modulesclass16="10" name="DSP2 IDLE^Value^8^0^0"/>
+				<map modulesclass16="11" name="DSS IDLE^Value^8^0^0"/>
+				<map modulesclass16="12" name="EFUSE_CTRL_CUST IDLE^Value^8^0^0"/>
+				<map modulesclass16="13" name="GP_TIM IDLE^Value^8^0^0"/>
+				<map modulesclass16="14" name="EMIF1 IDLE^Value^8^0^0"/>
+				<map modulesclass16="15" name="EMIF2 IDLE^Value^8^0^0"/>
+				<map modulesclass16="16" name="EMIF_OCP_FW IDLE^Value^8^0^0"/>
+				<map modulesclass16="17" name="EVE1.EVE_SLAVE_PM^Value^8^0^0"/>
+				<map modulesclass16="18" name="EVE2.EVE_SLAVE_PM^Value^8^0^0"/>
+				<map modulesclass16="19" name="EVE3.EVE_SLAVE_PM^Value^8^0^0"/>
+				<map modulesclass16="20" name="EVE4.EVE_SLAVE_PM^Value^8^0^0"/>
+				<map modulesclass16="21" name="GPMC IDLE^Value^8^0^0"/>
+				<map modulesclass16="22" name="GPU IDLE^Value^8^0^0"/>
+				<map modulesclass16="23" name="USB IDLE^Value^8^0^0"/>
+				<map modulesclass16="24" name="I2C IDLE^Value^8^0^0"/>
+				<map modulesclass16="25" name="VIVPE IDLE^Value^8^0^0"/>
+				<map modulesclass16="26" name="TIMER IDLE^Value^8^0^0"/>
+				<map modulesclass16="27" name="IPU1 IDLE^Value^8^0^0"/>
+				<map modulesclass16="28" name="IPU2 IDLE^Value^8^0^0"/>
+				<map modulesclass16="29" name="IVA IDLE^Value^8^0^0"/>
+				<map modulesclass16="30" name="L3_INSTR IDLE^Value^8^0^0"/>
+				<map modulesclass16="31" name="L3_MAIN1 IDLE^Value^8^0^0"/>
+				<map modulesclass16="32" name="L3_MAIN2 IDLE^Value^8^0^0"/>
+				<map modulesclass16="33" name="L4_CFG IDLE^Value^8^0^0"/>
+				<map modulesclass16="34" name="L4_PER1 IDLE^Value^8^0^0"/>
+				<map modulesclass16="35" name="L4_PER2 IDLE^Value^8^0^0"/>
+				<map modulesclass16="36" name="L4_PER3 IDLE^Value^8^0^0"/>
+				<map modulesclass16="37" name="MAILBOX IDLE^Value^8^0^0"/>
+				<map modulesclass16="38" name="MCASP IDLE^Value^8^0^0"/>
+				<map modulesclass16="39" name="MCSPI IDLE^Value^8^0^0"/>
+				<map modulesclass16="40" name="RTCSS.RTC.SLVP^Value^8^0^0"/>
+				<map modulesclass16="41" name="MMC IDLE^Value^8^0^0"/>
+				<map modulesclass16="42" name="MMU IDLE^Value^8^0^0"/>
+				<map modulesclass16="43" name="MPU IDLE^Value^8^0^0"/>
+				<map modulesclass16="44" name="MPU_MPU_DBG IDLE^Value^8^0^0"/>
+				<map modulesclass16="45" name="OCMC IDLE^Value^8^0^0"/>
+				<map modulesclass16="46" name="OCP2SCP IDLE^Value^8^0^0"/>
+				<map modulesclass16="47" name="SATA IDLE^Value^8^0^0"/>
+				<map modulesclass16="48" name="PCIESS IDLE^Value^8^0^0"/>
+				<map modulesclass16="49" name="PRUSSPWMSS IDLE^Value^8^0^0"/>
+			</mapping>	
+
+
+			<!-- x Lookup for Target activity (4-bit counters) - ACT_CM1 -->
+			<mapping id="modulesclass17.name">
+				<map modulesclass17="0" name="SECURITY IDLE^Value^4^0^0"/>
+				<map modulesclass17="1" name="CORE IDLE^Value^4^0^0"/>
+				<map modulesclass17="2" name="BB2D IDLE^Value^4^0^0"/>
+				<map modulesclass17="3" name="L3INIT IDLE^Value^4^0^0"/>
+				<map modulesclass17="4" name="L4PER IDLE^Value^4^0^0"/>
+				<map modulesclass17="5" name="UART IDLE^Value^4^0^0"/>
+				<map modulesclass17="6" name="SMARTREFLEX IDLE^Value^4^0^0"/>
+				<map modulesclass17="7" name="DMA IDLE^Value^4^0^0"/>
+				<map modulesclass17="8" name="DMM IDLE^Value^4^0^0"/>
+				<map modulesclass17="9" name="DSP1 IDLE^Value^4^0^0"/>
+				<map modulesclass17="10" name="DSP2 IDLE^Value^4^0^0"/>
+				<map modulesclass17="11" name="DSS IDLE^Value^4^0^0"/>
+				<map modulesclass17="12" name="EFUSE_CNTR_CUST IDLE^Value^4^0^0"/>
+				<map modulesclass17="13" name="GP_TIM IDLE^Value^4^0^0"/>
+				<map modulesclass17="14" name="EMIF1 IDLE^Value^4^0^0"/>
+				<map modulesclass17="15" name="EMIF2 IDLE^Value^4^0^0"/>
+				<map modulesclass17="16" name="EMIF_OCP_FW IDLE^Value^4^0^0"/>
+				<map modulesclass17="16" name="EMIF_OCP_FW IDLE^Value^4^0^0"/>
+				<map modulesclass17="18" name="EVE2.EVE_SLAVE_PM^Value^4^0^0"/>
+				<map modulesclass17="19" name="EVE3.EVE_SLAVE_PM^Value^4^0^0"/>
+				<map modulesclass17="20" name="EVE4.EVE_SLAVE_PM^Value^4^0^0"/>
+				<map modulesclass17="21" name="GPMC IDLE^Value^4^0^0"/>
+				<map modulesclass17="22" name="GPU IDLE^Value^4^0^0"/>
+				<map modulesclass17="23" name="USB IDLE^Value^4^0^0"/>
+				<map modulesclass17="24" name="I2C IDLE^Value^4^0^0"/>
+				<map modulesclass17="25" name="VIVPE IDLE^Value^4^0^0"/>
+				<map modulesclass17="26" name="TIMER IDLE^Value^4^0^0"/>
+				<map modulesclass17="27" name="IPU1 IDLE^Value^4^0^0"/>
+				<map modulesclass17="28" name="IPU2 IDLE^Value^4^0^0"/>
+				<map modulesclass17="29" name="IVA IDLE^Value^4^0^0"/>
+				<map modulesclass17="30" name="L3_INSTR IDLE^Value^4^0^0"/>
+				<map modulesclass17="31" name="L3_MAIN1 IDLE^Value^4^0^0"/>
+				<map modulesclass17="32" name="L3_MAIN2 IDLE^Value^4^0^0"/>
+				<map modulesclass17="33" name="L4_CFG IDLE^Value^4^0^0"/>
+				<map modulesclass17="34" name="L4_PER1 IDLE^Value^4^0^0"/>
+				<map modulesclass17="35" name="L4_PER2 IDLE^Value^4^0^0"/>
+				<map modulesclass17="36" name="L4_PER3 IDLE^Value^4^0^0"/>
+				<map modulesclass17="37" name="MAILBOX IDLE^Value^4^0^0"/>
+				<map modulesclass17="38" name="MCASP IDLE^Value^4^0^0"/>
+				<map modulesclass17="39" name="MCSPI IDLE^Value^4^0^0"/>
+				<map modulesclass17="40" name="RTCSS.RTC.SLVP^Value^4^0^0"/>
+				<map modulesclass17="41" name="MMC IDLE^Value^4^0^0"/>
+				<map modulesclass17="42" name="MMU IDLE^Value^4^0^0"/>
+				<map modulesclass17="43" name="MPU IDLE^Value^4^0^0"/>
+				<map modulesclass17="44" name="MPU_MPU_DBG IDLE^Value^4^0^0"/>
+				<map modulesclass17="45" name="OCMC IDLE^Value^4^0^0"/>
+				<map modulesclass17="46" name="OCP2SCP IDLE^Value^4^0^0"/>
+				<map modulesclass17="47" name="SATA IDLE^Value^4^0^0"/>
+				<map modulesclass17="48" name="PCIESS IDLE^Value^4^0^0"/>
+				<map modulesclass17="49" name="PRUSSPWMSS IDLE^Value^4^0^0"/>
+			</mapping>	
+	
+			
+	<!-- Class string ^ class string type ^ module bit size ^ Data message ID ^ MessageIsDataValue-->
+			<!-- x Lookup for Initiator activity (8-bit counters) - ACT_CM1 -->
+			<mapping id="modulesclass18.name">
+				<map modulesclass18="0" name="CPGMAC.CPGMACSS_R.MSTANDBYP^Value^8^0^0"/>
+				<map modulesclass18="1" name="CS11 STANDBY^Value^8^0^0"/>
+				<map modulesclass18="2" name="MPU_CPU0^Value^8^0^0"/>
+				<map modulesclass18="3" name="MPU_CPU1^Value^8^0^0"/>
+				<map modulesclass18="4" name="MPU STANDBY^Value^8^0^0"/>
+				<map modulesclass18="5" name="DMA_SYSTEM STANDBY^Value^8^0^0"/>
+				<map modulesclass18="6" name="BB2D STANDBY^Value^8^0^0"/>
+				<map modulesclass18="7" name="DSS STANDBY^Value^8^0^0"/>
+				<map modulesclass18="8" name="GPU STANDBY^Value^8^0^0"/>
+				<map modulesclass18="9" name="IVA STANDBY^Value^8^0^0"/>
+				<map modulesclass18="10" name="CSI2 STANDBY^Value^8^0^0"/>
+				<map modulesclass18="11" name="MMC1 STANDBY^Value^8^0^0"/>
+				<map modulesclass18="12" name="MMC2 STANDBY^Value^8^0^0"/>
+				<map modulesclass18="13" name="SATA STANDBY^Value^8^0^0"/>
+				<map modulesclass18="14" name="DSP1 STANDBY^Value^8^0^0"/>
+				<map modulesclass18="15" name="DSP2 STANDBY^Value^8^0^0"/>
+				<map modulesclass18="16" name="EVE1_EVE_MASTER_PM^Value^8^0^0"/>
+				<map modulesclass18="17" name="DMA_CRYPTO STANDBY^Value^8^0^0"/>
+				<map modulesclass18="18" name="EVE2_EVE_MASTER_PM^Value^8^0^0"/>
+				<map modulesclass18="19" name="EVE3_EVE_MASTER_PM^Value^8^0^0"/>
+				<map modulesclass18="20" name="EVE4_EVE_MASTER_PM^Value^8^0^0"/>
+				<map modulesclass18="21" name="IPU1 STANDBY^Value^8^0^0"/>
+				<map modulesclass18="22" name="IPU2 STANDBY^Value^8^0^0"/>
+				<map modulesclass18="23" name="MLB_SS_MLB_TOP_P STANDBY^Value^8^0^0"/>
+				<map modulesclass18="24" name="PCIESS1 STANDBY^Value^8^0^0"/>
+				<map modulesclass18="25" name="PCIESS2 STANDBY^Value^8^0^0"/>
+				<map modulesclass18="26" name="PCIESS1_PWR_MSTP^Value^8^0^0"/>
+				<map modulesclass18="27" name="PCIESS2_PWR_MSTP^Value^8^0^0"/>
+				<map modulesclass18="28" name="TPTC1 STANDBY^Value^8^0^0"/>
+				<map modulesclass18="29" name="TPTC2 STANDBY^Value^8^0^0"/>
+				<map modulesclass18="30" name="USB_OTG_SS1 STANDBY^Value^8^0^0"/>
+				<map modulesclass18="31" name="USB_OTG_SS2 STANDBY^Value^8^0^0"/>
+				<map modulesclass18="32" name="USB_OTG_SS3 STANDBY^Value^8^0^0"/>
+				<map modulesclass18="33" name="USB_OTG_SS4 STANDBY^Value^8^0^0"/>
+				<map modulesclass18="34" name="VIP1 STANDBY^Value^8^0^0"/>
+				<map modulesclass18="35" name="VIP2 STANDBY^Value^8^0^0"/>
+				<map modulesclass18="36" name="VIP3 STANDBY^Value^8^0^0"/>
+				<map modulesclass18="37" name="VPE STANDBY^Value^8^0^0"/>
+			</mapping>	
+
+
+			<!-- x Lookup for Initiator activity (8-bit counters) - ACT_CM1 -->
+			<mapping id="modulesclass19.name">
+				<map modulesclass19="0" name="CPGMAC.CPGMACSS_R.MSTANDBYP^Value^8^0^0"/>
+				<map modulesclass19="1" name="CSM STANDBY^Value^4^0^0"/>
+				<map modulesclass19="2" name="MPU_CPU0^Value^4^0^0"/>
+				<map modulesclass19="3" name="MPU_CPU1^Value^4^0^0"/>
+				<map modulesclass19="4" name="MPU STANDBY^Value^4^0^0"/>
+				<map modulesclass19="5" name="DMA_SYSTEM STANDBY^Value^4^0^0"/>
+				<map modulesclass19="6" name="BB2D STANDBY^Value^4^0^0"/>
+				<map modulesclass19="7" name="DSS STANDBY^Value^4^0^0"/>
+				<map modulesclass19="8" name="GPU STANDBY^Value^4^0^0"/>
+				<map modulesclass19="9" name="IVA STANDBY^Value^4^0^0"/>
+				<map modulesclass19="10" name="CSI2 STANDBY^Value^4^0^0"/>
+				<map modulesclass19="11" name="MMC1 STANDBY^Value^4^0^0"/>
+				<map modulesclass19="12" name="MMC2 STANDBY^Value^4^0^0"/>
+				<map modulesclass19="13" name="SATA STANDBY^Value^4^0^0"/>
+				<map modulesclass19="14" name="DSP1 STANDBY^Value^4^0^0"/>
+				<map modulesclass19="15" name="DSP2 STANDBY^Value^4^0^0"/>
+				<map modulesclass19="16" name="EVE1_EVE_MASTER_PM^Value^4^0^0"/>
+				<map modulesclass19="17" name="DMA_CRYPTO STANDBY^Value^4^0^0"/>
+				<map modulesclass19="18" name="EVE2_EVE_MASTER_PM^Value^4^0^0"/>
+				<map modulesclass19="19" name="EVE3_EVE_MASTER_PM^Value^4^0^0"/>
+				<map modulesclass19="20" name="EVE4_EVE_MASTER_PM^Value^4^0^0"/>
+				<map modulesclass19="21" name="IPU1 STANDBY^Value^4^0^0"/>
+				<map modulesclass19="22" name="IPU2 STANDBY^Value^4^0^0"/>
+				<map modulesclass19="23" name="MLB_SS_MLB_TOP_P STANDBY^Value^4^0^0"/>
+				<map modulesclass19="24" name="PCIESS1 STANDBY^Value^4^0^0"/>
+				<map modulesclass19="25" name="PCIESS2 STANDBY^Value^4^0^0"/>
+				<map modulesclass19="26" name="PCIESS1_PWR_MSTP^Value^4^0^0"/>
+				<map modulesclass19="27" name="PCIESS2_PWR_MSTP^Value^4^0^0"/>
+				<map modulesclass19="28" name="TPTC1 STANDBY^Value^4^0^0"/>
+				<map modulesclass19="29" name="TPTC2 STANDBY^Value^4^0^0"/>
+				<map modulesclass19="30" name="USB_OTG_SS1 STANDBY^Value^4^0^0"/>
+				<map modulesclass19="31" name="USB_OTG_SS2 STANDBY^Value^4^0^0"/>
+				<map modulesclass19="32" name="USB_OTG_SS3 STANDBY^Value^4^0^0"/>
+				<map modulesclass19="33" name="USB_OTG_SS4 STANDBY^Value^4^0^0"/>
+				<map modulesclass19="34" name="VIP1 STANDBY^Value^4^0^0"/>
+				<map modulesclass19="35" name="VIP2 STANDBY^Value^4^0^0"/>
+				<map modulesclass18="36" name="VIP3 STANDBY^Value^4^0^0"/>
+				<map modulesclass18="37" name="VPE STANDBY^Value^4^0^0"/>
+			</mapping>	
+
+			<!-- x Lookup for Logic Voltage Domain OPP Change -->
+			<mapping id="modulesclass20.name">
+				<map modulesclass20="0" name="---RESERVED---^^Value^32^0^1"/>
+			</mapping>	
+
+
+			<!-- x Lookup for Memory Voltage Domain OPP Change -->
+			<mapping id="modulesclass21.name">
+				<map modulesclass21="0" name="VDD VOTR_M^State^1^3^0"/>
+				<map modulesclass21="1" name="---RESERVED---^State^7^0^0"/>	
+				<map modulesclass21="2" name="VDD DSPEVE_M^State^1^3^0"/>
+				<map modulesclass21="3" name="---RESERVED---^State^7^0^0"/>		
+				<map modulesclass21="4" name="VDD GPU_M^State^1^3^0"/>
+				<map modulesclass21="5" name="---RESERVED---^State^7^0^0"/>		
+				<map modulesclass21="6" name="VDD MPU_M^State^1^3^0"/>
+			</mapping>	
+
+	<!-- Class string ^ class string type ^ module bit size ^ Data message ID ^ MessageIsDataValue-->
+			<!-- x Lookup for Logic Power Domain State Change -->
+			<mapping id="modulesclass22.name">
+				<map modulesclass22="0" name="MPU^State^2^6^0"/>
+				<map modulesclass22="1" name="CPU0^State^2^6^0"/>
+				<map modulesclass22="2" name="CPU1^State^2^6^0"/>
+				<map modulesclass22="3" name="DSP1^State^2^6^0"/>
+				<map modulesclass22="4" name="DSP2^State^2^6^0"/>
+				<map modulesclass22="5" name="CORE^State^2^6^0"/>
+				<map modulesclass22="6" name="IVA^State^2^6^0"/>
+				<map modulesclass22="7" name="CAM^State^2^6^0"/>
+				<map modulesclass22="8" name="DSS^State^2^6^0"/>
+				<map modulesclass22="9" name="GPU^State^2^6^0"/>
+				<map modulesclass22="10" name="L3INT^State^2^6^0"/>
+				<map modulesclass22="11" name="L4PER^State^2^6^0"/>
+				<map modulesclass22="12" name="CUSTEFUSE^State^2^6^0"/>
+				<map modulesclass22="13" name="EVE1^State^2^6^0"/>
+				<map modulesclass22="14" name="EVE2^State^2^6^0"/>
+				<map modulesclass22="15" name="EVE3^State^2^6^0"/>
+				<map modulesclass22="16" name="EVE4^State^2^6^0"/>
+				<map modulesclass22="17" name="IPU^State^2^6^0"/>
+				<map modulesclass22="18" name="VPE^State^2^6^0"/>
+			</mapping>			
+			
+			<!-- x Lookup for Memory Power Domain State Change -->
+			<mapping id="modulesclass23.name">
+				<map modulesclass23="0" name="MPU L2^State^2^6^0"/>
+				<map modulesclass23="1" name="MPU RAM^State^2^6^0"/>
+				<map modulesclass23="2" name="MPU CPU0 L1^State^2^6^0"/>
+				<map modulesclass23="3" name="MPU CPU1 L1^State^2^6^0"/>
+				<map modulesclass23="4" name="IPU AESSMEM^State^2^6^0"/>
+				<map modulesclass23="5" name="DSP1 EDMA^State^2^6^0"/>
+				<map modulesclass23="6" name="DSP1 L1^State^2^6^0"/>
+				<map modulesclass23="7" name="DSP1 L2^State^2^6^0"/>
+				<map modulesclass23="8" name="DSP2 EDMA^State^2^6^0"/>
+				<map modulesclass23="9" name="CORE NRET BANK^State^2^6^0"/>
+				<map modulesclass23="10" name="CORE OCMRAM^State^2^6^0"/>
+				<map modulesclass23="11" name="CORE IPU L2RAM^State^2^6^0"/>
+				<map modulesclass23="12" name="CORE IPU UNICACHE^State^2^6^0"/>
+				<map modulesclass23="13" name="CORE OTHER BANK^State^2^6^0"/>
+				<map modulesclass23="14" name="IVA HWA MEM^State^2^6^0"/>
+				<map modulesclass23="15" name="IVA SL2 MEM^State^2^6^0"/>
+				<map modulesclass23="16" name="IVA TCMI MEM^State^2^6^0"/>
+				<map modulesclass23="17" name="IVA TCM2 MEM^State^2^6^0"/>
+				<map modulesclass23="18" name="DSP2 L1^State^2^6^0"/>
+				<map modulesclass23="19" name="DSS MEM^State^2^6^0"/>
+				<map modulesclass23="20" name="GPU MEM^State^2^6^0"/>
+				<map modulesclass23="21" name="L3INIT BANK1^State^2^6^0"/>
+				<map modulesclass23="22" name="L3INIT BANK2^State^2^6^0"/>
+				<map modulesclass23="23" name="L4PER RETAINED BANK^State^2^6^0"/>
+				<map modulesclass23="24" name="L4PER NONRETAINED BANK^State^2^6^0"/>
+				<map modulesclass23="25" name="DSP2 L2^State^2^6^0"/>
+				<map modulesclass23="26" name="EVE1 BANK^State^2^6^0"/>
+				<map modulesclass23="27" name="EVE2 BANK^State^2^6^0"/>
+				<map modulesclass23="28" name="EVE3 BANK^State^2^6^0"/>
+				<map modulesclass23="29" name="EVE4 BANK^State^2^6^0"/>
+				<map modulesclass23="30" name="L3INIT GMAC BANK^State^2^6^0"/>
+				<map modulesclass23="31" name="IPU PERIPHMEM^State^2^6^0"/>
+				<map modulesclass23="32" name="CAM VIP BANK^State^2^6^0"/>
+				<map modulesclass23="33" name="VPE BANK^State^2^6^0"/>
+			</mapping>	
+
+
+			<!-- Lookup for CM Event String 1 -->
+			<mapping id="cmeventstring1.name">
+				<map cmeventstring1="1" name="Off"/>
+				<map cmeventstring1="2" name="On"/>
+			</mapping>
+
+
+			<mapping id="cmeventstring2.name">
+				<map cmeventstring2="1" name="DPLL is not yet initialized or internal FSM are in transient state"/>
+				<map cmeventstring2="2" name="DPLL STATUS = LP Stop"/>
+				<map cmeventstring2="3" name="DPLL STATUS = FR Stop"/>
+				<map cmeventstring2="4" name="DPLL STATUS = reserved"/>
+				<map cmeventstring2="5" name="DPLL STATUS = bad data"/>
+				<map cmeventstring2="6" name="DPLL STATUS = LP Bypass"/>
+				<map cmeventstring2="7" name="DPLL STATUS = FR Bypass"/>
+				<map cmeventstring2="8" name="DPLL STATUS = Locked"/>
+			</mapping>
+
+			<!-- Lookup for Voltage Domain OPP -->
+			<mapping id="cmeventstring3.name">
+				<map cmeventstring3="0" name="LDO is in SLEEP mode and operating at trimmed voltage"/>
+				<map cmeventstring3="1" name="LDO is in ON mode and operating at normal voltage."/>
+			</mapping>
+
+			<!-- Lookup for PM Event String 2 -->
+			<mapping id="cmeventstring4.name">
+                <map cmeventstring4="1" name="Off"/>
+                <map cmeventstring4="2" name="bad data"/>
+                <map cmeventstring4="3" name="bad data"/>
+                <map cmeventstring4="4" name="bad data"/>
+                <map cmeventstring4="5" name="OSWR"/>
+                <map cmeventstring4="6" name="Hg Slow"/>
+                <map cmeventstring4="7" name="CSWR"/>
+                <map cmeventstring4="8" name="Hg Fast"/>
+                <map cmeventstring4="9" name="bad data"/>
+                <map cmeventstring4="10" name="bad data"/>
+                <map cmeventstring4="11" name="Inactive"/>
+                <map cmeventstring4="12" name="bad data"/>
+                <map cmeventstring4="13" name="bad data"/>
+                <map cmeventstring4="14" name="bad data"/>
+                <map cmeventstring4="15" name="On"/>
+                <map cmeventstring4="16" name="bad data"/>                
+			</mapping>
+			<!-- Lookup for Voltage Domain OPP -->
+			<!-- The translation table can be found from PALMAS spec Page 41, under SMPS12_VOLTAGE register range table -->
+			<!-- The value in name field is in mV -->
+			<mapping id="cmeventstring5.name">
+				<map cmeventstring5="0" name="0"/>
+				<map cmeventstring5="1" name="500"/>
+				<map cmeventstring5="2" name="500"/>
+				<map cmeventstring5="3" name="500"/>
+				<map cmeventstring5="4" name="500"/>
+				<map cmeventstring5="5" name="500"/>
+				<map cmeventstring5="6" name="500"/>
+				<map cmeventstring5="7" name="510"/>
+				<map cmeventstring5="8" name="520"/>
+				<map cmeventstring5="9" name="530"/>
+				<map cmeventstring5="10" name="540"/>
+				<map cmeventstring5="11" name="550"/>
+				<map cmeventstring5="12" name="560"/>
+				<map cmeventstring5="13" name="570"/>
+				<map cmeventstring5="14" name="580"/>
+				<map cmeventstring5="15" name="590"/>
+				<map cmeventstring5="16" name="600"/>
+				<map cmeventstring5="17" name="610"/>
+				<map cmeventstring5="18" name="620"/>
+				<map cmeventstring5="19" name="630"/>
+				<map cmeventstring5="20" name="640"/>
+				<map cmeventstring5="21" name="650"/>
+				<map cmeventstring5="22" name="660"/>
+				<map cmeventstring5="23" name="670"/>
+				<map cmeventstring5="24" name="680"/>
+				<map cmeventstring5="25" name="690"/>
+				<map cmeventstring5="26" name="700"/>
+				<map cmeventstring5="27" name="710"/>
+				<map cmeventstring5="28" name="720"/>
+				<map cmeventstring5="29" name="730"/>
+				<map cmeventstring5="30" name="740"/>
+				<map cmeventstring5="31" name="750"/>
+				<map cmeventstring5="32" name="760"/>
+				<map cmeventstring5="33" name="770"/>
+				<map cmeventstring5="34" name="780"/>
+				<map cmeventstring5="35" name="790"/>
+				<map cmeventstring5="36" name="800"/>
+				<map cmeventstring5="37" name="810"/>
+				<map cmeventstring5="38" name="820"/>
+				<map cmeventstring5="39" name="830"/>
+				<map cmeventstring5="40" name="840"/>
+				<map cmeventstring5="41" name="850"/>
+				<map cmeventstring5="42" name="860"/>
+				<map cmeventstring5="43" name="870"/>
+				<map cmeventstring5="44" name="880"/>
+				<map cmeventstring5="45" name="890"/>
+				<map cmeventstring5="46" name="900"/>
+				<map cmeventstring5="47" name="910"/>
+				<map cmeventstring5="48" name="920"/>
+				<map cmeventstring5="49" name="930"/>
+				<map cmeventstring5="50" name="940"/>
+				<map cmeventstring5="51" name="950"/>
+				<map cmeventstring5="52" name="960"/>
+				<map cmeventstring5="53" name="970"/>
+				<map cmeventstring5="54" name="980"/>
+				<map cmeventstring5="55" name="990"/>
+				<map cmeventstring5="56" name="1000"/>
+				<map cmeventstring5="57" name="1010"/>
+				<map cmeventstring5="58" name="1020"/>
+				<map cmeventstring5="59" name="1030"/>
+				<map cmeventstring5="60" name="1040"/>
+				<map cmeventstring5="61" name="1050"/>
+				<map cmeventstring5="62" name="1060"/>
+				<map cmeventstring5="63" name="1070"/>
+				<map cmeventstring5="64" name="1080"/>
+				<map cmeventstring5="65" name="1090"/>
+				<map cmeventstring5="66" name="1100"/>
+				<map cmeventstring5="67" name="1110"/>
+				<map cmeventstring5="68" name="1120"/>
+				<map cmeventstring5="69" name="1130"/>
+				<map cmeventstring5="70" name="1140"/>
+				<map cmeventstring5="71" name="1150"/>
+				<map cmeventstring5="72" name="1160"/>
+				<map cmeventstring5="73" name="1170"/>
+				<map cmeventstring5="74" name="1180"/>
+				<map cmeventstring5="75" name="1190"/>
+				<map cmeventstring5="76" name="1200"/>
+				<map cmeventstring5="77" name="1210"/>
+				<map cmeventstring5="78" name="1220"/>
+				<map cmeventstring5="79" name="1230"/>
+				<map cmeventstring5="80" name="1240"/>
+				<map cmeventstring5="81" name="1250"/>
+				<map cmeventstring5="82" name="1260"/>
+				<map cmeventstring5="83" name="1270"/>
+				<map cmeventstring5="84" name="1280"/>
+				<map cmeventstring5="85" name="1290"/>
+				<map cmeventstring5="86" name="1300"/>
+				<map cmeventstring5="87" name="1310"/>
+				<map cmeventstring5="88" name="1320"/>
+				<map cmeventstring5="89" name="1330"/>
+				<map cmeventstring5="90" name="1340"/>
+				<map cmeventstring5="91" name="1350"/>
+				<map cmeventstring5="92" name="1360"/>
+				<map cmeventstring5="93" name="1370"/>
+				<map cmeventstring5="94" name="1380"/>
+				<map cmeventstring5="95" name="1390"/>
+				<map cmeventstring5="96" name="1400"/>
+				<map cmeventstring5="97" name="1410"/>
+				<map cmeventstring5="98" name="1420"/>
+				<map cmeventstring5="99" name="1430"/>
+				<map cmeventstring5="100" name="1440"/>
+				<map cmeventstring5="101" name="1450"/>
+				<map cmeventstring5="102" name="1460"/>
+				<map cmeventstring5="103" name="1470"/>
+				<map cmeventstring5="104" name="1480"/>
+				<map cmeventstring5="105" name="1490"/>
+				<map cmeventstring5="106" name="1500"/>
+				<map cmeventstring5="107" name="1510"/>
+				<map cmeventstring5="108" name="1520"/>
+				<map cmeventstring5="109" name="1530"/>
+				<map cmeventstring5="110" name="1540"/>
+				<map cmeventstring5="111" name="1550"/>
+				<map cmeventstring5="112" name="1560"/>
+				<map cmeventstring5="113" name="1570"/>
+				<map cmeventstring5="114" name="1580"/>
+				<map cmeventstring5="115" name="1590"/>
+				<map cmeventstring5="116" name="1600"/>
+				<map cmeventstring5="117" name="1610"/>
+				<map cmeventstring5="118" name="1620"/>
+				<map cmeventstring5="119" name="1630"/>
+				<map cmeventstring5="120" name="1640"/>
+				<map cmeventstring5="121" name="1650"/>
+				<map cmeventstring5="122" name="1650"/>
+				<map cmeventstring5="123" name="1650"/>
+				<map cmeventstring5="124" name="1650"/>
+				<map cmeventstring5="125" name="1650"/>
+				<map cmeventstring5="126" name="1650"/>
+				<map cmeventstring5="127" name="1650"/>
+			</mapping>
+
+			<mapping id="cmeventstring6.name">
+				<map cmeventstring6="1" name="Off"/>
+				<map cmeventstring6="2" name="Ret"/>
+				<map cmeventstring6="3" name="Inactive"/>
+				<map cmeventstring6="4" name="On"/>
+			</mapping>
+
+
+			<mapping id="masterid.proc">
+				<map masterid="0xF8" proc="CSSTM_0"/>
+				<map masterid="0xF4" proc="CSSTM_0"/>				
+			</mapping>
+			
+
+			<mapping id="masterid.name">
+				<map masterid="0xF8" name="CLOCKPRO"/>
+				<map masterid="0xF4" name="CLOCKPRO"/>		
+			</mapping>
+			
+			<mapping id="masterid.width">
+				<map masterid="0xF8" width="64"/>
+				<map masterid="0xF4" width="64"/>				
+			</mapping>
+			
+			<mapping id="masterid.decoder">
+				<map masterid="*"  decoder="StmDecoderUnitClockProfiler"/>
+			</mapping>
+		</module> 
+
+
+    <!-- CTSET Requires to program ATB_ID and master ID. -->
+    <module id="MOD_CTSET" kind="CTSET" proc="CSSTM_0" version="1.0" >
+	<characteristics>
+    <!-- Since CTSET does not have dedicated export and uses STM export, -->
+    <!-- decoder SW uses STM ATB_ID for reading data from trace buffer,  -->
+    <!-- this ATB_ID should be same as STM ATB_ID.                       -->
+         <characteristic id="DEV_CHAR_ATB_ID"    description="" value="0x40"/> 
+         <characteristic id="DEV_CHAR_MASTER_ID" description="" value="0xDC"/> 
+	</characteristics>
+   </module> 
+
+    <module id="MOD_SMSET0" kind="SMSET" proc="CSSTM_0" version="1.0" >
+
+       <mapping id="eventid.module">
+        <map eventid="1" module="0"/>
+        <map eventid="2" module="0"/>
+        <map eventid="3" module="0"/>
+        <map eventid="4" module="0"/>
+        <map eventid="5" module="0"/>
+        <map eventid="6" module="0"/>
+        <map eventid="7" module="0"/>
+        <map eventid="8" module="0"/>
+        <map eventid="9" module="0"/>
+        <map eventid="10" module="0"/>
+        <map eventid="11" module="0"/>
+        <map eventid="12" module="0"/>
+        <map eventid="13" module="0"/>
+        <map eventid="14" module="0"/>
+        <map eventid="15" module="0"/>
+        <map eventid="16" module="0"/>
+        <map eventid="17" module="0"/>
+        <map eventid="18" module="0"/>
+        <map eventid="19" module="0"/>
+        <map eventid="20" module="0"/>
+        <map eventid="21" module="0"/>
+        <map eventid="22" module="0"/>
+        <map eventid="23" module="IRQ_BYSIN_EOF_0"/>
+        <map eventid="24" module="IRQ_BYSIN_EOF_1"/>
+        <map eventid="25" module="IRQ_BYSIN_OVR_0"/>
+        <map eventid="26" module="IRQ_BYSIN_OVR_1"/>
+        <map eventid="27" module="IRQ_BYSIN_SOF_0"/>
+        <map eventid="28" module="IRQ_BYSIN_SOF_1"/>
+        <map eventid="29" module="IRQ_BYSOUT_EOF_0"/>
+        <map eventid="30" module="IRQ_BYSOUT_EOF_1"/>
+        <map eventid="31" module="IRQ_LINE_NUMBER_0"/>
+        <map eventid="32" module="IRQ_LINE_NUMBER_1"/>
+        <map eventid="33" module="IRQ_LL_EOF_0_0"/>
+        <map eventid="34" module="IRQ_LL_EOF_0_1"/>
+        <map eventid="35" module="IRQ_LL_EOF_0_2"/>
+        <map eventid="36" module="IRQ_LL_EOF_0_3"/>
+        <map eventid="37" module="IRQ_LL_EOF_0_4"/>
+        <map eventid="38" module="IRQ_LL_EOF_0_5"/>
+        <map eventid="39" module="IRQ_LL_EOF_0_6"/>
+        <map eventid="40" module="IRQ_LL_EOF_0_7"/>
+        <map eventid="41" module="IRQ_LL_EOF_1_0"/>
+        <map eventid="42" module="IRQ_LL_EOF_1_1"/>
+        <map eventid="43" module="IRQ_LL_EOF_1_2"/>
+        <map eventid="44" module="IRQ_LL_EOF_1_3"/>
+        <map eventid="45" module="IRQ_LL_EOF_1_4"/>
+        <map eventid="46" module="IRQ_LL_EOF_1_5"/>
+        <map eventid="47" module="IRQ_LL_EOF_1_6"/>
+        <map eventid="48" module="IRQ_LL_EOF_1_7"/>
+        <map eventid="49" module="IRQ_LL_SOF_0_0"/>
+        <map eventid="50" module="IRQ_LL_SOF_0_1"/>
+        <map eventid="51" module="IRQ_LL_SOF_0_2"/>
+        <map eventid="52" module="IRQ_LL_SOF_0_3"/>
+        <map eventid="53" module="IRQ_LL_SOF_0_4"/>
+        <map eventid="54" module="IRQ_LL_SOF_0_5"/>
+        <map eventid="55" module="IRQ_LL_SOF_0_6"/>
+        <map eventid="56" module="IRQ_LL_SOF_0_7"/>
+        <map eventid="57" module="IRQ_LL_SOF_1_0"/>
+        <map eventid="58" module="IRQ_LL_SOF_1_1"/>
+        <map eventid="59" module="IRQ_LL_SOF_1_2"/>
+        <map eventid="60" module="IRQ_LL_SOF_1_3"/>
+        <map eventid="61" module="IRQ_LL_SOF_1_4"/>
+        <map eventid="62" module="IRQ_LL_SOF_1_5"/>
+        <map eventid="63" module="IRQ_LL_SOF_1_6"/>
+        <map eventid="64" module="IRQ_LL_SOF_1_7"/>
+        <map eventid="65" module="IRQ_PPI_FE_IRQ_0_0_0"/>
+        <map eventid="66" module="IRQ_PPI_FE_IRQ_0_0_1"/>
+        <map eventid="67" module="IRQ_PPI_FE_IRQ_0_0_2"/>
+        <map eventid="68" module="IRQ_PPI_FE_IRQ_0_0_3"/>
+        <map eventid="69" module="IRQ_PPI_FE_IRQ_0_1_0"/>
+        <map eventid="70" module="IRQ_PPI_FE_IRQ_0_1_1"/>
+        <map eventid="71" module="IRQ_PPI_FE_IRQ_0_1_2"/>
+        <map eventid="72" module="IRQ_PPI_FE_IRQ_0_1_3"/>
+        <map eventid="73" module="IRQ_PPI_FE_IRQ_1_0_0"/>
+        <map eventid="74" module="IRQ_PPI_FE_IRQ_1_0_1"/>
+        <map eventid="75" module="IRQ_PPI_FE_IRQ_1_0_2"/>
+        <map eventid="76" module="IRQ_PPI_FE_IRQ_1_0_3"/>
+        <map eventid="77" module="IRQ_PPI_FE_IRQ_1_1_0"/>
+        <map eventid="78" module="IRQ_PPI_FE_IRQ_1_1_1"/>
+        <map eventid="79" module="IRQ_PPI_FE_IRQ_1_1_2"/>
+        <map eventid="80" module="IRQ_PPI_FE_IRQ_1_1_3"/>
+        <map eventid="81" module="IRQ_PPI_CS_1_1_2"/>
+        <map eventid="82" module="IRQ_PPI_CS_1_1_3"/>
+        <map eventid="83" module="0"/>
+        <map eventid="84" module="0"/>
+        <map eventid="85" module="0"/>
+        <map eventid="86" module="0"/>
+        <map eventid="87" module="0"/>
+        <map eventid="88" module="0"/>
+        <map eventid="89" module="0"/>
+        <map eventid="90" module="0"/>
+        <map eventid="91" module="0"/>
+        <map eventid="92" module="0"/>
+        <map eventid="93" module="0"/>
+        <map eventid="94" module="0"/>
+        <map eventid="95" module="0"/>
+        <map eventid="96" module="0"/>
+        <map eventid="97" module="IRQ_RDMA_CIRC_0"/>
+        <map eventid="98" module="IRQ_RDMA_CIRC_1"/>
+        <map eventid="99" module="IRQ_RDMA_END_0"/>
+        <map eventid="100" module="IRQ_RDMA_END_1"/>
+        <map eventid="101" module="IRQ_VPORT_EOF_0"/>
+        <map eventid="102" module="IRQ_VPORT_EOF_1"/>
+        <map eventid="103" module="IRQ_WDMA_CIRC_0_0"/>
+        <map eventid="104" module="IRQ_WDMA_CIRC_0_1"/>
+        <map eventid="105" module="IRQ_WDMA_CIRC_0_2"/>
+        <map eventid="106" module="IRQ_WDMA_CIRC_0_3"/>
+        <map eventid="107" module="IRQ_WDMA_CIRC_0_4"/>
+        <map eventid="108" module="IRQ_WDMA_CIRC_0_5"/>
+        <map eventid="109" module="IRQ_WDMA_CIRC_0_6"/>
+        <map eventid="110" module="IRQ_WDMA_CIRC_0_7"/>
+        <map eventid="111" module="IRQ_WDMA_CIRC_1_0"/>
+        <map eventid="112" module="IRQ_WDMA_CIRC_1_1"/>
+        <map eventid="113" module="IRQ_WDMA_CIRC_1_2"/>
+        <map eventid="114" module="IRQ_WDMA_CIRC_1_3"/>
+        <map eventid="115" module="IRQ_WDMA_CIRC_1_4"/>
+        <map eventid="116" module="IRQ_WDMA_CIRC_1_5"/>
+        <map eventid="117" module="IRQ_WDMA_CIRC_1_6"/>
+        <map eventid="118" module="IRQ_WDMA_CIRC_1_7"/>
+        <map eventid="119" module="IRQ_WDMA_END_0_0"/>
+        <map eventid="120" module="IRQ_WDMA_END_0_1"/>
+        <map eventid="121" module="IRQ_WDMA_END_0_2"/>
+        <map eventid="122" module="IRQ_WDMA_END_0_3"/>
+        <map eventid="123" module="IRQ_WDMA_END_0_4"/>
+        <map eventid="124" module="IRQ_WDMA_END_0_5"/>
+        <map eventid="125" module="IRQ_WDMA_END_0_6"/>
+        <map eventid="126" module="IRQ_WDMA_END_0_7"/>
+        <map eventid="127" module="IRQ_WDMA_END_1_0"/>
+        <map eventid="128" module="IRQ_WDMA_END_1_1"/>
+        <map eventid="129" module="IRQ_WDMA_END_1_2"/>
+        <map eventid="130" module="IRQ_WDMA_END_1_3"/>
+        <map eventid="131" module="IRQ_WDMA_END_1_4"/>
+        <map eventid="132" module="IRQ_WDMA_END_1_5"/>
+        <map eventid="133" module="IRQ_WDMA_END_1_6"/>
+        <map eventid="134" module="IRQ_WDMA_END_1_7"/>
+        <map eventid="135" module="IRQ_WDMA_START_0_0"/>
+        <map eventid="136" module="IRQ_WDMA_START_0_1"/>
+        <map eventid="137" module="IRQ_WDMA_START_0_2"/>
+        <map eventid="138" module="IRQ_WDMA_START_0_3"/>
+        <map eventid="139" module="IRQ_WDMA_START_0_4"/>
+        <map eventid="140" module="IRQ_WDMA_START_0_5"/>
+        <map eventid="141" module="IRQ_WDMA_START_0_6"/>
+        <map eventid="142" module="IRQ_WDMA_START_0_7"/>
+        <map eventid="143" module="IRQ_WDMA_START_1_0"/>
+        <map eventid="144" module="IRQ_WDMA_START_1_1"/>
+        <map eventid="145" module="IRQ_WDMA_START_1_2"/>
+        <map eventid="146" module="IRQ_WDMA_START_1_3"/>
+        <map eventid="147" module="IRQ_WDMA_START_1_4"/>
+        <map eventid="148" module="IRQ_WDMA_START_1_5"/>
+        <map eventid="149" module="IRQ_WDMA_START_1_6"/>
+        <map eventid="150" module="IRQ_WDMA_START_1_7"/>
+        <map eventid="151" module="OCP_ERR_IRQ"/>
+        <map eventid="152" module="CNFA_INT_REPRGM"/>
+        <map eventid="153" module="CNFA_INT_INCMPL"/>
+        <map eventid="154" module="CNFA_INT_OUTCMPI"/>
+        <map eventid="155" module="CNFA_INT_OVERFLOW"/>
+        <map eventid="156" module="CNFA_VERT_BLANK"/>
+        <map eventid="157" module="0"/>
+        <map eventid="158" module="1"/>
+        <map eventid="159" module="2"/>
+        <map eventid="160" module="3"/>
+        <map eventid="161" module="0"/>
+        <map eventid="162" module="GLBCE_FILTERING_DONE"/>
+        <map eventid="163" module="GLBCE_FILTERING_START"/>
+        <map eventid="164" module="GLBCE_INT_REG"/>
+        <map eventid="165" module="GLBCE_ERROR"/>
+        <map eventid="166" module="H3A_AEW_INT"/>
+        <map eventid="167" module="H3A_AF_INT"/>
+        <map eventid="168" module="H3A_H3A_INT"/>
+        <map eventid="169" module="H3A_INT_EOF"/>
+        <map eventid="170" module="H3A_OVF"/>
+        <map eventid="171" module="IPIPE_INT_EOF"/>
+        <map eventid="172" module="IPIPE_INT_DPC_INI"/>
+        <map eventid="173" module="IPIPE_INT_DPC_RNEW0"/>
+        <map eventid="174" module="IPIPE_INT_DPC_RNEW1"/>
+        <map eventid="175" module="IPIPE_BOXCAR_OVF"/>
+        <map eventid="176" module="IPIPE_HST_ERR"/>
+        <map eventid="177" module="IPIPE_BSC_ERR"/>
+        <map eventid="178" module="IPIPE_INT_REG"/>
+        <map eventid="179" module="IPIPE_INT_LAST_PIX"/>
+        <map eventid="180" module="IPIPE_INT_DMA"/>
+        <map eventid="181" module="IPIPE_INT_BSC3"/>
+        <map eventid="182" module="IPIPE_INT_HST"/>
+        <map eventid="183" module="IPIPEIF_UDFINT"/>
+        <map eventid="184" module="IPIPEIF_CB"/>
+        <map eventid="185" module="IPIPEIF_IRQ"/>
+        <map eventid="186" module="ISIF_INT_0"/>
+        <map eventid="187" module="ISIF_INT_1"/>
+        <map eventid="188" module="ISIF_INT_2"/>
+        <map eventid="189" module="ISIF_INT_3"/>
+        <map eventid="190" module="ISIF_OVF"/>
+        <map eventid="191" module="ISIF_CB"/>
+        <map eventid="192" module="NSF3V_INT_REPRGM"/>
+        <map eventid="193" module="NSF3V_INT_INCMPL"/>
+        <map eventid="194" module="NSF3V_INT_OUTCMPl"/>
+        <map eventid="195" module="NSF3V_INT_OVERFLOW"/>
+        <map eventid="196" module="NSF3V_VERT_BLANK"/>
+        <map eventid="197" module="RSZ_INT_REG"/>
+        <map eventid="198" module="RSZ_INT_LAST_PIX"/>
+        <map eventid="199" module="RSZ_INT_DMA"/>
+        <map eventid="200" module="RSZ_INT_CYC_RZA"/>
+        <map eventid="201" module="RSZ_INT_CYC_RZB"/>
+        <map eventid="202" module="RSZ_FIFO_IN_OVF"/>
+        <map eventid="203" module="RSZ_FIFO_IN_BLK_ERR"/>
+        <map eventid="204" module="RSZ_INT_EOF0"/>
+        <map eventid="205" module="RSZ_INT_EOF1"/>
+        <map eventid="206" module="RSZ_MTC_FIFO_OUT_OVF"/>
+        <map eventid="207" module="DONE_STEP"/>
+        <map eventid="208" module="DONE_HWSEQ"/>
+        <map eventid="209" module="0"/>
+        <map eventid="210" module="0"/>
+        <map eventid="211" module="0"/>
+        <map eventid="212" module="0"/>
+        <map eventid="213" module="0"/>
+        <map eventid="214" module="0"/>
+        <map eventid="215" module="DONE_VTNF"/>
+        <map eventid="216" module="DONE_LDC"/>
+        <map eventid="217" module="DONE_DMA_0"/>
+        <map eventid="218" module="DONE_DMA_0"/>
+        <map eventid="219" module="DONE_DMA_0"/>
+        <map eventid="220" module="DONE_DMA_0"/>
+        <map eventid="221" module="EXT_0"/>
+        <map eventid="222" module="EXT_1"/>
+        <map eventid="223" module="EXT_2"/>
+        <map eventid="224" module="EXT_3"/>
+        <map eventid="225" module="EXT_4"/>
+        <map eventid="226" module="EXT_5"/>
+        <map eventid="227" module="EXT_6"/>
+        <map eventid="228" module="EXT_7"/>
+        <map eventid="229" module="EXT_8"/>
+        <map eventid="230" module="EXT_9"/>
+        <map eventid="231" module="EXT_10"/>
+        <map eventid="232" module="EXT_11"/>
+        <map eventid="233" module="EXT_12"/>
+        <map eventid="234" module="EXT_13"/>
+        <map eventid="235" module="EXT_14"/>
+        <map eventid="236" module="EXT_15"/>
+        <map eventid="237" module="CNFA_INT_CDS_REPRGM"/>
+        <map eventid="238" module="CNFA_INT_CUS_REPRGM"/>
+        <map eventid="239" module="0"/>
+        <map eventid="240" module="0"/>
+        <map eventid="241" module="SWT_NSF3V_OVERFLOW"/>
+        <map eventid="242" module="NSF3V_INT_HORZ_BLANK"/>
+        <map eventid="243" module="CNFA_INT_HORZ_BLANK"/>
+        <map eventid="244" module="0"/>
+        <map eventid="245" module="IRQ_BYSOUT_VBLANK_END_0"/>
+        <map eventid="246" module="IRQ_BYSOUT_VBLANK_END_1"/>
+        <map eventid="247" module="0"/>
+        <map eventid="248" module="0"/>
+        <map eventid="249" module="0"/>
+        <map eventid="250" module="0"/>
+      </mapping>
+
+     <mapping id="eventid.module1">
+        <map eventid="1" module1="IRQ_LL_ATT_CTRL_0_0"/>
+        <map eventid="2" module1="IRQ_LL_ATT_CTRL_0_1"/>
+        <map eventid="3" module1="IRQ_LL_ATT_CTRL_0_2"/>
+        <map eventid="4" module1="IRQ_LL_ATT_CTRL_0_3"/>
+        <map eventid="5" module1="IRQ_LL_ATT_CTRL_0_4"/>
+        <map eventid="6" module1="IRQ_LL_ATT_CTRL_0_5"/>
+        <map eventid="7" module1="IRQ_LL_ATT_CTRL_0_6"/>
+        <map eventid="8" module1="IRQ_LL_ATT_CTRL_0_7"/>
+        <map eventid="9" module1="IRQ_LL_ATT_CTRL_1_0"/>
+        <map eventid="10" module1="IRQ_LL_ATT_CTRL_1_1"/>
+        <map eventid="11" module1="IRQ_LL_ATT_CTRL_1_2"/>
+        <map eventid="12" module1="IRQ_LL_ATT_CTRL_1_3"/>
+        <map eventid="13" module1="IRQ_LL_ATT_CTRL_1_4"/>
+        <map eventid="14" module1="IRQ_LL_ATT_CTRL_1_5"/>
+        <map eventid="15" module1="IRQ_LL_ATT_CTRL_1_6"/>
+        <map eventid="16" module1="IRQ_LL_ATT_CTRL_1_7"/>
+        <map eventid="17" module1="IRQ_LL_INVALID_0_0"/>
+        <map eventid="18" module1="IRQ_LL_INVALID_0_1"/>
+        <map eventid="19" module1="IRQ_LL_INVALID_0_2"/>
+        <map eventid="20" module1="IRQ_LL_INVALID_0_3"/>
+        <map eventid="21" module1="IRQ_LL_INVALID_0_4"/>
+        <map eventid="22" module1="IRQ_LL_INVALID_0_5"/>
+        <map eventid="23" module1="IRQ_LL_INVALID_0_6"/>
+        <map eventid="24" module1="IRQ_LL_INVALID_0_7"/>
+        <map eventid="25" module1="IRQ_LL_INVALID_1_0"/>
+        <map eventid="26" module1="IRQ_LL_INVALID_1_1"/>
+        <map eventid="27" module1="IRQ_LL_INVALID_1_2"/>
+        <map eventid="28" module1="IRQ_LL_INVALID_1_3"/>
+        <map eventid="29" module1="IRQ_LL_INVALID_1_4"/>
+        <map eventid="30" module1="IRQ_LL_INVALID_1_5"/>
+        <map eventid="31" module1="IRQ_LL_INVALID_1_6"/>
+        <map eventid="32" module1="IRQ_LL_INVALID_1_7"/>
+        <map eventid="33" module1="IRQ_LL_PIX_CTRL_0_0"/>
+        <map eventid="34" module1="IRQ_LL_PIX_CTRL_0_1"/>
+        <map eventid="35" module1="IRQ_LL_PIX_CTRL_0_2"/>
+        <map eventid="36" module1="IRQ_LL_PIX_CTRL_0_3"/>
+        <map eventid="37" module1="IRQ_LL_PIX_CTRL_0_4"/>
+        <map eventid="38" module1="IRQ_LL_PIX_CTRL_0_5"/>
+        <map eventid="39" module1="IRQ_LL_PIX_CTRL_0_6"/>
+        <map eventid="40" module1="IRQ_LL_PIX_CTRL_0_7"/>
+        <map eventid="41" module1="IRQ_LL_PIX_CTRL_1_0"/>
+        <map eventid="42" module1="IRQ_LL_PIX_CTRL_1_1"/>
+        <map eventid="43" module1="IRQ_LL_PIX_CTRL_1_2"/>
+        <map eventid="44" module1="IRQ_LL_PIX_CTRL_1_3"/>
+        <map eventid="45" module1="IRQ_LL_PIX_CTRL_1_4"/>
+        <map eventid="46" module1="IRQ_LL_PIX_CTRL_1_5"/>
+        <map eventid="47" module1="IRQ_LL_PIX_CTRL_1_6"/>
+        <map eventid="48" module1="IRQ_LL_PIX_CTRL_1_7"/>
+        <map eventid="49" module1="IRQ_LL_TX_OVR_0_0"/>
+        <map eventid="50" module1="IRQ_LL_TX_OVR_0_1"/>
+        <map eventid="51" module1="IRQ_LL_TX_OVR_0_2"/>
+        <map eventid="52" module1="IRQ_LL_TX_OVR_0_3"/>
+        <map eventid="53" module1="IRQ_LL_TX_OVR_0_4"/>
+        <map eventid="54" module1="IRQ_LL_TX_OVR_0_5"/>
+        <map eventid="55" module1="IRQ_LL_TX_OVR_0_6"/>
+        <map eventid="56" module1="IRQ_LL_TX_OVR_0_7"/>
+        <map eventid="57" module1="IRQ_LL_TX_OVR_1_0"/>
+        <map eventid="58" module1="IRQ_LL_TX_OVR_1_1"/>
+        <map eventid="59" module1="IRQ_LL_TX_OVR_1_2"/>
+        <map eventid="60" module1="IRQ_LL_TX_OVR_1_3"/>
+        <map eventid="61" module1="IRQ_LL_TX_OVR_1_4"/>
+        <map eventid="62" module1="IRQ_LL_TX_OVR_1_5"/>
+        <map eventid="63" module1="IRQ_LL_TX_OVR_1_6"/>
+        <map eventid="64" module1="IRQ_LL_TX_OVR_1_7"/>
+        <map eventid="65" module1="IRQ_OCPO_ERR_0"/>
+        <map eventid="66" module1="IRQ_OCPO_ERR_1"/>
+        <map eventid="67" module1="IRQ_PPI_CS_0_0_0"/>
+        <map eventid="68" module1="IRQ_PPI_CS_0_0_1"/>
+        <map eventid="69" module1="IRQ_PPI_CS_0_0_2"/>
+        <map eventid="70" module1="IRQ_PPI_CS_0_0_3"/>
+        <map eventid="71" module1="IRQ_PPI_CS_0_1_0"/>
+        <map eventid="72" module1="IRQ_PPI_CS_0_1_1"/>
+        <map eventid="73" module1="IRQ_PPI_CS_0_1_2"/>
+        <map eventid="74" module1="IRQ_PPI_CS_0_1_3"/>
+        <map eventid="75" module1="IRQ_PPI_CS_1_0_0"/>
+        <map eventid="76" module1="IRQ_PPI_CS_1_0_1"/>
+        <map eventid="77" module1="IRQ_PPI_CS_1_0_2"/>
+        <map eventid="78" module1="IRQ_PPI_CS_1_0_3"/>
+        <map eventid="79" module1="IRQ_PPI_CS_1_1_0"/>
+        <map eventid="80" module1="IRQ_PPI_CS_1_1_1"/>
+        <map eventid="81" module1="IRQ_PPI_CS_1_1_2"/>
+        <map eventid="82" module1="IRQ_PPI_CS_1_1_3"/>
+        <map eventid="83" module1="IRQ_PPI_ECC_CORRECTION_0_0_0"/>
+        <map eventid="84" module1="IRQ_PPI_ECC_CORRECTION_0_0_1"/>
+        <map eventid="85" module1="IRQ_PPI_ECC_CORRECTION_0_0_2"/>
+        <map eventid="86" module1="IRQ_PPI_ECC_CORRECTION_0_0_3"/>
+        <map eventid="87" module1="IRQ_PPI_ECC_CORRECTION_0_1_0"/>
+        <map eventid="88" module1="IRQ_PPI_ECC_CORRECTION_0_1_1"/>
+        <map eventid="89" module1="IRQ_PPI_ECC_CORRECTION_0_1_2"/>
+        <map eventid="90" module1="IRQ_PPI_ECC_CORRECTION_0_1_3"/>
+        <map eventid="91" module1="IRQ_PPI_ECC_CORRECTION_1_0_0"/>
+        <map eventid="92" module1="IRQ_PPI_ECC_CORRECTION_1_0_1"/>
+        <map eventid="93" module1="IRQ_PPI_ECC_CORRECTION_1_0_2"/>
+        <map eventid="94" module1="IRQ_PPI_ECC_CORRECTION_1_0_3"/>
+        <map eventid="95" module1="IRQ_PPI_ECC_CORRECTION_1_1_0"/>
+        <map eventid="96" module1="IRQ_PPI_ECC_CORRECTION_1_1_1"/>
+        <map eventid="97" module1="IRQ_PPI_ECC_CORRECTION_1_1_2"/>
+        <map eventid="98" module1="IRQ_PPI_ECC_CORRECTION_1_1_3"/>
+        <map eventid="99" module1="IRQ_PPI_ECC_NO_CORRECTION_0_0"/>
+        <map eventid="100" module1="IRQ_PPI_ECC_NO_CORRECTION_0_1"/>
+        <map eventid="101" module1="IRQ_PPI_ECC_NO_CORRECTION_1_0"/>
+        <map eventid="102" module1="IRQ_PPI_ECC_NO_CORRECTION_1_1"/>
+        <map eventid="103" module1="IRQ_PPI_ERRCONTROL_0_0_0"/>
+        <map eventid="104" module1="IRQ_PPI_ERRCONTROL_0_0_1"/>
+        <map eventid="105" module1="IRQ_PPI_ERRCONTROL_0_0_2"/>
+        <map eventid="106" module1="IRQ_PPI_ERRCONTROL_0_0_3"/>
+        <map eventid="107" module1="IRQ_PPI_ERRCONTROL_0_0_4"/>
+        <map eventid="108" module1="IRQ_PPI_ERRCONTROL_0_1_0"/>
+        <map eventid="109" module1="IRQ_PPI_ERRCONTROL_0_1_1"/>
+        <map eventid="110" module1="IRQ_PPI_ERRCONTROL_0_1_2"/>
+        <map eventid="111" module1="IRQ_PPI_ERRCONTROL_0_1_3"/>
+        <map eventid="112" module1="IRQ_PPI_ERRCONTROL_0_1_4"/>
+        <map eventid="113" module1="IRQ_PPI_ERRCONTROL_1_0_0"/>
+        <map eventid="114" module1="IRQ_PPI_ERRCONTROL_1_0_1"/>
+        <map eventid="115" module1="IRQ_PPI_ERRCONTROL_1_0_2"/>
+        <map eventid="116" module1="IRQ_PPI_ERRCONTROL_1_0_3"/>
+        <map eventid="117" module1="IRQ_PPI_ERRCONTROL_1_0_4"/>
+        <map eventid="118" module1="IRQ_PPI_ERRCONTROL_1_1_0"/>
+        <map eventid="119" module1="IRQ_PPI_ERRCONTROL_1_1_1"/>
+        <map eventid="120" module1="IRQ_PPI_ERRCONTROL_1_1_2"/>
+        <map eventid="121" module1="IRQ_PPI_ERRCONTROL_1_1_3"/>
+        <map eventid="122" module1="IRQ_PPI_ERRCONTROL_1_1_4"/>
+        <map eventid="123" module1="IRQ_PPI_ERRESC_0_0_0"/>
+        <map eventid="124" module1="IRQ_PPI_ERRESC_0_0_1"/>
+        <map eventid="125" module1="IRQ_PPI_ERRESC_0_0_2"/>
+        <map eventid="126" module1="IRQ_PPI_ERRESC_0_0_3"/>
+        <map eventid="127" module1="IRQ_PPI_ERRESC_0_0_4"/>
+        <map eventid="128" module1="IRQ_PPI_ERRESC_0_1_0"/>
+        <map eventid="129" module1="IRQ_PPI_ERRESC_0_1_1"/>
+        <map eventid="130" module1="IRQ_PPI_ERRESC_0_1_2"/>
+        <map eventid="131" module1="IRQ_PPI_ERRESC_0_1_3"/>
+        <map eventid="132" module1="IRQ_PPI_ERRESC_0_1_4"/>
+        <map eventid="133" module1="IRQ_PPI_ERRESC_1_0_0"/>
+        <map eventid="134" module1="IRQ_PPI_ERRESC_1_0_1"/>
+        <map eventid="135" module1="IRQ_PPI_ERRESC_1_0_2"/>
+        <map eventid="136" module1="IRQ_PPI_ERRESC_1_0_3"/>
+        <map eventid="137" module1="IRQ_PPI_ERRESC_1_0_4"/>
+        <map eventid="138" module1="IRQ_PPI_ERRESC_1_1_0"/>
+        <map eventid="139" module1="IRQ_PPI_ERRESC_1_1_1"/>
+        <map eventid="140" module1="IRQ_PPI_ERRESC_1_1_2"/>
+        <map eventid="141" module1="IRQ_PPI_ERRESC_1_1_3"/>
+        <map eventid="142" module1="IRQ_PPI_ERRESC_1_1_4"/>
+        <map eventid="143" module1="IRQ_PPI_ERRSOTHS_0_0_0"/>
+        <map eventid="144" module1="IRQ_PPI_ERRSOTHS_0_0_1"/>
+        <map eventid="145" module1="IRQ_PPI_ERRSOTHS_0_0_2"/>
+        <map eventid="146" module1="IRQ_PPI_ERRSOTHS_0_0_3"/>
+        <map eventid="147" module1="IRQ_PPI_ERRSOTHS_0_0_4"/>
+        <map eventid="148" module1="IRQ_PPI_ERRSOTHS_0_1_0"/>
+        <map eventid="149" module1="IRQ_PPI_ERRSOTHS_0_1_1"/>
+        <map eventid="150" module1="IRQ_PPI_ERRSOTHS_0_1_2"/>
+        <map eventid="151" module1="IRQ_PPI_ERRSOTHS_0_1_3"/>
+        <map eventid="152" module1="IRQ_PPI_ERRSOTHS_0_1_4"/>
+        <map eventid="153" module1="IRQ_PPI_ERRSOTHS_1_0_0"/>
+        <map eventid="154" module1="IRQ_PPI_ERRSOTHS_1_0_1"/>
+        <map eventid="155" module1="IRQ_PPI_ERRSOTHS_1_0_2"/>
+        <map eventid="156" module1="IRQ_PPI_ERRSOTHS_1_0_3"/>
+        <map eventid="157" module1="IRQ_PPI_ERRSOTHS_1_0_4"/>
+        <map eventid="158" module1="IRQ_PPI_ERRSOTHS_1_1_0"/>
+        <map eventid="159" module1="IRQ_PPI_ERRSOTHS_1_1_1"/>
+        <map eventid="160" module1="IRQ_PPI_ERRSOTHS_1_1_2"/>
+        <map eventid="161" module1="IRQ_PPI_ERRSOTHS_1_1_3"/>
+        <map eventid="162" module1="IRQ_PPI_ERRSOTHS_1_1_4"/>
+        <map eventid="163" module1="IRQ_PPI_ERRSOTSYNCHS_0_0_0"/>
+        <map eventid="164" module1="IRQ_PPI_ERRSOTSYNCHS_0_0_1"/>
+        <map eventid="165" module1="IRQ_PPI_ERRSOTSYNCHS_0_0_2"/>
+        <map eventid="166" module1="IRQ_PPI_ERRSOTSYNCHS_0_0_3"/>
+        <map eventid="167" module1="IRQ_PPI_ERRSOTSYNCHS_0_0_4"/>
+        <map eventid="168" module1="IRQ_PPI_ERRSOTSYNCHS_0_1_0"/>
+        <map eventid="169" module1="IRQ_PPI_ERRSOTSYNCHS_0_1_1"/>
+        <map eventid="170" module1="IRQ_PPI_ERRSOTSYNCHS_0_1_2"/>
+        <map eventid="171" module1="IRQ_PPI_ERRSOTSYNCHS_0_1_3"/>
+        <map eventid="172" module1="IRQ_PPI_ERRSOTSYNCHS_0_1_4"/>
+        <map eventid="173" module1="IRQ_PPI_ERRSOTSYNCHS_1_0_0"/>
+        <map eventid="174" module1="IRQ_PPI_ERRSOTSYNCHS_1_0_1"/>
+        <map eventid="175" module1="IRQ_PPI_ERRSOTSYNCHS_1_0_2"/>
+        <map eventid="176" module1="IRQ_PPI_ERRSOTSYNCHS_1_0_3"/>
+        <map eventid="177" module1="IRQ_PPI_ERRSOTSYNCHS_1_0_4"/>
+        <map eventid="178" module1="IRQ_PPI_ERRSOTSYNCHS_1_1_0"/>
+        <map eventid="179" module1="IRQ_PPI_ERRSOTSYNCHS_1_1_1"/>
+        <map eventid="180" module1="IRQ_PPI_ERRSOTSYNCHS_1_1_2"/>
+        <map eventid="181" module1="IRQ_PPI_ERRSOTSYNCHS_1_1_3"/>
+        <map eventid="182" module1="IRQ_PPI_ERRSOTSYNCHS_1_1_4"/>
+        <map eventid="183" module1="IRQ_PPI_FIFO_OVR_0_0"/>
+        <map eventid="184" module1="IRQ_PPI_FIFO_OVR_0_1"/>
+        <map eventid="185" module1="IRQ_PPI_FIFO_OVR_1_0"/>
+        <map eventid="186" module1="IRQ_PPI_FIFO_OVR_1_1"/>
+        <map eventid="187" module1="IRQ_PPI_SHORT_PACKET_0_0"/>
+        <map eventid="188" module1="IRQ_PPI_SHORT_PACKET_0_1"/>
+        <map eventid="189" module1="IRQ_PPI_SHORT_PACKET_1_0"/>
+        <map eventid="190" module1="IRQ_PPI_SHORT_PACKET_1_1"/>
+        <map eventid="191" module1="IRQ_PPI_STATEALLULPMENTER_0_0"/>
+        <map eventid="192" module1="IRQ_PPI_STATEALLULPMENTER_0_1"/>
+        <map eventid="193" module1="IRQ_PPI_STATEALLULPMENTER_1_0"/>
+        <map eventid="194" module1="IRQ_PPI_STATEALLULPMENTER_1_1"/>
+        <map eventid="195" module1="0"/>
+        <map eventid="196" module1="0"/>
+        <map eventid="197" module1="0"/>
+        <map eventid="198" module1="0"/>
+        <map eventid="199" module1="0"/>
+        <map eventid="200" module1="0"/>
+        <map eventid="201" module1="0"/>
+        <map eventid="202" module1="0"/>
+        <map eventid="203" module1="0"/>
+        <map eventid="204" module1="0"/>
+        <map eventid="205" module1="0"/>
+        <map eventid="206" module1="0"/>
+        <map eventid="207" module1="0"/>
+        <map eventid="208" module1="0"/>
+        <map eventid="209" module1="0"/>
+        <map eventid="210" module1="0"/>
+        <map eventid="211" module1="IRQ_PPI_STATEALLULPMEXIT_0_0"/>
+        <map eventid="212" module1="IRQ_PPI_STATEALLULPMEXIT_0_1"/>
+        <map eventid="213" module1="IRQ_PPI_STATEALLULPMEXIT_1_0"/>
+        <map eventid="214" module1="IRQ_PPI_STATEALLULPMEXIT_1_1"/>
+        <map eventid="215" module1="0"/>
+        <map eventid="216" module1="0"/>
+        <map eventid="217" module1="0"/>
+        <map eventid="218" module1="0"/>
+        <map eventid="219" module1="0"/>
+        <map eventid="220" module1="0"/>
+        <map eventid="221" module1="0"/>
+        <map eventid="222" module1="0"/>
+        <map eventid="223" module1="0"/>
+        <map eventid="224" module1="0"/>
+        <map eventid="225" module1="0"/>
+        <map eventid="226" module1="0"/>
+        <map eventid="227" module1="0"/>
+        <map eventid="228" module1="0"/>
+        <map eventid="229" module1="0"/>
+        <map eventid="230" module1="0"/>
+        <map eventid="231" module1="IRQ_PPI_STATEULPM_0_0_0"/>
+        <map eventid="232" module1="IRQ_PPI_STATEULPM_0_0_1"/>
+        <map eventid="233" module1="IRQ_PPI_STATEULPM_0_0_2"/>
+        <map eventid="234" module1="IRQ_PPI_STATEULPM_0_0_3"/>
+        <map eventid="235" module1="IRQ_PPI_STATEULPM_0_0_4"/>
+        <map eventid="236" module1="IRQ_PPI_STATEULPM_0_1_0"/>
+        <map eventid="237" module1="IRQ_PPI_STATEULPM_0_1_1"/>
+        <map eventid="238" module1="IRQ_PPI_STATEULPM_0_1_2"/>
+        <map eventid="239" module1="IRQ_PPI_STATEULPM_0_1_3"/>
+        <map eventid="240" module1="IRQ_PPI_STATEULPM_0_1_4"/>
+        <map eventid="241" module1="IRQ_PPI_STATEULPM_1_0_0"/>
+        <map eventid="242" module1="IRQ_PPI_STATEULPM_1_0_1"/>
+        <map eventid="243" module1="IRQ_PPI_STATEULPM_1_0_2"/>
+        <map eventid="244" module1="IRQ_PPI_STATEULPM_1_0_3"/>
+        <map eventid="245" module1="IRQ_PPI_STATEULPM_1_0_4"/>
+        <map eventid="246" module1="IRQ_PPI_STATEULPM_1_1_0"/>
+        <map eventid="247" module1="IRQ_PPI_STATEULPM_1_1_1"/>
+        <map eventid="248" module1="IRQ_PPI_STATEULPM_1_1_2"/>
+        <map eventid="249" module1="IRQ_PPI_STATEULPM_1_1_3"/>
+        <map eventid="250" module1="IRQ_PPI_STATEULPM_1_1_4"/>
+      </mapping>
+
+     <mapping id="eventid.module2">
+        <map eventid="1" module2="IRQ_PPI_FS_IRQ_0_0_0"/>
+        <map eventid="2" module2="IRQ_PPI_FS_IRQ_0_0_1"/>
+        <map eventid="3" module2="IRQ_PPI_FS_IRQ_0_0_2"/>
+        <map eventid="4" module2="IRQ_PPI_FS_IRQ_0_0_3"/>
+        <map eventid="5" module2="IRQ_PPI_FS_IRQ_0_1_0"/>
+        <map eventid="6" module2="IRQ_PPI_FS_IRQ_0_1_1"/>
+        <map eventid="7" module2="IRQ_PPI_FS_IRQ_0_1_2"/>
+        <map eventid="8" module2="IRQ_PPI_FS_IRQ_0_1_3"/>
+        <map eventid="9" module2="IRQ_PPI_FS_IRQ_1_1_0"/>
+        <map eventid="10" module2="IRQ_PPI_FS_IRQ_1_0_1"/>
+        <map eventid="11" module2="IRQ_PPI_FS_IRQ_1_0_2"/>
+        <map eventid="12" module2="IRQ_PPI_FS_IRQ_1_0_3"/>
+        <map eventid="13" module2="IRQ_PPI_FS_IRQ_1_0_0"/>
+        <map eventid="14" module2="IRQ_PPI_FS_IRQ_1_1_1"/>
+        <map eventid="15" module2="IRQ_PPI_FS_IRQ_1_1_2"/>
+        <map eventid="16" module2="IRQ_PPI_FS_IRQ_1_1_3"/>
+        <map eventid="17" module2="IRQ_PPI_LE_IRQ_0_0_0"/>
+        <map eventid="18" module2="IRQ_PPI_LE_IRQ_0_0_1"/>
+        <map eventid="19" module2="IRQ_PPI_LE_IRQ_0_0_2"/>
+        <map eventid="20" module2="IRQ_PPI_LE_IRQ_0_0_3"/>
+        <map eventid="21" module2="IRQ_PPI_LE_IRQ_0_1_0"/>
+        <map eventid="22" module2="IRQ_PPI_LE_IRQ_0_1_1"/>
+        <map eventid="23" module2="IRQ_PPI_LE_IRQ_0_1_2"/>
+        <map eventid="24" module2="IRQ_PPI_LE_IRQ_0_1_3"/>
+        <map eventid="25" module2="IRQ_PPI_LE_IRQ_1_0_0"/>
+        <map eventid="26" module2="IRQ_PPI_LE_IRQ_1_0_1"/>
+        <map eventid="27" module2="IRQ_PPI_LE_IRQ_1_0_2"/>
+        <map eventid="28" module2="IRQ_PPI_LE_IRQ_1_0_3"/>
+        <map eventid="29" module2="IRQ_PPI_LE_IRQ_1_1_0"/>
+        <map eventid="30" module2="IRQ_PPI_LE_IRQ_1_1_1"/>
+        <map eventid="31" module2="IRQ_PPI_LE_IRQ_1_1_2"/>
+        <map eventid="32" module2="IRQ_PPI_LE_IRQ_1_1_3"/>
+        <map eventid="33" module2="IRQ_PPI_LS_IRQ_0_0_0"/>
+        <map eventid="34" module2="IRQ_PPI_LS_IRQ_0_0_1"/>
+        <map eventid="35" module2="IRQ_PPI_LS_IRQ_0_0_2"/>
+        <map eventid="36" module2="IRQ_PPI_LS_IRQ_0_0_3"/>
+        <map eventid="37" module2="IRQ_PPI_LS_IRQ_0_1_0"/>
+        <map eventid="38" module2="IRQ_PPI_LS_IRQ_0_1_1"/>
+        <map eventid="39" module2="IRQ_PPI_LS_IRQ_0_1_2"/>
+        <map eventid="40" module2="IRQ_PPI_LS_IRQ_0_1_3"/>
+        <map eventid="41" module2="IRQ_PPI_LS_IRQ_1_0_0"/>
+        <map eventid="42" module2="IRQ_PPI_LS_IRQ_1_0_1"/>
+        <map eventid="43" module2="IRQ_PPI_LS_IRQ_1_0_2"/>
+        <map eventid="44" module2="IRQ_PPI_LS_IRQ_1_0_3"/>
+        <map eventid="45" module2="IRQ_PPI_LS_IRQ_1_1_0"/>
+        <map eventid="46" module2="IRQ_PPI_LS_IRQ_1_1_1"/>
+        <map eventid="47" module2="IRQ_PPI_LS_IRQ_1_1_2"/>
+        <map eventid="48" module2="IRQ_PPI_LS_IRQ_1_1_3"/>
+        <map eventid="49" module2="IRQ_LL_TX_OVR_0_0"/>
+        <map eventid="50" module2="IRQ_LL_TX_OVR_0_1"/>
+        <map eventid="51" module2="IRQ_LL_TX_OVR_0_2"/>
+        <map eventid="52" module2="IRQ_LL_TX_OVR_0_3"/>
+        <map eventid="53" module2="IRQ_LL_TX_OVR_0_4"/>
+        <map eventid="54" module2="IRQ_LL_TX_OVR_0_5"/>
+        <map eventid="55" module2="IRQ_LL_TX_OVR_0_6"/>
+        <map eventid="56" module2="IRQ_LL_TX_OVR_0_7"/>
+        <map eventid="57" module2="IRQ_LL_TX_OVR_1_0"/>
+        <map eventid="58" module2="IRQ_LL_TX_OVR_1_1"/>
+        <map eventid="59" module2="IRQ_LL_TX_OVR_1_2"/>
+        <map eventid="60" module2="IRQ_LL_TX_OVR_1_3"/>
+        <map eventid="61" module2="IRQ_LL_TX_OVR_1_4"/>
+        <map eventid="62" module2="IRQ_LL_TX_OVR_1_5"/>
+        <map eventid="63" module2="IRQ_LL_TX_OVR_1_6"/>
+        <map eventid="64" module2="IRQ_LL_TX_OVR_1_7"/>
+        <map eventid="65" module2="IRQ_OCPO_ERR_0"/>
+        <map eventid="66" module2="IRQ_OCPO_ERR_1"/>
+        <map eventid="67" module2="IRQ_PPI_CS_0_0_0"/>
+        <map eventid="68" module2="IRQ_PPI_CS_0_0_1"/>
+        <map eventid="69" module2="IRQ_PPI_CS_0_0_2"/>
+        <map eventid="70" module2="IRQ_PPI_CS_0_0_3"/>
+        <map eventid="71" module2="IRQ_PPI_CS_0_1_0"/>
+        <map eventid="72" module2="IRQ_PPI_CS_0_1_1"/>
+        <map eventid="73" module2="IRQ_PPI_CS_0_1_2"/>
+        <map eventid="74" module2="IRQ_PPI_CS_0_1_3"/>
+        <map eventid="75" module2="IRQ_PPI_CS_1_0_0"/>
+        <map eventid="76" module2="IRQ_PPI_CS_1_0_1"/>
+        <map eventid="77" module2="IRQ_PPI_CS_1_0_2"/>
+        <map eventid="78" module2="IRQ_PPI_CS_1_0_3"/>
+        <map eventid="79" module2="IRQ_PPI_CS_1_1_0"/>
+        <map eventid="80" module2="IRQ_PPI_CS_1_1_1"/>
+        <map eventid="81" module2="IRQ_PPI_CS_1_1_2"/>
+        <map eventid="82" module2="IRQ_PPI_CS_1_1_3"/>
+        <map eventid="83" module2="IRQ_PPI_ECC_CORRECTION_0_0_0"/>
+        <map eventid="84" module2="IRQ_PPI_ECC_CORRECTION_0_0_1"/>
+        <map eventid="85" module2="IRQ_PPI_ECC_CORRECTION_0_0_2"/>
+        <map eventid="86" module2="IRQ_PPI_ECC_CORRECTION_0_0_3"/>
+        <map eventid="87" module2="IRQ_PPI_ECC_CORRECTION_0_1_0"/>
+        <map eventid="88" module2="IRQ_PPI_ECC_CORRECTION_0_1_1"/>
+        <map eventid="89" module2="IRQ_PPI_ECC_CORRECTION_0_1_2"/>
+        <map eventid="90" module2="IRQ_PPI_ECC_CORRECTION_0_1_3"/>
+        <map eventid="91" module2="IRQ_PPI_ECC_CORRECTION_1_0_0"/>
+        <map eventid="92" module2="IRQ_PPI_ECC_CORRECTION_1_0_1"/>
+        <map eventid="93" module2="IRQ_PPI_ECC_CORRECTION_1_0_2"/>
+        <map eventid="94" module2="IRQ_PPI_ECC_CORRECTION_1_0_3"/>
+        <map eventid="95" module2="IRQ_PPI_ECC_CORRECTION_1_1_0"/>
+        <map eventid="96" module2="IRQ_PPI_ECC_CORRECTION_1_1_1"/>
+        <map eventid="97" module2="IRQ_PPI_ECC_CORRECTION_1_1_2"/>
+        <map eventid="98" module2="IRQ_PPI_ECC_CORRECTION_1_1_3"/>
+        <map eventid="99" module2="IRQ_PPI_ECC_NO_CORRECTION_0_0"/>
+        <map eventid="100" module2="IRQ_PPI_ECC_NO_CORRECTION_0_1"/>
+        <map eventid="101" module2="IRQ_PPI_ECC_NO_CORRECTION_1_0"/>
+        <map eventid="102" module2="IRQ_PPI_ECC_NO_CORRECTION_1_1"/>
+        <map eventid="103" module2="IRQ_PPI_ERRCONTROL_0_0_0"/>
+        <map eventid="104" module2="IRQ_PPI_ERRCONTROL_0_0_1"/>
+        <map eventid="105" module2="IRQ_PPI_ERRCONTROL_0_0_2"/>
+        <map eventid="106" module2="IRQ_PPI_ERRCONTROL_0_0_3"/>
+        <map eventid="107" module2="IRQ_PPI_ERRCONTROL_0_0_4"/>
+        <map eventid="108" module2="IRQ_PPI_ERRCONTROL_0_1_0"/>
+        <map eventid="109" module2="IRQ_PPI_ERRCONTROL_0_1_1"/>
+        <map eventid="110" module2="IRQ_PPI_ERRCONTROL_0_1_2"/>
+        <map eventid="111" module2="IRQ_PPI_ERRCONTROL_0_1_3"/>
+        <map eventid="112" module2="IRQ_PPI_ERRCONTROL_0_1_4"/>
+        <map eventid="113" module2="IRQ_PPI_ERRCONTROL_1_0_0"/>
+        <map eventid="114" module2="IRQ_PPI_ERRCONTROL_1_0_1"/>
+        <map eventid="115" module2="IRQ_PPI_ERRCONTROL_1_0_2"/>
+        <map eventid="116" module2="IRQ_PPI_ERRCONTROL_1_0_3"/>
+        <map eventid="117" module2="IRQ_PPI_ERRCONTROL_1_0_4"/>
+        <map eventid="118" module2="IRQ_PPI_ERRCONTROL_1_1_0"/>
+        <map eventid="119" module2="IRQ_PPI_ERRCONTROL_1_1_1"/>
+        <map eventid="120" module2="IRQ_PPI_ERRCONTROL_1_1_2"/>
+        <map eventid="121" module2="IRQ_PPI_ERRCONTROL_1_1_3"/>
+        <map eventid="122" module2="IRQ_PPI_ERRCONTROL_1_1_4"/>
+        <map eventid="123" module2="IRQ_PPI_ERRESC_0_0_0"/>
+        <map eventid="124" module2="IRQ_PPI_ERRESC_0_0_1"/>
+        <map eventid="125" module2="IRQ_PPI_ERRESC_0_0_2"/>
+        <map eventid="126" module2="IRQ_PPI_ERRESC_0_0_3"/>
+        <map eventid="127" module2="IRQ_PPI_ERRESC_0_0_4"/>
+        <map eventid="128" module2="IRQ_PPI_ERRESC_0_1_0"/>
+        <map eventid="129" module2="IRQ_PPI_ERRESC_0_1_1"/>
+        <map eventid="130" module2="IRQ_PPI_ERRESC_0_1_2"/>
+        <map eventid="131" module2="IRQ_PPI_ERRESC_0_1_3"/>
+        <map eventid="132" module2="IRQ_PPI_ERRESC_0_1_4"/>
+        <map eventid="133" module2="IRQ_PPI_ERRESC_1_0_0"/>
+        <map eventid="134" module2="IRQ_PPI_ERRESC_1_0_1"/>
+        <map eventid="135" module2="IRQ_PPI_ERRESC_1_0_2"/>
+        <map eventid="136" module2="IRQ_PPI_ERRESC_1_0_3"/>
+        <map eventid="137" module2="IRQ_PPI_ERRESC_1_0_4"/>
+        <map eventid="138" module2="IRQ_PPI_ERRESC_1_1_0"/>
+        <map eventid="139" module2="IRQ_PPI_ERRESC_1_1_1"/>
+        <map eventid="140" module2="IRQ_PPI_ERRESC_1_1_2"/>
+        <map eventid="141" module2="IRQ_PPI_ERRESC_1_1_3"/>
+        <map eventid="142" module2="IRQ_PPI_ERRESC_1_1_4"/>
+        <map eventid="143" module2="IRQ_PPI_ERRSOTHS_0_0_0"/>
+        <map eventid="144" module2="IRQ_PPI_ERRSOTHS_0_0_1"/>
+        <map eventid="145" module2="IRQ_PPI_ERRSOTHS_0_0_2"/>
+        <map eventid="146" module2="IRQ_PPI_ERRSOTHS_0_0_3"/>
+        <map eventid="147" module2="IRQ_PPI_ERRSOTHS_0_0_4"/>
+        <map eventid="148" module2="IRQ_PPI_ERRSOTHS_0_1_0"/>
+        <map eventid="149" module2="IRQ_PPI_ERRSOTHS_0_1_1"/>
+        <map eventid="150" module2="IRQ_PPI_ERRSOTHS_0_1_2"/>
+        <map eventid="151" module2="IRQ_PPI_ERRSOTHS_0_1_3"/>
+        <map eventid="152" module2="IRQ_PPI_ERRSOTHS_0_1_4"/>
+        <map eventid="153" module2="IRQ_PPI_ERRSOTHS_1_0_0"/>
+        <map eventid="154" module2="IRQ_PPI_ERRSOTHS_1_0_1"/>
+        <map eventid="155" module2="IRQ_PPI_ERRSOTHS_1_0_2"/>
+        <map eventid="156" module2="IRQ_PPI_ERRSOTHS_1_0_3"/>
+        <map eventid="157" module2="IRQ_PPI_ERRSOTHS_1_0_4"/>
+        <map eventid="158" module2="IRQ_PPI_ERRSOTHS_1_1_0"/>
+        <map eventid="159" module2="IRQ_PPI_ERRSOTHS_1_1_1"/>
+        <map eventid="160" module2="IRQ_PPI_ERRSOTHS_1_1_2"/>
+        <map eventid="161" module2="IRQ_PPI_ERRSOTHS_1_1_3"/>
+        <map eventid="162" module2="IRQ_PPI_ERRSOTHS_1_1_4"/>
+        <map eventid="163" module2="IRQ_PPI_ERRSOTSYNCHS_0_0_0"/>
+        <map eventid="164" module2="IRQ_PPI_ERRSOTSYNCHS_0_0_1"/>
+        <map eventid="165" module2="IRQ_PPI_ERRSOTSYNCHS_0_0_2"/>
+        <map eventid="166" module2="IRQ_PPI_ERRSOTSYNCHS_0_0_3"/>
+        <map eventid="167" module2="IRQ_PPI_ERRSOTSYNCHS_0_0_4"/>
+        <map eventid="168" module2="IRQ_PPI_ERRSOTSYNCHS_0_1_0"/>
+        <map eventid="169" module2="IRQ_PPI_ERRSOTSYNCHS_0_1_1"/>
+        <map eventid="170" module2="IRQ_PPI_ERRSOTSYNCHS_0_1_2"/>
+        <map eventid="171" module2="IRQ_PPI_ERRSOTSYNCHS_0_1_3"/>
+        <map eventid="172" module2="IRQ_PPI_ERRSOTSYNCHS_0_1_4"/>
+        <map eventid="173" module2="IRQ_PPI_ERRSOTSYNCHS_1_0_0"/>
+        <map eventid="174" module2="IRQ_PPI_ERRSOTSYNCHS_1_0_1"/>
+        <map eventid="175" module2="IRQ_PPI_ERRSOTSYNCHS_1_0_2"/>
+        <map eventid="176" module2="IRQ_PPI_ERRSOTSYNCHS_1_0_3"/>
+        <map eventid="177" module2="IRQ_PPI_ERRSOTSYNCHS_1_0_4"/>
+        <map eventid="178" module2="IRQ_PPI_ERRSOTSYNCHS_1_1_0"/>
+        <map eventid="179" module2="IRQ_PPI_ERRSOTSYNCHS_1_1_1"/>
+        <map eventid="180" module2="IRQ_PPI_ERRSOTSYNCHS_1_1_2"/>
+        <map eventid="181" module2="IRQ_PPI_ERRSOTSYNCHS_1_1_3"/>
+        <map eventid="182" module2="IRQ_PPI_ERRSOTSYNCHS_1_1_4"/>
+        <map eventid="183" module2="IRQ_PPI_FIFO_OVR_0_0"/>
+        <map eventid="184" module2="IRQ_PPI_FIFO_OVR_0_1"/>
+        <map eventid="185" module2="IRQ_PPI_FIFO_OVR_1_0"/>
+        <map eventid="186" module2="IRQ_PPI_FIFO_OVR_1_1"/>
+        <map eventid="187" module2="IRQ_PPI_SHORT_PACKET_0_0"/>
+        <map eventid="188" module2="IRQ_PPI_SHORT_PACKET_0_1"/>
+        <map eventid="189" module2="IRQ_PPI_SHORT_PACKET_1_0"/>
+        <map eventid="190" module2="IRQ_PPI_SHORT_PACKET_1_1"/>
+        <map eventid="191" module2="IRQ_PPI_STATEALLULPMENTER_0_0"/>
+        <map eventid="192" module2="IRQ_PPI_STATEALLULPMENTER_0_1"/>
+        <map eventid="193" module2="IRQ_PPI_STATEALLULPMENTER_1_0"/>
+        <map eventid="194" module2="IRQ_PPI_STATEALLULPMENTER_1_1"/>
+        <map eventid="195" module2="0"/>
+        <map eventid="196" module2="0"/>
+        <map eventid="197" module2="0"/>
+        <map eventid="198" module2="0"/>
+        <map eventid="199" module2="0"/>
+        <map eventid="200" module2="0"/>
+        <map eventid="201" module2="0"/>
+        <map eventid="202" module2="0"/>
+        <map eventid="203" module2="0"/>
+        <map eventid="204" module2="0"/>
+        <map eventid="205" module2="0"/>
+        <map eventid="206" module2="0"/>
+        <map eventid="207" module2="0"/>
+        <map eventid="208" module2="0"/>
+        <map eventid="209" module2="0"/>
+        <map eventid="210" module2="0"/>
+        <map eventid="211" module2="IRQ_PPI_STATEALLULPMEXIT_0_0"/>
+        <map eventid="212" module2="IRQ_PPI_STATEALLULPMEXIT_0_1"/>
+        <map eventid="213" module2="IRQ_PPI_STATEALLULPMEXIT_1_0"/>
+        <map eventid="214" module2="IRQ_PPI_STATEALLULPMEXIT_1_1"/>
+        <map eventid="215" module2="0"/>
+        <map eventid="216" module2="0"/>
+        <map eventid="217" module2="0"/>
+        <map eventid="218" module2="0"/>
+        <map eventid="219" module2="0"/>
+        <map eventid="220" module2="0"/>
+        <map eventid="221" module2="0"/>
+        <map eventid="222" module2="0"/>
+        <map eventid="223" module2="0"/>
+        <map eventid="224" module2="0"/>
+        <map eventid="225" module2="0"/>
+        <map eventid="226" module2="0"/>
+        <map eventid="227" module2="0"/>
+        <map eventid="228" module2="0"/>
+        <map eventid="229" module2="0"/>
+        <map eventid="230" module2="0"/>
+        <map eventid="231" module2="IRQ_PPI_STATEULPM_0_0_0"/>
+        <map eventid="232" module2="IRQ_PPI_STATEULPM_0_0_1"/>
+        <map eventid="233" module2="IRQ_PPI_STATEULPM_0_0_2"/>
+        <map eventid="234" module2="IRQ_PPI_STATEULPM_0_0_3"/>
+        <map eventid="235" module2="IRQ_PPI_STATEULPM_0_0_4"/>
+        <map eventid="236" module2="IRQ_PPI_STATEULPM_0_1_0"/>
+        <map eventid="237" module2="IRQ_PPI_STATEULPM_0_1_1"/>
+        <map eventid="238" module2="IRQ_PPI_STATEULPM_0_1_2"/>
+        <map eventid="239" module2="IRQ_PPI_STATEULPM_0_1_3"/>
+        <map eventid="240" module2="IRQ_PPI_STATEULPM_0_1_4"/>
+        <map eventid="241" module2="IRQ_PPI_STATEULPM_1_0_0"/>
+        <map eventid="242" module2="IRQ_PPI_STATEULPM_1_0_1"/>
+        <map eventid="243" module2="IRQ_PPI_STATEULPM_1_0_2"/>
+        <map eventid="244" module2="IRQ_PPI_STATEULPM_1_0_3"/>
+        <map eventid="245" module2="IRQ_PPI_STATEULPM_1_0_4"/>
+        <map eventid="246" module2="IRQ_PPI_STATEULPM_1_1_0"/>
+        <map eventid="247" module2="IRQ_PPI_STATEULPM_1_1_1"/>
+        <map eventid="248" module2="IRQ_PPI_STATEULPM_1_1_2"/>
+        <map eventid="249" module2="IRQ_PPI_STATEULPM_1_1_3"/>
+        <map eventid="250" module2="IRQ_PPI_STATEULPM_1_1_4"/>
+      </mapping>
+
+      <mapping id="eventid.class">
+        <map eventid="1" class="Interrupt"/>
+        <map eventid="2" class="Interrupt"/>
+        <map eventid="3" class="Interrupt"/>
+        <map eventid="4" class="Interrupt"/>
+        <map eventid="5" class="Interrupt"/>
+        <map eventid="6" class="Interrupt"/>
+        <map eventid="7" class="Interrupt"/>
+        <map eventid="8" class="Interrupt"/>
+        <map eventid="9" class="Interrupt"/>
+        <map eventid="10" class="Interrupt"/>
+        <map eventid="11" class="Interrupt"/>
+        <map eventid="12" class="Interrupt"/>
+        <map eventid="13" class="Interrupt"/>
+        <map eventid="14" class="Interrupt"/>
+        <map eventid="15" class="Interrupt"/>
+        <map eventid="16" class="Interrupt"/>
+        <map eventid="17" class="Interrupt"/>
+        <map eventid="18" class="Interrupt"/>
+        <map eventid="19" class="Interrupt"/>
+        <map eventid="20" class="Interrupt"/>
+        <map eventid="21" class="Interrupt"/>
+        <map eventid="22" class="Interrupt"/>
+        <map eventid="23" class="Interrupt"/>
+        <map eventid="24" class="Interrupt"/>
+        <map eventid="25" class="Interrupt"/>
+        <map eventid="26" class="Interrupt"/>
+        <map eventid="27" class="Interrupt"/>
+        <map eventid="28" class="Interrupt"/>
+        <map eventid="29" class="Interrupt"/>
+        <map eventid="20" class="Interrupt"/>
+        <map eventid="21" class="Interrupt"/>
+        <map eventid="22" class="Interrupt"/>
+        <map eventid="23" class="Interrupt"/>
+        <map eventid="24" class="Interrupt"/>
+        <map eventid="25" class="Interrupt"/>
+        <map eventid="26" class="Interrupt"/>
+        <map eventid="27" class="Interrupt"/>
+        <map eventid="28" class="Interrupt"/>
+        <map eventid="29" class="Interrupt"/>
+        <map eventid="30" class="Interrupt"/>
+        <map eventid="31" class="Interrupt"/>
+        <map eventid="32" class="Interrupt"/>
+        <map eventid="33" class="Interrupt"/>
+        <map eventid="34" class="Interrupt"/>
+        <map eventid="35" class="Interrupt"/>
+        <map eventid="36" class="Interrupt"/>
+        <map eventid="37" class="Interrupt"/>
+        <map eventid="38" class="Interrupt"/>
+        <map eventid="39" class="Interrupt"/>
+        <map eventid="40" class="Interrupt"/>
+        <map eventid="41" class="Interrupt"/>
+        <map eventid="42" class="Interrupt"/>
+        <map eventid="43" class="Interrupt"/>
+        <map eventid="44" class="Interrupt"/>
+        <map eventid="45" class="Interrupt"/>
+        <map eventid="46" class="Interrupt"/>
+        <map eventid="47" class="Interrupt"/>
+        <map eventid="48" class="Interrupt"/>
+        <map eventid="49" class="Interrupt"/>
+        <map eventid="50" class="Interrupt"/>
+        <map eventid="51" class="Interrupt"/>
+        <map eventid="52" class="Interrupt"/>
+        <map eventid="53" class="Interrupt"/>
+        <map eventid="54" class="Interrupt"/>
+        <map eventid="55" class="Interrupt"/>
+        <map eventid="56" class="Interrupt"/>
+        <map eventid="57" class="Interrupt"/>
+        <map eventid="58" class="Interrupt"/>
+        <map eventid="59" class="Interrupt"/>
+        <map eventid="60" class="Interrupt"/>
+        <map eventid="61" class="Interrupt"/>
+        <map eventid="62" class="Interrupt"/>
+        <map eventid="63" class="Interrupt"/>
+        <map eventid="64" class="Interrupt"/>
+        <map eventid="65" class="Interrupt"/>
+        <map eventid="66" class="Interrupt"/>
+        <map eventid="67" class="Interrupt"/>
+        <map eventid="68" class="Interrupt"/>
+        <map eventid="69" class="Interrupt"/>
+        <map eventid="70" class="Interrupt"/>
+        <map eventid="71" class="Interrupt"/>
+        <map eventid="72" class="Interrupt"/>
+        <map eventid="73" class="Interrupt"/>
+        <map eventid="74" class="Interrupt"/>
+        <map eventid="75" class="Interrupt"/>
+        <map eventid="76" class="Interrupt"/>
+        <map eventid="77" class="Interrupt"/>
+        <map eventid="78" class="Interrupt"/>
+        <map eventid="79" class="Interrupt"/>
+        <map eventid="80" class="Interrupt"/>
+        <map eventid="81" class="Interrupt"/>
+        <map eventid="82" class="Interrupt"/>
+        <map eventid="83" class="Interrupt"/>
+        <map eventid="84" class="Interrupt"/>
+        <map eventid="85" class="Interrupt"/>
+        <map eventid="86" class="Interrupt"/>
+        <map eventid="87" class="Interrupt"/>
+        <map eventid="88" class="Interrupt"/>
+        <map eventid="89" class="Interrupt"/>
+        <map eventid="90" class="Interrupt"/>
+        <map eventid="91" class="Interrupt"/>
+        <map eventid="92" class="Interrupt"/>
+        <map eventid="93" class="Interrupt"/>
+        <map eventid="94" class="Interrupt"/>
+        <map eventid="95" class="Interrupt"/>
+        <map eventid="96" class="Interrupt"/>
+        <map eventid="97" class="Interrupt"/>
+        <map eventid="98" class="Interrupt"/>
+        <map eventid="99" class="Interrupt"/>
+        <map eventid="100" class="Interrupt"/>
+        <map eventid="101" class="Interrupt"/>
+        <map eventid="102" class="Interrupt"/>
+        <map eventid="103" class="Interrupt"/>
+        <map eventid="104" class="Interrupt"/>
+        <map eventid="105" class="Interrupt"/>
+        <map eventid="106" class="Interrupt"/>
+        <map eventid="107" class="Interrupt"/>
+        <map eventid="108" class="Interrupt"/>
+        <map eventid="109" class="Interrupt"/>
+        <map eventid="110" class="Interrupt"/>
+        <map eventid="111" class="Interrupt"/>
+        <map eventid="112" class="Interrupt"/>
+        <map eventid="113" class="Interrupt"/>
+        <map eventid="114" class="Interrupt"/>
+        <map eventid="115" class="Interrupt"/>
+        <map eventid="116" class="Interrupt"/>
+        <map eventid="117" class="Interrupt"/>
+        <map eventid="118" class="Interrupt"/>
+        <map eventid="119" class="Interrupt"/>
+        <map eventid="120" class="Interrupt"/>
+        <map eventid="121" class="Interrupt"/>
+        <map eventid="122" class="Interrupt"/>
+        <map eventid="123" class="Interrupt"/>
+        <map eventid="124" class="Interrupt"/>
+        <map eventid="125" class="Interrupt"/>
+        <map eventid="126" class="Interrupt"/>
+        <map eventid="127" class="Interrupt"/>
+        <map eventid="128" class="Interrupt"/>
+        <map eventid="129" class="Interrupt"/>
+        <map eventid="120" class="Interrupt"/>
+        <map eventid="121" class="Interrupt"/>
+        <map eventid="122" class="Interrupt"/>
+        <map eventid="123" class="Interrupt"/>
+        <map eventid="124" class="Interrupt"/>
+        <map eventid="125" class="Interrupt"/>
+        <map eventid="126" class="Interrupt"/>
+        <map eventid="127" class="Interrupt"/>
+        <map eventid="128" class="Interrupt"/>
+        <map eventid="129" class="Interrupt"/>
+        <map eventid="130" class="Interrupt"/>
+        <map eventid="131" class="Interrupt"/>
+        <map eventid="132" class="Interrupt"/>
+        <map eventid="133" class="Interrupt"/>
+        <map eventid="134" class="Interrupt"/>
+        <map eventid="135" class="Interrupt"/>
+        <map eventid="136" class="Interrupt"/>
+        <map eventid="137" class="Interrupt"/>
+        <map eventid="138" class="Interrupt"/>
+        <map eventid="139" class="Interrupt"/>
+        <map eventid="140" class="Interrupt"/>
+        <map eventid="141" class="Interrupt"/>
+        <map eventid="142" class="Interrupt"/>
+        <map eventid="143" class="Interrupt"/>
+        <map eventid="144" class="Interrupt"/>
+        <map eventid="145" class="Interrupt"/>
+        <map eventid="146" class="Interrupt"/>
+        <map eventid="147" class="Interrupt"/>
+        <map eventid="148" class="Interrupt"/>
+        <map eventid="149" class="Interrupt"/>
+        <map eventid="150" class="Interrupt"/>
+        <map eventid="151" class="Interrupt"/>
+        <map eventid="152" class="Interrupt"/>
+        <map eventid="153" class="Interrupt"/>
+        <map eventid="154" class="Interrupt"/>
+        <map eventid="155" class="Interrupt"/>
+        <map eventid="156" class="Interrupt"/>
+        <map eventid="157" class="Interrupt"/>
+        <map eventid="158" class="Interrupt"/>
+        <map eventid="159" class="Interrupt"/>
+        <map eventid="160" class="Interrupt"/>
+        <map eventid="161" class="Interrupt"/>
+        <map eventid="162" class="Interrupt"/>
+        <map eventid="163" class="Interrupt"/>
+        <map eventid="164" class="Interrupt"/>
+        <map eventid="165" class="Interrupt"/>
+        <map eventid="166" class="Interrupt"/>
+        <map eventid="167" class="Interrupt"/>
+        <map eventid="168" class="Interrupt"/>
+        <map eventid="169" class="Interrupt"/>
+        <map eventid="170" class="Interrupt"/>
+        <map eventid="171" class="Interrupt"/>
+        <map eventid="172" class="Interrupt"/>
+        <map eventid="173" class="Interrupt"/>
+        <map eventid="174" class="Interrupt"/>
+        <map eventid="175" class="Interrupt"/>
+        <map eventid="176" class="Interrupt"/>
+        <map eventid="177" class="Interrupt"/>
+        <map eventid="178" class="Interrupt"/>
+        <map eventid="179" class="Interrupt"/>
+        <map eventid="180" class="Interrupt"/>
+        <map eventid="181" class="Interrupt"/>
+        <map eventid="182" class="Interrupt"/>
+        <map eventid="183" class="Interrupt"/>
+        <map eventid="184" class="Interrupt"/>
+        <map eventid="185" class="Interrupt"/>
+        <map eventid="186" class="Interrupt"/>
+        <map eventid="187" class="Interrupt"/>
+        <map eventid="188" class="Interrupt"/>
+        <map eventid="189" class="Interrupt"/>
+        <map eventid="190" class="Interrupt"/>
+        <map eventid="191" class="Interrupt"/>
+        <map eventid="192" class="Interrupt"/>
+        <map eventid="193" class="Interrupt"/>
+        <map eventid="194" class="Interrupt"/>
+        <map eventid="195" class="Interrupt"/>
+        <map eventid="196" class="Interrupt"/>
+        <map eventid="197" class="Interrupt"/>
+        <map eventid="198" class="Interrupt"/>
+        <map eventid="199" class="Interrupt"/>
+        <map eventid="200" class="Interrupt"/>
+        <map eventid="201" class="Interrupt"/>
+        <map eventid="202" class="Interrupt"/>
+        <map eventid="203" class="Interrupt"/>
+        <map eventid="204" class="Interrupt"/>
+        <map eventid="205" class="Interrupt"/>
+        <map eventid="206" class="Interrupt"/>
+        <map eventid="207" class="Interrupt"/>
+        <map eventid="208" class="Interrupt"/>
+        <map eventid="209" class="Interrupt"/>
+        <map eventid="210" class="Interrupt"/>
+        <map eventid="211" class="Interrupt"/>
+        <map eventid="212" class="Interrupt"/>
+        <map eventid="213" class="Interrupt"/>
+        <map eventid="214" class="Interrupt"/>
+        <map eventid="215" class="Interrupt"/>
+        <map eventid="216" class="Interrupt"/>
+        <map eventid="217" class="Interrupt"/>
+        <map eventid="218" class="Interrupt"/>
+        <map eventid="219" class="Interrupt"/>
+        <map eventid="220" class="Interrupt"/>
+        <map eventid="221" class="Interrupt"/>
+        <map eventid="222" class="Interrupt"/>
+        <map eventid="223" class="Interrupt"/>
+        <map eventid="224" class="Interrupt"/>
+        <map eventid="225" class="Interrupt"/>
+        <map eventid="226" class="Interrupt"/>
+        <map eventid="227" class="Interrupt"/>
+        <map eventid="228" class="Interrupt"/>
+        <map eventid="229" class="Interrupt"/>
+        <map eventid="220" class="Interrupt"/>
+        <map eventid="221" class="Interrupt"/>
+        <map eventid="222" class="Interrupt"/>
+        <map eventid="223" class="Interrupt"/>
+        <map eventid="224" class="Interrupt"/>
+        <map eventid="225" class="Interrupt"/>
+        <map eventid="226" class="Interrupt"/>
+        <map eventid="227" class="Interrupt"/>
+        <map eventid="228" class="Interrupt"/>
+        <map eventid="229" class="Interrupt"/>
+        <map eventid="230" class="Interrupt"/>
+        <map eventid="231" class="Interrupt"/>
+        <map eventid="232" class="Interrupt"/>
+        <map eventid="233" class="Interrupt"/>
+        <map eventid="234" class="Interrupt"/>
+        <map eventid="235" class="Interrupt"/>
+        <map eventid="236" class="Interrupt"/>
+        <map eventid="237" class="Interrupt"/>
+        <map eventid="238" class="Interrupt"/>
+        <map eventid="239" class="Interrupt"/>
+        <map eventid="240" class="Interrupt"/>
+        <map eventid="241" class="Interrupt"/>
+        <map eventid="242" class="Interrupt"/>
+        <map eventid="243" class="Interrupt"/>
+        <map eventid="244" class="Interrupt"/>
+        <map eventid="245" class="Interrupt"/>
+        <map eventid="246" class="Interrupt"/>
+        <map eventid="247" class="Interrupt"/>
+        <map eventid="248" class="Interrupt"/>
+        <map eventid="249" class="Interrupt"/>
+        <map eventid="250" class="Interrupt"/>
+      </mapping>
+
+      <mapping id="eventid.type">
+        <map eventid="1" type="Event"/>
+        <map eventid="2" type="Event"/>
+        <map eventid="3" type="Event"/>
+        <map eventid="4" type="Event"/>
+        <map eventid="5" type="Event"/>
+        <map eventid="6" type="Event"/>
+        <map eventid="7" type="Event"/>
+        <map eventid="8" type="Event"/>
+        <map eventid="9" type="Event"/>
+        <map eventid="10" type="Event"/>
+        <map eventid="11" type="Event"/>
+        <map eventid="12" type="Event"/>
+        <map eventid="13" type="Event"/>
+        <map eventid="14" type="Event"/>
+        <map eventid="15" type="Event"/>
+        <map eventid="16" type="Event"/>
+        <map eventid="17" type="Event"/>
+        <map eventid="18" type="Event"/>
+        <map eventid="19" type="Event"/>
+        <map eventid="20" type="Event"/>
+        <map eventid="21" type="Event"/>
+        <map eventid="22" type="Event"/>
+        <map eventid="23" type="Event"/>
+        <map eventid="24" type="Event"/>
+        <map eventid="25" type="Event"/>
+        <map eventid="26" type="Event"/>
+        <map eventid="27" type="Event"/>
+        <map eventid="28" type="Event"/>
+        <map eventid="29" type="Event"/>
+        <map eventid="20" type="Event"/>
+        <map eventid="21" type="Event"/>
+        <map eventid="22" type="Event"/>
+        <map eventid="23" type="Event"/>
+        <map eventid="24" type="Event"/>
+        <map eventid="25" type="Event"/>
+        <map eventid="26" type="Event"/>
+        <map eventid="27" type="Event"/>
+        <map eventid="28" type="Event"/>
+        <map eventid="29" type="Event"/>
+        <map eventid="30" type="Event"/>
+        <map eventid="31" type="Event"/>
+        <map eventid="32" type="Event"/>
+        <map eventid="33" type="Event"/>
+        <map eventid="34" type="Event"/>
+        <map eventid="35" type="Event"/>
+        <map eventid="36" type="Event"/>
+        <map eventid="37" type="Event"/>
+        <map eventid="38" type="Event"/>
+        <map eventid="39" type="Event"/>
+        <map eventid="40" type="Event"/>
+        <map eventid="41" type="Event"/>
+        <map eventid="42" type="Event"/>
+        <map eventid="43" type="Event"/>
+        <map eventid="44" type="Event"/>
+        <map eventid="45" type="Event"/>
+        <map eventid="46" type="Event"/>
+        <map eventid="47" type="Event"/>
+        <map eventid="48" type="Event"/>
+        <map eventid="49" type="Event"/>
+        <map eventid="50" type="Event"/>
+        <map eventid="51" type="Event"/>
+        <map eventid="52" type="Event"/>
+        <map eventid="53" type="Event"/>
+        <map eventid="54" type="Event"/>
+        <map eventid="55" type="Event"/>
+        <map eventid="56" type="Event"/>
+        <map eventid="57" type="Event"/>
+        <map eventid="58" type="Event"/>
+        <map eventid="59" type="Event"/>
+        <map eventid="60" type="Event"/>
+        <map eventid="61" type="Event"/>
+        <map eventid="62" type="Event"/>
+        <map eventid="63" type="Event"/>
+        <map eventid="64" type="Event"/>
+        <map eventid="65" type="Event"/>
+        <map eventid="66" type="Event"/>
+        <map eventid="67" type="Event"/>
+        <map eventid="68" type="Event"/>
+        <map eventid="69" type="Event"/>
+        <map eventid="70" type="Event"/>
+        <map eventid="71" type="Event"/>
+        <map eventid="72" type="Event"/>
+        <map eventid="73" type="Event"/>
+        <map eventid="74" type="Event"/>
+        <map eventid="75" type="Event"/>
+        <map eventid="76" type="Event"/>
+        <map eventid="77" type="Event"/>
+        <map eventid="78" type="Event"/>
+        <map eventid="79" type="Event"/>
+        <map eventid="80" type="Event"/>
+        <map eventid="81" type="Event"/>
+        <map eventid="82" type="Event"/>
+        <map eventid="83" type="Event"/>
+        <map eventid="84" type="Event"/>
+        <map eventid="85" type="Event"/>
+        <map eventid="86" type="Event"/>
+        <map eventid="87" type="Event"/>
+        <map eventid="88" type="Event"/>
+        <map eventid="89" type="Event"/>
+        <map eventid="90" type="Event"/>
+        <map eventid="91" type="Event"/>
+        <map eventid="92" type="Event"/>
+        <map eventid="93" type="Event"/>
+        <map eventid="94" type="Event"/>
+        <map eventid="95" type="Event"/>
+        <map eventid="96" type="Event"/>
+        <map eventid="97" type="Event"/>
+        <map eventid="98" type="Event"/>
+        <map eventid="99" type="Event"/>
+        <map eventid="100" type="Event"/>
+        <map eventid="101" type="Event"/>
+        <map eventid="102" type="Event"/>
+        <map eventid="103" type="Event"/>
+        <map eventid="104" type="Event"/>
+        <map eventid="105" type="Event"/>
+        <map eventid="106" type="Event"/>
+        <map eventid="107" type="Event"/>
+        <map eventid="108" type="Event"/>
+        <map eventid="109" type="Event"/>
+        <map eventid="110" type="Event"/>
+        <map eventid="111" type="Event"/>
+        <map eventid="112" type="Event"/>
+        <map eventid="113" type="Event"/>
+        <map eventid="114" type="Event"/>
+        <map eventid="115" type="Event"/>
+        <map eventid="116" type="Event"/>
+        <map eventid="117" type="Event"/>
+        <map eventid="118" type="Event"/>
+        <map eventid="119" type="Event"/>
+        <map eventid="120" type="Event"/>
+        <map eventid="121" type="Event"/>
+        <map eventid="122" type="Event"/>
+        <map eventid="123" type="Event"/>
+        <map eventid="124" type="Event"/>
+        <map eventid="125" type="Event"/>
+        <map eventid="126" type="Event"/>
+        <map eventid="127" type="Event"/>
+        <map eventid="128" type="Event"/>
+        <map eventid="129" type="Event"/>
+        <map eventid="120" type="Event"/>
+        <map eventid="121" type="Event"/>
+        <map eventid="122" type="Event"/>
+        <map eventid="123" type="Event"/>
+        <map eventid="124" type="Event"/>
+        <map eventid="125" type="Event"/>
+        <map eventid="126" type="Event"/>
+        <map eventid="127" type="Event"/>
+        <map eventid="128" type="Event"/>
+        <map eventid="129" type="Event"/>
+        <map eventid="130" type="Event"/>
+        <map eventid="131" type="Event"/>
+        <map eventid="132" type="Event"/>
+        <map eventid="133" type="Event"/>
+        <map eventid="134" type="Event"/>
+        <map eventid="135" type="Event"/>
+        <map eventid="136" type="Event"/>
+        <map eventid="137" type="Event"/>
+        <map eventid="138" type="Event"/>
+        <map eventid="139" type="Event"/>
+        <map eventid="140" type="Event"/>
+        <map eventid="141" type="Event"/>
+        <map eventid="142" type="Event"/>
+        <map eventid="143" type="Event"/>
+        <map eventid="144" type="Event"/>
+        <map eventid="145" type="Event"/>
+        <map eventid="146" type="Event"/>
+        <map eventid="147" type="Event"/>
+        <map eventid="148" type="Event"/>
+        <map eventid="149" type="Event"/>
+        <map eventid="150" type="Event"/>
+        <map eventid="151" type="Event"/>
+        <map eventid="152" type="Event"/>
+        <map eventid="153" type="Event"/>
+        <map eventid="154" type="Event"/>
+        <map eventid="155" type="Event"/>
+        <map eventid="156" type="Event"/>
+        <map eventid="157" type="Event"/>
+        <map eventid="158" type="Event"/>
+        <map eventid="159" type="Event"/>
+        <map eventid="160" type="Event"/>
+        <map eventid="161" type="Event"/>
+        <map eventid="162" type="Event"/>
+        <map eventid="163" type="Event"/>
+        <map eventid="164" type="Event"/>
+        <map eventid="165" type="Event"/>
+        <map eventid="166" type="Event"/>
+        <map eventid="167" type="Event"/>
+        <map eventid="168" type="Event"/>
+        <map eventid="169" type="Event"/>
+        <map eventid="170" type="Event"/>
+        <map eventid="171" type="Event"/>
+        <map eventid="172" type="Event"/>
+        <map eventid="173" type="Event"/>
+        <map eventid="174" type="Event"/>
+        <map eventid="175" type="Event"/>
+        <map eventid="176" type="Event"/>
+        <map eventid="177" type="Event"/>
+        <map eventid="178" type="Event"/>
+        <map eventid="179" type="Event"/>
+        <map eventid="180" type="Event"/>
+        <map eventid="181" type="Event"/>
+        <map eventid="182" type="Event"/>
+        <map eventid="183" type="Event"/>
+        <map eventid="184" type="Event"/>
+        <map eventid="185" type="Event"/>
+        <map eventid="186" type="Event"/>
+        <map eventid="187" type="Event"/>
+        <map eventid="188" type="Event"/>
+        <map eventid="189" type="Event"/>
+        <map eventid="190" type="Event"/>
+        <map eventid="191" type="Event"/>
+        <map eventid="192" type="Event"/>
+        <map eventid="193" type="Event"/>
+        <map eventid="194" type="Event"/>
+        <map eventid="195" type="Event"/>
+        <map eventid="196" type="Event"/>
+        <map eventid="197" type="Event"/>
+        <map eventid="198" type="Event"/>
+        <map eventid="199" type="Event"/>
+        <map eventid="200" type="Event"/>
+        <map eventid="201" type="Event"/>
+        <map eventid="202" type="Event"/>
+        <map eventid="203" type="Event"/>
+        <map eventid="204" type="Event"/>
+        <map eventid="205" type="Event"/>
+        <map eventid="206" type="Event"/>
+        <map eventid="207" type="Event"/>
+        <map eventid="208" type="Event"/>
+        <map eventid="209" type="Event"/>
+        <map eventid="210" type="Event"/>
+        <map eventid="211" type="Event"/>
+        <map eventid="212" type="Event"/>
+        <map eventid="213" type="Event"/>
+        <map eventid="214" type="Event"/>
+        <map eventid="215" type="Event"/>
+        <map eventid="216" type="Event"/>
+        <map eventid="217" type="Event"/>
+        <map eventid="218" type="Event"/>
+        <map eventid="219" type="Event"/>
+        <map eventid="220" type="Event"/>
+        <map eventid="221" type="Event"/>
+        <map eventid="222" type="Event"/>
+        <map eventid="223" type="Event"/>
+        <map eventid="224" type="Event"/>
+        <map eventid="225" type="Event"/>
+        <map eventid="226" type="Event"/>
+        <map eventid="227" type="Event"/>
+        <map eventid="228" type="Event"/>
+        <map eventid="229" type="Event"/>
+        <map eventid="220" type="Event"/>
+        <map eventid="221" type="Event"/>
+        <map eventid="222" type="Event"/>
+        <map eventid="223" type="Event"/>
+        <map eventid="224" type="Event"/>
+        <map eventid="225" type="Event"/>
+        <map eventid="226" type="Event"/>
+        <map eventid="227" type="Event"/>
+        <map eventid="228" type="Event"/>
+        <map eventid="229" type="Event"/>
+        <map eventid="230" type="Event"/>
+        <map eventid="231" type="Event"/>
+        <map eventid="232" type="Event"/>
+        <map eventid="233" type="Event"/>
+        <map eventid="234" type="Event"/>
+        <map eventid="235" type="Event"/>
+        <map eventid="236" type="Event"/>
+        <map eventid="237" type="Event"/>
+        <map eventid="238" type="Event"/>
+        <map eventid="239" type="Event"/>
+        <map eventid="240" type="Event"/>
+        <map eventid="241" type="Event"/>
+        <map eventid="242" type="Event"/>
+        <map eventid="243" type="Event"/>
+        <map eventid="244" type="Event"/>
+        <map eventid="245" type="Event"/>
+        <map eventid="246" type="Event"/>
+        <map eventid="247" type="Event"/>
+        <map eventid="248" type="Event"/>
+        <map eventid="249" type="Event"/>
+        <map eventid="250" type="Event"/>
+      </mapping>
+
+
+      <mapping id="eventid.msg">
+        <map eventid="1" msg="occurred"/>
+        <map eventid="2" msg="occurred"/>
+        <map eventid="3" msg="occurred"/>
+        <map eventid="4" msg="occurred"/>
+        <map eventid="5" msg="occurred"/>
+        <map eventid="6" msg="occurred"/>
+        <map eventid="7" msg="occurred"/>
+        <map eventid="8" msg="occurred"/>
+        <map eventid="9" msg="occurred"/>
+        <map eventid="10" msg="occurred"/>
+        <map eventid="11" msg="occurred"/>
+        <map eventid="12" msg="occurred"/>
+        <map eventid="13" msg="occurred"/>
+        <map eventid="14" msg="occurred"/>
+        <map eventid="15" msg="occurred"/>
+        <map eventid="16" msg="occurred"/>
+        <map eventid="17" msg="occurred"/>
+        <map eventid="18" msg="occurred"/>
+        <map eventid="19" msg="occurred"/>
+        <map eventid="20" msg="occurred"/>
+        <map eventid="21" msg="occurred"/>
+        <map eventid="22" msg="occurred"/>
+        <map eventid="23" msg="occurred"/>
+        <map eventid="24" msg="occurred"/>
+        <map eventid="25" msg="occurred"/>
+        <map eventid="26" msg="occurred"/>
+        <map eventid="27" msg="occurred"/>
+        <map eventid="28" msg="occurred"/>
+        <map eventid="29" msg="occurred"/>
+        <map eventid="20" msg="occurred"/>
+        <map eventid="21" msg="occurred"/>
+        <map eventid="22" msg="occurred"/>
+        <map eventid="23" msg="occurred"/>
+        <map eventid="24" msg="occurred"/>
+        <map eventid="25" msg="occurred"/>
+        <map eventid="26" msg="occurred"/>
+        <map eventid="27" msg="occurred"/>
+        <map eventid="28" msg="occurred"/>
+        <map eventid="29" msg="occurred"/>
+        <map eventid="30" msg="occurred"/>
+        <map eventid="31" msg="occurred"/>
+        <map eventid="32" msg="occurred"/>
+        <map eventid="33" msg="occurred"/>
+        <map eventid="34" msg="occurred"/>
+        <map eventid="35" msg="occurred"/>
+        <map eventid="36" msg="occurred"/>
+        <map eventid="37" msg="occurred"/>
+        <map eventid="38" msg="occurred"/>
+        <map eventid="39" msg="occurred"/>
+        <map eventid="40" msg="occurred"/>
+        <map eventid="41" msg="occurred"/>
+        <map eventid="42" msg="occurred"/>
+        <map eventid="43" msg="occurred"/>
+        <map eventid="44" msg="occurred"/>
+        <map eventid="45" msg="occurred"/>
+        <map eventid="46" msg="occurred"/>
+        <map eventid="47" msg="occurred"/>
+        <map eventid="48" msg="occurred"/>
+        <map eventid="49" msg="occurred"/>
+        <map eventid="50" msg="occurred"/>
+        <map eventid="51" msg="occurred"/>
+        <map eventid="52" msg="occurred"/>
+        <map eventid="53" msg="occurred"/>
+        <map eventid="54" msg="occurred"/>
+        <map eventid="55" msg="occurred"/>
+        <map eventid="56" msg="occurred"/>
+        <map eventid="57" msg="occurred"/>
+        <map eventid="58" msg="occurred"/>
+        <map eventid="59" msg="occurred"/>
+        <map eventid="60" msg="occurred"/>
+        <map eventid="61" msg="occurred"/>
+        <map eventid="62" msg="occurred"/>
+        <map eventid="63" msg="occurred"/>
+        <map eventid="64" msg="occurred"/>
+        <map eventid="65" msg="occurred"/>
+        <map eventid="66" msg="occurred"/>
+        <map eventid="67" msg="occurred"/>
+        <map eventid="68" msg="occurred"/>
+        <map eventid="69" msg="occurred"/>
+        <map eventid="70" msg="occurred"/>
+        <map eventid="71" msg="occurred"/>
+        <map eventid="72" msg="occurred"/>
+        <map eventid="73" msg="occurred"/>
+        <map eventid="74" msg="occurred"/>
+        <map eventid="75" msg="occurred"/>
+        <map eventid="76" msg="occurred"/>
+        <map eventid="77" msg="occurred"/>
+        <map eventid="78" msg="occurred"/>
+        <map eventid="79" msg="occurred"/>
+        <map eventid="80" msg="occurred"/>
+        <map eventid="81" msg="occurred"/>
+        <map eventid="82" msg="occurred"/>
+        <map eventid="83" msg="occurred"/>
+        <map eventid="84" msg="occurred"/>
+        <map eventid="85" msg="occurred"/>
+        <map eventid="86" msg="occurred"/>
+        <map eventid="87" msg="occurred"/>
+        <map eventid="88" msg="occurred"/>
+        <map eventid="89" msg="occurred"/>
+        <map eventid="90" msg="occurred"/>
+        <map eventid="91" msg="occurred"/>
+        <map eventid="92" msg="occurred"/>
+        <map eventid="93" msg="occurred"/>
+        <map eventid="94" msg="occurred"/>
+        <map eventid="95" msg="occurred"/>
+        <map eventid="96" msg="occurred"/>
+        <map eventid="97" msg="occurred"/>
+        <map eventid="98" msg="occurred"/>
+        <map eventid="99" msg="occurred"/>
+        <map eventid="100" msg="occurred"/>
+        <map eventid="101" msg="occurred"/>
+        <map eventid="102" msg="occurred"/>
+        <map eventid="103" msg="occurred"/>
+        <map eventid="104" msg="occurred"/>
+        <map eventid="105" msg="occurred"/>
+        <map eventid="106" msg="occurred"/>
+        <map eventid="107" msg="occurred"/>
+        <map eventid="108" msg="occurred"/>
+        <map eventid="109" msg="occurred"/>
+        <map eventid="110" msg="occurred"/>
+        <map eventid="111" msg="occurred"/>
+        <map eventid="112" msg="occurred"/>
+        <map eventid="113" msg="occurred"/>
+        <map eventid="114" msg="occurred"/>
+        <map eventid="115" msg="occurred"/>
+        <map eventid="116" msg="occurred"/>
+        <map eventid="117" msg="occurred"/>
+        <map eventid="118" msg="occurred"/>
+        <map eventid="119" msg="occurred"/>
+        <map eventid="120" msg="occurred"/>
+        <map eventid="121" msg="occurred"/>
+        <map eventid="122" msg="occurred"/>
+        <map eventid="123" msg="occurred"/>
+        <map eventid="124" msg="occurred"/>
+        <map eventid="125" msg="occurred"/>
+        <map eventid="126" msg="occurred"/>
+        <map eventid="127" msg="occurred"/>
+        <map eventid="128" msg="occurred"/>
+        <map eventid="129" msg="occurred"/>
+        <map eventid="120" msg="occurred"/>
+        <map eventid="121" msg="occurred"/>
+        <map eventid="122" msg="occurred"/>
+        <map eventid="123" msg="occurred"/>
+        <map eventid="124" msg="occurred"/>
+        <map eventid="125" msg="occurred"/>
+        <map eventid="126" msg="occurred"/>
+        <map eventid="127" msg="occurred"/>
+        <map eventid="128" msg="occurred"/>
+        <map eventid="129" msg="occurred"/>
+        <map eventid="130" msg="occurred"/>
+        <map eventid="131" msg="occurred"/>
+        <map eventid="132" msg="occurred"/>
+        <map eventid="133" msg="occurred"/>
+        <map eventid="134" msg="occurred"/>
+        <map eventid="135" msg="occurred"/>
+        <map eventid="136" msg="occurred"/>
+        <map eventid="137" msg="occurred"/>
+        <map eventid="138" msg="occurred"/>
+        <map eventid="139" msg="occurred"/>
+        <map eventid="140" msg="occurred"/>
+        <map eventid="141" msg="occurred"/>
+        <map eventid="142" msg="occurred"/>
+        <map eventid="143" msg="occurred"/>
+        <map eventid="144" msg="occurred"/>
+        <map eventid="145" msg="occurred"/>
+        <map eventid="146" msg="occurred"/>
+        <map eventid="147" msg="occurred"/>
+        <map eventid="148" msg="occurred"/>
+        <map eventid="149" msg="occurred"/>
+        <map eventid="150" msg="occurred"/>
+        <map eventid="151" msg="occurred"/>
+        <map eventid="152" msg="occurred"/>
+        <map eventid="153" msg="occurred"/>
+        <map eventid="154" msg="occurred"/>
+        <map eventid="155" msg="occurred"/>
+        <map eventid="156" msg="occurred"/>
+        <map eventid="157" msg="occurred"/>
+        <map eventid="158" msg="occurred"/>
+        <map eventid="159" msg="occurred"/>
+        <map eventid="160" msg="occurred"/>
+        <map eventid="161" msg="occurred"/>
+        <map eventid="162" msg="occurred"/>
+        <map eventid="163" msg="occurred"/>
+        <map eventid="164" msg="occurred"/>
+        <map eventid="165" msg="occurred"/>
+        <map eventid="166" msg="occurred"/>
+        <map eventid="167" msg="occurred"/>
+        <map eventid="168" msg="occurred"/>
+        <map eventid="169" msg="occurred"/>
+        <map eventid="170" msg="occurred"/>
+        <map eventid="171" msg="occurred"/>
+        <map eventid="172" msg="occurred"/>
+        <map eventid="173" msg="occurred"/>
+        <map eventid="174" msg="occurred"/>
+        <map eventid="175" msg="occurred"/>
+        <map eventid="176" msg="occurred"/>
+        <map eventid="177" msg="occurred"/>
+        <map eventid="178" msg="occurred"/>
+        <map eventid="179" msg="occurred"/>
+        <map eventid="180" msg="occurred"/>
+        <map eventid="181" msg="occurred"/>
+        <map eventid="182" msg="occurred"/>
+        <map eventid="183" msg="occurred"/>
+        <map eventid="184" msg="occurred"/>
+        <map eventid="185" msg="occurred"/>
+        <map eventid="186" msg="occurred"/>
+        <map eventid="187" msg="occurred"/>
+        <map eventid="188" msg="occurred"/>
+        <map eventid="189" msg="occurred"/>
+        <map eventid="190" msg="occurred"/>
+        <map eventid="191" msg="occurred"/>
+        <map eventid="192" msg="occurred"/>
+        <map eventid="193" msg="occurred"/>
+        <map eventid="194" msg="occurred"/>
+        <map eventid="195" msg="occurred"/>
+        <map eventid="196" msg="occurred"/>
+        <map eventid="197" msg="occurred"/>
+        <map eventid="198" msg="occurred"/>
+        <map eventid="199" msg="occurred"/>
+        <map eventid="200" msg="occurred"/>
+        <map eventid="201" msg="occurred"/>
+        <map eventid="202" msg="occurred"/>
+        <map eventid="203" msg="occurred"/>
+        <map eventid="204" msg="occurred"/>
+        <map eventid="205" msg="occurred"/>
+        <map eventid="206" msg="occurred"/>
+        <map eventid="207" msg="occurred"/>
+        <map eventid="208" msg="occurred"/>
+        <map eventid="209" msg="occurred"/>
+        <map eventid="210" msg="occurred"/>
+        <map eventid="211" msg="occurred"/>
+        <map eventid="212" msg="occurred"/>
+        <map eventid="213" msg="occurred"/>
+        <map eventid="214" msg="occurred"/>
+        <map eventid="215" msg="occurred"/>
+        <map eventid="216" msg="occurred"/>
+        <map eventid="217" msg="occurred"/>
+        <map eventid="218" msg="occurred"/>
+        <map eventid="219" msg="occurred"/>
+        <map eventid="220" msg="occurred"/>
+        <map eventid="221" msg="occurred"/>
+        <map eventid="222" msg="occurred"/>
+        <map eventid="223" msg="occurred"/>
+        <map eventid="224" msg="occurred"/>
+        <map eventid="225" msg="occurred"/>
+        <map eventid="226" msg="occurred"/>
+        <map eventid="227" msg="occurred"/>
+        <map eventid="228" msg="occurred"/>
+        <map eventid="229" msg="occurred"/>
+        <map eventid="220" msg="occurred"/>
+        <map eventid="221" msg="occurred"/>
+        <map eventid="222" msg="occurred"/>
+        <map eventid="223" msg="occurred"/>
+        <map eventid="224" msg="occurred"/>
+        <map eventid="225" msg="occurred"/>
+        <map eventid="226" msg="occurred"/>
+        <map eventid="227" msg="occurred"/>
+        <map eventid="228" msg="occurred"/>
+        <map eventid="229" msg="occurred"/>
+        <map eventid="230" msg="occurred"/>
+        <map eventid="231" msg="occurred"/>
+        <map eventid="232" msg="occurred"/>
+        <map eventid="233" msg="occurred"/>
+        <map eventid="234" msg="occurred"/>
+        <map eventid="235" msg="occurred"/>
+        <map eventid="236" msg="occurred"/>
+        <map eventid="237" msg="occurred"/>
+        <map eventid="238" msg="occurred"/>
+        <map eventid="239" msg="occurred"/>
+        <map eventid="240" msg="occurred"/>
+        <map eventid="241" msg="occurred"/>
+        <map eventid="242" msg="occurred"/>
+        <map eventid="243" msg="occurred"/>
+        <map eventid="244" msg="occurred"/>
+        <map eventid="245" msg="occurred"/>
+        <map eventid="246" msg="occurred"/>
+        <map eventid="247" msg="occurred"/>
+        <map eventid="248" msg="occurred"/>
+        <map eventid="249" msg="occurred"/>
+        <map eventid="250" msg="occurred"/>
+      </mapping>
+
+      <mapping id="masterid.name">
+        <map masterid="0xDC" name="SMSET0"/>
+      </mapping>
+
+      <mapping id="modelid.masterid">
+        <map modelid="0" masterid="0xDC"/>
+      </mapping>
+
+      <mapping id="masterid.decoder">
+        <map masterid="*"  decoder="SetDecoder"/>
+      </mapping>
+
+    </module>
+
+    <module id="MOD_SMSET1" kind="SMSET" proc="CSSTM_0" version="1.0" >
+
+      <mapping id="eventid.module">
+        <map eventid="1" module="EDMA_TPCC_AET"/>
+        <map eventid="2" module="EDMA_TPCC_AET"/>
+        <map eventid="3" module="INTC_ARP32_INT4"/>
+        <map eventid="4" module="INTC_ARP32_INT5"/>
+        <map eventid="5" module="INTC_ARP32_INT6"/>
+        <map eventid="6" module="INTC_ARP32_INT7"/>
+        <map eventid="7" module="VCOP_EVE_LOOP"/>
+        <map eventid="8" module="VCOP_EVE_LOOP"/>
+        <map eventid="9" module="VCOP_ARP32_NMI"/>
+      </mapping>
+
+      <mapping id="eventid.class">
+        <map eventid="1" class="computation"/>
+        <map eventid="2" class="computation"/>
+        <map eventid="3" class="computation"/>
+        <map eventid="4" class="computation"/>
+        <map eventid="5" class="computation"/>
+        <map eventid="6" class="computation"/>
+        <map eventid="7" class="computation"/>
+        <map eventid="8" class="computation"/>
+        <map eventid="9" class="computation"/>
+      </mapping>
+
+      <mapping id="eventid.type">
+        <map eventid="1" type="Event"/>
+        <map eventid="2" type="Event"/>
+        <map eventid="3" type="Event"/>
+        <map eventid="4" type="Event"/>
+        <map eventid="5" type="Event"/>
+        <map eventid="6" type="Event"/>
+        <map eventid="7" type="Event"/>
+        <map eventid="8" type="Event"/>
+        <map eventid="9" type="Event"/>
+      </mapping>
+
+
+      <mapping id="eventid.msg">
+        <map eventid="1" msg="start"/>
+        <map eventid="2" msg="stop"/>
+        <map eventid="3" msg="occurred"/>
+        <map eventid="4" msg="occurred"/>
+        <map eventid="5" msg="occurred"/>
+        <map eventid="6" msg="occurred"/>
+        <map eventid="7" msg="start"/>
+        <map eventid="8" msg="stop"/>
+        <map eventid="9" msg="occurred"/>
+      </mapping>
+
+      <mapping id="masterid.name">
+        <map masterid="0xD0" name="SMSET1"/>
+      </mapping>
+
+      <mapping id="modelid.masterid">
+        <map modelid="0" masterid="0xD0"/>
+      </mapping>
+
+      <mapping id="masterid.decoder">
+        <map masterid="*"  decoder="SetDecoder"/>
+      </mapping>
+
+    </module>
+
+
+    <module id ="MOD_SC"  kind="SC" proc="CSSTM_0" version="1.0" >
+			
+     <mapping id="masterid.name">
+        <map masterid="0xE0" name="SM_STATISTICS_UNIT0"/>
+        <map masterid="0xE2" name="SM_STATISTICS_UNIT1"/>
+        <map masterid="0xE4" name="SM_STATISTICS_UNIT2"/>
+        <map masterid="0xE8" name="SM_STATISTICS_UNIT3"/>
+      </mapping>
+			
+      <mapping id="masterid.width">
+        <map masterid="0xE0" width="64"/>
+        <map masterid="0xE2" width="64"/>
+        <map masterid="0xE4" width="64"/>
+        <map masterid="0xE8" width="64"/>
+      </mapping>
+			
+      <mapping id="masterid.cntnum">
+        <map masterid="0xE0" cntnum="8"/>
+        <map masterid="0xE2" cntnum="4"/>
+        <map masterid="0xE4" cntnum="4"/>
+        <map masterid="0xE8" cntnum="4"/>
+      </mapping>
+			
+      <mapping id="masterid.decoder">
+        <map masterid="*"  decoder="SCDecoderUnit"/>
+      </mapping>
+
+      <mapping id="unitname.moduletype">
+        <map unitname="LAT0" moduletype="NTTP"/>
+        <map unitname="LAT1" moduletype="NTTP"/>
+        <map unitname="LAT2" moduletype="NTTP"/>
+        <map unitname="LAT3" moduletype="NTTP"/>
+      </mapping>
+			
+      <mapping id="unitname.address">
+        <map unitname="LAT0" address="0x45002000"/>
+        <map unitname="LAT1" address="0x45003000"/>
+        <map unitname="LAT2" address="0x45004000"/>
+        <map unitname="LAT3" address="0x45005000"/>
+      </mapping>
+			
+      <mapping id="unitname.cntinfor">
+        <map unitname="LAT0" cntinfor="4"/>
+        <map unitname="LAT1" cntinfor="4"/>
+        <map unitname="LAT2" cntinfor="4"/>
+        <map unitname="LAT3" cntinfor="4"/>
+      </mapping>
+			
+      <mapping id="unitname.probid">
+        <map unitname="LAT0" probid="0^0^1^1^2^2^3^3^4^4^5^5"/>
+        <map unitname="LAT1" probid="6^6^7^7^8^8^9^9^14^14^15^15^16^16^17^17"/>
+        <map unitname="LAT2" probid="18^18^19^19^20^20^21^21^22^22^12^12^13^13"/>
+        <map unitname="LAT3" probid="25^25^26^26^24^24^27^27^28^28^24^24"/>
+      </mapping>
+
+      <mapping id="modelid.masterid">
+        <map modelid="0" masterid="0xE0"/>
+        <map modelid="1" masterid="0xE2"/>
+        <map modelid="2" masterid="0xE4"/>
+        <map modelid="3" masterid="0xE8"/>
+      </mapping>
+
+      <mapping id="unitid.remapid">
+        <map unitid="0" remapid="1"/>
+        <map unitid="1" remapid="2"/>
+        <map unitid="2" remapid="3"/>
+        <map unitid="3" remapid="4"/>
+      </mapping>
+    </module> 
+    
+    <module id ="MOD_CONFIGINFO"  kind="CONFIGINFO" proc="CSSTM_0" version="1.0" >
+		
+       <mapping id="ubmfunnum.filename">
+          <map ubmfunnum="0x80000000" filename="OCPType_2600_ADAS.xml"/>
+          <map ubmfunnum="0x80000002" filename="AET_PropertyOCP_ADAS.xml"/>
+          <map ubmfunnum="0x80000005" filename="AET_PropertyCTSET_ADAS.xml"/>
+          <map ubmfunnum="0x80001005" filename="AET_PropertySMSET_EVE.xml"/>
+          <map ubmfunnum="0x80000006" filename="AET_PropertyPMG_omap5.xml"/>
+          <map ubmfunnum="0x80000007" filename="AET_PropertyCMG0_omap5.xml"/>
+          <map ubmfunnum="0xC000000A" filename="AET_PropertyPPFADAS.xml"/>
+          <map ubmfunnum="0x8000000F" filename="AET_PropertySTM_ADAS.xml"/>
+       </mapping>
+			
+	<!-- Make sure this section should be consistent with OCPTYPE_2600_OMAP4.xml-->
+       <mapping id="ubmfunnum.funcname">
+          <map ubmfunnum="0x80000000" funcname="STM Functions"/>
+          <map ubmfunnum="0x80000002" funcname="OCP Traffic Monitoring"/>
+          <map ubmfunnum="0x80000005" funcname="System Event Detection(ISS)"/>
+          <map ubmfunnum="0x80001005" funcname="System Event Detection(EVE1)"/>
+          <map ubmfunnum="0x80000006" funcname="Power Management Profiling"/>
+          <map ubmfunnum="0x80000007" funcname="Clock Management Profiling 1"/>
+          <map ubmfunnum="0xC000000A" funcname="Performance Probe"/>
+          <map ubmfunnum="0x8000000F" funcname="Trace Export Configuration"/>
+      </mapping>
+
+      <mapping id="ubmfunnum.modulename">
+           <map ubmfunnum="0x80000000" modulename=""/>
+           <map ubmfunnum="0x80000002" modulename="MOD_OCPWP0"/>
+           <map ubmfunnum="0x80000005" modulename="MOD_SMSET0"/>
+           <map ubmfunnum="0x80001005" modulename="MOD_SMSET1"/>
+           <map ubmfunnum="0x80000006" modulename="MOD_POWERPRO"/>
+           <map ubmfunnum="0x80000007" modulename="MOD_CLOCKPRO"/>
+           <map ubmfunnum="0xC000000A" modulename="MOD_SC"/>
+           <map ubmfunnum="0x8000000F" modulename=""/>
+       </mapping>
+      </module> 
+		
+	
+		<module id ="MOD_CROSS_TRIGGERING_XTRIG"  kind="CHANNELS" proc="XTRIG" version="1.0" >		
+			<mapping id="gbgroup.channels">
+				<!-- This is the group of cross triggering across CTI -->
+				<map gbgroup="1" channels="NA"/>
+				<!-- This is the group within XTRIG -->
+				<map gbgroup="2" channels="NA"/>
+			</mapping>
+			<mapping id="syncgroup.channels">
+				<map syncgroup="0" channels=""/>
+			</mapping>
+			<characteristics>
+				<characteristic id="DEV_CHAR_SMP_CPUNAME" value="XTRIG"/> 
+			</characteristics>
+		</module> 
+		
+		<!-- Pins module -->
+		<module id ="MOD_DRM"  kind="drm" proc="CSSTM_0" version="1.0" >
+			<registers>
+			</registers>
+			<mapping id="program.pinouts">
+				<map program="1" pinouts="tpiu=2,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,1,0" />
+				<map program="2" pinouts="tpiu=2,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4" />
+				<map program="3" pinouts="tpiu=2,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4" />
+				<map program="4" pinouts="tpiu=2,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4" />
+				<map program="5" pinouts="tpiu=2,17,16,15,14,13,12,11,10,9,8,7,6,5,4" />
+				<map program="6" pinouts="tpiu=2,17,16,15,14,13,12,11,10,9,8,7,6,5,4" />
+				<map program="7" pinouts="tpiu=2,16,15,14,13,12,11,10,9,8,7,6,5,4" />
+				<map program="8" pinouts="tpiu=2,15,14,13,12,11,10,9,8,7,6,5,4" />
+				<map program="9" pinouts="tpiu=2,15,14,13,12,11,10,9,8,7,6,5,4" />
+				<map program="10" pinouts="tpiu=2,14,13,12,11,10,9,8,7,6,5,4" />
+				<map program="11" pinouts="tpiu=2,13,12,11,10,9,8,7,6,5,4" />
+				<map program="12" pinouts="tpiu=2,5,4,1,0" />
+				<map program="13" pinouts="tpiu=2,1,0" />
+				<map program="14" pinouts="tpiu=2,0" />
+			</mapping>
+		</module>
+
+		<!-- version 1 indicates a regular TPIU type -->
+		<module id ="MOD_TPIU"  kind="tpiu" proc="CS_DAP_DebugSS" version="1" >
+			<registers>
+			</registers>
+			<characteristics>
+				<characteristic id="DEV_CHAR_TPIUTYPE" value="1"/> 
+				<characteristic id="DEV_CHAR_TPIUBASE" value="0xCB163000"/> 
+			</characteristics>
+		</module>	
+
+		<module id ="MOD_DRMMAP"  kind="DRMMAP" proc="CS_DAP_DebugSS" version="1.0" >
+			<characteristics>
+				<characteristic id="DEV_CHAR_DRMBASE_ADDR_DAP" value="0xCB160000"/>
+				<characteristic id="DEV_CHAR_DRM_FIRST_DATA_PIN" value="3"/>
+				<characteristic id="DEV_CHAR_CLOCK_VERSION" value="1"/>
+			</characteristics>
+		</module>
+
+	</modules>
+
+</device>

@@ -1,0 +1,984 @@
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  davincievm_arm.gel                                                      *
+ *  Version 3.2a                                                            *
+ *                                                                          *
+ *  This GEL file is designed to be used in conjunction with                *
+ *  CCStudio 3.2+ and the DM6446 based EVM.                                 *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  StartUp( )                                                              *
+ *      Setup Memory Map                                                    *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+StartUp( )
+{
+    Setup_Memory_Map( );
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  OnTargetConnect( )                                                      *
+ *      Setup PinMux, Power, PLLs, DDR, & EMIF                              *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+OnTargetConnect( )
+{
+    GEL_TextOut( "\nDaVinciEVM ARM Startup Sequence\n\n" );
+
+    Disable_IRQ_Flush_Cache();
+
+    Setup_Pin_Mux( );                   // Setup Pin Mux
+    Setup_Psc_All_On( );                // Setup All Power Domains
+
+    Setup_PLL1_594_MHz_OscIn( );        // Setup Pll1 [DSP @ 594 MHz, ARM @ 297 MHz][1.20V]
+    Setup_PLL2_DDR_162_MHz_OscIn( );    // Setup Pll2 [VPSS @ 54 MHz, DDR @ 162 MHz][1.20V]
+    Setup_DDR_162_MHz( );               // Setup DDR2 [162 MHz]
+
+  //Reset_EMIF_16Bit_Bus( );            // Reset Async-EMIF [16-bit bus]
+    Setup_EMIF_CS2_NorFlash_16Bit( );   // Setup NOR Flash
+  //Setup_EMIF_CS2_SRAM_16Bit( );       // Setup SRAM
+  //Setup_EMIF_CS2_NandFlash_8Bit( );   // Setup NAND Flash
+
+    DSP_Boot_from_L2_Sram( );           // Boot DSP from L2
+    GEL_TextOut( "\nStartup Complete.\n\n" );
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  Flush_Cache_Disable_MMU( )                                              *
+ *      Flush Cache & Disable MMU                                           *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+Disable_IRQ_Flush_Cache( )
+{
+    GEL_TextOut( "Disable IRQ/FIQ\n" );
+    CPSR = 0x400000D3;                  // Set to supervisor mode, disable IRQ/FIQ
+
+    GEL_TextOut( "Flush Data Cache\n" );
+    REG_CP15_FLSH_D;                   // Flush then disable D-Cache
+    REG_CP15_D_CACHE = 0;
+
+    GEL_TextOut( "Flush Instruction Cache\n" );
+    REG_CP15_FLSH_I;                   // Flush then disable I-Cache
+    REG_CP15_I_CACHE = 0;
+
+    GEL_TextOut( "Disable MMU\n" );
+    REG_CP15_MMU = 0;                   // Disable MMU
+}
+
+menuitem "DaVinci EVM Memory Map";
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  Setup_Memory_Map( )                                                     *
+ *      Setup the Memory Map for ARM side only.                             *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+hotmenu
+Setup_Memory_Map( )
+{
+    GEL_MapOn( );
+    GEL_MapReset( );
+
+    /* ARM RAM & ROM */
+    GEL_MapAddStr( 0x00000000, 0, 0x00004000, "R|W|AS4", 0 );   // ARM RAM Instruction
+    GEL_MapAddStr( 0x00004000, 0, 0x00004000, "R|AS4",   0 );   // ARM ROM Instruction
+    GEL_MapAddStr( 0x00008000, 0, 0x00004000, "R|W|AS4", 0 );   // ARM RAM Data
+    GEL_MapAddStr( 0x0000c000, 0, 0x00004000, "R|AS4",   0 );   // ARM ROM Data
+
+    /* Extend Trace */
+    GEL_MapAddStr( 0x01bc0000, 0, 0x00001900, "R|W|AS4", 0 );   // ARM ETB
+
+    /* Peripherals */
+    GEL_MapAddStr( 0x01c00000, 0, 0x00000644, "R|W|AS4", 0 );   // EDMA Channel Ctrl
+    GEL_MapAddStr( 0x01c01000, 0, 0x00000098, "R|W|AS4", 0 );   // EDMA Channel Ctrl
+    GEL_MapAddStr( 0x01c02000, 0, 0x00000098, "R|W|AS4", 0 );   // EDMA Channel Ctrl
+    GEL_MapAddStr( 0x01c02200, 0, 0x00000098, "R|W|AS4", 0 );   // EDMA Channel Ctrl
+    GEL_MapAddStr( 0x01c10000, 0, 0x000003d8, "R|W|AS4", 0 );   // EDMA Transfer Ctrl 0
+    GEL_MapAddStr( 0x01c10400, 0, 0x000003d8, "R|W|AS4", 0 );   // EDMA Transfer Ctrl 1
+    GEL_MapAddStr( 0x01c20000, 0, 0x00000034, "R|W|AS4", 0 );   // UART 0
+    GEL_MapAddStr( 0x01c20400, 0, 0x00000034, "R|W|AS4", 0 );   // UART 1
+    GEL_MapAddStr( 0x01c20800, 0, 0x00000034, "R|W|AS4", 0 );   // UART 2
+    GEL_MapAddStr( 0x01c21000, 0, 0x0000003c, "R|W|AS4", 0 );   // I2C
+    GEL_MapAddStr( 0x01c21400, 0, 0x00000028, "R|W|AS4", 0 );   // Timer 0
+    GEL_MapAddStr( 0x01c21800, 0, 0x00000028, "R|W|AS4", 0 );   // Timer 1
+    GEL_MapAddStr( 0x01c21c00, 0, 0x0000002c, "R|W|AS4", 0 );   // Timer 2 WDT
+    GEL_MapAddStr( 0x01c22000, 0, 0x0000001c, "R|W|AS4", 0 );   // PWM 0
+    GEL_MapAddStr( 0x01c22400, 0, 0x0000001c, "R|W|AS4", 0 );   // PWM 1
+    GEL_MapAddStr( 0x01c22800, 0, 0x0000001c, "R|W|AS4", 0 );   // PWM 2
+    GEL_MapAddStr( 0x01c40000, 0, 0x00000050, "R|W|AS4", 0 );   // System Module
+    GEL_MapAddStr( 0x01c40800, 0, 0x00000168, "R|W|AS4", 0 );   // PLL 1
+    GEL_MapAddStr( 0x01c40c00, 0, 0x00000154, "R|W|AS4", 0 );   // PLL 2
+    GEL_MapAddStr( 0x01c41000, 0, 0x00000518, "R|W|AS4", 0 );   // PSC Domain Control
+    GEL_MapAddStr( 0x01c41800, 0, 0x000000a4, "R|W|AS4", 0 );   // PSC Module Status
+    GEL_MapAddStr( 0x01c41a00, 0, 0x000000a4, "R|W|AS4", 0 );   // PSC Module Control
+    GEL_MapAddStr( 0x01c42030, 0, 0x00000004, "R|W|AS4", 0 );   // DDR2 VTP
+    GEL_MapAddStr( 0x01c48000, 0, 0x00000050, "R|W|AS4", 0 );   // ARM Interrupts
+    GEL_MapAddStr( 0x01c64000, 0, 0x00002000, "R|W|AS4", 0 );   // USB 2.0 + RAM
+    GEL_MapAddStr( 0x01c66000, 0, 0x00000800, "R|W|AS2", 0 );   // ATA / CF
+    GEL_MapAddStr( 0x01c66800, 0, 0x00000074, "R|W|AS4", 0 );   // SPI
+    GEL_MapAddStr( 0x01c67000, 0, 0x00000038, "R|W|AS4", 0 );   // GPIO
+    GEL_MapAddStr( 0x01c70000, 0, 0x00004000, "R|W|AS4", 0 );   // VPSS
+    GEL_MapAddStr( 0x01c80000, 0, 0x00001000, "R|W|AS4", 0 );   // EMAC Control
+    GEL_MapAddStr( 0x01c81000, 0, 0x00001000, "R|W|AS4", 0 );   // EMAC Module
+    GEL_MapAddStr( 0x01c82000, 0, 0x00002000, "R|W|AS4", 0 );   // EMAC Module RAM
+    GEL_MapAddStr( 0x01c84000, 0, 0x00000090, "R|W|AS4", 0 );   // MDIO
+    GEL_MapAddStr( 0x01cc0000, 0, 0x00020000, "R|W|AS4", 0 );   // VICP
+    GEL_MapAddStr( 0x01e00000, 0, 0x000000b4, "R|W|AS4", 0 );   // EMIFA Control
+    GEL_MapAddStr( 0x01e01000, 0, 0x00000048, "R|W|AS4", 0 );   // VLYNQ Control
+    GEL_MapAddStr( 0x01e02000, 0, 0x0000005c, "R|W|AS4", 0 );   // ASP
+    GEL_MapAddStr( 0x01e10000, 0, 0x00000078, "R|W|AS4", 0 );   // MMC / SD
+
+    /* Off-chip */
+    GEL_MapAddStr( 0x02000000, 0, 0x02000000, "R|W|AS4", 0 );   // AEMIF CS2
+    GEL_MapAddStr( 0x04000000, 0, 0x02000000, "R|W|AS4", 0 );   // AEMIF CS3
+    GEL_MapAddStr( 0x06000000, 0, 0x02000000, "R|W|AS4", 0 );   // AEMIF CS4
+    GEL_MapAddStr( 0x08000000, 0, 0x02000000, "R|W|AS4", 0 );   // AEMIF CS5
+    GEL_MapAddStr( 0x0c000000, 0, 0x04000000, "R|W|AS4", 0 );   // VLYNQ
+
+    /* DSP RAM */
+    GEL_MapAddStr( 0x11800000, 0, 0x00010000, "R|W|AS4", 0 );   // DSP L2 Cache
+    GEL_MapAddStr( 0x11e08000, 0, 0x00008000, "R|W|AS4", 0 );   // DSP L1P Cache
+    GEL_MapAddStr( 0x11f04000, 0, 0x0000c000, "R|W|AS4", 0 );   // DSP L1D RAM
+    GEL_MapAddStr( 0x11f10000, 0, 0x00008000, "R|W|AS4", 0 );   // DSP L1D Cache
+
+    /* DDR2 */
+    GEL_MapAddStr( 0x20000000, 0, 0x000000f4, "R|W|AS4", 0 );   // DDR2 Control
+    GEL_MapAddStr( 0x80000000, 0, 0x10000000, "R|W|AS4", 0 );   // DDR2 SDRAM
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  Clear_Memory_Map( )                                                     *
+ *      Clear the Memory Map                                                *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+hotmenu
+Clear_Memory_Map( )
+{
+    GEL_MapOff( );
+    GEL_MapReset( );
+}
+
+menuitem "DaVinci EVM Functions";
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  Setup_Pin_Mux( )                                                        *
+ *      Configure Pin Multiplexing                                          *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+hotmenu
+Setup_Pin_Mux( )
+{
+    GEL_TextOut( "Setup PinMux... " );
+    #define PINMUX0             *( unsigned int* )( 0x01c40000 )
+    #define PINMUX1             *( unsigned int* )( 0x01c40004 )
+    #define VDD3P3V_PWDN        *( unsigned int* )( 0x01c40048 )
+
+    /*
+     *  PinMux settings for:
+     *      [Normal Operation]
+     */
+    PINMUX0 = 0x80000c1f;
+          /*| ( 1 << 31 )   // EMACEN - ON
+            | ( 0 << 30 )   // EN1394 - OFF
+            | ( 0 << 29 )   // HPIEN  - OFF
+            | ( 0 << 27 )   // CFLDEN - OFF
+            | ( 0 << 26 )   // CWEN   - OFF
+            | ( 0 << 25 )   // LFLDEN - OFF
+            | ( 0 << 24 )   // LOEEN  - OFF
+            | ( 0 << 23 )   // RGB888 - OFF
+            | ( 0 << 22 )   // RGB666 - OFF
+            | ( 0 << 17 )   // ATAEN  - OFF
+            | ( 0 << 16 )   // HDIREN - OFF
+            | ( 0 << 15 )   // VLYNQEN- OFF
+            | ( 0 << 14 )   // VLSCREN- OFF
+            | ( 0 << 12 )   // VLYNQWD- OFF
+            | ( 1 << 11 )   // AECS5  - ON
+            | ( 1 << 10 )   // AECS4  - ON
+            | ( 31 << 0 );  // AEAW   - ON*/
+
+    PINMUX1 = 0x000404f1;
+          /*| ( 1 << 18 )   // TIMIN - ON
+            | ( 0 << 17 )   // CLK1  - OFF
+            | ( 0 << 16 )   // CLK0  - OFF
+            | ( 1 << 10 )   // MCBSP - ON
+            | ( 0 << 9 )    // MSTK  - OFF
+            | ( 0 << 8 )    // SPI   - OFF
+            | ( 1 << 7 )    // I2C   - ON
+            | ( 1 << 6 )    // PWM2  - ON
+            | ( 1 << 5 )    // PWM1  - ON
+            | ( 1 << 4 )    // PWM0  - ON
+            | ( 0 << 3 )    // U2FLO - OFF
+            | ( 0 << 2 )    // UART2 - OFF
+            | ( 0 << 1 )    // UART1 - OFF
+            | ( 1 << 0 );   // UART0 - ON*/
+
+    VDD3P3V_PWDN = 0;
+          /*| ( 0 << 1 )    // MMC/SD I/O      - Powered down
+            | ( 0 << 0 );   // GIOV33/EMAC I/O - Powered down*/
+
+    GEL_TextOut( "[Done]\n" );
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  Setup_Psc_All_On( )                                                     *
+ *      Enable all PSC modules on ALWAYSON and DSP power dominas.           *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+hotmenu
+Setup_Psc_All_On( )
+{
+    int i;
+    GEL_TextOut( "Setup Power Modules (All on)... " );
+
+    /*
+     *  Enable all non-reserved power modules
+     *  Reserved: 8, 12, 16, 29-38
+     */
+    for ( i = 0 ; i <= 7 ; i++ )
+        psc_change_state( i , 3 );
+    for ( i = 9 ; i <= 11 ; i++ )
+        psc_change_state( i , 3 );
+    for ( i = 13 ; i <= 15 ; i++ )
+        psc_change_state( i , 3 );
+    for ( i = 17 ; i <= 28 ; i++ )
+        psc_change_state( i , 3 );
+    for ( i = 39 ; i <= 40 ; i++ )
+        psc_change_state( i , 3 );
+
+    GEL_TextOut( "[Done]\n" );
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  psc_use_interrupt( id )                                                 *
+ *      Determine which PSC module needs the interrupt set                  *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+psc_use_interrupt( int id )
+{
+    /* Interrupts: 0-1, 5-6, 9-10, 13-15, 17, 26, 40 */
+    if ( ( id == 0 ) || ( id == 1 ) || ( id == 5 ) || ( id == 6 )
+        || ( id == 9 ) || ( id == 10 ) || ( ( id >= 13 ) && ( id <= 15 ) )
+        || ( id == 17 ) || ( id == 26 ) || ( id == 40 ) )
+        return 1;
+    else
+        return 0;
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  psc_turn_on_dsp_power_domain( )                                         *
+ *      Turn on DSP Power Domain                                            *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+psc_turn_on_dsp_power_domain( )
+{
+    #define PSC_EPCPR           *( unsigned int* )( 0x01c41070 )
+    #define PSC_PTCMD           *( unsigned int* )( 0x01c41120 )
+    #define PSC_PTSTAT          *( unsigned int* )( 0x01c41128 )
+    #define PSC_PDCTL1          *( unsigned int* )( 0x01c41304 )
+    #define PSC_MDSTAT_DSP      *( unsigned int* )( 0x01c41800 + ( 4 * 39 ) )
+    #define PSC_MDCTL_DSP       *( unsigned int* )( 0x01c41a00 + ( 4 * 39 ) )
+	#define PSC_MDSTAT_IMCOP    *( unsigned int* )( 0x01c41800 + ( 4 * 40 ) )
+    #define PSC_MDCTL_IMCOP     *( unsigned int* )( 0x01c41a00 + ( 4 * 40 ) )
+    #define CHP_SHRTSW          *( unsigned int* )( 0x01c40038 )
+
+    /*
+     *  Step 0 - Ignore if DSP power is already on
+     */
+    if ( ( PSC_MDSTAT_DSP & 0x1f ) == 3 )
+        return;
+
+    /*
+     *  Turn DSP power on ( by shorting switch )
+     */
+    CHP_SHRTSW = 1;
+
+    /*
+     *  Step 1 - Wait for PTSTAT.GOSTAT to clear
+     */
+    while( PSC_PTSTAT & 2 );
+
+    /*
+     *  Step 2 - Turn on Power to DSP domain, then Enable DSP & IMCOP
+     */
+    PSC_PDCTL1 |= 1;
+    PSC_MDCTL_DSP |= 0x0003;
+    PSC_MDCTL_IMCOP |= 0x0203;
+
+    /*
+     *  Step 3 - Start power transition ( set PTCMD.GO to 1 )
+     */
+    PSC_PTCMD = 2;
+
+    /*
+     *  Step 4 - Wait for External Power request
+     */
+    while( ! ( PSC_EPCPR & 2 ) );
+
+    /*  Step 5 - Apply Power - should already be set */
+
+    /*
+     *  Step 6 - Indicate that power has been applied
+     */
+    PSC_PDCTL1 |= 0x0100;
+
+    /*
+     *  Step 5 - Wait for PTSTAT.GOSTAT to clear
+     */
+    while( PSC_PTSTAT & 2 );
+    PSC_MDCTL_IMCOP &= ~0x0200;
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  psc_change_state( id, state )                                           *
+ *      id    = Domain #ID                                                  *
+ *      state = ( ENABLE, DISABLE, SYNCRESET, RESET )                       *
+ *              (   =3  ,   =2   ,    =1    ,   =0  )                       *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+psc_change_state( int id, int state )
+{
+    #define PSC_PTCMD           *( unsigned int* )( 0x01c41120 )
+    #define PSC_PTSTAT          *( unsigned int* )( 0x01c41128 )
+    unsigned int* mdstat        = ( unsigned int* )( 0x01c41800 + ( 4 * id ) );
+    unsigned int* mdctl         = ( unsigned int* )( 0x01c41a00 + ( 4 * id ) );
+    int set_interrupt;
+
+    /*
+     *  Step 0 - Ignore request if the state is already set as is
+     */
+    if ( ( *mdstat & 0x1f ) == state )
+        return;
+
+    /*
+     *  Step 0 - Enable the DSP & IMCOP seperately
+     */
+    if ( ( id == 39 ) || ( id == 40 ) )
+    {
+        psc_turn_on_dsp_power_domain( );
+        return;
+    }
+
+    /*
+     *  Step 1 - Wait for PTSTAT.GOSTAT to clear
+     */
+    while( PSC_PTSTAT & 1 );
+
+    /*
+     *  Step 2 - Set MDCTLx.NEXT to new state
+     */
+    *mdctl &= ~0x1f;
+    *mdctl |= state;
+
+    /*
+     *  Step 2.5 - Enable interrutps if it is needed
+     */
+    set_interrupt = psc_use_interrupt( id );
+    if ( set_interrupt )
+        *mdctl |= 0x0200;
+
+    /*
+     *  Step 3 - Start power transition ( set PTCMD.GO to 1 )
+     */
+    PSC_PTCMD = 1;
+
+    /*
+     *  Step 4 - Wait for PTSTAT.GOSTAT to clear
+     */
+    while( PSC_PTSTAT & 1 );
+
+    /*
+     *  Step 5 - Verify state changed
+     */
+    while( ( *mdstat & 0x1f ) != state );
+
+    /*
+     *  Step 6 - Clear Interrupt
+     */
+    if ( set_interrupt )
+       *mdctl &= ~0x0200;
+}
+
+_wait( int delay )
+{
+    int i;
+    for( i = 0 ; i < delay ; i++ ){}
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  setup_pll_1( )                                                          *
+ *                                                                          *
+ *      clock_source    <- 0: Onchip Oscillator                             *
+ *                         1: External Clock                                *
+ *                                                                          *
+ *      pll_mult        <- 21: 22x Multiplier * 27MHz Clk = 594 MHz         *
+ *                         16: 17x Multiplier * 27MHz Clk = 459 MHz         *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+setup_pll_1( int clock_source, int pll_mult )
+{
+    unsigned int* pll_ctl           = ( unsigned int* )( 0x01c40900 );
+    unsigned int* pll_pllm          = ( unsigned int* )( 0x01c40910 );
+    unsigned int* pll_postdiv       = ( unsigned int* )( 0x01c40928 );
+    unsigned int* pll_bpdiv         = ( unsigned int* )( 0x01c4092c );
+
+    int pll1_freq = 27 * ( pll_mult + 1 );
+    int dsp_freq = pll1_freq;
+    int arm_freq = pll1_freq / 2;
+    int postdiv = 0;
+    int bypass_div = 0;
+
+    GEL_TextOut( "Setup PLL1 " );
+
+    /*
+     *  Step 0 - Ignore request if the PLL is already set as is
+     */
+    if ( ( ( *pll_ctl & 0x0100 ) >> 8 ) == clock_source )
+    {
+        if ( ( *pll_pllm & 0x3f ) == ( pll_mult & 0x3f ) )
+        {
+            if ( ( *pll_postdiv & 0x1f ) == ( postdiv & 0x1f ) )
+            {
+                GEL_TextOut( "(DSP = %d MHz + ",,,,, dsp_freq );
+                GEL_TextOut( "ARM = %d MHz + ",,,,, arm_freq );
+                if ( clock_source == 0 )
+                    GEL_TextOut( "Onchip Oscillator)... " );
+                else
+                    GEL_TextOut( "External Clock)... " );
+                GEL_TextOut( "[Already Set]\n" );
+                return;
+            }
+        }
+    }
+    /*
+     *  Step 1 - Set clock mode
+     */
+    if ( clock_source == 0 )
+        *pll_ctl &= ~0x0100;    // Onchip Oscillator
+    else
+        *pll_ctl |= 0x0100;     // External Clock
+
+    /*
+     *  Step 2 - Set PLL to bypass
+     *         - Wait for PLL to stabilize
+     */
+    *pll_ctl &= ~0x0021;
+    _wait( 150 );
+
+    /*
+     *  Step 3 - Reset PLL
+     */
+    *pll_ctl &= ~0x0008;
+
+    /*
+     *  Step 4 - Disable PLL
+     *  Step 5 - Powerup PLL
+     *  Step 6 - Enable PLL
+     *  Step 7 - Wait for PLL to stabilize
+     */
+    *pll_ctl |= 0x0010;         // Disable PLL
+    *pll_ctl &= ~0x0002;        // Power up PLL
+    *pll_ctl &= ~0x0010;        // Enable PLL
+    _wait( 150 );               // Wait for PLL to stabilize
+
+    /*
+     *  Step 8 - Load PLL multiplier
+     */
+    *pll_pllm = pll_mult & 0x3f;
+
+    /*
+     *  Step 9 - Set PLL post dividers
+     *           For PLL1: DSP, ARM, VPSS, VICP, & Per. dividers are all fixed
+     */
+    *pll_bpdiv = 0x8000 | bypass_div;   // Bypass divider
+    *pll_postdiv = 0x8000 | postdiv;    // Post divider
+
+    /*
+     *  Step 10 - Wait for PLL to reset ( 2000 cycles )
+     *  Step 11 - Release from reset
+     */
+    _wait( 2000 );
+    *pll_ctl |= 0x0008;
+
+    /*
+     *  Step 12 - Wait for PLL to re-lock ( 2000 cycles )
+     *  Step 13 - Switch out of BYPASS mode
+     */
+    _wait( 2000 );
+    *pll_ctl |= 0x0001;
+
+    pll1_freq = 27 * ( ( *pll_pllm & 0x3f ) + 1 );
+    dsp_freq = pll1_freq;
+    arm_freq = pll1_freq / 2;
+
+    GEL_TextOut( "(DSP = %d MHz + ",,,,, dsp_freq );
+    GEL_TextOut( "ARM = %d MHz + ",,,,, arm_freq );
+
+    if ( clock_source == 0 )
+        GEL_TextOut( "Onchip Oscillator)... " );
+    else
+        GEL_TextOut( "External Clock)... " );
+
+    GEL_TextOut( "[Done]\n" );
+}
+
+hotmenu
+Setup_PLL1_459_MHz_OscIn( )
+{
+    setup_pll_1( 0, 16 );   // DSP @ 459 MHz & ARM @ 229.5 MHz w/ Onchip Oscillator
+}
+hotmenu
+Setup_PLL1_594_MHz_OscIn( )
+{
+    setup_pll_1( 0, 21 );   // DSP @ 594 MHz & ARM @ 297 MHz w/ Onchip Oscillator
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  setup_pll_2( )                                                          *
+ *                                                                          *
+ *      clock_source    <- 0: Onchip Oscillator                             *
+ *                         1: External Clock                                *
+ *                                                                          *
+ *      pll_mult        <- PLL Multiplier                                   *
+ *                         23: 24x Multiplier * 27MHz Clk = 648 MHz         *
+ *                                                                          *
+ *      vpss_div        <- VPSS divider ( For PLL2 )                        *
+ *                         11: 648 MHz Clk / 12x Divider = 54 MHz           *
+ *                                                                          *
+ *      DDR2_div        <- DDR2 divider ( For PLL2 )                        *
+ *                         1: 648 MHz Clk / (2*2)x Divider = 162 MHz        *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+setup_pll_2( int clock_source, int pll_mult, int vpss_div, int DDR2_div )
+{
+    unsigned int* pll_ctl       = ( unsigned int* )( 0x01c40d00 );
+    unsigned int* pll_pllm      = ( unsigned int* )( 0x01c40d10 );
+    unsigned int* pll_cmd       = ( unsigned int* )( 0x01c40d38 );
+    unsigned int* pll_stat      = ( unsigned int* )( 0x01c40d3c );
+    unsigned int* pll_div1      = ( unsigned int* )( 0x01c40d18 );
+    unsigned int* pll_div2      = ( unsigned int* )( 0x01c40d1c );
+    unsigned int* pll_bpdiv     = ( unsigned int* )( 0x01c40d2c );
+
+    int pll2_freq = 27 * ( pll_mult + 1 );
+    int DDR2_freq = pll2_freq / ( 2 * ( DDR2_div + 1 ) );
+    int vpss_freq = pll2_freq / ( vpss_div + 1 );
+    int bypass_div = 1;
+
+    GEL_TextOut( "Setup PLL2 " );
+
+    /*
+     *  Step 0 - Ignore request if the PLL is already set as is
+     */
+    if ( ( ( *pll_ctl & 0x0100 ) >> 8 ) == clock_source )
+    {
+        if ( ( *pll_pllm & 0x3f ) == ( pll_mult & 0x3f ) )
+        {
+            if (   ( ( *pll_div1 & 0x1f ) == ( vpss_div & 0x1f ) )
+                || ( ( *pll_div2 & 0x1f ) == ( DDR2_div & 0x1f ) ) )
+            {
+                GEL_TextOut( "(VPSS = %d MHz + ",,,,, vpss_freq );
+                GEL_TextOut( "DDR2 Phy = %d MHz + ",,,,, DDR2_freq );
+                if ( clock_source == 0 )
+                    GEL_TextOut( "Onchip Oscillator)... " );
+                else
+                    GEL_TextOut( "External Clock)... " );
+
+                GEL_TextOut( "[Already Set]\n" );
+                return;
+            }
+        }
+    }
+
+    /*
+     *  Step 0 - Stop all peripheral operations
+     */
+
+    /*
+     *  Step 1 - Set clock mode
+     */
+    if ( clock_source == 0 )
+        *pll_ctl &= ~0x0100;    // Onchip Oscillator
+    else
+        *pll_ctl |= 0x0100;     // External Clock
+
+    /*
+     *  Step 2 - Set PLL to bypass
+     *         - Wait for PLL to stabilize
+     */
+    *pll_ctl &= ~0x0021;
+    _wait( 150 );
+
+    /*
+     *  Step 3 - Reset PLL
+     */
+    *pll_ctl &= ~0x0008;
+
+    /*
+     *  Step 4 - Disable PLL
+     *  Step 5 - Powerup PLL
+     *  Step 6 - Enable PLL
+     *  Step 7 - Wait for PLL to stabilize
+     */
+    *pll_ctl |= 0x0010;         // Disable PLL
+    *pll_ctl &= ~0x0002;        // Power up PLL
+    *pll_ctl &= ~0x0010;        // Enable PLL
+    _wait( 150 );               // Wait for PLL to stabilize
+
+    /*
+     *  Step 8 - Load PLL multiplier
+     */
+    *pll_pllm = pll_mult & 0x3f;
+
+    /*
+     *  Step 9 - Load PLL dividers ( must be in a 1/3/6 ratio )
+     *           1:DDR2, 2:VPSS-VPBE
+     */
+    *pll_bpdiv = 0x8000 | bypass_div;
+    *pll_div1 = 0x8000 | ( vpss_div & 0x1f );
+    *pll_div2 = 0x8000 | ( DDR2_div & 0x1f );
+    *pll_cmd |= 0x0001;             // Set phase alignment
+    while( ( *pll_stat & 1 ) != 0 );// Wait for phase alignment
+
+    /*
+     *  Step 10 - Wait for PLL to reset ( 2000 cycles )
+     *  Step 11 - Release from reset
+     */
+    _wait( 2000 );
+    *pll_ctl |= 0x0008;
+
+    /*
+     *  Step 12 - Wait for PLL to re-lock ( 2000 cycles )
+     *  Step 13 - Switch out of BYPASS mode
+     */
+    _wait( 2000 );
+    *pll_ctl |= 0x0001;
+
+    pll2_freq = 27 * ( ( *pll_pllm & 0x3f ) + 1 );
+    DDR2_freq = pll2_freq / ( 2 * ( ( *pll_div2 & 0x1f ) + 1 ) );
+    vpss_freq = pll2_freq / ( ( *pll_div1 & 0x1f ) + 1 );
+
+    GEL_TextOut( "(VPSS = %d MHz + ",,,,, vpss_freq );
+    GEL_TextOut( "DDR2 Phy = %d MHz + ",,,,, DDR2_freq );
+
+    if ( clock_source == 0 )
+        GEL_TextOut( "Onchip Oscillator)... " );
+    else
+        GEL_TextOut( "External Clock)... " );
+
+    GEL_TextOut( "[Done]\n" );
+}
+
+hotmenu
+Setup_PLL2_DDR_135_MHz_OscIn( )
+{
+    /* [VPSS @54 MHz][DDR @135 MHz] w/ Onchip Oscillator */
+    setup_pll_2( 0, 19, 9, 1 );
+}
+hotmenu
+Setup_PLL2_DDR_162_MHz_OscIn( )
+{
+    /* [VPSS @54 MHz][DDR @162 MHz] w/ Onchip Oscillator */
+    setup_pll_2( 0, 23, 11, 1 );
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  setup_DDR2( )                                                           *
+ *      Configure DDR2 to run at specified frequency.                       *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+setup_DDR2( int freq )
+{
+    #define DDR_SDBCR           *( unsigned int* )( 0x20000008 )
+    #define DDR_SDRCR           *( unsigned int* )( 0x2000000c )
+    #define DDR_SDTIMR          *( unsigned int* )( 0x20000010 )
+    #define DDR_SDTIMR2         *( unsigned int* )( 0x20000014 )
+    #define DDR_DDRPHYCR        *( unsigned int* )( 0x200000e4 )
+
+    #define DDR_VTPIOCR         *( unsigned int* )( 0x200000f0 )
+    #define DDR_DDRVTPR         *( unsigned int* )( 0x01c42030 )
+    #define DDR_DDRVTPER        *( unsigned int* )( 0x01c4004c )
+
+    int dummy_read;
+    int pch_nch;
+
+    GEL_TextOut( "Setup DDR2 (%d MHz + 32-bit bus)... ",,,,, freq );
+
+    /*
+     *  Step 1 - Setup PLL2
+     *  Step 2 - Enable DDR2 PHY
+     */
+    psc_change_state( 13, 3 );
+
+    /*
+     *  Step 3 - DDR2 Initialization
+     */
+    DDR_DDRPHYCR = 0x50006405;      // DLL powered, ReadLatency=6
+    DDR_SDBCR    = 0x00138632;      // DDR Bank: 32-bit bus, CAS=3,
+                                    // 8 banks, 1024-word pg
+    if ( freq == 135 )
+    {
+        DDR_SDTIMR   = 0x20922991;  // DDR Timing
+        DDR_SDTIMR2  = 0x0012c722;  // DDR Timing
+    }
+    else  /* Default to 162 MHz */
+    {
+        DDR_SDTIMR   = 0x28923209;  // DDR Timing
+        DDR_SDTIMR2  = 0x0016c722;  // DDR Timing
+    }
+    DDR_SDBCR    = 0x00130632;      // DDR Bank: cannot modify
+    DDR_SDRCR    = freq * 7.8;      // Refresh Control [ 7.8 usec * freq ]
+
+    /*
+     *  Step 4 - Dummy Read from DDR2
+     */
+    dummy_read = *( int* )0x80000000;
+
+    /*
+     *  Step 5 - Soft Reset ( SYNCRESET followed by ENABLE ) of DDR2 PHY
+     */
+    psc_change_state( 13, 1 );
+    psc_change_state( 13, 3 );
+
+    /*
+     *  Step 6 - Enable VTP calibration
+     *  Step 7 - Wait for VTP calibration ( 33 VTP cycles )
+     */
+    DDR_VTPIOCR = 0x201f;
+    DDR_VTPIOCR = 0xa01f;
+    _wait( 1500 );
+
+    /*
+     *  Step 8 - Enable access to DDR VTP reg
+     *  Step 9 - Reat P & N channels
+     *  Step 10 - Set VTP fields PCH & NCH
+     */
+    DDR_DDRVTPER = 1;
+    pch_nch = DDR_DDRVTPR & 0x3ff;
+    DDR_VTPIOCR = 0xa000 | pch_nch;
+
+    /*
+     *  Step 11 - Disable VTP calibaration
+     *          - Disable access to DDR VTP register
+     */
+    DDR_VTPIOCR &= ~0x2000;
+    DDR_DDRVTPER = 0;
+
+    GEL_TextOut( "[Done]\n" );
+}
+
+hotmenu
+Setup_DDR_135_MHz( )
+{
+    setup_DDR2( 135 );
+}
+hotmenu
+Setup_DDR_162_MHz( )
+{
+    setup_DDR2( 162 );
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  setup_aemif( )                                                          *
+ *      Setup Async-EMIF to Max Wait cycles and specified bus width.        *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+setup_aemif( int bus_width )
+{
+    #define AEMIF_BASE          0x01e00000
+    #define AWCCR               *( unsigned int* )( 0x01e00004 )
+    #define A1CR                *( unsigned int* )( 0x01e00010 )
+    #define A2CR                *( unsigned int* )( 0x01e00014 )
+    #define A3CR                *( unsigned int* )( 0x01e00018 )
+    #define A4CR                *( unsigned int* )( 0x01e0001c )
+    #define NANDFCR             *( unsigned int* )( 0x01e00060 )
+
+    GEL_TextOut( "Setup Asyn Emif (%d-bit bus)... ",,,,, bus_width );
+
+    AWCCR = 0x00000000;                 // No extended wait cycles
+    if ( bus_width == 8 )               // Setup for 8-bit bus
+    {
+        A1CR = 0x3ffffffc;              // Wait cycles - Max Wait
+        A2CR = 0x3ffffffc;
+        A3CR = 0x3ffffffc;
+        A4CR = 0x3ffffffc;
+    }
+    if ( bus_width == 16 )              // Setup for 16-bit bus
+    {
+        A1CR = 0x3ffffffd;              // Wait cycles - Max Wait
+        A2CR = 0x3ffffffd;
+        A3CR = 0x3ffffffd;
+        A4CR = 0x3ffffffd;
+    }
+    NANDFCR = 0x00000000;               // NAND controller not used
+    GEL_TextOut( "[Done]\n" );
+}
+
+/*hotmenu*/
+Reset_EMIF_8Bit_Bus( )
+{
+    setup_aemif( 8 );
+}
+
+/*hotmenu*/
+Reset_EMIF_16Bit_Bus( )
+{
+    setup_aemif( 16 );
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  Setup_EMIF_CS2( )                                                       *
+ *      Setup Async-EMIF to depending on the memory device.                 *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+hotmenu
+Setup_EMIF_CS2_NorFlash_16Bit( )
+{
+    #define AEMIF_BASE              0x01e00000
+    #define AEMIF_A1CR              *( unsigned int* )( 0x01e00010 )
+    #define AEMIF_NANDFCR           *( unsigned int* )( 0x01e00060 )
+    #define EMIF_CS2_PTR            *( unsigned int* )( 0x02000000 )
+
+    GEL_TextOut( "Setup EMIF CS2 - NOR Flash (16-bit bus)... " );
+    AEMIF_A1CR      = 0x0050043d;   // NOR Flash settings ( @ 99MHz or below )
+    AEMIF_NANDFCR  &= 0xfffffffe;   // Disable Hw NAND Flash controller
+    EMIF_CS2_PTR    = 0xf0;         // Reset Flash memory to Read mode
+    GEL_TextOut( "[Done]\n" );
+}
+
+hotmenu
+Setup_EMIF_CS2_SRAM_16Bit( )
+{
+    #define AEMIF_BASE              0x01e00000
+    #define AEMIF_A1CR              *( unsigned int* )( 0x01e00010 )
+    #define AEMIF_NANDFCR           *( unsigned int* )( 0x01e00060 )
+    #define EMIF_CS2_BASE           ( 0x02000000 )
+
+    GEL_TextOut( "Setup EMIF CS2 - SRAM (16-bit bus)... " );
+    AEMIF_A1CR      = 0x00900305;   // SRAM settings ( @ 99MHz or below )
+    AEMIF_NANDFCR  &= 0xfffffffe;   // Disable Hw NAND Flash controller
+    GEL_TextOut( "[Done]\n" );
+}
+
+hotmenu
+Setup_EMIF_CS2_NandFlash_8Bit( )
+{
+    #define AEMIF_BASE              0x01e00000
+    #define AEMIF_A1CR              *( unsigned int* )( 0x01e00010 )
+    #define AEMIF_NANDFCR           *( unsigned int* )( 0x01e00060 )
+    #define NAND_CLE_PTR            *( unsigned char* )( 0x02000010 )
+
+    GEL_TextOut( "Setup EMIF CS2 - NAND Flash (8-bit bus)... " );
+    AEMIF_A1CR      = 0x04422318;   // NAND Flash settings ( @ 99MHz or below )
+    AEMIF_NANDFCR  |= 0x00000001;   // Enable Hw NAND Flash controller
+    NAND_CLE_PTR    = 0xff;         // Reset Flash memory to Read Mode
+    GEL_TextOut( "[Done]\n" );
+}
+
+menuitem "DaVinci EVM Boot Mode";
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  Boot_Mode_Reader( )                                                     *
+ *      Read and Print boot mode                                            *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+hotmenu
+Boot_Mode_Reader( )
+{
+    #define BOOTCFG             *( unsigned int* )( 0x01c40014 )
+    int dsp_boot                = ( BOOTCFG >> 8 ) & 0x1;
+    int boot_mode               = ( BOOTCFG >> 6 ) & 0x3;
+    int em_width                = ( BOOTCFG >> 5 ) & 0x1;
+    int aeaw                    = ( BOOTCFG >> 0 ) & 0x1f;
+
+    GEL_TextOut( "\nBoot Mode Reader:\n" );
+
+    if ( boot_mode == 0 )
+        GEL_TextOut( "  > [Boot Mode]: NAND Boot\n" );
+    else if ( boot_mode == 1 )
+        GEL_TextOut( "  > [Boot Mode]: NOR Boot\n" );
+    else if ( boot_mode == 3 )
+        GEL_TextOut( "  > [Boot Mode]: UART0 Boot\n" );
+    else
+        GEL_TextOut( "  >>>>>> ERROR boot option not supported <<<<<<\n" );
+
+    if ( em_width == 0 )
+        GEL_TextOut( "  > [Bus Width]: 8-bit\n" );
+    if ( em_width == 1 )
+        GEL_TextOut( "  > [Bus Width]: 16-bit\n" );
+
+    if ( dsp_boot == 0 )
+        GEL_TextOut( "  > [DSP Boot] : ARM boots C64x+\n" );
+    if ( dsp_boot == 1 )
+        GEL_TextOut( "  > [DSP Boot] : C64x+ self boots\n" );
+
+    GEL_TextOut( "  > [AEAW]     : %x\n",,,,, aeaw );
+
+    GEL_TextOut( "\n" );
+}
+
+menuitem "DaVinci EVM DSP";
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  boot_dsp_from_arm( )                                                    *
+ *      Boot DSP from ARM side.                                             *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+boot_dsp_from_arm( unsigned int boot_aDDRess )
+{
+    #define DSPBOOTADDR         *( unsigned int* )( 0x01c40008 )
+    #define PSC_MDCTL_DSP       *( unsigned int* )( 0x01c41a00 + ( 4 * 39 ) )
+
+    GEL_TextOut( "Boot DSP from %x ... ",,,,, boot_aDDRess );
+
+    /*
+     *  Step 1 - Turn DSP power on
+     */
+    psc_change_state( 39, 3 );
+    psc_change_state( 40, 3 );
+
+    /*
+     *  Step 2 - Assert local reset
+     */
+    PSC_MDCTL_DSP &= 0xfeff;
+
+    /*
+     *  Step 3 - Program DSP boot aDDRess 
+     *         - Fill in memory w/ branch to self opcode
+     */
+    DSPBOOTADDR = boot_aDDRess;
+    GEL_MemoryFill( boot_aDDRess, 0, 32, 0x13 );
+
+    /*
+     *  4. Release from reset
+     */
+    PSC_MDCTL_DSP |= 0x0100;
+    GEL_TextOut( "[Done]\n" );
+}
+
+hotmenu
+DSP_Boot_from_L2_Sram( )
+{
+    boot_dsp_from_arm( 0x11800000 );            // L2 SRAM Memory
+}
+
+hotmenu
+DSP_Boot_from_DDR2( )
+{
+    boot_dsp_from_arm( 0x80000000 );            // DDR2 Memory
+}

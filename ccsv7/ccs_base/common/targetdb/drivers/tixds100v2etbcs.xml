@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!-- <drivers id="tixds560etbcs"> --><drivers id="ETBCS">	
+<isa Type="CS_ETB" ProcID="0x75809404">		
+	<driver file="..\..\..\emulation\drivers\tixds510etbcs.dvr">			
+		<connectionType Type="TIXDS100v2"/>			
+		<property Name="Address" Type="numericfield" Value="0x0" NumericType="HEX" UpperBound="0xFFFFFFFF" LowerBound="0" ID="device.address"/>		
+		<property Name="Access Port Number" Type="numericfield" Value="0x0" NumericType="HEX" UpperBound="0xFFFFFFFF" LowerBound="0" ID="DAPPort"/>		
+		<property Name="TraceDeviceId" Type="numericfield" Value="0x0" NumericType="HEX" UpperBound="0xFFFFFFFF" LowerBound="0" ID="device.traceId"/>
+	</driver>	
+</isa>
+</drivers>

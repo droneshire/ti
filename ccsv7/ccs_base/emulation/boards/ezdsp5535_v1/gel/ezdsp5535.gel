@@ -1,0 +1,401 @@
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ * ezdsp5535.gel                                                            *
+ *   Version 1.00                                                           *
+ *                                                                          *
+ *     This GEL file is designed to be used in conjunction with             *
+ *     CCS 4.2 and the eZDSP5535.                                           *
+ *                                                                          *
+ *   History                                                                *
+ *     v0.01      Initial Release                                           *
+ *     v1.00      Public Release                                            *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  StartUp( )                                                              *
+ *    This function is called each time CCS is started.                     *
+ *      Setup Memory Map                                                    *
+ *      Do not touch the target                                             *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+StartUp()
+{
+    GEL_TextOut( "\nStartUp()\n" );
+    c5535_MapInit();
+}
+
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  OnTargetConnect( )                                                      *
+ *    This function is call automatically when you connect to the target.   *
+ *    Under normal circumstances it should be used to fully intialize the   *
+ *    connected CPU and optionally the rest of the chip or board.           *
+ *                                                                          *
+ *    Operations that may be needed before the cpu/chip can be configured   *
+ *        GEL_Reset                                                         *
+ *        Disable MMU -  Important for ARM                                  *
+ *        Disable DMA                                                       *
+ *                                                                          *
+ *  Note: OnTargetConnect might not be appropriate if you are trying to     *
+ *        debug a running OS.  In general if debugging a running OS you     *
+ *        only want the memory map defined.                                 *
+ * ------------------------------------------------------------------------ */
+OnTargetConnect()
+{
+    GEL_TextOut( "\nOnTargetConnect()\n" );
+
+    c5535_MapInit();
+    GEL_Reset();
+    SystemCleanup();
+    ProgramPLL_100MHz();
+    GEL_TextOut("Target Connection Complete.\n"); 
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  OnReset( )                                                              *
+ *      This function is called by CCS when you do a reset or GEL_Reset.    *
+ *      It can be used to configure/reconfigure portions of the chip that   *
+ *      are cleared by the reset.                                           *
+ *                                                                          *
+ *  Note: OnReset is generally used by older targets when reset/GEL_Reset   *
+ *        actually reset the chip.  On newer multi-core devices the reset   *
+ *        is basicly a SW reset of the connected CPU.                       *
+ *        If you want to catch an external reset or an IcePick reset then   *
+ *        OnResetDetected() can be used.                                    *
+ * ------------------------------------------------------------------------ */
+OnReset( int nErrorCode )
+{
+   GEL_TextOut( "\nOnReset()\n" ); 
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  OnRestart( )                                                            *
+ *      This function is called by CCS when you do Debug->Restart.          *
+ *      The assumption is that the target has not hung and program is still *
+ *      in memory.  If that is not the case then program should be reloaded *
+ *      vs restarted.                                                       *
+ *                                                                          *
+ *      Operations that may be needed:                                      *
+ *         Disable MMU                                                      *
+ *         Flush/Disable Caches                                             *
+ *         Clear/Disable Interrupts                                         *
+ *         Disable DMA                                                      *
+ *         For ARM set the CPSR. This effects exec mode IRQ/FIQ and Thumb.  *
+ *         Disable watchdogs                                                *
+ * ------------------------------------------------------------------------ */
+OnRestart( int nErrorCode )
+{
+    GEL_TextOut( "\nOnRestart()\n" ); 
+    SystemCleanup();
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  OnPreFileLoaded( )                                                      *
+ *      This function is called automatically when the 'Load Program'       *
+ *      Menu item is selected. This function should ensure that the cpu     *
+ *      is in a good enough state so that program, data and i/o memory is   *
+ *      readable and writeable.  Every chip is different especially the     *
+ *      reset so some things have to be done manually especially on ARM     *
+ *      devices.                                                            *
+ *                                                                          *
+ *      Operations that may be needed:                                      *
+ *        GEL_Reset                                                         *
+ *        Disable MMU -  Important for ARM                                  *
+ *        Disable DMA                                                       *
+ *        Reconfigure EMIF if GEL_Reset reset it.                           *
+ *                                                                          *
+ *      Note: OnRestart if present is called after the file is loaded so    *
+ *            there is some reduncancy but this can be minimized.           *
+ * ------------------------------------------------------------------------ */
+OnPreFileLoaded()
+{
+    GEL_TextOut( "\nOnPreFileLoaded()\n" );
+    SystemCleanup();
+    ProgramPLL_100MHz();
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ * SystemCleanup()                                                          *
+ * Clean up DSP state                                                       *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+SystemCleanup()
+{
+    /* Disable interrupts */
+    *(int*)0x0003 = *(int*)0x0003 | 0x0800; // Set INTM
+    *(int*)0x0000 = 0;                      // Clear IER0
+    *(int*)0x0045 = 0;                      // Clear IER1
+    *(int*)0x0004 = *(int*)0x0004 | 0x2000; // Set CACLR (Clear Cache)
+
+    /* Disable each DMA channels */
+    *(int*)0xC01@io = 0;    // DMA0
+    *(int*)0xC21@io = 0;    // DMA1
+    *(int*)0xC41@io = 0;    // DMA2
+    *(int*)0xC61@io = 0;    // DMA3
+
+    Peripheral_Reset();
+}
+
+/* --------------------------------------------- *
+ * C5535 REGISTERS                               *
+ * --------------------------------------------- */
+#define ESCR     0x1c33
+
+#define SDTIMR1  0x1020 
+#define SDTIMR2  0x1021 
+#define SDCR1    0x1008 
+#define SDCR2    0x1009
+#define SDSRETR  0x103C
+#define SDRCR    0x100C
+
+#define PRCR     0x1C05 
+#define PCGCR1   0x1c02
+#define PCGCR2   0x1c03
+#define PSRCR    0x1c04 
+
+#define CLKCFGL  0x1c1e
+#define CCR2     0x1c1f
+#define CGCR1    0x1c20
+#define CGCR2    0x1c21
+#define CGCR3    0x1c22
+#define CGCR4    0x1c23
+#define CCSSR    0x1c24
+#define IVPD     0x0049
+
+
+// ***************************************************************************
+
+/* Memory map based on MP/MC value (assume MP/MC = 0).    */
+c5535_MapInit() {
+    GEL_MapOn();
+    GEL_MapReset();
+
+    /*Program Space*/
+
+    /* DARAM */
+    GEL_MapAdd(0x0000C0,0,0x001F40,1,1);    /* DARAM0 */
+    GEL_MapAdd(0x002000,0,0x002000,1,1);    /* DARAM1 */
+    GEL_MapAdd(0x004000,0,0x002000,1,1);    /* DARAM2 */
+    GEL_MapAdd(0x006000,0,0x002000,1,1);    /* DARAM3 */
+    GEL_MapAdd(0x008000,0,0x002000,1,1);    /* DARAM4 */
+    GEL_MapAdd(0x00A000,0,0x002000,1,1);    /* DARAM5 */
+    GEL_MapAdd(0x00C000,0,0x002000,1,1);    /* DARAM6 */
+    GEL_MapAdd(0x00E000,0,0x002000,1,1);    /* DARAM7 */
+
+    /* SARAM */
+    GEL_MapAdd(0x010000,0,0x002000,1,1);    /* SARAM0 */
+    GEL_MapAdd(0x012000,0,0x002000,1,1);    /* SARAM1 */
+    GEL_MapAdd(0x014000,0,0x002000,1,1);    /* SARAM2 */
+    GEL_MapAdd(0x016000,0,0x002000,1,1);    /* SARAM3 */
+    GEL_MapAdd(0x018000,0,0x002000,1,1);    /* SARAM4 */
+    GEL_MapAdd(0x01A000,0,0x002000,1,1);    /* SARAM5 */
+    GEL_MapAdd(0x01C000,0,0x002000,1,1);    /* SARAM6 */
+    GEL_MapAdd(0x01E000,0,0x002000,1,1);    /* SARAM7 */
+    GEL_MapAdd(0x020000,0,0x002000,1,1);    /* SARAM8 */
+    GEL_MapAdd(0x022000,0,0x002000,1,1);    /* SARAM9 */
+    GEL_MapAdd(0x024000,0,0x002000,1,1);    /* SARAM10 */
+    GEL_MapAdd(0x026000,0,0x002000,1,1);    /* SARAM11 */
+    GEL_MapAdd(0x028000,0,0x002000,1,1);    /* SARAM12 */
+    GEL_MapAdd(0x02A000,0,0x002000,1,1);    /* SARAM13 */
+    GEL_MapAdd(0x02C000,0,0x002000,1,1);    /* SARAM14 */
+    GEL_MapAdd(0x02E000,0,0x002000,1,1);    /* SARAM15 */
+    GEL_MapAdd(0x030000,0,0x002000,1,1);    /* SARAM16 */
+    GEL_MapAdd(0x032000,0,0x002000,1,1);    /* SARAM17 */
+    GEL_MapAdd(0x034000,0,0x002000,1,1);    /* SARAM18 */
+    GEL_MapAdd(0x036000,0,0x002000,1,1);    /* SARAM19 */
+    GEL_MapAdd(0x038000,0,0x002000,1,1);    /* SARAM20 */
+    GEL_MapAdd(0x03A000,0,0x002000,1,1);    /* SARAM21 */
+    GEL_MapAdd(0x03C000,0,0x002000,1,1);    /* SARAM22 */
+    GEL_MapAdd(0x03E000,0,0x002000,1,1);    /* SARAM23 */
+    GEL_MapAdd(0x040000,0,0x002000,1,1);    /* SARAM24 */
+    GEL_MapAdd(0x042000,0,0x002000,1,1);    /* SARAM25 */
+    GEL_MapAdd(0x044000,0,0x002000,1,1);    /* SARAM26 */
+    GEL_MapAdd(0x046000,0,0x002000,1,1);    /* SARAM27 */
+    GEL_MapAdd(0x048000,0,0x002000,1,1);    /* SARAM28 */
+    GEL_MapAdd(0x04A000,0,0x002000,1,1);    /* SARAM29 */
+    GEL_MapAdd(0x04C000,0,0x002000,1,1);    /* SARAM30 */
+    GEL_MapAdd(0x04E000,0,0x002000,1,1);    /* SARAM31 */
+
+    /* External-Memory */
+    GEL_MapAdd(0x050000,0,0x7B0000,1,1);    /* External-SDRAM */
+    GEL_MapAdd(0x800000,0,0x400000,1,1);    /* External-Async */
+    GEL_MapAdd(0xC00000,0,0x200000,1,1);    /* External-Async */
+    GEL_MapAdd(0xE00000,0,0x100000,1,1);    /* External-Async */
+    GEL_MapAdd(0xF00000,0,0x0E0000,1,1);    /* External-Async */
+
+    /* ROM */
+    GEL_MapAdd(0xFE0000,0,0x008000,1,0);    /* SAROM0 */
+    GEL_MapAdd(0xFE8000,0,0x008000,1,0);    /* SAROM1 */
+    GEL_MapAdd(0xFF0000,0,0x008000,1,0);    /* SAROM2 */
+    GEL_MapAdd(0xFF8000,0,0x008000,1,0);    /* SAROM3 */
+
+    /* Data Space */
+
+    /* DARAM */
+    GEL_MapAdd(0x000000,1,0x000060,1,1);    /* MMRs */
+    GEL_MapAdd(0x000060,1,0x000FA0,1,1);    /* DARAM0 */
+    GEL_MapAdd(0x001000,1,0x001000,1,1);    /* DARAM1 */
+    GEL_MapAdd(0x002000,1,0x001000,1,1);    /* DARAM2 */
+    GEL_MapAdd(0x003000,1,0x001000,1,1);    /* DARAM3 */
+    GEL_MapAdd(0x004000,1,0x001000,1,1);    /* DARAM4 */
+    GEL_MapAdd(0x005000,1,0x001000,1,1);    /* DARAM5 */
+    GEL_MapAdd(0x006000,1,0x001000,1,1);    /* DARAM6 */
+    GEL_MapAdd(0x007000,1,0x001000,1,1);    /* DARAM7 */
+
+    /* SARAM */
+    GEL_MapAdd(0x008000,1,0x001000,1,1);    /* SARAM0 */
+    GEL_MapAdd(0x009000,1,0x001000,1,1);    /* SARAM1 */
+    GEL_MapAdd(0x00A000,1,0x001000,1,1);    /* SARAM2 */
+    GEL_MapAdd(0x00B000,1,0x001000,1,1);    /* SARAM3 */
+    GEL_MapAdd(0x00C000,1,0x001000,1,1);    /* SARAM4 */
+    GEL_MapAdd(0x00D000,1,0x001000,1,1);    /* SARAM5 */
+    GEL_MapAdd(0x00E000,1,0x001000,1,1);    /* SARAM6 */
+    GEL_MapAdd(0x00F000,1,0x001000,1,1);    /* SARAM7 */
+    GEL_MapAdd(0x010000,1,0x001000,1,1);    /* SARAM8 */
+    GEL_MapAdd(0x011000,1,0x001000,1,1);    /* SARAM9 */
+    GEL_MapAdd(0x012000,1,0x001000,1,1);    /* SARAM10 */
+    GEL_MapAdd(0x013000,1,0x001000,1,1);    /* SARAM11 */
+    GEL_MapAdd(0x014000,1,0x001000,1,1);    /* SARAM12 */
+    GEL_MapAdd(0x015000,1,0x001000,1,1);    /* SARAM13 */
+    GEL_MapAdd(0x016000,1,0x001000,1,1);    /* SARAM14 */
+    GEL_MapAdd(0x017000,1,0x001000,1,1);    /* SARAM15 */
+    GEL_MapAdd(0x018000,1,0x001000,1,1);    /* SARAM16 */
+    GEL_MapAdd(0x019000,1,0x001000,1,1);    /* SARAM17 */
+    GEL_MapAdd(0x01A000,1,0x001000,1,1);    /* SARAM18 */
+    GEL_MapAdd(0x01B000,1,0x001000,1,1);    /* SARAM19 */
+    GEL_MapAdd(0x01C000,1,0x001000,1,1);    /* SARAM20 */
+    GEL_MapAdd(0x01D000,1,0x001000,1,1);    /* SARAM21 */
+    GEL_MapAdd(0x01E000,1,0x001000,1,1);    /* SARAM22 */
+    GEL_MapAdd(0x01F000,1,0x001000,1,1);    /* SARAM23 */
+    GEL_MapAdd(0x020000,1,0x001000,1,1);    /* SARAM24 */
+    GEL_MapAdd(0x021000,1,0x001000,1,1);    /* SARAM25 */
+    GEL_MapAdd(0x022000,1,0x001000,1,1);    /* SARAM26 */
+    GEL_MapAdd(0x023000,1,0x001000,1,1);    /* SARAM27 */
+    GEL_MapAdd(0x024000,1,0x001000,1,1);    /* SARAM28 */
+    GEL_MapAdd(0x025000,1,0x001000,1,1);    /* SARAM29 */
+    GEL_MapAdd(0x026000,1,0x001000,1,1);    /* SARAM30 */
+    GEL_MapAdd(0x027000,1,0x001000,1,1);    /* SARAM31 */
+
+    /* External-Memory */
+    GEL_MapAdd(0x028000,1,0x3D8000,1,1);    /* External-SDRAM */
+    GEL_MapAdd(0x400000,1,0x200000,1,1);    /* External-Async */
+    GEL_MapAdd(0x600000,1,0x100000,1,1);    /* External-Async */
+    GEL_MapAdd(0x700000,1,0x080000,1,1);    /* External-Async */
+    GEL_MapAdd(0x780000,1,0x070000,1,1);    /* External-Async */
+
+    /* ROM */
+    GEL_MapAdd(0x7F0000,1,0x004000,1,0);    /* SAROM0 */
+    GEL_MapAdd(0x7F4000,1,0x004000,1,0);    /* SAROM1 */
+    GEL_MapAdd(0x7F8000,1,0x004000,1,0);    /* SAROM2 */
+    GEL_MapAdd(0x7FC000,1,0x004000,1,0);    /* SAROM3 */
+
+    /* IO Space */
+    GEL_MapAdd(0x0000,2,0xFFFF,1,1);        /* XPORT */
+}
+
+Peripheral_Reset()
+{
+    int i;
+
+    *(short *)PSRCR@IO = 0x0020;
+    *(short *)PRCR@IO  = 0x00BB;
+
+    for(i=0;i<0xff;i++);
+    *(short *)IVPD@data = 0x027F; // Load interrupt vector pointer
+    GEL_TextOut("Reset Peripherals is complete.\n");
+}
+
+ProgramPLL_100MHz() {
+    int i;
+
+    GEL_TextOut("Configuring PLL (100 MHz).\n");
+    /* Enable clocks to all peripherals */
+    *(short *)PCGCR1@IO = 0x0;
+    *(short *)PCGCR2@IO = 0x0;
+
+    /* For 32KHz input clock */
+    /* Bypass PLL */
+    *(short *)CCR2@IO = 0x0;
+
+    /* Set CLR_CNTL = 0 */
+    *(short *)CGCR1@IO = *(short *)CGCR1@IO & 0x7FFF;
+
+    *(short *)CGCR1@IO =  0x8BE8;
+    *(short *)CGCR2@IO =  0x8000;
+    *(short *)CGCR3@IO =  0x0806;
+    *(short *)CGCR4@IO =  0x0000; 
+
+
+    /* Wait for PLL lock */
+    for(i=0;i<0x7fff;i++);
+
+    /* Switch to PLL clk */ 
+    *(short *)CCR2@IO = 0x1;
+
+    GEL_TextOut("PLL Init Done.\n");
+    
+}
+
+ProgramPLL_120MHz() {
+    int i;
+
+    GEL_TextOut("Configuring PLL (120 MHz).\n");
+    /* Enable clocks to all peripherals */
+    *(short *)PCGCR1@IO = 0x0;
+    *(short *)PCGCR2@IO = 0x0;
+
+    /* Bypass PLL */
+    *(short *)CCR2@IO = 0x0;
+
+    /* Set CLR_CNTL = 0 */
+    *(short *)CGCR1@IO = *(short *)CGCR1@IO & 0x7FFF;
+
+    *(short *)CGCR1@IO =  0x8E4B;
+    *(short *)CGCR2@IO =  0x8000;
+    *(short *)CGCR3@IO =  0x0806;
+    *(short *)CGCR4@IO =  0x0000; 
+
+    /* Wait for PLL lock */
+    for(i=0;i<0x7fff;i++);
+
+    /* Switch to PLL clk */ 
+    *(short *)CCR2@IO = 0x1;
+
+    GEL_TextOut("PLL Init Done.");  
+}
+
+ProgramPLL_60MHz() {
+    int i;
+
+    GEL_TextOut("Configuring PLL (60 MHz).\n");
+    /* Enable clocks to all peripherals */
+    *(short *)PCGCR1@IO = 0x0;
+    *(short *)PCGCR2@IO = 0x0;
+
+    /* Bypass PLL */
+    *(short *)CCR2@IO = 0x0;
+
+    /* Set CLR_CNTL = 0 */
+    *(short *)CGCR1@IO = *(short *)CGCR1@IO & 0x7FFF;
+
+    *(short *)CGCR1@IO =  0x8724;
+    *(short *)CGCR2@IO =  0x8000;
+    *(short *)CGCR3@IO =  0x0806;
+    *(short *)CGCR4@IO =  0x0000; 
+
+    /* Wait for PLL lock */
+    for(i=0;i<0x7fff;i++);
+
+    /* Switch to PLL clk */ 
+    *(short *)CCR2@IO = 0x1;
+
+    GEL_TextOut("PLL Init Done.");  
+}

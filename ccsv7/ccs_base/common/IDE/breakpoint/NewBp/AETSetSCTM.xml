@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<newBreakpoint xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="schema.xsd" enable="false" name="SCTM Function" breakpointType="1">
+  <targets>
+    <target>
+      <type>dsk,emu</type>
+      <familyId>320</familyId>
+      <subfamilyId>64</subfamilyId>
+      <revision>106</revision>
+    </target>
+	<target>
+		<type>dsk,emu</type>
+		<familyid>470</familyid>
+		<subfamilyid>e</subfamilyid>
+		<revision>*</revision>
+	</target>
+	<target>
+		<type>dsk,emu</type>
+		<familyId>700</familyId>
+		<subfamilyId>*</subfamilyId>
+		<revision>*</revision>
+	</target>
+  </targets>
+  <defaultProperty>
+    <property name="Miscellaneous.Name" value="SCTM Function" />
+    <property name="Hardware Configuration.Type" value="SCTM Function" />
+	<property name="Hardware Configuration.Type.Function Type" value="Event Counter"/>
+  </defaultProperty>
+  <showIn>
+    <breakpointView autoSubmit="true" />
+  </showIn>
+</newBreakpoint>

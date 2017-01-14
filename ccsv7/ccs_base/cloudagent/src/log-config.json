@@ -1,0 +1,12 @@
+{
+    "fileLogger": {
+        "json": false,
+        "logFilename": "TICloudAgent.log",
+        "timestamp": true,
+        "maxRollingFiles": 7,
+        "maxFileSize": 3145728,
+        "levels": {
+            "defaultLevel": "trace"
+        }
+    }
+}

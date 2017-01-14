@@ -1,0 +1,270 @@
+/*********************************************************************
+*              SEGGER MICROCONTROLLER GmbH & Co. K.G.                *
+*        Solutions for real time microcontroller applications        *
+**********************************************************************
+*                                                                    *
+*        (c) 2010 SEGGER Microcontroller GmbH & Co. KG               *
+*                                                                    *
+* Internet: www.segger.com Support: support@segger.com               *
+*                                                                    *
+**********************************************************************
+----------------------------------------------------------------------
+Purpose : Support for TI AM180x L138
+---------------------------END-OF-HEADER------------------------------
+*/
+
+/*********************************************************************
+*
+*       _ResetViaIcePick
+*
+*  Function description
+*    Reset CPU core via Ice Pick.
+*    This function can be used if the reset pin of the CPU is
+*    not connected to the reset pin of the JTAG connector
+*/
+void  _ResetViaIcePick(void) {
+  int v;
+  int BitPos;
+  //
+  // Setup JTAG config to "talk" to the ICEPick, so we can use the JTAG API functions
+  //
+  JTAG_DRPre  = 2;
+  JTAG_DRPost = 0;
+  JTAG_IRPre  = 8;
+  JTAG_IRPost = 0;
+  JTAG_IRLen  = 6;
+  //
+  // Perform reset via ICEPick system control register, by setting the SysReset bit
+  //
+  JTAG_StoreIR(2);         // Cmd: ROUTER
+  v = 0x01000000;          // Read SYS_CNTL
+  JTAG_StoreDR(v, 32);
+  BitPos = JTAG_StoreDR(v, 32);
+  v = JTAG_GetU32(BitPos);
+  v &= 0x00FFFFFF;
+  v |= 0x81000001;         // Write SYS_CNTL and set SysReset bit
+  JTAG_StoreDR(v, 32);
+  v &= 0xFFFFFFFE;
+  v &= 0x00FFFFFF;
+  v |= 0x81000000;         // Write SYS_CNTL and clear SysReset bit
+  JTAG_StoreDR(v, 32);
+  //
+  // Setup JTAG config to "talk" to the Cortex-R4 again
+  //
+  JTAG_IRPre=4;
+  JTAG_DRPre=1;
+  JTAG_IRPost=6;
+  JTAG_DRPost=1;
+  JTAG_IRLen=4;
+}
+
+/*********************************************************************
+*
+*       _WriteIceReg
+*
+*  Function description
+*    Writes an Ice-Breaker regsiter
+*/
+void _WriteIceReg(int Reg, int v) {
+  __int64 ScanData;
+  
+  JTAG_StoreIR(0x2);                 // Scan chain select
+  JTAG_StoreClocks(1);
+  JTAG_StoreDR(2, 5);                // Scan chain 2 is Ice breaker
+  JTAG_StoreClocks(1);
+  JTAG_StoreIR(0xC);                 // Intest
+  JTAG_StoreClocks(1);
+  ScanData  = v;
+  ScanData |= (Reg << 32);
+  ScanData |= (1   << 37);
+  JTAG_StoreDR(ScanData, 38);
+  JTAG_WriteClocks(100);
+}
+
+/*********************************************************************
+*
+*       _ReadIceReg
+*
+*  Function description
+*    Reads an Ice-Breaker register
+*/
+int _ReadIceReg(int Reg) {
+  __int64 ScanData;
+  int BitPos;
+  int v;
+  
+  JTAG_StoreIR(0x2);                 // Scan chain select
+  JTAG_StoreClocks(1);
+  JTAG_StoreDR(2, 5);                // Scan chain 2 is Ice breaker
+  JTAG_StoreClocks(1);
+  JTAG_StoreIR(0xC);                 // Intest
+  JTAG_StoreClocks(1);
+  ScanData  = v;
+  ScanData |= (Reg << 32);
+  ScanData |= (0   << 37);
+  JTAG_StoreDR(ScanData, 38);
+  JTAG_StoreClocks(100);
+  BitPos = JTAG_StoreDR(ScanData, 38);
+  JTAG_WriteClocks(100);
+  v = JTAG_GetU32(BitPos);
+  return v;
+}
+
+/*********************************************************************
+*
+*       _InitIcePick
+*
+*  Function description
+*    Writes an Ice-Breaker regsiter
+*/
+void _InitIcePick(void) {
+  unsigned int aDevice[3];
+  int BitPos;
+  int id;
+  int v;
+  int i;
+
+  Report("J-Link script: Init ICEPick");
+  //  JTAG_ResetPin = 0;
+  //  SYS_Sleep(50);
+  //  JTAG_ResetPin = 1;
+  //  SYS_Sleep(50);
+  JTAG_Reset();                           // Perform TAP reset and J-Link JTAG auto-detection
+  if (JTAG_TotalIRLen != 6) {
+    MessageBox("Can not find ICE-Pick (IRLen mismatch)");
+  }
+  id = JTAG_GetDeviceId(0);
+  if (   id != 0x0B7D102F
+  		&& id != 0x1B7D102F) 
+ 	{
+    MessageBox1("Can not find ICE-Pick (JTAG-ID mismatch), read: ", id);
+  }
+  JTAG_DRPre  = 0;
+  JTAG_DRPost = 0;
+  JTAG_IRPre  = 0;
+  JTAG_IRPost = 0;
+  JTAG_IRLen  = 6;
+  JTAG_Speed = 100;
+  //
+  // Put ARM core in scan chain
+  //
+  JTAG_WriteIR(7);
+  JTAG_WriteDR(0x89, 8);
+  JTAG_WriteIR(2);
+  JTAG_WriteDR(0x81000080, 32);
+  JTAG_WriteDR(0xA2002108, 32);   // Secondary debug TAP 2 register
+  JTAG_WriteIR(0x3F);                  // Bypass
+  JTAG_WriteClocks(10);
+  //
+  // Configure JTAG chain, so J-Link knows to which devices it has to "talk"
+  //
+  JTAG_IRPre=0;
+  JTAG_DRPre=0;
+  JTAG_IRPost=6;
+  JTAG_DRPost=1;
+  JTAG_IRLen=4;
+  CPU=ARM926EJS;
+  JTAG_AllowTAPReset=0; 
+  //
+  // Talk to ICEPick again, to enable ETB
+  //
+  JTAG_IRPre=4;
+  JTAG_DRPre=1;
+  JTAG_IRPost=0;
+  JTAG_DRPost=0;
+  JTAG_IRLen=6;
+  JTAG_WriteIR(7);
+  JTAG_WriteDR(0x89, 8);
+  JTAG_WriteIR(2);
+  JTAG_WriteDR(0xa3302108, 32);        // Secondary debug TAP 3 register
+  JTAG_WriteIR(0x3F);                  // Bypass
+  JTAG_WriteClocks(10);
+  //
+  // Re-configure JTAG chain, since we have an ICEPick, ARM core and ETB in the scan chain right now
+  // We want to talk to the ARM core now
+  //
+  JTAG_IRPre=4;
+  JTAG_DRPre=1;
+  JTAG_IRPost=6;
+  JTAG_DRPost=1;
+  JTAG_IRLen=4;
+  //
+  // Check core ID
+  //
+  JTAG_StoreIR(0xE);  // Cmd: ROUTER
+  JTAG_StoreDR(id, 32);
+  BitPos = JTAG_StoreDR(v, 32);
+  v = JTAG_GetU32(BitPos);
+  if (v != 0x07926001) {
+    MessageBox1("CPU JTAG Id mismatch, read: ", v);
+  }
+  //
+  // Set JTAG Ids for all devices in the JTAG chain
+  //  
+  i = 0;
+  aDevice[0] = 0x2B900F0F;  // ETB is device [0]
+  aDevice[1] = 0x07926001;  // ARM core is device [1]
+  aDevice[2] = id;  				// ICEPick is device [2]
+  while (i < 3) {
+    JTAG_SetDeviceId(i, aDevice[i]);
+    i += 1;
+  }
+}
+
+/*********************************************************************
+*
+*       InitEMU
+*/
+void InitEMU(void) {
+  EMU_ETB_IsPresent = 1;    // Tells the J-Link DLL that the connected device has an ETB
+  EMU_ETB_UseETB = 1;       // Make ETB usable in IDEs (e.g. IAR EWARM)
+}
+
+/*********************************************************************
+*
+*       ResetTarget
+*/
+void ResetTarget(void) {
+  __int64 v;
+  int BitPos;
+
+  Report("J-Link script: Reset");
+  //
+  // Reset core via ResetPin
+  //
+  JTAG_ResetPin = 0;
+  SYS_Sleep(50);
+  JTAG_TRSTPin = 0;
+  JTAG_TRSTPin = 1;
+  SYS_Sleep(50);
+  JTAG_ResetPin = 1;
+  SYS_Sleep(50);
+  _InitIcePick();
+  _WriteIceReg(0,3);    // Set Debug request
+  _WriteIceReg(2,1);    // Write vector catch register, to halt core immdeiately after reset
+//  _ResetViaIcePick();
+  JTAG_ResetPin = 0;
+  SYS_Sleep(50);
+  JTAG_ResetPin = 1;
+  SYS_Sleep(50);
+}
+
+/*********************************************************************
+*
+*       InitTarget
+*/
+void InitTarget(void) {
+  int v;
+
+  Report("AM180x J-Link script");  // To avoid message box, you can alternatively use Report().
+  _InitIcePick();
+  //
+  // Halt the CPU to verify it can be halted. If it can not, let's reset the CPU
+  //
+  _WriteIceReg(0,3);
+  v = _ReadIceReg(1);
+  if ((v & 9) != 9) {
+    Report("J-Link script: Could not halt CPU, Executing Reset");
+    ResetTarget();  // Reset core via ResetPin
+  }
+}

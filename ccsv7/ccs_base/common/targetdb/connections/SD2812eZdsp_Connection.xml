@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!-- ************************************************************ -->
+<!-- Files created by Spectrum Digital Inc.                       -->
+<!-- $Revision:: 1                                              $ -->
+<!-- $Date:: 7/06/10 10:36a                                     $ -->
+<!-- (C) Copyright 2004 by Spectrum Digital Incorporated          -->
+<!-- All rights reserved                                          -->
+<!-- ************************************************************ -->
+<connection id="Spectrum Digital eZdsp2812 Parallel Port Emulator" class="52574">
+
+	<connectionType Type="SDeZdsp2812"/>
+
+	<property desc="Emulator I/O Port" Type="choicelist" Value="0" id="portAddr1" ID="SDOPTS.EmuPortAddr">
+		<choice Name="PP Emulator address is 0x378" value="0x378" />
+		<choice Name="PP Emulator address is 0x278" value="0x278" />
+		<choice Name="PP Emulator address is 0x3BC" value="0x3BC" />
+	</property>
+
+</connection>

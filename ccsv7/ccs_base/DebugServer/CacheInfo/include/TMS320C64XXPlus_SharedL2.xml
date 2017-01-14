@@ -1,0 +1,57 @@
+﻿<!-- The GEM Memory hierarchy consists of the following:
+	L1P Memory: Region 0, Region 1 (PMC - Program Memory Controller)
+	L1P Cache 
+	L1D Memory: Region 0, Region 1 (DMC - Data Memory Controller)
+	L1D Cache 
+	L2 Memory: Region 0, Region 1  (UMC - Unified Memory Controller)
+	L2 Cache 
+	External Memory 
+	
+	The following variables are defined as External Entity Parameters:
+	
+	-->
+	
+<MemoryType>
+	<Name>SharedL2</Name>
+	<MemoryLevelName>SharedL2</MemoryLevelName>
+	<GTIMemHierarchyReadEnableFlags>0x04</GTIMemHierarchyReadEnableFlags>
+	<MemLevelBitFlag>0x04</MemLevelBitFlag>
+	<Description>Shared L2 memory</Description>
+	<CanBeBypassed>false</CanBeBypassed>
+    <IsBypassedByDefault>false</IsBypassedByDefault>
+	<SimulatorSupportsConsistencyChecking>false</SimulatorSupportsConsistencyChecking>
+	<CanBeLocked>false</CanBeLocked>
+	<CanBeSecured>false</CanBeSecured>
+	<CanBeNonEmulatable>false</CanBeNonEmulatable>
+	<CanBeProtected>false</CanBeProtected>
+	<IsCache>false</IsCache>
+	<IsMapped>true</IsMapped>
+	<IsProgram>true</IsProgram>
+	<IsData>true</IsData>
+	<IsIOSpace>false</IsIOSpace>
+	<IsExternal>false</IsExternal>
+	<IsShared>true</IsShared>
+	<IsROM>false</IsROM>
+	<IsPaged>false</IsPaged>
+	<IsVirtualWayConversionEnabled>false</IsVirtualWayConversionEnabled>
+	<Linesize>128</Linesize>
+	<HierarchyDepth>2</HierarchyDepth>
+	<!-- the following are only read if IsCache is false -->
+	<MappedMemory>
+		<PhysicalAddresses>
+			<CanBeDisabled>false</CanBeDisabled>
+			<StartAddress>
+				<IsFixed>true</IsFixed>
+				<FixedValue>&SharedL2StartAdrs;</FixedValue>
+				<ConfigReg></ConfigReg>
+				<DecoderName></DecoderName>
+			</StartAddress>
+			<Length>
+				<IsFixed>true</IsFixed>
+				<FixedValue>&SharedL2Length;</FixedValue>
+				<ConfigReg></ConfigReg>
+				<DecoderName></DecoderName>
+			</Length>
+		</PhysicalAddresses>
+	</MappedMemory>
+</MemoryType>

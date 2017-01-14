@@ -1,0 +1,30 @@
+v1.0.3
+
+Note: For F2837xD support, watch for a new pinmux tool to be released in
+      2Q14 and announced on the E2E.ti.com forum. 
+
+- Added SCIB to the 2806x 80 pin device
+- F28M35x, M36x:
+  - Many updates to align with data manual: Rev H for F28M35x and Rev C for F28M36x
+    including:
+     - Removed U1CTS, U1RTS, U1DSR, U1DTR, U1DCD, U1RI
+     - Changed NMI to EXTNMI
+     - For GPIO32 & GPIO33, SDAA & SCLA renamed as I2CASDA & I2CASCL 
+     - Added EPI signals which were made available as of Rev A silicon. 
+     - Removed JTAG pins from GPIO64-67 -these pins do not exist
+     - Added TRACE bus signals
+     - MIITXD3 added to F28M35x on alternate M3 mode 12 
+
+V1.0.2
+- Deleted some eliminated part numbers for F28M35x
+- Added configuration files for F28M36x
+
+
+V1.0.1
+- Added all 28M35x devices
+- Added entries for all 2803x and 2802x devices
+- Added HRCAP to 2803x devices
+
+
+V1.0.0
+- first release

@@ -1,0 +1,257 @@
+<?xml version="1.0"?>
+<!-- This file defines how Trace attributes are available for a device.
+	 This information is used by ETB Trace subsystem to find out setup parameters 
+	 and way to access and configure those parameters. 
+ -->
+<!-- Trace Setup Attributes for Faraday Device -->
+<device id="Faraday" value="0x0009202F" mask="0x0FFFFFFF" HW_revision="1.0" XML_version="1.0">
+
+<FileVersion version="2.0.0.0" Copyright="Copyright (c) 2005-2007 Texas Instruments"></FileVersion>
+
+	<trace_routes>
+		<route>
+			<source source="CPU_0"/>
+			<link module=""/>
+			<sink module=""/>
+			<pin module="MOD_DRM"/>
+		</route> 
+		
+		<route>
+			<source source="CPU_1"/>
+			<link module=""/>
+			<sink module=""/>
+			<pin module="MOD_DRM"/>
+		</route> 
+		
+		<route>
+			<source source="CPU_2"/>
+			<link module=""/>
+			<sink module=""/>
+			<pin module="MOD_DRM"/>
+		</route> 
+		
+		<route>
+			<source source="CPU_0"/>
+			<link module=""/>
+			<sink module="MOD_ETB0"/>
+			<pin module=""/>
+		</route> 
+		
+		<route>
+			<source source="CPU_1"/>
+			<link module=""/>
+			<sink module="MOD_ETB1"/>
+			<pin module=""/>
+		</route> 
+		
+		<route>
+			<source source="CPU_2"/>
+			<link module=""/>
+			<sink module="MOD_ETB2"/>
+			<pin module=""/>
+		</route> 
+		
+	</trace_routes>
+	
+	<!-- Supported proc access mechanisms for the device -->
+	<procs>
+		<!-- C64x+ DSP core -->
+		<proc id="C64XP" kind="tms320C64plus">
+			<identifier>
+				<register id="DNUM" address="DNUM" page="" addrunit="" width="32" type="reg"/>
+				<value idvalue="0x0" />
+			</identifier> 
+			
+		</proc> 
+		
+		<proc id="C64XP_1" kind="tms320C64plus">
+			<identifier>
+				<register id="DNUM" address="DNUM" page="" addrunit="" width="32" type="reg"/>
+				<value idvalue="0x1" />
+			</identifier> 
+			
+		</proc>		
+		
+		<proc id="C64XP_2" kind="tms320C64plus">
+			<identifier>
+				<register id="DNUM" address="DNUM" page="" addrunit="" width="32" type="reg"/>
+				<value idvalue="0x2" />
+			</identifier> 			
+		</proc>
+	</procs>
+	
+	<!-- Available Trace sources for the device -->
+	<sources>
+		<!-- DSP Trace source -->
+		<source id="CPU_0" proc="C64XP" stmmaster = "false">
+			<components>
+				<component module="MOD_DTF0"/>
+			</components> 
+			<characteristics>
+				<characteristic id="DEV_CHAR_TRACEPLLUNIT" description="" value="13"/>
+			</characteristics>
+		</source> 
+		
+		<source id="CPU_1" proc="C64XP_1" stmmaster = "false">
+			<components>
+				<component module="MOD_DTF1"/>
+			</components> 
+			<characteristics>
+				<characteristic id="DEV_CHAR_TRACEPLLUNIT" description="" value="13"/>
+			</characteristics>
+		</source> 
+		
+		<source id="CPU_2" proc="C64XP_2" stmmaster = "false">
+			<components>
+				<component module="MOD_DTF2"/>
+			</components> 
+			<characteristics>
+				<characteristic id="DEV_CHAR_TRACEPLLUNIT" description="" value="13"/>
+			</characteristics>
+		</source> 		
+	</sources>
+
+	<!-- Available modules asscoiated with various modules in the device -->
+	<modules> 
+		<!-- DTF module associated with C64x+ DSP trace to ETB -->
+		<!-- We may need to move the type attribute to here to specify the access type -->
+		<module id="MOD_DTF0" kind="dtf" proc="C64XP" version="1.0" >
+			<registers>
+				<register id="DTFCR" address="0x02880400" page="0" addrunit="1" width="32" type="mem" />
+			</registers>
+			
+			<characteristics>
+				<characteristic id="DEV_CHAR_TRACEMODE" description="" value="3"/>
+				
+			</characteristics> 
+		</module> 
+				<!-- We may need to move the type attribute to here to specify the access type -->
+		<module id="MOD_DTF1" kind="dtf" proc="C64XP_1" version="1.0" >
+			<registers>
+				<register id="DTFCR" address="0x02880404" page="0" addrunit="1" width="32" type="mem" />
+			</registers>
+			
+			<characteristics>
+				<characteristic id="DEV_CHAR_TRACEMODE" description="" value="3"/>
+				
+			</characteristics> 
+		</module> 
+		
+		<!-- We may need to move the type attribute to here to specify the access type -->
+		<module id="MOD_DTF2" kind="dtf" proc="C64XP_2" version="1.0" >
+			<registers>
+				<register id="DTFCR" address="0x02880408" page="0" addrunit="1" width="32" type="mem" />
+			</registers>
+			
+			<characteristics>
+				<characteristic id="DEV_CHAR_TRACEMODE" description="" value="3"/>
+				
+			</characteristics> 
+		</module> 
+	
+		<!-- ETB module associated with C64x+ DSP-->
+	<module id="MOD_ETB0" kind="cs_etb" proc="C64XP" version="1.0" >
+		<registers>
+			<register id="RDP" address="0x02AD0004" page="" addrunit="1" width="32" type="mem" />	
+			<register id="RRD" address="0x02AD0010" page="" addrunit="1" width="32" type="mem" />
+			<register id="RRP" address="0x02AD0014" page="" addrunit="1" width="32" type="mem" />
+			<register id="STS" address="0x02AD000C" page="" addrunit="1" width="32" type="mem" />		
+			<register id="RWP" address="0x02AD0018" page="" addrunit="1" width="32" type="mem" />						
+			<register id="TRG" address="0x02AD001C" page="" addrunit="1" width="32" type="mem" />		
+			<register id="CTL" address="0x02AD0020" page="" addrunit="1" width="32" type="mem" />		
+			<register id="RWD" address="0x02AD0024" page="" addrunit="1" width="32" type="mem" />
+			<register id="FFSR" address="0x02AD0300" page="" addrunit="1" width="32" type="mem" />
+			<register id="FFCR" address="0x02AD0304" page="" addrunit="1" width="32" type="mem" />
+			<register id="LOCK" address="0x02AD0FB0" page="" addrunit="1" width="32" type="mem" />
+			<register id="LOCK_STATUS" address="0x02AD0FB4" page="" addrunit="1" width="32" type="mem" />
+		</registers>
+		
+		<characteristics>
+			<characteristic id="DEV_CHAR_PINMANAGER" description="" value="1"/> 
+			<characteristic id="DEV_CHAR_DATAPINCOUNT" description="" value="20"/>
+			<characteristic id="DEV_CHAR_CLOCKPINCOUNT" description="" value="2"/>
+			<characteristic id="DEV_CHAR_PRIMARYCLOCK" description="" value="20"/>
+			<characteristic id="DEV_CHAR_SECONDARYCLOCK" description="" value="21"/>
+			<characteristic id="DEV_CHAR_TRACEDATAORDER" description="" value="reverse"/>
+			<characteristic id="CHAR_FFCRDISABLE" value="true"/>
+		</characteristics> 	
+	</module>
+	
+	<!-- ETB module associated with C55x+ DSP-->
+	<module id="MOD_ETB1" kind="cs_etb" proc="C64XP_1" version="1.0" >
+		<registers>
+			<register id="RDP" address="0x02AD8004" page="" addrunit="1" width="32" type="mem" />	
+			<register id="RRD" address="0x02AD8010" page="" addrunit="1" width="32" type="mem" />
+			<register id="RRP" address="0x02AD8014" page="" addrunit="1" width="32" type="mem" />
+			<register id="STS" address="0x02AD800C" page="" addrunit="1" width="32" type="mem" />		
+			<register id="RWP" address="0x02AD8018" page="" addrunit="1" width="32" type="mem" />						
+			<register id="TRG" address="0x02AD801C" page="" addrunit="1" width="32" type="mem" />		
+			<register id="CTL" address="0x02AD8020" page="" addrunit="1" width="32" type="mem" />		
+			<register id="RWD" address="0x02AD8024" page="" addrunit="1" width="32" type="mem" />
+			<register id="FFSR" address="0x02AD8300" page="" addrunit="1" width="32" type="mem" />
+			<register id="FFCR" address="0x02AD8304" page="" addrunit="1" width="32" type="mem" />
+			<register id="LOCK" address="0x02AD8FB0" page="" addrunit="1" width="32" type="mem" />
+			<register id="LOCK_STATUS" address="0x02AD8FB4" page="" addrunit="1" width="32" type="mem" />
+		</registers>
+		
+		<characteristics>
+			<characteristic id="DEV_CHAR_PINMANAGER" description="" value="1"/> 
+			<characteristic id="DEV_CHAR_DATAPINCOUNT" description="" value="20"/>
+			<characteristic id="DEV_CHAR_CLOCKPINCOUNT" description="" value="2"/>
+			<characteristic id="DEV_CHAR_PRIMARYCLOCK" description="" value="20"/>
+			<characteristic id="DEV_CHAR_SECONDARYCLOCK" description="" value="21"/>
+			<characteristic id="DEV_CHAR_TRACEDATAORDER" description="" value="reverse"/>
+			<characteristic id="CHAR_FFCRDISABLE" value="true"/>
+		</characteristics> 	
+	</module>
+		
+	<!-- ETB module associated with C64x+ DSP-->
+	<module id="MOD_ETB2" kind="cs_etb" proc="C64XP_2" version="1.0" >
+		<registers>
+			<register id="RDP" address="0x02AE0004" page="" addrunit="1" width="32" type="mem" />	
+			<register id="RRD" address="0x02AE0010" page="" addrunit="1" width="32" type="mem" />
+			<register id="RRP" address="0x02AE0014" page="" addrunit="1" width="32" type="mem" />
+			<register id="STS" address="0x02AE000C" page="" addrunit="1" width="32" type="mem" />		
+			<register id="RWP" address="0x02AE0018" page="" addrunit="1" width="32" type="mem" />						
+			<register id="TRG" address="0x02AE001C" page="" addrunit="1" width="32" type="mem" />		
+			<register id="CTL" address="0x02AE0020" page="" addrunit="1" width="32" type="mem" />		
+			<register id="RWD" address="0x02AE0024" page="" addrunit="1" width="32" type="mem" />
+			<register id="FFSR" address="0x02AE0300" page="" addrunit="1" width="32" type="mem" />
+			<register id="FFCR" address="0x02AE0304" page="" addrunit="1" width="32" type="mem" />
+			<register id="LOCK" address="0x02AE0FB0" page="" addrunit="1" width="32" type="mem" />
+			<register id="LOCK_STATUS" address="0x02AE0FB4" page="" addrunit="1" width="32" type="mem" />
+		</registers>
+		
+		<characteristics>
+			<characteristic id="DEV_CHAR_PINMANAGER" description="" value="1"/> 
+			<characteristic id="DEV_CHAR_DATAPINCOUNT" description="" value="20"/>
+			<characteristic id="DEV_CHAR_CLOCKPINCOUNT" description="" value="2"/>
+			<characteristic id="DEV_CHAR_PRIMARYCLOCK" description="" value="20"/>
+			<characteristic id="DEV_CHAR_SECONDARYCLOCK" description="" value="21"/>
+			<characteristic id="DEV_CHAR_TRACEDATAORDER" description="" value="reverse"/>
+			<characteristic id="CHAR_FFCRDISABLE" value="true"/>
+		</characteristics>
+	</module>
+		
+		
+	<!-- Pins module -->
+	<module id ="MOD_DRM"  kind="drm" proc="" version="1.0" >
+		<registers>
+		</registers>
+		<!-- Define dsp, pti, and tpiu pin maps supported for this device.  Note, only 1 program (line)
+		     can be active at any given time.  Must use odd pin for clock because primary clock bit must
+			 be used and C1 is the primary clock.  -->
+		<mapping id="program.pinouts">
+			<map program="0" pinouts="dsp=17,14,15,12,13,10,11,8,9,6,7,4,5,2,3,0,1" />
+			<map program="1" pinouts="dsp=17,1,14,15,12,13,10,11,8,9,6,7,4,5,2,3" />
+			<map program="2" pinouts="dsp=17,14,15,12,13,10,11,8,9,6,7,4,5,2,3" />
+			<map program="3" pinouts="dsp=17,15,12,13,10,11,8,9,6,7,4,5,2,3" />
+			<map program="4" pinouts="dsp=15,12,13,10,11,8,9,6,7,4,5,2,3" />
+			<map program="5" pinouts="dsp=15,13,10,11,8,9,6,7,4,5,2,3" />
+			<map program="6" pinouts="dsp=13,10,11,8,9,6,7,4,5,2,3" />
+		</mapping>
+	</module>
+
+	</modules>
+</device>
+

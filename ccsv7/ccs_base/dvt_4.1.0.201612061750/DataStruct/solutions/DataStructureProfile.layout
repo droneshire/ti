@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.5.0_14" class="java.beans.XMLDecoder"> 
+ <object class="com.ti.dvt.gadget.model.LayoutModel"> 
+  <void property="autoLayout"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="layoutMap"> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:data</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>322</int> 
+     <int>253</int> 
+     <int>-1</int> 
+     <int>-1</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>DataStructureAnalyzer</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>33</int> 
+     <int>97</int> 
+     <int>141</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:Data Structure Profiling~1</string>
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>57</int> 
+     <int>300</int> 
+     <int>137</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:Data Structure Profiling~4</string>
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>114</int> 
+     <int>345</int> 
+     <int>137</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:test</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>318</int> 
+     <int>228</int> 
+     <int>-1</int> 
+     <int>-1</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>Tap.1</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>68</int> 
+     <int>255</int> 
+     <int>-1</int> 
+     <int>-1</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:Data Structure Profiling~2</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>64</int> 
+     <int>310</int> 
+     <int>137</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:baer</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>285</int> 
+     <int>226</int> 
+     <int>-1</int> 
+     <int>-1</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>UnlimitedBuffer.1</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>247</int> 
+     <int>208</int> 
+     <int>114</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>DataStructureAnalyzer.1</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>222</int> 
+     <int>92</int> 
+     <int>132</int> 
+     <int>31</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:Data Structure Profiling</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>42</int> 
+     <int>420</int> 
+     <int>137</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:Data Structure Profiling~3</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>130</int> 
+     <int>335</int> 
+     <int>137</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:dfy</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>279</int> 
+     <int>242</int> 
+     <int>151</int> 
+     <int>29</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:Data Structure Profiling~6</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>75</int> 
+     <int>522</int> 
+     <int>137</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>FieldTranslator.1</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>242</int> 
+     <int>148</int> 
+     <int>112</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:dfy~0</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>5</int> 
+     <int>604</int> 
+     <int>71</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:Data Structure Raw Data</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>330</int> 
+     <int>329</int> 
+     <int>71</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>UnlimitedBuffer</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>46</int> 
+     <int>321</int> 
+     <int>104</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:asd</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>286</int> 
+     <int>198</int> 
+     <int>-1</int> 
+     <int>-1</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>Tap</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>87</int> 
+     <int>10</int> 
+     <int>75</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>FieldTranslator</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>60</int> 
+     <int>147</int> 
+     <int>102</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:Data Structure Profiling~0</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>77</int> 
+     <int>266</int> 
+     <int>137</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:dfy~1</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>279</int> 
+     <int>301</int> 
+     <int>71</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+  </void> 
+ </object> 
+</java> 

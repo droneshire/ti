@@ -1,0 +1,14 @@
+{
+    "name": "dinfra",
+    "description": "Cloud infrastructure abstraction layer.  Simple desktop build.",
+    "copyright": "Copyright (C) 2015-2016 Texas Instruments Incorporated - http://www.ti.com/",
+    "version": "1.6.0",
+    "variant": "desktop",
+    "author": {
+        "name": "Julian M.N. Bourne",
+        "email": "jbourne@ti.com"
+    },
+    "dependencies": {
+        "q": "1.2.0"
+    }
+}

@@ -1,0 +1,73 @@
+Texas Instruments USB Loader 2000 Example Package
+
+
+This file contains instructions for using USBLoader2000.exe.
+
+
+Command line parameters for USBLoader2000.exe:
+
+Usage: USBLoader2000.exe [-l] [-q] [-h] <input filename(s)>
+
+	-q  Quiet mode -- suppress normal output
+	-l  List attached devices without programming
+	-h  Print this usage information
+
+
+Before running USBLoader2000.exe, the microcontroller must be attached
+to a USB port, must be running the USB boot loader, and must be using the
+included Windows driver. If these conditions are met, the following command
+will load the included example program:
+
+	USBLoader2000.exe Loader_Test_Converted.dat
+
+The program reads the input file data into memory, then attempts to open the
+USB device and send a bulk transfer containing the data to OUT endpoint 1.
+If multiple input files are specified, the files are transferred in that order.
+The boot loader of the device copies the incoming data into the specified memory
+locations, then disconnects from the bus and branches to the specified entry point.
+To silence the normal output, use the -q option. Error messages will still print.
+If the load was successful, the program returns 0 to the shell, otherwise it
+returns -1.
+
+Alternately, if the -l option is specified, the program will check whether a
+boot loader is attached. If it is, the program will print the manufacturer,
+product ID, and serial number string descriptors as in normal operation.
+
+The input files must be a binary file containing only data in the standard boot
+loader format. This format is described in the ROM Code and Peripheral Booting
+chapter of the F28x7x TRM and is reproduced below for convenience. To convert
+a .out file compiled by Code Composer Studio into the required format, use the
+hex2000 tool, which is part of the C2000 Code Generation Tools package:
+
+	hex2000 -boot -b <.out filename> -o <output filename>
+
+
+Binary data format:
+The USB boot loader data follows the same format as the other peripheral boot loaders.
+
+Byte   Contents
+1      LSB: AA (KeyValue for memory width = 8-bits)
+2      MSB: 08h (KeyValue for memory width = 8-bits)
+3      LSB: bytes 3-18 reserved for future use
+4      MSB: bytes 3-18 reserved for future use
+...    ...
+17     LSB: bytes 3-18 reserved for future use
+18     MSB: bytes 3-18 reserved for future use
+19     LSB: Upper half (MSW) of Entry point PC[23:16]
+20     MSB: Upper half (MSW) of Entry point PC[31:24] (Note: Always 0x00)
+21     LSB: Lower half (LSW) of Entry point PC[7:0]
+22     MSB: Lower half (LSW) of Entry point PC[15:8]
+23     LSB: Block size[7:0] (number of 16-bit words) of the first block of data to load
+24     MSB: Block size[15:8]
+25     LSB: Block load starting address [23:16]
+26     LSB: Block load starting address [31:24]
+27     LSB: Block load starting address [7:0]
+28     LSB: Block load starting address [15:8]
+29     LSB: First data word in the block
+30     MSB: First data word in the block
+...    ...
+n      MSB: Last data word in block
+n+1    LSB: Block size[7:0] of the next block of data
+[Same structure as the first block]
+x      LSB: Block size[7:0] of 0x0000 indicates the end of the load
+x+1    MSB: Block size[15:8] of 0x0000 indicates the end of the load

@@ -1,0 +1,9 @@
+{
+  "name": "com.ti.ticloudagent",
+  "description": "TI Cloud Agent - To communicate with TI devices",
+  "path": "@INSTALL_ROOT@\\ticloudagent.bat",
+  "type": "stdio",
+  "allowed_origins": [
+    "chrome-extension://pfillhniocmjcapelhjcianojmoidjdk/"
+  ]
+}

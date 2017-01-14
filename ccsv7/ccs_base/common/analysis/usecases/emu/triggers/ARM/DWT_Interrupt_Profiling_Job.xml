@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<breakpoints xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="breakpoints.xsd">
+
+  <breakpoint type="AET">
+
+    <property>
+      <name>Hardware Configuration</name>
+      <property>
+        <name>Type</name>
+        <string>Trace</string>
+        <property>
+            <name>Triggers</name>
+            <string>Trace DWT Event</string>
+            <property>
+              <name>Interrupt Event</name>
+              <boolean>1</boolean>
+            </property>
+            <property>
+              <name>Interrupt Overhead Count Event</name>
+              <boolean>1</boolean>
+            </property>
+        </property>
+      </property>
+    </property>
+
+    <property>
+      <name>Miscellaneous</name>
+      <property>
+        <name>Group</name>
+        <string>Default Group</string>
+      </property>
+      <property>
+        <name>Name</name>
+        <string>Interrupt Trace</string>
+      </property>
+    </property>
+    <enabled>0</enabled>
+
+  </breakpoint>
+
+</breakpoints>

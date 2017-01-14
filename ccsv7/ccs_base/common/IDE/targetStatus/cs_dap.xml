@@ -1,0 +1,104 @@
+<status_indicator>
+	<!-- no cs_dap device type status --> 	
+	
+	<!-- this is the dap sub-path status (.port is an internal variable) -->
+	<!-- debug subpath type -->
+	<indicator isa="TMS224C1" type="*" subpath="true" subpath_type="debug" description="Clock" status_reg="IP_TAP_CNTL_$(index)" index="$(.port)">
+		<status mask="0x00000004" value="0x00000004" icon="" icon_text="CLK On" description="Clock status" />
+		<status mask="0x00000004" value="0x00000000" icon="" icon_text="CLK Off" description="Clock status" />
+	</indicator>
+	
+	<indicator isa="TMS224C1" type="*" subpath="true" subpath_type="debug" description="Power" status_reg="IP_TAP_CNTL_$(index)" index="$(.port)">
+		<status mask="0x00000020" value="0x00000020" icon="" icon_text="Power On" description="Power status" />
+		<status mask="0x00000020" value="0x00000000" icon="" icon_text="Power Off" description="Power status" />
+	</indicator>
+	
+	<indicator isa="TMS224C1" type="*" subpath="true" subpath_type="debug" description="Clock Down Desired" status_reg="IP_TAP_CNTL_$(index)" index="$(.port)">
+		<status mask="0x00000010" value="0x00000010" icon="" icon_text="CLK Down active" description="Clock Down Desired" />
+		<status mask="0x00000010" value="0x00000000" icon="" icon_text="CLK Down inactive" description="Clock Down Desired" />
+	</indicator>
+	
+	<indicator isa="TMS224C1" type="*" subpath="true" subpath_type="debug"  description="Power Down Desired" status_reg="IP_TAP_CNTL_$(index)" index="$(.port)">
+		<status mask="0x00000080" value="0x00000080" icon="" icon_text="Power Down active" description="Power Down Desired" />
+		<status mask="0x00000080" value="0x00000000" icon="" icon_text="Power Down inactive" description="Power Down Desired" />
+	</indicator>
+
+	<indicator isa="TMS224C1" type="*" subpath="true" subpath_type="debug" description="In Reset" status_reg="IP_TAP_CNTL_$(index)" index="$(.port)">
+		<status mask="0x00020000" value="0x00020000" icon="" icon_text="In Reset"     description="In Reset" />
+		<status mask="0x00020000" value="0x00000000" icon="" icon_text="Not In Reset" description="In Reset" />
+	</indicator>
+	
+	<indicator isa="TMS224C1" type="*" subpath="true" subpath_type="debug" description="Reset Control" status_reg="IP_TAP_CNTL_$(index)" index="$(.port)">
+		<status mask="0x0000C000" value="0x00000000" icon="" icon_text="Reset (None)" description="Reset Control (None)" />
+		<status mask="0x0000C000" value="0x00004000" icon="" icon_text="Reset (Wait)" description="Reset Control (Wait-In-Reset)" />
+		<status mask="0x0000C000" value="0x00008000" icon="" icon_text="Reset (Block)" description="Reset Control (Block Reset)" />
+	</indicator>
+
+      <!-- this is the dap sub-path status (.port is an internal variable) -->
+      <!-- virtual subpath type -->
+	<indicator isa="TMS224C1" type="*" subpath="true" subpath_type="virtual" description="Clock" status_reg="IP_CORE_CNTL_$(index)" index="$(.port)">
+		<status mask="0x00000004" value="0x00000004" icon="" icon_text="CLK On" description="Clock status" />
+		<status mask="0x00000004" value="0x00000000" icon="" icon_text="CLK Off" description="Clock status" />
+	</indicator>
+	
+	<indicator isa="TMS224C1" type="*" subpath="true" subpath_type="virtual" description="Power" status_reg="IP_CORE_CNTL_$(index)" index="$(.port)">
+		<status mask="0x00000020" value="0x00000020" icon="" icon_text="Power On" description="Power status" />
+		<status mask="0x00000020" value="0x00000000" icon="" icon_text="Power Off" description="Power status" />
+	</indicator>
+	
+	<indicator isa="TMS224C1" type="*" subpath="true" subpath_type="virtual" description="Clock Down Desired" status_reg="IP_CORE_CNTL_$(index)" index="$(.port)">
+		<status mask="0x00000010" value="0x00000010" icon="" icon_text="CLK Down active" description="Clock Down Desired" />
+		<status mask="0x00000010" value="0x00000000" icon="" icon_text="CLK Down inactive" description="Clock Down Desired" />
+	</indicator>
+	
+	<indicator isa="TMS224C1" type="*" subpath="true" subpath_type="virtual"  description="Power Down Desired" status_reg="IP_CORE_CNTL_$(index)" index="$(.port)">
+		<status mask="0x00000080" value="0x00000080" icon="" icon_text="Power Down active" description="Power Down Desired" />
+		<status mask="0x00000080" value="0x00000000" icon="" icon_text="Power Down inactive" description="Power Down Desired" />
+	</indicator>
+
+	<indicator isa="TMS224C1" type="*" subpath="true" subpath_type="virtual" description="In Reset" status_reg="IP_CORE_CNTL_$(index)" index="$(.port)">
+		<status mask="0x00020000" value="0x00020000" icon="" icon_text="In Reset"     description="In Reset" />
+		<status mask="0x00020000" value="0x00000000" icon="" icon_text="Not In Reset" description="In Reset" />
+	</indicator>
+	
+	<indicator isa="TMS224C1" type="*" subpath="true" subpath_type="virtual" description="Reset Control" status_reg="IP_CORE_CNTL_$(index)" index="$(.port)">
+		<status mask="0x0000C000" value="0x00000000" icon="" icon_text="Reset (None)" description="Reset Control (None)" />
+		<status mask="0x0000C000" value="0x00004000" icon="" icon_text="Reset (Wait)" description="Reset Control (Wait-In-Reset)" />
+		<status mask="0x0000C000" value="0x00008000" icon="" icon_text="Reset (Block)" description="Reset Control (Block Reset)" />
+	</indicator>
+
+
+      <!-- this is the dap sub-path status (.port is an internal variable) -->
+      <!-- legacy subpath type -->
+	<indicator isa="TMS224C1" type="*" subpath="true" subpath_type="legacy" description="Clock" status_reg="IP_TAP_CNTL_$(index)" index="$(.port-16)">
+		<status mask="0x00000004" value="0x00000004" icon="" icon_text="CLK On" description="Clock status" />
+		<status mask="0x00000004" value="0x00000000" icon="" icon_text="CLK Off" description="Clock status" />
+	</indicator>
+	
+	<indicator isa="TMS224C1" type="*" subpath="true" subpath_type="legacy" description="Power" status_reg="IP_TAP_CNTL_$(index)" index="$(.port-16)">
+		<status mask="0x00000020" value="0x00000020" icon="" icon_text="Power On" description="Power status" />
+		<status mask="0x00000020" value="0x00000000" icon="" icon_text="Power Off" description="Power status" />
+	</indicator>
+	
+	<indicator isa="TMS224C1" type="*" subpath="true" subpath_type="legacy" description="Clock Down Desired" status_reg="IP_TAP_CNTL_$(index)" index="$(.port-16)">
+		<status mask="0x00000010" value="0x00000010" icon="" icon_text="CLK Down active" description="Clock Down Desired" />
+		<status mask="0x00000010" value="0x00000000" icon="" icon_text="CLK Down inactive" description="Clock Down Desired" />
+	</indicator>
+	
+	<indicator isa="TMS224C1" type="*" subpath="true" subpath_type="legacy"  description="Power Down Desired" status_reg="IP_TAP_CNTL_$(index)" index="$(.port-16)">
+		<status mask="0x00000080" value="0x00000080" icon="" icon_text="Power Down active" description="Power Down Desired" />
+		<status mask="0x00000080" value="0x00000000" icon="" icon_text="Power Down inactive" description="Power Down Desired" />
+	</indicator>
+
+	<indicator isa="TMS224C1" type="*" subpath="true" subpath_type="legacy" description="In Reset" status_reg="IP_TAP_CNTL_$(index)" index="$(.port-16)">
+		<status mask="0x00020000" value="0x00020000" icon="" icon_text="In Reset"     description="In Reset" />
+		<status mask="0x00020000" value="0x00000000" icon="" icon_text="Not In Reset" description="In Reset" />
+	</indicator>
+	
+	<indicator isa="TMS224C1" type="*" subpath="true" subpath_type="legacy" description="Reset Control" status_reg="IP_TAP_CNTL_$(index)" index="$(.port-16)">
+		<status mask="0x0000C000" value="0x00000000" icon="" icon_text="Reset (None)" description="Reset Control (None)" />
+		<status mask="0x0000C000" value="0x00004000" icon="" icon_text="Reset (Wait)" description="Reset Control (Wait-In-Reset)" />
+		<status mask="0x0000C000" value="0x00008000" icon="" icon_text="Reset (Block)" description="Reset Control (Block Reset)" />
+	</indicator>
+</status_indicator>
+

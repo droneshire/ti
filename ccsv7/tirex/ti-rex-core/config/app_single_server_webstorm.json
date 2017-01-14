@@ -1,0 +1,19 @@
+{
+  "//": "NOTE: The properties below override the ones in app_default.json",
+  "mode": "remoteserver",
+  "myHttpPort": "3000",
+  "webComponentsServer": "http://dev-sl.ti.com/components",
+  "contentPath": "~/ccs-cloud-storage/ti-rex/git/ti-rex-content",
+  "dbPath": "~/ccs-cloud-storage/ti-rex/db",
+  "contentPackagesConfig": "config/contentPackages/test.json",
+  "downloadsCache": "~/ccs-cloud/tirex/downloads",
+  "ccsCloudUrl": "$SITE_NAME",
+  "ccsCloudUrl": "", "//": "will be obtained from dinfra.landscape",
+  "logsDir": "~/ccs-cloud/tirex/ti-rex-core/logs",
+  "analyticsDir": "~/ccs-cloud/tirex/ti-rex-core/tirex-analytics-data",
+  "refreshDB": "false",
+  "allowRefreshFromWeb": "true",
+  "seaportHostIP": "127.0.0.1",
+  "seaportPort": "8002",
+  "myRole": ""
+}

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewStates>
+<editors>
+<editorArea activeWorkbook="DefaultEditorWorkbook">
+<info part="DefaultEditorWorkbook">
+<folder appearance="1" expanded="2">
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+</folder>
+</info>
+</editorArea>
+</editors>
+<perspectives>
+<perspective editorAreaVisible="0" fixed="0" version="0.016">
+<fastViews>
+</fastViews>
+<layout>
+<mainWindow>
+</mainWindow>
+</layout>
+</perspective>
+</perspectives>
+</ViewStates>

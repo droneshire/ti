@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<translate name="Rename Fields.2"> 
+	<passthru name="Partial Profile"		input="Partial"/>
+	<passthru name="Function"				input="Name"/>
+<!--
+	<passthru name="Filename"				input="Filename"/>
+	<passthru name="Start Address"		input="Start_Address"/>
+	<passthru name="End Address"			input="End_Address"/>
+-->
+	<passthru name="Entry Cycle"		input="Start_Time"/>
+	<passthru name="Exit Cycle"		input="End_Time"/>
+	<passthru name="Excl CPU Cycles"	input="Excl_Count"/>
+	<passthru name="Incl CPU Cycles"	input="Incl_Count"/>
+</translate>

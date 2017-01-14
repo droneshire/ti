@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- 
+  TI File $Revision: 
+  Checkin $Date: 
+  --> 
+
+<!--  28M35x FLASH REGS Registers 
+     =================================== 
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     --> 
+<module id="FLASH REGS" HW_revision="" XML_version="1" description="FLASH REGS Registers">
+    <register id="FRDCNTL" acronym="FRDCNTL" offset="0" page="1" width="32" description="Flash Read Control Register" />
+    <!--  56 empty  -->
+    <register id="FBAC" acronym="FBAC" offset="60" page="1" width="32" description="Flash Bank Access Control Register" />
+    <register id="FBFALLBACK" acronym="FBFALLBACK" offset="64" page="1" width="32" description="Flash Bank Fallback Power Register" />
+    <register id="FBPRDY" acronym="FBPRDY" offset="68" page="1" width="32" description="Flash Bank Pump Ready Register" />
+    <register id="FPAC1" acronym="FPAC1" offset="72" page="1" width="32" description="Flash Pump Access Control Register 1" />
+    <register id="FPAC2" acronym="FPAC2" offset="76" page="1" width="32" description="Flash Pump Access Control Register 2" />
+    <register id="FMAC" acronym="FMAC" offset="80" page="1" width="32" description="Flash Module Access Control Register" />
+    <register id="FMSTAT" acronym="FMSTAT" offset="84" page="1" width="32" description="Flash Module Status Register" />
+    <!--  680 empty  -->
+    <register id="FRD_INTF_CTRL" acronym="FRD_INTF_CTRL" offset="768" page="1" width="32" description="Flash Read Interface Control Register" />
+</module>

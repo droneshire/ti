@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cpu id="TMS192C2004" isa="hidden" HW_revision="1.0" XML_version="1.0" description="IVA IPE3 Accelerator">
+    <register id="IPE_PID"   acronym="IPE_PID"   width="32" description="Peripheral ID register"/>
+    <register id="IPE_COUNT" acronym="IPE_COUNT" width="32" description="IPE Cycle Counter register"/>
+    <register id="IPE_CTRL"  acronym="IPE_CTRL"  width="32" description="IPE Control register"/>
+    <register id="IPE_NS"    acronym="IPE_NS"    width="32" description="Horizontal Noise Suppression register"/>
+    <register id="IPE_NA"    acronym="IPE_NA"    width="32" description="nA Mode register"/>
+
+    <instance href="..\Modules\ihwa\iva_debug.xml" id="Debug" xml="iva_debug.xml" xmlpath="..\Modules\ihwa\" HW_revision="1.0" description="IVA IHWA Debug Registers" requestor="TMS192C2004" baseaddr="0" size="0" accessnumbytes="4" permissions="rw"/>
+    <instance href="..\Modules\ihwa\iva_syncbox.xml" id="SyncBox" xml="iva_syncbox.xml" xmlpath="..\Modules\ihwa\" HW_revision="1.0" description="IVA IHWA SyncBox Registers" requestor="TMS192C2004" baseaddr="0" size="0" accessnumbytes="4" permissions="rw"/>
+</cpu>

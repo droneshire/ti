@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module id="VCOP_Load_Registers" HW_revision="0" XML_version="1" description="VCOP Load Registers">
+    <register id="ld_ptr0" acronym="ld_ptr0" offset="0x00" page="1" width="32" description="LD Memory Address 0" />
+    <register id="ld_ptr1" acronym="ld_ptr1" offset="0x04" page="1" width="32" description="LD Memory Address 1" />
+    <register id="ld_ptr2" acronym="ld_ptr2" offset="0x08" page="1" width="32" description="LD Memory Address 2" />
+    <register id="ld_ptr3" acronym="ld_ptr3" offset="0x0c" page="1" width="32" description="LD Memory Address 3" />
+    <register id="ld_ptr4" acronym="ld_ptr4" offset="0x10" page="1" width="32" description="LD Memory Address 4" />
+    <register id="ld_ptr5" acronym="ld_ptr5" offset="0x14" page="1" width="32" description="LD Memory Address 5" />
+    <register id="ld_ptr6" acronym="ld_ptr6" offset="0x18" page="1" width="32" description="LD Memory Address 6" />
+    <register id="ld_ptr7" acronym="ld_ptr7" offset="0x1c" page="1" width="32" description="LD Memory Address 7" />
+    <register id="st_ptr0" acronym="st_ptr0" offset="0x20" page="1" width="32" description="ST Memory Address 0" />
+    <register id="st_ptr1" acronym="st_ptr1" offset="0x24" page="1" width="32" description="ST Memory Address 1" />
+    <register id="st_ptr2" acronym="st_ptr2" offset="0x28" page="1" width="32" description="ST Memory Address 2" />
+    <register id="st_ptr3" acronym="st_ptr3" offset="0x2c" page="1" width="32" description="ST Memory Address 3" />
+    <register id="st_ptr4" acronym="st_ptr4" offset="0x30" page="1" width="32" description="ST Memory Address 4" />
+    <register id="st_ptr5" acronym="st_ptr5" offset="0x34" page="1" width="32" description="ST Memory Address 5" />
+    <register id="st_ptr6" acronym="st_ptr6" offset="0x38" page="1" width="32" description="ST Memory Address 6" />
+    <register id="st_ptr7" acronym="st_ptr7" offset="0x3c" page="1" width="32" description="ST Memory Address 7" />
+</module>
+

@@ -1,0 +1,52 @@
+<Panel id="Emu">Emu
+  <Control id="Default" type="Button" helpid="0x808303eb">&amp;Default</Control>
+  <Control id="EmuProductName" type="ComboBox" helpid="0x808303fc">Name of hardware product:
+    <Value id="XDS510PP_PLUS">XDS510PP_PLUS
+      <Where EmuPortAddr="0X3BC;0X278;0X378"/>
+    </Value>
+    <Value id="XDS510PP">XDS510PP
+      <Where EmuPortAddr="0X3BC;0X278;0X378"/>
+    </Value>
+    <Value id="XDS510USB">XDS510USB
+      <Where EmuPortAddr="0X510;0X511;0X512;0X513"/>
+    </Value>
+    <Value id="SPI515">SPI515
+      <Where EmuPortAddr="0X3BC;0X278;0X378"/>
+    </Value>
+    <Value id="SPI525">SPI525
+      <Where EmuPortAddr="0X100"/>
+    </Value>
+  </Control>
+  <Control id="EmuPortAddr" type="Edit" readonly="1" helpid="0x808303f7">Emulator port address:</Control>
+  <Control id="EmuPortMode" type="ComboBox" helpid="0x808303f8">Emulator port mode:
+    <Value id="SPP4">SPP4
+      <Where EmuProductName="XDS510PP"/>
+    </Value>
+    <Value id="SPP8">SPP8
+      <Where EmuProductName="XDS510PP;XDS510PP_PLUS;SPI515"/>
+    </Value>
+    <Value id="ECP">ECP
+     <Where EmuProductName="XDS510PP;XDS510PP_PLUS;SPI515"/>
+    </Value>
+    <Value id="EPP">EPP
+     <Where EmuProductName="XDS510PP;XDS510PP_PLUS;SPI515" EmuPortAddr="0X278;0X378;0X100;0X510"/>
+     </Value>
+    <Value id="PCI">PCI
+      <Where EmuProductName="SPI525"/>
+    </Value>
+    <Value id="USB">USB
+      <Where EmuProductName="XDS510USB"/>
+    </Value>
+  </Control>
+  <Control id="EmuPortSpeed" type="SpinEdit" helpid="0x808303f9">Emulator port speed:
+    <Value id="Min">1
+      <Where EmuProductName="SPI515;XDS510PP_PLUS" EmuPortMode="EPP"/>
+    </Value>
+    <Value id="Min">0</Value>
+    <Value id="Max">0x7fff</Value>
+  </Control>
+  <Control id="EmuAddOptoPod" type="CheckBox" helpid="0x808303fa">Include SD opto-isolator pod</Control>
+  <Control id="EmuDisablePolling" type="CheckBox" helpid="0x808303fb">Disable certain emulation polling</Control>
+  <Control id="EmuDoWaitInReset" type="CheckBox" helpid="0x808303fd">Perform C27x style Wait-In-Reset</Control>
+ 
+</Panel>

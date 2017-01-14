@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- 
+  TI File $Revision: 
+  Checkin $Date: 
+  --> 
+
+<!--  F2805x XINTRUPT REGS Registers 
+     =================================== 
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     --> 
+<module id="XINTRUPT REGS" HW_revision="" XML_version="1" description="XINTRUPT REGS Registers">
+    <register id="XINT1CR" acronym="XINT1CR" offset="0" page="1" width="16" description="XINT1 Configuration Register" />
+    <register id="XINT2CR" acronym="XINT2CR" offset="1" page="1" width="16" description="XINT2 Configuration Register" />
+    <register id="XINT3CR" acronym="XINT3CR" offset="2" page="1" width="16" description="XINT3 Configuration Register" />
+    <!--  5 empty  -->
+    <register id="XINT1CTR" acronym="XINT1CTR" offset="8" page="1" width="16" description="XINT1 Counter Register" />
+    <register id="XINT2CTR" acronym="XINT2CTR" offset="9" page="1" width="16" description="XINT2 Counter Register" />
+    <register id="XINT3CTR" acronym="XINT3CTR" offset="10" page="1" width="16" description="XINT3 Counter Register" />
+</module>

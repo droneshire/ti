@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Logic Analyzer" default="enable" basedir=".">
+	<import file="../../templates/analysisfeature.xml"/>
+	
+	<property name="dvt.activity.name" value="Load/${ant.project.name}"/>
+	<property name="dvt.activity.description" value="${ant.project.name}"/>
+	<property name="dvt.activity.icon" value="platform:/plugin/com.ti.dvt.ui/icons/views/open_views.gif"/>	
+	<property name="dvt.data.type" value="STM"/>
+	<property name="dvt.views" value="Graph"/>
+	<property name="dvt.views.show" value="Graph"/>
+	<property name="analysisFeatureName" value="LogicAnalyzer" />
+	<!--property name="bufferbypass.text" value="true" /-->
+
+	<!-- Hide this AF for now  -->
+	<!--<target name="enable"/>-->
+
+    <!-- minimum required input fields for the AF (optional, for better performance) -->
+    <property name="requiredFields" value="Time,Type,Master Name,Domain,Class,Data Message,Data"/>
+
+	<!-- override template target -->
+	<target name="postAddAnalysisFeature">
+		<dvt.start refid="analysisFeatureRef"/>
+		<dvt.view.show refid="analysisFeatureRef" view="${dvt.views.show}"/>
+	</target>
+
+	<target name="createStandardContextMenu">
+	</target>
+
+</project>

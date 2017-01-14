@@ -1,0 +1,20 @@
+[
+  "msp/MSP432Ware_3_40_00_25",
+  "msp/MSP430Ware_3_40_00_19",
+  "msp/MSPWare_3_30_01_00",
+  "TivaWare_C_Series-2.1.3.156",
+  "simplelink/ble_cc26xx_2_01_00_44423_cloud",
+  "CC3200SDK_1.1.0",
+  "energia-0101E0017",
+  "Sitara_1_02_00_00",
+  "tirtos_msp43x_2_16_00_08",
+  "tirtos_tivac_2_16_00_08",
+  "tirtos_cc13xx_cc26xx_2_20_00_06",
+  "tirtos_cc32xx_2_16_00_08",
+  "tirtos_simplelink_2_01_00_03",
+  "tirtos_simplelink_2_13_00_06",
+  "tirtos_simplelink_2_13_01_09",
+  "xdctools_3_30_04_52_core",
+  "xdctools_3_31_01_33_core",
+  "xdctools_3_32_00_06_core"
+]

@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<connection id="Spectrum Digital XDS510USB Emulator" class="574025">
+
+	<connectionType Type="SD510USB"/>
+
+    <property Name="Diagnostic Command" Type="hiddenfield" Value="%ccs_base%/emulation/drivers/sdjtag.exe -f %boarddatafile% -v -X reset -X scantest" ID="DiagnosticCommand"/>
+
+	<property desc="Emulator I/O Port" Type="choicelist" Value="0" id="portAddr1" ID="SDOPTS.EmuPortAddr">
+
+		<choice Name="USB Emulator address is 0x510" value="0x510" />
+		<choice Name="USB Emulator address is 0x511" value="0x511" />
+		<choice Name="USB Emulator address is 0x512" value="0x512" />
+		<choice Name="USB Emulator address is 0x513" value="0x513" />
+	</property>
+
+       <property Name="TCK Mode" Type="choicelist" Value="0" ID="SDOPTS.EmuJclkMode">
+        <choice Name="Counter Mode - Freq or Divide" value="Counter">
+            <property Name="unused" Type="hiddenfield" Value="Counter" ID="SDOPTS.EmuJclkMode"/>
+        </choice>
+        <choice Name="Adaptive - Synchronous" value="adaptive">
+            <property Name="unused" Type="hiddenfield" Value="Adaptive" ID="SDOPTS.EmuJclkMode"/>
+        </choice>
+        <choice Name="Fast Adaptive - Asynchronous" value="fastadaptive">
+            <property Name="unused" Type="hiddenfield" Value="FastAdaptive" ID="SDOPTS.EmuJclkMode"/>
+        </choice>
+        <choice Name="Internal TCK Loopback to RTCK" value="Counteritckr">
+            <property Name="unused" Type="hiddenfield" Value="CounterITckr" ID="SDOPTS.EmuJclkMode"/>
+        </choice>
+      </property>
+
+      <property Name="Emulator port speed" Type="stringfield" Value="0" ID="SDOPTS.EmuPortSpeed"/>
+      
+      <property Name="Disable certain emulation polling" Type="choicelist" Value="1" ID="SDOPTS.EmuDisablePolling">
+        <choice Name="NO"  value="NO" />
+        <choice Name="YES" value="YES" />
+      </property>
+
+      <property Name="TCK Frequency MHz (Counter mode)" Type="stringfield" Value="10" ID="SDOPTS.EmuJclkFreqMHz"/>
+      <property Name="TCK Divisor/Adaptive TCK Delay"   Type="stringfield" Value="1"  ID="SDOPTS.EmuTckDiv"/>
+
+      <property Name="TMS/TDO Output Timing" Type="choicelist" Value="0" ID="SDOPTS.EmuAltTckTiming">
+        <choice Name="Falling edge is JTAG standard"  value="NO" />
+        <choice Name="Rising edge allows faster TCLK" value="YES" />
+      </property>
+
+      <property Name="Target Power Detect Threshold" Type="choicelist" Value="0" ID="SDOPTS.EmuPowerMode">
+        <choice Name="Threshold_1Volt_IO"  value="Threshold_1Volt_IO" />
+        <choice Name="Threshold_3Volt_IO"  value="Threshold_3Volt_IO" />
+      </property>
+
+     <property Name="JTAG I/O OFF on exit" Type="choicelist" Value="1" ID="SDOPTS.EmuIoOffAtExit">
+        <choice Name="NO"  value="NO" />
+        <choice Name="YES" value="YES" />
+     </property>
+
+     <property Name="JTAG I/O OFF on disconnect" Type="choicelist" Value="1" ID="SDOPTS.EmuIoOffAtDisconnect">
+        <choice Name="NO"  value="NO" />
+        <choice Name="YES" value="YES" />
+     </property>
+
+     <property Name="EMU0 Startup Pin State" Type="choicelist" Value="0" ID="SDOPTS.Emu0PinLevel">
+        <choice Name="HIZ"  value="HIZ" />
+        <choice Name="HIGH" value="HIGH" />
+        <choice Name="LOW"  value="LOW" />
+     </property>
+
+     <property Name="EMU1 Startup Pin State" Type="choicelist" Value="0" ID="SDOPTS.Emu1PinLevel">
+        <choice Name="HIZ"  value="HIZ" />
+        <choice Name="HIGH" value="HIGH" />
+        <choice Name="LOW"  value="LOW" />
+     </property>
+
+     <property Name="Assert target system reset on startup" Type="choicelist" Value="0" ID="SDOPTS.EmuAssertSysReset">
+        <choice Name="NO"  value="NO" />
+        <choice Name="YES" value="YES" />
+     </property>
+
+     <property Name="Pulse TRST on startup" Type="choicelist" Value="0" ID="SDOPTS.EmuPulseTrst">
+        <choice Name="NO"  value="NO" />
+        <choice Name="YES" value="YES" />
+     </property>
+
+     <property Name="Emulator Serial Number" Type="stringfield" Value="ANY" ID="SDOPTS.EmuSerialNumber"/>
+
+     <property Name="Extended IcePick Router Support" Type="choicelist" Value="0" ID="SDOPTS.EmuIcePickRtrExtended">
+        <choice Name="NO"  value="NO" />
+        <choice Name="YES" value="YES" />
+     </property>
+
+
+     <property Name="USB Link Disconnect on CCS Disconnect" Type="choicelist" Value="0" ID="SDOPTS.DevDelayedInit">
+        <choice Name="NO"  value="NO" />
+        <choice Name="YES" value="YES" />
+     </property>
+
+
+</connection>

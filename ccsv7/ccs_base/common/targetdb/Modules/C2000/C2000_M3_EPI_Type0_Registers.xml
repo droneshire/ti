@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- 
+  TI File $Revision: 
+  Checkin $Date: 
+  --> 
+
+<!--  28M35x EPI REGS Registers 
+     =================================== 
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     --> 
+<module id="EPI REGS" HW_revision="" XML_version="1" description="EPI REGS Registers">
+    <register id="EPICFG" acronym="EPICFG" offset="0" page="1" width="32" description="EPI Configuration" />
+    <register id="EPIBAUD" acronym="EPIBAUD" offset="4" page="1" width="32" description="EPI Main Baud Rate" />
+    <register id="EPIBAUD2" acronym="EPIBAUD2" offset="8" page="1" width="32" description="EPI Baud Rate 2" />
+
+    <register id="HB16CFG" acronym="HB16CFG" offset="16" page="1" width="32" description="EPI Host-Bus 16 Configuration" />
+    <register id="SDRAMCFG" acronym="SDRAMCFG" offset="16" page="1" width="32" description="EPI SDRAM Configuration" />
+    <register id="HB8CFG" acronym="HB8CFG" offset="16" page="1" width="32" description="EPI Host-Bus 8 Configuration" />
+    <register id="GPCFG" acronym="GPCFG" offset="16" page="1" width="32" description="EPI General Purpose Configuration" />
+    <register id="HB16CFG2" acronym="HB16CFG2" offset="20" page="1" width="32" description="EPI Host-Bus 16 Configuration 2" />
+    <register id="HB8CFG2" acronym="HBCFG" offset="20" page="1" width="32" description="EPI Host-Bus 8 Configuration 2" />
+    <register id="GPCFG2" acronym="GPCFG2" offset="20" page="1" width="32" description="EPI General Purpose Configuration 2" />     
+    <!--  4 empty  -->
+    <!--  4 empty  -->
+    <!--  4 empty  -->
+    <register id="EPIADDRMAP" acronym="EPIADDRMAP" offset="28" page="1" width="32" description="EPI Address Map" />
+    <register id="EPIRSIZE0" acronym="EPIRSIZE0" offset="32" page="1" width="32" description="EPI Read Size 0" />
+    <register id="EPIRADDR0" acronym="EPIRADDR0" offset="36" page="1" width="32" description="EPI Read Address 0" />
+    <register id="EPIRPSTD0" acronym="EPIRPSTD0" offset="40" page="1" width="32" description="EPI Non-Blocking Read Data 0" />
+    <!--  4 empty  -->
+    <register id="EPIRSIZE1" acronym="EPIRSIZE1" offset="48" page="1" width="32" description="EPI Read Size 1" />
+    <register id="EPIRADDR1" acronym="EPIRADDR1" offset="52" page="1" width="32" description="EPI Read Address 1" />
+    <register id="EPIRPSTD1" acronym="EPIRPSTD1" offset="56" page="1" width="32" description="EPI Non-Blocking Read Data 1" />
+    <!--  32 empty  -->
+    <register id="EPISTAT" acronym="EPISTAT" offset="96" page="1" width="32" description="EPI Status" />
+    <!--  8 empty  -->
+    <register id="EPIRFIFOCNT" acronym="EPIRFIFOCNT" offset="108" page="1" width="32" description="EPI Read FIFO Count" />
+    <register id="EPIREADFIFO" acronym="EPIREADFIFO" offset="112" page="1" width="32" description="EPI Read FIFO" />
+    <register id="EPIREADFIFO1" acronym="EPIREADFIFO1" offset="116" page="1" width="32" description="EPI Read FIFO Alias 1" />
+    <register id="EPIREADFIFO2" acronym="EPIREADFIFO2" offset="120" page="1" width="32" description="EPI Read FIFO Alias 2" />
+    <register id="EPIREADFIFO3" acronym="EPIREADFIFO3" offset="124" page="1" width="32" description="EPI Read FIFO Alias 3" />
+    <register id="EPIREADFIFO4" acronym="EPIREADFIFO4" offset="128" page="1" width="32" description="EPI Read FIFO Alias 4" />
+    <register id="EPIREADFIFO5" acronym="EPIREADFIFO5" offset="132" page="1" width="32" description="EPI Read FIFO Alias 5" />
+    <register id="EPIREADFIFO6" acronym="EPIREADFIFO6" offset="136" page="1" width="32" description="EPI Read FIFO Alias 6" />
+    <register id="EPIREADFIFO7" acronym="EPIREADFIFO7" offset="140" page="1" width="32" description="EPI Read FIFO Alias 7" />
+    <!--  368 empty  -->
+    <register id="EPIFIFOLVL" acronym="EPIFIFOLVL" offset="512" page="1" width="32" description="EPI FIFO Level Selects" />
+    <register id="EPIWFIFOCNT" acronym="EPIWFIFOCNT" offset="516" page="1" width="32" description="EPI Write FIFO Count" />
+    <register id="EPIDMATXCNT" acronym="EPIDMATXCNT" offset="520" page="1" width="32" description="EPI DMA Transmit Count" />    
+    <!--  8 empty  -->
+    <register id="EPIIM" acronym="EPIIM" offset="528" page="1" width="32" description="EPI Interrupt Mask" />
+    <register id="EPIRIS" acronym="EPIRIS" offset="532" page="1" width="32" description="EPI Raw Interrupt Status" />
+    <register id="EPIMIS" acronym="EPIMIS" offset="536" page="1" width="32" description="EPI Masked Interrupt Status" />
+    <register id="EPIEISC" acronym="EPIEISC" offset="540" page="1" width="32" description="EPI Error Interrupt Status and Clear" />
+    
+    <register id="HB16CFG3" acronym="HB16CFG3" offset="776" page="1" width="32" description="EPI Host-Bus 16 Configuration 3" />
+    <register id="HB8CFG3" acronym="HB8CFG3" offset="776" page="1" width="32" description="EPI Host-Bus 8 Configuration 3" />
+    <register id="HB16CFG4" acronym="HB16CFG4" offset="780" page="1" width="32" description="EPI Host-Bus 16 Configuration 4" />
+    <register id="HB8CFG4" acronym="HB8CFG4" offset="780" page="1" width="32" description="EPI Host-Bus 8 Configuration 4" />
+    
+    <register id="HB8TIME" acronym="HB8TIME" offset="784" page="1" width="32" description="EPI Host-Bus 8 Timing Extension" />
+    <register id="HB16TIME" acronym="HB16TIME" offset="784" page="1" width="32" description="EPI Host-Bus 16 Timing Extension" />
+    <register id="HB8TIME2" acronym="HB8TIME2" offset="788" page="1" width="32" description="EPI Host-Bus 8 Timing Extension 2" />
+    <register id="HB16TIME2" acronym="HB16TIME2" offset="788" page="1" width="32" description="EPI Host-Bus 16 Timing Extension 2" />
+    <register id="HB8TIME3" acronym="HB8TIME3" offset="792" page="1" width="32" description="EPI Host-Bus 8 Timing Extension 3" />
+    <register id="HB16TIME3" acronym="HB16TIME3" offset="792" page="1" width="32" description="EPI Host-Bus 16 Timing Extension 3" />
+    <register id="HB8TIME4" acronym="HB8TIME4" offset="796" page="1" width="32" description="EPI Host-Bus 8 Timing Extension 4" />
+    <register id="HB16TIME4" acronym="HB16TIME4" offset="796" page="1" width="32" description="EPI Host-Bus 16 Timing Extension 4" />    
+    
+</module>

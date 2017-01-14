@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<drivers id="CS_DAP_PC">
+	<isa Type="CS_DAP_PC" ProcID="0x38000005">
+		<driver file="NONE">
+			<connectionType Type="JLink"/>
+		</driver>
+	</isa>
+</drivers>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<newBreakpoint xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="schema.xsd" enable="false" name="DWT Data Variable Trace" breakpointType="1">
+  <targets>
+    <target>
+      <type>dsk,emu</type>
+      <familyId>470</familyId>
+      <subfamilyId>e</subfamilyId>
+      <revision>*</revision>
+    </target>
+  </targets>
+  <defaultProperty>
+    <property name="Hardware Configuration.Type" value="DWT Data Variable Trace" />
+    <property name="Miscellaneous.Name" value="DWT Data Variable Trace" />
+  </defaultProperty>
+  <submitSequence>
+		<id>Hardware Configuration.Type.Location</id>
+  </submitSequence>
+  <showIn>
+    <breakpointView autoSubmit="false"/>
+		<editor autoSubmit="true" selectionType="variable">
+			<property>
+				<id>Hardware Configuration.Type.Location</id>
+				<selectionLocation>selection</selectionLocation>
+			</property>
+		</editor>
+  </showIn>
+  <dialog colCount="2">
+		<label id="label_location" widthHint="50" heightHint="18" verticalAlign="center" horizontalAlign="fill">
+			<text>Location:</text>
+		</label>
+		<textBox id="Hardware Configuration.Type.Location" widthHint="190" heightHint="20" verticalAlign="center" horizontalAlign="center">
+			<text>Enter variable location here (symbol or address)...</text>
+		</textBox>
+  </dialog>
+</newBreakpoint>

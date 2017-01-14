@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<translate name="ProfileTranslate">
+   	<passthru name="Thread"	input="Function==&quot;&quot;?Context==&quot;&quot;?Symbol:Context:null"/>
+	<passthruAll/>
+</translate>
+

@@ -1,0 +1,13 @@
+<Panel id="TMS470-TMS570">TMS470-TMS570 CUSTOM
+
+  <Control id="Default" type="Button" >&amp;Default</Control>
+
+  <Control id="DevArm7IsBigEndian" type="CheckBox">ARM7 Is Big Endian</Control>
+
+  <Control id="DevArm7NoChain0" type="CheckBox">ARM7 No Chain0</Control>
+
+  <Control id="DevArm7HWDisconnect" type="CheckBox">ARM7-Cortex Hardware Disconnect</Control>
+
+  <Control id="DevHWDisconnect" type="CheckBox">Hardware Disconnect - ALL</Control>
+ 
+</Panel>

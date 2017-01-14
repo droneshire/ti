@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cpu id="SEC_AP" isa="SEC_AP" HW_revision="1.0" XML_version="1.0" description="Secure AP">
+	<register id="TRANSMIT_DATA"    acronym="TRANSMIT_DATA" 	width="32" description="Transmit Data Register" />
+		<bitfield id="TXDAT" width="32" begin="31" end="0" resetval="0" description="Transmit Data.  Writing this sets the TXDATAVAIL bit in the Transmit Control Register" range="" rwaccess="RW">
+      		</bitfield>
+	<register id="TRANSMIT_CONTROL" acronym="TRANSMIT_CONTROL"  width="32" description="Transmit Control Register" />
+		<bitfield id="CONTROL" width="31" begin="31" end="1" resetval="0" description="Device specific control information for the system security logic." range="" rwaccess="RW">
+		</bitfield>	
+		<bitfield id="TXDATAVAIL" width="1" begin="0" end="0" resetval="0" description="Set automatically when the TX Data Register is written.  Cleared automatically when the system debug logic indicates it has accepted TX Data" range="" rwaccess="R">
+      		</bitfield>
+	<register id="RECEIVE_DATA"     acronym="RECEIVE_DATA"      width="32" description="Receive Data Register" />
+		<bitfield id="RXDAT" width="32" begin="31" end="0" resetval="0" description="Receive Data.  Reading this clears the RXDATAVAIL bit in the Receive Control Register" range="" rwaccess="RW">
+		</bitfield>
+	<register id="RECEIVE_CONTROL"  acronym="RECEIVE_CONTROL"   width="32" description="Receive Control Register" />
+		<bitfield id="CONTROL" width="31" begin="31" end="1" resetval="0" description="Device specific control information for the system security logic." range="" rwaccess="RW">
+		</bitfield>	
+		<bitfield id="RXDATAVAIL" width="1" begin="0" end="0" resetval="0" description="Set automatically when the system security logic indicates that RX Data Register is valid.  Cleared automatically when the RX data register is read" range="" rwaccess="R">
+      		</bitfield>		
+</cpu>

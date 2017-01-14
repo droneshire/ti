@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module id="Control" HW_revision="" XML_version="1" description="Control Registers">
+
+    <register id="CSR"      acronym="CSR"       offset="0x00" page="3" width="32" description="Control Status Register">
+        <bitfield id="DBZ"     width="1"  begin="13" end="13" resetval="0" description="Divide by Zero"          range="" rwaccess="RW" />
+        <bitfield id="DBZE"    width="1"  begin="12" end="12" resetval="0" description="Divide by Zero Enable"   range="" rwaccess="RW" />
+        <bitfield id="INUM"    width="4"  begin="11" end="8"  resetval="0" description="Interrupt Number"        range="" rwaccess="RW" />
+        <bitfield id="V"       width="1"  begin="7"  end="7"  resetval="0" description="Overflow Bit"            range="" rwaccess="RW" />
+        <bitfield id="SAT"     width="1"  begin="6"  end="6"  resetval="0" description="Saturation Bit"          range="" rwaccess="RW" />
+        <bitfield id="C"       width="1"  begin="5"  end="5"  resetval="0" description="Carry Bit"               range="" rwaccess="RW" />
+        <bitfield id="GT"      width="1"  begin="4"  end="4"  resetval="0" description="Greater Than Bit"        range="" rwaccess="RW" />
+        <bitfield id="LT"      width="1"  begin="3"  end="3"  resetval="0" description="Less Than Bit"           range="" rwaccess="RW" />
+        <bitfield id="EQ"      width="1"  begin="2"  end="2"  resetval="0" description="Equal Bit"               range="" rwaccess="RW" />
+        <bitfield id="GIE"     width="1"  begin="0"  end="0"  resetval="0" description="Global Interrupt Enable" range="" rwaccess="RW" />
+    </register>
+    <register id="IER"      acronym="IER"       offset="0x01" page="3" width="32" description="Interrupt Enable Register">
+        <bitfield id="IE15"    width="1"  begin="15" end="15" resetval="0" description="Enable Bit for INT15"    range="" rwaccess="RW" />
+        <bitfield id="IE14"    width="1"  begin="14" end="14" resetval="0" description="Enable Bit for INT14"    range="" rwaccess="RW" />
+        <bitfield id="IE13"    width="1"  begin="13" end="13" resetval="0" description="Enable Bit for INT13"    range="" rwaccess="RW" />
+        <bitfield id="IE12"    width="1"  begin="12" end="12" resetval="0" description="Enable Bit for INT12"    range="" rwaccess="RW" />
+        <bitfield id="IE11"    width="1"  begin="11" end="11" resetval="0" description="Enable Bit for INT11"    range="" rwaccess="RW" />
+        <bitfield id="IE10"    width="1"  begin="10" end="10" resetval="0" description="Enable Bit for INT10"    range="" rwaccess="RW" />
+        <bitfield id="IE9"     width="1"  begin="9"  end="9"  resetval="0" description="Enable Bit for INT9"     range="" rwaccess="RW" />
+        <bitfield id="IE8"     width="1"  begin="8"  end="8"  resetval="0" description="Enable Bit for INT8"     range="" rwaccess="RW" />
+        <bitfield id="IE7"     width="1"  begin="7"  end="7"  resetval="0" description="Enable Bit for INT7"     range="" rwaccess="RW" />
+        <bitfield id="IE6"     width="1"  begin="6"  end="6"  resetval="0" description="Enable Bit for INT6"     range="" rwaccess="RW" />
+        <bitfield id="IE5"     width="1"  begin="5"  end="5"  resetval="0" description="Enable Bit for INT5"     range="" rwaccess="RW" />
+        <bitfield id="IE4"     width="1"  begin="4"  end="4"  resetval="0" description="Enable Bit for INT4"     range="" rwaccess="RW" />
+        <bitfield id="NMIE"    width="1"  begin="1"  end="1"  resetval="0" description="Enable Bit for NMI"      range="" rwaccess="RW" />
+    </register>
+    <register id="IFR"      acronym="IFR"       offset="0x02" page="3" width="32" description="Interrupt Flag Register">
+        <bitfield id="IF15"    width="1"  begin="15" end="15" resetval="0" description="Flag Bit for INT15"      range="" rwaccess="RW" />
+        <bitfield id="IF14"    width="1"  begin="14" end="14" resetval="0" description="Flag Bit for INT14"      range="" rwaccess="RW" />
+        <bitfield id="IF13"    width="1"  begin="13" end="13" resetval="0" description="Flag Bit for INT13"      range="" rwaccess="RW" />
+        <bitfield id="IF12"    width="1"  begin="12" end="12" resetval="0" description="Flag Bit for INT12"      range="" rwaccess="RW" />
+        <bitfield id="IF11"    width="1"  begin="11" end="11" resetval="0" description="Flag Bit for INT11"      range="" rwaccess="RW" />
+        <bitfield id="IF10"    width="1"  begin="10" end="10" resetval="0" description="Flag Bit for INT10"      range="" rwaccess="RW" />
+        <bitfield id="IF9"     width="1"  begin="9"  end="9"  resetval="0" description="Flag Bit for INT9"       range="" rwaccess="RW" />
+        <bitfield id="IF8"     width="1"  begin="8"  end="8"  resetval="0" description="Flag Bit for INT8"       range="" rwaccess="RW" />
+        <bitfield id="IF7"     width="1"  begin="7"  end="7"  resetval="0" description="Flag Bit for INT7"       range="" rwaccess="RW" />
+        <bitfield id="IF6"     width="1"  begin="6"  end="6"  resetval="0" description="Flag Bit for INT6"       range="" rwaccess="RW" />
+        <bitfield id="IF5"     width="1"  begin="5"  end="5"  resetval="0" description="Flag Bit for INT5"       range="" rwaccess="RW" />
+        <bitfield id="IF4"     width="1"  begin="4"  end="4"  resetval="0" description="Flag Bit for INT4"       range="" rwaccess="RW" />
+        <bitfield id="NMIF"    width="1"  begin="1"  end="1"  resetval="0" description="Flag Bit for NMI"        range="" rwaccess="RW" />
+    </register>
+    <register id="ISR"      acronym="ISR"       offset="0x03" page="3" width="32" description="Interrupt Set Register">
+        <bitfield id="IS15"    width="1"  begin="15" end="15" resetval="0" description="Set Bit for INT15"       range="" rwaccess="W" />
+        <bitfield id="IS14"    width="1"  begin="14" end="14" resetval="0" description="Set Bit for INT14"       range="" rwaccess="W" />
+        <bitfield id="IS13"    width="1"  begin="13" end="13" resetval="0" description="Set Bit for INT13"       range="" rwaccess="W" />
+        <bitfield id="IS12"    width="1"  begin="12" end="12" resetval="0" description="Set Bit for INT12"       range="" rwaccess="W" />
+        <bitfield id="IS11"    width="1"  begin="11" end="11" resetval="0" description="Set Bit for INT11"       range="" rwaccess="W" />
+        <bitfield id="IS10"    width="1"  begin="10" end="10" resetval="0" description="Set Bit for INT10"       range="" rwaccess="W" />
+        <bitfield id="IS9"     width="1"  begin="9"  end="9"  resetval="0" description="Set Bit for INT9"        range="" rwaccess="W" />
+        <bitfield id="IS8"     width="1"  begin="8"  end="8"  resetval="0" description="Set Bit for INT8"        range="" rwaccess="W" />
+        <bitfield id="IS7"     width="1"  begin="7"  end="7"  resetval="0" description="Set Bit for INT7"        range="" rwaccess="W" />
+        <bitfield id="IS6"     width="1"  begin="6"  end="6"  resetval="0" description="Set Bit for INT6"        range="" rwaccess="W" />
+        <bitfield id="IS5"     width="1"  begin="5"  end="5"  resetval="0" description="Set Bit for INT5"        range="" rwaccess="W" />
+        <bitfield id="IS4"     width="1"  begin="4"  end="4"  resetval="0" description="Set Bit for INT4"        range="" rwaccess="W" />
+    </register>
+    <register id="ICR"      acronym="ICR"       offset="0x04" page="3" width="32" description="Interrupt Clear Register">
+        <bitfield id="IC15"    width="1"  begin="15" end="15" resetval="0" description="Clear Bit for INT15"     range="" rwaccess="W" />
+        <bitfield id="IC14"    width="1"  begin="14" end="14" resetval="0" description="Clear Bit for INT14"     range="" rwaccess="W" />
+        <bitfield id="IC13"    width="1"  begin="13" end="13" resetval="0" description="Clear Bit for INT13"     range="" rwaccess="W" />
+        <bitfield id="IC12"    width="1"  begin="12" end="12" resetval="0" description="Clear Bit for INT12"     range="" rwaccess="W" />
+        <bitfield id="IC11"    width="1"  begin="11" end="11" resetval="0" description="Clear Bit for INT11"     range="" rwaccess="W" />
+        <bitfield id="IC10"    width="1"  begin="10" end="10" resetval="0" description="Clear Bit for INT10"     range="" rwaccess="W" />
+        <bitfield id="IC9"     width="1"  begin="9"  end="9"  resetval="0" description="Clear Bit for INT9"      range="" rwaccess="W" />
+        <bitfield id="IC8"     width="1"  begin="8"  end="8"  resetval="0" description="Clear Bit for INT8"      range="" rwaccess="W" />
+        <bitfield id="IC7"     width="1"  begin="7"  end="7"  resetval="0" description="Clear Bit for INT7"      range="" rwaccess="W" />
+        <bitfield id="IC6"     width="1"  begin="6"  end="6"  resetval="0" description="Clear Bit for INT6"      range="" rwaccess="W" />
+        <bitfield id="IC5"     width="1"  begin="5"  end="5"  resetval="0" description="Clear Bit for INT5"      range="" rwaccess="W" />
+        <bitfield id="IC4"     width="1"  begin="4"  end="4"  resetval="0" description="Clear Bit for INT4"      range="" rwaccess="W" />
+    </register>
+    <register id="NRP"      acronym="NRP"       offset="0x05" page="3" width="32" description="NMI Return Pointer (half word address)" />
+    <register id="IRP"      acronym="IRP"       offset="0x06" page="3" width="32" description="Interrupt Return Pointer (half word address)" />
+    <register id="SP"       acronym="SP"        offset="0x07" page="3" width="32" description="Stack Pointer (byte address)" />
+    <register id="GDP"      acronym="GDP"       offset="0x08" page="3" width="32" description="Global Data Pointer (byte address)" />
+    <register id="LR"       acronym="LR"        offset="0x09" page="3" width="32" description="Link Register (half word address)" />
+    <register id="LSA0"     acronym="LSA0"      offset="0x0a" page="3" width="32" description="Loop 0 Start Address (byte address)" />
+    <register id="LEA0"     acronym="LEA0"      offset="0x0b" page="3" width="32" description="Loop 0 End Address (byte address)" />
+    <register id="LCNT0"    acronym="LCNT0"     offset="0x0c" page="3" width="32" description="Loop 0 Iteration Count" />
+    <register id="LSA1"     acronym="LSA1"      offset="0x0d" page="3" width="32" description="Loop 1 Start Address (byte address)" />
+    <register id="LEA1"     acronym="LEA1"      offset="0x0e" page="3" width="32" description="Loop 1 End Address (byte address)" />
+    <register id="LCNT1"    acronym="LCNT1"     offset="0x0f" page="3" width="32" description="Loop 1 Iteration Count" />
+    <register id="LCNT0RLD" acronym="LCNT0RLDT" offset="0x10" page="3" width="32" description="Loop 0 Iteration Count Reload Value" />
+    <register id="SCSR"     acronym="SCSR"      offset="0x11" page="3" width="32" description="Shadow CSR">
+        <bitfield id="DBZ"     width="1"  begin="13" end="13" resetval="0" description="Shadow Copy of CSR:DBZ"  range="" rwaccess="RW" />
+        <bitfield id="DBZE"    width="1"  begin="12" end="12" resetval="0" description="Shadow Copy of CSR:DBZE" range="" rwaccess="RW" />
+        <bitfield id="INUM"    width="4"  begin="11" end="8"  resetval="0" description="Shadow Copy of CSR:INUM" range="" rwaccess="RW" />
+        <bitfield id="V"       width="1"  begin="7"  end="7"  resetval="0" description="Shadow Copy of CSR:V"    range="" rwaccess="RW" />
+        <bitfield id="SAT"     width="1"  begin="6"  end="6"  resetval="0" description="Shadow Copy of CSR:SAT"  range="" rwaccess="RW" />
+        <bitfield id="C"       width="1"  begin="5"  end="5"  resetval="0" description="Shadow Copy of CSR:C"    range="" rwaccess="RW" />
+        <bitfield id="GT"      width="1"  begin="4"  end="4"  resetval="0" description="Shadow Copy of CSR:GT"   range="" rwaccess="RW" />
+        <bitfield id="LT"      width="1"  begin="3"  end="3"  resetval="0" description="Shadow Copy of CSR:LT"   range="" rwaccess="RW" />
+        <bitfield id="EQ"      width="1"  begin="2"  end="2"  resetval="0" description="Shadow Copy of CSR:EQ"   range="" rwaccess="RW" />
+        <bitfield id="GIE"     width="1"  begin="0"  end="0"  resetval="0" description="Shadow Copy of CSR:GIE"  range="" rwaccess="RW" />
+    </register>
+    <register id="NMISCSR"  acronym="NMISCSR"   offset="0x12" page="3" width="32" description="NMI Shadow CSR">
+        <bitfield id="DBZ"     width="1"  begin="13" end="13" resetval="0" description="Shadow Copy of CSR:DBZ"  range="" rwaccess="RW" />
+        <bitfield id="DBZE"    width="1"  begin="12" end="12" resetval="0" description="Shadow Copy of CSR:DBZE" range="" rwaccess="RW" />
+        <bitfield id="INUM"    width="4"  begin="11" end="8"  resetval="0" description="Shadow Copy of CSR:INUM" range="" rwaccess="RW" />
+        <bitfield id="V"       width="1"  begin="7"  end="7"  resetval="0" description="Shadow Copy of CSR:V"    range="" rwaccess="RW" />
+        <bitfield id="SAT"     width="1"  begin="6"  end="6"  resetval="0" description="Shadow Copy of CSR:SAT"  range="" rwaccess="RW" />
+        <bitfield id="C"       width="1"  begin="5"  end="5"  resetval="0" description="Shadow Copy of CSR:C"    range="" rwaccess="RW" />
+        <bitfield id="GT"      width="1"  begin="4"  end="4"  resetval="0" description="Shadow Copy of CSR:GT"   range="" rwaccess="RW" />
+        <bitfield id="LT"      width="1"  begin="3"  end="3"  resetval="0" description="Shadow Copy of CSR:LT"   range="" rwaccess="RW" />
+        <bitfield id="EQ"      width="1"  begin="2"  end="2"  resetval="0" description="Shadow Copy of CSR:EQ"   range="" rwaccess="RW" />
+        <bitfield id="GIE"     width="1"  begin="0"  end="0"  resetval="0" description="Shadow Copy of CSR:GIE"  range="" rwaccess="RW" />
+    </register>
+    <register id="CPUID"    acronym="CPUID"     offset="0x13" page="3" width="32" description="CPU ID Register">
+        <bitfield id="CPUNUM"  width="4"  begin="19" end="16" resetval="0" description="CPU Instance Identifier" range="" rwaccess="R" />
+        <bitfield id="Y_MINOR" width="4"  begin="15" end="12" resetval="0" description="Minor Version Number"    range="" rwaccess="R" />
+        <bitfield id="X_MAJOR" width="12" begin="11" end="0"  resetval="0" description="Major Version Number"    range="" rwaccess="R" />
+    </register>
+    <register id="DPC"      acronym="DPC"       offset="0x14" page="3" width="32" description="Decode Program Counter (half word address)" />
+    <register id="TSCL"     acronym="TSCL"      offset="0x15" page="3" width="32" description="Time Stamp Counter Low Half" />
+    <register id="TSCH"     acronym="TSCH"      offset="0x16" page="3" width="32" description="Time Stamp Counter High Half" />
+
+</module>

@@ -1,0 +1,354 @@
+/*--------------------------------------------------------------*/
+/* C5416_DSK.gel                                                */
+/* Version 3.00                                                 */
+/*                                                              */
+/* This GEL file is designed to be used in conjunction with     */
+/* CCS 3.X and the TMS320VC5416 based DSK.                      */
+/*                                                              */
+/*--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------*/
+/* StartUp()                                                    */
+/* This function is called each time CCS is started.            */
+/* Customize this function to perform desired initialization.   */
+/*--------------------------------------------------------------*/
+StartUp()
+{
+    setup_memory_map();
+
+    /*------------------------------------------------------*/
+    /* Uncomment the OnTargetConnect() call for CCS 2.X     */
+    /* support.                                             */
+    /*                                                      */
+    /*                                                      */
+    /*------------------------------------------------------*/
+    //OnTargetConnect();
+}
+
+/*--------------------------------------------------------------*/
+/* OnTargetConnect()                                            */
+/* This function is called by CCS when you do Debug->Connect on */
+/* CCS 3.X.  When using CCS 2.X, the OnTargetConnect() call     */
+/* should be uncommented from the StartUp() function.           */
+/*--------------------------------------------------------------*/
+OnTargetConnect()
+{
+    /*------------------------------------------------------*/
+    /* GEL_Reset() is used to deal with the worst case      */
+    /* senario of unknown target state.  If for some reason */
+    /* a reset is not desired upon target connection,       */
+    /* GEL_Reset() may be removed and replaced with         */
+    /* something "less brutal".                             */
+    /*------------------------------------------------------*/
+    GEL_Reset();
+
+    setup_extended_memory_map();
+
+    reset_cpu( );
+
+    GEL_TextOut("Gel StartUp Complete.\n");
+}
+
+/*--------------------------------------------------------------*/
+/* setup_memory_map()                                           */
+/* Memory map setup                                             */
+/*--------------------------------------------------------------*/
+setup_memory_map()
+{
+    /* All memory maps are based on the PMST value of 0xFFE0 */
+    GEL_MapOn();
+    GEL_MapReset();
+    GEL_MapAdd( 0x00080u, 0, 0x07F80u, 1, 1 );  // DARAM
+    GEL_MapAdd( 0x08000u, 0, 0x08000u, 1, 1 );  // External
+    GEL_MapAdd( 0x00000u, 1, 0x00060u, 1, 1 );  // MMRs
+    GEL_MapAdd( 0x00060u, 1, 0x07FA0u, 1, 1 );  // DARAM
+    GEL_MapAdd( 0x08000u, 1, 0x08000u, 1, 1 );  // DARAM
+    GEL_MapAdd( 0x00000u, 2, 0x10000u, 1, 1 );  // IO Space
+}
+
+/*--------------------------------------------------------------*/
+/* setup_extended_memory_map()                                  */
+/* Extended memory map setup                                    */
+/*--------------------------------------------------------------*/
+setup_extended_memory_map()
+{
+    /* Turn on the Extended Memory Map */
+    GEL_XMDef( 0x0000u, 0x01eu, 1, 0x8000u, 0x7f );
+    GEL_XMOn();
+
+    GEL_MapAdd( 0x18000u, 0, 0x08000u, 1, 1 );  // DARAM
+    GEL_MapAdd( 0x28000u, 0, 0x08000u, 1, 1 );  // SARAM
+    GEL_MapAdd( 0x38000u, 0, 0x08000u, 1, 1 );  // SARAM
+}
+
+/*--------------------------------------------------------------*/
+/* clear_memory_map()                                           */
+/* Memory map disable                                           */
+/*--------------------------------------------------------------*/
+clear_memory_map()
+{
+    GEL_MapOff();
+}
+
+/*--------------------------------------------------------------*/
+/* reset_cpu()                                                  */
+/* Reset the CPU                                                */
+/*--------------------------------------------------------------*/
+reset_cpu()
+{
+    /* Set PMST to: OVLY on; DROM on, CLKOUT off */
+    #define PMST_VAL        0x7facu
+
+    /* Set wait-state control reg for: 2 wait states, 4 for I/O */
+    #define SWWSR_VAL       0x4492u
+
+    /* Set external-banks switch control for: set CONSEC and BH, CLKOUT/=2 */
+    #define BSCR_VAL        0xa002u
+
+    PMST = PMST_VAL;
+
+    /*------------------------------------------------------*/
+    /* Don't change the wait states, let the application    */
+    /* code handle it.                                      */
+    /* Note: at power up all wait states will be the        */
+    /* maximum (7)                                          */
+    /* SWWSR = SWWSR_VAL;                                   */
+    /*------------------------------------------------------*/
+
+    BSCR = BSCR_VAL;
+
+    disable_flash();
+
+    reset_peripherals();
+
+    GEL_TextOut("CPU Reset Complete.\n");
+}
+
+/*--------------------------------------------------------------*/
+/* disable_flash()                                              */
+/* Disable Flash and Enable SRAM                                */
+/*--------------------------------------------------------------*/
+disable_flash()
+{
+    /* Disable Flash so SRAM is visible */
+    *(int*)0x0005@io = 0x40;
+
+    GEL_TextOut("Flash is disabled.\n");
+}
+
+/*--------------------------------------------------------------*/
+/* reset_peripherals()                                          */
+/* Peripheral Reset                                             */
+/*--------------------------------------------------------------*/
+reset_peripherals()
+{
+    IFR = 0xFFFFu;
+    IFR = 0x0000u;
+
+    reset_dma();
+    reset_mcbsp0();
+    reset_mcbsp1();
+    reset_mcbsp2();
+    reset_timer0();
+    reset_gpio();
+}
+
+/*--------------------------------------------------------------*/
+/* reset_dma()                                                  */
+/* DMA Reset                                                    */
+/*--------------------------------------------------------------*/
+reset_dma()
+{
+    /* Set Peripheral Control Register Addresses for DEV_RESET */
+    #define DMPREC                  0x0054u
+    #define DMSA                    0x0055u
+    #define DMSDI                   0x0056u
+
+    #define DMA_CH0_DMFSC_SUB_ADDR  0x0003u
+    #define DMA_CH1_DMFSC_SUB_ADDR  0x0008u
+    #define DMA_CH2_DMFSC_SUB_ADDR  0x000Du
+    #define DMA_CH3_DMFSC_SUB_ADDR  0x0012u
+    #define DMA_CH4_DMFSC_SUB_ADDR  0x0017u
+    #define DMA_CH5_DMFSC_SUB_ADDR  0x001cu
+
+    *(int *)DMPREC = 0;
+
+    *(int *)DMSA  = DMA_CH0_DMFSC_SUB_ADDR;
+    *(int *)DMSDI = 0;
+    *(int *)DMSDI = 0;
+    *(int *)DMSA  = DMA_CH1_DMFSC_SUB_ADDR;
+    *(int *)DMSDI = 0;
+    *(int *)DMSDI = 0;
+    *(int *)DMSA  = DMA_CH2_DMFSC_SUB_ADDR;
+    *(int *)DMSDI = 0;
+    *(int *)DMSDI = 0;
+    *(int *)DMSA  = DMA_CH3_DMFSC_SUB_ADDR;
+    *(int *)DMSDI = 0;
+    *(int *)DMSDI = 0;
+    *(int *)DMSA  = DMA_CH4_DMFSC_SUB_ADDR;
+    *(int *)DMSDI = 0;
+    *(int *)DMSDI = 0;
+    *(int *)DMSA  = DMA_CH2_DMFSC_SUB_ADDR;
+    *(int *)DMSDI = 0;
+    *(int *)DMSDI = 0;
+}
+
+/*--------------------------------------------------------------*/
+/* reset_mcbsp0()                                               */
+/* MCBSP0 Reset                                                 */
+/*--------------------------------------------------------------*/
+reset_mcbsp0()
+{
+    #define MCBSP0_SPSA             0x0038u
+    #define MCBSP0_SPSD             0x0039u
+
+    #define MCBSP_SPCR1_SUB_ADDR    0x0000u
+    #define MCBSP_SPCR2_SUB_ADDR    0x0001u
+    #define MCBSP_SRGR1_SUB_ADDR    0x0006u
+    #define MCBSP_SRGR2_SUB_ADDR    0x0007u
+    #define MCBSP_MCR1_SUB_ADDR     0x0008u
+    #define MCBSP_MCR2_SUB_ADDR     0x0009u
+    #define SRGR1_INIT              0x0001u
+
+    *(int *)MCBSP0_SPSA = MCBSP_SPCR1_SUB_ADDR;
+    *(int *)MCBSP0_SPSD = 0;
+    *(int *)MCBSP0_SPSA = MCBSP_SPCR2_SUB_ADDR;
+    *(int *)MCBSP0_SPSD = 0;
+
+    *(int *)MCBSP0_SPSA = MCBSP_SRGR1_SUB_ADDR;
+    *(int *)MCBSP0_SPSD = SRGR1_INIT;
+    *(int *)MCBSP0_SPSA = MCBSP_SRGR2_SUB_ADDR;
+    *(int *)MCBSP0_SPSD = 0;
+
+    *(int *)MCBSP0_SPSA = MCBSP_MCR1_SUB_ADDR;
+    *(int *)MCBSP0_SPSD = 0;
+    *(int *)MCBSP0_SPSA = MCBSP_MCR2_SUB_ADDR;
+    *(int *)MCBSP0_SPSD = 0;
+}
+
+/*--------------------------------------------------------------*/
+/* reset_mcbsp1()                                               */
+/* MCBSP1 Reset                                                 */
+/*--------------------------------------------------------------*/
+reset_mcbsp1()
+{
+    #define MCBSP1_SPSA             0x0048u
+    #define MCBSP1_SPSD             0x0049u
+
+    #define MCBSP_SPCR1_SUB_ADDR    0x0000u
+    #define MCBSP_SPCR2_SUB_ADDR    0x0001u
+    #define MCBSP_SRGR1_SUB_ADDR    0x0006u
+    #define MCBSP_SRGR2_SUB_ADDR    0x0007u
+    #define MCBSP_MCR1_SUB_ADDR     0x0008u
+    #define MCBSP_MCR2_SUB_ADDR     0x0009u
+    #define SRGR1_INIT              0x0001u
+
+    *(int *)MCBSP1_SPSA = MCBSP_SPCR1_SUB_ADDR;
+    *(int *)MCBSP1_SPSD = 0;
+    *(int *)MCBSP1_SPSA = MCBSP_SPCR2_SUB_ADDR;
+    *(int *)MCBSP1_SPSD = 0;
+
+    *(int *)MCBSP1_SPSA = MCBSP_SRGR1_SUB_ADDR;
+    *(int *)MCBSP1_SPSD = SRGR1_INIT;
+    *(int *)MCBSP1_SPSA = MCBSP_SRGR2_SUB_ADDR;
+    *(int *)MCBSP1_SPSD = 0;
+
+    *(int *)MCBSP1_SPSA = MCBSP_MCR1_SUB_ADDR;
+    *(int *)MCBSP1_SPSD = 0;
+    *(int *)MCBSP1_SPSA = MCBSP_MCR2_SUB_ADDR;
+    *(int *)MCBSP1_SPSD = 0;
+}
+
+/*--------------------------------------------------------------*/
+/* reset_mcbsp2()                                               */
+/* MCBSP2 Reset                                                 */
+/*--------------------------------------------------------------*/
+reset_mcbsp2()
+{
+    #define MCBSP2_SPSA             0x0034u
+    #define MCBSP2_SPSD             0x0035u
+
+    #define MCBSP_SPCR1_SUB_ADDR    0x0000u
+    #define MCBSP_SPCR2_SUB_ADDR    0x0001u
+    #define MCBSP_SRGR1_SUB_ADDR    0x0006u
+    #define MCBSP_SRGR2_SUB_ADDR    0x0007u
+    #define MCBSP_MCR1_SUB_ADDR     0x0008u
+    #define MCBSP_MCR2_SUB_ADDR     0x0009u
+    #define SRGR1_INIT              0x0001u
+
+    *(int *)MCBSP2_SPSA = MCBSP_SPCR1_SUB_ADDR;
+    *(int *)MCBSP2_SPSD = 0;
+    *(int *)MCBSP2_SPSA = MCBSP_SPCR2_SUB_ADDR;
+    *(int *)MCBSP2_SPSD = 0;
+
+    *(int *)MCBSP2_SPSA = MCBSP_SRGR1_SUB_ADDR;
+    *(int *)MCBSP2_SPSD = SRGR1_INIT;
+    *(int *)MCBSP2_SPSA = MCBSP_SRGR2_SUB_ADDR;
+    *(int *)MCBSP2_SPSD = 0;
+
+    *(int *)MCBSP2_SPSA = MCBSP_MCR1_SUB_ADDR;
+    *(int *)MCBSP2_SPSD = 0;
+    *(int *)MCBSP2_SPSA = MCBSP_MCR2_SUB_ADDR;
+    *(int *)MCBSP2_SPSD = 0;
+}
+
+/*--------------------------------------------------------------*/
+/* reset_timer0()                                               */
+/* Timer0 Reset                                                 */
+/*--------------------------------------------------------------*/
+reset_timer0()
+{
+    #define PRD0            0x0025u
+    #define TCR0            0x0026u
+
+    #define PRD1            0x0031u
+    #define TCR1            0x0032u
+
+    #define TIMER_STOP      0x0010u
+    #define TIMER_RESET     0x0020u
+    #define PRD_DEFAULT     0xFFFFu
+
+    *(int *)TCR0 = TIMER_STOP;
+    *(int *)PRD0 = PRD_DEFAULT;
+    *(int *)TCR0 = TIMER_RESET;
+}
+
+/*--------------------------------------------------------------*/
+/* reset_gpio()                                                 */
+/* GPIO Reset                                                   */
+/*--------------------------------------------------------------*/
+reset_gpio()
+{
+    #define GPIOCR          0x0010u
+
+    *(int *)GPIOCR = 0;
+}
+
+/*--------------------------------------------------------------*/
+/* DSK5416 MENU                                                 */
+/*--------------------------------------------------------------*/
+menuitem "DSK5416 Functions";
+
+hotmenu Reset()
+{
+    GEL_Reset();
+    reset_cpu( );
+}
+
+/*--------------------------------------------------------------*/
+/* MEMORY MAP MENU                                              */
+/*--------------------------------------------------------------*/
+menuitem "Memory Map";
+
+hotmenu SetMemoryMap()
+{
+    setup_memory_map();
+}
+hotmenu    SetExtendedMemoryMap()
+{
+    setup_extended_memory_map();
+}
+hotmenu ClearMemoryMap()
+{
+    clear_memory_map();
+}

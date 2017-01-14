@@ -1,0 +1,12 @@
+# config version=3.5
+@ cpu0 family=tms320c641x
+
+$ uscif
+  tclk_program   = specific
+  tclk_frequency = 20.5MHz
+  tclk_testmode  = nothing
+  pathlength_ir  = 0
+  pathlength_dr  = 0
+$ /
+
+# /

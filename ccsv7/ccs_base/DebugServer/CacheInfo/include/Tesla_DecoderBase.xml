@@ -1,0 +1,130 @@
+<!-- Decoders perform the following sequence of operations:
+		1) XOR XorWithRegValue with register valuex
+		2) Mask with BitfieldMask property 
+		3) shift right by BitfieldShift bits 
+		4a) if a <StringTable> field is present with <NumStrings> > 0, use result of step 3 as index into lookup table of strings and 
+			set string result = value from table.  No further processing is done in this case.
+		4b) if a <DecoderTable> field is present with <NumDecoders> > 0, use result of step 3 as index into lookup table of decoders and
+			call the specified decoder and sets result = value and string result = string from the decoder 
+		4c) if a <LookupTable> field is present with <NumIndexValues> > 0, use result of step 3 as index into lookup table and set result = value from table 
+		5) multiply the result from step 4b or 4c by floating point Multiplier value (e.g. set to 0.25 to divide by 4)  
+		6) add AddToProduct value 
+		7) if IsTrueIfResultIsZero, decode_bool returns true if 0, false if non-zero
+		
+		If any of these properties are not defined, they are set to the
+		following default values:
+			XorWithRegValue = 0
+			BitfieldMask = 0xffffffff
+			BitfieldShift = 0
+			Multiplier = 1.0
+			AddToProduct = 0
+			IsTrueIfResultIsZero = false
+		-->
+<Decoder>
+	<DecoderName>GetL1CacheSize</DecoderName>
+	<BitfieldMask>0x0FFC0</BitfieldMask>
+	<BitfieldShift>6</BitfieldShift>
+	<Multiplier>1024.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>
+<Decoder>
+<!-- L1 cache lines are all 32B long, so need to shift the cache size right by 5 bits. -->
+	<DecoderName>GetL1NumCacheLines</DecoderName>
+	<BitfieldMask>0x0FFC0</BitfieldMask>
+	<BitfieldShift>1</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>GetL1NumWays</DecoderName>
+	<BitfieldMask>0x0</BitfieldMask>
+	<BitfieldShift>0</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>4</AddToProduct>
+</Decoder>
+<Decoder>
+   <!-- Tesla has a 4 way set-associative cache.  The least recently used way is specified by the 2 LSBs of the cache tag RAM LRA data -->
+	<DecoderName>L1LruToWayMap</DecoderName>
+	<BitfieldMask>0x03</BitfieldMask>
+	<BitfieldShift>0</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>
+<Decoder>
+	<!-- returns true if the cache hasnot  been bypassed -->
+	<DecoderName>IsCacheEnabled</DecoderName>
+	<BitfieldMask>0x02</BitfieldMask>
+	<BitfieldShift>1</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>GetL2CacheSize</DecoderName>
+	<BitfieldMask>0x0FFC0</BitfieldMask>
+	<BitfieldShift>6</BitfieldShift>
+	<Multiplier>1024.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>GetL2NumCacheLines</DecoderName>
+	<BitfieldMask>0x0FFC0</BitfieldMask>
+	<BitfieldShift>1</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>
+<Decoder>
+	<DecoderName>GetL2NumWays</DecoderName>
+	<BitfieldMask>0x0</BitfieldMask>
+	<BitfieldShift>0</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>8</AddToProduct>
+</Decoder>
+<Decoder>
+	<!-- Tesla has an 8-way set associative L2 cache.
+	 The LRU is defined by the 3 LSBs of the cache tag RAM LRA data   -->
+	<DecoderName>L2LruToWayMap</DecoderName>
+	<BitfieldMask>0x07</BitfieldMask>
+	<BitfieldShift>0</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+</Decoder>
+
+<!-- GetCoreNumber extracts the device number for the device core from the DNUM control register -->
+<Decoder>
+	<DecoderName>GetCoreNumber</DecoderName>
+	<XorWithRegValue>0x0</XorWithRegValue>
+	<BitfieldMask>0x0F</BitfieldMask>
+	<BitfieldShift>0</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+	<IsTrueIfResultIsZero>false</IsTrueIfResultIsZero>
+</Decoder>
+<!-- GetCoreNumber uses the core number from the DNUM control register as an index into a lookup table
+     that specifies the base global address for that core -->
+<Decoder>
+	<DecoderName>GetGlobalAdrsForThisCore</DecoderName>
+	<XorWithRegValue>0x00000000</XorWithRegValue>
+	<BitfieldMask>0x0F</BitfieldMask>
+	<BitfieldShift>0</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+	<LookupTable>
+		<NumIndexValues>16</NumIndexValues>
+		<Array index="0">0x010000000</Array>
+		<Array index="1">0x011000000</Array>
+		<Array index="2">0x012000000</Array>
+		<Array index="3">0x013000000</Array>
+		<Array index="4">0x014000000</Array>
+		<Array index="5">0x015000000</Array>
+		<Array index="6">0x016000000</Array>
+		<Array index="7">0x017000000</Array>   
+		<Array index="8">0x018000000</Array>
+		<Array index="9">0x019000000</Array>
+		<Array index="10">0x01A000000</Array>
+		<Array index="11">0x01B000000</Array>
+		<Array index="12">0x01C000000</Array>
+		<Array index="13">0x01D000000</Array>
+		<Array index="14">0x01E000000</Array>
+		<Array index="15">0x01F000000</Array>   
+	</LookupTable>
+</Decoder>

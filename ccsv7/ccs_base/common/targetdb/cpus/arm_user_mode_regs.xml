@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module id="USER" HW_revision="" XML_version="1.2" description="USER Mode Registers">
+
+	<register id="R8_USER" acronym="R8_USER" width="32" description="General Purpose Register 8 in USER mode" />
+	<register id="R9_USER" acronym="R9_USER" width="32" description="General Purpose Register 9 in USER mode" />
+	<register id="R10_USER" acronym="R10_USER" width="32" description="General Purpose Register 10 in USER mode" />
+	<register id="R11_USER" acronym="R11_USER" width="32" description="General Purpose Register 11 in USER mode" />
+	<register id="R12_USER" acronym="R12_USER" width="32" description="General Purpose Register 12 in USER mode" />
+	<register id="R13_USER" acronym="R13_USER" width="32" description="General Purpose Register 13 in USER mode" />
+	<register id="R14_USER" acronym="R14_USER" width="32" description="General Purpose Register 14 in USER mode" />
+
+</module>

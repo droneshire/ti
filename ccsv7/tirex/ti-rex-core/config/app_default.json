@@ -1,0 +1,20 @@
+{
+  "//": "the following 4 paths will be prefixed with the 'data' path as/if defined in the dconfig file",
+  "contentPath": "ti-rex/git/ti-rex-content",
+  "dbPath": "ti-rex/db",
+  "logsDir": "logs",
+  "analyticsDir": "tirex-analytics",
+  "//": "the following path will be prefixed with the 'defaultCode' path as/if defined in the dconfig file",
+  "downloadsCache": "tirex/downloads",
+  "remoteBundleZips": "https://downloads.ti.com/ccs/esd/tirex/zips/",
+  "//": "the following path is relative to the location of app.js",
+  "contentPackagesConfig": "config/contentPackages/default.json",
+  "refreshDB": "true",
+  "allowRefreshFromWeb": "false",
+  "ccsCloudUrl": "", "//": "will be obtained from dinfra.landscape",
+  "seaportHostIP": "", "//": "will be obtained from from sconfig file",
+  "seaportPort": "", "//": "will be obtained from from sconfig file",
+  "myHttpPort": "3000",
+    "myRole": "tirex",
+    "no_proxy": "localhost,127.0.0.0,.ti.com,.toro.design.ti.com"
+}

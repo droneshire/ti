@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+  TI File $Revision: /main/1 $
+  Checkin $Date: August 5, 2009   17:02:56 $
+  -->
+
+<!-- C2000 Event Manager B Registers
+     ===================================
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     -->
+<module id="EVB" HW_revision="" XML_version="1" description="EVB Registers">
+ <register id="GPTCONB" acronym="GPTCONB" offset="0" page="1" width="16" description="0x7500" />
+ <register id="T3CNT" acronym="T3CNT" offset="1" page="1" width="16" description="0x7501" />
+ <register id="T3CMPR" acronym="T3CMPR" offset="2" page="1" width="16" description="0x7502" />
+ <register id="T3PR" acronym="T3PR" offset="3" page="1" width="16" description="0x7503" />
+ <register id="T3CON" acronym="T3CON" offset="4" page="1" width="16" description="0x7504" />
+ <register id="T4CNT" acronym="T4CNT" offset="5" page="1" width="16" description="0x7505" />
+ <register id="T4CMPR" acronym="T4CMPR" offset="6" page="1" width="16" description="0x7506" />
+ <register id="T4PR" acronym="T4PR" offset="7" page="1" width="16" description="0x7507" />
+ <register id="T4CON" acronym="T4CON" offset="8" page="1" width="16" description="0x7508" />
+ <register id="EXTCONB" acronym="EXTCONB" offset="9" page="1" width="16" description="0x7509" />
+ <!-- 7 empty -->        
+ <register id="COMCONB" acronym="COMCONB" offset="17" page="1" width="16" description="0x7511" />
+ <!-- 1 empty -->        
+ <register id="ACTRB" acronym="ACTRB" offset="19" page="1" width="16" description="0x7513" />
+ <!-- 1 empty -->        
+ <register id="DBTCONB" acronym="DBTCONB" offset="21" page="1" width="16" description="0x7515" />
+ <!-- 1 empty -->        
+ <register id="CMPR4" acronym="CMPR4" offset="23" page="1" width="16" description="0x7517" />
+ <register id="CMPR5" acronym="CMPR5" offset="24" page="1" width="16" description="0x7518" />
+ <register id="CMPR6" acronym="CMPR6" offset="25" page="1" width="16" description="0x7519" />
+ <!-- 6 empty -->        
+ <register id="CAPCONB" acronym="CAPCONB" offset="32" page="1" width="16" description="0x7520" />
+ <!-- 1 empty -->        
+ <register id="CAPFIFOB" acronym="CAPFIFOB" offset="34" page="1" width="16" description="0x7522" />
+ <register id="CAP4FIFO" acronym="CAP4FIFO" offset="35" page="1" width="16" description="0x7523" />
+ <register id="CAP5FIFO" acronym="CAP5FIFO" offset="36" page="1" width="16" description="0x7524" />
+ <register id="CAP6FIFO" acronym="CAP6FIFO" offset="37" page="1" width="16" description="0x7525" />
+ <!-- 1 empty -->        
+ <register id="CAP4FBOT" acronym="CAP4FBOT" offset="39" page="1" width="16" description="0x7527" />
+ <register id="CAP5FBOT" acronym="CAP5FBOT" offset="40" page="1" width="16" description="0x7528" />
+ <register id="CAP6FBOT" acronym="CAP6FBOT" offset="41" page="1" width="16" description="0x7529" />
+ <!-- 2 empty -->        
+ <register id="EVBIMRA" acronym="EVBIMRA" offset="44" page="1" width="16" description="0x752C" />
+ <register id="EVBIMRB" acronym="EVBIMRB" offset="45" page="1" width="16" description="0x752D" />
+ <register id="EVBIMRC" acronym="EVBIMRC" offset="46" page="1" width="16" description="0x752E" />
+ <register id="EVBIFRA" acronym="EVBIFRA" offset="47" page="1" width="16" description="0x752F" />
+ <register id="EVBIFRB" acronym="EVBIFRB" offset="48" page="1" width="16" description="0x7530" />
+ <register id="EVBIFRC" acronym="EVBIFRC" offset="49" page="1" width="16" description="0x7531" />
+</module>

@@ -1,0 +1,16 @@
+<module id="DMA_REGS" HW_revision="" description="DMA Registers">
+	<register id="DMACTRL" width="16" page="1" offset="0x0" internal="0" description="DMA Control Register">
+		<bitfield id="HARDRESET" description="Hard Reset Bit" begin="0" end="0" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="PRIORITYRESET" description="Priority Reset Bit" begin="1" end="1" width="1" rwaccess="R=0/W=1"/>
+	</register>
+	<register id="DEBUGCTRL" width="16" page="1" offset="0x1" internal="0" description="Debug Control Register">
+		<bitfield id="FREE" description="Debug Mode Bit" begin="15" end="15" width="1" rwaccess="R/W"/>
+	</register>
+	<register id="PRIORITYCTRL1" width="16" page="1" offset="0x4" internal="0" description="Priority Control 1 Register">
+		<bitfield id="CH1PRIORITY" description="Ch1 Priority Bit" begin="0" end="0" width="1" rwaccess="R/W"/>
+	</register>
+	<register id="PRIORITYSTAT" width="16" page="1" offset="0x6" internal="0" description="Priority Status Register">
+		<bitfield id="ACTIVESTS" description="Active Channel Status Bits" begin="2" end="0" width="3" rwaccess="R"/>
+		<bitfield id="ACTIVESTS_SHADOW" description="Active Channel Status Shadow Bits" begin="6" end="4" width="3" rwaccess="R"/>
+	</register>
+</module>

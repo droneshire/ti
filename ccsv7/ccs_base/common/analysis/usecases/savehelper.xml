@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="savehelper">
+	<target name="savehelper">
+		<dirname property="savehelper.basedir" file="${ant.file.savehelper}"/>
+		<echo message="${savehelper.basedir}/savetemplate.xml"/>
+		<echo message="${dvt.save.basedir}/${dvt.save.activity.name}.control.xml"/>
+		<copy file="${savehelper.basedir}/savetemplate.xml" tofile="${dvt.save.basedir}/${dvt.save.activity.name}.control.xml" overwrite="true"/>
+		<replace file="${dvt.save.basedir}/${dvt.save.activity.name}.control.xml">
+			<replacefilter token="save" value="${dvt.save.activity.name}"/>
+		</replace>		
+		<dvt.property name="savehelper.basedir"/>
+		<echoproperties destfile="${dvt.save.basedir}/properties">
+			<!--propertyset negate="true">
+				<propertyref builtin="system"/>				
+				<propertyref builtin="commandline"/>
+			</propertyset-->
+			<propertyset>
+				<propertyref prefix="p."/>
+			</propertyset>
+		</echoproperties>
+		<propertyfile file="${dvt.save.basedir}/properties">
+			<entry key="ant.core.lib" operation="del"/>
+			<entry key="ant.java.version" operation="del"/>
+			<entry key="basedir" operation="del"/>
+			<entry key="dvt.save.activity.name" operation="del"/>
+			<entry key="dvt.save.activity.path" operation="del"/>
+			<entry key="dvt.save.basedir" operation="del"/>
+			<entry key="dvt.installpath" operation="del"/>
+			<entry key="dvt.basepath" operation="del"/>
+			<entry key="dvt.filepath" operation="del"/>
+			<entry key="dvt.activity.name" value="${dvt.save.activity.path}/${dvt.save.activity.name}"/>
+			<entry key="dvt.factory.activity" value="${dvt.factory.activity}"/>
+		</propertyfile>
+		<dvt.property name="dvt.save.activity.name"/>
+		<dvt.property name="dvt.save.basedir"/>
+		<dvt.property name="dvt.factory.activity"/>
+		<!--dvt.echoreferences destfile="${basedir}/properties" format="xml"/-->
+	</target>
+</project>

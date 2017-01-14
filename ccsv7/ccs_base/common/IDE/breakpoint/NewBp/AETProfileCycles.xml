@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<newBreakpoint xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="schema.xsd" name="Profile Cycles" breakpointType="1">
+	<targets>
+		<target>
+			<type>dsk,emu</type>
+			<familyId>320</familyId>
+			<subfamilyId>64</subfamilyId>
+			<revision>*</revision>
+		</target>
+	</targets>
+
+	<defaultProperty>
+		<property name="Hardware Configuration.Type" value="Profile Cycles"/>
+		<property name="Miscellaneous.Name" value="Profile Cycles"/>
+	</defaultProperty>
+
+	<submitSequence>
+		<id>Hardware Configuration.Type.Start Location</id>
+		<id>Hardware Configuration.Type.End Location</id>
+		<id>Hardware Configuration.Type.Range Type</id>
+	</submitSequence>
+
+	<showIn>
+		<breakpointView autoSubmit="false" />
+	</showIn>
+
+	<dialog colCount="2">
+		<label id="label_start_location" widthHint="95" heightHint="18" verticalAlign="center" horizontalAlign="fill">
+			<text>Start Location:</text>
+		</label>
+		
+		<textBox id="Hardware Configuration.Type.Start Location" widthHint="190" heightHint="20" verticalAlign="center" horizontalAlign="center">
+			<text>Enter start program location here...</text>
+		</textBox>
+
+		<label id="label_end_location" widthHint="95" heightHint="18" verticalAlign="center" horizontalAlign="fill">
+			<text>End Location:</text>
+		</label>
+		
+		<textBox id="Hardware Configuration.Type.End Location" widthHint="190" heightHint="20" verticalAlign="center" horizontalAlign="center">
+			<text>Enter end program location here...</text>
+		</textBox>
+
+		<label id="label_range_type" widthHint="95" heightHint="18" verticalAlign="center" horizontalAlign="fill">
+			<text>Range Type:</text>
+		</label>
+		
+		<comboBox id="Hardware Configuration.Type" widthHint="190" heightHint="20" verticalAlign="center" horizontalAlign="center">
+			<text>Exclude Subroutine</text>
+			<choices>
+				<item>Exclude Subroutine</item>
+				<item>Include Subroutine</item>
+			</choices>
+		</comboBox>		
+	</dialog>
+</newBreakpoint>

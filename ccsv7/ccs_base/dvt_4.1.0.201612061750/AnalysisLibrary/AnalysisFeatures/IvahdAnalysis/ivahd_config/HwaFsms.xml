@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<TimedFSMSystem timefield="Time" auxdatafield="Time">
+
+   <!-- FSM template -->
+   <fsm name="Sequence" states="3" events="2" selfterminate ="0">
+     <transition name="00" state="0" event="0" next="0" />
+     <transition name="01" state="0" event="1" next="1" />
+     <transition name="10" state="1" event="0" next="2" />
+     <transition name="11" state="1" event="1" next="0" />
+     <transition name="20" state="2" event="0" next="0" />
+     <transition name="21" state="2" event="1" next="1" />
+
+     <statename state="0" name="Unkown" />
+     <statename state="1" name="Active" />
+     <statename state="2" name="Idle" />
+   </fsm>
+   
+   <!-- event generators -->
+   <eventgen eventfield="EventID" value="0" sourcefield="Source" event="0" />
+   <eventgen eventfield="EventID" value="1" sourcefield="Source" event="1" />
+   
+ </TimedFSMSystem>

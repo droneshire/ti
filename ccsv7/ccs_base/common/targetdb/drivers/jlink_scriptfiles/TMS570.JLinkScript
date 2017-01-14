@@ -1,0 +1,254 @@
+/*********************************************************************
+*                SEGGER MICROCONTROLLER GmbH & Co. KG                *
+*        Solutions for real time microcontroller applications        *
+*                                                                    *
+*      Internet: www.segger.com     Support: support@segger.com      *
+*                                                                    *
+**********************************************************************
+----------------------------------------------------------------------
+File    : TMS570.JLinkScript
+Purpose : J-Link target setup file for TMS570.
+          Configures the ICEPick to enable the core.
+          This script file also contains a special reset strategy which performs
+          a reset via the ICEPick.
+---------------------------END-OF-HEADER------------------------------
+*/
+
+/*********************************************************************
+*
+*       _SelDP
+*/
+void _SelDP(void) {
+  JTAG_WriteIR(0xA);  // DPACC command
+  JTAG_WriteClocks(1);
+}
+
+/*********************************************************************
+*
+*       _SelAP
+*/
+void _SelAP(void) {
+  JTAG_WriteIR(0xB);  // APACC command
+  JTAG_WriteClocks(1);
+}
+
+/*********************************************************************
+*
+*       _TriggerReadAPDPReg
+*
+*  Function description
+*    Triggers a read of an AP or DP register. Depends on the previous command (DPACC / APACC)
+*/
+int _TriggerReadAPDPReg(unsigned int RegIndex) {
+  __int64 v;        // We need 35 bits: 32 data, 2 bit addr, 1 bit RnW
+  int BitPosData;
+  //
+  // Write 35 bits (32 bits data, 2 bits addr, 1 bit RnW)
+  //
+  v = 0;
+  v |= 1;                // 1 indicates read access
+  v |= (RegIndex << 1);
+  BitPosData = JTAG_StoreDR(v, 35);
+  JTAG_StoreClocks(8);
+  return BitPosData;
+}
+
+/*********************************************************************
+*
+*       _WriteAPDPReg
+*
+*  Function description
+*    Writes an AP or DP register. Depends on the previous command (DPACC / APACC)
+*/
+int _WriteAPDPReg(unsigned int RegIndex, __int64 Data) {
+  __int64 v;        // We need 35 bits: 32 data, 2 bit addr, 1 bit RnW
+  int BitPosData;
+  //
+  // Write 35 bits (32 bits data, 2 bits addr, 1 bit RnW)
+  //
+  v = 0;   // 0 indicates write access
+  v |= (RegIndex << 1);
+  v |= (Data << 3);
+  BitPosData = JTAG_StoreDR(v, 35);
+  JTAG_StoreClocks(8);
+  return BitPosData;
+}
+
+/*********************************************************************
+*
+*       _ResetViaIcePick
+*
+*  Function description
+*    Reset CPU core via Ice Pick.
+*    This function can be used if the reset pin of the CPU is
+*    not connected to the reset pin of the JTAG connector
+*/
+void  _ResetViaIcePick(void) {
+  int v;
+  int BitPos;
+  //
+  // The Cortex-R4 core is still selected, so no need to re-configure the JTAG chain here
+  // Write vector catch register: Set reset vector catch
+  //
+  _SelDP();
+  _WriteAPDPReg(1, 0xF0000000);  // Write JTAG-DP CTRL/STAT in order to power-up debug port
+  v = 0
+    | (1 << 24)   // Select AP 1 which is the APB-AP
+    | (0 << 4)    // Select Bank 0
+    ;
+  _WriteAPDPReg(2, v);  // Write JTAG-DP SELECT register, in order to select the APB-AP. On the TMS570 AP[1] is the APB-AP
+  _SelAP();
+  _WriteAPDPReg(0, 0x80000012);  // Write APB-AP CSW
+  _WriteAPDPReg(1, 0x8000101C);  // Write APB-AP TAR: Vector catch register
+  v = (1 << 0);  // Set reset vector catch
+  _WriteAPDPReg(3, v);  // Write APB-AP DRW
+  _SelDP();
+  //
+  // Setup JTAG config to "talk" to the ICEPick, so we can use the JTAG API functions
+  //
+  JTAG_DRPre  = 1;
+  JTAG_DRPost = 0;
+  JTAG_IRPre  = 4;
+  JTAG_IRPost = 0;
+  JTAG_IRLen  = 6;
+  //
+  // Perform reset via ICEPick system control register, by setting the SysReset bit
+  //
+  JTAG_StoreIR(2);         // Cmd: ROUTER
+  v = 0x01000000;          // Read SYS_CNTL
+  JTAG_StoreDR(v, 32);
+  BitPos = JTAG_StoreDR(v, 32);
+  v = JTAG_GetU32(BitPos);
+  v &= 0x00FFFFFF;
+  v |= 0x81000001;         // Write SYS_CNTL and set SysReset bit
+  JTAG_StoreDR(v, 32);
+  v &= 0xFFFFFFFE;
+  v &= 0x00FFFFFF;
+  v |= 0x81000000;         // Write SYS_CNTL and clear SysReset bit
+  JTAG_WriteDR(v, 32);
+  //
+  // Setup JTAG config to "talk" to the Cortex-R4 again
+  //
+  JTAG_IRPre=0;
+  JTAG_DRPre=0;
+  JTAG_IRPost=6;
+  JTAG_DRPost=1;
+  JTAG_IRLen=4;
+  //
+  // Clear vector catch register
+  //
+  _SelAP();
+  _WriteAPDPReg(0, 0x80000012);  // Write APB-AP CSW
+  _WriteAPDPReg(1, 0x8000101C);  // Write APB-AP TAR: Vector catch register
+  v = (0 << 0);  // Set reset vector catch
+  _WriteAPDPReg(3, v);  // Write APB-AP DRW
+  _SelDP();  
+}
+
+/*********************************************************************
+*
+*       _InitIcePick
+*
+*  Function description
+*    Configures the ICEPick so that the CPU core also becomes
+*    visible in the JTAG chain.
+*/
+void _InitIcePick(void) {
+  unsigned int aDevice[2];
+  int v;
+  int i;
+  int BitPos;
+  int Speed;
+
+  Speed = JTAG_Speed;
+  JTAG_Speed = 50;     // Use 50 kHz JTAG speed for ICEPick initialization
+  //
+  // After power-on, only the TI ICEPick is in the scan chain
+  // It has an IRLen of 6 bits.
+  // This configuration has to be setup at first in a script file.
+  // Otherwise it is not possible to use the JTAG_xxx() functions.
+  //
+  Report("J-Link script: Init ICEPick");
+  JTAG_Reset();                           // Perform TAP reset and auto-detection of total IR Len
+  if (JTAG_TotalIRLen != 6) {
+    //MessageBox1("Can not find ICE-Pick (IRLen mismatch). Expected 0x00000006, found: ", JTAG_TotalIRLen);
+  }
+  JTAG_DRPre  = 0;
+  JTAG_DRPost = 0;
+  JTAG_IRPre  = 0;
+  JTAG_IRPost = 0;
+  JTAG_IRLen  = 6;
+  //
+  // Check IDCODE of ICEPick
+  //
+  JTAG_WriteIR(4);                              // ICEPICK IDCODE instruction
+  BitPos = JTAG_WriteDR(0x00000000, 32);
+  v = JTAG_GetU32(BitPos);
+  if ((v & 0x0FFFFFFF) != 0x0B7B302F) {
+    //MessageBox1("Can not find ICE-Pick (IDCODE mismatch). Expected 0x0B7B302F, found: ", v);
+  }
+  //
+  // Put ARM core in JTAG chain
+  //  
+  JTAG_WriteIR(7);         // CONNECT
+  JTAG_WriteDR(0x89, 8);   // The ICEPick documentation (SPRUE64, 2.6 CONNECT instruction: Accessing the debug connect register). Bit 7 set means: Write debug connect register. We write 0x9 to the debug connect register which is the debug connect key.
+  JTAG_WriteIR(2);         // ROUTER (Accessing the mapped registers)
+  v = 0
+    | (1 << 31)     // Write mapped register
+    | (0x20 << 24)  // SDTAP0 register
+    | (1 << 13)     // Debug connect
+    | (1 << 8)      // TAP select
+    | (1 << 3)      // Force active
+	  ;
+  JTAG_WriteDR(v, 32);  // Write register 0x20 (SDTAP0), value 0x002108
+  JTAG_WriteIR(0x3F);      // Bypass
+  JTAG_WriteClocks(10);
+  //
+  // Configure JTAG chain, so J-Link knows to which devices it has to "talk" to.
+  // CPU core is in scan chain now, so we have to re-configure the JTAG chain settings
+  //
+  JTAG_DRPre  = 0;
+  JTAG_DRPost = 1;
+  JTAG_IRPre  = 0;
+  JTAG_IRPost = 6;
+  JTAG_IRLen  = 4;
+  CPU=CORTEX_R4;
+  JTAG_AllowTAPReset=0; 
+  //
+  // Set JTAG Ids for all devices in the JTAG chain
+  //  
+  aDevice[0] = 0x1BA00477;  // Cortex-R4 core is device [0]
+  aDevice[1] = 0x0B7B302F;  // ICEPick is device [1]
+  i = 0;
+  while (i < 2) {
+    JTAG_SetDeviceId(i, aDevice[i]);
+    i += 1;
+  }
+  JTAG_Speed = Speed;  // Restore original JTAG speed
+}
+
+/*********************************************************************
+*
+*       ResetTarget
+*/
+void ResetTarget(void) {
+  Report("J-Link script: Reset");
+  _ResetViaIcePick();
+}
+
+/*********************************************************************
+*
+*       InitTarget
+*/
+void InitTarget(void) {
+  Report("TMS570 (Cortex-R4 core) J-Link script");
+  //
+  // Reset debug logic in order to make sure that ONLY the ICEPick is in the JTAG chain
+  //
+  JTAG_TRSTPin = 0;
+  SYS_Sleep(50);
+  JTAG_TRSTPin = 1;
+  SYS_Sleep(50);
+  JTAG_Write(0x1F, 0, 6);
+  _InitIcePick();
+}

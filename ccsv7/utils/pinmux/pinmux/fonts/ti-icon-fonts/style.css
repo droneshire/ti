@@ -1,0 +1,28 @@
+@font-face {
+	font-family: 'ti-icon-fonts';
+	src:url('fonts/ti-icon-fonts.eot?-m7kqol');
+	src:url('fonts/ti-icon-fonts.eot?#iefix-m7kqol') format('embedded-opentype'),
+		url('fonts/ti-icon-fonts.ttf?-m7kqol') format('truetype'),
+		url('fonts/ti-icon-fonts.woff?-m7kqol') format('woff'),
+		url('fonts/ti-icon-fonts.svg?-m7kqol#ti-icon-fonts') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="ti-icon-"], [class*=" ti-icon-"] {
+	font-family: 'ti-icon-fonts';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.ti-icon-myti:before {
+	content: "\e600";
+}

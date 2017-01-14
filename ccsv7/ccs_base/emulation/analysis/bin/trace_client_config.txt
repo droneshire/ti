@@ -1,0 +1,164 @@
+###################################################
+#File version="1.0.0.0" Copyright="Copyright (c) 2005-2007 Texas Instruments"
+###################################################
+#
+#
+#
+# The client reads this property to create the reference to the
+# "ChannelServer" object in the server.
+#
+ChannelServer.Proxy=ChannelServer:tcp -p 6501:udp -p 6501
+
+#
+# The server creates one single object adapter with the name
+# "ChannelServer". The following line sets the endpoints for this
+# adapter.
+#
+ChannelServer.Endpoints=tcp -p 6501:udp -p 6501
+
+
+#
+# The Target Adapter channel ctools-> trace server
+#
+TargetAdapterFactory.Proxy=TargetAdapterFactory:tcp -p 6502:udp -p 6502
+
+TargetAdapterFactory.Endpoints=tcp -p 6502:udp -p 6502
+
+
+#
+# The Target Event Broker trace server-> ctools/ICETargetAdapter
+#
+TargetEventBroker.Proxy=TargetEventBroker:tcp -p 6503:udp -p 6503
+
+TargetEventBroker.Endpoints=tcp -p 6503:udp -p 6503
+
+#
+# Warn about connection exceptions
+#
+Ice.Warn.Connections=0
+
+#
+#Disable Active Connection Management
+#
+Ice.ConnectionIdleTime=0
+
+#
+# Network Tracing
+#
+# 0 = no network tracing
+# 1 = trace connection establishment and closure
+# 2 = like 1, but more detailed
+# 3 = like 2, but also trace data transfer
+#
+Ice.Trace.Network=0
+
+#
+# Protocol Tracing
+#
+# 0 = no protocol tracing
+# 1 = trace protocol messages
+#
+Ice.Trace.Protocol=0
+
+#
+# Security Tracing
+#
+# 0 = no security tracing
+# 1 = trace warning messages
+# 2 = config file parsing warnings
+#
+IceSSL.Trace.Security=0
+
+#
+# SSL Configuration File
+#
+# An XML based file that specifies the certificates, keys, SSL version
+# and other pertinent information for creating an SSL connection.
+#
+#Ice.Plugin.IceSSL=IceSSL:create
+#IceSSL.Client.CertPath=../../../certs
+#IceSSL.Client.Config=sslconfig.xml
+#IceSSL.Server.CertPath=../../../certs
+#IceSSL.Server.Config=sslconfig.xml
+
+#
+# Glacier settings
+#
+Glacier.Router.Endpoints=default -p 6504
+Glacier.Router.Client.Endpoints=tcp:udp:ssl
+Glacier.Router.Trace.Client=0
+Glacier.Router.Trace.RoutingTable=1
+
+#
+# IcePack registry settings (assumes that a db directory exists in the 
+# current working directory).
+# 
+IcePack.Registry.Client.Endpoints=default -p 6505
+IcePack.Registry.Server.Endpoints=default
+IcePack.Registry.Admin.Endpoints=default
+IcePack.Registry.Data=db
+IcePack.Registry.DynamicRegistration=1
+
+
+#
+# This property is used to configure the endpoints of the clock
+# subscriber adapter.
+#
+ChannelListener.Subscriber.Endpoints=tcp
+
+#
+# This property is used by the clients to connect to IceStorm.
+#
+IceStorm.TopicManager.Proxy=IceStorm/TopicManager:default -p 6506
+
+#
+# This property defines the endpoints on which the IceStorm
+# TopicManager listens.
+#
+IceStorm.TopicManager.Endpoints=default -p 6506
+
+#
+# This property defines the endpoints on which the topic
+# publisher objects listen.
+#
+IceStorm.Publish.Endpoints=default
+
+#
+# TopicManager Tracing
+#
+# 0 = no tracing
+# 1 = trace topic creation, subscription, unsubscription
+# 2 = like 1, but with more detailed subscription information
+#
+IceStorm.Trace.TopicManager=0
+
+#
+# Topic Tracing
+#
+# 0 = no tracing
+# 1 = trace unsubscription diagnostics
+#
+IceStorm.Trace.Topic=0
+
+#
+# Subscriber Tracing
+#
+# 0 = no tracing
+# 1 = subscriber diagnostics (subscription, unsubscription, event
+#     propagation failures)
+#
+IceStorm.Trace.Subscriber=0
+
+#
+# Flush Tracing (for batch mode transfer flushing)
+#
+# 0 = no tracing
+# 1 = trace activity of flusher thread
+#
+IceStorm.Trace.Flush=0
+
+#
+# Amount of time in milliseconds between flushes for batch mode
+# transfer. The minimum allowable value is 100ms.
+#
+IceStorm.Flush.Timeout = 0

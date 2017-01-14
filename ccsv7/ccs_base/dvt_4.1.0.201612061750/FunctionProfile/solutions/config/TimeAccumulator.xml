@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<translate name="Time Accumulator">
+	<passthruAll/>
+        <recordEval field="CycleCount" type="ulong" display="Decimal">
+		<item expression="accum(cycle.CPU)"/>
+	</recordEval>
+</translate>

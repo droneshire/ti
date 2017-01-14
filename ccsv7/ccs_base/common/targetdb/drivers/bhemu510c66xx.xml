@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--                                                  -->
+<!-- Blackhawk XDS510 Emulator XML Definitions.       -->
+<!-- Date: 07 March 2016                              -->
+<!-- Vers: 6.0.83.001                                 -->
+<!--                                                  -->
+
+<drivers id="TMS320C64XP">
+	<isa Type="TMS320C66xx" ProcID="0x50019BF8">
+		<driver file="..\..\..\emulation\drivers\bhemu6400_plus.dvr">
+			<connectionType Type="BHEMU"/>
+			<property Type="hiddenfield" Value="true" id="realtimeEnabled" />
+			<property Name="TraceDeviceId" Type="numericfield" Value="0x0" NumericType="HEX" UpperBound="0xFFFFFFFF" LowerBound="0" ID="device.traceId"/>
+		</driver>
+	</isa>
+    <driverProperties>
+        <version number="1.0"/>
+        <choicelist id="Domain Power Loss Mode" type="string_list">
+            <choice value="Legacy"/>
+            <choice value="Auto"/>
+        </choicelist>
+        <hierarchy>
+            <hchoice depends="none" key="Domain Power Loss Mode"/>
+        </hierarchy>
+        <current>
+            <cchoice key="Domain Power Loss Mode" value="Legacy"/>
+        </current>
+    </driverProperties>
+</drivers>

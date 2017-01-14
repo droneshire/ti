@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- 
+  TI File $Revision: 
+  Checkin $Date: 
+  --> 
+
+<!--  C28M35x SYS CTRL REGS Registers 
+     =================================== 
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     --> 
+<module id="SYS CTRL REGS" HW_revision="" XML_version="1" description="SYS CTRL REGS Registers">
+    <!--  2 empty  -->
+    <register id="CLKCTL" acronym="CLKCTL" offset="2" page="1" width="16" description="CPU Timer 2 Clock Configuration Register" />
+    <!--  6 empty  -->
+    <register id="PCLKCR2" acronym="PCLKCR2" offset="9" page="1" width="16" description="Peripheral Clock Control Register2 " />
+    <register id="HISPCP" acronym="HISPCP" offset="10" page="1" width="16" description="High Speed Clock Prescaler" />
+    <register id="LOSPCP" acronym="LOSPCP" offset="11" page="1" width="16" description="Low Speed Clock Prescaler" />
+    <register id="PCLKCR0" acronym="PCLKCR0" offset="12" page="1" width="16" description="Peripheral Clock Control Register0" />
+    <register id="PCLKCR1" acronym="PCLKCR1" offset="13" page="1" width="16" description="Peripheral Clock Control Register1" />
+    <register id="LPMCR0" acronym="LPMCR0" offset="14" page="1" width="16" description="C28 LPM Control Register0" />
+    <!--  1 empty  -->
+    <register id="PCLKCR3" acronym="PCLKCR3" offset="16" page="1" width="16" description="Peripheral Clock Control Register3" />
+    <register id="CWIR" acronym="CWIR" offset="27" page="1" width="16" description="Control subsystem Wait-in-Reset Register" />
+</module>

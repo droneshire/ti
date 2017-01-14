@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module id="Hidden" HW_revision="1" XML_version="1" description="Dummy registers" hidden="true" >
+	<register id="EMU_INPUT_TRIG_EN_REG" acronym="EMU_INPUT_TRIG_EN_REG" width="32" description="EMU channel Input Trigger Enable Register"/>
+</module>

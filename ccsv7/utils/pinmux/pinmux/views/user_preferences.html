@@ -1,0 +1,9 @@
+<div>
+	<div class="pinmuxAboutSpan">User Preferences</div>
+	<label class="userPref">{{prefs.devicePinDisplayNamePref.description}}: </label>
+	<div class="dropdown">
+		<select ng-focus="userPrefsChildSetFocus(true)" ng-blur="userPrefsChildSetFocus(false)" id="devicePinDisplayNamePref" ng-change="prefs.dropDownSelectionChanged(prefs.devicePinDisplayNamePref)"
+			ng-model="prefs.devicePinDisplayNamePref.selectedOption" ng-options="option.optionText for option in prefs.devicePinDisplayNamePref.options"> 
+		</select>
+	</div>
+</div>

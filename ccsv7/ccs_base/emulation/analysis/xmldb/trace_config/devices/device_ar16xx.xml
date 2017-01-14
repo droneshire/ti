@@ -1,0 +1,221 @@
+<?xml version="1.0"?>
+
+<!-- Trace subsystem setup attributes for device -->
+<device id="AR16xx" value="0x0BB5202F" mask="0x0FFFFFFF" HW_revision="1.0" XML_version="1.0">
+
+	<FileVersion version="2.0.0.0" Copyright="Copyright (c) 2009 Texas Instruments"></FileVersion>
+	
+	<!-- Trace route topology. Every route entry specifies a soure to sink/pin route for a given source.
+	Multiple routes shows multiple possible paths available for trace and user can select one for an 
+	active debug session -->
+			
+	<trace_routes> 
+		<route>
+			<source source="C674X_0"/>
+			<link module=""/>
+			<sink module="MOD_ETB0"/>
+			<pin module=""/>
+		</route>
+		<route>
+			<source source="C674X_0"/>
+			<link module=""/>
+			<sink module="MOD_TPIU_VIA_DAP"/>
+			<pin module="MOD_DRM"/>
+		</route>
+		<route>
+			<source source="CortexR4_0"/>
+			<link module=""/>
+			<sink module="MOD_ETB0"/>
+			<pin module=""/>
+		</route>
+		<route>
+			<source source="CortexR4_0"/>
+			<link module=""/>
+			<sink module="MOD_TPIU_VIA_DAP"/>
+			<pin module="MOD_DRM"/>
+		</route>
+	</trace_routes>
+
+	<!-- Supported proc access mechanisms for the device -->
+	<procs>
+		<proc id="CortexR4_0" kind="cortex_rxx" traceid="1">
+			<identifier>
+				<register id="" address="" page="" addrunit="" width="" type="reg"/>
+				<value idvalue="" />
+			</identifier> 			
+		</proc>
+		<proc id="CortexR4_1" kind="cortex_rxx" traceid="0xFF">
+			<identifier>
+				<register id="" address="" page="" addrunit="" width="" type="reg"/>
+				<value idvalue="" />
+			</identifier> 			
+		</proc>		
+		<proc id="C674X_0" kind="tms320c674x" traceid="2">	
+			<components>
+				<component module="MOD_RADTF0"/>
+			</components> 				
+		</proc>
+		<proc id="CSETB_0" kind="cs_etb" >
+			<identifier>
+				<register id="BASE_ADDRESS" address="" page="" addrunit="" width="" type="reg"/>
+				<value idvalue="0xFFA3C000" />
+			</identifier> 
+		</proc>
+		<proc id="CS_DAP_0" kind="cs_dap" >
+			<identifier>
+				<register id="" address="" page="" addrunit="" width="" type="reg"/>
+				<value idvalue="" />
+			</identifier> 
+		</proc>
+	</procs>
+
+	<!-- Available Trace sources for the device -->
+	<sources>	
+		<source id="CortexR4_0" proc="CortexR4_0" stmmaster = "false">
+                <components>
+                      <component module="MOD_CROSS_TRIGGERING_R4_0"/>
+                </components>
+			<characteristics>
+        			<characteristic id="DEV_CHAR_CTI" value="1"/>
+        			<characteristic id="DEV_CHAR_CTIFUNNAME" value="Cross Trigger"/>
+        			<characteristic id="DEV_CHAR_CTIFILE" value="AET_PropertyCTI_AR16XX.xml"/>
+        			<characteristic id="DEV_CHAR_CTIFUNNUM" value="0x90001000"/>
+        			<characteristic id="DEV_CHAR_CT_MOD_EXT" value="R4_0"/>
+				<characteristic id="DEV_CHAR_ATB_ID" value="0x20"/>
+				<characteristic id="DEV_CHAR_ETMPTM_BASEADDR" value="0xFFA18000"/>
+				<characteristic id="DEV_CHAR_ETMPTM_PAGE" value="0x6"/>
+			</characteristics>
+		</source>		
+		<source id="C674X_0" proc="C674X_0" stmmaster = "false">
+			<components>
+				<component module="MOD_RADTF0"/>
+				<component module="MOD_CROSS_TRIGGERING_XTRIG"/>
+			</components>
+			<characteristics>
+				<characteristic id="DEV_CHAR_TRACEPLLUNIT" description="" value="13"/>
+				<characteristic id="DEV_CHAR_TRACEPLLBASE" value="0"/>
+				<characteristic id="DEV_CHAR_GEMTYPE" value="2"/>
+			  	<characteristic id="DEV_CHAR_CTI" value="0"/>
+			  	<characteristic id="DEV_CHAR_CTIFUNNAME" value="Cross Trigger(XTRIG)"/>
+			  	<characteristic id="DEV_CHAR_CTIFILE" value="AET_PropertyCTI_GB1.xml"/>
+				<characteristic id="DEV_CHAR_ATB_ID" value="0x10"/>
+				<characteristic id="DEV_CHAR_DSP_VIA_TPIU" value="1"/>
+			</characteristics>
+		</source>
+	</sources> 
+
+	<!-- Available modules asscoiated with various modules in the device -->
+	<modules> 
+
+    		<!-- CTI Triggering Module -->
+    		<module id ="MOD_CROSS_TRIGGERING_R4_0"  kind="CHANNELS" proc="CortexR4_0" version="1.0" >
+      		<mapping id="gbgroup.channels">
+        			<!-- This is the group between the CTI trigger sources if any -->
+        			<map gbgroup="0" channels="0^1^2^3"/>
+        			<!-- This is the group of cross triggering across XTRIG -->
+        			<map gbgroup="1" channels="0^1"/>
+      		</mapping>
+      		<mapping id="syncgroup.channels">
+        			<map syncgroup="0" channels="1"/>
+      		</mapping>
+      		<characteristics>
+        			<!-- This name should be consistent with the name defined in DEV_CHAR_CTIFILE -->
+        			<characteristic id="DEV_CHAR_SMP_CPUNAME" value="Cortex R4 CPU 0"/>
+        			<!-- This value should be consistent with the value defined in DEV_CHAR_CTIFILE -->
+        			<characteristic id="DEV_CHAR_GBBPCPU_ID" value="0x89000100"/>
+        			<!-- This value should be consistent with the value defined in DEV_CHAR_CTIFILE -->
+        			<characteristic id="DEV_CHAR_SYNCCPU_ID" value="0x8A000700"/>
+      		</characteristics>
+    		</module>
+
+		<module id ="MOD_CROSS_TRIGGERING_XTRIG"  kind="CHANNELS" proc="XTRIG" version="1.0" >		
+			<mapping id="gbgroup.channels">
+				<!-- This is the group of cross triggering across CTI -->
+				<map gbgroup="1" channels="NA"/>
+				<!-- This is the group within XTRIG -->
+				<map gbgroup="2" channels="NA"/>
+			</mapping>
+			<mapping id="syncgroup.channels">
+				<map syncgroup="0" channels=""/>
+			</mapping>
+			<characteristics>
+				<characteristic id="DEV_CHAR_SMP_CPUNAME" value="XTRIG"/> 
+			</characteristics>
+	</module> 
+
+		<!-- TPIU Module -->
+
+		<!-- ETB module. It is used as receiver -->
+		<module id="MOD_ETB0" kind="cs_etb" proc="CSETB_0" version="2.0" >
+			<registers>
+				<register id="ID" address="ETBCS_ID"  page="" addrunit="1" width="32" type="reg"/>		
+				<register id="RDP" address="ETBCS_RDP" page="" addrunit="1" width="32" type="reg"/>		
+				<register id="STS" address="ETBCS_STS" page="" addrunit="1" width="32" type="reg"/>		
+				<register id="RRD" address="ETBCS_RRD" page="" addrunit="1" width="32" type="reg"/>
+				<register id="RRP" address="ETBCS_RRP" page="" addrunit="1" width="32" type="reg"/>
+				<register id="RWD" address="ETBCS_RWD" page="" addrunit="1" width="32" type="reg"/>
+				<register id="RWP" address="ETBCS_RWP" page="" addrunit="1" width="32" type="reg"/>						
+				<register id="TRG" address="ETBCS_TRG" page="" addrunit="1" width="32" type="reg"/>		
+				<register id="CTL" address="ETBCS_CTL" page="" addrunit="1" width="32" type="reg"/>		
+				<register id="FFSR" address="ETBCS_FFSR" page="" addrunit="1" width="32" type="reg"/>
+				<register id="FFCR" address="ETBCS_FFCR" page="" addrunit="1" width="32" type="reg"/>
+				<register id="LOCK" address="ETBCS_LOCK_ACCESS" page="" addrunit="1" width="32" type="reg"/>
+				<register id="LOCK_STATUS" address="ETBCS_LOCK_STATUS" page="" addrunit="1" width="32" type="reg"/>
+			</registers>
+			
+			<characteristics>
+				<characteristic id="DEV_CHAR_PINMANAGER" description="" value="1"/> 
+				<characteristic id="DEV_CHAR_DATAPINCOUNT" description="" value="20"/>
+				<characteristic id="DEV_CHAR_CLOCKPINCOUNT" description="" value="2"/>
+				<characteristic id="DEV_CHAR_PRIMARYCLOCK" description="" value="20"/>
+				<characteristic id="DEV_CHAR_SECONDARYCLOCK" description="" value="21"/>
+				<characteristic id="DEV_CHAR_TRACEDATAORDER" description="" value="reverse"/>
+				<characteristic id="DEV_CHAR_FFCRDISABLE" value="1"/>	
+				<characteristic id="DEV_CHAR_CURIE" value="0"/> <!-- This is a curie type of device (using ADTF in general). Need special handling -->	
+				<characteristic id="DEV_CHAR_TRACEMODE" value="3"/> <!-- This is setting is giving a hint to channel driver to run at freeclock mode. It is here to deal with ADTF -->	
+			</characteristics> 
+			
+		</module>
+
+		<!-- ADTF module associated with GEM DSP trace to ETB -->
+		<!-- Addresses are relative to DSP view of memory map -->
+		<module id="MOD_RADTF0" kind="radtf" proc="C674X_0" version="1.0" >
+			<registers>
+				<register id="DTFCR" address="0x05A30000" page="0" addrunit="1" width="32" type="mem" />
+				<register id="ATBID" address="0x05A30400" page="0" addrunit="1" width="32" type="mem" />
+				<register id="TAGSET" address="0x05A30FA0" page="0" addrunit="1" width="32" type="mem" />	
+				<register id="TAGCLR" address="0x05A30FA4" page="0" addrunit="1" width="32" type="mem" />
+				<register id="LOCK" address="0x05A30FB0" page="0" addrunit="1" width="32" type="mem" />		
+				<register id="LOCK_STATUS" address="0x05A30FB4" page="0" addrunit="1" width="32" type="mem" />	
+				<register id="ID" address="0x05A30FC8" page="0" addrunit="1" width="32" type="mem" />	
+			</registers>
+			<characteristics>
+				<characteristic id="DEV_CHAR_TRACEMODE" description="" value="3"/>		
+			</characteristics> 
+		</module> 
+
+		<!-- Pins module -->
+		<!-- Set is based on pin-muxing overlap.  Only 8, 10, and 16pin combinations supported. -->
+		<module id ="MOD_DRM"  kind="drm" proc="" version="1.0" >
+			<registers>
+			</registers>
+			<mapping id="program.pinouts">
+				<map program="0" pinouts="tpiu=2,17,16,15,14,13,12,11,10,9,8,7,6,5,4,1,0" />
+				<map program="1" pinouts="tpiu=2,11,10,9,8,7,6,5,4,1,0" />
+				<map program="2" pinouts="tpiu=2,9,8,7,6,5,4,1,0" />
+			</mapping>
+		</module>
+
+		<!-- version 1 indicates a regular TPIU type -->
+		<module id ="MOD_TPIU_VIA_DAP"  kind="tpiu" proc="CS_DAP_0" version="1" >
+			<registers>
+			</registers>
+			<characteristics>
+				<characteristic id="DEV_CHAR_TPIUTYPE" value="1"/> 
+				<characteristic id="DEV_CHAR_TPIUBASE" value="0xFFA02000"/> 
+				<characteristic id="DEV_CHAR_TPIUPAGE" value="6"/> 				
+			</characteristics>
+		</module>
+	</modules>
+
+</device>

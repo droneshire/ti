@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!-- This file defines how Trace attributes are available for a device.
+	 This information is used by ETB Trace subsystem to find out setup parameters 
+	 and way to access and configure those parameters. 
+ -->
+<?CTOOLS version="1.1.0.0" Copyright="Copyright (c) 2005-2007 Texas Instruments"?>
+<!-- Trace Setup Attributes for Kailash Device -->
+<device id="DM648" value="0x1b77a02F" HW_revision="1.0" XML_version="1.0">
+
+<FileVersion version="2.0.0.0" Copyright="Copyright (c) 2005-2007 Texas Instruments"></FileVersion>
+
+	<trace_routes>
+		<route>
+			<source source="CPU0"/>
+			<link module=""/>
+			<sink module=""/>
+			<pin module="MOD_DRM"/>
+		</route> 
+	</trace_routes>
+		
+	<!-- Supported proc access mechanisms for the device -->
+	<procs>
+		<!-- C64x+ DSP core -->
+		<proc id="C64XP" kind="tms320C64plus">
+			<identifier>
+				<register id="DNUM" address="DNUM" page="" addrunit="" width="32" type="reg"/>
+				<value idvalue="0x0" />
+			</identifier> 		
+		</proc> 
+	</procs>
+		
+	<!-- Available Trace sources for the device -->
+	<sources>
+		<!-- DSP Trace source -->
+		<source id="CPU0" proc="C64XP" stmmaster = "false">
+			<characteristics>
+				<characteristic id="DEV_CHAR_PINMANAGER" value="1"/>
+				<characteristic id="DEV_CHAR_DATAPINCOUNT" value="20"/>
+				<characteristic id="DEV_CHAR_CLOCKPINCOUNT" value="2"/>
+				<characteristic id="DEV_CHAR_PRIMARYCLOCK" value="20"/>
+				<characteristic id="DEV_CHAR_SECONDARYCLOCK" value="21"/>
+				<characteristic id="DEV_CHAR_TRACEDATAORDER" value="reverse"/>
+				<characteristic id="DEV_CHAR_TRACEMODE" value="3"/> <!-- refer eTraceMode in XMTRBase.h -->
+				<characteristic id="DEV_CHAR_TRACEPLLUNIT" value="5"/> 
+				<characteristic id="DEV_CHAR_FFCRDISABLE" value="1"/>
+				<characteristic id="DEV_CHAR_TRACEPLLBASE" value="0x029A0000"/> 
+			</characteristics>
+		</source> 
+	</sources>
+
+	<!-- Available modules asscoiated with various modules in the device -->
+	<modules> 
+	
+	<!-- Pins module -->
+	<module id ="MOD_DRM"  kind="drm" proc="" version="1.0" >
+		<registers>
+		</registers>
+		<!-- Define dsp, pti, and tpiu pin maps supported for this device -->
+		<mapping id="program.pinouts">
+			<map program="0" pinouts="dsp=10,8,9,6,7,4,5,2,3,0,1" />
+		</mapping>
+	</module>
+
+	</modules>
+</device>
+

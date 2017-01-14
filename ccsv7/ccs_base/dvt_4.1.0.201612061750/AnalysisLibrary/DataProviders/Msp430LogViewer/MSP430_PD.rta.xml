@@ -1,0 +1,30 @@
+<xdc.runtime.Types.RtaDecoderData>
+  <targetName>ti.targets.MSP430</targetName>
+  <binaryParser>ti.targets.omf.cof.Coff</binaryParser>
+  <endian>little</endian>
+  <bitsPerChar>8</bitsPerChar>
+  <argSize>4</argSize>
+  <eventSize>48</eventSize>
+  <dataTransportClassName>undefined</dataTransportClassName>
+  <controlTransportClassName>undefined</controlTransportClassName>
+  <loggers-length>1</loggers-length>
+  <loggers>
+    <name>Power Tracer</name>
+    <type>ti.msp430.trace.LoggerPowerTrace</type>
+    <metaArgs>
+      <instanceId>1</instanceId>
+      <priority>1</priority>
+    </metaArgs>
+  </loggers>
+  <modMap-length>1</modMap-length>
+  <modMap key="ti.msp430.trace.power">
+    <id>0</id>
+    <logger>Power Tracer</logger>
+    <diagsMask>0000100000000000</diagsMask>
+  </modMap>
+  <evtMap-length>1</evtMap-length>
+  <evtMap key="ti.msp430.trace.power.Snapshot">
+    <id>0</id>
+    <msg>Snapshot%3A+</msg>
+  </evtMap>
+</xdc.runtime.Types.RtaDecoderData>

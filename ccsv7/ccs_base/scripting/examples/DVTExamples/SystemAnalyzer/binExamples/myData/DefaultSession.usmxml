@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.7.0_60" class="java.beans.XMLDecoder">
+ <object class="com.ti.uia.host.core.Session$Config">
+  <void property="endpoints">
+   <void method="add">
+    <object class="com.ti.uia.host.core.Session$Config$Endpoint">
+     <void property="clockFreq">
+      <long>700000000</long>
+     </void>
+     <void property="name">
+      <string>C64XP_A</string>
+     </void>
+     <void property="outFile">
+      <string>C:\Working\Projects\SystemAnalyzer\binFile\UIA\multicoreSingleImage.out</string>
+     </void>
+     <void property="rtaFile">
+      <string>C:\Working\Projects\SystemAnalyzer\binFile\UIA\message_p64P.rta.xml</string>
+     </void>
+     <void property="uiaFile">
+      <string>C:\Working\Projects\SystemAnalyzer\binFile\UIA\message_p64P.uia.xml</string>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="com.ti.uia.host.core.Session$Config$Endpoint">
+     <void property="clockFreq">
+      <long>700000000</long>
+     </void>
+     <void property="destID">
+      <int>1</int>
+     </void>
+     <void property="name">
+      <string>C64XP_B</string>
+     </void>
+     <void property="outFile">
+      <string>C:\Working\Projects\SystemAnalyzer\binFile\UIA\multicoreSingleImage.out</string>
+     </void>
+     <void property="rtaFile">
+      <string>C:\Working\Projects\SystemAnalyzer\binFile\UIA\message_p64P.rta.xml</string>
+     </void>
+     <void property="uiaFile">
+      <string>C:\Working\Projects\SystemAnalyzer\binFile\UIA\message_p64P.uia.xml</string>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="com.ti.uia.host.core.Session$Config$Endpoint">
+     <void property="clockFreq">
+      <long>700000000</long>
+     </void>
+     <void property="destID">
+      <int>2</int>
+     </void>
+     <void property="name">
+      <string>C64XP_C</string>
+     </void>
+     <void property="outFile">
+      <string>C:\Working\Projects\SystemAnalyzer\binFile\UIA\multicoreSingleImage.out</string>
+     </void>
+     <void property="rtaFile">
+      <string>C:\Working\Projects\SystemAnalyzer\binFile\UIA\message_p64P.rta.xml</string>
+     </void>
+     <void property="uiaFile">
+      <string>C:\Working\Projects\SystemAnalyzer\binFile\UIA\message_p64P.uia.xml</string>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="com.ti.uia.host.core.Session$Config$Endpoint">
+     <void property="clockFreq">
+      <long>700000000</long>
+     </void>
+     <void property="destID">
+      <int>3</int>
+     </void>
+     <void property="name">
+      <string>C64XP_D</string>
+     </void>
+     <void property="outFile">
+      <string>C:\Working\Projects\SystemAnalyzer\binFile\UIA\multicoreSingleImage.out</string>
+     </void>
+     <void property="rtaFile">
+      <string>C:\Working\Projects\SystemAnalyzer\binFile\UIA\message_p64P.rta.xml</string>
+     </void>
+     <void property="uiaFile">
+      <string>C:\Working\Projects\SystemAnalyzer\binFile\UIA\message_p64P.uia.xml</string>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="com.ti.uia.host.core.Session$Config$Endpoint">
+     <void property="clockFreq">
+      <long>700000000</long>
+     </void>
+     <void property="destID">
+      <int>4</int>
+     </void>
+     <void property="name">
+      <string>C64XP_E</string>
+     </void>
+     <void property="outFile">
+      <string>C:\Working\Projects\SystemAnalyzer\binFile\UIA\multicoreSingleImage.out</string>
+     </void>
+     <void property="rtaFile">
+      <string>C:\Working\Projects\SystemAnalyzer\binFile\UIA\message_p64P.rta.xml</string>
+     </void>
+     <void property="uiaFile">
+      <string>C:\Working\Projects\SystemAnalyzer\binFile\UIA\message_p64P.uia.xml</string>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="com.ti.uia.host.core.Session$Config$Endpoint">
+     <void property="clockFreq">
+      <long>700000000</long>
+     </void>
+     <void property="destID">
+      <int>5</int>
+     </void>
+     <void property="name">
+      <string>C64XP_F</string>
+     </void>
+     <void property="outFile">
+      <string>C:\Working\Projects\SystemAnalyzer\binFile\UIA\multicoreSingleImage.out</string>
+     </void>
+     <void property="rtaFile">
+      <string>C:\Working\Projects\SystemAnalyzer\binFile\UIA\message_p64P.rta.xml</string>
+     </void>
+     <void property="uiaFile">
+      <string>C:\Working\Projects\SystemAnalyzer\binFile\UIA\message_p64P.uia.xml</string>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void property="eventTransport">
+   <object class="com.ti.uia.host.core.Session$Config$Transport" id="Session$Config$Transport0">
+    <void property="address">
+     <string>158.218.99.1</string>
+    </void>
+    <void property="port">
+     <int>1235</int>
+    </void>
+   </object>
+  </void>
+  <void property="msgTransport">
+   <object class="com.ti.uia.host.core.Session$Config$Transport">
+    <void property="address">
+     <string>158.218.99.1</string>
+    </void>
+    <void property="port">
+     <int>1234</int>
+    </void>
+    <void property="type">
+     <string>TCPIP</string>
+    </void>
+   </object>
+  </void>
+ </object>
+<void class="com.ti.uia.host.core.Session$Config$Transport" method="getField">
+ <string>customProperties</string>
+ <void id="Properties0" method="get">
+  <object idref="Session$Config$Transport0"/>
+  <void method="put">
+   <string>Address</string>
+   <string>158.218.99.1</string>
+  </void>
+  <void method="put">
+   <string>Port</string>
+   <int>1235</int>
+  </void>
+ </void>
+</void>
+<void idref="Properties0"/>
+</java>

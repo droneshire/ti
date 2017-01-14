@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<drivers id="Cortex_M0">
+	<isa Type="Cortex_M0" ProcID="0x75802800">
+		<driver file="..\..\..\emulation\drivers\tixds560cortexM0.dvr">
+			<connectionType Type="TIXDS560"/>
+			<connectionType Type="TIXDS200"/>
+			<property Name="Access Port Designator" Type="numericfield" Value="0x02000000" NumericType="HEX" UpperBound="0xFFFFFFFF" LowerBound="0" ID="device.identify"/>
+			<property Name="TraceDeviceId" Type="numericfield" Value="0x0" NumericType="HEX" UpperBound="0xFFFFFFFF" LowerBound="0" ID="device.traceId"/>
+		</driver>
+	</isa>
+    <isa Type="Cortex_M0P" ProcID="0x75802800">
+		<driver file="..\..\..\emulation\drivers\tixds560cortexM0.dvr">
+			<connectionType Type="TIXDS560"/>
+			<connectionType Type="TIXDS200"/>
+			<property Name="Access Port Designator" Type="numericfield" Value="0x02000000" NumericType="HEX" UpperBound="0xFFFFFFFF" LowerBound="0" ID="device.identify"/>
+			<property Name="TraceDeviceId" Type="numericfield" Value="0x0" NumericType="HEX" UpperBound="0xFFFFFFFF" LowerBound="0" ID="device.traceId"/>
+		</driver>
+	</isa>
+</drivers>

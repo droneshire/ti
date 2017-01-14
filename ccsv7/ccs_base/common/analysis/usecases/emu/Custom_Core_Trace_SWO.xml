@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+
+<UCdeviceinfo>
+    <targets>
+        <target>
+            <type>dsk,emu</type>
+            <familyId>470</familyId>
+            <subfamilyId>e</subfamilyId>
+            <revision>*</revision>
+            <RcvrJobs>
+                ARM_SWO.xml
+            </RcvrJobs>
+            <Trigger_Jobs>
+                <job name="ITM/Empty.xml" active="false"/>
+            </Trigger_Jobs>
+        </target>
+    </targets>
+
+    <ConfigUI>
+        <!-- Receivers -->
+        <jobs>
+            <names>
+                ARM_SWO.xml
+            </names>
+            
+            <configUIactions
+                ID="Receiver"
+                description="Receiver Setting"
+                values="SWO Trace"
+                default="SWO Trace">
+                <job>
+                    <jobProperty name="Hardware Configuration.Receiver Settings.Receiver" />
+                </job>
+            </configUIactions>
+
+            <configUIactions
+                ID="Encoding Type"
+                description="UART"
+                values="@Hardware Configuration.Receiver Settings.Receiver.SWO Selection.Encoding Type">
+                <job>
+                    <jobProperty name="Hardware Configuration.Receiver Settings.Receiver.SWO Selection.Encoding Type"/>
+                </job>
+            </configUIactions>
+
+            <configUIactions
+                ID="COM Port"
+                description="COM Port"
+				values="@Hardware Configuration.Receiver Settings.Receiver.UART Options.COM Port">
+                <job>
+                    <jobProperty name="Hardware Configuration.Receiver Settings.Receiver.UART Options.COM Port"/>
+                </job>
+            </configUIactions>
+			
+            <configUIactions
+                ID="TimestampingResolution"
+                description="Prescaler Timestamping Resolution"
+                values="@Hardware Configuration.Receiver Settings.Receiver.Timestamping.Resolution">
+                <job>
+                    <jobProperty name="Hardware Configuration.Receiver Settings.Receiver.Timestamping.Resolution"/>
+                </job>
+            </configUIactions>
+			
+        </jobs>
+
+    </ConfigUI>
+
+</UCdeviceinfo>
+

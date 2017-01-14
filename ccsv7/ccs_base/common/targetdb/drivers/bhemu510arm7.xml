@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--                                                  -->
+<!-- Blackhawk XDS510 Emulator XML Definitions.       -->
+<!-- Date: 07 March 2016                              -->
+<!-- Vers: 6.0.83.001                                 -->
+<!--                                                  -->
+
+<drivers id="ARM7">
+	<isa Type="ARM7" ProcID="0x75800418">
+		<driver file="..\..\..\emulation\drivers\bhemuarm7.dvr">
+			<property Name="TraceDeviceId" Type="numericfield" Value="0x0" NumericType="HEX" UpperBound="0xFFFFFFFF" LowerBound="0" ID="device.traceId"/>
+			<connectionType Type="BHEMU"/>
+		</driver>
+	</isa>
+    <driverProperties>
+        <version number="1.0"/>
+        <choicelist id="Endianess" type="string_list">
+            <choice value="Little Endian"/>
+            <choice value="Big Endian"/>
+        </choicelist>
+        <choicelist id="ARM Fast Download" type="string_list">
+            <choice value="On"/>
+            <choice value="Off"/>
+        </choicelist>
+        <choicelist id="Advanced Debug" type="string_list">
+            <choice value="On"/>
+            <choice value="Off"/>
+        </choicelist>
+        <hierarchy>
+            <hchoice depends="none" key="Endianess"/>
+            <hchoice depends="none" key="ARM Fast Download"/>
+            <hchoice depends="none" key="Advanced Debug"/>
+        </hierarchy>
+        <current>
+            <cchoice key="Endianess" value="Little Endian"/>
+            <cchoice key="ARM Fast Download" value="On"/>
+            <cchoice key="Advanced Debug" value="On"/>
+        </current>
+    </driverProperties>
+</drivers>

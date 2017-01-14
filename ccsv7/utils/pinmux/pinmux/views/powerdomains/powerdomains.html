@@ -1,0 +1,35 @@
+<div id="viewPowerDomains" class="nonConfig" style="padding-top: 5px">
+	<input id="chkEnablePowerDomains" type="checkbox" ng-model="deviceRequirements.powerDomainSettingsEnabled"/>
+	<label for="chkEnablePowerDomains"> Enable power domains </label> <a id="configurePinsBtn" href="" ng-click="configureCurrentDevicePins()" style="margin-left:6px;">[Back to pin configuration]</a>
+
+	<div class="datagrid datagridBlue">
+		<table class="reqDetails_{{deviceRequirements.powerDomainSettingsEnabled}} shadow1">
+			<thead>
+				<tr>
+					<th>Power Domain</th>
+					<th>Value</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="powerDomain in powerDomains" ng-class-odd="''" ng-class-even="'alt'">
+					<td ng-disabled="typeof(powerDomain.powerValue) === 'undefined' || powerDomain.powerValue.length == 0">							
+						{{powerDomain.name}}			
+					</td>
+					<td>
+						<div class="dropdown">
+							<select id="{{powerDomain.name}}Select" ng-disabled="powerDomain.powerValue.length < 2 || !powerDomain.powerValue" ng-model="deviceRequirements.powerDomainSettings[powerDomain.name]" ng-options="powerValue for powerValue in powerDomain.powerValue" class="form-control select-form-control" style="color:#000;" ></select>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<br/>
+<br/>
+
+<a id="backtoPinBottomLink" style="color: #ffffff;" class="aReset" href="" ng-click="configureCurrentDevicePins()">
+	<div class="backPinBottomNav">
+		<span class="glyphicon glyphicon-arrow-left"></span> Back to pin configuration
+	</div>
+</a>

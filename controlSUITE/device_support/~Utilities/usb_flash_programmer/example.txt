@@ -1,0 +1,32 @@
+Texas Instruments C2000 USB Flash Programmer Example Package
+
+
+This file describes how to reproduce the example loader data file.
+
+
+The loader_test_ccs directory contains a CCS 5.x project called
+F28x7x_Loader_Test along with the following files:
+
+	* F28x7x_Loader_Test.c: Main program. Endlessly toggles GPIO 10.
+	* Extra_Data.c: A large constant data array to increase the size of the
+	  loader data file.
+	* F28x7x_Loader_Data.cmd: A linker command file that puts all of the
+	  loadable sections into areas of RAM that are not used by the boot ROM.
+
+The project links to several controlSUITE device support files. These links
+are to version 120 of the F2837xD files, and may need to be changed for your
+installation.
+
+Compiling the project produces F28x7x_Loader_Test.out. This program disables
+the watchdog to avoid unwanted resets, then endlessly toggles GPIO 10. An
+optional ESTOP0 instruction may be uncommented to make the load completion
+halt a CCS debug run.
+
+The next step is to convert F28x7x_Loader_Test.out to the boot loader data
+format. This is done using hex2000, which is part of the C2000 Code Generation
+Tools package. The correct command line is:
+
+	hex2000.exe -boot -b F28x7x_Loader_Test.out -o Loader_Test_Converted.dat
+
+If everything was done correctly, Loader_Test_Converted.dat will now contain
+the loadable sections of F28x7x_Loader_Test.out in the correct format.

@@ -1,0 +1,67 @@
+# Global list of icons
+#
+# built-in system icons 
+error = <error>
+information = <information>
+warning = <warning>
+
+# icons in this directory
+
+blue dot = blue_dot.ico
+device = device.ico
+device folder = device_folder.ico
+elements = elements.ico
+folder = folder.ico
+globe = globe.ico
+globe folder = globe_folder.ico
+host = host.ico
+host folder = host_folder.ico
+kernel = kernel.ico
+kernel folder.ico = kernel_folder.ico
+mailbox = mailbox.ico
+mailbox folder = mailbox_folder.ico
+memory = memory.ico
+memory folder = memory_folder.ico
+os = os.ico
+queue = queue.ico
+queue folder = queue_folder.ico
+sem = sem.ico
+sem folder = sem_folder.ico
+sio = sio.ico
+sio folder = sio_folder.ico
+swi = swi.ico
+swi folder = swi_folder.ico
+task = task.ico
+task folder = task_folder.ico
+
+#added for BIOS/RTA
+swiPost = swiPost.ico
+swiPostR = swiPostR.ico
+semPend = semPend.ico
+semPost = semPost.ico
+begin = begin.ico
+end = end.ico
+evtPost = evtPost.ico
+evtPend = evtPend.ico
+
+#added for UIA
+details = details.gif
+analysis = analysis.gif
+lifeCycle = lifecycle.gif
+module1 = module1.gif
+module2 = module2.gif
+module3 = module3.gif
+dataloss = DataLoss.gif
+seqerror = SequenceError.gif
+multierror = MultipleErrors.gif
+emergency = Emergency.gif
+critical = Critical.gif
+
+#added for Profiler
+thread = thread_obj.gif
+caller = arrow_left.gif
+callee = arrow_right.gif
+callercallee = caller_callee.gif
+function = methpub_obj.gif
+library = package_obj.gif
+stack = stckframe_obj.gif

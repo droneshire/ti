@@ -1,0 +1,92 @@
+Texas Instruments C2000 USB Flash Programmer Example Package
+
+
+This package contains software to demonstrate the use of the USB Flash Programmer.
+The contents are:
+
+	* windows_driver: A directory containing a WinUSB driver for the boot
+	  loader.
+	* usb_flash_programmer.exe: A Windows command line program to load binary
+	  data in the boot loader format. This program is based on the WinUSB
+	  library from the Windows Device Driver Kit (DDK).
+	* F28x7x_Loader_Test.out: A compiled F28x7x example program that can
+	  be loaded via the boot loader.
+	* Loader_Test_Converted.dat: An input data file for usb_flash_programmer.exe
+	  containing the loadable sections of F28x7x_Loader_Test.out.
+	* loader_test_ccs: A directory containing the source code and Code Composer
+	  Studio project for F28x7x_Loader_Test.out.
+    * f2837xD_fw_upgrade_example: A directory containing firmware upgrade kernel
+      and application (blinky).  It includes the F2837xD executable files (.out)
+      and boot loader format files (.dat).
+	* src: A directory containing source code for usb_flash_programmer.exe and
+	  projects for Visual Studio 2010 and MinGW.
+    * f2837xD_fw_upgrade_example.txt: Instructions for using usb_flash_programmer
+      to do a usb firmware upgrade on the F2837xD device.
+	* contents.txt: This file.
+	* usage.txt: Instructions for using usb_flash_programmer.exe.
+	* example.txt: Instructions for reproducing Loader_Test_Converted.dat.
+
+
+
+To compile using MinGW:
+	gcc -o usb_flash_programmer.exe usb_flash_programmer.c libusb-1.0.a
+
+Usage instructions:
+usb_flash_programmer v01_00_00_00
+Copyright 2014 by Texas Instruments
+
+
+Usage: usb_flash_programmer.exe [-l] [-q] [-h] <input filenames>
+
+	-q  Quiet mode -- suppress normal output\n
+	-l  List attached devices without programming\n
+	-h  Print this usage information\n\n\n
+    
+    *input filenames are loaded in the ascending order on the command line
+
+
+Starting the MCU:
+Reset the MCU, then write 0x0C5A to the boot mode select address (0xD00) with the debugger.
+Run from the reset vector to start the USB boot loader. Connect the MCU to the PC.
+
+
+Listing attached TI MCUs:
+	usb_flash_programmer.exe -l
+
+
+Loading the example file:
+	usb_flash_programmer.exe Loader_Test_Converted.dat
+
+NOTE: On F2837xD Rev0 and RevA, the loader may produce a LIBUSB_ERROR_PIPE error after
+sending the data. This does not affect the load process and will be fixed in RevB.
+
+
+Binary data format:
+The USB boot loader data follows the same format as the other peripheral boot loaders.
+
+Byte   Contents
+1      LSB: AA (KeyValue for memory width = 8-bits)
+2      MSB: 08h (KeyValue for memory width = 8-bits)
+3      LSB: bytes 3-18 reserved for future use
+4      MSB: bytes 3-18 reserved for future use
+...    ...
+17     LSB: bytes 3-18 reserved for future use
+18     MSB: bytes 3-18 reserved for future use
+19     LSB: Upper half (MSW) of Entry point PC[23:16]
+20     MSB: Upper half (MSW) of Entry point PC[31:24] (Note: Always 0x00)
+21     LSB: Lower half (LSW) of Entry point PC[7:0]
+22     MSB: Lower half (LSW) of Entry point PC[15:8]
+23     LSB: Block size[7:0] (number of 16-bit words) of the first block of data to load
+24     MSB: Block size[15:8]
+25     LSB: Block load starting address [23:16]
+26     LSB: Block load starting address [31:24]
+27     LSB: Block load starting address [7:0]
+28     LSB: Block load starting address [15:8]
+29     LSB: First data word in the block
+30     MSB: First data word in the block
+...    ...
+n      MSB: Last data word in block
+n+1    LSB: Block size[7:0] of the next block of data
+[Same structure as the first block]
+x      LSB: Block size[7:0] of 0x0000 indicates the end of the load
+x+1    MSB: Block size[15:8] of 0x0000 indicates the end of the load

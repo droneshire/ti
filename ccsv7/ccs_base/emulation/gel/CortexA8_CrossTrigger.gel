@@ -1,0 +1,46 @@
+/*--------------------------------------------------------------*/
+/* CortexA8_CrossTrigger.gel                                    */
+/* version 0.03                                                 */
+/*                                                              */
+/* This gel file configures cross triggering on an ICECrusher   */
+/* CoreSight based device.                                      */
+/*--------------------------------------------------------------*/
+
+menuitem "Cross Triggering";
+
+/*--------------------------------------------------------------*/
+/* Use EnableEmu0IOMode() to enable cross triggering on EMU0.   */
+/*--------------------------------------------------------------*/
+hotmenu EnableEmu0IOMode() 
+{
+    ICECS_TCR = 0x60000000;
+    ICECS_TCR = 0xa0000000;
+
+    /* I/O mode on EMU 0 */
+    ICECS_TCR = 0xa0000003;
+
+    GEL_TextOut("EMU0 I/O is enabled\n","result");
+}
+
+/*--------------------------------------------------------------*/
+/* Use EnableEmu1IOMode() to enable cross triggering on EMU1.   */
+/*--------------------------------------------------------------*/
+hotmenu EnableEmu1IOMode() 
+{
+    ICECS_TCR = 0x60000000;
+    ICECS_TCR = 0xa0000000;
+
+    /* I/O mode on EMU 1 */
+    ICECS_TCR = 0xa0003000;
+
+    GEL_TextOut("EMU1 I/O is enabled\n","result");
+}
+
+/*--------------------------------------------------------------*/
+/* Disable cross triggering.                                    */
+/*--------------------------------------------------------------*/
+hotmenu DisableEMU01() 
+{
+    ICECS_TCR = 0xa0000000;
+    GEL_TextOut("EMU01 disabled\n","result");
+}

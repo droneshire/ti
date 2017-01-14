@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<register_ids id="SEC_AP" XML_version="2.0">
+
+	<register_id id="TRANSMIT_DATA" value="0" address="0" page="0" />
+	<register_id id="TRANSMIT_CONTROL" value="1" address="0" page="0" />
+	<register_id id="RECEIVE_DATA" value="2" address="0" page="0" />
+	<register_id id="RECEIVE_CONTROL" value="2" address="0" page="0" />
+</register_ids>

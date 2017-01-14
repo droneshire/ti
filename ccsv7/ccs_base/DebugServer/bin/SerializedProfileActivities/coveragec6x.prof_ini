@@ -1,0 +1,31 @@
+[Name]
+Collect Code Coverage and Exclusive Profile Data
+
+[Attributes]
+PartialEvents=true
+SimulationOnly=true
+
+[ISA]
+TMS320C621x
+TMS320C641x
+TMS320C661x
+TMS320C671x
+
+[Events]
+dataclass.aba_prog.events.CPU.instruction.decoded
+dataclass.aba_prog.events.CPU.instruction.condition_false
+dataclass.aba_prog.events.cycle.Total
+dataclass.aba_prog.events.cycle.CPU
+
+[EventClasses]
+aba_prog
+
+[Attributes]
+dataclass.aba_prog.Maximum Events=,userCanModify=false
+
+[Description]
+Gather source line coverage and exclusive function performance data during target execution.  Additional target events and profiling options can be configured via the Activity's properties.
+
+[MetaData]
+collectionType=coverage_data
+analysisType=Line Coverage

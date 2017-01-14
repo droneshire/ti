@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="Open Binary File" basedir=".">
+
+	<property name="dvt.activity.name" value="RTOS Analyzer/Open File/${ant.project.name}"/>
+  	<property name="dvt.activity.description" value="Display binary data from selected folder."/>
+
+	<property name="uc_name" value="Open_File" />
+
+	<dvt.import file="../../scripts/SystemAnalyzer.js"/>
+
+	<dvt.property>
+		version=1.0.0
+		dvt.activity.priority = 160
+		
+		<!-- Data Provider and AF information-->
+		uiaMode=Binary
+		dataproviders=UIA
+		UIA.name=UIA Log Viewer
+	</dvt.property>
+</project>

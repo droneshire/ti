@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file defines how ETB Trace attributes are available for a device.
+	 This information is used by Trace subsystem to find out setup parameters 
+	 and way to access and configure those parameters. 
+ -->
+<!-- ETB Trace Setup Attributes for a generic ARM ETB11 device -->
+
+<device id="ARM-ETB11" value="generic" mask="" HW_revision="1.0" XML_version="1.0">
+	<FileVersion version="1.1.0.0" Copyright="Copyright (c) 2005-2007 Texas Instruments"></FileVersion>
+	
+	<identification id="cpuid">
+		<cpu id="CPU0" kind="arm11xx" type="reg" address="" page="" width="" value="" mask="" modules="ETB" />
+	</identification> 
+	
+	<module id="ETB" kind="etb11" access="etb11" type="reg">
+		<register id="ID" address="ETB11_ID"  page="" width="32" />		
+		<register id="RDP" address="ETB11_RDP" page="" width="32" />		
+		<register id="RWP" address="ETB11_RWP" page="" width="32" />		
+		<register id="STS" address="ETB11_STS" page="" width="32" />		
+		<register id="RRD" address="ETB11_RRD" page="" width="32" />		
+		<register id="RRP" address="ETB11_RRP" page="" width="32" />		
+		<register id="RWD" address="ETB11_RWD" page="" width="32" />		
+		<register id="TRG" address="ETB11_TRG" page="" width="32" />		
+		<register id="CTL" address="ETB11_CTL" page="" width="32" />		
+	</module> 
+	
+	
+</device>
+

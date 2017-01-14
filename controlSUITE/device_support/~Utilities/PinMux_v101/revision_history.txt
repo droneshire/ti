@@ -1,0 +1,8 @@
+V1.0.1
+- Added all 28M35x devices
+- Added entries for all 2803x and 2802x devices
+- Added HRCAP to 2803x devices
+
+
+V1.0.0
+- first release

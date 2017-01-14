@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- 
+  TI File $Revision: 
+  Checkin $Date: 
+  --> 
+
+<!--  F2805x NMI INTRUPT REGS Registers 
+     =================================== 
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     --> 
+<module id="NMI INTRUPT REGS" HW_revision="" XML_version="1" description="NMI INTRUPT REGS Registers">
+    <register id="NMICFG" acronym="NMICFG" offset="0" page="1" width="16" description="C28 NMI Configuration Register" />
+    <register id="NMIFLG" acronym="NMIFLG" offset="1" page="1" width="16" description="C28 NMI Flag Register" />
+    <register id="NMIFLGCLR" acronym="NMIFLGCLR" offset="2" page="1" width="16" description="C28 NMI Flag Clear Register" />
+    <register id="NMIFLGFRC" acronym="NMIFLGFRC" offset="3" page="1" width="16" description="C28 NMI Flag Force Register" />
+    <register id="NMIWDCNT" acronym="NMIWDCNT" offset="4" page="1" width="16" description="C28 NMI Watchdog Counter Register" />
+    <register id="NMIWDPRD" acronym="NMIWDPRD" offset="5" page="1" width="16" description="C28 NMI Watchdog Period Register" />
+</module>

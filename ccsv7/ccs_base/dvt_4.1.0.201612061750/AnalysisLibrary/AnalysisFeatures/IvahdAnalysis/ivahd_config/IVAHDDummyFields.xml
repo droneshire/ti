@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<translate name="dummy fields">
+  <stringParser delimiters=", " input="Line">	
+    <ubyte name="Master ID" translate="$0" />
+    <string name="Master Name" translate="$2" />
+    <ulong name="Local Delta Timestamp" translate="$0" />
+    <ulong name="Local Timestamp" translate="$0" />
+    <uinteger name="Data" translate="$1" />
+    <string name="Type" input="$2" />
+    <string name="Module" input="$3" />
+    <string name="Domain" input="$3" />
+    <string name="Class" input="$4" />
+    <string name="Data Message" input="$5" />
+  </stringParser>
+</translate>
+

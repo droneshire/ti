@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<translate name="CoverageTranslate">
+<passthru name="Filename" input ="Filename"/>
+<passthru name="Function" input ="Function"/>
+<passthru name="Line Number" input ="Line_Number"/>
+<!--<passthru name="ColumnNumber" input ="ColumnNumber"/>-->
+<passthru name="Coverage"      input="Frequency_Count>0 ? &quot;YES&quot; : &quot;NO&quot;" />
+<!--<passthru name="FrequencyCount" input ="FrequencyCount"/>   -->
+<passthru name="Comment" input ="Comment"/>
+</translate>

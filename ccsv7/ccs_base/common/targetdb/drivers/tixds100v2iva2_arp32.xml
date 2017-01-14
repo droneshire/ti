@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<drivers id="TMS700C41XX">
+    <isa id="TMS700C41XX" ProcID="0xaf010410">
+        <driver file="..\..\..\emulation\drivers\tixds510ihwa.dvr">
+            <connectionType Type="TIXDS100v2"/>
+            <property id="debugParent" Type="hiddenfield" Value="" />
+            <property id="IHWA Base Address" Type="hiddenfield" Value="0x00" />
+            <property id="Use PRSC Features" Type="hiddenfield" Value="0"    />
+            <property Name="TraceDeviceId" Type="numericfield" Value="0x0" NumericType="HEX" UpperBound="0xFFFFFFFF" LowerBound="0" ID="device.traceId"/>
+        </driver>
+    </isa>
+</drivers>

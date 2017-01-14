@@ -1,0 +1,237 @@
+﻿<!-- This xml include file defines registers that need to be read from the C64XX+ device.
+	<Name> specifies the name that is used in the XML file to refer to this register
+	<SymbolName> specifies the symbolic name for the register used by the Debug Server.  Do not include this element for memory mapped registers.
+	<Address> specifies the memory mapped address for the register.  Set to -1 if the symbolic name is to be used.
+	<LengthInMAUs> specifies the number of bytes that the register contains multiplied by the number of registers in the set.
+	<NumRegistersInSet> specifies the number of (memory mapped) registers in the set.  These are read as a block.
+	<MemoryPageNumber> specifies the address space ID to use when reading memory mapped registers
+	<IsMemoryMapped> set to true for a memory mapped register, false to use the symbol name specified
+	<IsRegValueReadOnHalt> set to true if the register is to be read from the target each time the target halts
+	<IsOnlyForMemAnalysis> set to false if the register is not used for normal clients (default), true if used for advanced memory analysis or cache view
+	<IsRegValueSetDuringPrefetch> set to false (obsolete)
+	<IsRegValueContextRestoreReqd> set to false (obsolete)
+	<RegDecoder> for each decoder type that is associated with this register, add a <RegDecoder> element that specifies the (case-sensitive) name of the decoder
+	    as defined in the XML file.
+    NOTE: this file uses different decoders than the CCS 3.3 version of this file!
+-->
+<!--
+    /*__________________________________________________________________________*/
+    /* Coprocessor 15 - Overall System Configuration and Control                */
+    /*__________________________________________________________________________*/
+    { "CP15_CONTROL_REGISTER",                 			REG_CP15_C1C0OP0_CONTROL,                   			32, DSP_REG_MEM, BT_LONG },
+    { "CP15_AUXILIARY_CONTROL",                        	REG_CP15_C1C0OP1_AUX_CONTROL,               		32, DSP_REG_MEM, BT_LONG },
+    { "CP15_COPROCESSOR_ACCESS_CONTROL",  	REG_CP15_C1C0OP2_CP_ACCESS_CONTROL,     	32, DSP_REG_MEM, BT_LONG },
+    { "CP15_SECURE_CONFIGURATION",                 	REG_CP15_C1C1OP0_SECURE_CONFIG,             		32, DSP_REG_MEM, BT_LONG },
+    { "CP15_SECURE_DEBUG_ENABLE",               		REG_CP15_C1C1OP1_SECURE_DEBUG_ENABLE,  	32, DSP_REG_MEM, BT_LONG },
+    { "CP15_NON_SECURE_ACCESS_CONTROL",     	REG_CP15_C1C1OP2_NON_SECURE_ACCESS_CTL,	32, DSP_REG_MEM, BT_LONG },
+    { "CP15_VECTOR_BASE_ADDRESS",               		REG_CP15_C12C0OP0_VECTOR_BASE_ADDRESS,   	32, DSP_REG_MEM, BT_LONG },
+    { "CP15_MONITOR_VECTOR_BASE_ADDRESS",	REG_CP15_C12C0OP1_MONITOR_VECTOR_BASE_ADDR, 32, DSP_REG_MEM, BT_LONG },
+    { "CP15_INTERRUPT_STATUS",                  			REG_CP15_C12C1OP0_INTERRUPT_STATUS,         	32, DSP_REG_MEM, BT_LONG },
+
+    /*__________________________________________________________________________*/
+    /* Coprocessor 15 - MMU and Configuration control Registers                 */
+    /*__________________________________________________________________________*/
+    TLB Type Register returns the number of lockable entries for both the instruction and data TLBs - accessible in privileged modes only
+    { "CP15_MMU_TLB_TYPE",                      				REG_CP15_C0C0OP3_TLB_TYPE,                  				32, DSP_REG_MEM, BT_LONG },
+
+	CP15 now supports two translation table base registers: TTBR0 and TTBR1. 
+	The N most significant address bits of a virtual address use TTBR0
+	in virtual addresses that use TTBR0; 0 < N < 7. The device resets with N equal to zero, 
+	meaning all virtual addresses
+	use TTBR0, otherwise the address space 0-232-N will use TTBR0 and other addresses will
+	use TTBR1. The size of the first level page table required for TTBR0 will vary from 128
+	bytes to 16kB depending on the value of N, offering additional scope for memory savings
+	in resource critical systems, particularly where multiple tables are held in memory and
+	swapped on a context switch by updating the translation base register.
+	
+	N is defined by the Translation Table Base Control register c2, == CP15_MMU_XLATION_TABLE_BASE_CONTROL
+    {"RCP15_MMU_XLATION_TABLE_BASE",    RARM11_CP15_MMU(20), 32, DSP_REG_MEM, BT_LONG },
+    
+    TTBR0
+    { "CP15_MMU_XLATION_TABLE_BASE_0",          	REG_CP15_C2C0OP0_TRANS_TABLE_BASE0,         	32, DSP_REG_MEM, BT_LONG },
+    TTBR1
+    { "CP15_MMU_XLATION_TABLE_BASE_1",          	REG_CP15_C2C0OP1_TRANS_TABLE_BASE1,         	32, DSP_REG_MEM, BT_LONG },
+    "N"
+    { "CP15_MMU_XLATION_TABLE_BASE_CONTROL",    REG_CP15_C2C0OP2_TRANS_TABLE_CONTROL,       32, DSP_REG_MEM, BT_LONG },
+    { "CP15_MMU_DOMAIN_ACCESS_CONTROL",    	REG_CP15_C3C0OP0_DACR,                      				32, DSP_REG_MEM, BT_LONG },
+    { "CP15_DATA_FAULT_STATUS",                 			REG_CP15_C5C0OP0_DATA_FAULT_STATUS,         	32, DSP_REG_MEM, BT_LONG },
+    { "CP15_INSTRUCTION_FAULT_STATUS",          	REG_CP15_C5C0OP1_INST_FAULT_STATUS,         	32, DSP_REG_MEM, BT_LONG },
+    { "CP15_MMU_DATA_AUXILIARY_FAULT_STATUS",   REG_CP15_C5C1OP0_DATA_AUX_FAULT_STATUS,     32, DSP_REG_MEM, BT_LONG },
+    { "CP15_MMU_INSTR_AUXILIARY_FAULT_STATUS",  REG_CP15_C5C1OP1_INST_AUX_FAULT_STATUS,     32, DSP_REG_MEM, BT_LONG },
+	{ "CP15_DATA_FAULT_ADDRESS",                			REG_CP15_C6C0OP0_DATA_FAULT_ADDR,           	32, DSP_REG_MEM, BT_LONG },
+	{ "CP15_INSTRUCTION_FAULT_ADDRESS",         	REG_CP15_C6C0OP2_INST_FAULT_ADDR,           	32, DSP_REG_MEM, BT_LONG },
+    { "CP15_MMU_TLB_INVALID_INSTR",             		REG_CP15_C8C5OP0_INVALID_INSTR,             		32, DSP_REG_MEM, BT_LONG },
+    { "CP15_MMU_TLB_INVALID_DATA",              		REG_CP15_C8C6OP0_INVALID_DATA,              		32, DSP_REG_MEM, BT_LONG },
+    { "CP15_MMU_TLB_INVALID_BOTH",              		REG_CP15_C8C7OP0_INVALID_UNIFIED,           		32, DSP_REG_MEM, BT_LONG },
+    { "CP15_MMU_TLB_INVALID_MVA_INSTR",         	REG_CP15_C8C5OP1_INVALID_INSTR_ENTRY_MVA,   32, DSP_REG_MEM, BT_LONG },
+    { "CP15_MMU_TLB_INVALID_MVA_DATA",          	REG_CP15_C8C6OP1_INVALID_DATA_ENTRY_MVA,    32, DSP_REG_MEM, BT_LONG },
+    { "CP15_MMU_TLB_INVALID_MVA_BOTH",          	REG_CP15_C8C7OP1_INVALID_UNIFIED_ENTRY_MVA, 32, DSP_REG_MEM, BT_LONG },
+    { "CP15_MMU_TLB_INVALID_ASID_INSTR",        	REG_CP15_C8C5OP2_INVALID_INSTR_ON_ASID,     32, DSP_REG_MEM, BT_LONG },
+    { "CP15_MMU_TLB_INVALID_ASID_DATA",         	REG_CP15_C8C6OP2_INVALID_DATA_ON_ASID,      32, DSP_REG_MEM, BT_LONG },
+    { "CP15_MMU_TLB_INVALID_ASID_BOTH",         	REG_CP15_C8C7OP2_INVALID_UNIFIED_ON_ASID,   32, DSP_REG_MEM, BT_LONG },
+    { "CP15_MMU_TLB_DATA_LOCKDOWN",             	REG_CP15_C10C0OP0_DATA_TLB_LOCKDOWN,        32, DSP_REG_MEM, BT_LONG },
+    { "CP15_MMU_TLB_INSTR_LOCKDOWN",            	REG_CP15_C10C0OP1_INST_TLB_LOCKDOWN,        32, DSP_REG_MEM, BT_LONG },
+    { "CP15_MMU_PRIMARY_REGION_REMAP",          REG_CP15_C10C2OP0_PRIMARY_REGION_REMAP,     32, DSP_REG_MEM, BT_LONG },
+    { "CP15_MMU_NORMAL_MEMORY_REMAP",         	REG_CP15_C10C2OP1_NORMAL_REGION_REMAP,      32, DSP_REG_MEM, BT_LONG },
+    { "CP15_MMU_FCSE_PID",                      				REG_CP15_C13C0OP0_FCSE_PID,                 			32, DSP_REG_MEM, BT_LONG },
+    { "CP15_MMU_CONTEXT_ID",                    				REG_CP15_C13C0OP1_CONTEXT,                  			32, DSP_REG_MEM, BT_LONG },
+    { "CP15_MMU_THREAD_PROCESS_READ_WRITE_ID",  REG_CP15_C13C0OP2_THREAD_READ_WRITE,        32, DSP_REG_MEM, BT_LONG },
+    { "CP15_MMU_THREAD_PROCESS_READ_ONLY_ID",   REG_CP15_C13C0OP3_THREAD_READ_ONLY,         32, DSP_REG_MEM, BT_LONG },
+    { "CP15_MMU_THREAD_PROCESS_PRIV_ONLY_ID",   REG_CP15_C13C0OP4_THREAD_PRIV_ONLY,         32, DSP_REG_MEM, BT_LONG },
+    { "CP15_MMU_PERIPHERAL_PORT_MEMORY_REMAP",  REG_CP15_C15C2OP4_PERIPHERAL_PORT_REMAP,    32, DSP_REG_MEM, BT_LONG },
+    { "CP15_MMU_TLB_LOCKDOWN_INDEX",            	REG_CP15_C15C4OP2_TLB_LOCKDOWN_INDEX,       32, DSP_REG_MEM, BT_LONG },
+    { "CP15_MMU_TLB_LOCKDOWN_VA",               		REG_CP15_C15C5OP2_TLB_LOCKDOWN_VA,          	32, DSP_REG_MEM, BT_LONG },
+    { "CP15_MMU_TLB_LOCKDOWN_PA",               		REG_CP15_C15C6OP2_TLB_LOCKDOWN_PA,          	32, DSP_REG_MEM, BT_LONG },
+    { "CP15_MMU_TLB_LOCKDOWN_ATTRIBUTES",   	REG_CP15_C15C7OP2_TLB_LOCKDOWN_ATTR,     	32, DSP_REG_MEM, BT_LONG },
+
+    /*__________________________________________________________________________*/
+    /* Coprocessor 15 - Debug Access to caches and TLB Registers                */
+    /*__________________________________________________________________________*/
+    { "CP15_DATA_L1_HIGH",                      				REG_CP15_C15C0OP0_DATA_LI_HIGH,             			32, DSP_REG_MEM, BT_LONG },
+    { "CP15_DATA_L1_LOW",                       				REG_CP15_C15C0OP1_DATA_LI_LOW,              			32, DSP_REG_MEM, BT_LONG },
+    { "CP15_DATA_TLB_CAM_RAM_WRITE",            	REG_CP15_C15C0OP2_DATA_TLB_CAM_WRITE,     		32, DSP_REG_MEM, BT_LONG },
+    { "CP15_DATA_TLB_ATTR_WRITE",              	 		REG_CP15_C15C0OP3_DATA_TLB_ATTR_WRITE,    	32, DSP_REG_MEM, BT_LONG },
+    { "CP15_DATA_TLB_PA_WRITE",                 			REG_CP15_C15C0OP4_DATA_TLB_PA_WRITE,        		32, DSP_REG_MEM, BT_LONG },
+    { "CP15_DATA_HVAB_ARRAY_WRITE",             	REG_CP15_C15C0OP5_DATA_HVAB_ARRAY_WRITE,  	32, DSP_REG_MEM, BT_LONG },
+    { "CP15_DATA_TAG_ARRAY_WRITE",              		REG_CP15_C15C0OP6_DATA_TAG_ARRAY_WRITE,    	32, DSP_REG_MEM, BT_LONG },
+    { "CP15_DATA_DATA_DIRTY_PARITY_WRITE", 	REG_CP15_C15C0OP7_DATA_DIRTY_PARITY_WRITE,	32, DSP_REG_MEM, BT_LONG },
+    { "CP15_INSTR_L1_HIGH",                     				REG_CP15_C15C1OP0_INSTR_L1_HIGH,            			32, DSP_REG_MEM, BT_LONG },
+    { "CP15_INSTR_L1_LOW",                      				REG_CP15_C15C1OP1_INSTR_L1_LOW,             			32, DSP_REG_MEM, BT_LONG },
+    { "CP15_INSTR_TLB_CAM_RAM_WRITE",           	REG_CP15_C15C1OP2_INSTR_TLB_CAM_WRITE,      	32, DSP_REG_MEM, BT_LONG },
+    { "CP15_INSTR_TLB_ATTR_WRITE",              		REG_CP15_C15C1OP3_INSTR_TLB_ATTR_WRITE,     	32, DSP_REG_MEM, BT_LONG },
+    { "CP15_INSTR_TLB_PA_WRITE",                			REG_CP15_C15C1OP4_INSTR_TLB_PA_WRITE,       		32, DSP_REG_MEM, BT_LONG },
+    { "CP15_INSTR_HVAB_ARRAY_WRITE",            	REG_CP15_C15C1OP5_INSTR_HVAB_ARRAY_WRITE, 	32, DSP_REG_MEM, BT_LONG },
+    { "CP15_INSTR_TAG_ARRAY_WRITE",             		REG_CP15_C15C1OP6_INSTR_TAG_ARRAY_WRITE,   	32, DSP_REG_MEM, BT_LONG },
+    { "CP15_INSTR_DATA_DIRTY_PARITY_WRITE",  	REG_CP15_C15C1OP7_INSTR_DIRTY_PARITY_WRITE, 32, DSP_REG_MEM, BT_LONG },
+    { "CP15_DATA_TLB_CAM_RAM_READ",             	REG_CP15_C15C2OP2_DATA_TLB_CAM_READ,        	32, DSP_REG_MEM, BT_LONG },
+    { "CP15_DATA_TLB_ATTR_READ",                			REG_CP15_C15C2OP3_DATA_TLB_ATTR_READ,       	32, DSP_REG_MEM, BT_LONG },
+    { "CP15_DATA_TLB_PA_READ",                  			REG_CP15_C15C2OP4_DATA_TLB_PA_READ,         		32, DSP_REG_MEM, BT_LONG },
+    { "CP15_DATA_HVAB_ARRAY_READ",              		REG_CP15_C15C2OP5_DATA_HVAB_ARRAY_READ,   	32, DSP_REG_MEM, BT_LONG },
+    { "CP15_DATA_TAG_ARRAY_READ",               		REG_CP15_C15C2OP6_DATA_TAG_ARRAY_READ,      32, DSP_REG_MEM, BT_LONG },
+    { "CP15_DATA_DATA_DIRTY_PARITY",            		REG_CP15_C15C2OP7_DATA_DIRTY_PARITY_READ, 	32, DSP_REG_MEM, BT_LONG },
+    { "CP15_INSTR_TLB_CAM_RAM_READ",            	REG_CP15_C15C3OP2_INSTR_TLB_CAM_READ,       	32, DSP_REG_MEM, BT_LONG },
+    { "CP15_INSTR_TLB_ATTR_READ",               			REG_CP15_C15C3OP3_INSTR_TLB_ATTR_READ,      	32, DSP_REG_MEM, BT_LONG },
+    { "CP15_INSTR_TLB_PA_READ",                 			REG_CP15_C15C3OP4_INSTR_TLB_PA_READ,        		32, DSP_REG_MEM, BT_LONG },
+    { "CP15_INSTR_HVAB_ARRAY_READ",             		REG_CP15_C15C3OP5_INSTR_HVAB_ARRAY_READ,   	32, DSP_REG_MEM, BT_LONG },
+    { "CP15_INSTR_TAG_ARRAY_READ",              		REG_CP15_C15C3OP6_INSTR_TAG_ARRAY_READ,     	32, DSP_REG_MEM, BT_LONG },
+    { "CP15_INSTR_DATA_DIRTY_PARITY_READ",    	REG_CP15_C15C3OP7_INSTR_DIRTY_PARITY_READ, 	32, DSP_REG_MEM, BT_LONG },
+    { "CP15_GHB_ARRAY",                         					REG_CP15_C15C7OP2_GHB_ARRAY,                				32, DSP_REG_MEM, BT_LONG },
+    { "CP15_BTB_ARRAY",                         					REG_CP15_C15C7OP3_BTB_ARRAY,                				32, DSP_REG_MEM, BT_LONG },
+    { "CP15_L2_HIGH",                           						REG_CP15_C15C8OP0_L2_HIGH,                  					32, DSP_REG_MEM, BT_LONG },
+    { "CP15_L2_LOW",                           	 					REG_CP15_C15C8OP1_L2_LOW,                   				32, DSP_REG_MEM, BT_LONG },
+
+    /*__________________________________________________________________________*/
+    /* Coprocessor 15 - System Performance and Monitoring                       */
+    /*__________________________________________________________________________*/
+    { "CP15_PERFORMANCE_MONITOR_CONTROL",       REG_CP15_C9C12OP0_PERF_MONITOR_CONTROL,     32, DSP_REG_MEM, BT_LONG },
+    { "CP15_COUNT_ENABLE_SET",                  			REG_CP15_C9C12OP1_COUNT_ENABLE_SET,         			32, DSP_REG_MEM, BT_LONG },
+    { "CP15_COUNT_ENABLE_CLEAR",                			REG_CP15_C9C12OP2_COUNT_ENABLE_CLEAR,       		32, DSP_REG_MEM, BT_LONG },
+    { "CP15_OVERFLOW_FLAG_STATUS",              		REG_CP15_C9C12OP3_OVERFLOW_FLAG_STATUS,     	32, DSP_REG_MEM, BT_LONG },
+    { "CP15_SOFTWARE_INCREMENT",                		REG_CP15_C9C12OP4_SOFTWARE_INCREMENT,       		32, DSP_REG_MEM, BT_LONG },
+    { "CP15_COUNTER_SELECTION",                 			REG_CP15_C9C12OP5_COUNTER_SELECTION,        		32, DSP_REG_MEM, BT_LONG },
+    { "CP15_CYCLE_COUNT",                      	 				REG_CP15_C9C13OP0_CYCLE_COUNT,              				32, DSP_REG_MEM, BT_LONG },
+    { "CP15_EVENT_SELECTION",                   				REG_CP15_C9C13OP1_EVENT_SELECTION,          			32, DSP_REG_MEM, BT_LONG },
+    { "CP15_PERFORMANCE_MONITOR_COUNT",     	REG_CP15_C9C13OP2_PERF_MONITOR_COUNT,       		32, DSP_REG_MEM, BT_LONG },
+    { "CP15_USER_ENABLE",                       					REG_CP15_C9C14OP0_USER_ENABLE,              				32, DSP_REG_MEM, BT_LONG },
+    { "CP15_INTERRUPT_ENABLE_SET",              		REG_CP15_C9C14OP1_INTERRUPT_ENABLE_SET,     		32, DSP_REG_MEM, BT_LONG },
+    { "CP15_INTERRUPT_ENABLE_CLEAR",            		REG_CP15_C9C14OP2_INTERRUPT_ENABLE_CLEAR,   	32, DSP_REG_MEM, BT_LONG },
+
+-->
+<Register>
+	<Name>CPSR</Name>
+	<SymbolName>CPSR</SymbolName>
+	<Address>-1</Address>
+	<LengthInMAUs>4</LengthInMAUs>
+	<NumRegistersInSet>1</NumRegistersInSet>
+	<MemoryPageNumber>0</MemoryPageNumber>
+	<IsMemoryMapped>false</IsMemoryMapped>
+	<IsRegValueReadOnHalt>true</IsRegValueReadOnHalt>
+	<IsRegValueSetDuringPrefetch>false</IsRegValueSetDuringPrefetch>
+	<IsRegValueContextRestoreReqd>false</IsRegValueContextRestoreReqd>
+	<RegDecoder>GetModeStatusString</RegDecoder>
+	<RegDecoder>GetThumbModeStatusString</RegDecoder>
+</Register>
+<Register>
+	<Name>MmuControl</Name>
+	<SymbolName>CP15_CONTROL_REGISTER</SymbolName>
+	<Address>-1</Address>
+	<LengthInMAUs>4</LengthInMAUs>
+	<NumRegistersInSet>1</NumRegistersInSet>
+	<MemoryPageNumber>0</MemoryPageNumber>
+	<IsMemoryMapped>false</IsMemoryMapped>
+	<IsRegValueReadOnHalt>true</IsRegValueReadOnHalt>
+	<IsRegValueSetDuringPrefetch>false</IsRegValueSetDuringPrefetch>
+	<IsRegValueContextRestoreReqd>false</IsRegValueContextRestoreReqd>
+	<RegDecoder>IsMmuEnabled</RegDecoder>
+	<RegDecoder>IsSystemReadAccess</RegDecoder>
+	<RegDecoder>IsRomMode</RegDecoder>
+	<RegDecoder>IsArmV7MmuMode</RegDecoder>
+	<RegDecoder>IsArmV5MmuMode</RegDecoder>
+</Register>
+<Register>
+	<Name>MmuTranslationTableBaseControlReg</Name>
+	<SymbolName>CP15_MMU_XLATION_TABLE_BASE_CONTROL</SymbolName>
+	<Address>-1</Address>
+	<LengthInMAUs>4</LengthInMAUs>
+	<NumRegistersInSet>1</NumRegistersInSet>
+	<MemoryPageNumber>0</MemoryPageNumber>
+	<IsMemoryMapped>false</IsMemoryMapped>
+	<IsRegValueReadOnHalt>true</IsRegValueReadOnHalt>
+	<IsRegValueSetDuringPrefetch>false</IsRegValueSetDuringPrefetch>
+	<IsRegValueContextRestoreReqd>false</IsRegValueContextRestoreReqd>
+	<RegDecoder>GetTTBR1CutoverAdrs</RegDecoder>
+</Register>
+<Register>
+	<Name>MmuTranslationTableReg0BaseAdrs</Name>
+	<SymbolName>CP15_MMU_XLATION_TABLE_BASE_0</SymbolName>
+	<Address>-1</Address>
+	<LengthInMAUs>4</LengthInMAUs>
+	<NumRegistersInSet>1</NumRegistersInSet>
+	<MemoryPageNumber>0</MemoryPageNumber>
+	<IsMemoryMapped>false</IsMemoryMapped>
+	<IsRegValueReadOnHalt>true</IsRegValueReadOnHalt>
+	<IsRegValueSetDuringPrefetch>false</IsRegValueSetDuringPrefetch>
+	<IsRegValueContextRestoreReqd>false</IsRegValueContextRestoreReqd>
+	<RegDecoder>GetTranslationTableBaseAdrs</RegDecoder>
+</Register>
+<Register>
+	<Name>MmuTranslationTableReg1BaseAdrs</Name>
+	<SymbolName>CP15_MMU_XLATION_TABLE_BASE_1</SymbolName>
+	<Address>-1</Address>
+	<LengthInMAUs>4</LengthInMAUs>
+	<NumRegistersInSet>1</NumRegistersInSet>
+	<MemoryPageNumber>0</MemoryPageNumber>
+	<IsMemoryMapped>false</IsMemoryMapped>
+	<IsRegValueReadOnHalt>true</IsRegValueReadOnHalt>
+	<IsRegValueSetDuringPrefetch>false</IsRegValueSetDuringPrefetch>
+	<IsRegValueContextRestoreReqd>false</IsRegValueContextRestoreReqd>
+	<RegDecoder>GetTranslationTableBaseAdrs</RegDecoder>
+</Register>
+<Register>
+	<Name>MmuDACR</Name>
+	<SymbolName>CP15_MMU_DOMAIN_ACCESS_CONTROL</SymbolName>
+	<Address>-1</Address>
+	<LengthInMAUs>4</LengthInMAUs>
+	<NumRegistersInSet>1</NumRegistersInSet>
+	<MemoryPageNumber>0</MemoryPageNumber>
+	<IsMemoryMapped>false</IsMemoryMapped>
+	<IsRegValueReadOnHalt>true</IsRegValueReadOnHalt>
+	<IsRegValueSetDuringPrefetch>false</IsRegValueSetDuringPrefetch>
+	<IsRegValueContextRestoreReqd>false</IsRegValueContextRestoreReqd>
+	<RegDecoder>Getb1_b0</RegDecoder>
+	<RegDecoder>Getb3_b2</RegDecoder>
+	<RegDecoder>Getb5_b4</RegDecoder>
+	<RegDecoder>Getb7_b6</RegDecoder>
+	<RegDecoder>Getb9_b8</RegDecoder>
+	<RegDecoder>Getb11_b10</RegDecoder>
+	<RegDecoder>Getb13_b12</RegDecoder>
+	<RegDecoder>Getb15_b14</RegDecoder>
+	<RegDecoder>Getb17_b16</RegDecoder>
+	<RegDecoder>Getb19_b18</RegDecoder>
+	<RegDecoder>Getb21_b20</RegDecoder>
+	<RegDecoder>Getb23_b22</RegDecoder>
+	<RegDecoder>Getb25_b24</RegDecoder>
+	<RegDecoder>Getb27_b26</RegDecoder>
+	<RegDecoder>Getb29_b28</RegDecoder>
+	<RegDecoder>Getb31_b30</RegDecoder>
+</Register>

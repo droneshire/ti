@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configurations XML_version="1.2" id="configurations_0">
+
+
+<configuration XML_version="1.2" id="TI XDS560 Emulator_0">
+        <instance XML_version="1.2" desc="TI XDS560 Emulator_0" href="connections\TIXDS560_Connection.xml" id="TI XDS560 Emulator_0" xml="TIXDS560_Connection.xml" xmlpath="connections"/>
+        <connection XML_version="1.2" id="TI XDS560 Emulator_0">
+            <instance XML_version="1.2" href="drivers\tixds560icepick_c.xml" id="drivers" xml="tixds560icepick_c.xml" xmlpath="drivers"/>
+            <instance XML_version="1.2" href="drivers\tixds560cs_dap.xml" id="drivers" xml="tixds560cs_dap.xml" xmlpath="drivers"/>
+            <instance XML_version="1.2" href="drivers\tixds560cortexM.xml" id="drivers" xml="tixds560cortexM.xml" xmlpath="drivers"/>
+            <instance XML_version="1.2" href="drivers\tixds560cs_child.xml" id="drivers" xml="tixds560cs_child.xml" xmlpath="drivers"/>
+            <instance XML_version="1.2" href="drivers\tixds560c28x.xml" id="drivers" xml="tixds560c28x.xml" xmlpath="drivers"/>
+            <platform XML_version="1.2" id="platform_0">
+                <instance XML_version="1.2" desc="F28M35H52C1_0" href="devices\f28m35h52c1.xml" id="F28M35H52C1_0" xml="f28m35h52c1.xml" xmlpath="devices"/>
+                <device HW_revision="1" XML_version="1.2" description="" id="F28M35H52C1_0" partnum="F28M35H52C1">
+                    <router HW_revision="1.0" XML_version="1.2" description="ICEPick_C Router" id="IcePick_C_0" isa="ICEPICK_C">
+                        <subpath id="C28x">
+                            <property Type="numericfield" Value="0x11" desc="Port Number_0" id="Port Number"/>
+                        </subpath>
+                    </router>
+                </device>
+            </platform>
+        </connection>
+    </configuration>
+</configurations>

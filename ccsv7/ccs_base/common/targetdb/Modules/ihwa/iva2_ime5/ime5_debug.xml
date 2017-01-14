@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module id="Hidden" HW_revision="1" XML_version="1" description="IVA IHWA Debug Registers" hidden="true" >
+    <register id="DBG_CAP"  			   acronym="DBG_CAP"  				 width="32" description="Debug Capabilities Register" />
+    <register id="DBG_CNTL" 			   acronym="DBG_CNTL" 				 width="32" description="Debug Control Register" />
+    <register id="DBG_HWBP_0_CNTL"         acronym="DBG_HWBP_0_CNTL"         width="32" description="MB Breakpoint 0 control register"/>
+    <register id="DBG_HWBP_0_MB_INDEX"     acronym="DBG_HWBP_0_MB_INDEX"     width="32" description="MB Breakpoint 0 index register"/>
+    <register id="DBG_HWBP_0_AMASK"        acronym="DBG_HWBP_0_AMASK"        width="32" description="MB Breakpoint 0 mask register"/>
+</module>

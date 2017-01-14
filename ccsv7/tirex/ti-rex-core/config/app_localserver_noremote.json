@@ -1,0 +1,18 @@
+{
+  "//": "NOTE: The properties below override the ones in app_default.json",
+  "mode": "localserver",
+  "myHttpPort": "3002",
+  "myRole": "",
+  "remoteserverHost": "",
+  "remoteBundleZips": "https://downloads.ti.com/ccs/esd/tirex/zips/",
+  "contentPath": "~/ccs-cloud-storage/ti-rex/git/ti-rex-content",
+  "dbPath": "~/tirex-localserver_noremote/.db",
+  "contentPackagesConfig": "config/contentPackages/local.json",
+  "userConfigPath": "~/ti/tirex-localserver",
+  "downloadsCache": "~/tirex-localserver_noremote/.downloads",
+  "ccsCloudUrl": "{ccs-url}",
+  "logsDir": "~/tirex-localserver_noremote/.logs",
+  "analyticsDir": "~/tirex-localserver_noremote/.tirex-analytics-data",
+  "refreshDB": "false",
+  "allowRefreshFromWeb": "true"
+}

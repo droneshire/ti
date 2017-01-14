@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!--                                                  -->
+<!-- Blackhawk USB2000 Controller XML Definitions.    -->
+<!--                                                  -->
+<!-- This is a CCStudio v4 compatible XML.            -->
+<!--                                                  -->
+<!-- 23 December 2011                                 -->
+<!-- v5.1.0.106                                       -->
+<!--                                                  -->
+
+<connection id="Blackhawk USB2000 Controller" class="337402">
+
+    <connectionType Type="BH2000"/>
+
+    <property id="Emulator Filename" Type="hiddenfield" Value="bhemujscl.dll" ID="SEPK.POD_DRVR"/>
+
+    <property id="Enable Scan Loop Feature" Type="hiddenfield" Value="1" ID="SEPK.POD_SCANLOOP"/>
+
+    <property desc="Emulator I/O Port" Type="stringfield" Value="0x0" id="portAddr1" ID="SEPK.POD_PORT"/>
+
+    <property id="JTAG TCLK Frequency (MHz)" Type="choicelist" Value="0" ID="USCIF.TCLK_PROGRAM">
+
+        <choice Name="Automatic with faster limit" value="AUTOMATIC">
+            <property id="Automatic" Type="hiddenfield" Value="EXCHANGE" ID="USCIF.TCLK_FREQUENCY"/>
+        </choice>
+        <choice Name="Automatic with legacy 10.368MHz limit" value="AUTOMATIC">
+            <property id="Automatic" Type="hiddenfield" Value="LEGACY" ID="USCIF.TCLK_FREQUENCY"/>
+        </choice>
+        <choice Name="Automatic with user specified limit" value="AUTOMATIC">
+            <property id="Enter any value from 0.50 to 35.0" Type="stringfield" Value="10.368" ID="USCIF.TCLK_FREQUENCY"/>
+        </choice>
+        <choice Name="Fixed with user specified value" value="SPECIFIC">
+            <property id="Enter any value from 0.50 to 35.0" Type="stringfield" Value="10.368" ID="USCIF.TCLK_FREQUENCY"/>
+        </choice>
+
+    </property>
+
+    <property id="TMS/TDO Output Timing" Type="choicelist" Value="0" ID="USCIF.TDOEDGE">
+
+        <choice Name="Rising edge allows faster TCLK" value="RISE" />
+        <choice Name="Falling edge is JTAG standard"  value="FALL" />
+
+    </property>
+
+    <property Name="Diagnostic Command" Type="hiddenfield" Value="%ccs_base%/common/uscif/dbgjtag.exe -f %boarddatafile% -rv -o -F inform,logfile=yes -S pathlength -S integrity" ID="DiagnosticCommand"/>
+
+</connection>

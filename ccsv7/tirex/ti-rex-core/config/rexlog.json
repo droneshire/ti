@@ -1,0 +1,38 @@
+{
+    "__comment": "loggers are monitored for changes during run-time, but transports are not",
+
+    "transports": {
+        "myFile": {
+            "filename": "tirex.log",
+            "maxFileSize": null
+        }
+    },
+
+    "loggers": {
+        "tirex": {
+            "transport": "myFile",
+            "level": "verbose",
+            "console": true
+        },
+        "dbBuilderDevices": {
+            "transport": "dbBuilderDevicesLog",
+            "level": "info",
+            "console": false
+        },
+        "dbBuilderDevtools": {
+            "transport": "dbBuilderDevtoolsLog",
+            "level": "info",
+            "console": false
+        },
+        "dbBuilderResources": {
+            "transport": "dbBuilderResourcesLog",
+            "level": "info",
+            "console": false
+        },
+        "dbBuilderMacros": {
+            "transport": "dbBuilderMacrosLog",
+            "level": "info",
+            "console": false
+        }
+    }
+}

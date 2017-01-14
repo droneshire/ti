@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><PartNumber id=""><Core name="Cortex_M3_0"><DebugProperties/><FilePaths/></Core><Core name="C28xx_0"><DebugProperties>&lt;?xml version="1.0" encoding="UTF-8" standalone="no" ?&gt;
+&lt;PropertyValues&gt;
+
+  &lt;property id="FlashEraseSelection"&gt;
+    &lt;curValue&gt;Necessary Sectors Only (for Program Load)&lt;/curValue&gt;
+  &lt;/property&gt;
+
+&lt;/PropertyValues&gt;
+</DebugProperties><FilePaths/></Core></PartNumber>

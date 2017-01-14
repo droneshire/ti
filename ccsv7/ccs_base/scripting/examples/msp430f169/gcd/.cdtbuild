@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?fileVersion 3.1.0?>
+
+<ManagedProjectBuildInfo>
+<project id="gcd.com.ti.ccstudio.buildDefinitions.MSP430.executableProjectType.579043766" name="MSP430 Executable" projectType="com.ti.ccstudio.buildDefinitions.MSP430.executableProjectType">
+<configuration artifactExtension="out" artifactName="gcd" cleanCommand="${CCE_INSTALL_ROOT}/utils/Cygwin/rm -rf" description="" id="com.ti.ccstudio.buildDefinitions.MSP430.exe.debug.717070581" name="Debug" parent="com.ti.ccstudio.buildDefinitions.MSP430.exe.debug">
+<toolChain id="com.ti.ccstudio.buildDefinitions.MSP430_3.0.exe.DebugToolchain.1910047461" name="TI Code Generation Tools" superClass="com.ti.ccstudio.buildDefinitions.MSP430_3.0.exe.DebugToolchain" targetTool="com.ti.ccstudio.buildDefinitions.MSP430_3.0.exe.linkerDebug.796538496">
+<option id="com.ti.ccstudio.buildDefinitions.core.OPT_CODEGEN_VERSION.968716307" superClass="com.ti.ccstudio.buildDefinitions.core.OPT_CODEGEN_VERSION" value="3.0.1" valueType="string"/>
+<option id="com.ti.ccstudio.buildDefinitions.core.OPT_TAGS.188232502" superClass="com.ti.ccstudio.buildDefinitions.core.OPT_TAGS" valueType="stringList">
+<listOptionValue builtIn="false" value="DEVICE_CONFIGURATION_ID=MSP430F169"/>
+<listOptionValue builtIn="false" value="DEVICE_ENDIANNESS=little"/>
+<listOptionValue builtIn="false" value="LINKER_COMMAND_FILE=lnk_msp430f169.cmd"/>
+<listOptionValue builtIn="false" value="RUNTIME_SUPPORT_LIBRARY=rts430.lib"/>
+<listOptionValue builtIn="false" value="IS_ASSEMBLY_ONLY=false"/>
+</option>
+<tool id="com.ti.ccstudio.buildDefinitions.MSP430_3.0.exe.compilerDebug.1974082716" name="MSP430 Compiler v3.0" superClass="com.ti.ccstudio.buildDefinitions.MSP430_3.0.exe.compilerDebug">
+<option id="com.ti.ccstudio.buildDefinitions.MSP430_3.0.compilerID.PRINTF_SUPPORT.1080290659" superClass="com.ti.ccstudio.buildDefinitions.MSP430_3.0.compilerID.PRINTF_SUPPORT" value="com.ti.ccstudio.buildDefinitions.MSP430_3.0.compilerID.PRINTF_SUPPORT.full" valueType="enumerated"/>
+</tool>
+<tool id="com.ti.ccstudio.buildDefinitions.MSP430_3.0.exe.linkerDebug.796538496" name="MSP430 Linker v3.0" superClass="com.ti.ccstudio.buildDefinitions.MSP430_3.0.exe.linkerDebug">
+<option id="com.ti.ccstudio.buildDefinitions.MSP430_3.0.linkerID.LIBRARY.89310079" superClass="com.ti.ccstudio.buildDefinitions.MSP430_3.0.linkerID.LIBRARY" valueType="stringList">
+<listOptionValue builtIn="false" value="&quot;rts430.lib&quot;"/>
+</option>
+<option id="com.ti.ccstudio.buildDefinitions.MSP430_3.0.linkerID.HEAP_SIZE.699164149" superClass="com.ti.ccstudio.buildDefinitions.MSP430_3.0.linkerID.HEAP_SIZE" value="80" valueType="string"/>
+<option id="com.ti.ccstudio.buildDefinitions.MSP430_3.0.linkerID.STACK_SIZE.907442486" superClass="com.ti.ccstudio.buildDefinitions.MSP430_3.0.linkerID.STACK_SIZE" value="80" valueType="string"/>
+<option id="com.ti.ccstudio.buildDefinitions.MSP430_3.0.linkerID.USE_HW_MPY.1353470182" superClass="com.ti.ccstudio.buildDefinitions.MSP430_3.0.linkerID.USE_HW_MPY" value="com.ti.ccstudio.buildDefinitions.MSP430_3.0.linkerID.USE_HW_MPY.16" valueType="enumerated"/>
+</tool>
+<macros/>
+</toolChain>
+</configuration>
+<configuration artifactExtension="out" artifactName="gcd" cleanCommand="${CCE_INSTALL_ROOT}/utils/Cygwin/rm -rf" description="" id="com.ti.ccstudio.buildDefinitions.MSP430.exe.Release.1878574448" name="Release" parent="com.ti.ccstudio.buildDefinitions.MSP430.exe.Release">
+<toolChain id="com.ti.ccstudio.buildDefinitions.MSP430_3.0.exe.ReleaseToolchain.1387392164" name="TI Code Generation Tools" superClass="com.ti.ccstudio.buildDefinitions.MSP430_3.0.exe.ReleaseToolchain" targetTool="com.ti.ccstudio.buildDefinitions.MSP430_3.0.exe.linkerRelease.560275825">
+<option id="com.ti.ccstudio.buildDefinitions.core.OPT_CODEGEN_VERSION.1707123301" superClass="com.ti.ccstudio.buildDefinitions.core.OPT_CODEGEN_VERSION" value="3.0.1" valueType="string"/>
+<option id="com.ti.ccstudio.buildDefinitions.core.OPT_TAGS.212355717" superClass="com.ti.ccstudio.buildDefinitions.core.OPT_TAGS" valueType="stringList">
+<listOptionValue builtIn="false" value="DEVICE_CONFIGURATION_ID=MSP430F169"/>
+<listOptionValue builtIn="false" value="DEVICE_ENDIANNESS=little"/>
+<listOptionValue builtIn="false" value="LINKER_COMMAND_FILE=lnk_msp430f169.cmd"/>
+<listOptionValue builtIn="false" value="RUNTIME_SUPPORT_LIBRARY=rts430.lib"/>
+<listOptionValue builtIn="false" value="IS_ASSEMBLY_ONLY=false"/>
+</option>
+<tool id="com.ti.ccstudio.buildDefinitions.MSP430_3.0.exe.compilerRelease.1042384738" name="MSP430 Compiler v3.0" superClass="com.ti.ccstudio.buildDefinitions.MSP430_3.0.exe.compilerRelease">
+<option id="com.ti.ccstudio.buildDefinitions.MSP430_3.0.compilerID.PRINTF_SUPPORT.770731797" superClass="com.ti.ccstudio.buildDefinitions.MSP430_3.0.compilerID.PRINTF_SUPPORT" value="com.ti.ccstudio.buildDefinitions.MSP430_3.0.compilerID.PRINTF_SUPPORT.full" valueType="enumerated"/>
+</tool>
+<tool id="com.ti.ccstudio.buildDefinitions.MSP430_3.0.exe.linkerRelease.560275825" name="MSP430 Linker v3.0" superClass="com.ti.ccstudio.buildDefinitions.MSP430_3.0.exe.linkerRelease">
+<option id="com.ti.ccstudio.buildDefinitions.MSP430_3.0.linkerID.LIBRARY.324964053" superClass="com.ti.ccstudio.buildDefinitions.MSP430_3.0.linkerID.LIBRARY" valueType="stringList">
+<listOptionValue builtIn="false" value="&quot;rts430.lib&quot;"/>
+</option>
+<option id="com.ti.ccstudio.buildDefinitions.MSP430_3.0.linkerID.HEAP_SIZE.2011625141" superClass="com.ti.ccstudio.buildDefinitions.MSP430_3.0.linkerID.HEAP_SIZE" value="80" valueType="string"/>
+<option id="com.ti.ccstudio.buildDefinitions.MSP430_3.0.linkerID.STACK_SIZE.61528095" superClass="com.ti.ccstudio.buildDefinitions.MSP430_3.0.linkerID.STACK_SIZE" value="80" valueType="string"/>
+<option id="com.ti.ccstudio.buildDefinitions.MSP430_3.0.linkerID.USE_HW_MPY.1331453318" superClass="com.ti.ccstudio.buildDefinitions.MSP430_3.0.linkerID.USE_HW_MPY" value="com.ti.ccstudio.buildDefinitions.MSP430_3.0.linkerID.USE_HW_MPY.16" valueType="enumerated"/>
+</tool>
+</toolChain>
+</configuration>
+</project>
+</ManagedProjectBuildInfo>

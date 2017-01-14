@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<!-- <drivers id="tixds560etbcs"> -->
+
+<drivers id="ETBCS">	
+<isa Type="CS_ETB" ProcID="0x75809404">		
+	<driver file="NONE">
+		<connectionType Type="JLink"/>
+	</driver>
+</isa>
+</drivers>

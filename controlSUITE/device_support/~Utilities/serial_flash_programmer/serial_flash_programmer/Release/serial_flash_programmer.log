@@ -1,0 +1,57 @@
+﻿  stdafx.cpp
+  serial_flash_programmer.cpp
+serial_flash_programmer.cpp(180): warning C4005: 'NO_ERROR': macro redefinition
+  C:\Program Files (x86)\Windows Kits\8.1\Include\shared\winerror.h(211): note: see previous definition of 'NO_ERROR'
+serial_flash_programmer.cpp(250): warning C4996: '_swprintf': This function or variable may be unsafe. Consider using _swprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\corecrt_wstdio.h(1444): note: see declaration of '_swprintf'
+serial_flash_programmer.cpp(266): warning C4996: '_swprintf': This function or variable may be unsafe. Consider using _swprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\corecrt_wstdio.h(1444): note: see declaration of '_swprintf'
+  f021_DownloadKernel.cpp
+source\f021_DownloadKernel.cpp(193): warning C4477: 'fscanf_s' : format string '%x' requires an argument of type 'unsigned int *', but variadic argument 1 has type 'unsigned char *'
+  source\f021_DownloadKernel.cpp(193): note: consider using '%hhx' in the format string
+source\f021_DownloadKernel.cpp(230): warning C4477: 'fscanf_s' : format string '%x' requires an argument of type 'unsigned int *', but variadic argument 1 has type 'unsigned char *'
+  source\f021_DownloadKernel.cpp(230): note: consider using '%hhx' in the format string
+source\f021_DownloadKernel.cpp(272): warning C4996: '_wfopen': This function or variable may be unsafe. Consider using _wfopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\corecrt_wstdio.h(129): note: see declaration of '_wfopen'
+  f021_SendMessage.cpp
+source\f021_SendMessage.cpp(160): warning C4018: '<': signed/unsigned mismatch
+source\f021_SendMessage.cpp(212): warning C4101: 'dwWritten': unreferenced local variable
+source\f021_SendMessage.cpp(253): warning C4101: 'dwWritten': unreferenced local variable
+source\f021_SendMessage.cpp(362): warning C4101: 'dwRead': unreferenced local variable
+source\f021_SendMessage.cpp(380): warning C4101: 'dwRead': unreferenced local variable
+  f05_DownloadImage.cpp
+source\f05_DownloadImage.cpp(190): warning C4477: 'fscanf_s' : format string '%x' requires an argument of type 'unsigned int *', but variadic argument 1 has type 'unsigned char *'
+  source\f05_DownloadImage.cpp(190): note: consider using '%hhx' in the format string
+source\f05_DownloadImage.cpp(207): warning C4477: 'fscanf_s' : format string '%x' requires an argument of type 'unsigned int *', but variadic argument 1 has type 'unsigned char *'
+  source\f05_DownloadImage.cpp(207): note: consider using '%hhx' in the format string
+source\f05_DownloadImage.cpp(279): warning C4477: 'fscanf_s' : format string '%x' requires an argument of type 'unsigned int *', but variadic argument 1 has type 'unsigned char *'
+  source\f05_DownloadImage.cpp(279): note: consider using '%hhx' in the format string
+source\f05_DownloadImage.cpp(338): warning C4477: 'fscanf_s' : format string '%x' requires an argument of type 'unsigned int *', but variadic argument 1 has type 'unsigned char *'
+  source\f05_DownloadImage.cpp(338): note: consider using '%hhx' in the format string
+  f021_DownloadImage.cpp
+source\f021_DownloadImage.cpp(218): warning C4018: '<': signed/unsigned mismatch
+source\f021_DownloadImage.cpp(128): warning C4477: 'fscanf_s' : format string '%x' requires an argument of type 'unsigned int *', but variadic argument 1 has type 'unsigned char *'
+  source\f021_DownloadImage.cpp(128): note: consider using '%hhx' in the format string
+source\f021_DownloadImage.cpp(165): warning C4477: 'fscanf_s' : format string '%x' requires an argument of type 'unsigned int *', but variadic argument 1 has type 'unsigned char *'
+  source\f021_DownloadImage.cpp(165): note: consider using '%hhx' in the format string
+source\f021_DownloadImage.cpp(166): warning C4477: 'fscanf_s' : format string '%x' requires an argument of type 'unsigned int *', but variadic argument 1 has type 'unsigned char *'
+  source\f021_DownloadImage.cpp(166): note: consider using '%hhx' in the format string
+source\f021_DownloadImage.cpp(187): warning C4477: 'fscanf_s' : format string '%x' requires an argument of type 'unsigned int *', but variadic argument 1 has type 'unsigned char *'
+  source\f021_DownloadImage.cpp(187): note: consider using '%hhx' in the format string
+source\f021_DownloadImage.cpp(188): warning C4477: 'fscanf_s' : format string '%x' requires an argument of type 'unsigned int *', but variadic argument 1 has type 'unsigned char *'
+  source\f021_DownloadImage.cpp(188): note: consider using '%hhx' in the format string
+source\f021_DownloadImage.cpp(189): warning C4477: 'fscanf_s' : format string '%x' requires an argument of type 'unsigned int *', but variadic argument 1 has type 'unsigned char *'
+  source\f021_DownloadImage.cpp(189): note: consider using '%hhx' in the format string
+source\f021_DownloadImage.cpp(190): warning C4477: 'fscanf_s' : format string '%x' requires an argument of type 'unsigned int *', but variadic argument 1 has type 'unsigned char *'
+  source\f021_DownloadImage.cpp(190): note: consider using '%hhx' in the format string
+source\f021_DownloadImage.cpp(249): warning C4477: 'fscanf_s' : format string '%x' requires an argument of type 'unsigned int *', but variadic argument 1 has type 'unsigned char *'
+  source\f021_DownloadImage.cpp(249): note: consider using '%hhx' in the format string
+source\f021_DownloadImage.cpp(256): warning C4477: 'fscanf_s' : format string '%x' requires an argument of type 'unsigned int *', but variadic argument 1 has type 'unsigned char *'
+  source\f021_DownloadImage.cpp(256): note: consider using '%hhx' in the format string
+source\f021_DownloadImage.cpp(316): warning C4996: '_wfopen': This function or variable may be unsafe. Consider using _wfopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\corecrt_wstdio.h(129): note: see declaration of '_wfopen'
+  Generating code
+  All 410 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  serial_flash_programmer.vcxproj -> C:\ti\controlSUITE\device_support\~Utilities\serial_flash_programmer\Release\serial_flash_programmer.exe
+  serial_flash_programmer.vcxproj -> C:\ti\controlSUITE\device_support\~Utilities\serial_flash_programmer\Release\serial_flash_programmer.pdb (Full PDB)

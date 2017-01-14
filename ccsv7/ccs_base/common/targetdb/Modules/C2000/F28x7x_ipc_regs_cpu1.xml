@@ -1,0 +1,386 @@
+<module id="IPC_REGS_CPU1" HW_revision="" description="IPC CPU1 Registers">
+  <register id="IPCACK" width="32" page="1" offset="0x0" internal="0" description="IPC incoming flag clear (acknowledge) register">
+    <bitfield id="IPC0" description="Local IPC Flag 0 AcknowledgementLocal IPC Flag 0 Acknowledgement" begin="0" end="0" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC0" description="Local IPC Flag 0 AcknowledgementLocal IPC Flag 0 Acknowledgement" begin="0" end="0" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC1" description="Local IPC Flag 1 AcknowledgementLocal IPC Flag 1 Acknowledgement" begin="1" end="1" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC1" description="Local IPC Flag 1 AcknowledgementLocal IPC Flag 1 Acknowledgement" begin="1" end="1" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC2" description="Local IPC Flag 2 AcknowledgementLocal IPC Flag 2 Acknowledgement" begin="2" end="2" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC2" description="Local IPC Flag 2 AcknowledgementLocal IPC Flag 2 Acknowledgement" begin="2" end="2" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC3" description="Local IPC Flag 3 AcknowledgementLocal IPC Flag 3 Acknowledgement" begin="3" end="3" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC3" description="Local IPC Flag 3 AcknowledgementLocal IPC Flag 3 Acknowledgement" begin="3" end="3" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC4" description="Local IPC Flag 4 AcknowledgementLocal IPC Flag 4 Acknowledgement" begin="4" end="4" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC4" description="Local IPC Flag 4 AcknowledgementLocal IPC Flag 4 Acknowledgement" begin="4" end="4" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC5" description="Local IPC Flag 5 AcknowledgementLocal IPC Flag 5 Acknowledgement" begin="5" end="5" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC5" description="Local IPC Flag 5 AcknowledgementLocal IPC Flag 5 Acknowledgement" begin="5" end="5" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC6" description="Local IPC Flag 6 AcknowledgementLocal IPC Flag 6 Acknowledgement" begin="6" end="6" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC6" description="Local IPC Flag 6 AcknowledgementLocal IPC Flag 6 Acknowledgement" begin="6" end="6" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC7" description="Local IPC Flag 7 AcknowledgementLocal IPC Flag 7 Acknowledgement" begin="7" end="7" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC7" description="Local IPC Flag 7 AcknowledgementLocal IPC Flag 7 Acknowledgement" begin="7" end="7" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC8" description="Local IPC Flag 8 AcknowledgementLocal IPC Flag 8 Acknowledgement" begin="8" end="8" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC8" description="Local IPC Flag 8 AcknowledgementLocal IPC Flag 8 Acknowledgement" begin="8" end="8" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC9" description="Local IPC Flag 9 AcknowledgementLocal IPC Flag 9 Acknowledgement" begin="9" end="9" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC9" description="Local IPC Flag 9 AcknowledgementLocal IPC Flag 9 Acknowledgement" begin="9" end="9" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC10" description="Local IPC Flag 10 AcknowledgementLocal IPC Flag 10 Acknowledgement" begin="10" end="10" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC10" description="Local IPC Flag 10 AcknowledgementLocal IPC Flag 10 Acknowledgement" begin="10" end="10" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC11" description="Local IPC Flag 11 AcknowledgementLocal IPC Flag 11 Acknowledgement" begin="11" end="11" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC11" description="Local IPC Flag 11 AcknowledgementLocal IPC Flag 11 Acknowledgement" begin="11" end="11" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC12" description="Local IPC Flag 12 AcknowledgementLocal IPC Flag 12 Acknowledgement" begin="12" end="12" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC12" description="Local IPC Flag 12 AcknowledgementLocal IPC Flag 12 Acknowledgement" begin="12" end="12" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC13" description="Local IPC Flag 13 AcknowledgementLocal IPC Flag 13 Acknowledgement" begin="13" end="13" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC13" description="Local IPC Flag 13 AcknowledgementLocal IPC Flag 13 Acknowledgement" begin="13" end="13" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC14" description="Local IPC Flag 14 AcknowledgementLocal IPC Flag 14 Acknowledgement" begin="14" end="14" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC14" description="Local IPC Flag 14 AcknowledgementLocal IPC Flag 14 Acknowledgement" begin="14" end="14" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC15" description="Local IPC Flag 15 AcknowledgementLocal IPC Flag 15 Acknowledgement" begin="15" end="15" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC15" description="Local IPC Flag 15 AcknowledgementLocal IPC Flag 15 Acknowledgement" begin="15" end="15" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC16" description="Local IPC Flag 16 AcknowledgementLocal IPC Flag 16 Acknowledgement" begin="16" end="16" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC16" description="Local IPC Flag 16 AcknowledgementLocal IPC Flag 16 Acknowledgement" begin="16" end="16" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC17" description="Local IPC Flag 17 AcknowledgementLocal IPC Flag 17 Acknowledgement" begin="17" end="17" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC17" description="Local IPC Flag 17 AcknowledgementLocal IPC Flag 17 Acknowledgement" begin="17" end="17" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC18" description="Local IPC Flag 18 AcknowledgementLocal IPC Flag 18 Acknowledgement" begin="18" end="18" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC18" description="Local IPC Flag 18 AcknowledgementLocal IPC Flag 18 Acknowledgement" begin="18" end="18" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC19" description="Local IPC Flag 19 AcknowledgementLocal IPC Flag 19 Acknowledgement" begin="19" end="19" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC19" description="Local IPC Flag 19 AcknowledgementLocal IPC Flag 19 Acknowledgement" begin="19" end="19" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC20" description="Local IPC Flag 20 AcknowledgementLocal IPC Flag 20 Acknowledgement" begin="20" end="20" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC20" description="Local IPC Flag 20 AcknowledgementLocal IPC Flag 20 Acknowledgement" begin="20" end="20" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC21" description="Local IPC Flag 21 AcknowledgementLocal IPC Flag 21 Acknowledgement" begin="21" end="21" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC21" description="Local IPC Flag 21 AcknowledgementLocal IPC Flag 21 Acknowledgement" begin="21" end="21" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC22" description="Local IPC Flag 22 AcknowledgementLocal IPC Flag 22 Acknowledgement" begin="22" end="22" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC22" description="Local IPC Flag 22 AcknowledgementLocal IPC Flag 22 Acknowledgement" begin="22" end="22" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC23" description="Local IPC Flag 23 AcknowledgementLocal IPC Flag 23 Acknowledgement" begin="23" end="23" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC23" description="Local IPC Flag 23 AcknowledgementLocal IPC Flag 23 Acknowledgement" begin="23" end="23" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC24" description="Local IPC Flag 24 AcknowledgementLocal IPC Flag 24 Acknowledgement" begin="24" end="24" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC24" description="Local IPC Flag 24 AcknowledgementLocal IPC Flag 24 Acknowledgement" begin="24" end="24" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC25" description="Local IPC Flag 25 AcknowledgementLocal IPC Flag 25 Acknowledgement" begin="25" end="25" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC25" description="Local IPC Flag 25 AcknowledgementLocal IPC Flag 25 Acknowledgement" begin="25" end="25" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC26" description="Local IPC Flag 26 AcknowledgementLocal IPC Flag 26 Acknowledgement" begin="26" end="26" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC26" description="Local IPC Flag 26 AcknowledgementLocal IPC Flag 26 Acknowledgement" begin="26" end="26" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC27" description="Local IPC Flag 27 AcknowledgementLocal IPC Flag 27 Acknowledgement" begin="27" end="27" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC27" description="Local IPC Flag 27 AcknowledgementLocal IPC Flag 27 Acknowledgement" begin="27" end="27" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC28" description="Local IPC Flag 28 AcknowledgementLocal IPC Flag 28 Acknowledgement" begin="28" end="28" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC28" description="Local IPC Flag 28 AcknowledgementLocal IPC Flag 28 Acknowledgement" begin="28" end="28" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC29" description="Local IPC Flag 29 AcknowledgementLocal IPC Flag 29 Acknowledgement" begin="29" end="29" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC29" description="Local IPC Flag 29 AcknowledgementLocal IPC Flag 29 Acknowledgement" begin="29" end="29" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC30" description="Local IPC Flag 30 AcknowledgementLocal IPC Flag 30 Acknowledgement" begin="30" end="30" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC30" description="Local IPC Flag 30 AcknowledgementLocal IPC Flag 30 Acknowledgement" begin="30" end="30" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC31" description="Local IPC Flag 31 AcknowledgementLocal IPC Flag 31 Acknowledgement" begin="31" end="31" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC31" description="Local IPC Flag 31 AcknowledgementLocal IPC Flag 31 Acknowledgement" begin="31" end="31" width="1" rwaccess="R/W"/>
+  </register>
+  <register id="IPCSTS" width="32" page="1" offset="0x2" internal="0" description="IPC incoming flag status register">
+    <bitfield id="IPC0" description="Local IPC Flag 0 StatusLocal IPC Flag 0 Status" begin="0" end="0" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC0" description="Local IPC Flag 0 StatusLocal IPC Flag 0 Status" begin="0" end="0" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC1" description="Local IPC Flag 1 StatusLocal IPC Flag 1 Status" begin="1" end="1" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC1" description="Local IPC Flag 1 StatusLocal IPC Flag 1 Status" begin="1" end="1" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC2" description="Local IPC Flag 2 StatusLocal IPC Flag 2 Status" begin="2" end="2" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC2" description="Local IPC Flag 2 StatusLocal IPC Flag 2 Status" begin="2" end="2" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC3" description="Local IPC Flag 3 StatusLocal IPC Flag 3 Status" begin="3" end="3" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC3" description="Local IPC Flag 3 StatusLocal IPC Flag 3 Status" begin="3" end="3" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC4" description="Local IPC Flag 4 StatusLocal IPC Flag 4 Status" begin="4" end="4" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC4" description="Local IPC Flag 4 StatusLocal IPC Flag 4 Status" begin="4" end="4" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC5" description="Local IPC Flag 5 StatusLocal IPC Flag 5 Status" begin="5" end="5" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC5" description="Local IPC Flag 5 StatusLocal IPC Flag 5 Status" begin="5" end="5" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC6" description="Local IPC Flag 6 StatusLocal IPC Flag 6 Status" begin="6" end="6" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC6" description="Local IPC Flag 6 StatusLocal IPC Flag 6 Status" begin="6" end="6" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC7" description="Local IPC Flag 7 StatusLocal IPC Flag 7 Status" begin="7" end="7" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC7" description="Local IPC Flag 7 StatusLocal IPC Flag 7 Status" begin="7" end="7" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC8" description="Local IPC Flag 8 StatusLocal IPC Flag 8 Status" begin="8" end="8" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC8" description="Local IPC Flag 8 StatusLocal IPC Flag 8 Status" begin="8" end="8" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC9" description="Local IPC Flag 9 StatusLocal IPC Flag 9 Status" begin="9" end="9" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC9" description="Local IPC Flag 9 StatusLocal IPC Flag 9 Status" begin="9" end="9" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC10" description="Local IPC Flag 10 StatusLocal IPC Flag 10 Status" begin="10" end="10" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC10" description="Local IPC Flag 10 StatusLocal IPC Flag 10 Status" begin="10" end="10" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC11" description="Local IPC Flag 11 StatusLocal IPC Flag 11 Status" begin="11" end="11" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC11" description="Local IPC Flag 11 StatusLocal IPC Flag 11 Status" begin="11" end="11" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC12" description="Local IPC Flag 12 StatusLocal IPC Flag 12 Status" begin="12" end="12" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC12" description="Local IPC Flag 12 StatusLocal IPC Flag 12 Status" begin="12" end="12" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC13" description="Local IPC Flag 13 StatusLocal IPC Flag 13 Status" begin="13" end="13" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC13" description="Local IPC Flag 13 StatusLocal IPC Flag 13 Status" begin="13" end="13" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC14" description="Local IPC Flag 14 StatusLocal IPC Flag 14 Status" begin="14" end="14" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC14" description="Local IPC Flag 14 StatusLocal IPC Flag 14 Status" begin="14" end="14" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC15" description="Local IPC Flag 15 StatusLocal IPC Flag 15 Status" begin="15" end="15" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC15" description="Local IPC Flag 15 StatusLocal IPC Flag 15 Status" begin="15" end="15" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC16" description="Local IPC Flag 16 StatusLocal IPC Flag 16 Status" begin="16" end="16" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC16" description="Local IPC Flag 16 StatusLocal IPC Flag 16 Status" begin="16" end="16" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC17" description="Local IPC Flag 17 StatusLocal IPC Flag 17 Status" begin="17" end="17" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC17" description="Local IPC Flag 17 StatusLocal IPC Flag 17 Status" begin="17" end="17" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC18" description="Local IPC Flag 18 StatusLocal IPC Flag 18 Status" begin="18" end="18" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC18" description="Local IPC Flag 18 StatusLocal IPC Flag 18 Status" begin="18" end="18" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC19" description="Local IPC Flag 19 StatusLocal IPC Flag 19 Status" begin="19" end="19" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC19" description="Local IPC Flag 19 StatusLocal IPC Flag 19 Status" begin="19" end="19" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC20" description="Local IPC Flag 20 StatusLocal IPC Flag 20 Status" begin="20" end="20" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC20" description="Local IPC Flag 20 StatusLocal IPC Flag 20 Status" begin="20" end="20" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC21" description="Local IPC Flag 21 StatusLocal IPC Flag 21 Status" begin="21" end="21" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC21" description="Local IPC Flag 21 StatusLocal IPC Flag 21 Status" begin="21" end="21" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC22" description="Local IPC Flag 22 StatusLocal IPC Flag 22 Status" begin="22" end="22" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC22" description="Local IPC Flag 22 StatusLocal IPC Flag 22 Status" begin="22" end="22" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC23" description="Local IPC Flag 23 StatusLocal IPC Flag 23 Status" begin="23" end="23" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC23" description="Local IPC Flag 23 StatusLocal IPC Flag 23 Status" begin="23" end="23" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC24" description="Local IPC Flag 24 StatusLocal IPC Flag 24 Status" begin="24" end="24" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC24" description="Local IPC Flag 24 StatusLocal IPC Flag 24 Status" begin="24" end="24" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC25" description="Local IPC Flag 25 StatusLocal IPC Flag 25 Status" begin="25" end="25" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC25" description="Local IPC Flag 25 StatusLocal IPC Flag 25 Status" begin="25" end="25" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC26" description="Local IPC Flag 26 StatusLocal IPC Flag 26 Status" begin="26" end="26" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC26" description="Local IPC Flag 26 StatusLocal IPC Flag 26 Status" begin="26" end="26" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC27" description="Local IPC Flag 27 StatusLocal IPC Flag 27 Status" begin="27" end="27" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC27" description="Local IPC Flag 27 StatusLocal IPC Flag 27 Status" begin="27" end="27" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC28" description="Local IPC Flag 28 StatusLocal IPC Flag 28 Status" begin="28" end="28" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC28" description="Local IPC Flag 28 StatusLocal IPC Flag 28 Status" begin="28" end="28" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC29" description="Local IPC Flag 29 StatusLocal IPC Flag 29 Status" begin="29" end="29" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC29" description="Local IPC Flag 29 StatusLocal IPC Flag 29 Status" begin="29" end="29" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC30" description="Local IPC Flag 30 StatusLocal IPC Flag 30 Status" begin="30" end="30" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC30" description="Local IPC Flag 30 StatusLocal IPC Flag 30 Status" begin="30" end="30" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC31" description="Local IPC Flag 31 StatusLocal IPC Flag 31 Status" begin="31" end="31" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC31" description="Local IPC Flag 31 StatusLocal IPC Flag 31 Status" begin="31" end="31" width="1" rwaccess="R/W"/>
+  </register>
+  <register id="IPCSET" width="32" page="1" offset="0x4" internal="0" description="IPC remote flag set register">
+    <bitfield id="IPC0" description="Set Remote IPC0 FlagSet Remote IPC0 Flag" begin="0" end="0" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC0" description="Set Remote IPC0 FlagSet Remote IPC0 Flag" begin="0" end="0" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC1" description="Set Remote IPC1 FlagSet Remote IPC1 Flag" begin="1" end="1" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC1" description="Set Remote IPC1 FlagSet Remote IPC1 Flag" begin="1" end="1" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC2" description="Set Remote IPC2 FlagSet Remote IPC2 Flag" begin="2" end="2" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC2" description="Set Remote IPC2 FlagSet Remote IPC2 Flag" begin="2" end="2" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC3" description="Set Remote IPC3 FlagSet Remote IPC3 Flag" begin="3" end="3" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC3" description="Set Remote IPC3 FlagSet Remote IPC3 Flag" begin="3" end="3" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC4" description="Set Remote IPC4 FlagSet Remote IPC4 Flag" begin="4" end="4" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC4" description="Set Remote IPC4 FlagSet Remote IPC4 Flag" begin="4" end="4" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC5" description="Set Remote IPC5 FlagSet Remote IPC5 Flag" begin="5" end="5" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC5" description="Set Remote IPC5 FlagSet Remote IPC5 Flag" begin="5" end="5" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC6" description="Set Remote IPC6 FlagSet Remote IPC6 Flag" begin="6" end="6" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC6" description="Set Remote IPC6 FlagSet Remote IPC6 Flag" begin="6" end="6" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC7" description="Set Remote IPC7 FlagSet Remote IPC7 Flag" begin="7" end="7" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC7" description="Set Remote IPC7 FlagSet Remote IPC7 Flag" begin="7" end="7" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC8" description="Set Remote IPC8 FlagSet Remote IPC8 Flag" begin="8" end="8" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC8" description="Set Remote IPC8 FlagSet Remote IPC8 Flag" begin="8" end="8" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC9" description="Set Remote IPC9 FlagSet Remote IPC9 Flag" begin="9" end="9" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC9" description="Set Remote IPC9 FlagSet Remote IPC9 Flag" begin="9" end="9" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC10" description="Set Remote IPC10 FlagSet Remote IPC10 Flag" begin="10" end="10" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC10" description="Set Remote IPC10 FlagSet Remote IPC10 Flag" begin="10" end="10" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC11" description="Set Remote IPC11 FlagSet Remote IPC11 Flag" begin="11" end="11" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC11" description="Set Remote IPC11 FlagSet Remote IPC11 Flag" begin="11" end="11" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC12" description="Set Remote IPC12 FlagSet Remote IPC12 Flag" begin="12" end="12" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC12" description="Set Remote IPC12 FlagSet Remote IPC12 Flag" begin="12" end="12" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC13" description="Set Remote IPC13 FlagSet Remote IPC13 Flag" begin="13" end="13" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC13" description="Set Remote IPC13 FlagSet Remote IPC13 Flag" begin="13" end="13" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC14" description="Set Remote IPC14 FlagSet Remote IPC14 Flag" begin="14" end="14" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC14" description="Set Remote IPC14 FlagSet Remote IPC14 Flag" begin="14" end="14" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC15" description="Set Remote IPC15 FlagSet Remote IPC15 Flag" begin="15" end="15" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC15" description="Set Remote IPC15 FlagSet Remote IPC15 Flag" begin="15" end="15" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC16" description="Set Remote IPC16 FlagSet Remote IPC16 Flag" begin="16" end="16" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC16" description="Set Remote IPC16 FlagSet Remote IPC16 Flag" begin="16" end="16" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC17" description="Set Remote IPC17 FlagSet Remote IPC17 Flag" begin="17" end="17" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC17" description="Set Remote IPC17 FlagSet Remote IPC17 Flag" begin="17" end="17" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC18" description="Set Remote IPC18 FlagSet Remote IPC18 Flag" begin="18" end="18" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC18" description="Set Remote IPC18 FlagSet Remote IPC18 Flag" begin="18" end="18" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC19" description="Set Remote IPC19 FlagSet Remote IPC19 Flag" begin="19" end="19" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC19" description="Set Remote IPC19 FlagSet Remote IPC19 Flag" begin="19" end="19" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC20" description="Set Remote IPC20 FlagSet Remote IPC20 Flag" begin="20" end="20" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC20" description="Set Remote IPC20 FlagSet Remote IPC20 Flag" begin="20" end="20" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC21" description="Set Remote IPC21 FlagSet Remote IPC21 Flag" begin="21" end="21" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC21" description="Set Remote IPC21 FlagSet Remote IPC21 Flag" begin="21" end="21" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC22" description="Set Remote IPC22 FlagSet Remote IPC22 Flag" begin="22" end="22" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC22" description="Set Remote IPC22 FlagSet Remote IPC22 Flag" begin="22" end="22" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC23" description="Set Remote IPC23 FlagSet Remote IPC23 Flag" begin="23" end="23" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC23" description="Set Remote IPC23 FlagSet Remote IPC23 Flag" begin="23" end="23" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC24" description="Set Remote IPC24 FlagSet Remote IPC24 Flag" begin="24" end="24" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC24" description="Set Remote IPC24 FlagSet Remote IPC24 Flag" begin="24" end="24" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC25" description="Set Remote IPC25 FlagSet Remote IPC25 Flag" begin="25" end="25" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC25" description="Set Remote IPC25 FlagSet Remote IPC25 Flag" begin="25" end="25" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC26" description="Set Remote IPC26 FlagSet Remote IPC26 Flag" begin="26" end="26" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC26" description="Set Remote IPC26 FlagSet Remote IPC26 Flag" begin="26" end="26" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC27" description="Set Remote IPC27 FlagSet Remote IPC27 Flag" begin="27" end="27" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC27" description="Set Remote IPC27 FlagSet Remote IPC27 Flag" begin="27" end="27" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC28" description="Set Remote IPC28 FlagSet Remote IPC28 Flag" begin="28" end="28" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC28" description="Set Remote IPC28 FlagSet Remote IPC28 Flag" begin="28" end="28" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC29" description="Set Remote IPC29 FlagSet Remote IPC29 Flag" begin="29" end="29" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC29" description="Set Remote IPC29 FlagSet Remote IPC29 Flag" begin="29" end="29" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC30" description="Set Remote IPC30 FlagSet Remote IPC30 Flag" begin="30" end="30" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC30" description="Set Remote IPC30 FlagSet Remote IPC30 Flag" begin="30" end="30" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC31" description="Set Remote IPC31 FlagSet Remote IPC31 Flag" begin="31" end="31" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC31" description="Set Remote IPC31 FlagSet Remote IPC31 Flag" begin="31" end="31" width="1" rwaccess="R/W"/>
+  </register>
+  <register id="IPCCLR" width="32" page="1" offset="0x6" internal="0" description="IPC remote flag clear register">
+    <bitfield id="IPC0" description="Clear Remote IPC0 FlagClear Remote IPC0 Flag" begin="0" end="0" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC0" description="Clear Remote IPC0 FlagClear Remote IPC0 Flag" begin="0" end="0" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC1" description="Clear Remote IPC1 FlagClear Remote IPC1 Flag" begin="1" end="1" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC1" description="Clear Remote IPC1 FlagClear Remote IPC1 Flag" begin="1" end="1" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC2" description="Clear Remote IPC2 FlagClear Remote IPC2 Flag" begin="2" end="2" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC2" description="Clear Remote IPC2 FlagClear Remote IPC2 Flag" begin="2" end="2" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC3" description="Clear Remote IPC3 FlagClear Remote IPC3 Flag" begin="3" end="3" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC3" description="Clear Remote IPC3 FlagClear Remote IPC3 Flag" begin="3" end="3" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC4" description="Clear Remote IPC4 FlagClear Remote IPC4 Flag" begin="4" end="4" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC4" description="Clear Remote IPC4 FlagClear Remote IPC4 Flag" begin="4" end="4" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC5" description="Clear Remote IPC5 FlagClear Remote IPC5 Flag" begin="5" end="5" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC5" description="Clear Remote IPC5 FlagClear Remote IPC5 Flag" begin="5" end="5" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC6" description="Clear Remote IPC6 FlagClear Remote IPC6 Flag" begin="6" end="6" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC6" description="Clear Remote IPC6 FlagClear Remote IPC6 Flag" begin="6" end="6" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC7" description="Clear Remote IPC7 FlagClear Remote IPC7 Flag" begin="7" end="7" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC7" description="Clear Remote IPC7 FlagClear Remote IPC7 Flag" begin="7" end="7" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC8" description="Clear Remote IPC8 FlagClear Remote IPC8 Flag" begin="8" end="8" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC8" description="Clear Remote IPC8 FlagClear Remote IPC8 Flag" begin="8" end="8" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC9" description="Clear Remote IPC9 FlagClear Remote IPC9 Flag" begin="9" end="9" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC9" description="Clear Remote IPC9 FlagClear Remote IPC9 Flag" begin="9" end="9" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC10" description="Clear Remote IPC10 FlagClear Remote IPC10 Flag" begin="10" end="10" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC10" description="Clear Remote IPC10 FlagClear Remote IPC10 Flag" begin="10" end="10" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC11" description="Clear Remote IPC11 FlagClear Remote IPC11 Flag" begin="11" end="11" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC11" description="Clear Remote IPC11 FlagClear Remote IPC11 Flag" begin="11" end="11" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC12" description="Clear Remote IPC12 FlagClear Remote IPC12 Flag" begin="12" end="12" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC12" description="Clear Remote IPC12 FlagClear Remote IPC12 Flag" begin="12" end="12" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC13" description="Clear Remote IPC13 FlagClear Remote IPC13 Flag" begin="13" end="13" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC13" description="Clear Remote IPC13 FlagClear Remote IPC13 Flag" begin="13" end="13" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC14" description="Clear Remote IPC14 FlagClear Remote IPC14 Flag" begin="14" end="14" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC14" description="Clear Remote IPC14 FlagClear Remote IPC14 Flag" begin="14" end="14" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC15" description="Clear Remote IPC15 FlagClear Remote IPC15 Flag" begin="15" end="15" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC15" description="Clear Remote IPC15 FlagClear Remote IPC15 Flag" begin="15" end="15" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC16" description="Clear Remote IPC16 FlagClear Remote IPC16 Flag" begin="16" end="16" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC16" description="Clear Remote IPC16 FlagClear Remote IPC16 Flag" begin="16" end="16" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC17" description="Clear Remote IPC17 FlagClear Remote IPC17 Flag" begin="17" end="17" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC17" description="Clear Remote IPC17 FlagClear Remote IPC17 Flag" begin="17" end="17" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC18" description="Clear Remote IPC18 FlagClear Remote IPC18 Flag" begin="18" end="18" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC18" description="Clear Remote IPC18 FlagClear Remote IPC18 Flag" begin="18" end="18" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC19" description="Clear Remote IPC19 FlagClear Remote IPC19 Flag" begin="19" end="19" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC19" description="Clear Remote IPC19 FlagClear Remote IPC19 Flag" begin="19" end="19" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC20" description="Clear Remote IPC20 FlagClear Remote IPC20 Flag" begin="20" end="20" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC20" description="Clear Remote IPC20 FlagClear Remote IPC20 Flag" begin="20" end="20" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC21" description="Clear Remote IPC21 FlagClear Remote IPC21 Flag" begin="21" end="21" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC21" description="Clear Remote IPC21 FlagClear Remote IPC21 Flag" begin="21" end="21" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC22" description="Clear Remote IPC22 FlagClear Remote IPC22 Flag" begin="22" end="22" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC22" description="Clear Remote IPC22 FlagClear Remote IPC22 Flag" begin="22" end="22" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC23" description="Clear Remote IPC23 FlagClear Remote IPC23 Flag" begin="23" end="23" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC23" description="Clear Remote IPC23 FlagClear Remote IPC23 Flag" begin="23" end="23" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC24" description="Clear Remote IPC24 FlagClear Remote IPC24 Flag" begin="24" end="24" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC24" description="Clear Remote IPC24 FlagClear Remote IPC24 Flag" begin="24" end="24" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC25" description="Clear Remote IPC25 FlagClear Remote IPC25 Flag" begin="25" end="25" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC25" description="Clear Remote IPC25 FlagClear Remote IPC25 Flag" begin="25" end="25" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC26" description="Clear Remote IPC26 FlagClear Remote IPC26 Flag" begin="26" end="26" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC26" description="Clear Remote IPC26 FlagClear Remote IPC26 Flag" begin="26" end="26" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC27" description="Clear Remote IPC27 FlagClear Remote IPC27 Flag" begin="27" end="27" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC27" description="Clear Remote IPC27 FlagClear Remote IPC27 Flag" begin="27" end="27" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC28" description="Clear Remote IPC28 FlagClear Remote IPC28 Flag" begin="28" end="28" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC28" description="Clear Remote IPC28 FlagClear Remote IPC28 Flag" begin="28" end="28" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC29" description="Clear Remote IPC29 FlagClear Remote IPC29 Flag" begin="29" end="29" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC29" description="Clear Remote IPC29 FlagClear Remote IPC29 Flag" begin="29" end="29" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC30" description="Clear Remote IPC30 FlagClear Remote IPC30 Flag" begin="30" end="30" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC30" description="Clear Remote IPC30 FlagClear Remote IPC30 Flag" begin="30" end="30" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC31" description="Clear Remote IPC31 FlagClear Remote IPC31 Flag" begin="31" end="31" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC31" description="Clear Remote IPC31 FlagClear Remote IPC31 Flag" begin="31" end="31" width="1" rwaccess="R/W"/>
+  </register>
+  <register id="IPCFLG" width="32" page="1" offset="0x8" internal="0" description="IPC remote flag status register">
+    <bitfield id="IPC0" description="Remote IPC0 Flag StatusRemote IPC0 Flag Status" begin="0" end="0" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC0" description="Remote IPC0 Flag StatusRemote IPC0 Flag Status" begin="0" end="0" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC1" description="Remote IPC1 Flag StatusRemote IPC1 Flag Status" begin="1" end="1" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC1" description="Remote IPC1 Flag StatusRemote IPC1 Flag Status" begin="1" end="1" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC2" description="Remote IPC2 Flag StatusRemote IPC2 Flag Status" begin="2" end="2" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC2" description="Remote IPC2 Flag StatusRemote IPC2 Flag Status" begin="2" end="2" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC3" description="Remote IPC3 Flag StatusRemote IPC3 Flag Status" begin="3" end="3" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC3" description="Remote IPC3 Flag StatusRemote IPC3 Flag Status" begin="3" end="3" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC4" description="Remote IPC4 Flag StatusRemote IPC4 Flag Status" begin="4" end="4" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC4" description="Remote IPC4 Flag StatusRemote IPC4 Flag Status" begin="4" end="4" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC5" description="Remote IPC5 Flag StatusRemote IPC5 Flag Status" begin="5" end="5" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC5" description="Remote IPC5 Flag StatusRemote IPC5 Flag Status" begin="5" end="5" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC6" description="Remote IPC6 Flag StatusRemote IPC6 Flag Status" begin="6" end="6" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC6" description="Remote IPC6 Flag StatusRemote IPC6 Flag Status" begin="6" end="6" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC7" description="Remote IPC7 Flag StatusRemote IPC7 Flag Status" begin="7" end="7" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC7" description="Remote IPC7 Flag StatusRemote IPC7 Flag Status" begin="7" end="7" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC8" description="Remote IPC8 Flag StatusRemote IPC8 Flag Status" begin="8" end="8" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC8" description="Remote IPC8 Flag StatusRemote IPC8 Flag Status" begin="8" end="8" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC9" description="Remote IPC9 Flag StatusRemote IPC9 Flag Status" begin="9" end="9" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC9" description="Remote IPC9 Flag StatusRemote IPC9 Flag Status" begin="9" end="9" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC10" description="Remote IPC10 Flag StatusRemote IPC10 Flag Status" begin="10" end="10" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC10" description="Remote IPC10 Flag StatusRemote IPC10 Flag Status" begin="10" end="10" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC11" description="Remote IPC11 Flag StatusRemote IPC11 Flag Status" begin="11" end="11" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC11" description="Remote IPC11 Flag StatusRemote IPC11 Flag Status" begin="11" end="11" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC12" description="Remote IPC12 Flag StatusRemote IPC12 Flag Status" begin="12" end="12" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC12" description="Remote IPC12 Flag StatusRemote IPC12 Flag Status" begin="12" end="12" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC13" description="Remote IPC13 Flag StatusRemote IPC13 Flag Status" begin="13" end="13" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC13" description="Remote IPC13 Flag StatusRemote IPC13 Flag Status" begin="13" end="13" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC14" description="Remote IPC14 Flag StatusRemote IPC14 Flag Status" begin="14" end="14" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC14" description="Remote IPC14 Flag StatusRemote IPC14 Flag Status" begin="14" end="14" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC15" description="Remote IPC15 Flag StatusRemote IPC15 Flag Status" begin="15" end="15" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC15" description="Remote IPC15 Flag StatusRemote IPC15 Flag Status" begin="15" end="15" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC16" description="Remote IPC16 Flag StatusRemote IPC16 Flag Status" begin="16" end="16" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC16" description="Remote IPC16 Flag StatusRemote IPC16 Flag Status" begin="16" end="16" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC17" description="Remote IPC17 Flag StatusRemote IPC17 Flag Status" begin="17" end="17" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC17" description="Remote IPC17 Flag StatusRemote IPC17 Flag Status" begin="17" end="17" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC18" description="Remote IPC18 Flag StatusRemote IPC18 Flag Status" begin="18" end="18" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC18" description="Remote IPC18 Flag StatusRemote IPC18 Flag Status" begin="18" end="18" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC19" description="Remote IPC19 Flag StatusRemote IPC19 Flag Status" begin="19" end="19" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC19" description="Remote IPC19 Flag StatusRemote IPC19 Flag Status" begin="19" end="19" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC20" description="Remote IPC20 Flag StatusRemote IPC20 Flag Status" begin="20" end="20" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC20" description="Remote IPC20 Flag StatusRemote IPC20 Flag Status" begin="20" end="20" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC21" description="Remote IPC21 Flag StatusRemote IPC21 Flag Status" begin="21" end="21" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC21" description="Remote IPC21 Flag StatusRemote IPC21 Flag Status" begin="21" end="21" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC22" description="Remote IPC22 Flag StatusRemote IPC22 Flag Status" begin="22" end="22" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC22" description="Remote IPC22 Flag StatusRemote IPC22 Flag Status" begin="22" end="22" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC23" description="Remote IPC23 Flag StatusRemote IPC23 Flag Status" begin="23" end="23" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC23" description="Remote IPC23 Flag StatusRemote IPC23 Flag Status" begin="23" end="23" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC24" description="Remote IPC24 Flag StatusRemote IPC24 Flag Status" begin="24" end="24" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC24" description="Remote IPC24 Flag StatusRemote IPC24 Flag Status" begin="24" end="24" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC25" description="Remote IPC25 Flag StatusRemote IPC25 Flag Status" begin="25" end="25" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC25" description="Remote IPC25 Flag StatusRemote IPC25 Flag Status" begin="25" end="25" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC26" description="Remote IPC26 Flag StatusRemote IPC26 Flag Status" begin="26" end="26" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC26" description="Remote IPC26 Flag StatusRemote IPC26 Flag Status" begin="26" end="26" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC27" description="Remote IPC27 Flag StatusRemote IPC27 Flag Status" begin="27" end="27" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC27" description="Remote IPC27 Flag StatusRemote IPC27 Flag Status" begin="27" end="27" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC28" description="Remote IPC28 Flag StatusRemote IPC28 Flag Status" begin="28" end="28" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC28" description="Remote IPC28 Flag StatusRemote IPC28 Flag Status" begin="28" end="28" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC29" description="Remote IPC29 Flag StatusRemote IPC29 Flag Status" begin="29" end="29" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC29" description="Remote IPC29 Flag StatusRemote IPC29 Flag Status" begin="29" end="29" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC30" description="Remote IPC30 Flag StatusRemote IPC30 Flag Status" begin="30" end="30" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC30" description="Remote IPC30 Flag StatusRemote IPC30 Flag Status" begin="30" end="30" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC31" description="Remote IPC31 Flag StatusRemote IPC31 Flag Status" begin="31" end="31" width="1" rwaccess="R/W"/>
+    <bitfield id="IPC31" description="Remote IPC31 Flag StatusRemote IPC31 Flag Status" begin="31" end="31" width="1" rwaccess="R/W"/>
+  </register>
+  <register id="IPCCOUNTERL" width="32" page="1" offset="0xc" internal="0" description="IPC Counter Low Register ">
+    <bitfield id="COUNT" description="IPC Counter's lower 32-bitIPC Counter's lower 32-bit" begin="31" end="0" width="32" rwaccess="R/W"/>
+    <bitfield id="COUNT" description="IPC Counter's lower 32-bitIPC Counter's lower 32-bit" begin="31" end="0" width="32" rwaccess="R/W"/>
+  </register>
+  <register id="IPCCOUNTERH" width="32" page="1" offset="0xe" internal="0" description="IPC Counter High Register ">
+    <bitfield id="COUNT" description="IPC Counter's upper 32-bitIPC Counter's upper 32-bit" begin="31" end="0" width="32" rwaccess="R/W"/>
+    <bitfield id="COUNT" description="IPC Counter's upper 32-bitIPC Counter's upper 32-bit" begin="31" end="0" width="32" rwaccess="R/W"/>
+  </register>
+  <register id="IPCSENDCOM" width="32" page="1" offset="0x10" internal="0" description="Local to Remote IPC Command Register">
+    <bitfield id="COMMAND" description="Local to Remote IPC CommandLocal to Remote IPC Command" begin="31" end="0" width="32" rwaccess="R/W"/>
+    <bitfield id="COMMAND" description="Local to Remote IPC CommandLocal to Remote IPC Command" begin="31" end="0" width="32" rwaccess="R/W"/>
+  </register>
+  <register id="IPCSENDADDR" width="32" page="1" offset="0x12" internal="0" description="Local to Remote IPC Address Register">
+    <bitfield id="ADDRESS" description="Local to Remote IPC AddressLocal to Remote IPC Address" begin="31" end="0" width="32" rwaccess="R/W"/>
+    <bitfield id="ADDRESS" description="Local to Remote IPC AddressLocal to Remote IPC Address" begin="31" end="0" width="32" rwaccess="R/W"/>
+  </register>
+  <register id="IPCSENDDATA" width="32" page="1" offset="0x14" internal="0" description="Local to Remote IPC Data Register">
+    <bitfield id="WDATA" description="Local to Remote IPC DataLocal to Remote IPC Data" begin="31" end="0" width="32" rwaccess="R/W"/>
+    <bitfield id="WDATA" description="Local to Remote IPC DataLocal to Remote IPC Data" begin="31" end="0" width="32" rwaccess="R/W"/>
+  </register>
+  <register id="IPCREMOTEREPLY" width="32" page="1" offset="0x16" internal="0" description="Remote to Local IPC Reply Data Register">
+    <bitfield id="RDATA" description="Remote to Local IPC Return DataRemote to Local IPC Return Data" begin="31" end="0" width="32" rwaccess="R/W"/>
+    <bitfield id="RDATA" description="Remote to Local IPC Return DataRemote to Local IPC Return Data" begin="31" end="0" width="32" rwaccess="R/W"/>
+  </register>
+  <register id="IPCRECVCOM" width="32" page="1" offset="0x18" internal="0" description="Remote to Local IPC Command Register">
+    <bitfield id="COMMAND" description="Remote to Local IPC CommandRemote to Local IPC Command" begin="31" end="0" width="32" rwaccess="R/W"/>
+    <bitfield id="COMMAND" description="Remote to Local IPC CommandRemote to Local IPC Command" begin="31" end="0" width="32" rwaccess="R/W"/>
+  </register>
+  <register id="IPCRECVADDR" width="32" page="1" offset="0x1a" internal="0" description="Remote to Local IPC Address Register">
+    <bitfield id="ADDRESS" description="Remote to Local IPC AddressRemote to Local IPC Address" begin="31" end="0" width="32" rwaccess="R/W"/>
+    <bitfield id="ADDRESS" description="Remote to Local IPC AddressRemote to Local IPC Address" begin="31" end="0" width="32" rwaccess="R/W"/>
+  </register>
+  <register id="IPCRECVDATA" width="32" page="1" offset="0x1c" internal="0" description="Remote to Local IPC Data Register">
+    <bitfield id="WDATA" description="Remote to Local IPC DataRemote to Local IPC Data" begin="31" end="0" width="32" rwaccess="R/W"/>
+    <bitfield id="WDATA" description="Remote to Local IPC DataRemote to Local IPC Data" begin="31" end="0" width="32" rwaccess="R/W"/>
+  </register>
+  <register id="IPCLOCALREPLY" width="32" page="1" offset="0x1e" internal="0" description="Local to Remote IPC Reply Data Register">
+    <bitfield id="RDATA" description="Local to Remote IPC Return DataLocal to Remote IPC Return Data" begin="31" end="0" width="32" rwaccess="R/W"/>
+    <bitfield id="RDATA" description="Local to Remote IPC Return DataLocal to Remote IPC Return Data" begin="31" end="0" width="32" rwaccess="R/W"/>
+  </register>
+  <register id="IPCBOOTSTS" width="32" page="1" offset="0x20" internal="0" description="CPU2 to CPU1 IPC Boot Status Register">
+    <bitfield id="BOOTSTS" description="CPU2 to CPU1 IPC Boot StatusCPU2 to CPU1 IPC Boot Status" begin="31" end="0" width="32" rwaccess="R/W"/>
+    <bitfield id="BOOTSTS" description="CPU2 to CPU1 IPC Boot StatusCPU2 to CPU1 IPC Boot Status" begin="31" end="0" width="32" rwaccess="R/W"/>
+  </register>
+  <register id="IPCBOOTMODE" width="32" page="1" offset="0x22" internal="0" description="CPU1 to CPU2 IPC Boot Mode Register">
+    <bitfield id="BOOTMODE" description="CPU1 to CPU2 IPC Boot ModeCPU1 to CPU2 IPC Boot Mode" begin="31" end="0" width="32" rwaccess="R/W"/>
+    <bitfield id="BOOTMODE" description="CPU1 to CPU2 IPC Boot ModeCPU1 to CPU2 IPC Boot Mode" begin="31" end="0" width="32" rwaccess="R/W"/>
+  </register>
+  <register id="PUMPREQUEST" width="32" page="1" offset="0x24" internal="0" description="Flash programming semaphore PUMP request register">
+    <bitfield id="SEM" description="Flash Pump Request Semaphore between CPU1 and CPU2Flash Pump Request Semaphore between CPU1 and CPU2" begin="1" end="0" width="2" rwaccess="R/W"/>
+    <bitfield id="SEM" description="Flash Pump Request Semaphore between CPU1 and CPU2Flash Pump Request Semaphore between CPU1 and CPU2" begin="1" end="0" width="2" rwaccess="R/W"/>
+    <bitfield id="KEY" description="Key Qualifier for writes to this registerKey Qualifier for writes to this register" begin="31" end="16" width="16" rwaccess="R/W"/>
+    <bitfield id="KEY" description="Key Qualifier for writes to this registerKey Qualifier for writes to this register" begin="31" end="16" width="16" rwaccess="R/W"/>
+  </register>
+</module>

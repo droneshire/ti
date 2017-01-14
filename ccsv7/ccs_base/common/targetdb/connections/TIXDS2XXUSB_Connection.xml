@@ -1,0 +1,160 @@
+<?xml version="1.0"?>
+
+<!-- This is a USCIF35 compatible XML.                        -->
+<!-- Copyright (c) 2011-2014, Texas Instruments Incorporated. -->
+<!-- XDS2xx USB Debug Probe XML Definitions.                  -->
+
+<connection desc="Texas Instruments XDS2xx USB Debug Probe" id="Texas Instruments XDS2xx USB Emulator" class="574026">
+
+  <connectionType Type="TIXDS200"/>
+  <property Name="Diagnostic Command" Type="hiddenfield" Value="%ccs_base%/common/uscif/dbgjtag -f %boarddatafile% -rv -o -S integrity" ID="DiagnosticCommand"/>
+  <property desc="Debug Probe Filename" id="Emulator Filename" Type="hiddenfield" Value="xds2xxu.out" ID="USCIF.ECOM_DRVR" />
+  <property desc="Debug Probe I/O Port Number" Type="stringfield" Value="0" id="portAddr1" ID="USCIF.ECOM_PORT"/>
+  
+  <property Name="BIO_0"   Type="hiddenfield" Value="BIO_0,Active_High"      ID="XDS2XX.BIO_0"/>
+  <property Name="BIO_1"   Type="hiddenfield" Value="BIO_1,Active_High"      ID="XDS2XX.BIO_1"/>
+  <property Name="BIO_2"   Type="hiddenfield" Value="BIO_2,Active_High"      ID="XDS2XX.BIO_2"/>
+  <property Name="BIO_3"   Type="hiddenfield" Value="BIO_3,Active_High"      ID="XDS2XX.BIO_3"/>
+  <property Name="TXD1 "   Type="hiddenfield" Value="TXD1,Active_High"       ID="XDS2XX.TXD1"/>
+  <property Name="RXD1"    Type="hiddenfield" Value="RXD1,Active_High"       ID="XDS2XX.RXD1"/>
+  <property Name="EXPIO_4" Type="hiddenfield" Value="EXPIO_4,Active_High"    ID="XDS2XX.EXPIO_4"/>
+  <property Name="EXPIO_5" Type="hiddenfield" Value="EXPIO_5,Active_High"    ID="XDS2XX.EXPIO_5"/>
+  <property Name="EXPIO_6" Type="hiddenfield" Value="EXPIO_6,Active_High"    ID="XDS2XX.EXPIO_6"/>
+  <property Name="EXPIO_7" Type="hiddenfield" Value="EXPIO_7,Active_High"    ID="XDS2XX.EXPIO_7"/>
+
+  <property Name="The JTAG nTRST Boot-Mode" Type="choicelist" Value="0"  ID="USCIF.JTAGBOOT_MODE">
+    <choice Name="Disabled - Both EMU pins remain hi-z" value="disable">
+      <property Name="unused" Type="hiddenfield" Value="hiz" ID="USCIF.JTAGBOOT_VALUE"/>
+    </choice>
+    <choice Name="Enabled - Both EMU pins are high" value="enable">
+      <property Name="unused" Type="hiddenfield" Value="11"  ID="USCIF.JTAGBOOT_VALUE"/>
+    </choice>
+    <choice Name="Enabled - EMU1 is high, EMU0 is low" value="enable">
+      <property Name="unused" Type="hiddenfield" Value="10"  ID="USCIF.JTAGBOOT_VALUE"/>
+    </choice>
+    <choice Name="Enabled - EMU1 is low, EMU0 is high" value="enable">
+      <property Name="unused" Type="hiddenfield" Value="01"  ID="USCIF.JTAGBOOT_VALUE"/>
+    </choice>
+    <choice Name="Enabled - Both EMU pins are low" value="enable">
+      <property Name="unused" Type="hiddenfield" Value="00"  ID="USCIF.JTAGBOOT_VALUE"/>
+    </choice>
+  </property>
+  <property Name="The Power-On-Reset Boot-Mode" Type="choicelist" Value="0" ID="USCIF.POWERBOOT_MODE">
+    <choice Name="Disabled - Both EMU pins remain hi-z" value="disable">
+      <property Name="unused" Type="hiddenfield" Value="hiz" ID="USCIF.POWERBOOT_VALUE"/>
+    </choice>
+    <choice Name="Enabled - Both EMU pins are high" value="enable">
+      <property Name="unused" Type="hiddenfield" Value="11"  ID="USCIF.POWERBOOT_VALUE"/>
+    </choice>
+    <choice Name="Enabled - EMU1 is high, EMU0 is low" value="enable">
+      <property Name="unused" Type="hiddenfield" Value="10"  ID="USCIF.POWERBOOT_VALUE"/>
+    </choice>
+    <choice Name="Enabled - EMU1 is low, EMU0 is high" value="enable">
+      <property Name="unused" Type="hiddenfield" Value="01"  ID="USCIF.POWERBOOT_VALUE"/>
+    </choice>
+    <choice Name="Enabled - Both EMU pins are low" value="enable">
+      <property Name="unused" Type="hiddenfield" Value="00"  ID="USCIF.POWERBOOT_VALUE"/>
+    </choice>
+  </property>
+  <property Name="The JTAG TCLK Frequency (MHz)" Type="choicelist" Value="0" ID="USCIF.TCLK_PROGRAM">
+    <!-- 
+         Note: The property id is old Name value that was both display text and internal id.
+               Do not change it, or you will break existing target configurations.
+    -->
+    <choice Name="Fixed with user specified faster value" value="SPECIFIC">
+      <property desc="-- Enter a value from 50KHz to 20.0MHz" id="-- Enter a value from 0.5MHz to 20.0MHz" Type="stringfield" Value="10.0MHz" ID="USCIF.TCLK_FREQUENCY"/>
+    </choice>
+    <choice Name="Adaptive with user specified limit" value="ADAPTIVE">
+      <property desc="-- Enter a value from 50KHz to 20.0MHz" id="-- Enter a value from 0.5MHz to 20.0MHz" Type="stringfield" Value="10.0MHz" ID="USCIF.TCLK_FREQUENCY"/>
+    </choice>
+  </property>
+  <property Name="Loopback Mode"  Type="hiddenfield" Value="disable" ID="USCIF.LOOPBACK_MODE"/>
+  <property Name="Loopback Value" Type="hiddenfield" Value="disable" ID="USCIF.LOOPBACK_VALUE"/>
+
+    <property Name="The JTAG Signals Isolation Upon Disconnect" Type="choicelist" Value="1" ID="USCIF.JTAG_ISOLATE">
+        <choice Name="Do not isolate JTAG signals when last client disconnects" value="disable" />
+        <choice Name="Isolate JTAG signals when last client disconnects" value="enable" />
+    </property>
+
+    <property desc="Apply nRESET/SRST pin on the debug header" id="Apply nRESET/SRST pin on the emulation header" Type="choicelist" Value="0" ID="USCIF.EXTRARESET_SYSTEM">
+        <choice Name="Do NOT pulse this pin on debug probe startup" value="false" />
+        <choice Name="Pulse this pin on debug probe startup" value="true" />
+    </property>
+
+
+  <property id="The cJTAG / SWD Features" desc="JTAG / cJTAG / SWD Mode" Type="choicelist" Value="0" ID="DOT7.DTS_USAGE">
+
+      <choice Name="JTAG (1149.1), SWD and cJTAG are disabled" value="nothing">
+      <!-- "DOT7.DTS_USAGE=NOTHING" is equivalent to no "DOT7.DTS_???" or "DOT7.TS_???" variables at all.  -->
+      <!-- The converter is not-present - the link delay is zero.                                          -->
+      <!-- The capabilities are those of the 1149.1 standard.                                              -->
+
+        <property id="SWD Debug" desc="" Type="hiddenfield" Value="disabled" ID="SWD.SWD_DEBUG" />
+        <property id="SWO Data"  desc="" Type="hiddenfield" Value="aux_uart" ID="SWD.SWO_DATA" />
+
+      </choice>
+
+      <choice Name="cJTAG (1149.7) 4-pin standard mode" value="enable">
+
+        <!-- "DOT7.DTS_USAGE=ENABLE" allows use of all the "DOT7.DTS_???" and "DOT7.TS_???" variables. -->
+        <!-- The converter is present - the link delay is three or two.                                -->
+        <!-- The capabilities are those of the 1149.7 JSCAN0 mode.                                     -->
+
+        <property Name="The Converter Type" Type="hiddenfield" Value="xds2xx" ID="DOT7.DTS_TYPE"/>
+        <property Name="Use the emulator clock" Type="hiddenfield" Value="emulator" ID="DOT7.DTS_PROGRAM"/>
+        <property Name="The Converter 1149.7 Frequency Value"   Type="hiddenfield" Value="1.0MHz"  ID="DOT7.DTS_FREQUENCY"/>
+        <property Name="The Target Scan Format"                 Type="hiddenfield" Value="jscan0"   ID="DOT7.TS_FORMAT"    />
+
+        <property Name="The Target Pin Width" Type="choicelist" Value="0" ID="DOT7.TS_PIN_WIDTH">
+          <choice Name="The target hardware has 4 JTAG pins" value="all_four" /> <!-- TCKO/TMSC/TDI/TDO -->
+          <choice Name="The target hardware has 2 JTAG pins" value="only_two" /> <!-- TCKO/TMSC         -->
+        </property>
+
+        <property id="SWD Debug" desc="" Type="hiddenfield" Value="disabled" ID="SWD.SWD_DEBUG" />
+        <property id="SWO Data"  desc="" Type="hiddenfield" Value="aux_uart" ID="SWD.SWO_DATA" />
+
+      </choice>
+
+      <choice Name="cJTAG (1149.7) 2-pin advanced modes" value="enable">
+        <!-- "DOT7.DTS_USAGE=ENABLE" allows use of all the "DOT7.DTS_???" and "DOT7.TS_???" variables. -->
+        <!-- The converter is present - the link delay is three or two.                                -->
+        <!-- The capabilities are those of the 1149.7 MSCAN and OSCAN0-7 modes.                        -->
+
+        <property Name="The Converter Type" Type="hiddenfield" Value="xds2xx" ID="DOT7.DTS_TYPE"/>
+        <property Name="Use the emulator clock" Type="hiddenfield" Value="emulator" ID="DOT7.DTS_PROGRAM"/>
+        <property Name="The Converter 1149.7 Frequency Value"   Type="hiddenfield" Value="1.0MHz"  ID="DOT7.DTS_FREQUENCY"/>
+
+        <property Name="The Target Scan Format" Type="choicelist" Value="1" ID="DOT7.TS_FORMAT">
+                <choice Name="Use MSCAN  format - do it all, don't optimise" value="mscan" />
+                <choice Name="Use OSCAN0 format - is adaptive, no escapes"   value="oscan0"/>
+                <choice Name="Use OSCAN1 format - non adaptive, no escapes"  value="oscan1"/>
+                <choice Name="Use OSCAN2 format - fast non-scan, no escapes" value="oscan2"/>
+                <choice Name="Use OSCAN4 format - is adaptive, fast scan"    value="oscan4"/>
+                <choice Name="Use OSCAN5 format - non adaptive, fast scan"   value="oscan5"/>
+        </property>
+
+        <property Name="The Target Pin Width" Type="choicelist"  Value="1" ID="DOT7.TS_PIN_WIDTH">
+          <choice Name="The target hardware has 4 JTAG pins" value="all_four" /> <!-- TCKO/TMSC/TDI/TDO -->
+          <choice Name="The target hardware has 2 JTAG pins" value="only_two" /> <!-- TCKO/TMSC         -->
+        </property>
+
+        <property id="SWD Debug" desc="" Type="hiddenfield" Value="disabled" ID="SWD.SWD_DEBUG" />
+	<property id="XDS200 User Port" desc="User COM Port Connection" Type="choicelist" Value="0" ID="SWD.SWO_DATA">
+	  <choice Name="User COM port is target UART port" value="aux_uart" />
+	  <choice Name="User COM port is target TDO pin" value="tdo_pin" />
+	</property>
+
+      </choice>
+
+      <choice Name="SWD Mode - User COM port is target UART port" value="nothing">
+        <property id="SWD Debug" desc="" Type="hiddenfield" Value="enabled" ID="SWD.SWD_DEBUG" />
+        <property id="SWO Data"  desc="" Type="hiddenfield" Value="aux_uart" ID="SWD.SWO_DATA" />
+      </choice>
+
+      <choice Name="SWD Mode - User COM port is target TDO pin" value="nothing">
+        <property id="SWD Debug" desc="" Type="hiddenfield" Value="enabled" ID="SWD.SWD_DEBUG" />
+        <property id="SWO Data"  desc="" Type="hiddenfield" Value="tdo_pin" ID="SWD.SWO_DATA" />
+      </choice>
+
+    </property>
+</connection>

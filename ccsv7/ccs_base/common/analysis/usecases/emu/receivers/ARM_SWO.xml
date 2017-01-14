@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<breakpoints xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="breakpoints.xsd">
+
+  <breakpoint type="Trace">
+    <property>
+      <name>Hardware Configuration</name>
+      <property>
+        <name>Receiver Settings</name>
+        <property>
+          <name>Receiver</name>
+          <string>SWO Trace</string>
+          <property>
+            <name> SWO Selection </name>
+            <property>
+                <name> Encoding Type </name>
+                <string> UART </string>
+            </property>
+            <property>
+                <name> Prescalar </name>
+                <string> Prescalar Value </string>
+            </property>
+          </property>
+          <property>
+            <name> UART Options </name>
+            <property>
+                <name> Target Clk Frequency </name>
+                <string> Frequency in Hz </string>
+            </property>
+            <property>
+                <name> COM Port Number </name>
+                <string> COM Port Number </string>
+            </property>
+          </property>
+        </property>
+      </property>
+    </property>
+    
+    <property>
+      <name>Miscellaneous</name>
+      <property>
+        <name>Group</name>
+        <string>Default Group</string>
+      </property>
+      <property>
+        <name>Name</name>
+        <string>Receiver</string>
+      </property>
+    </property>
+    <enabled>0</enabled>
+  </breakpoint>
+
+</breakpoints>

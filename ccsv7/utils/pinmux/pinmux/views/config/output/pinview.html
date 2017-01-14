@@ -1,0 +1,24 @@
+<div id="pinViewFileTab" class="panel panel-default shadow1" style="margin:0px 0 6px 0;border:none;">
+				<div class="panel-heading panel-heading-custom panel-heading-main" ng-click="hidePinViewSection=!hidePinViewSection">
+					<span ng-class="srvStyle.getTriangleGlyphClass(hidePinViewSection)"></span>
+					<span style="font-size:14px;font-weight:bold;">Pin Layout</span>
+				</div>
+				<div class="panel-body" style="padding:0px" ng-hide="hidePinViewSection">
+					<!-- Use for hover popup for the pin view -->
+					<div style="display:none;" id="pinDetails" > Place Holder </div> 			
+					<div id="pinViewContainer">
+						<div id="pinView"><!--  KinectJS display area for pinView --></div>
+						<div id="pinStatusContainer">
+							<ul class="list-group" style="margin-left:5px;font-size:14px;color:#444;">
+								<li class="list-group-item" style="padding:5px 10px;">
+									<span class="badge gpioPin">{{numGPIO-numGPIOLeft}}</span>GPIO Used&nbsp;&nbsp;
+								</li>
+								<li class="list-group-item" style="padding:5px 10px;">
+									<span class="badge availablePin">{{numGPIOLeft}}</span>GPIO Available&nbsp;&nbsp;
+								</li>
+							</ul>
+						</div>
+					</div>
+			<div id="pinViewMargin" style="clear:both;"></div> <!-- needed for extra spacing on the bottom for the mobile layout -->
+	</div>
+</div>

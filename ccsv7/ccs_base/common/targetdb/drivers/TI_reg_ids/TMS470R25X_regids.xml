@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<register_ids id="CS_ETB" XML_version="2.0">
+<!-- Displayed Common ETB Registers -->
+    <register_id id="ID"                value="0"  address="0" page="0" />
+    <register_id id="RDP"               value="1"  address="0" page="0" />
+    <register_id id="STS"               value="2"  address="0" page="0" />
+    <register_id id="RRD"               value="3"  address="0" page="0" />
+    <register_id id="RRP"               value="4"  address="0" page="0" />
+    <register_id id="RWD"               value="5"  address="0" page="0" />
+    <register_id id="RWP"               value="6"  address="0" page="0" />
+    <register_id id="TRG"               value="7"  address="0" page="0" />
+    <register_id id="CTL"               value="8"  address="0" page="0" />
+    <register_id id="FFSR"              value="9"  address="0" page="0" />
+    <register_id id="FFCR"              value="10" address="0" page="0" />
+    <register_id id="LOCK"              value="11" address="0" page="0" />
+    <register_id id="LOCK_STATUS"       value="12" address="0" page="0" />
+<!-- Legacy ETB CS Register Names -->
+    <register_id id="ETBCS_ID"          value="0"  address="0" page="0" />
+    <register_id id="ETBCS_RDP"         value="1"  address="0" page="0" />
+    <register_id id="ETBCS_STS"         value="2"  address="0" page="0" />
+    <register_id id="ETBCS_RRD"         value="3"  address="0" page="0" />
+    <register_id id="ETBCS_RRP"         value="4"  address="0" page="0" />
+    <register_id id="ETBCS_RWD"         value="5"  address="0" page="0" />
+    <register_id id="ETBCS_RWP"         value="6"  address="0" page="0" />
+    <register_id id="ETBCS_TRG"         value="7"  address="0" page="0" />
+    <register_id id="ETBCS_CTL"         value="8"  address="0" page="0" />
+    <register_id id="ETBCS_FFSR"        value="9"  address="0" page="0" />
+    <register_id id="ETBCS_FFCR"        value="10" address="0" page="0" />
+    <register_id id="ETBCS_LOCK_ACCESS" value="11" address="0" page="0" />
+    <register_id id="ETBCS_LOCK_STATUS" value="12" address="0" page="0" />
+<!-- ETB TI Control Register -->
+    <register_id id="TIETB_CNTL"        value="13" address="0" page="0" />
+<!-- ETB TBR Register Names -->
+    <register_id id="DEVID"             value="0"  address="0" page="0" />
+    <register_id id="RAMSZ"             value="1"  address="0" page="0" />
+    <register_id id="STAT"              value="2"  address="0" page="0" />
+    <register_id id="RAMRDAT"           value="3"  address="0" page="0" />
+    <register_id id="RAMRPTR"           value="4"  address="0" page="0" />
+    <register_id id="RAMWDAT"           value="5"  address="0" page="0" />
+    <register_id id="RAMWPTR"           value="6"  address="0" page="0" />
+    <register_id id="TRGCNT"            value="7"  address="0" page="0" />
+    <register_id id="CTRL"              value="8"  address="0" page="0" />
+    <register_id id="OPSTAT"            value="9"  address="0" page="0" />
+    <register_id id="OPCTRL"            value="10" address="0" page="0" />
+    <register_id id="LOCKACC"           value="11" address="0" page="0" />
+    <register_id id="LOCKSTAT"          value="12" address="0" page="0" />
+    <register_id id="IDPERIOD"          value="14" address="0" page="0" />
+    <register_id id="SEQCNTL"           value="15" address="0" page="0" />
+    <register_id id="CLAIMSET"          value="16" address="0" page="0" />
+    <register_id id="CLAIMCLR"          value="17" address="0" page="0" />
+</register_ids>

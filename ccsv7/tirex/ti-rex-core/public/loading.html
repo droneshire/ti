@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">       
+        <title ng-bind="metaservice.metaTitle()">TI Resource Explorer</title>
+        <meta name="description" content="{{ metaservice.metaDescription() }}"  ng-bind="metaservice.metaDescription()"></meta>
+        <meta name="keywords" content="{{metaservice.metaKeywords()}}" ng-bind="metaservice.metaKeywords()"></meta>
+        <meta name="title" content="{{metaservice.metaTitle()}}">
+        <meta name="author" content="pegah" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="stylesheets/main.css">
+        <link rel="shortcut icon" href="icns/trex.ico">
+        <script src="scripts/html5-boilerplate-4.3.0/js/vendor/modernizr-2.6.2.min.js"></script>
+
+        <!-- scripts that are required by dependent script must be included first -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="scripts/html5-boilerplate-4.3.0/js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+        <script src="scripts/bootstrap-3.1.1/dist/js/bootstrap.min.js"></script> <!--RALPH-->
+        <script src="scripts/html5-boilerplate-4.3.0/js/plugins.js"></script>
+        <script src="scripts/html5-boilerplate-4.3.0/js/main.js"></script>
+        
+        <link rel="stylesheet" href="scripts/jstree/themes/default/style.min.css" />
+        <link rel="stylesheet" href="scripts/select2-3.5.1/select2.css" type="text/css" />
+        <link rel="stylesheet" href="scripts/jquery-layout/jquery.scrollpane.css" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="scripts/slick/slick.css"/>
+
+        <link href="scripts/intro.js-1.0.0/introjs.css" rel="stylesheet">
+        <link rel="stylesheet" href="stylesheets/rex.css" type="text/css"  />
+        <link rel="stylesheet" ng-href="stylesheets/rex2.css" type="text/css" ng-if="!showIntro" />
+        <link rel="stylesheet" href="stylesheets/material-icn.css" type="text/css">
+        
+        <script src="scripts/jstree/jstree.min.js"></script>
+        <script src="scripts/select2-3.5.1/select2.min.js"></script>
+        <script type="text/javascript" src="scripts/intro.js-1.0.0/intro.js"></script>
+        <!-- these two needs to be reimplemented for Angular -->
+
+        <!-- script src="/analytics/index.js"></script>
+         <script src="/login/index.js"></script -->
+
+        <script src="scripts/angular-1.2.9/angular.min.js"></script>
+        <script src="scripts/angular-1.2.9/angular-route.min.js"></script>
+        <script src="scripts/angular-1.2.9/angular-cookies.min.js"></script>
+        <script src="scripts/angular-1.2.9/select2.js"></script>
+        <script src="scripts/jquery-layout/jquery-ui-latest.js"></script>
+        <script src="scripts/jquery-layout/jquery.layout-latest.js"></script>
+        <script src="scripts/jquery-layout/jquery.scrollpane.js"></script>
+        <script src="scripts/jquery-layout/jquery.mousewheel.js"></script>
+        <script src="scripts/bootstrap-3.1.1/js/ui-bootstrap-tpls-0.11.2.min.js"></script>
+        <script src="scripts/angular-1.2.9/angular-jscrollpane.min.js"></script>
+        <script src="scripts/angular-1.2.9/angular-intro.min.js"></script>
+        <script src="scripts/angular-1.2.9/angular-cookie.min.js"></script>
+        <script type="text/javascript" src="scripts/slick/slick.min.js"></script>
+        <script src="scripts/marked/marked.min.js"></script>
+
+        <link rel="stylesheet" src="scripts2/perfect-scrollbar/dist/css/perfect-scrollbar.min.css"></link>
+        
+        <!-- needed for goolge analytics-->
+        <script type="text/javascript"
+            src="/analytics/googleAnalytics.js"></script>
+        <!--
+         <script>
+         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+         ga('create', 'UA-62823528-1', 'auto');
+         ga('send', 'pageview');
+
+         </script>
+           -->
+        <!--
+         <script type='text/javascript' src='http://getfirebug.com/releases/lite/1.2/firebug-lite-compressed.js'></script> -->
+        <script src="lib/bundle.js"></script>              
+    </head>
+    <body ng-app="loadingPage" class="no-js">
+        <div ng-view></div>
+    </body>
+</html>

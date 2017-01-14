@@ -1,0 +1,43 @@
+<!-- Mobile Menu -->
+<div id="mobileActionMenu" ng-if="!initializingConfigSrv">
+	<ul class="nav nav-tabs">
+		<li id="mobileTab1" ng-click="srvLayout.showColOnly(1)" ng-class="srvStyle.getMobileTabClass(1)" style="padding:0;margin:0">
+			<a href=""><span>Peripherals</span></a>
+		</li>
+		<li id="mobileTab2" ng-click="srvLayout.showColOnly(2)" ng-class="srvStyle.getMobileTabClass(2)">
+			<a href=""><span>Requirements</span></a>
+		</li>
+		<li id="mobileTab3" ng-click="srvLayout.showColOnly(3)" ng-class="srvStyle.getMobileTabClass(3)">
+			<a href=""><span>Output</span></a>
+		</li>
+	</ul>
+</div>
+
+<!-- column 1: Peripheral View -->
+<div id="newCol1Outer" ng-class="srvStyle.getCol1Class()" ng-show="srvLayout.needShowCol(1)&&!initializingConfigSrv">
+	<div id="newCol1">
+		<interfaces></interfaces>
+	</div>
+</div>
+
+<!-- column 2: Requirements View -->
+<div id="newCol2Outer" ng-class="srvStyle.getCol2Class()" ng-show="srvLayout.needShowCol(2)&&!initializingConfigSrv">
+	<div id="newCol2">
+		<ng-include src="'views/config/requirement.html'"></ng-include>
+	</div>
+</div>
+
+<!-- column 3: Output View -->
+<div id="newCol3" ng-class="srvStyle.getCol3Class(codePreviewViewStatus)" ng-show="srvLayout.needShowCol(3)&&!initializingConfigSrv">
+	<ng-include src="'views/config/pins.html'"></ng-include>
+</div>
+
+<div id="loadingProjectDiv" ng-show="initializingConfigSrv" style="width:100%">
+	<div class="container">
+		<h4>Setting up your PinMux project...</h4>
+		<div class="progress" style="position:absolute;left:30%;width:40%;">
+			<div ng-init="setProgressInterval()" id="loadingProgressBar" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100" style="width:55%">
+			</div>
+		</div>
+	</div>
+</div>

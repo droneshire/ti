@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module id="Debug" HW_revision="1" XML_version="1" description="PRU Debug Registers" hidden="false" >
+    <register id="CONTROL" acronym="CONTROL" width="32" description="PRU Control Register">
+        <bitfield id="PCRESETVAL" width="16" begin="31" end="16" resetval="0" description="Program Counter Reset Value" range="" rwaccess="RW"/>
+        <bitfield id="RUNSTATE" width="1" begin="15" end="15" resetval="0" description="Run State" range="" rwaccess="R">
+            <bitenum id="HALTED" value="0" token="HALTED" description="PRU is halted."/>
+            <bitenum id="RUNNING" value="1" token="RUNNING" description="PRU is currently running."/>
+        </bitfield>
+        <bitfield id="RESERVED_1" width="6" begin="14" end="9" resetval="0" description="Reserved" range="" rwaccess="R"/>
+        <bitfield id="SINGLESTEP" width="1" begin="8" end="8" resetval="0" description="Single Step Enable" range="" rwaccess="RW">
+            <bitenum id="FREE_RUN" value="0" token="FREE_RUN" description="PRU will free run."/>
+            <bitenum id="SINGLE_STEP" value="1" token="SINGLE_STEP" description="PRU will single step."/>
+        </bitfield>
+        <bitfield id="RESERVED_0" width="4" begin="7" end="4" resetval="0" description="Reserved" range="" rwaccess="R"/>
+        <bitfield id="COUNTENABLE" width="1" begin="3" end="3" resetval="0" description="Cycle Counter Enable" range="" rwaccess="RW">
+            <bitenum id="DISABLED" value="0" token="DISABLED" description="Counters are disabled."/>
+            <bitenum id="ENABLED" value="1" token="ENABLED" description="Counters are enabled."/>
+        </bitfield>
+        <bitfield id="SLEEPING" width="1" begin="2" end="2" resetval="0" description="Sleep Indicator" range="" rwaccess="RW">
+            <bitenum id="WAKEUP" value="0" token="WAKEUP" description="PRU is awake."/>
+            <bitenum id="SLEEP" value="1" token="SLEEP" description="PRU is asleep."/>
+        </bitfield>
+        <bitfield id="ENABLE" width="1" begin="1" end="1" resetval="0" description="Processor Enable" range="" rwaccess="RW">
+            <bitenum id="HALT" value="0" token="HALT" description="PRU will halt (disabled)."/>
+            <bitenum id="RUN" value="1" token="RUN" description="PRU will run (enabled)."/>
+        </bitfield>
+        <bitfield id="SOFTRESET" width="1" begin="0" end="0" resetval="0" description="Soft Reset" range="" rwaccess="RW"/>    
+    </register>
+    <register id="STATUS" acronym="STATUS" width="32" description="PRU Status Register">
+        <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0" description="Reserved" range="" rwaccess="R"/>    
+        <bitfield id="PCOUNTER" width="16" begin="15" end="0" resetval="0" description="Program Counter" range="" rwaccess="R"/>    
+    </register>
+    <register id="WAKEUP" acronym="WAKEUP" width="32" description="PRU Wakeup Enable Register"/>
+    <register id="CYCLECNT" acronym="CYCLECNT" width="32" description="PRU Cycle Count Register"/>
+    <register id="STALLCNT" acronym="STALLCNT" width="32" description="PRU Stall Count Register"/>
+    <register id="CONTABBLKIDX0" acronym="CONTABBLKIDX0" width="32" description="PRU Constant Table Block Index Register 0">
+        <bitfield id="RESERVED_1" width="8" begin="31" end="24" resetval="0" description="Reserved" range="" rwaccess="R"/>    
+        <bitfield id="C25" width="8" begin="23" end="16" resetval="0" description="Constant Entry 25 Block Index" range="" rwaccess="RW"/>    
+        <bitfield id="RESERVED_0" width="8" begin="15" end="8" resetval="0" description="Reserved" range="" rwaccess="R"/>    
+        <bitfield id="C24" width="8" begin="7" end="0" resetval="0" description="Constant Entry 24 Block Index" range="" rwaccess="RW"/>    
+    </register>
+    <register id="CONTABPROPTR0" acronym="CONTABPROPTR0" width="32" description="PRU Constant Table Programmable Pointer Register 0">
+        <bitfield id="C29" width="16" begin="31" end="16" resetval="0" description="Constant Entry 29 Pointer" range="" rwaccess="RW"/>    
+        <bitfield id="C28" width="16" begin="15" end="0" resetval="0" description="Constant Entry 28 Pointer" range="" rwaccess="RW"/>    
+    </register>
+    <register id="CONTABPROPTR1" acronym="CONTABPROPTR1" width="32" description="PRU Constant Table Programmable Pointer Register 1">
+        <bitfield id="C31" width="16" begin="31" end="16" resetval="0" description="Constant Entry 31 Pointer" range="" rwaccess="RW"/>    
+        <bitfield id="C30" width="16" begin="15" end="0" resetval="0" description="Constant Entry 30 Pointer" range="" rwaccess="RW"/>    
+    </register>
+</module>

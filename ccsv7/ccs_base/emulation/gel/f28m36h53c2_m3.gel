@@ -1,0 +1,374 @@
+/********************************************************************/
+/* f28m36h53c2_m3.gel                                               */
+/* Version 4.00.0                                                   */
+/*                                                                  */
+/* This GEL file is to be used with the F28M36H53C2 M3 Device.      */
+/* Changes may be required to support specific hardware designs.    */
+/*                                                                  */
+/* Code Composer Studio supports six reserved GEL functions that    */
+/* automatically get executed if they are defined. They are:        */
+/*                                                                  */
+/* StartUp()              - Executed whenever CCS is invoked        */
+/* OnReset()              - Executed after Debug->Reset CPU         */
+/* OnRestart()            - Executed after Debug->Restart           */
+/* OnPreFileLoaded()      - Executed before File->Load Program      */
+/* OnFileLoaded()         - Executed after File->Load Program       */
+/* OnTargetConnect()      - Executed after Debug->Connect           */
+/*                                                                  */
+/********************************************************************/
+
+menuitem "StartUp"
+
+hotmenu StartUp()
+{
+    /* Load the CortexM3_util.gel file */
+    GEL_LoadGel("$(GEL_file_dir)/CortexM3_util.gel");
+
+    GEL_MapOff();
+    GEL_MapReset();
+    GEL_MapOn();
+    F28M36H53C2_Memory_Map();
+}
+
+OnTargetConnect()
+{
+    M3_Disable_Flash_ECC();
+    M3_Ram_Init();
+    watchdog_enable();
+
+    uart_enable();
+}
+
+OnReset(int nErrorCode)
+{
+    /* If XRSn Reset occurred previously, re-activate Flash prior to accessing Flash */
+    if ((*(unsigned long *)0x400FE05C & 0x1) == 1)
+    {
+        Flash_Activate();
+    }
+    Read_OTPSECLOCK();
+    Unlock_CSMZ1();
+    Unlock_CSMZ2();
+    Unlock_ECSLZ1();
+    Unlock_ECSLZ2();
+    M3_Disable_Flash_ECC();
+    ReadFlashEXEZ1();
+    ReadFlashEXEZ2();
+    Grab_Sectors();
+    Device_Config();
+}
+
+OnRestart ()
+{
+    Device_Config();
+}
+
+OnPreFileLoaded()
+{
+    GEL_Reset();
+}
+
+menuitem "Initialize F28M36H53C2 Memory Map"
+
+hotmenu F28M36H53C2_Memory_Map()
+{
+    /*
+     * Syntax for GEL_MapAddStr.
+     * GEL_MapAddStr(address, page, length, "attribute", waitstate);
+
+    Basic Attribute Types           Derived Attribute Types
+    String      Description         String      Description
+    R           Read                NONE        No memory/protected
+    W           Write               RAM         Read and write
+    P           Port                ROM         Read only
+    EX          External            WOM         Write only
+    EM          Emulator            INPORT      Port read only
+    PR          Programmable        OUTPORT     Port write only
+    ER          Erasable            IOPORT      Port read and write
+    DA          Dual access         SARAM       Single access RAM
+    ASn         Access size         DARAM       Dual access RAM
+    SHnC        Shared              FLASH       Flash ROM
+    CACHE       Cache               EXRAM       External RAM
+    TX          Text                EXROM       External ROM
+    MN          Monitor             EPROM       Erasable write-able EPROM
+    SA          Single access       MONITOR     Monitor ROM
+    FL          Flash               PRAM        Program RAM
+    MR          Memory mapped       PROM        Program ROM
+    NULL        NULL                NULL        NULL
+    */
+
+    GEL_MapAddStr(0x0,          0, 0x10000,     "R",  0);         /* M3 BOOT ROM                      */
+    GEL_MapAddStr(0x200000,     0, 0x40000,     "R",  0);         /* FLASH BANK Low                     */
+	GEL_MapAddStr(0x2C0000,     0, 0x40000,     "R",  0);         /* FLASH BANK High                    */
+    GEL_MapAddStr(0x600000,     0, 0x8000,      "R|AS2",  0);     /* FLASH BANK 1 Low ECC Bits            */
+	GEL_MapAddStr(0x618000,     0, 0x8000,      "R|AS2",  0);     /* FLASH BANK 1 High ECC Bits            */
+    GEL_MapAddStr(0x680000,     0, 0x01000,     "R",  0);         /* OTP BANK 1                       */ 
+    GEL_MapAddStr(0x681000,     0, 0x01000,     "R",  0);         /* OTP BANK 1 Application 1         */
+    GEL_MapAddStr(0x700000,     0, 0x00200,     "R|AS2",  0);     /* OTP BANK 1 ECC Bits              */
+    GEL_MapAddStr(0x700200,     0, 0x00200,     "R|AS2",  0);     /* OTP BANK 1 Application ECC Bits  */
+    
+    GEL_MapAddStr(0x1000000,    0, 0x10000,     "R",  0);         /* M3 BOOT ROM (Dual Mapped)        */
+    GEL_MapAddStr(0x4000000,    0, 0x4000000,   "R",  0);         /* uCRC (Mirror 1 Space)            */
+    
+    GEL_MapAddStr(0x20000000,   0, 0x8000,      "R|W",  0);         /* C0-C3 SARAM                      */
+    GEL_MapAddStr(0x20008000,   0, 0x10000,     "R|W",  0);         /* S0-S7 SRAM                       */
+    GEL_MapAddStr(0x20018000,   0, 0x18000,     "R|W",  0);         /* C4-C15 SARAM                     */
+    GEL_MapAddStr(0x2007f000,   0, 0x1000,      "R|W",  0);         /* CtoM and MtoC MSGRAM             */
+    GEL_MapAddStr(0x20080000,   0, 0x4000,      "R",  0);         /* C0,C1 SARAM ECC Bits             */
+    GEL_MapAddStr(0x20084000,   0, 0x4000,      "R",  0);         /* C2,C3 SARAM Parity Bits          */
+    GEL_MapAddStr(0x20088000,   0, 0x10000,     "R",  0);         /* S0-S7 SRAM Parity Bits           */
+    GEL_MapAddStr(0x20098000,   0, 0x18000,     "R",  0);         /* C4-C15 SARAM Parity Bits         */
+    GEL_MapAddStr(0x200ff000,   0, 0x1000,      "R",  0);         /* CtoM and MtoC MSGRAM Parity Bits */
+    
+    GEL_MapAddStr(0x22000000,   0, 0x2000000,   "R|W",  0);         /* Bit-Banded RAM                   */
+    GEL_MapAddStr(0x24000000,   0, 0x4000000,   "R|W",  0);         /* uCRC (Mirror 2 Space)            */
+    
+    GEL_MapAddStr(0x40000000,   0, 0x1000,      "R|W",  0);         /* Watchdog Timer 0                 */
+    GEL_MapAddStr(0x40001000,   0, 0x1000,      "R|W",  0);         /* Watchdog Timer 1                 */
+    GEL_MapAddStr(0x40004000,   0, 0x1000,      "R|W",  0);         /* GPIO Port A                      */
+    GEL_MapAddStr(0x40005000,   0, 0x1000,      "R|W",  0);         /* GPIO Port B                      */
+    GEL_MapAddStr(0x40006000,   0, 0x1000,      "R|W",  0);         /* GPIO Port C                      */
+    GEL_MapAddStr(0x40007000,   0, 0x1000,      "R|W",  0);         /* GPIO Port D                      */
+    GEL_MapAddStr(0x40008000,   0, 0x1000,      "R|W",  0);         /* SSI0                             */
+    GEL_MapAddStr(0x40009000,   0, 0x1000,      "R|W",  0);         /* SSI1                             */
+    GEL_MapAddStr(0x4000a000,   0, 0x1000,      "R|W",  0);         /* SSI2                             */
+    GEL_MapAddStr(0x4000b000,   0, 0x1000,      "R|W",  0);         /* SSI3                             */
+    GEL_MapAddStr(0x4000c000,   0, 0x1000,      "R|W",  0);         /* UART0                            */
+    GEL_MapAddStr(0x4000d000,   0, 0x1000,      "R|W",  0);         /* UART1                            */
+    GEL_MapAddStr(0x4000e000,   0, 0x1000,      "R|W",  0);         /* UART2                            */
+    GEL_MapAddStr(0x4000f000,   0, 0x1000,      "R|W",  0);         /* UART3                            */
+    GEL_MapAddStr(0x40010000,   0, 0x1000,      "R|W",  0);         /* UART4                            */
+    
+    GEL_MapAddStr(0x40020000,   0, 0x800,       "R|W",  0);         /* I2C Master 0                     */
+    GEL_MapAddStr(0x40020800,   0, 0x800,       "R|W",  0);         /* I2C Slave 0                      */
+    GEL_MapAddStr(0x40021000,   0, 0x800,       "R|W",  0);         /* I2C Master 1                     */
+    GEL_MapAddStr(0x40021800,   0, 0x800,       "R|W",  0);         /* I2C Slave 1                      */
+    GEL_MapAddStr(0x40024000,   0, 0x1000,      "R|W",  0);         /* GPIO Port E                      */
+    GEL_MapAddStr(0x40025000,   0, 0x1000,      "R|W",  0);         /* GPIO Port F                      */
+    GEL_MapAddStr(0x40026000,   0, 0x1000,      "R|W",  0);         /* GPIO Port G                      */
+    GEL_MapAddStr(0x40027000,   0, 0x1000,      "R|W",  0);         /* GPIO Port H                      */
+    GEL_MapAddStr(0x40030000,   0, 0x1000,      "R|W",  0);         /* Timer0                           */
+    GEL_MapAddStr(0x40031000,   0, 0x1000,      "R|W",  0);         /* Timer1                           */
+    GEL_MapAddStr(0x40032000,   0, 0x1000,      "R|W",  0);         /* Timer2                           */
+    GEL_MapAddStr(0x40033000,   0, 0x1000,      "R|W",  0);         /* Timer3                           */
+    GEL_MapAddStr(0x4003d000,   0, 0x1000,      "R|W",  0);         /* GPIO Port J                      */
+    GEL_MapAddStr(0x40048000,   0, 0x1000,      "R|W",  0);         /* Ethernet Controller              */
+    GEL_MapAddStr(0x40050000,   0, 0x1000,      "R|W",  0);         /* USB Controller                   */
+    GEL_MapAddStr(0x40058000,   0, 0x1000,      "R|W",  0);         /* GPIO Port A (AHB aperture)       */
+    GEL_MapAddStr(0x40059000,   0, 0x1000,      "R|W",  0);         /* GPIO Port B (AHB aperture)       */
+    GEL_MapAddStr(0x4005a000,   0, 0x1000,      "R|W",  0);         /* GPIO Port C (AHB aperture)       */
+    GEL_MapAddStr(0x4005b000,   0, 0x1000,      "R|W",  0);         /* GPIO Port D (AHB aperture)       */
+    GEL_MapAddStr(0x4005c000,   0, 0x1000,      "R|W",  0);         /* GPIO Port E (AHB aperture)       */
+    GEL_MapAddStr(0x4005d000,   0, 0x1000,      "R|W",  0);         /* GPIO Port F (AHB aperture)       */
+    GEL_MapAddStr(0x4005e000,   0, 0x1000,      "R|W",  0);         /* GPIO Port G (AHB aperture)       */
+    GEL_MapAddStr(0x4005f000,   0, 0x1000,      "R|W",  0);         /* GPIO Port H (AHB aperture)       */
+    GEL_MapAddStr(0x40060000,   0, 0x1000,      "R|W",  0);         /* GPIO Port J (AHB aperture)       */
+    GEL_MapAddStr(0x40061000,   0, 0x1000,      "R|W",  0);         /* GPIO Port K (AHB aperture)       */
+    GEL_MapAddStr(0x40062000,   0, 0x1000,      "R|W",  0);         /* GPIO Port L (AHB aperture)       */
+    GEL_MapAddStr(0x40063000,   0, 0x1000,      "R|W",  0);         /* GPIO Port M (AHB aperture)       */
+    GEL_MapAddStr(0x40064000,   0, 0x1000,      "R|W",  0);         /* GPIO Port N (AHB aperture)       */
+    GEL_MapAddStr(0x40065000,   0, 0x1000,      "R|W",  0);         /* GPIO Port P (AHB aperture)       */
+    GEL_MapAddStr(0x40066000,   0, 0x1000,      "R|W",  0);         /* GPIO Port Q (AHB aperture)       */
+    GEL_MapAddStr(0x40067000,   0, 0x1000,      "R|W",  0);         /* GPIO Port R (AHB aperture)       */
+    GEL_MapAddStr(0x40068000,   0, 0x1000,      "R|W",  0);         /* GPIO Port S (AHB aperture)       */
+    GEL_MapAddStr(0x40070000,   0, 0x2000,      "R|W",  0);         /* CAN0                             */
+    GEL_MapAddStr(0x40072000,   0, 0x2000,      "R|W",  0);         /* CAN0 Message RAM                 */
+    GEL_MapAddStr(0x40074000,   0, 0x2000,      "R|W",  0);         /* CAN1                             */
+    GEL_MapAddStr(0x40076000,   0, 0x2000,      "R|W",  0);         /* CAN1 Message RAM                 */
+    GEL_MapAddStr(0x400d0000,   0, 0x1000,      "R|W",  0);         /* EPI0                             */
+    GEL_MapAddStr(0x400fa000,   0, 0x600,       "R|W",  0);         /* Flash Control                    */
+    GEL_MapAddStr(0x400fa600,   0, 0x080,       "R|W",  0);         /* Flash ECC Error                  */
+    GEL_MapAddStr(0x400fb000,   0, 0x200,       "R|W",  0);         /* PBIST Registers  ***INTERNAL***  */
+    GEL_MapAddStr(0x400fb200,   0, 0x100,       "R|W",  0);         /* RAM Configuration                */
+    GEL_MapAddStr(0x400fb300,   0, 0x100,       "R|W",  0);         /* RAM Parity/ECC                   */
+    GEL_MapAddStr(0x400fb400,   0, 0x200,       "R|W",  0);         /* CSM                              */
+    GEL_MapAddStr(0x400fb600,   0, 0x80,        "R|W",  0);         /* uCRC                             */
+    GEL_MapAddStr(0x400fb700,   0, 0x80,        "R|W",  0);         /* CtoM and MtoC IPC                */
+    GEL_MapAddStr(0x400fb800,   0, 0x100,       "R|W",  0);         /* Clock/LPM/Reset Control          */
+    GEL_MapAddStr(0x400fb900,   0, 0x40,        "R|W",  0);         /* Device Configuration             */
+    GEL_MapAddStr(0x400fb980,   0, 0x80,        "R|W",  0);         /* Write Protect Registers          */
+    GEL_MapAddStr(0x400fba00,   0, 0x80,        "R|W",  0);         /* NMI Configuration                */
+    GEL_MapAddStr(0x400fe000,   0, 0x1000,      "R|W",  0);         /* System Control                   */
+    GEL_MapAddStr(0x400ff000,   0, 0x1000,      "R|W",  0);         /* uDMA Control                     */
+    
+    GEL_MapAddStr(0x42000000,   0, 0x2000000,   "R|W", 0);          /* Bit-Banded Peripheral Space      */
+    
+    GEL_MapAddStr(0x50001600,   0, 0x200,       "R|W", 0);          /* ADC1 and ADC2 Result Registers   */
+
+    GEL_MapAddStr(0xE0040000,   0, 0x1000,      "R|W", 0);        
+    GEL_MapAddStr(0xE00FF000,   0, 0x1000,      "R|W", 0);          /* ROM space */
+    GEL_MapAddStr(0xE0000000,   0, 0xf000,      "R|W", 0);
+
+    GEL_TextOut("Memory Map Initialization Complete\n");
+}
+
+hotmenu M3_Ram_Init()
+{
+    *(unsigned long *)0x400FB240 |= 0x55555555;   					/* Initialize C0 - C15 RAM's 	*/     
+    *(unsigned long *)0x400FB260 |= 0x00000001;   					/* Initialize MtoC MSG RAM's  	*/
+    while(*(unsigned long *)0x400FB270 != 0x55555555);				/* Wait for C0 - C15 RAM init 	*/
+    while(*(unsigned long *)0x400FB288 != 0x01);					/* Wait for MtoC MSG RAM init	*/
+}
+
+hotmenu Flash_Activate()
+{
+    int i;
+    *(unsigned long *)0x400FA048 = 0x1;
+    *(unsigned long *)0x400FA040 = 0x3;
+    for (i=0; i<10; i++)
+    {
+        R1 = 0x00000000;
+    }
+}
+hotmenu M3_Disable_Flash_ECC()
+{
+    *(unsigned short *)0x400FA600 = 0x0;    /* Disable Flash ECC */
+}
+
+hotmenu M3_Enable_Flash_ECC()
+{
+    *(unsigned short *)0x400FA600 |= 0xA;   /* Enable Flash ECC */
+}
+
+menuitem "Peripherals"
+hotmenu watchdog_enable()
+{
+    *(unsigned long*)0x400FE100 |= 0x10000008; 
+    GEL_TextOut("Watchdog Timers Enabled\n");
+}
+
+hotmenu uart_enable()
+{
+    *(unsigned long*)0x400FE104 |= 0xF;
+    GEL_TextOut("UARTs Enabled\n");
+}
+
+menuitem "Security"
+hotmenu Unlock_CSMZ1()
+{
+    /* Perform dummy reads of the password locations */
+    R1 = *0x200000;
+    R1 = *0x200004;
+    R1 = *0x200008;
+    R1 = *0x20000C;
+
+    /* Write passwords to the KEY registers.  0xFFFFFFFF's are dummy passwords.
+       User should replace them with the correct password for their DSP */
+    *0x400FB400 = 0xFFFFFFFF;
+    *0x400FB404 = 0xFFFFFFFF;
+    *0x400FB408 = 0xFFFFFFFF;
+    *0x400FB40C = 0xFFFFFFFF;
+}
+
+hotmenu Unlock_CSMZ2()
+{
+    /* Perform dummy reads of the password locations */
+    R1 = *0x2FFFF0;
+    R1 = *0x2FFFF4;
+    R1 = *0x2FFFF8;
+    R1 = *0x2FFFFC;
+
+    /* Write passwords to the KEY registers.  0xFFFFFFFF's are dummy passwords.
+       User should replace them with the correct password for their DSP */
+    *0x400FB418 = 0xFFFFFFFF;
+    *0x400FB41C = 0xFFFFFFFF;
+    *0x400FB420 = 0xFFFFFFFF;
+    *0x400FB424 = 0xFFFFFFFF;
+}
+
+hotmenu Unlock_ECSLZ1()
+{
+    /* Perform dummy reads of the password locations */
+    R1 = *0x200010;
+    R1 = *0x200014;
+
+    /* Write passwords to the KEY registers.  0xFFFFFFFF's are dummy passwords.
+       User should replace them with the correct password for their DSP */
+    *0x400FB410 = 0xFFFFFFFF;
+    *0x400FB414 = 0xFFFFFFFF;
+}
+
+hotmenu Unlock_ECSLZ2()
+{
+    /* Perform dummy reads of the password locations */
+    R1 = *0x2FFFE8;
+    R1 = *0x2FFFEC;
+
+    /* Write passwords to the KEY registers.  0xFFFFFFFF's are dummy passwords.
+       User should replace them with the correct password for their DSP */
+    *0x400FB428 = 0xFFFFFFFF;
+    *0x400FB42C = 0xFFFFFFFF;
+}
+
+hotmenu ReadFlashEXEZ1()
+{
+    /* Perform dummy reads of the password locations */
+    R1 = *0x200020;
+}
+
+hotmenu ReadFlashEXEZ2()
+{
+    /* Perform dummy reads of the password locations */
+    R1 = *0x2FFFDC;
+}
+
+hotmenu Grab_Sectors()
+{
+    R1 = *0x200018; // Read Z1_GRABSECT
+    R1 = *0x20001C; // Read Z1_GRABRAM
+    R1 = *0x2FFFE4; // Read Z2_GRABSECT
+    R1 = *0x2FFFE0; // Read Z2_GRABRAM
+}
+
+hotmenu Read_OTPSECLOCK()
+{
+    R1 = *0x681000;
+}
+/* The below is usually performed in the boot ROM, but if during debug,
+   Boot ROM execution is bypassed, then the following must be executed
+   OnReset() or OnRestart()
+*/
+
+menuitem "Device Configuration"
+hotmenu Device_Config()
+{
+    *(unsigned long *)0x400FE004   = *(unsigned long *)0x00680430; 
+    *(unsigned long *)0x400FB900   = *(unsigned long *)0x00680410;
+    *(unsigned long *)0x400FB904   = *(unsigned long *)0x00680414;
+    *(unsigned long *)0x400FB930   = *(unsigned long *)0x0068042C;
+
+    *(unsigned long *)0x400FE014   = *(unsigned long *)0x00680400; 
+    *(unsigned long *)0x400FE01C   = *(unsigned long *)0x00680404;
+    *(unsigned long *)0x400FE024   = *(unsigned long *)0x00680408; 
+    *(unsigned long *)0x400FE194   = *(unsigned long *)0x0068040C; 
+    *(unsigned long *)0x400FB910   = *(unsigned long *)0x00680418; 
+    *(unsigned long *)0x400FB914   = *(unsigned long *)0x0068041C; 
+    *(unsigned long *)0x400FB918   = *(unsigned long *)0x00680420; 
+    *(unsigned long *)0x400FB91C   = *(unsigned long *)0x00680424; 
+    *(unsigned long *)0x400FB920   = *(unsigned long *)0x00680428;
+    *(unsigned long *)0x400FE308   = *(unsigned long *)0x00680434;
+
+	*(unsigned long *)0x400FBA00 |= 0x1;				/* Enable NMI */
+    *(unsigned long *)0x400FB8C0 |= 0x00030001;         /* Release C28 from Reset*/    
+}
+
+/* This function is used to enable GPIO pins for ITM trace output */
+menuitem "ITM Enable"; 
+hotmenu EnablePinForITMTrace()
+{
+    *(unsigned int*)0x400FE108 = *(unsigned int*)0x400FE108 | 0x000001FF;  //Enable run time clock gating to all GPIO pins
+    *(unsigned int*)0x40025520 = 0x4C4F434B;                               //unlock GPIO access
+    *(unsigned int*)0x40026520 = 0x4C4F434B;                               //unlock GPIO access
+    *(unsigned int*)0x4002551c = *(unsigned int*)0x4002551c | 0x00000000F; //Digital Enable Port F0-3 (not just GPIO)
+    *(unsigned int*)0x4002651c = *(unsigned int*)0x4002651c | 0x000000008; //Digital Enable Port G3 (not just GPIO)
+    *(unsigned int*)0x4002551c = *(unsigned int*)0x4002551c | 0x00000000F; //Digital Enable Port F0-3 (not just GPIO)
+    *(unsigned int*)0x4002651c = *(unsigned int*)0x4002651c | 0x000000008; //Digital Enable Port G3 (not just GPIO)
+    *(unsigned int*)0x40025420 = *(unsigned int*)0x40025420 | 0x00000000F; //Alternate Function Select Port F0-3 (not just GPIO)
+    *(unsigned int*)0x40026420 = *(unsigned int*)0x40026420 | 0x000000008; //Alternate Function Select Port G3 (not just GPIO)
+    *(unsigned int*)0x40025530 = *(unsigned int*)0x40025530 | 0x0000000F;  //Selects alternate peripheral mux for Trace Pins on PF0-3
+    *(unsigned int*)0x40026530 = *(unsigned int*)0x40026530 | 0x00000008;  //Selects alternate peripheral mux for Trace Pins on PG3
+    *(unsigned int*)0x4002552C = *(unsigned int*)0x4002552C | 0x0000EEEE;  //Selects GPIO alternate peripheral 14
+    *(unsigned int*)0x4002652C = *(unsigned int*)0x4002652C | 0x0000E000;  //Selects GPIO alternate peripheral 14
+
+    GEL_TextOut("EMU pins for ITM trace are enabled\n", "result");
+}

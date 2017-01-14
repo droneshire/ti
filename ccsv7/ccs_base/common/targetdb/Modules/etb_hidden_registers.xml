@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<module id="Hidden" HW_revision="1" XML_version="1" description="" hidden="true">
+    <!-- Legacy ETB CS Register Names -->
+    <register id="ETBCS_ID"          acronym="ETBCS_ID"          width="32" description="" />
+    <register id="ETBCS_RDP"         acronym="ETBCS_RDP"         width="32" description="" />
+    <register id="ETBCS_STS"         acronym="ETBCS_STS"         width="32" description="" />
+    <register id="ETBCS_RRD"         acronym="ETBCS_RRD"         width="32" description="" />
+    <register id="ETBCS_RRP"         acronym="ETBCS_RRP"         width="32" description="" />
+    <register id="ETBCS_RWD"         acronym="ETBCS_RWD"         width="32" description="" />
+    <register id="ETBCS_RWP"         acronym="ETBCS_RWP"         width="32" description="" />
+    <register id="ETBCS_TRG"         acronym="ETBCS_TRG"         width="32" description="" />
+    <register id="ETBCS_CTL"         acronym="ETBCS_CTL"         width="32" description="" />
+    <register id="ETBCS_FFSR"        acronym="ETBCS_FFSR"        width="32" description="" />
+    <register id="ETBCS_FFCR"        acronym="ETBCS_FFCR"        width="32" description="" />
+    <register id="ETBCS_LOCK_ACCESS" acronym="ETBCS_LOCK_ACCESS" width="32" description="" />
+    <register id="ETBCS_LOCK_STATUS" acronym="ETBCS_LOCK_STATUS" width="32" description="" />
+    <!-- ETB TI Control Register -->
+    <register id="TIETB_CNTL"        acronym="TIETB_CNTL"        width="32" description="" />
+    <!-- ETB TBR Register Names -->
+    <register id="DEVID"             acronym="DEVID"             width="32" description="" />
+    <register id="RAMSZ"             acronym="RAMSZ"             width="32" description="" />
+    <register id="STAT"              acronym="STAT"              width="32" description="" />
+    <register id="RAMRDAT"           acronym="RAMRDAT"           width="32" description="" />
+    <register id="RAMRPTR"           acronym="RAMRPTR"           width="32" description="" />
+    <register id="RAMWDAT"           acronym="RAMWDAT"           width="32" description="" />
+    <register id="RAMWPTR"           acronym="RAMWPTR"           width="32" description="" />
+    <register id="TRGCNT"            acronym="TRGCNT"            width="32" description="" />
+    <register id="CTRL"              acronym="CTRL"              width="32" description="" />
+    <register id="OPSTAT"            acronym="OPSTAT"            width="32" description="" />
+    <register id="OPCTRL"            acronym="OPCTRL"            width="32" description="" />
+    <register id="LOCKACC"           acronym="LOCKACC"           width="32" description="" />
+    <register id="LOCKSTAT"          acronym="LOCKSTAT"          width="32" description="" />
+    <register id="IDPERIOD"          acronym="IDPERIOD"          width="32" description="" />
+    <register id="SEQCNTL"           acronym="SEQCNTL"           width="32" description="" />
+    <register id="CLAIMSET"          acronym="CLAIMSET"          width="32" description="" />
+    <register id="CLAIMCLR"          acronym="CLAIMCLR"          width="32" description="" />
+</module>

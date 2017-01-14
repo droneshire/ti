@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configurations XML_version="1.2" id="configurations_0">
+
+
+
+
+
+<configuration XML_version="1.2" id="Texas Instruments XDS100v2 USB Emulator_0">
+        <instance XML_version="1.2" desc="Texas Instruments XDS100v2 USB Emulator_0" href="connections\TIXDS100v2_Connection.xml" id="Texas Instruments XDS100v2 USB Emulator_0" xml="TIXDS100v2_Connection.xml" xmlpath="connections"/>
+        <connection XML_version="1.2" id="Texas Instruments XDS100v2 USB Emulator_0">
+            <instance XML_version="1.2" href="drivers\tixds100v2c28x.xml" id="drivers" xml="tixds100v2c28x.xml" xmlpath="drivers"/>
+            <instance XML_version="1.2" href="drivers\tixds100v2cla.xml" id="drivers" xml="tixds100v2cla.xml" xmlpath="drivers"/>
+            <property Type="choicelist" Value="1" id="Emulator Selection">
+                <choice Name="Select by serial number" value="0">
+                    <property Type="stringfield" Value="" id="-- Enter the serial number"/>
+                </choice>
+            </property>
+            <platform XML_version="1.2" id="platform_0">
+                <instance XML_version="1.2" desc="TMS320F28035_0" href="Devices\f28035.xml" id="TMS320F28035_0" xml="f28035.xml" xmlpath="Devices"/>
+            <device HW_revision="1" XML_version="1.2" description="" id="TMS320F28035_0" partnum="TMS320F28035" simulation="no">
+                    <cpu HW_revision="1.0" XML_version="1.2" description="CLA Accelerator" deviceSim="false" id="CLA_0" isa="TMS192C2006">
+                        <property Type="choicelist" Value="1" id="bypass"/>
+                    </cpu>
+                </device>
+            </platform>
+        </connection>
+    </configuration>
+</configurations>

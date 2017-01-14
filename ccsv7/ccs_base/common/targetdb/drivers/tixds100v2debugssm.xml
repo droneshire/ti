@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<drivers id="DEBUGSSM">
+    <isa Type="DEBUGSSM" ProcID="0x00C00005">
+        <driver file="..\..\..\emulation\drivers\tixds510debugssm.dvr">
+            <connectionType Type="TIXDS100v2"/>
+            <property Name="Port Number" Type="numericfield" Value="0x0" NumericType="HEX" UpperBound="0x1F" LowerBound="0x0" SubPath="true" ID="subpath.address"/>
+            <property id="Use Board Reset" Type="hiddenfield" Value="0" />
+            <property id="Use Board Reset Free Run" Type="hiddenfield" Value="0" />
+            <property Name="Initial Configuration" Type="choicelist" Value="1" SubPath="true" ID="subpath.initial">
+                <choice Name="Yes" value="1"/>
+                <choice Name="No" value="0"/>
+            </property>
+            <property Name="Custom Configuration" Type="choicelist" Value="1" SubPath="true" ID="subpath.custom">
+                <choice Name="Yes" value="1"/>
+                <choice Name="No" value="0"/>
+            </property>
+            <property Name="Force Configuration" Type="choicelist" Value="0" SubPath="true" ID="subpath.force">
+                <choice Name="Yes" value="1"/>
+                <choice Name="No" value="0"/>
+            </property>
+            <property Name="Pseudo Address" Type="choicelist" Value="1" SubPath="true" ID="subpath.pseudo">
+                <choice Name="Yes" value="1"/>
+                <choice Name="No" value="0"/>
+            </property>
+        </driver>
+    </isa>
+</drivers>

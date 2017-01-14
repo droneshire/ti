@@ -1,0 +1,24 @@
+[Name]
+Profile all Functions for Total Cycles 
+
+[Events]
+dataclass.pcdt.events.cycle.Total
+
+[EventClasses]
+pcdt
+
+[Attributes]
+SimulationOnly=true
+dataclass.pcdt.Enable Interrupt Awareness=0
+dataclass.pcdt.Record Buffer Size=10240
+dataclass.pcdt.Profile TI Libraries=1
+dataclass.pcdt.Maximum Memory Buffer=10
+dataclass.pcdt.Use Full PC Trace=1
+dataclass.pcdt.Enable Thread Awareness=0
+
+[Description]
+Collect profile information for all functions in the currently loaded executable.  By default, the total number of cycles will be calculated for each function.  Additional target events and profiling options can be configured via this Activity's properties.  By default, Full PC Trace will be used.
+
+[MetaData]
+collectionType=pc_discontinuity
+analysisType=Function Profile

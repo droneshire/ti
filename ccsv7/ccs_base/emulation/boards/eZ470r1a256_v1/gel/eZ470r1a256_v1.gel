@@ -1,0 +1,357 @@
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  eZ470r1a256_v1.gel                                                      *
+ *  Version 3.10                                                            *
+ *                                                                          *
+ *  This GEL file is designed to be used in conjunction with                *
+ *  CCS 3.1.                                                                *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+ 
+/* ------------------------------------------------------------------------ *
+ *  StartUp( )                                                              *
+ * ------------------------------------------------------------------------ */
+StartUp( )
+{
+	setup_memory_map();
+}
+
+/* ------------------------------------------------------------------------ *
+ *  OnTargetConnect( )                                                      *
+ * ------------------------------------------------------------------------ */
+OnTargetConnect( )
+{
+	GEL_Reset();
+	GEL_TextOut("\n**************************************","1"); 
+	GEL_TextOut("\n**CONFIGURE TARGET FROM THE GEL MENU**","1");
+	GEL_TextOut("\n**************************************\n\n","1"); 
+}
+
+/* ------------------------------------------------------------------------ *
+ *  OnPreFileLoaded()                                                       *
+ * ------------------------------------------------------------------------ */
+OnPreFileLoaded()
+{
+	GEL_Reset();
+}
+
+menuitem "CONFIGURE_TARGET"
+/* ------------------------------------------------------------------------ *
+ *  RAM_CONFIG() - Configure SRAM                                           *
+ * ------------------------------------------------------------------------ */
+hotmenu RAM_CONFIG()
+{
+	GEL_Reset();
+	Feed_WD();					    // Feed WatchDog
+	Setup_RAM();				    // Setup RAM Low
+	Setup_PLL(0);				    // Setup PLL to 24Mhz.
+	Setup_Peripheral_Clock();		// Setup Peripheral clock to 12Mhz.
+	GEL_TextOut("\nTARGET IS CONFIGURED WITH RAM LOW\n\n","1");
+}
+
+/* ------------------------------------------------------------------------ *
+ *  FLASH_CONFIG() - Configure FLASH                                        *
+ * ------------------------------------------------------------------------ */
+hotmenu FLASH_CONFIG()
+{
+	GEL_Reset();
+	Feed_WD();					    // Feed WatchDog
+	Setup_FLASH();				    // Setup FLASH Low
+	Setup_PLL(1);				    // Setup PLL to 24Mhz.
+	Setup_Peripheral_Clock();		// Setup Peripheral clock to 12 Mhz.
+	GEL_TextOut("\nTARGET IS CONFIGURED WITH FLASH LOW\n\n","1");
+}
+
+menuitem "MemoryMap";
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  setup_memory_map()                                                  *
+ *                                                                          *
+ *      Setup Memory Map                                                    *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+hotmenu setup_memory_map()
+{
+	GEL_MapOn( );
+	GEL_MapReset( );
+	
+	// By Default,the memory is mapped with Flash low.
+	GEL_MapAddStr( 0x00000000, 0, 0x00040000, "R|AS4", 0 );   // FLASH 
+	GEL_MapAddStr( 0x00300000, 0, 0x00004000, "R|W|AS4", 0 ); // SRAM
+	
+	GEL_MapAddStr( 0x00800000, 0, 0x00000800, "R|W|AS4", 0 );   // HET RAM 
+
+	/* Peripheral memory map */
+	GEL_MapAddStr( 0xFFE84000, 0, 0x00000023, "R|W|AS4", 0 );   // MPU CONTROL REGISTERS
+	GEL_MapAddStr( 0xFFE88000, 0, 0x00003FFF, "R|W|AS4", 0 );   // FLASH CONFIGURATION REGISTERS
+	GEL_MapAddStr( 0xFFF7C800, 0, 0x00000400, "R|W|AS4", 0 );   // C2Slb
+	GEL_MapAddStr( 0xFFF7D400, 0, 0x00000400, "R|W|AS4", 0 );   // SPI2
+	GEL_MapAddStr( 0xFFF7DC00, 0, 0x00000400, "R|W|AS4", 0 );   // SCC RAM
+	GEL_MapAddStr( 0xFFF7E000, 0, 0x00000400, "R|W|AS4", 0 );   // SCC
+	GEL_MapAddStr( 0xFFF7EC00, 0, 0x00000400, "R|W|AS4", 0 );   // GIO/ECP
+	GEL_MapAddStr( 0xFFF7F000, 0, 0x00000400, "R|W|AS4", 0 );   // MibADC
+	GEL_MapAddStr( 0xFFF7F400, 0, 0x00000100, "R|W|AS4", 0 );   // SCI1
+	GEL_MapAddStr( 0xFFF7F500, 0, 0x00000300, "R|W|AS4", 0 );   // SCI2
+	GEL_MapAddStr( 0xFFF7F800, 0, 0x00000400, "R|W|AS4", 0 );   // SPI1
+	GEL_MapAddStr( 0xFFF7FC00, 0, 0x00000400, "R|W|AS4", 0 );   // HET
+
+	GEL_MapAddStr( 0xFFFFFD00, 0, 0x00000300, "R|W|AS4", 0 );   // SYSTEM CONTROL REGISTERS
+}
+/* ------------------------------------------------------------------------ *
+ *  Clear_Memory_Map() - Clear Memory Map                                   *
+ * ------------------------------------------------------------------------ */
+hotmenu Clear_Memory_Map()
+{
+	GEL_MapOff();
+}
+
+/* ------------------------------------------------------------------------   *
+ *                                                                            *
+ * Setup_RAM()                                                                *
+ * By default Flash is mapped to lower memory.Before mapping RAM to lower     *
+ * memory remap the Flash to higher memory and then map the RAM to low memory.* 
+ * This prevents two memory maps from being overwritten.                      *
+ *                                                                            *
+ * ---------------------------------------------------------------------------*/
+Setup_RAM()
+{
+	#define SYSECR             *(unsigned int *)0xFFFFFFE0 
+	#define MFBAHR0            *(unsigned int *)0xFFFFFE00 
+	#define MFBALR0            *(unsigned int *)0xFFFFFE04 
+	#define MFBAHR2            *(unsigned int *)0xFFFFFE10 
+	#define MFBALR2            *(unsigned int *)0xFFFFFE14 
+	#define SMCR1              *(unsigned int *)0xFFFFFD04 
+	#define MFBAHR4            *(unsigned int *)0xFFFFFE20 
+	#define MFBALR4            *(unsigned int *)0xFFFFFE24 
+	#define WCR0               *(unsigned int *)0xFFFFFD2C 
+
+	// Delete the memory maps before mapping RAM low.
+	GEL_MapDelete(0x00000000, 0); 
+	GEL_MapDelete(0x00300000, 0);
+
+	/* The memory is mapped in SRAM config mode*/
+	GEL_MapAddStr( 0x00000000, 0, 0x00004000, "R|W|AS4", 0 );   // SRAM
+	GEL_MapAddStr( 0x00300000, 0, 0x00040000, "R|AS4", 0 );     // FLASH  
+
+	// Disable reset at illegal address and access violation to
+	// avoid resetting the CPU when debugging.
+	// SYSECR = RESET0 + PACCOVR + ACCOVR + ILLOVR;
+	SYSECR = 0x00004007; 
+
+	// Map 256k flash connected to memory select 0 at 0x00300000, size 2048k
+	// and activate new mapping by writing 1 to MFBALR0.8.
+	// MFBAHR0 = 0x00000030;
+  	// MFBALR0 |= BLOCK_SIZE_256K + RONLY;
+	MFBAHR0  = 0x00000030;
+	MFBALR0  = 0x00000092;
+
+	// Activate RAM at 0x00000000 that is connected to memory select 2,
+	// set size to 16KB
+	// MFBAHR2 = 0x00000000;
+	// MFBALR2 = BLOCK_SIZE_16K;
+	MFBAHR2 = 0x00000000;
+	MFBALR2 = 0x00000050;
+
+	// HET RAM static memory control register, use 7 wait states and
+	// 32-bit access
+	// SMCR1 = WS_7 + DW_32;
+	SMCR1   = 0x00000072; 
+
+	// Map 1k HET RAM connected to memory select 4 at 0x00800000, size 2k
+ 	//MFBAHR4 = 0x00000080;
+  	//MFBALR4 = BLOCK_SIZE_2K;
+	MFBAHR4 = 0x00000080;
+	MFBALR4 = 0x00000020;
+
+	// Trailing wait states controlled by TWS bits, use write buffer for
+	// expansion bus access
+	// WCR0 = WTWSOVR + WBENABLE;
+	WCR0 = 0x00000003;
+
+	// Enable selected memory map
+	// MFBALR0 |= MS;
+	MFBALR0 |= 0x00000100;
+
+}
+/* ----------------------------------------------------------------------------   *
+ * Setup_FLASH()                                                                  *
+ * Before mapping the FLASH to low memory remap the RAM to higher memory and then * 
+ * map the FLASH.This prevents two memory maps from being overwritten.            *
+ *--------------------------------------------------------------------------------*/
+Setup_FLASH()
+{
+	#define SYSECR             *(unsigned int *)0xFFFFFFE0 
+	#define MFBAHR0            *(unsigned int *)0xFFFFFE00 
+	#define MFBALR0            *(unsigned int *)0xFFFFFE04 
+	#define MFBAHR2            *(unsigned int *)0xFFFFFE10 
+	#define MFBALR2            *(unsigned int *)0xFFFFFE14 
+	#define SMCR1              *(unsigned int *)0xFFFFFD04 
+	#define MFBAHR4            *(unsigned int *)0xFFFFFE20 
+	#define MFBALR4            *(unsigned int *)0xFFFFFE24 
+	#define WCR0               *(unsigned int *)0xFFFFFD2C 
+
+	// Delete previously mapped memory before mapping them again
+	GEL_MapDelete(0x00000000, 0); 
+	GEL_MapDelete(0x00300000, 0);
+
+	// Map Flash Low.
+	GEL_MapAddStr( 0x00000000, 0, 0x00040000, "R|AS4", 0 );   // FLASH 
+	GEL_MapAddStr( 0x00300000, 0, 0x00004000, "R|W|AS4", 0 ); // SRAM
+	
+	// Disable reset at illegal address and access violation to
+	// avoid resetting the CPU when debugging.
+	// SYSECR  = 0x00004007;
+	SYSECR = 0x00004007; 
+
+	// Activate RAM at 0x00300000 that is connected to memory select 2,
+	// set size to 16KB
+	// MFBAHR2 = 0x00000030;
+	// MFBALR2 = BLOCK_SIZE_16K;
+	MFBAHR2 = 0x00000030;
+	MFBALR2 = 0x00000050;
+
+	// Activate Flash at 0x00000000 that is connected to memory select 0,
+	// set size to 256KB, enable read-only protection
+	// MFBAHR0 = 0x00000000;
+	// MFBALR0 |= BLOCK_SIZE_256K + RONLY;
+	MFBAHR0 = 0x00000000;
+	MFBALR0 = 0x00000092;
+
+	// HET RAM static memory control register, use 7 wait states and
+	// 32-bit access
+	// SMCR1 = WS_7 + DW_32;
+	SMCR1 = 0x00000072; 
+
+	// Map 1k HET RAM connected to memory select 4 at 0x00800000, size 2k
+ 	//MFBAHR4 = 0x00000080;
+  	//MFBALR4 = BLOCK_SIZE_2K;
+	MFBAHR4 = 0x00000080;
+	MFBALR4 = 0x00000020;
+
+	// Trailing wait states controlled by TWS bits, use write buffer for
+	// expansion bus access
+	// WCR0 = WTWSOVR + WBENABLE;
+	WCR0 = 0x00000003;
+
+	// Enable selected memory map
+	// MFBALR0 |= MS;
+	MFBALR0 |= 0x00000100;
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ * Setup_PLL()                                                              *
+ *                                                                          *
+ * Make sure SW1-4 is in Off position inorder for the PLL to be in          *
+ * Nonbypass Mode                                                           *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+Setup_PLL(int FlashConfig)
+{
+	#define   GCR                    *(unsigned int *)0xFFFFFFDC 
+	#define   ZPLL_CLK_DIV_PRE_1     ((unsigned int) 0x0 <<  0) // 2:0    ZPLL clock divider precale
+	#define   ZPLL_CLK_DIV_PRE_2     ((unsigned int) 0x1 <<  0) // 2:0    ZPLL clock divider precale
+	#define   ZPLL_CLK_DIV_PRE_3     ((unsigned int) 0x2 <<  0) // 2:0    ZPLL clock divider precale
+	#define   ZPLL_CLK_DIV_PRE_4     ((unsigned int) 0x3 <<  0) // 2:0    ZPLL clock divider precale
+	#define   ZPLL_CLK_DIV_PRE_5     ((unsigned int) 0x4 <<  0) // 2:0    ZPLL clock divider precale
+	#define   ZPLL_CLK_DIV_PRE_6     ((unsigned int) 0x5 <<  0) // 2:0    ZPLL clock divider precale
+	#define   ZPLL_CLK_DIV_PRE_7     ((unsigned int) 0x6 <<  0) // 2:0    ZPLL clock divider precale
+	#define   ZPLL_CLK_DIV_PRE_8     ((unsigned int) 0x7 <<  0) // 2:0    ZPLL clock divider precale
+	#define   ZPLL_MULT4             ((unsigned int) 0x1 <<  3) // 3      Multiply-by-4 or 8
+	#define   FLCONFIG               ((unsigned int) 0x1 <<  4) // 4      Flash configuration enable
+
+	// set PLL factor X4, divide by 1
+	// SYSCLK = OSCIN * 4/4 =24Mhz 
+	if(FlashConfig)
+		// Enable FLCONFIG to access Flash Config Registers.
+		GCR = FLCONFIG + ZPLL_MULT4 + ZPLL_CLK_DIV_PRE_4;
+	else
+		GCR = ZPLL_MULT4 + ZPLL_CLK_DIV_PRE_4;
+}
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ * Setup_Peripheral_Clock()                                                 *
+ *                                                                          *
+ * Make sure SW1-4 is in Off position inorder for the PLL to be in          *
+ * Nonbypass Mode. Else the peripheral clock will be really slow at 6Mhz.   *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+Setup_Peripheral_Clock()
+{
+	#define  PCR                     *(unsigned int *)0xFFFFFD30 
+	#define  PENABLE                 ((unsigned int) 0x1 <<  0)    // 0      Peripheral enable
+	#define  CLKDIV_1                ((unsigned int) 0x0 <<  1)    // Peripheral clock divide ratio ICLK=SYSCLK
+	#define  CLKDIV_2                ((unsigned int) 0x1 <<  1)    // Peripheral clock divide ratio ICLK=SYSCLK/2
+	#define  CLKDIV_3                ((unsigned int) 0x2 <<  1)    // Peripheral clock divide ratio ICLK=SYSCLK/3
+	#define  CLKDIV_4                ((unsigned int) 0x3 <<  1)    // Peripheral clock divide ratio ICLK=SYSCLK/4
+	#define  CLKDIV_5                ((unsigned int) 0x4 <<  1)    // Peripheral clock divide ratio ICLK=SYSCLK/5
+	#define  CLKDIV_6                ((unsigned int) 0x5 <<  1)    // Peripheral clock divide ratio ICLK=SYSCLK/6
+	#define  CLKDIV_7                ((unsigned int) 0x6 <<  1)    // Peripheral clock divide ratio ICLK=SYSCLK/7
+	#define  CLKDIV_8                ((unsigned int) 0x7 <<  1)    // Peripheral clock divide ratio ICLK=SYSCLK/8
+	#define  CLKDIV_9                ((unsigned int) 0x8 <<  1)    // Peripheral clock divide ratio ICLK=SYSCLK/9
+	#define  CLKDIV_10               ((unsigned int) 0x9 <<  1)    // Peripheral clock divide ratio ICLK=SYSCLK/10
+	#define  CLKDIV_11               ((unsigned int) 0x0A <<  1)    // Peripheral clock divide ratio ICLK=SYSCLK/11
+	#define  CLKDIV_12               ((unsigned int) 0x0B <<  1)    // Peripheral clock divide ratio ICLK=SYSCLK/12
+	#define  CLKDIV_13               ((unsigned int) 0x0C <<  1)    // Peripheral clock divide ratio ICLK=SYSCLK/13
+	#define  CLKDIV_14               ((unsigned int) 0x0D <<  1)    // Peripheral clock divide ratio ICLK=SYSCLK/14
+	#define  CLKDIV_15               ((unsigned int) 0x0E <<  1)    // Peripheral clock divide ratio ICLK=SYSCLK/15
+	#define  CLKDIV_16               ((unsigned int) 0x0F <<  1)    // Peripheral clock divide ratio ICLK=SYSCLK/16	
+
+	// Setup Peripheral clock ICLK = SYSCLK/2 = 12Mhz.
+	PCR = CLKDIV_2;    	      // PCR - set CLKDIV_2
+	PCR = CLKDIV_2 + PENABLE; 	// PCR - keep CLKDIV and enable
+}
+
+menuitem "Watchdog";
+/*******************************************************************
+*                                                                  *
+* Feed_WD()                                                        *
+*                                                                  *
+* This function is used to feed the watchdog timer to prevent      *
+* a reset                                                          *
+*                                                                  *
+*******************************************************************/
+hotmenu Feed_WD()
+{
+	#define  WKEY	*(unsigned int *)0xFFFFFF0C 
+	WKEY = 0x0E5;     /* WKEY is enabled for reset by the next 0x0A3.*/
+    WKEY = 0x0A3;     /* WatchDog is Reset*/
+    GEL_TextOut("\nWATCHDOG IS RESET","1");
+}
+
+menuitem "TMS470R1A256 FUNCTIONS";
+
+#define   CLKDIR             ((unsigned int) 0x1 <<  4)    // 4      CLKOUT pin direction
+#define   CLKSR_IO           ((unsigned int) 0x0 <<  5)    // 6:5    CLKOUT source bits
+#define   CLKSR_ICLK         ((unsigned int) 0x1 <<  5)    // 6:5    CLKOUT source bits
+#define   CLKSR_MCLK         ((unsigned int) 0x2 <<  5)    // 6:5    CLKOUT source bits
+#define   CLKSR_SYSCLK       ((unsigned int) 0x3 <<  5)    // 6:5    CLKOUT source bits
+
+hotmenu CLKOUT_ICLK()
+{
+	// Configure CLKOUT as output driven by ICLK
+    // Just for testing purposes.
+    *(unsigned int *)0xFFFFFFD0 = CLKDIR + CLKSR_ICLK;
+	GEL_TextOut("\nCLKOUT IS DRIVEN BY ICLK","1");
+}
+
+hotmenu CLKOUT_MCLK()
+{
+    // Configure CLKOUT as output driven by MCLK
+    // Just for testing purposes.
+    *(unsigned int *)0xFFFFFFD0 = CLKDIR + CLKSR_MCLK;
+	GEL_TextOut("\nCLKOUT IS DRIVEN BY MCLK","1");
+}
+
+hotmenu CLKOUT_SYSCLK()
+{
+    // Configure CLKOUT as output driven by SYSCLK
+    // Just for testing purposes.
+    *(unsigned int *)0xFFFFFFD0 = CLKDIR + CLKSR_SYSCLK;
+	GEL_TextOut("\nCLKOUT IS DRIVEN BY SYSCLK","1");
+}
+
+	 
+
+	
+		

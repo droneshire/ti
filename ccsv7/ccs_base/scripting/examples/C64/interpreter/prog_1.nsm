@@ -1,0 +1,26 @@
+;Following instructions are supported
+
+;Instructions     Eg. Syntax     	Meaning
+
+;MOV			 MOV A B			A = B
+;MOVI			 MOVI A 100			A = 100
+;ADD			 ADD A B			A = A + B
+;ADDI			 ADDI A 100			A = A + 100
+;SUB			 SUB A B			A = A - B
+;SUBI			 SUB A 100			A = A - 100
+;MULT			 MULT A B			A = A * B
+;MULTI			 MULTI A 100		A = A * 100
+;DIV			 DIV A B			A = A / B
+;DIVI			 DIV A 100			A = A / 100
+;READ			 READ A				Read A from stdin
+;WRITE			 WRITE A			Write A to stdout
+
+;Resources available are A, B, C,....,Y, Z
+
+MOVI A 100; 	A = 100
+MOVI B 200; 	B = 200
+ADD A B; 		A = 300
+MULT A B; 		A = 60000
+SUB A B; 		A = 59800
+WRITE A; 
+WRITE B;

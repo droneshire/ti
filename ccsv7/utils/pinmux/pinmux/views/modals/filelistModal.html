@@ -1,0 +1,16 @@
+<script type="text/ng-template" id="filelistModal.html">
+	<div class="modal-header" style="padding:16px 16px 0 16px;">
+		<h3 class="modal-title">Choose a File to Open</h3>
+	</div>
+	<div class="modal-body" style="padding:16px 16px 0 16px;">
+		<ul ng-show="(cloudFiles.length > 0) && (cloudFiles[0] != '')">
+			<li ng-repeat="file in cloudFiles | orderBy:'mtime':true"><a href="" ng-click="openFile(file.name)">{{file.name}}</a></li>
+		</ul>
+		<div ng-show="(cloudFiles.length == 0) || (cloudFiles[0] == '')">
+			No files stored on Cloud Storage.
+		</div>
+	</div>
+	<div class="modal-footer" style="padding:8px;">
+		<button class="btn btn-primary" ng-click="cancel()">Cancel</button>
+	</div>
+</script>

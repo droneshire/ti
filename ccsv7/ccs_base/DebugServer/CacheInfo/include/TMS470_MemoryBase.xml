@@ -1,0 +1,48 @@
+﻿<AddressSpaceName>Unified</AddressSpaceName>
+<!--Note: all lists are 0-based-->
+<MemoryType id="0">
+	<Name>ARM</Name>
+	<MemoryLevelName>ARM</MemoryLevelName>
+	<GTIMemHierarchyReadEnableFlags>0x0</GTIMemHierarchyReadEnableFlags>
+	<MemLevelBitFlag>0x0</MemLevelBitFlag>
+	<Description>ARM memory</Description>
+	<CanBeBypassed>false</CanBeBypassed>
+	<IsBypassedByDefault>false</IsBypassedByDefault>
+	<SimulatorSupportsConsistencyChecking>false</SimulatorSupportsConsistencyChecking>
+	<CanBeLocked>false</CanBeLocked>
+	<CanBeSecured>false</CanBeSecured>
+	<CanBeNonEmulatable>false</CanBeNonEmulatable>
+	<CanBeProtected>false</CanBeProtected>
+	<IsCache>false</IsCache>
+	<IsMapped>true</IsMapped>
+	<IsProgram>true</IsProgram>
+	<IsData>true</IsData>
+	<IsIOSpace>false</IsIOSpace>
+	<IsExternal>true</IsExternal>
+	<IsShared>false</IsShared>
+	<IsROM>false</IsROM>
+	<IsPaged>false</IsPaged>
+	<IsVirtualMemorySupported>&isVirtualMemorySupported;</IsVirtualMemorySupported>
+	<IsVirtualWayConversionEnabled>false</IsVirtualWayConversionEnabled>
+	<Linesize>32</Linesize>
+	<HierarchyDepth>0</HierarchyDepth>
+	<!-- the following are only read if IsCache is false -->
+	<MappedMemory>
+		<PhysicalAddresses>
+			<CanBeDisabled>false</CanBeDisabled>
+			<StartAddress>
+				<IsFixed>true</IsFixed>
+				<FixedValue>0x0</FixedValue>
+				<ConfigReg></ConfigReg>
+				<DecoderName></DecoderName>
+			</StartAddress>
+			<Length>
+				<IsFixed>true</IsFixed>
+				<FixedValue>0x100000000</FixedValue>
+				<ConfigReg></ConfigReg>
+				<DecoderName></DecoderName>
+			</Length>
+		</PhysicalAddresses>
+	</MappedMemory>
+</MemoryType>
+

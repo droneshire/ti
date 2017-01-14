@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module id="Hidden" HW_revision="1" XML_version="1" description="" hidden="true">
+	<register id="SECAP_TDR" offset="0x0000" width="32" page="121" acronym="SECAP_TDR"/>
+	<register id="SECAP_TCR" offset="0x0004" width="32" page="121" acronym="SECAP_TCR"/>
+	<register id="SECAP_RDR" offset="0x0008" width="32" page="121" acronym="SECAP_RDR"/>
+	<register id="SECAP_RCR" offset="0x000C" width="32" page="121" acronym="SECAP_RCR"/>
+</module>

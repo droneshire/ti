@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--                                                  -->
+<!-- Blackhawk XDS510 Emulator XML Definitions.       -->
+<!-- Date: 07 March 2016                              -->
+<!-- Vers: 6.0.83.001                                 -->
+<!--                                                  -->
+
+<drivers id="TMS320C64XP">
+	<isa Type="TMS320C669x" ProcID="0x50019b68">
+		<driver file="..\..\..\emulation\drivers\bhemu6400_plus.dvr">
+	        <connectionType Type="BHEMU"/>
+			<property Name="TraceDeviceId" Type="numericfield" Value="0x0" NumericType="HEX" UpperBound="0xFFFFFFFF" LowerBound="0" ID="device.traceId"/>
+			<property Type="hiddenfield" Value="true" id="realtimeEnabled" />
+		</driver>
+	</isa>
+</drivers>

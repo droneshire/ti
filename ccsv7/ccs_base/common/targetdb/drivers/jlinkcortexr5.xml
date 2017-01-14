@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<drivers id="Cortex_R5">
+	<isa Type="Cortex_R5" ProcID="0x75803400">
+		<driver file="..\..\..\DebugServer\drivers\jlink2gtiadapter.dvr">
+			<property Type="hiddenfield" Value="CortexR5" id="Core Type" />
+      <property Type="hiddenfield" Value="true" id="disableInternalFlashManager" />
+      <property Type="hiddenfield" Value="true" id="disableMemoryMapOnDownload" />
+      <property Type="hiddenfield" id="disableArmAdvancedFeatures" />
+			<property Type="hiddenfield" Value="Big Endian" id="Endianness" />
+			<property Type="stringfield" Value="auto" id="JTAG Frequency (Hz)" />
+			<property Name="Target Interface" desc="Target Interface" Type="choicelist" id="Target Interface Type" Value="0">
+				<choice Name="JTAG" value="0"/>
+				<choice Name="SWD" value="1"/>
+			</property>
+			<property Type="filepathfield" Value="..\..\..\common\targetdb\drivers\jlink_scriptfiles\TMS570.JLinkScript" id="J-Link Scriptfile Path" />
+			<connectionType Type="JLink"/>
+		</driver>
+	</isa>
+</drivers>

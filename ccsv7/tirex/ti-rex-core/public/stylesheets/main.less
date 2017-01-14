@@ -1,0 +1,44 @@
+// main stylesheet for the site
+// osohm 5/23/2014
+
+@import "../html5-boilerplate-4.3.0/css/main.css";
+@import "../bootstrap-3.1.1/less/ti_bootstrap.less";	// TODO: compile to css for production
+@import "../font-awesome-4.1.0/less/font-awesome.less"; // TODO: compile to css for production
+
+// osohm: workaround for Google Custom Search bar to correctly display the search button
+input.gsc-search-button-v2 {
+	height: auto !important;
+	width: auto !important;
+}
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+
+.ti-readmore-icon {
+	.text-primary;
+	.fa; 
+	&:before {
+		content: @fa-var-play-circle;
+	} 
+}
+
+#footnote { padding:1em 3%; border-top:1px solid #c0c0c0; }
+
+a#ti_logo {
+    background: url('//www.ti.com/assets/images/iconHeader.png') no-repeat scroll 0px 0px transparent;
+    width: 280px;
+    height: 35px;
+    display: block;
+}
+
+// osohm: for import device variant selection
+@media (min-width:768px) {
+  .modal-dialog {
+    width: 350px;
+    height: 300px;
+    margin:30px auto
+  }
+}

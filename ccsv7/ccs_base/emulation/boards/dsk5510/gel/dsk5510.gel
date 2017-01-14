@@ -1,0 +1,193 @@
+/*--------------------------------------------------------------*/
+/* C5510_DSK.gel                                                */
+/* Version 3.00                                                 */
+/*                                                              */
+/* This GEL file is designed to be used in conjunction with     */
+/* CCS 3.X and the TMS320VC5510 based DSK.                      */
+/*                                                              */
+/*--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------*/
+/* StartUp()                                                    */
+/* This function is called each time CCS is started.            */
+/* Customize this function to perform desired initialization.   */
+/*--------------------------------------------------------------*/
+StartUp()
+{
+    setup_memory_map();
+
+    /*------------------------------------------------------*/
+    /* Uncomment the OnTargetConnect() call for CCS 2.X     */
+    /* support.                                             */
+    /*                                                      */
+    /*                                                      */
+    /*------------------------------------------------------*/
+    //OnTargetConnect();
+}
+
+/*--------------------------------------------------------------*/
+/* OnTargetConnect()                                            */
+/* This function is called by CCS when you do Debug->Connect on */
+/* CCS 3.X.  When using CCS 2.X, the OnTargetConnect() call     */
+/* should be uncommented from the StartUp() function.           */
+/*--------------------------------------------------------------*/
+OnTargetConnect()
+{
+    /*------------------------------------------------------*/
+    /* GEL_Reset() is used to deal with the worst case      */
+    /* senario of unknown target state.  If for some reason */
+    /* a reset is not desired upon target connection,       */
+    /* GEL_Reset() may be removed and replaced with         */
+    /* something "less brutal".                             */
+    /*------------------------------------------------------*/
+    GEL_Reset();
+
+    init_emif();
+
+    GEL_TextOut("Gel StartUp Complete.\n");
+}
+
+/*--------------------------------------------------------------*/
+/* OnPreFileLoaded()                                            */
+/* This function is called automatically when the 'Load Program'*/
+/* Menu item is selected.                                       */
+/*--------------------------------------------------------------*/
+OnPreFileLoaded()
+{
+    /* Reset the CPU to clean up state */
+    GEL_Reset();
+}
+
+/*--------------------------------------------------------------*/
+/* OnRestart()                                                  */
+/* This function is executed before a file is loaded. Disable   */
+/* interrupts and DMA from the current program so pending       */
+/* events and transfers don't interfere with the new program.   */
+/*--------------------------------------------------------------*/
+OnRestart()
+{
+    /* Disable interrupts */
+    *(int*)0x0003 = *(int*)0x0003 | 0x0800; // Set INTM
+    *(int*)0x0000 = 0;      // Clear IER0
+    *(int*)0x0045 = 0;      // Clear IER1
+
+    /* Disable each DMA channel */
+    *(int*)0xC01@io = 0;    // DMA0
+    *(int*)0xC21@io = 0;    // DMA1
+    *(int*)0xC41@io = 0;    // DMA2
+    *(int*)0xC61@io = 0;    // DMA3
+    *(int*)0xC81@io = 0;    // DMA4
+    *(int*)0xCA1@io = 0;    // DMA5
+}
+
+/*--------------------------------------------------------------*/
+/* setup_memory_map()                                           */
+/* Memory map setup                                             */
+/*--------------------------------------------------------------*/
+setup_memory_map()
+{
+    GEL_MapOn();
+    GEL_MapReset();
+
+    /* Init debugger memory map for program space */
+    GEL_MapAdd( 0x0000C0, 0, 0x00FF40, 1, 1 );  // DARAM
+    GEL_MapAdd( 0x010000, 0, 0x040000, 1, 1 );  // SARAM
+    GEL_MapAdd( 0x050000, 0, 0x3B0000, 1, 1 );  // External CE0
+    GEL_MapAdd( 0x400000, 0, 0x400000, 1, 1 );  // External CE1
+    GEL_MapAdd( 0x800000, 0, 0x400000, 1, 1 );  // External CE2
+    GEL_MapAdd( 0xC00000, 0, 0x400000, 1, 1 );  // External CE3
+
+    /* Init debugger memory map for data space */
+    GEL_MapAdd( 0x000000, 1, 0x000060, 1, 1 );  // MMRs
+    GEL_MapAdd( 0x000060, 1, 0x007FA0, 1, 1 );  // DARAM
+    GEL_MapAdd( 0x008000, 1, 0x020000, 1, 1 );  // SARAM
+    GEL_MapAdd( 0x028000, 1, 0x1D8000, 1, 1 );  // External CE0
+    GEL_MapAdd( 0x200000, 1, 0x200000, 1, 1 );  // External CE1
+    GEL_MapAdd( 0x400000, 1, 0x200000, 1, 1 );  // External CE2
+    GEL_MapAdd( 0x600000, 1, 0x200000, 1, 1 );  // External CE3
+
+    /* Init debugger memory map for I/O mapped regs */
+    GEL_MapAdd( 0x0000u, 2, 0x000Fu, 1, 1 );    // Peripheral Bus
+    GEL_MapAdd( 0x07fdu, 2, 0x0001u, 1, 1 );    // SYSR
+    GEL_MapAdd( 0x0800u, 2, 0x0014u, 1, 1 );    // EMIF
+    GEL_MapAdd( 0x0C00u, 2, 0x00ABu, 1, 1 );    // DMA
+    GEL_MapAdd( 0x0E00u, 2, 0x0001u, 1, 1 );    // DMA Global
+    GEL_MapAdd( 0x1000u, 2, 0x0004u, 1, 1 );    // TIMER #0
+    GEL_MapAdd( 0x1400u, 2, 0x0009u, 1, 1 );    // ICACHE
+    GEL_MapAdd( 0x1C00u, 2, 0x0001u, 1, 1 );    // CLKGEN
+    GEL_MapAdd( 0x2000u, 2, 0x0055u, 1, 1 );    // TRACE FIFO
+    GEL_MapAdd( 0x2400u, 2, 0x0004u, 1, 1 );    // TIMER #1
+    GEL_MapAdd( 0x2800u, 2, 0x001Fu, 1, 1 );    // SERIAL PORT #0
+    GEL_MapAdd( 0x2C00u, 2, 0x001Fu, 1, 1 );    // SERIAL PORT #1
+    GEL_MapAdd( 0x3000u, 2, 0x001Fu, 1, 1 );    // SERIAL PORT #2
+    GEL_MapAdd( 0x3400u, 2, 0x0002u, 1, 1 );    // GPIO
+    GEL_MapAdd( 0x3800u, 2, 0x0005u, 1, 1 );    // ID
+}
+
+/*--------------------------------------------------------------*/
+/* clear_memory_map()                                           */
+/* Memory map disable                                           */
+/*--------------------------------------------------------------*/
+clear_memory_map()
+{
+    GEL_MapOff();
+}
+
+/*--------------------------------------------------------------*/
+/* init_emif()                                                  */
+/* Emif initialization                                          */
+/*--------------------------------------------------------------*/
+init_emif()
+{
+    /*  SDRAM in CE0 and Flash + CPLD in CE1 */
+    *(int*)0x800@io = 0x0221;
+    *(int*)0x801@io = 0xFFFF;
+    *(int*)0x803@io = 0x3FFF;
+    *(int*)0x804@io = 0x5FFF;
+    *(int*)0x805@io = 0x5FFF;
+    *(int*)0x806@io = 0x1038;
+    *(int*)0x807@io = 0x0038;
+    *(int*)0x808@io = 0x0038;
+    *(int*)0x809@io = 0x1050;
+    *(int*)0x80A@io = 0x0050;
+    *(int*)0x80B@io = 0x0050;
+    *(int*)0x80C@io = 0x1050;
+    *(int*)0x80D@io = 0x0050;
+    *(int*)0x80E@io = 0x0050;
+    *(int*)0x80F@io = 0x2B11;
+    *(int*)0x810@io = 0x0578;   // Refresh Period 0x00A8 for 24MHz
+                                //                0x0578 for 200MHz
+    *(int*)0x811@io = 0x0fff;
+    *(int*)0x813@io = 0x0535;
+    *(int*)0x812@io = 0x0000;   // SDRAM Init
+}
+
+/*--------------------------------------------------------------*/
+/* DSK5510 MENU                                                 */
+/*--------------------------------------------------------------*/
+menuitem "DSK5510 Functions";
+
+hotmenu Reset()
+{
+    GEL_Reset( );
+}
+
+hotmenu InitEmif()
+{
+    init_emif();
+}
+
+/*--------------------------------------------------------------*/
+/* MEMORY MAP MENU                                              */
+/*--------------------------------------------------------------*/
+menuitem "Memory Map";
+
+hotmenu SetMemoryMap()
+{
+    setup_memory_map();
+}
+
+hotmenu ClearMemoryMap()
+{
+    clear_memory_map();
+}

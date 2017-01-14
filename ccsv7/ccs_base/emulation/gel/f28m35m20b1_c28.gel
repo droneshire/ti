@@ -1,0 +1,347 @@
+/********************************************************************/
+/* f28m35m20b1_c28.gel                                              */
+/* Version 4.00.0                                                   */
+/*                                                                  */
+/* This GEL file is to be used with the F28M35M20B1 Device.         */
+/* Changes may be required to support specific hardware designs.    */
+/*                                                                  */
+/* Code Composer Studio supports six reserved GEL functions that    */
+/* automatically get executed if they are defined. They are:        */
+/*                                                                  */
+/* StartUp()              - Executed whenever CCS is invoked        */
+/* OnReset()              - Executed after Debug->Reset CPU         */
+/* OnRestart()            - Executed after Debug->Restart           */
+/* OnPreFileLoaded()      - Executed before File->Load Program      */
+/* OnFileLoaded()         - Executed after File->Load Program       */
+/* OnTargetConnect()      - Executed after Debug->Connect           */
+/*                                                                  */
+/********************************************************************/
+
+StartUp()
+{
+}
+
+OnReset(int nErrorCode)
+{
+    if (GEL_IsInRealtimeMode())   /* If in real-time-mode */
+    {
+    }
+    else    /* Put device in C28x mode */
+    {
+         C28x_Mode();
+    }
+    Unlock_CSM();
+    Unlock_ECSL();
+    ReadFlashEXE();
+    C28x_Disable_Flash_ECC();
+}
+
+OnRestart(int nErrorCode)
+{
+/* CCS will call OnRestart() when you do a Debug->Restart and   */
+/* after you load a new file.  Between running interrupt based  */
+/* programs, this function will clear interrupts and help keep  */
+/* the processor from going off into invalid memory.            */
+     if (GEL_IsInRealtimeMode())   /* If in real-time-mode */
+    {
+    }
+    else    /* Put device in C28x mode */
+    {
+         C28x_Mode();
+    }
+     IER = 0;
+     IFR = 0;
+}
+
+OnPreFileLoaded()
+{
+     GEL_Reset();
+    // C28x_Ram_Init();             /* WARNING: If C28x_Ram_Init() is uncommented,            */
+                                    /* any other code in RAM will be re-initialized to 0x0000 */
+                                    /* on any file load                                       */
+}
+
+OnFileLoaded(int nErrorCode, int bSymbolsOnly)
+{
+     if (!bSymbolsOnly) {
+     }
+}
+
+OnTargetConnect()
+{
+    if (GEL_IsInRealtimeMode())   /* If in real-time-mode */
+    {
+    }
+    else    /* Put device in C28x mode */
+    {
+         C28x_Mode();
+    }
+    F28M35M20B1_Memory_Map();        /* Initialize the CCS memory map */
+     C28x_Ram_Init();             /* WARNING: If C28x_Ram_Init() is uncommented,  */
+                                     /* code in RAM will be re-initialized to 0x0000 */
+                                     /* on a target disconnect and reconnect.        */ 
+    C28x_Disable_Flash_ECC();
+
+/* Check to see if CCS has been started-up with the DSP already */
+/* running in real-time mode.  The user can add whatever        */
+/* custom initialization stuff they want to each case.          */
+
+    if (GEL_IsInRealtimeMode())     /* Do real-time mode target initialization */
+    {
+
+    }
+    else                            /* Do stop-mode target initialization */
+    {
+        GEL_Reset();                /* Reset DSP */
+    }
+}
+
+/********************************************************************/
+/* These functions are launched by the GEL_Toolbar button plugin    */
+/********************************************************************/
+GEL_Toolbar1()
+{
+    Run_Realtime_with_Reset();
+}
+GEL_Toolbar2()
+{
+    Run_Realtime_with_Restart();
+}
+GEL_Toolbar3()
+{
+    Full_Halt();
+}
+GEL_Toolbar4()
+{
+    Full_Halt_with_Reset();
+}
+
+GEL_Toolbar5()
+{
+    Full_Halt_with_Reset();
+    GEL_Restart();
+}
+
+/********************************************************************/
+/* These functions are useful to engage/disengage realtime          */
+/* emulation mode during debug.  They save the user from having to  */
+/* manually perform these steps in CCS.                             */
+/********************************************************************/
+menuitem "Realtime Emulation Control";
+
+hotmenu Run_Realtime_with_Reset()
+{
+    GEL_Reset();                /* Reset the DSP */
+    ST1 = ST1 & 0xFFFD;         /* clear DBGM bit in ST1 */
+    GEL_EnableRealtime();       /* Enable Realtime mode */
+    GEL_Run();                  /* Run the DSP */
+}
+hotmenu Run_Realtime_with_Restart()
+{
+    GEL_Restart();              /* Reset the DSP */
+    ST1 = ST1 & 0xFFFD;         /* clear DBGM bit in ST1 */
+    GEL_EnableRealtime();       /* Enable Realtime mode */
+    GEL_Run();                  /* Run the DSP */
+}
+hotmenu Full_Halt()
+{
+    GEL_DisableRealtime();      /* Disable Realtime mode */
+    GEL_Halt();                 /* Halt the DSP */
+}
+hotmenu Full_Halt_with_Reset()
+{
+    GEL_DisableRealtime();      /* Disable Realtime mode */
+    GEL_Halt();                 /* Halt the DSP */
+    GEL_Reset();                /* Reset the DSP */
+}
+
+/*********************************************************************/
+/*                         F28M35M20B1 Memory Map                    */
+/*                                                                   */
+/*   Note: M0M1MAP and VMAP signals tied high on F28M35M20B1 core    */
+/*                                                                   */
+/*   0x000000 - 0x0003ff   M0 SARAM                 (Prog and Data)  */
+/*   0x000400 - 0x0007ff   M1 SARAM                 (Prog and Data)  */
+/*   0x000800 - 0x001fff   Peripheral Frame0  (PF0) (Data only)      */
+/*   0x004000 - 0x004fff   Peripheral Frame1  (PF1) (Data only)      */
+/*   0x005000 - 0x006fff   Peripheral Frame3  (PF3) (Data only)      */
+/*   0x007000 - 0x007fff   Peripheral Frame2  (PF2) (Data only)      */
+/*   0x008000 - 0x008fff   L0 SARAM                 (Prog and Data)  */
+/*   0x009000 - 0x009fff   L1 SARAM                 (Prog and Data)  */
+/*   0x00a000 - 0x00afff   L2 SARAM                 (Prog and Data)  */
+/*   0x00b000 - 0x00bfff   L3 SARAM                 (Prog and Data)  */
+/*   0x03f800 - 0x03fbff   CtoM MSGRAM              (Data only)      */
+/*   0x03fc00 - 0x03ffff   MtoC MSGRAM              (Data only)      */
+/*     0x048000 - 0x048fff   L0 RAM - ECC Bits        (Data only)         */
+/*   0x049000 - 0x049fff   L1 RAM - ECC Bits        (Data only)         */
+/*   0x04a000 - 0x04afff   L2 RAM - PARITY Bits     (Data only)      */
+/*   0x04b000 - 0x04bfff   L3 RAM - PARITY Bits     (Data only)      */
+/*     0x07f000 - 0x07f3ff   M0 RAM - ECC Bits        (Data only)         */
+/*   0x07f400 - 0x07f7ff   M1 RAM - ECC Bits        (Data only)         */
+/*   0x07f800 - 0x07fbff   C28toM3 MSGRAM - PARITY Bits (Data only)  */
+/*   0x07fc00 - 0x07ffff   M3toC28 MSGRAM - PARITY Bits (Data only)  */
+/*   0x120000 - 0x13ffff   FLASH BANK 2             (Prog and Data)  */
+/*     0x204000 - 0x207fff   FLASH BANK 2 ECC Bits    (Data only)         */
+/*     0x240000 - 0x2403ff   OTP BANK 2                (Data only)         */
+/*   0x280000 - 0x28007f   OTP BANK 2 ECC Bits        (Data only)         */
+/*   0x3e0000 - 0x3effff   BIST ROM                 (Prog and Data)  */
+/*   0x3f8000 - 0x3fffff   BOOT ROM                 (Prog and Data)  */
+/*********************************************************************/
+menuitem "Initialize Breve 28x Memory Map";
+
+hotmenu F28M35M20B1_Memory_Map()
+{
+    GEL_MapReset();
+    GEL_MapOn();
+
+    /* Program memory maps */
+    GEL_MapAdd(0x0,0,0x400,1,1);                /* M0 SARAM */
+    GEL_MapAdd(0x400,0,0x400,1,1);              /* M1 SARAM */
+    GEL_MapAdd(0xd00,0,0x100,1,1);                /* PIEVECT(DSPBIOS) */
+    GEL_MapAdd(0x8000,0,0x1000,1,1);            /* L0 SARAM */
+    GEL_MapAdd(0x9000,0,0x1000,1,1);            /* L1 SARAM */
+    GEL_MapAdd(0xa000,0,0x1000,1,1);            /* L2 SARAM */
+    GEL_MapAdd(0xb000,0,0x1000,1,1);            /* L3 SARAM */
+    GEL_MapAdd(0x120000,0,0x20000,1,0);         /* FLASH BANK 2 */
+    GEL_MapAdd(0x3f8000,0,0x8000,1,0);          /* BOOT ROM */ 
+
+    /* Data memory maps */
+    GEL_MapAdd(0x0,1,0x400,1,1);                /* M0 SARAM */
+    GEL_MapAdd(0x400,1,0x400,1,1);              /* M1 SARAM */
+    GEL_MapAdd(0x800,1,0x1800,1,1);             /* PF0 */
+    GEL_MapAdd(0x4000,1,0x1000,1,1);            /* PF1 */
+    GEL_MapAdd(0x5000,1,0x2000,1,1);            /* PF3 */
+    GEL_MapAddStr(0x7000,1,0x1000,"R|W|AS2",0); /* PF2 */
+    GEL_MapAdd(0x8000,1,0x1000,1,1);            /* L0 SARAM */
+    GEL_MapAdd(0x9000,1,0x1000,1,1);            /* L1 SARAM */
+    GEL_MapAdd(0xa000,1,0x1000,1,1);            /* L2 SARAM */
+    GEL_MapAdd(0xb000,1,0x1000,1,1);            /* L3 SARAM */
+    GEL_MapAdd(0x3f800,1,0x400,1,1);            /* CtoM MSGRAM */
+    GEL_MapAdd(0x3fc00,1,0x400,1,1);            /* MtoC MSGRAM */
+    GEL_MapAdd(0x48000,1,0x1000,1,0);            /* L0 RAM - ECC Bits */
+    GEL_MapAdd(0x49000,1,0x1000,1,0);            /* L1 RAM - ECC Bits */
+    GEL_MapAdd(0x4a000,1,0x1000,1,0);              /* L2 RAM - PARITY Bits */
+    GEL_MapAdd(0x4b000,1,0x1000,1,0);           /* L3 RAM - PARITY Bits */
+    GEL_MapAdd(0x7f000,1,0x400,1,0);            /* M0 RAM - ECC Bits */
+    GEL_MapAdd(0x7f400,1,0x400,1,0);            /* M1 RAM - ECC Bits */
+    GEL_MapAdd(0x7f800,1,0x400,1,0);            /* CtoM MSGRAM - PARITY Bits */
+    GEL_MapAdd(0x7fc00,1,0x400,1,0);            /* MtoC MSGRAM - PARITY Bits */
+    GEL_MapAdd(0x120000,1,0x20000,1,0);         /* FLASH BANK 2 */
+    GEL_MapAddStr(0x204000,1,0x4000,"R|AS2",0);  /* FLASH BANK 2 ECC Bits */
+    GEL_MapAdd(0x240000,1,0x400,1,0);            /* OTP BANK 2 */
+    GEL_MapAddStr(0x280000,1,0x80,"R|AS2",0);   /* OTP BANK 2 ECC Bits */
+    GEL_MapAdd(0x3f8000,1,0x8000,1,0);          /* BOOT ROM */
+    
+    GEL_TextOut("\nMemory Map Initialization Complete\n"); 
+}
+
+/********************************************************************/
+/* The ESTOP0 fill functions are useful for debug.  They fill the   */
+/* RAM with software breakpoints that will trap runaway code.       */
+/********************************************************************/
+hotmenu Fill_Breve_28x_RAM_with_ESTOP0()
+{
+    GEL_MemoryFill(0x000000,1,0x000800,0x7625);      /* Fill M0/M1  */
+    GEL_MemoryFill(0x008000,1,0x001000,0x7625);      /* Fill L0     */
+    GEL_MemoryFill(0x009000,1,0x001000,0x7625);      /* Fill L1     */
+    GEL_MemoryFill(0x00a000,1,0x001000,0x7625);      /* Fill L2     */
+    GEL_MemoryFill(0x00b000,1,0x001000,0x7625);      /* Fill L3     */
+}
+
+hotmenu C28x_Ram_Init()
+{
+    *(unsigned long *)0x4920 |= 0x00000015; /* Initialize M0, M1, CtoM MSG RAM's   */
+    *(unsigned long *)0x4922 |= 0x00000055; /* Initialize L0, L1, L2, L3 RAM's */
+    while(*(unsigned long *)0x4930 != 0x15);
+    while(*(unsigned long *)0x4932 != 0x55);
+    GEL_TextOut("\nRAM Initialization Complete\n");
+}
+
+hotmenu C28x_Disable_Flash_ECC()
+{
+    *0x4300 = 0x0; /* Disable Flash ECC */
+}
+
+hotmenu C28x_Enable_Flash_ECC()
+{
+    *0x4300 |= 0xA; /* Enable Flash ECC */
+}
+
+/********************************************************************/
+/*              TI OTP and USER OTP Memory Dump                     */
+/********************************************************************/
+menuitem "OTP Dump";
+hotmenu OTP_Dump()
+{               
+                GEL_MemorySave(0x240000,1, 0x400, "USER_OTP_Bank.dat");
+                
+                GEL_TextOut("\n********************************************************************** 
+                             \nUSER OTP Memory Dump Complete!  
+                             \nFile Output Directory: <CCS Install Directory>\\ccs<version>\\eclipse 
+                             \n                       (e.g. C:\\ti\\ccsv6\\eclipse)
+                             \n**********************************************************************\n"); 
+}
+
+/********************************************************************/
+menuitem "Code Security Module"
+hotmenu Unlock_CSM()
+{
+    /* Perform dummy reads of the password locations */
+    XAR0 = *0x13FFF8;
+    XAR0 = *0x13FFFA;
+    XAR0 = *0x13FFFC;
+    XAR0 = *0x13FFFE;
+
+    /* Write passwords to the KEY registers.  0xFFFFFFFF's are dummy passwords.
+       User should replace them with the correct password for their DSP */
+    *(unsigned long*)0xAE0 = 0xFFFFFFFF;
+    *(unsigned long*)0xAE2 = 0xFFFFFFFF;
+    *(unsigned long*)0xAE4 = 0xFFFFFFFF;
+    *(unsigned long*)0xAE6 = 0xFFFFFFFF;
+}
+
+/********************************************************************/
+menuitem "Code Security Module"
+hotmenu Unlock_ECSL()
+{
+    /* Perform dummy reads of the password locations */
+    XAR0 = *0x13FFF4;
+    XAR0 = *0x13FFF6;
+
+    /* Write passwords to the KEY registers.  0xFFFFFFFF's are dummy passwords.
+       User should replace them with the correct password for their DSP */
+    *(unsigned long*)0xAF0 = 0xFFFFFFFF;
+    *(unsigned long*)0xAF2 = 0xFFFFFFFF;
+}
+
+/********************************************************************/
+menuitem "Code Security Module"
+hotmenu ReadFlashEXE()
+{
+    /* Perform dummy read of the flash execute only location */
+    XAR6 = *0x13FFF2;
+}
+
+/********************************************************************/
+menuitem "Addressing Modes";
+
+hotmenu C28x_Mode()
+{
+    ST1 = ST1 & (~0x0100);      /*   AMODE = 0  */
+    ST1 = ST1 | 0x0200;         /* OBJMODE = 1  */
+}
+
+hotmenu C24x_Mode()
+{
+    ST1 = ST1 | 0x0100;         /*   AMODE = 1  */
+    ST1 = ST1 | 0x0200;         /* OBJMODE = 1  */
+}
+
+hotmenu C27x_Mode()
+{
+    ST1 = ST1 & (~0x0100);      /*   AMODE = 0  */
+    ST1 = ST1 & (~0x0200);      /* OBJMODE = 0  */
+}
+
+/********************************************************************/
+/*** End of file ***/

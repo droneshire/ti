@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- 
+  TI File $Revision: 
+  Checkin $Date: 
+  --> 
+
+<!--  28M35x UCRCREGS Registers 
+     =================================== 
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     --> 
+<module id="UCRCREGS" HW_revision="" XML_version="1" description="UCRCREGS Registers">
+    <register id="UCRCCONFIG" acronym="UCRCCONFIG" offset="0" page="1" width="32" description="uCRC Configuration Register" />
+    <register id="UCRCCONTROL" acronym="UCRCCONTROL" offset="4" page="1" width="32" description="uCRC Control Register" />
+    <register id="UCRCRES" acronym="UCRCRES" offset="8" page="1" width="32" description="uCRC Result Register" />
+</module>

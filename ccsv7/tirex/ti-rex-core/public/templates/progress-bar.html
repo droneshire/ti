@@ -1,0 +1,20 @@
+<div class="modal-body"> 
+    <div>
+        <div style="padding-top: 10px;">
+            <div class="download-message"> {{ waitingMessage }} </div>
+            <div class="progress" style="text-align: center;">
+                <div test_id="progress-bar" class="progress-bar progress-bar-striped active"
+                     role="progressbar"
+                     aria-valuemin="0" aria-valuemax="100"
+                     aria-valuenow="{{progress}}"
+                     ng-style="{width : ( progress + '%' ) }">
+                    {{progress}}%
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default"
+                ng-click="cancel()">Cancel</button>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+
+You'll need to install:
+        doxygen
+                www.doxygen.org
+        latex                
+                http://www.latex-project.org/ftp.html
+                        I installed both MikTex and TeXstudio
+        ghostscript
+                http://sourceforge.net/projects/ghostscript/
+
+                add to your PATH env: C:\Program Files (x86)\gs\gs9.05\bin
+
+We run doxygen separately in modules, drivers and each project. See the doxygen.txt for instruction in each
+case.
+        sw/modules/docs/doxygen/doxygen.txt
+        sw/drivers/docs/doxygen/doxygen.txt
+        sw/solutions/.../<project>/docs/doxygen.txt
+   
+        

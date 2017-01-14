@@ -1,0 +1,863 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- TMS470R3XX (ARM 1 emulator) -->
+<!DOCTYPE CodeComposer [                 
+<!ENTITY MemoryBase SYSTEM "include/TMS470_MemoryBase.xml">
+<!ENTITY RegisterBase SYSTEM "include/TMS470RCXX_RegisterBase.xml">
+<!ENTITY DecoderBase SYSTEM "include/TMS470_DecoderBase.xml">
+
+<!ENTITY isVirtualMemorySupported "true">
+]>
+<CodeComposer>
+	<CcsMemoryServer>
+		<XMLFileVersion>1.0.0.0</XMLFileVersion>
+		<!-- TraceLevel 0=off,1=error,2=warning,3=transactions,4=events,5=info,6=verbose -->
+		<!-- CtrvTraceLevel 0=off,1=error,2=warning,3=transactions,4=events,5=info,6=verbose -->
+		<!-- MptvTraceLevel 0=off,1=error,2=warning,3=transactions,4=events,5=info,6=verbose -->
+		<!-- set LogEventTimestamps to true to have the events timestamped -->
+		<!-- set LogTargetName  to true to have the target name included in the event -->
+		<!-- set SendTraceEventsToErrorLog to true to have the events displayed in the Eclipse Error Log view -->
+		<!-- set SendTraceEventsToOutputWindow true to output trace data to the CCS Output window-->
+		<!-- set LogTraceEventsToFile to the name of the file to log events to -->
+		<!-- set TraceRequestLifecycle true to trace construction and recycling of request descriptors -->
+		<!-- set TraceVerboseMinAdrs to the first hex address to trace in detail -->
+		<!-- set TraceVerboseMaxAdrs to the last hex address to trace in detail -->
+		<Device>
+			<Name>TMS470RC00</Name>
+			<NumCores>1</NumCores>
+			<Core index="0">
+				<Name>TMS470RC00</Name>
+				<NumAddressSpaces>1</NumAddressSpaces>
+				<IsMemoryColoringSupported>false</IsMemoryColoringSupported>
+				<IsGTI_GetMemWithStatSupported>true</IsGTI_GetMemWithStatSupported>
+				<IsVirtualMemorySupported>&isVirtualMemorySupported;</IsVirtualMemorySupported>
+				<!-- set MinNumMausPerMemoryRead = number of minimum addressable units per line of memory -->
+				<MinNumMausPerMemoryRead>32</MinNumMausPerMemoryRead>
+				<DeviceId>
+					<IsDeviceIdSupported>false</IsDeviceIdSupported>
+				</DeviceId>
+				<CoreId>0</CoreId>
+				<AddressSpace page="0">&MemoryBase;</AddressSpace>
+				<MemoryManagementUnit>
+				    <UseDriverMMUBypassAPIs>true</UseDriverMMUBypassAPIs>
+					<UseDriverMMUAPIs>false</UseDriverMMUAPIs>
+					<Attributes>
+						<ToolTip>C=Cacheable, B=Write_Buffered, S=Shared, G=Global, X=Executable</ToolTip>
+					</Attributes>
+					<MmuVersionConfig>
+					    <AreAllVersionConfigsSupported>true</AreAllVersionConfigsSupported>
+					    <ConfigReg>MmuControl</ConfigReg>
+						<Decoder_VersionString>GetMmuVersionString</Decoder_VersionString>
+					    <!-- the following is only read if AreAllVersionConfigsSupported = false -->
+					    <Decoder_CurrentVersionConfigNotSupported></Decoder_CurrentVersionConfigNotSupported>
+					</MmuVersionConfig>
+					<Control>
+						<CanBeDisabled>true</CanBeDisabled>
+						<ConfigReg>MmuControl</ConfigReg>
+						<DecoderName>IsMmuEnabled</DecoderName>
+					</Control>
+					<StatusDisplay>
+						<Field>
+							<Name>Thumb Mode</Name>
+							<ConfigReg>CPSR</ConfigReg>
+							<DecoderName>GetThumbModeStatusString</DecoderName>
+						</Field>
+						<Field>
+							<Name>Processor Mode</Name>
+							<ConfigReg>CPSR</ConfigReg>
+							<DecoderName>GetModeStatusString</DecoderName>
+						</Field>
+					</StatusDisplay>
+					<SystemReadAccess>
+						<IsSupported>true</IsSupported>
+						<ConfigReg>MmuControl</ConfigReg>
+						<DecoderName>IsSystemReadAccess</DecoderName>
+					</SystemReadAccess>
+					<ReadOnlyAccess>
+						<IsSupported>true</IsSupported>
+						<ConfigReg>MmuControl</ConfigReg>
+						<DecoderName>IsRomMode</DecoderName>
+					</ReadOnlyAccess>
+					<ProcessId>
+						<IsSupported>true</IsSupported>
+						<IsDecodedFromLogicalAdrs>true</IsDecodedFromLogicalAdrs>
+						<DecoderName>Getb31_b25</DecoderName>
+					</ProcessId>
+					<DomainAccessPermissions>
+						<IsSupported>true</IsSupported>
+						<ConfigReg>MmuDACR</ConfigReg>
+						<NumDomains>16</NumDomains>
+						<RegDecoder>Getb1_b0</RegDecoder>
+						<RegDecoder>Getb3_b2</RegDecoder>
+						<RegDecoder>Getb5_b4</RegDecoder>
+						<RegDecoder>Getb7_b6</RegDecoder>
+						<RegDecoder>Getb9_b8</RegDecoder>
+						<RegDecoder>Getb11_b10</RegDecoder>
+						<RegDecoder>Getb13_b12</RegDecoder>
+						<RegDecoder>Getb15_b14</RegDecoder>
+						<RegDecoder>Getb17_b16</RegDecoder>
+						<RegDecoder>Getb19_b18</RegDecoder>
+						<RegDecoder>Getb21_b20</RegDecoder>
+						<RegDecoder>Getb23_b22</RegDecoder>
+						<RegDecoder>Getb25_b24</RegDecoder>
+						<RegDecoder>Getb27_b26</RegDecoder>
+						<RegDecoder>Getb29_b28</RegDecoder>
+						<RegDecoder>Getb31_b30</RegDecoder>
+					</DomainAccessPermissions>
+					<MasterPageTableControl>
+					    <MasterPageTable>
+							<Name>MasterPageTable0</Name>
+							<IsEnabled>
+								<!-- controls whether the master page table that this controls is enabled or not.
+								     The first master page table is always enabled -->
+								<AlwaysEnabled>true</AlwaysEnabled>
+								<!-- the following are only read if AlwaysEnabled = false -->
+								<ConfigReg></ConfigReg>
+								<DecoderName></DecoderName>
+							</IsEnabled>
+							<PageTableIndex>
+								<!-- Specifies which of the <PageTable> templates are to be used for this
+								mode of operation.  Since ARM v7 MMU doesn't support older MMU modes, use index 0 -->
+								<IsFixed>true</IsFixed>
+								<FixedValue>0x0</FixedValue>
+								<ConfigReg></ConfigReg>
+								<DecoderName></DecoderName>
+							</PageTableIndex>
+							<IsMaxVirtualAdrsEnabled>
+								<!-- For configurations where the virtual address determines which master page table
+								     is used to do the virtual to physical mapping, IsMaxVirtualAdrsEnabled will return true.
+								     This can be done either by setting AlwaysEnabled to true, or by specifying a configuration register
+								     and decoder that will return the appropriate result based on a register value.
+								     -->
+								<AlwaysEnabled>true</AlwaysEnabled>
+								<!-- the following are only read if AlwaysEnabled = false -->
+								<ConfigReg></ConfigReg>
+								<DecoderName></DecoderName>
+							</IsMaxVirtualAdrsEnabled>
+							<MaxVirtualAdrs>
+								<!-- the following is only read if IsMaxVirtualAdrsEnabled returned true.
+								The maximum virtual address can either be fixed, or based on the decoded value of a register -->
+								<IsFixed>false</IsFixed>
+								<FixedValue>0xFFFFFFFF</FixedValue>
+								<ConfigReg>MmuTranslationTableBaseControlReg</ConfigReg>
+								<DecoderName>GetTTBR1CutoverAdrs</DecoderName>
+							</MaxVirtualAdrs>
+					    </MasterPageTable>
+					    <MasterPageTable>
+							<Name>MasterPageTable1</Name>
+							<IsEnabled>
+								<AlwaysEnabled>true</AlwaysEnabled>
+								<!-- the following two entries are only read if AlwaysEnabled is false -->
+								<ConfigReg></ConfigReg>
+								<Decoder_IsPageTableEnabled></Decoder_IsPageTableEnabled>
+							</IsEnabled>
+							<PageTableIndex>
+								<IsFixed>true</IsFixed>
+								<FixedValue>0x1</FixedValue>
+								<ConfigReg></ConfigReg>
+								<DecoderName></DecoderName>
+							</PageTableIndex>
+							<IsMaxVirtualAdrsEnabled>
+								<AlwaysEnabled>true</AlwaysEnabled>
+								<!-- the following are only read if AlwaysEnabled = false -->
+								<ConfigReg></ConfigReg>
+								<DecoderName></DecoderName>
+							</IsMaxVirtualAdrsEnabled>
+							<MaxVirtualAdrs>
+								<IsFixed>true</IsFixed>
+								<FixedValue>0x0FFFFFFFF</FixedValue>
+								<ConfigReg></ConfigReg>
+								<DecoderName></DecoderName>
+							</MaxVirtualAdrs>
+					    </MasterPageTable>
+					</MasterPageTableControl>
+					<!--
+					The ARM has a 2 level page table hierarchy.
+					The first level (Master) covers the ARM's 4GB adrs space
+					with 4096 1MB page table entries, which can either point to 
+					a 1MB page frame in physical memory, be one of 16 1MB page frames
+					that make up a supersection, declare the 1MB range as
+					out of bounds (page fault) or point to a second level page table
+					(either a coarse page table or a fine page table)
+					Decoding an adrs thus involves dividing the virtual adrs
+					by 1MB to get the index of the page table entry, and then
+					using either the physical adrs that it points to or 
+					looking up the page table entry in the second level page table
+					that is pointed to.
+					-->
+					<PageTable>
+						<Name>Master TTBR0 (ARMv7)</Name>
+						<Level>0</Level>
+						<NumEntries>4096</NumEntries>
+						<NumMAUsPerEntry>4</NumMAUsPerEntry>
+						<NumMAUsPerPageFrame>0x100000</NumMAUsPerPageFrame>
+						<Decoder_IsEntryFaultPage>MmuL1PageTable_IsEntryFaultPage</Decoder_IsEntryFaultPage>
+						<Decoder_IsEntryPageTablePointer>MmuMasterPageTable_IsEntryPageTablePointer</Decoder_IsEntryPageTablePointer>
+						<PageTablePointer>
+							<Decoder_GetPageTablePointer>MmuMasterPageTable_GetPageTablePointer</Decoder_GetPageTablePointer>
+							<!-- the index of page table handler provides an index into the list composed of 
+							the MMU page tables defined by the <PageTable> elements, in the order they are defined in this file.
+							e.g. an index of 0 identifies a Master page table, 1 a coarse page table and 2 a fine page table -->
+							<Decoder_GetIndexOfPageTableHandler>MmuV7MasterPageTable_GetIndexOfL2PageTableHandler</Decoder_GetIndexOfPageTableHandler>
+						</PageTablePointer>
+						<Decoder_IsEntryPhysicalPagePointer>MmuMasterPageTable_IsEntryPhysicalPagePointer</Decoder_IsEntryPhysicalPagePointer>
+						<PhysicalPagePointer>
+						<!-- b18 = 0 indicates a 1MB section.
+						     b18 = 1 indicates that the 1MB page table entry is part of a 16MB super section -->
+							<Decoder_GetIndexOfPhysicalPageAdrsDecoder>Getb18</Decoder_GetIndexOfPhysicalPageAdrsDecoder>
+							<DecoderList_PhysicalPageAdrsDecoder>
+								<DecoderName>PageAdrsDecoder_1MB</DecoderName>
+								<DecoderName>PageAdrsDecoder_16MB</DecoderName>
+							</DecoderList_PhysicalPageAdrsDecoder>
+							<Decoder_GetIndexOfPhysicalPageSizeDecoder>Getb18</Decoder_GetIndexOfPhysicalPageSizeDecoder>
+							<DecoderList_PhysicalPageSizeDecoder>
+								<DecoderName>PageSizeDecoder_1MB</DecoderName>
+								<DecoderName>PageSizeDecoder_16MB</DecoderName>
+							</DecoderList_PhysicalPageSizeDecoder>
+							<Decoder_GetNumSubPages>AlwaysOne</Decoder_GetNumSubPages>
+							<DecoderList_GetSubPageAccessPermission>
+								<DecoderName>GetMMUv7L1AccessPermission</DecoderName>
+							</DecoderList_GetSubPageAccessPermission>
+							<Decoder_GetDomainId>Getb8_b5</Decoder_GetDomainId>
+							<Attributes>
+								<DecoderList_GetAttributes>
+									<DecoderName>GetCacheable</DecoderName>
+									<DecoderName>GetWriteBuffered</DecoderName>
+									<DecoderName>GetErrorCorrectionCtrl</DecoderName>
+									<DecoderName>GetL1ExecutableBit</DecoderName>
+									<DecoderName>GetL1TypeExtensionBits</DecoderName>
+								</DecoderList_GetAttributes>
+							</Attributes>
+						</PhysicalPagePointer>
+						<TableAdrs>
+							<IsFixed>false</IsFixed>
+							<FixedValue>0x0</FixedValue>
+							<IsAParentPageTableEntry>false</IsAParentPageTableEntry>
+							<!-- the following two entries are only read if IsFixed and IsAParentPageTableEntry are both false -->
+							<ConfigReg>MmuTranslationTableReg0BaseAdrs</ConfigReg>
+							<DecoderName>GetTranslationTableBaseAdrs</DecoderName>
+						</TableAdrs>
+						<!-- LogicalStartAdrs specifies the lowest logical memory adrs associated with this page table.
+						     Index into the page table = (virtual memory adrs = VirtualAdrsRangeStartAdrs) / NumMAusPerPageFrame) -->
+						<LogicalStartAdrs>
+							<IsFixed>true</IsFixed>
+							<FixedValue>0x0</FixedValue>
+							<IsAParentPageTableEntry>false</IsAParentPageTableEntry>
+							<!-- the following two entries are only read if IsFixed and IsAParentPageTableEntry are both false -->
+							<ConfigReg></ConfigReg>
+							<DecoderName></DecoderName>
+						</LogicalStartAdrs>
+					</PageTable>
+					<PageTable>
+						<Name>Master TTBR1 (ARMv7)</Name>
+						<Level>0</Level>
+						<NumEntries>4096</NumEntries>
+						<NumMAUsPerEntry>4</NumMAUsPerEntry>
+						<NumMAUsPerPageFrame>0x100000</NumMAUsPerPageFrame>
+						<Decoder_IsEntryFaultPage>MmuL1PageTable_IsEntryFaultPage</Decoder_IsEntryFaultPage>
+						<Decoder_IsEntryPageTablePointer>MmuMasterPageTable_IsEntryPageTablePointer</Decoder_IsEntryPageTablePointer>
+						<PageTablePointer>
+							<Decoder_GetPageTablePointer>MmuMasterPageTable_GetPageTablePointer</Decoder_GetPageTablePointer>
+							<!-- the index of page table handler provides an index into the list composed of 
+							the MMU page tables defined by the <PageTable> elements, in the order they are defined in this file.
+							e.g. an index of 0 identifies a Master page table, 1 a coarse page table and 2 a fine page table -->
+							<Decoder_GetIndexOfPageTableHandler>MmuV7MasterPageTable_GetIndexOfL2PageTableHandler</Decoder_GetIndexOfPageTableHandler>
+						</PageTablePointer>
+						<Decoder_IsEntryPhysicalPagePointer>MmuMasterPageTable_IsEntryPhysicalPagePointer</Decoder_IsEntryPhysicalPagePointer>
+						<PhysicalPagePointer>
+						<!-- b18 = 0 indicates a 1MB section.
+						     b18 = 1 indicates that the 1MB page table entry is part of a 16MB super section -->
+							<Decoder_GetIndexOfPhysicalPageAdrsDecoder>Getb18</Decoder_GetIndexOfPhysicalPageAdrsDecoder>
+							<DecoderList_PhysicalPageAdrsDecoder>
+								<DecoderName>PageAdrsDecoder_1MB</DecoderName>
+								<DecoderName>PageAdrsDecoder_16MB</DecoderName>
+							</DecoderList_PhysicalPageAdrsDecoder>
+							<Decoder_GetIndexOfPhysicalPageSizeDecoder>Getb18</Decoder_GetIndexOfPhysicalPageSizeDecoder>
+							<DecoderList_PhysicalPageSizeDecoder>
+								<DecoderName>PageSizeDecoder_1MB</DecoderName>
+								<DecoderName>PageSizeDecoder_16MB</DecoderName>
+							</DecoderList_PhysicalPageSizeDecoder>
+							<Decoder_GetNumSubPages>AlwaysOne</Decoder_GetNumSubPages>
+							<DecoderList_GetSubPageAccessPermission>
+								<DecoderName>GetMMUv7L1AccessPermission</DecoderName>
+							</DecoderList_GetSubPageAccessPermission>
+							<Decoder_GetDomainId>Getb8_b5</Decoder_GetDomainId>
+							<Attributes>
+								<DecoderList_GetAttributes>
+									<DecoderName>GetCacheable</DecoderName>
+									<DecoderName>GetWriteBuffered</DecoderName>
+									<DecoderName>GetErrorCorrectionCtrl</DecoderName>
+									<DecoderName>GetL1ExecutableBit</DecoderName>
+									<DecoderName>GetL1TypeExtensionBits</DecoderName>
+								</DecoderList_GetAttributes>
+							</Attributes>
+						</PhysicalPagePointer>
+						<TableAdrs>
+							<IsFixed>false</IsFixed>
+							<FixedValue>0x0</FixedValue>
+							<IsAParentPageTableEntry>false</IsAParentPageTableEntry>
+							<!-- the following two entries are only read if IsFixed and IsAParentPageTableEntry are both false -->
+							<ConfigReg>MmuTranslationTableReg1BaseAdrs</ConfigReg>
+							<DecoderName>GetTranslationTableBaseAdrs</DecoderName>
+						</TableAdrs>
+						<!-- LogicalStartAdrs specifies the lowest logical memory adrs associated with this page table.
+						     Index into the page table = (virtual memory adrs = VirtualAdrsRangeStartAdrs) / NumMAusPerPageFrame) -->
+						<LogicalStartAdrs>
+							<IsFixed>true</IsFixed>
+							<FixedValue>0x0</FixedValue>
+							<IsAParentPageTableEntry>false</IsAParentPageTableEntry>
+							<!-- the following two entries are only read if IsFixed and IsAParentPageTableEntry are both false -->
+							<ConfigReg></ConfigReg>
+							<DecoderName></DecoderName>
+						</LogicalStartAdrs>
+					</PageTable>
+					<!--
+					The L2 page table has 256 page table entries.  Each 
+					page table entrie in a coarse page table translates a 4KB block of 
+					virtual memory to a 4KB block in physical memory.  
+					A L2 page table entry supports either 4KB or 64KB pages.  
+					In practice, each of the entries is filled with a page frame page table entry
+					but the base adrs for a 64KB page table entry is repeated
+					in 16 entries.  Decoding an adrs thus involves subtracting
+					the base adrs of the Coarse page table from the virtual adrs
+					and dividing the remainder by 4KB to get the index of the page table entry.
+					
+					L2 page table entries:
+					b1-b0
+					00 : Page Fault
+					01 : Large Page - Base adrs of physical 64KB page in b31-b16 (1 Access Permissions field, 1 TEX field)
+					10 : Small Page - Base adrs of physical 4KB page in b31-b12 (1 Access Permissions field, 1 TEX field)
+					11 : Small Page - Base adrs of physical 4KB page in b31-b12 (1 Access Permissions field, 1 TEX field)
+					
+					NOTE: for entries that are not valid, enter a size of AlwaysZero.  This
+					will be detected by the MMU Page Table Viewer and will cause the entry
+					to be displayed in bold with a tooltip explaining that the entry configuration data was bad.
+					-->
+					<PageTable>
+						<Name>2nd Level Page Table (ARMv7)</Name>
+						<Level>1</Level>
+						<IsEnabled>
+							<AlwaysEnabled>true</AlwaysEnabled>
+							<!-- the following two entries are only read if AlwaysEnabled is false  (e.g. 
+							for ARM architectures with a 'Legacy' MMU mode such as ARMv6) -->
+						    <ConfigReg></ConfigReg>
+						    <Decoder_IsPageTableEnabled></Decoder_IsPageTableEnabled>
+						</IsEnabled>
+						<NumEntries>256</NumEntries>
+						<NumMAUsPerEntry>4</NumMAUsPerEntry>
+						<NumMAUsPerPageFrame>4096</NumMAUsPerPageFrame>
+						<Decoder_IsEntryFaultPage>MmuL2PageTable_IsEntryFaultPage</Decoder_IsEntryFaultPage>
+						<Decoder_IsEntryPageTablePointer>AlwaysZero</Decoder_IsEntryPageTablePointer>
+						<!-- the next nested element is only read if Decoder_IsEntryPageTablePointer returns true -->
+						<PageTablePointer>
+							<Decoder_GetPageTablePointer>AlwaysZero</Decoder_GetPageTablePointer>
+							<Decoder_GetIndexOfPageTableHandler>AlwaysZero</Decoder_GetIndexOfPageTableHandler>
+						</PageTablePointer>
+						<Decoder_IsEntryPhysicalPagePointer>MmuL2PageTable_IsEntryPhysicalPagePointer</Decoder_IsEntryPhysicalPagePointer>
+						<PhysicalPagePointer>
+							<Decoder_GetIndexOfPhysicalPageAdrsDecoder>MmuL2PageTable_GetIndexOfDecoder</Decoder_GetIndexOfPhysicalPageAdrsDecoder>
+							<DecoderList_PhysicalPageAdrsDecoder>
+								<DecoderName>AlwaysZero</DecoderName>
+								<DecoderName>PageAdrsDecoder_64KB</DecoderName>
+								<DecoderName>PageAdrsDecoder_4KB</DecoderName>
+								<DecoderName>PageAdrsDecoder_4KB</DecoderName>
+							</DecoderList_PhysicalPageAdrsDecoder>
+							<Decoder_GetIndexOfPhysicalPageSizeDecoder>MmuL2PageTable_GetIndexOfDecoder</Decoder_GetIndexOfPhysicalPageSizeDecoder>
+							<DecoderList_PhysicalPageSizeDecoder>
+								<DecoderName>AlwaysZero</DecoderName>
+								<DecoderName>PageSizeDecoder_64KB</DecoderName>
+								<DecoderName>PageSizeDecoder_4KB</DecoderName>
+								<DecoderName>PageSizeDecoder_4KB</DecoderName>
+							</DecoderList_PhysicalPageSizeDecoder>
+							<!-- ARMv7 mode: always 1 sub-page. -->
+							<Decoder_GetNumSubPages>AlwaysOne</Decoder_GetNumSubPages>
+							<DecoderList_GetSubPageAccessPermission>
+								<DecoderName>GetMMUv7L2AccessPermission</DecoderName>
+							</DecoderList_GetSubPageAccessPermission>
+							<Attributes>
+								<Decoder_GetListOfAttributeListsIndex>AlwaysZero</Decoder_GetListOfAttributeListsIndex>
+								<DecoderList_GetAttributes>
+									<DecoderName>GetCacheable</DecoderName>
+									<DecoderName>GetWriteBuffered</DecoderName>
+									<DecoderName>GetErrorCorrectionCtrl</DecoderName>
+									<DecoderName>GetL2ExecutableBit</DecoderName>
+									<DecoderName>GetL2TypeExtensionBits_v7MMU</DecoderName>
+								</DecoderList_GetAttributes>
+							</Attributes>
+							<Decoder_GetDomainId></Decoder_GetDomainId>
+						</PhysicalPagePointer>
+						<TableAdrs>
+							<IsFixed>false</IsFixed>
+							<FixedValue>0x0</FixedValue>
+							<IsAParentPageTableEntry>true</IsAParentPageTableEntry>
+							<ConfigReg></ConfigReg>
+							<DecoderName></DecoderName>
+						</TableAdrs>
+						<!-- LogicalStartAdrs specifies the lowest logical memory adrs associated with this page table.
+						     Index into the page table = (virtual memory adrs = VirtualAdrsRangeStartAdrs) / NumMAusPerPageFrame) -->
+						<LogicalStartAdrs>
+							<IsFixed>false</IsFixed>
+							<FixedValue>0x0</FixedValue>
+							<IsAParentPageTableEntry>true</IsAParentPageTableEntry>
+							<!-- the following two entries are only read if IsFixed and IsAParentPageTableEntry are both false -->
+							<ConfigReg></ConfigReg>
+							<DecoderName></DecoderName>
+						</LogicalStartAdrs>
+					</PageTable>
+					
+				</MemoryManagementUnit>
+				<!-- the following memory mapped registers are used to configure the memory of this device-->
+				<RegisterDefinitions>&RegisterBase;
+				</RegisterDefinitions>
+				<DecoderDefinitions>
+					<!-- Decoders perform the following sequence of operations:
+							1) XOR XorWithRegValue with register valuex
+							2) Mask with BitfieldMask property 
+							3) shift right by BitfieldShift bits 
+							4a) if a <StringTable> field is present with <NumStrings> > 0, use result of step 3 as index into lookup table of strings and 
+							   set string result = value from table.  No further processing is done in this case.
+							4b) if a <DecoderTable> field is present with <NumDecoders> > 0, use result of step 3 as index into lookup table of decoders and
+							    call the specified decoder and sets result = value and string result = string from the decoder 
+							4c) if a <LookupTable> field is present with <NumIndexValues> > 0, use result of step 3 as index into lookup table and set result = value from table 
+							5) multiply the result from step 4b or 4c by floating point Multiplier value (e.g. set to 0.25 to divide by 4)  
+							6) add AddToProduct value 
+							7) if IsTrueIfResultIsZero, decode_bool returns true if 0, false if non-zero
+							
+							If any of these properties are not defined, they are set to the
+							following default values:
+							   XorWithRegValue = 0
+							   BitfieldMask = 0xffffffff
+							   BitfieldShift = 0
+							   Multiplier = 1.0
+							   AddToProduct = 0
+							   IsTrueIfResultIsZero = false
+						 -->
+					<!--
+					L1 page table entries: (Master page table)
+					b1-b0
+					00 : Page Fault
+					01 : Coarse Page Table base adrs in b31-b10 (points to a 256 entry table which consumes 1KB)
+					10 : Base adrs of 1MB page frame in b31-b20
+					11 : v7 = Page Fault, v5 = Reserved
+
+					Domain ID for the entry: b8-b5 (multiply by 2 to get bit position in DACR register of the domain settings)
+
+					The Coarse page table has 256 page table entries with page size of either 4KB or 64KB.  In practice, each of 
+					the entries is filled with a page frame page table entry but the base adrs for a 64KB page table entry is repeated
+					in 16 entries.  Decoding an adrs thus involves subtracting the base adrs of the Coarse page table from the virtual adrs
+					and dividing the remainder by 4KB to get the index of the page table entry.
+
+					L2 page table entries:
+					b1-b0
+					00 : Page Fault
+					01 : Large Page - Base adrs of physical 64KB page in b31-b16
+					10 : Small Page - Base adrs of physical 4KB page in b31-b12
+					11 : Extended Small Page - Base adrs of physical 4KB page in b31-b12 					
+					-->
+					<Decoder>
+						<DecoderName>MmuL1PageTable_IsEntryFaultPage</DecoderName>
+						<BitfieldMask>0x03</BitfieldMask>
+						<BitfieldShift>0</BitfieldShift>
+						<Multiplier>1.0</Multiplier>
+						<AddToProduct>0</AddToProduct>
+						<LookupTable>
+							<!-- is entry fault page -->
+							<NumIndexValues>4</NumIndexValues>
+							<Array index="0">1</Array>
+							<Array index="1">0</Array>
+							<Array index="2">0</Array>
+							<Array index="3">1</Array>
+						</LookupTable>
+					</Decoder>
+					<Decoder>
+						<DecoderName>MmuL2PageTable_IsEntryFaultPage</DecoderName>
+						<BitfieldMask>0x03</BitfieldMask>
+						<BitfieldShift>0</BitfieldShift>
+						<Multiplier>1.0</Multiplier>
+						<AddToProduct>0</AddToProduct>
+						<LookupTable>
+							<!-- is entry fault page -->
+							<NumIndexValues>4</NumIndexValues>
+							<Array index="0">1</Array>
+							<Array index="1">0</Array>
+							<Array index="2">0</Array>
+							<Array index="3">0</Array>
+						</LookupTable>
+					</Decoder>
+					<Decoder>
+						<DecoderName>MmuMasterPageTable_IsEntryPageTablePointer</DecoderName>
+						<BitfieldMask>0x03</BitfieldMask>
+						<BitfieldShift>0</BitfieldShift>
+						<Multiplier>1.0</Multiplier>
+						<AddToProduct>0</AddToProduct>
+						<LookupTable>
+							<NumIndexValues>4</NumIndexValues>
+							<Array index="0">0</Array>
+							<Array index="1">1</Array>
+							<Array index="2">0</Array>
+							<Array index="3">0</Array>
+						</LookupTable>
+					</Decoder>
+					<Decoder>
+						<DecoderName>MmuMasterPageTable_IsEntryPhysicalPagePointer</DecoderName>
+						<BitfieldMask>0x03</BitfieldMask>
+						<BitfieldShift>0</BitfieldShift>
+						<Multiplier>1.0</Multiplier>
+						<AddToProduct>0</AddToProduct>
+						<LookupTable>
+							<!-- is entry physical page pointer -->
+							<NumIndexValues>4</NumIndexValues>
+							<Array index="0">0</Array>
+							<Array index="1">0</Array>
+							<Array index="2">1</Array>
+							<Array index="3">0</Array>
+						</LookupTable>
+					</Decoder>
+					<Decoder>
+					<!-- the 0-based index of MMU v7 page table handler provides an index into the list composed of 
+							the MMU page tables defined by the <PageTable> elements, in the order they are defined in this file.
+							e.g. an index of -1 identifies a value that does not point to a page table, 2 points to the L2 page table -->
+						<DecoderName>MmuV7MasterPageTable_GetIndexOfL2PageTableHandler</DecoderName>
+						<BitfieldMask>0x03</BitfieldMask>
+						<BitfieldShift>0</BitfieldShift>
+						<Multiplier>1.0</Multiplier>
+						<AddToProduct>0</AddToProduct>
+						<LookupTable>
+							<NumIndexValues>4</NumIndexValues>
+							<!-- page fault -->
+							<Array index="0">-1</Array>
+							<!--L2 page table -->
+							<Array index="1">2</Array>
+							<!-- physical memory (1MB secion / 16MB super section)  -->
+							<Array index="2">-1</Array>
+							<!-- Reserved in ARMv7 -->
+							<Array index="3">-1</Array>
+						</LookupTable>
+					</Decoder>
+					<Decoder>
+						<DecoderName>MmuMasterPageTable_GetPhysicalPageAdrs</DecoderName>
+						<BitfieldMask>0x0fff00000</BitfieldMask>
+						<BitfieldShift>0</BitfieldShift>
+						<Multiplier>1.0</Multiplier>
+						<AddToProduct>0</AddToProduct>
+					</Decoder>
+					<Decoder>
+						<DecoderName>MmuMasterPageTable_GetPageTablePointer</DecoderName>
+						<BitfieldMask>0x0fffffc00</BitfieldMask>
+						<BitfieldShift>0</BitfieldShift>
+						<Multiplier>1.0</Multiplier>
+						<AddToProduct>0</AddToProduct>
+					</Decoder>
+					<Decoder>
+						<DecoderName>MmuL2PageTable_IsEntryPhysicalPagePointer</DecoderName>
+						<BitfieldMask>0x03</BitfieldMask>
+						<BitfieldShift>0</BitfieldShift>
+						<Multiplier>1.0</Multiplier>
+						<AddToProduct>0</AddToProduct>
+						<LookupTable>
+							<!-- is entry physical page pointer -->
+							<NumIndexValues>4</NumIndexValues>
+							<Array index="0">0</Array>
+							<Array index="1">1</Array>
+							<Array index="2">1</Array>
+							<Array index="3">1</Array>
+						</LookupTable>
+					</Decoder>
+					<Decoder>
+						<DecoderName>MmuL2PageTable_GetIndexOfDecoder</DecoderName>
+						<BitfieldMask>0x03</BitfieldMask>
+						<BitfieldShift>0</BitfieldShift>
+						<Multiplier>1.0</Multiplier>
+						<AddToProduct>0</AddToProduct>
+					</Decoder>
+					<Decoder>
+						<DecoderName>PageAdrsDecoder_16MB</DecoderName>
+						<BitfieldMask>0x0ff000000</BitfieldMask>
+						<BitfieldShift>0</BitfieldShift>
+						<Multiplier>1.0</Multiplier>
+						<AddToProduct>0</AddToProduct>
+					</Decoder>
+					<Decoder>
+						<DecoderName>PageAdrsDecoder_1MB</DecoderName>
+						<BitfieldMask>0x0fff00000</BitfieldMask>
+						<BitfieldShift>0</BitfieldShift>
+						<Multiplier>1.0</Multiplier>
+						<AddToProduct>0</AddToProduct>
+					</Decoder>
+					<Decoder>
+						<DecoderName>PageSizeDecoder_16MB</DecoderName>
+						<BitfieldMask>0</BitfieldMask>
+						<BitfieldShift>0</BitfieldShift>
+						<Multiplier>1.0</Multiplier>
+						<AddToProduct>0x1000000</AddToProduct>
+					</Decoder>
+					<Decoder>
+						<DecoderName>PageSizeDecoder_1MB</DecoderName>
+						<BitfieldMask>0</BitfieldMask>
+						<BitfieldShift>0</BitfieldShift>
+						<Multiplier>1.0</Multiplier>
+						<AddToProduct>0x100000</AddToProduct>
+					</Decoder>
+					<Decoder>
+						<DecoderName>PageAdrsDecoder_64KB</DecoderName>
+						<BitfieldMask>0x0ffff0000</BitfieldMask>
+						<BitfieldShift>0</BitfieldShift>
+						<Multiplier>1.0</Multiplier>
+						<AddToProduct>0</AddToProduct>
+					</Decoder>
+					<Decoder>
+						<DecoderName>PageSizeDecoder_64KB</DecoderName>
+						<BitfieldMask>0x0</BitfieldMask>
+						<BitfieldShift>0</BitfieldShift>
+						<Multiplier>1.0</Multiplier>
+						<AddToProduct>0x10000</AddToProduct>
+					</Decoder>
+					<Decoder>
+						<DecoderName>PageAdrsDecoder_4KB</DecoderName>
+						<BitfieldMask>0x0fffff000</BitfieldMask>
+						<BitfieldShift>0</BitfieldShift>
+						<Multiplier>1.0</Multiplier>
+						<AddToProduct>0</AddToProduct>
+					</Decoder>
+					<Decoder>
+						<DecoderName>PageSizeDecoder_4KB</DecoderName>
+						<BitfieldMask>0x0</BitfieldMask>
+						<BitfieldShift>0</BitfieldShift>
+						<Multiplier>1.0</Multiplier>
+						<AddToProduct>0x1000</AddToProduct>
+					</Decoder>
+					<!-- PTE Attribute String Decoders -->
+					<Decoder>
+						<DecoderName>GetCacheable</DecoderName>
+						<BitfieldMask>0x08</BitfieldMask>
+						<BitfieldShift>3</BitfieldShift>
+						<Multiplier>1.0</Multiplier>
+						<AddToProduct>0</AddToProduct>
+						<StringTable>
+							<NumStrings>2</NumStrings>
+							<Array index="0">-</Array>
+							<Array index="1">C</Array>
+						</StringTable>
+					</Decoder>
+					<!-- nG, APX -->
+					<Decoder>
+						<DecoderName>GetWriteBuffered</DecoderName>
+						<BitfieldMask>0x04</BitfieldMask>
+						<BitfieldShift>2</BitfieldShift>
+						<Multiplier>1.0</Multiplier>
+						<AddToProduct>0</AddToProduct>
+						<StringTable>
+							<NumStrings>2</NumStrings>
+							<Array index="0">-</Array>
+							<Array index="1">B</Array>
+						</StringTable>
+					</Decoder>
+					<Decoder>
+					<!-- for L1 PTEs for both v5 and v7 MMUs, b9 defines the ECC Protection bit (P) -->
+						<DecoderName>GetL1ErrorCorrectionCtrl</DecoderName>
+						<BitfieldMask>0x0200</BitfieldMask>
+						<BitfieldShift>9</BitfieldShift>
+						<Multiplier>1.0</Multiplier>
+						<AddToProduct>0</AddToProduct>
+						<StringTable>
+							<NumStrings>2</NumStrings>
+							<Array index="0">-</Array>
+							<Array index="1">P</Array>
+						</StringTable>
+					</Decoder>
+					<Decoder>
+					<!-- for ARM v7 MMU L1PTEs, if subpages are disabled, b17 defines the not Global bit (nG)-->
+						<DecoderName>GetL1NotGlobalMemoryBit</DecoderName>
+						<BitfieldMask>0x020000</BitfieldMask>
+						<BitfieldShift>17</BitfieldShift>
+						<Multiplier>1.0</Multiplier>
+						<AddToProduct>0</AddToProduct>
+						<StringTable>
+							<NumStrings>2</NumStrings>
+							<Array index="0">G</Array>
+							<Array index="1">-</Array>
+						</StringTable>
+					</Decoder>					
+					<Decoder>
+					<!-- for ARM v7 MMU L2PTEs, if subpages are disabled, b17 defines the not Global bit (nG)-->
+						<DecoderName>GetL2NotGlobalMemoryBit</DecoderName>
+						<BitfieldMask>0x0800</BitfieldMask>
+						<BitfieldShift>11</BitfieldShift>
+						<Multiplier>1.0</Multiplier>
+						<AddToProduct>0</AddToProduct>
+						<StringTable>
+							<NumStrings>2</NumStrings>
+							<Array index="0">G</Array>
+							<Array index="1">-</Array>
+						</StringTable>
+					</Decoder>		
+					<Decoder>
+					<!-- for ARM v7 MMU L1 PTEs, if subpages are disabled, b16 defines the shared memory bit (S)-->
+						<DecoderName>GetL1SharedMemoryBit</DecoderName>
+						<BitfieldMask>0x010000</BitfieldMask>
+						<BitfieldShift>16</BitfieldShift>
+						<Multiplier>1.0</Multiplier>
+						<AddToProduct>0</AddToProduct>
+						<StringTable>
+							<NumStrings>2</NumStrings>
+							<Array index="0">-</Array>
+							<Array index="1">S</Array>
+						</StringTable>
+					</Decoder>					
+					<Decoder>
+					<!-- for ARM v7 L2 PTEs, b10 defines the shared memory bit -->
+						<DecoderName>GetL2SharedMemoryBit</DecoderName>
+						<BitfieldMask>0x0400</BitfieldMask>
+						<BitfieldShift>10</BitfieldShift>
+						<Multiplier>1.0</Multiplier>
+						<AddToProduct>0</AddToProduct>
+						<StringTable>
+							<NumStrings>2</NumStrings>
+							<Array index="0">-</Array>
+							<Array index="1">S</Array>
+						</StringTable>
+					</Decoder>
+					<Decoder>
+					<!-- for L1 Page Table Entries, if IsArmV7MmuMode is true,
+					     AccessPermission bits are not used and the XN bit is set by b4 of the page
+					     table entry (only for 1MB and 16MB sections), not for coarse page table pointers
+					     or page faults -->
+						<DecoderName>GetL1ExecutableBit</DecoderName>
+						<BitfieldMask>0x010</BitfieldMask>
+						<BitfieldShift>4</BitfieldShift>
+						<Multiplier>1.0</Multiplier>
+						<AddToProduct>0</AddToProduct>
+						<StringTable>
+							<NumStrings>2</NumStrings>
+							<Array index="0">X</Array>
+							<Array index="1">-</Array>
+						</StringTable>
+					</Decoder>	
+					<Decoder>
+					<!-- for L2 Page Table Entries, if IsArmV7MmuMode is true,
+					     The XN bit is set by b15 of the page table entry for 64KB (Large) page table entries (specified by b1 = 0) and
+					     by b0 of 4KB (small) page table entries (specified by b1 = 1). -->
+						<DecoderName>GetL2ExecutableBit</DecoderName>
+						<BitfieldMask>0x02</BitfieldMask>
+						<BitfieldShift>1</BitfieldShift>
+						<Multiplier>1.0</Multiplier>
+						<AddToProduct>0</AddToProduct>
+						<DecoderTable>
+							<NumDecoders>2</NumDecoders>
+							<Array index="0">Getb15</Array>
+							<Array index="1">Getb0</Array>
+						</DecoderTable>					
+						<StringTable>
+							<NumStrings>2</NumStrings>
+							<Array index="0">X</Array>
+							<Array index="1">-</Array>
+						</StringTable>
+					</Decoder>
+					<Decoder>
+					<!-- for ARM MMU v5 and v7, TEX fields are defined for L1 tables by bits b14-b12 if the 2 LSBs = 01 , else = 0 -->
+						<DecoderName>GetL1TypeExtensionBits</DecoderName>
+						<BitfieldMask>0x03</BitfieldMask>
+						<BitfieldShift>0</BitfieldShift>
+						<Multiplier>1.0</Multiplier>
+						<AddToProduct>0</AddToProduct>
+						<DecoderTable>
+							<NumDecoders>4</NumDecoders>
+							<Array index="0">AlwaysZero</Array>
+							<Array index="1">Getb14_b12</Array>
+							<Array index="2">AlwaysZero</Array>
+							<Array index="3">AlwaysZero</Array>
+						</DecoderTable>					
+						<StringTable>
+							<NumStrings>8</NumStrings>
+							<Array index="0">TEX=000b</Array>
+							<Array index="1">TEX=001b</Array>
+							<Array index="2">TEX=010b</Array>
+							<Array index="3">TEX=011b</Array>
+							<Array index="4">TEX=100b</Array>
+							<Array index="5">TEX=101b</Array>
+							<Array index="6">TEX=110b</Array>
+							<Array index="7">TEX=111b</Array>
+						</StringTable>										
+					</Decoder>	
+					<Decoder>
+					<!-- for ARM MMU v7, TEX fields are defined for L2 page tables by bits b14-b12 if the 2 LSBs != 0, else TEX = 0 
+					     if b1 = 1, TEX is in b8-6
+						 if b1 = 0, b1 = 1, TEX is in b14-12
+					  -->
+						<DecoderName>GetL2TypeExtensionBits_v7MMU</DecoderName>
+						<BitfieldMask>0x03</BitfieldMask>
+						<BitfieldShift>0</BitfieldShift>
+						<Multiplier>1.0</Multiplier>
+						<AddToProduct>0</AddToProduct>
+						<DecoderTable>
+							<NumDecoders>4</NumDecoders>
+							<Array index="0">AlwaysZero</Array>
+							<Array index="1">Getb14_b12</Array>
+							<Array index="2">Getb8_b6</Array>
+							<Array index="1">Getb8_b6</Array>
+						</DecoderTable>					
+						<StringTable>
+							<NumStrings>8</NumStrings>
+							<Array index="0">TEX=000b</Array>
+							<Array index="1">TEX=001b</Array>
+							<Array index="2">TEX=010b</Array>
+							<Array index="3">TEX=011b</Array>
+							<Array index="4">TEX=100b</Array>
+							<Array index="5">TEX=101b</Array>
+							<Array index="6">TEX=110b</Array>
+							<Array index="7">TEX=111b</Array>
+						</StringTable>										
+					</Decoder>	
+					<Decoder>
+					<!-- for ARM v7 L1 PTEs, the Access Permissions are a 3 bit field defined by 
+						    b2 = b15 (the APX bit)
+						    b1:b0 = b11:b10 (the AP bit field)-->
+					    <DecoderName>GetMMUv7L1AccessPermission</DecoderName>
+						<BitfieldMask>0x08000</BitfieldMask>
+						<BitfieldShift>15</BitfieldShift>
+						<Multiplier>1.0</Multiplier>
+						<AddToProduct>0</AddToProduct>
+						<DecoderTable>
+							<NumDecoders>2</NumDecoders>
+							<Array index="0">Getb11_b10</Array>
+							<Array index="1">Getb11_b10_Add_4</Array>
+						</DecoderTable>						    
+					</Decoder>
+					<Decoder>
+					<!-- for ARM v7 L2 PTEs, the Access Permissions are a 3 bit field defined by
+					        b2 = b9 (the APX bit)
+					        b1:b0 = b5:b4 (the AP bit field) -->
+						<DecoderName>GetMMUv7L2AccessPermission</DecoderName>
+						<BitfieldMask>0x0200</BitfieldMask>
+						<BitfieldShift>9</BitfieldShift>
+						<Multiplier>1.0</Multiplier>
+						<AddToProduct>0</AddToProduct>
+						<DecoderTable>
+							<NumDecoders>2</NumDecoders>
+							<Array index="0">Getb5_b4</Array>
+							<Array index="1">Getb5_b4_Add_4</Array>
+						</DecoderTable>						    
+					</Decoder>			
+					<Decoder>
+					   <!-- Return a string indicating the MMU version that is configured based on the 
+					     IsArmV7MmuMode decoder output -->
+						<DecoderName>GetMmuVersionString</DecoderName>
+						<BitfieldMask>0x0</BitfieldMask>
+						<BitfieldShift>0</BitfieldShift>
+						<Multiplier>1.0</Multiplier>
+						<AddToProduct>0</AddToProduct>
+						<DecoderTable>
+							<NumDecoders>1</NumDecoders>
+							<Array index="0">IsArmV7MmuMode</Array>
+						</DecoderTable>					
+						<StringTable>
+							<NumStrings>2</NumStrings>
+							<Array index="0">v5 MMU (CP15 Control:XP=0) </Array>
+							<Array index="1">v7 MMU (CP15 Control.U=1) </Array>
+						</StringTable>
+					</Decoder>					
+					&DecoderBase;					
+				</DecoderDefinitions>
+			</Core>
+		</Device>
+	</CcsMemoryServer>
+</CodeComposer>

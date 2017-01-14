@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!--                                                  -->
+<!-- Blackhawk USB560 Emulator XML Definitions.       -->
+<!--                                                  -->
+<!-- This is a CCStudio v4/v5 compatible XML.         -->
+<!--                                                  -->
+<!-- 23 December 2011                                 -->
+<!-- v5.1.0.106                                       -->
+<!--                                                  -->
+
+<connection id="Blackhawk USB560 Emulator" class="337502">
+
+    <connectionType Type="TIXDS560"/>
+
+    <property id="Emulator Filename" Type="stringfield" Value="bh560usb.out" ID="USCIF.ECOM_DRVR" />
+
+    <property desc="Emulator I/O Port Number" Type="stringfield" Value="0" id="portAddr1" ID="USCIF.ECOM_PORT" />
+
+    <property id="JTAG TCLK Frequency (MHz)" Type="choicelist" Value="1" ID="USCIF.TCLK_PROGRAM">
+
+        <choice Name="Automatic with faster 35.0MHz limit" value="AUTOMATIC">
+            <property id="Automatic" Type="hiddenfield" Value="EXCHANGE" ID="USCIF.TCLK_FREQUENCY"/>
+        </choice>
+        <choice Name="Automatic with legacy 10.368MHz limit" value="AUTOMATIC">
+            <property id="Automatic" Type="hiddenfield" Value="LEGACY" ID="USCIF.TCLK_FREQUENCY"/>
+        </choice>
+        <choice Name="Automatic with user specified limit" value="AUTOMATIC">
+            <property id="Enter any value from 0.50 to 35.0" Type="stringfield" Value="10.368" ID="USCIF.TCLK_FREQUENCY"/>
+        </choice>
+        <choice Name="Fixed with user specified value" value="SPECIFIC">
+            <property id="Enter any value from 0.50 to 35.0" Type="stringfield" Value="10.368" ID="USCIF.TCLK_FREQUENCY"/>
+        </choice>
+
+    </property>
+
+    <property id="TMS/TDO Output Timing" Type="choicelist" Value="1" ID="USCIF.TDOEDGE">
+
+        <choice Name="Rising edge allows faster TCLK" value="RISE" />
+        <choice Name="Falling edge is JTAG standard"  value="FALL" />
+
+    </property>
+
+    <property Name="Diagnostic Command" Type="hiddenfield" Value="%ccs_base%/common/uscif/dbgjtag.exe -f %boarddatafile% -rv -o -F inform,logfile=yes -S pathlength -S integrity" ID="DiagnosticCommand"/>
+
+</connection>

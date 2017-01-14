@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cpu HW_revision="1.0" XML_version="1.2" id="TMS320C646X" isa="TMS320C646X" desc="C646X" description="C64x+ MiniGEM CPU">
+	<register id="PC" acronym="PC" width="32" description="" />
+	<register id="CLK" acronym="CLK" width="32" description="" />
+	<register id="SP" acronym="SP" width="32" description="" />
+	<register id="FP" acronym="FP" width="32" description="" />
+	<register id="A0" acronym="A0" width="32" description="" />
+	<register id="A1" acronym="A1" width="32" description="" />
+	<register id="A2" acronym="A2" width="32" description="" />
+	<register id="A3" acronym="A3" width="32" description="" />
+	<register id="A4" acronym="A4" width="32" description="" />
+	<register id="A5" acronym="A5" width="32" description="" />
+	<register id="A6" acronym="A6" width="32" description="" />
+	<register id="A7" acronym="A7" width="32" description="" />
+	<register id="A8" acronym="A8" width="32" description="" />
+	<register id="A9" acronym="A9" width="32" description="" />
+	<register id="A10" acronym="A10" width="32" description="" />
+	<register id="A11" acronym="A11" width="32" description="" />
+	<register id="A12" acronym="A12" width="32" description="" />
+	<register id="A13" acronym="A13" width="32" description="" />
+	<register id="A14" acronym="A14" width="32" description="" />
+	<register id="A15" acronym="A15" width="32" description="" />
+	<register id="B0" acronym="B0" width="32" description="" />
+	<register id="B1" acronym="B1" width="32" description="" />
+	<register id="B2" acronym="B2" width="32" description="" />
+	<register id="B3" acronym="B3" width="32" description="" />
+	<register id="B4" acronym="B4" width="32" description="" />
+	<register id="B5" acronym="B5" width="32" description="" />
+	<register id="B6" acronym="B6" width="32" description="" />
+	<register id="B7" acronym="B7" width="32" description="" />
+	<register id="B8" acronym="B8" width="32" description="" />
+	<register id="B9" acronym="B9" width="32" description="" />
+	<register id="B10" acronym="B10" width="32" description="" />
+	<register id="B11" acronym="B11" width="32" description="" />
+	<register id="B12" acronym="B12" width="32" description="" />
+	<register id="B13" acronym="B13" width="32" description="" />
+	<register id="B14" acronym="B14" width="32" description="" />
+	<register id="B15" acronym="B15" width="32" description="" />
+	<register id="AMR" acronym="AMR" width="32" description="Addressing mode register">
+		<bitfield id="_RESV" width="6" begin="31" end="26" resetval="0" description="Reserved" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="BK1" width="5" begin="25" end="21" resetval="1" description="Block size 1" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="BK0" width="5" begin="20" end="16" resetval="1" description="Block size 0" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="B7MODE" width="2" begin="15" end="14" resetval="0" description="B7 mode" range="" rwaccess="RW">
+			<bitenum id="LINEAR" value="0" token="LINEAR" description="" />
+			<bitenum id="CIRCULARBK0" value="1" token="CIRCULARBK0" description="" />
+			<bitenum id="CIRCULARBK1" value="2" token="CIRCULARBK1" description="" />
+			<bitenum id="RESV" value="3" token="RESV" description="" />
+		</bitfield>
+		<bitfield id="B6MODE" width="2" begin="13" end="12" resetval="0" description="B6 mode" range="" rwaccess="RW">
+			<bitenum id="LINEAR" value="0" token="LINEAR" description="" />
+			<bitenum id="CIRCULARBK0" value="1" token="CIRCULARBK0" description="" />
+			<bitenum id="CIRCULARBK1" value="2" token="CIRCULARBK1" description="" />
+			<bitenum id="RESV" value="3" token="RESV" description="" />
+		</bitfield>
+		<bitfield id="B5MODE" width="2" begin="11" end="10" resetval="0" description="B5 mode" range="" rwaccess="RW">
+			<bitenum id="LINEAR" value="0" token="LINEAR" description="" />
+			<bitenum id="CIRCULARBK1" value="1" token="CIRCULARBK1" description="" />
+			<bitenum id="CIRCULARBK2" value="2" token="CIRCULARBK2" description="" />
+			<bitenum id="RESV" value="3" token="RESV" description="" />
+		</bitfield>
+		<bitfield id="B4MODE" width="2" begin="9" end="8" resetval="0" description="B4 mode" range="" rwaccess="RW">
+			<bitenum id="LINEAR" value="0" token="LINEAR" description="" />
+			<bitenum id="CIRCULARBK1" value="1" token="CIRCULARBK1" description="" />
+			<bitenum id="CIRCULARBK2" value="2" token="CIRCULARBK2" description="" />
+			<bitenum id="RESV" value="3" token="RESV" description="" />
+		</bitfield>
+		<bitfield id="A7MODE" width="2" begin="7" end="6" resetval="0" description="A7 mode" range="" rwaccess="RW">
+			<bitenum id="LINEAR" value="0" token="LINEAR" description="" />
+			<bitenum id="CIRCULARBK1" value="1" token="CIRCULARBK1" description="" />
+			<bitenum id="CIRCULARBK2" value="2" token="CIRCULARBK2" description="" />
+			<bitenum id="RESV" value="3" token="RESV" description="" />
+		</bitfield>
+		<bitfield id="A6MODE" width="2" begin="5" end="4" resetval="0" description="A6 mode" range="" rwaccess="RW">
+			<bitenum id="LINEAR" value="0" token="LINEAR" description="" />
+			<bitenum id="CIRCULARBK2" value="1" token="CIRCULARBK2" description="" />
+			<bitenum id="CIRCULARBK3" value="2" token="CIRCULARBK3" description="" />
+			<bitenum id="RESV" value="3" token="RESV" description="" />
+		</bitfield>
+		<bitfield id="A5MODE" width="2" begin="3" end="2" resetval="0" description="A5 mode" range="" rwaccess="RW">
+			<bitenum id="LINEAR" value="0" token="LINEAR" description="" />
+			<bitenum id="CIRCULARBK3" value="1" token="CIRCULARBK3" description="" />
+			<bitenum id="CIRCULARBK4" value="2" token="CIRCULARBK4" description="" />
+			<bitenum id="RESV" value="3" token="RESV" description="" />
+		</bitfield>
+		<bitfield id="A4MODE" width="2" begin="1" end="0" resetval="0" description="A4 mode" range="" rwaccess="RW">
+			<bitenum id="LINEAR" value="0" token="LINEAR" description="" />
+			<bitenum id="CIRCULARBK4" value="1" token="CIRCULARBK4" description="" />
+			<bitenum id="CIRCULARBK5" value="2" token="CIRCULARBK5" description="" />
+			<bitenum id="RESV" value="3" token="RESV" description="" />
+		</bitfield>
+	</register>
+	<register id="CSR" acronym="CSR" width="32" description="Control status register">
+		<bitfield id="CPU_ID" width="8" begin="31" end="24" resetval="8" description="CPU ID " range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="REV_ID" width="8" begin="23" end="16" resetval="2049" description="Revision ID" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="PWRD" width="6" begin="15" end="10" resetval="0" description="Control power-down modes" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="SAT" width="1" begin="9" end="9" resetval="0" description="Saturate " range="" rwaccess="RW">
+			<bitenum id="SATURATE" value="1" token="SATURATE" description="" />
+			<bitenum id="NONSATURATE" value="0" token="NONSATURATE" description="" />
+		</bitfield>
+		<bitfield id="EN" width="1" begin="8" end="8" resetval="" description="Endianness" range="" rwaccess="R">
+			<bitenum id="BIG" value="0" token="BIG" description="" />
+			<bitenum id="LITTLE" value="1" token="LITTLE" description="" />
+		</bitfield>
+		<bitfield id="PCC" width="3" begin="7" end="5" resetval="0" description="Program Cache control mode" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="DCC" width="3" begin="4" end="2" resetval="0" description="Data Cache control mode" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="PGIE" width="1" begin="1" end="1" resetval="0" description="Previous GIE" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="GIE" width="1" begin="0" end="0" resetval="0" description="Global interrupt enable " range="" rwaccess="RW">
+			<bitenum id="ENABLE" value="1" token="ENABLE" description="" />
+			<bitenum id="DISABLE" value="0" token="DISABLE" description="" />
+		</bitfield>
+	</register>
+	<register id="IFR" acronym="IFR" width="32" description="Interrupt Flag Register">
+		<bitfield id="_RESV" width="16" begin="31" end="16" resetval="0" description="Reserved" range="" rwaccess="">
+		</bitfield>
+		<bitfield id="IF15" width="1" begin="15" end="15" resetval="0" description="Interrupt flag 15" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="IF14" width="1" begin="14" end="14" resetval="0" description="Interrupt flag 14" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="IF13" width="1" begin="13" end="13" resetval="0" description="Interrupt flag 13" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="IF12" width="1" begin="12" end="12" resetval="0" description="Interrupt flag 12" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="IF11" width="1" begin="11" end="11" resetval="0" description="Interrupt flag 11" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="IF10" width="1" begin="10" end="10" resetval="0" description="Interrupt flag 10" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="IF9" width="1" begin="9" end="9" resetval="0" description="Interrupt flag 9" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="IF8" width="1" begin="8" end="8" resetval="0" description="Interrupt flag 8" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="IF7" width="1" begin="7" end="7" resetval="0" description="Interrupt flag 7" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="IF6" width="1" begin="6" end="6" resetval="0" description="Interrupt flag 6" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="IF5" width="1" begin="5" end="5" resetval="0" description="Interrupt flag 5" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="IF4" width="1" begin="4" end="4" resetval="0" description="Interrupt flag 4" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="_RESV" width="2" begin="3" end="2" resetval="0" description="Reserved" range="" rwaccess="">
+		</bitfield>
+		<bitfield id="NMIF" width="1" begin="1" end="1" resetval="0" description="Non maskable Interrupt flag" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="_RESV" width="1" begin="0" end="0" resetval="0" description="Reserved" range="" rwaccess="">
+		</bitfield>
+	</register>
+	<register id="ISR" acronym="ISR" width="32" description="Interrupt Set Register">
+		<bitfield id="_RESV" width="16" begin="31" end="16" resetval="0" description="Reserved" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="IS15" width="1" begin="15" end="15" resetval="0" description="Interrupt 15 Set" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="IS14" width="1" begin="14" end="14" resetval="0" description="Interrupt 14 Set" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="IS13" width="1" begin="13" end="13" resetval="0" description="Interrupt 15 Set" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="IS12" width="1" begin="12" end="12" resetval="0" description="Interrupt 14 Set" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="IS11" width="1" begin="11" end="11" resetval="0" description="Interrupt 15 Set" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="IS10" width="1" begin="10" end="10" resetval="0" description="Interrupt 14 Set" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="IS9" width="1" begin="9" end="9" resetval="0" description="Interrupt 15 Set" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="IS8" width="1" begin="8" end="8" resetval="0" description="Interrupt 14 Set" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="IS7" width="1" begin="7" end="7" resetval="0" description="Interrupt 15 Set" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="IS6" width="1" begin="6" end="6" resetval="0" description="Interrupt 14 Set" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="IS5" width="1" begin="5" end="5" resetval="0" description="Interrupt 15 Set" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="IS4" width="1" begin="4" end="4" resetval="0" description="Interrupt 15 Set" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="_RESV" width="4" begin="3" end="0" resetval="0" description="Reserved" range="" rwaccess="">
+		</bitfield>
+	</register>
+	<register id="ICR" acronym="ICR" width="32" description="Interrupt clear Register">
+		<bitfield id="_RESV" width="16" begin="31" end="16" resetval="0" description="Reserved" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="IC15" width="1" begin="15" end="15" resetval="0" description="Interrupt 15 Clear" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="IC14" width="1" begin="14" end="14" resetval="0" description="Interrupt 14 Clear" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="IC13" width="1" begin="13" end="13" resetval="0" description="Interrupt 15 Clear" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="IC12" width="1" begin="12" end="12" resetval="0" description="Interrupt 14 Clear" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="IC11" width="1" begin="11" end="11" resetval="0" description="Interrupt 15 Clear" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="IC10" width="1" begin="10" end="10" resetval="0" description="Interrupt 14 Clear" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="IC9" width="1" begin="9" end="9" resetval="0" description="Interrupt 15 Clear" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="IC8" width="1" begin="8" end="8" resetval="0" description="Interrupt 14 Clear" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="IC7" width="1" begin="7" end="7" resetval="0" description="Interrupt 15 Clear" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="IC6" width="1" begin="6" end="6" resetval="0" description="Interrupt 14 Clear" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="IC5" width="1" begin="5" end="5" resetval="0" description="Interrupt 15 Clear" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="IC4" width="1" begin="4" end="4" resetval="0" description="Interrupt 14 Clear" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="_RESV" width="4" begin="3" end="0" resetval="0" description="Reserved" range="" rwaccess="">
+		</bitfield>
+	</register>
+	<register id="IER" acronym="IER" width="32" description="Interrupt enable Register">
+		<bitfield id="_RESV" width="16" begin="31" end="16" resetval="0" description="Reserved" range="" rwaccess="">
+		</bitfield>
+		<bitfield id="IE15" width="1" begin="15" end="15" resetval="0" description="Interrupt enable 15" range="" rwaccess="RW">
+			<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable" />
+			<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable" />
+		</bitfield>
+		<bitfield id="IE14" width="1" begin="14" end="14" resetval="0" description="Interrupt enable 14" range="" rwaccess="RW">
+			<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable" />
+			<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable" />
+		</bitfield>
+		<bitfield id="IE13" width="1" begin="13" end="13" resetval="0" description="Interrupt enable 13" range="" rwaccess="RW">
+			<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable" />
+			<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable" />
+		</bitfield>
+		<bitfield id="IE12" width="1" begin="12" end="12" resetval="0" description="Interrupt enable 12" range="" rwaccess="RW">
+			<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable" />
+			<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable" />
+		</bitfield>
+		<bitfield id="IE11" width="1" begin="11" end="11" resetval="0" description="Interrupt enable 11" range="" rwaccess="RW">
+			<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable" />
+			<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable" />
+		</bitfield>
+		<bitfield id="IE10" width="1" begin="10" end="10" resetval="0" description="Interrupt enable 10" range="" rwaccess="RW">
+			<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable" />
+			<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable" />
+		</bitfield>
+		<bitfield id="IE09" width="1" begin="9" end="9" resetval="0" description="Interrupt enable 9" range="" rwaccess="RW">
+			<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable" />
+			<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable" />
+		</bitfield>
+		<bitfield id="IE08" width="1" begin="8" end="8" resetval="0" description="Interrupt enable 8" range="" rwaccess="RW">
+			<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable" />
+			<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable" />
+		</bitfield>
+		<bitfield id="IE07" width="1" begin="7" end="7" resetval="0" description="Interrupt enable 7" range="" rwaccess="RW">
+			<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable" />
+			<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable" />
+		</bitfield>
+		<bitfield id="IE06" width="1" begin="6" end="6" resetval="0" description="Interrupt enable 6" range="" rwaccess="RW">
+			<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable" />
+			<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable" />
+		</bitfield>
+		<bitfield id="IE05" width="1" begin="5" end="5" resetval="0" description="Interrupt enable 5" range="" rwaccess="RW">
+			<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable" />
+			<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable" />
+		</bitfield>
+		<bitfield id="IE04" width="1" begin="4" end="4" resetval="0" description="Interrupt enable 4" range="" rwaccess="RW">
+			<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable" />
+			<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable" />
+		</bitfield>
+		<bitfield id="_RESV" width="2" begin="3" end="2" resetval="0" description="Reserved" range="" rwaccess="">
+		</bitfield>
+		<bitfield id="NMI" width="1" begin="1" end="1" resetval="0" description="Non maskable interrupt" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="Reserved" width="1" begin="0" end="0" resetval="" description="" range="" rwaccess="N">
+		</bitfield>
+	</register>
+	<register id="ISTP" acronym="ISTP" width="32" description="Interrupt service table pointer">
+		<bitfield id="ISTB" width="22" begin="31" end="10" resetval="0" description="Interrupt Service table base address" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="HPEINT" width="5" begin="9" end="5" resetval="0" description="Specific interrupt occurred" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="_RESV" width="5" begin="4" end="0" resetval="0" description="Reserved" range="" rwaccess="RW">
+		</bitfield>
+	</register>
+	<register id="IRP" acronym="IRP" width="32" description="Interrupt return pointer">
+	</register>
+	<register id="NRP" acronym="NRP" width="32" description="Non maskable interrupt">
+	</register>
+	<register id="ERP" acronym="ERP" width="32" description="Exception return pointer">
+	</register>
+	<register id="TSCL" acronym="TSCL" width="32" description="Low half of 64-bit timestamp">
+	</register>
+	<register id="TSCH" acronym="TSCH" width="32" description="High half of 64-bit timestamp">
+	</register>
+	<register id="ARP" acronym="ARP" width="32" description="Analysis return pointer">
+	</register>
+	<register id="ILC" acronym="ILC" width="32" description="Inner loop SPL buffer count">
+	</register>
+	<register id="RILC" acronym="RILC" width="32" description="Reload Inner loop SPL buffer count">
+	</register>
+	<register id="PCE1" acronym="PCE1" width="32" description="Program counter E1 phase">
+	</register>
+	<register id="DNUM" acronym="DNUM" width="32" description="DSP Number">
+		<bitfield id="_RESV" width="24" begin="31" end="8" resetval="0" description="Reserved" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="DSPNUM" width="8" begin="7" end="0" resetval="0" description="" range="" rwaccess="R">
+		</bitfield>
+	</register>
+	<register id="SSR" acronym="SSR" width="32" description="Saturation status register">
+		<bitfield id="RESV" width="26" begin="31" end="6" resetval="0" description="Reserved" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="M2" width="1" begin="5" end="5" resetval="0" description="Saturation in M2 Unit" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="M1" width="1" begin="4" end="4" resetval="0" description="Saturation in M1 Unit" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="S2" width="1" begin="3" end="3" resetval="0" description="Saturation in S2 Unit" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="S1" width="1" begin="2" end="2" resetval="0" description="Saturation in S1 Unit" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="L2" width="1" begin="1" end="1" resetval="0" description="Saturation in L2 Unit" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="L1" width="1" begin="0" end="0" resetval="0" description="Saturation in L1 Unit" range="" rwaccess="R">
+		</bitfield>
+	</register>
+	<register id="GPLYA" acronym="GPLYA" width="32" description="GMPY polynomial for A-side">
+	</register>
+	<register id="GPLYB" acronym="GPLYB" width="32" description="GMPY polynomial for B-side">
+	</register>
+	<register id="GFPGFR" acronym="GFPGFR" width="32" description="Galois field multiply control register">
+		<bitfield id="_RESV" width="5" begin="31" end="27" resetval="0" description="Reserved" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="SIZE" width="3" begin="26" end="24" resetval="7" description="Size" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="_RESV" width="16" begin="23" end="8" resetval="0" description="Reserved" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="POLY" width="8" begin="7" end="0" resetval="29" description="Polynomial" range="" rwaccess="RW">
+		</bitfield>
+	</register>
+	<register id="DIER" acronym="DIER" width="32" description="Debug interrupt enable register">
+	</register>
+	<register id="TSR" acronym="TSR" width="32" description="Task state register">
+		<bitfield id="_RESV" width="16" begin="31" end="16" resetval="0" description="Reserved" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="IB" width="1" begin="15" end="15" resetval="0" description="Interrupts blocked" range="" rwaccess="R">
+			<bitenum id="UNBLOCKED" value="0" token="UNBLOCKED" description="" />
+			<bitenum id="BLOCKED" value="1" token="BLOCKED" description="" />
+		</bitfield>
+		<bitfield id="SPLX" width="1" begin="14" end="14" resetval="0" description="SPLOOP Executing " range="" rwaccess="R">
+			<bitenum id="NOTEXEC" value="0" token="NOTEXEC" description="" />
+			<bitenum id="EXEC" value="1" token="EXEC" description="" />
+		</bitfield>
+		<bitfield id="_RESV" width="3" begin="13" end="11" resetval="0" description="Reserved" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="EXC" width="1" begin="10" end="10" resetval="0" description="Execption Processing" range="" rwaccess="R">
+			<bitenum id="NOTEXEC" value="0" token="NOTEXEC" description="" />
+			<bitenum id="EXEC" value="1" token="EXEC" description="" />
+		</bitfield>
+		<bitfield id="INT" width="1" begin="9" end="9" resetval="0" description="Interrupt Processing" range="" rwaccess="RW">
+			<bitenum id="NOTEXEC" value="0" token="NOTEXEC" description="" />
+			<bitenum id="EXEC" value="1" token="EXEC" description="" />
+		</bitfield>
+		<bitfield id="_RESV" width="1" begin="8" end="8" resetval="0" description="Reserved" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="CXM" width="2" begin="7" end="6" resetval="0" description="Current Execution Mode" range="" rwaccess="R">
+			<bitenum id="SUPERVISOR" value="0" token="SUPERVISOR" description="" />
+			<bitenum id="USER" value="1" token="USER" description="" />
+		</bitfield>
+		<bitfield id="_RESV" width="1" begin="5" end="5" resetval="0" description="Reserved" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="DBGM" width="1" begin="4" end="4" resetval="0" description="Emulator debug mask" range="" rwaccess="R">
+			<bitenum id="EMU_ENABLE" value="0" token="EMU_ENABLE" description="" />
+			<bitenum id="EMU_DISABLE" value="1" token="EMU_DISABLE" description="" />
+		</bitfield>
+		<bitfield id="XEN" width="1" begin="3" end="3" resetval="0" description="Maskable exception enable" range="" rwaccess="RW">
+			<bitenum id="ENABLE" value="1" token="ENABLE" description="" />
+			<bitenum id="DISABLE" value="0" token="DISABLE" description="" />
+		</bitfield>
+		<bitfield id="GEE" width="1" begin="2" end="2" resetval="0" description="Globale exception enable" range="" rwaccess="RW">
+			<bitenum id="ENABLE" value="1" token="ENABLE" description="" />
+			<bitenum id="DISABLE" value="0" token="DISABLE" description="" />
+		</bitfield>
+		<bitfield id="SGIE" width="1" begin="1" end="1" resetval="0" description="Saved global interrupt enable" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="GIE" width="1" begin="0" end="0" resetval="0" description="Global interrupt enable" range="" rwaccess="RW">
+			<bitenum id="ENABLE" value="1" token="ENABLE" description="" />
+			<bitenum id="DISABLE" value="0" token="DISABLE" description="" />
+		</bitfield>
+	</register>
+	<register id="ITSR" acronym="ITSR" width="32" description="Interrupt task state register">
+		<bitfield id="_RESV" width="16" begin="31" end="16" resetval="0" description="Reserved" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="IB" width="1" begin="15" end="15" resetval="0" description="Interrupts blocked" range="" rwaccess="R">
+			<bitenum id="UNBLOCKED" value="0" token="UNBLOCKED" description="" />
+			<bitenum id="BLOCKED" value="1" token="BLOCKED" description="" />
+		</bitfield>
+		<bitfield id="SPLX" width="1" begin="14" end="14" resetval="0" description="SPLOOP Executing " range="" rwaccess="R">
+			<bitenum id="NOTEXEC" value="0" token="NOTEXEC" description="" />
+			<bitenum id="EXEC" value="1" token="EXEC" description="" />
+		</bitfield>
+		<bitfield id="_RESV" width="3" begin="13" end="11" resetval="0" description="Reserved" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="EXC" width="1" begin="10" end="10" resetval="0" description="Execption Processing" range="" rwaccess="R">
+			<bitenum id="NOTEXEC" value="0" token="NOTEXEC" description="" />
+			<bitenum id="EXEC" value="1" token="EXEC" description="" />
+		</bitfield>
+		<bitfield id="INT" width="1" begin="9" end="9" resetval="0" description="Interrupt Processing" range="" rwaccess="RW">
+			<bitenum id="NOTEXEC" value="0" token="NOTEXEC" description="" />
+			<bitenum id="EXEC" value="1" token="EXEC" description="" />
+		</bitfield>
+		<bitfield id="_RESV" width="1" begin="8" end="8" resetval="0" description="Reserved" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="CXM" width="2" begin="7" end="6" resetval="0" description="Current Execution Mode" range="" rwaccess="R">
+			<bitenum id="SUPERVISOR" value="0" token="SUPERVISOR" description="" />
+			<bitenum id="USER" value="1" token="USER" description="" />
+		</bitfield>
+		<bitfield id="_RESV" width="1" begin="5" end="5" resetval="0" description="Reserved" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="DBGM" width="1" begin="4" end="4" resetval="0" description="Emulator debug mask" range="" rwaccess="R">
+			<bitenum id="EMU_ENABLE" value="0" token="EMU_ENABLE" description="" />
+			<bitenum id="EMU_DISABLE" value="1" token="EMU_DISABLE" description="" />
+		</bitfield>
+		<bitfield id="XEN" width="1" begin="3" end="3" resetval="0" description="Maskable exception enable" range="" rwaccess="RW">
+			<bitenum id="ENABLE" value="1" token="ENABLE" description="" />
+			<bitenum id="DISABLE" value="0" token="DISABLE" description="" />
+		</bitfield>
+		<bitfield id="GEE" width="1" begin="2" end="2" resetval="0" description="Globale exception enable" range="" rwaccess="RW">
+			<bitenum id="ENABLE" value="1" token="ENABLE" description="" />
+			<bitenum id="DISABLE" value="0" token="DISABLE" description="" />
+		</bitfield>
+		<bitfield id="SGIE" width="1" begin="1" end="1" resetval="0" description="Saved global interrupt enable" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="GIE" width="1" begin="0" end="0" resetval="0" description="Global interrupt enable" range="" rwaccess="RW">
+			<bitenum id="ENABLE" value="1" token="ENABLE" description="" />
+			<bitenum id="DISABLE" value="0" token="DISABLE" description="" />
+		</bitfield>
+	</register>
+	<register id="NTSR" acronym="NTSR" width="32" description="Non maskable TSR snapshot">
+		<bitfield id="_RESV" width="16" begin="31" end="16" resetval="0" description="Reserved" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="IB" width="1" begin="15" end="15" resetval="0" description="Interrupts blocked" range="" rwaccess="R">
+			<bitenum id="UNBLOCKED" value="0" token="UNBLOCKED" description="" />
+			<bitenum id="BLOCKED" value="1" token="BLOCKED" description="" />
+		</bitfield>
+		<bitfield id="SPLX" width="1" begin="14" end="14" resetval="0" description="SPLOOP Executing " range="" rwaccess="R">
+			<bitenum id="NOTEXEC" value="0" token="NOTEXEC" description="" />
+			<bitenum id="EXEC" value="1" token="EXEC" description="" />
+		</bitfield>
+		<bitfield id="_RESV" width="3" begin="13" end="11" resetval="0" description="Reserved" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="EXC" width="1" begin="10" end="10" resetval="0" description="Execption Processing" range="" rwaccess="R">
+			<bitenum id="NOTEXEC" value="0" token="NOTEXEC" description="" />
+			<bitenum id="EXEC" value="1" token="EXEC" description="" />
+		</bitfield>
+		<bitfield id="INT" width="1" begin="9" end="9" resetval="0" description="Interrupt Processing" range="" rwaccess="RW">
+			<bitenum id="NOTEXEC" value="0" token="NOTEXEC" description="" />
+			<bitenum id="EXEC" value="1" token="EXEC" description="" />
+		</bitfield>
+		<bitfield id="_RESV" width="1" begin="8" end="8" resetval="0" description="Reserved" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="CXM" width="2" begin="7" end="6" resetval="0" description="Current Execution Mode" range="" rwaccess="R">
+			<bitenum id="SUPERVISOR" value="0" token="SUPERVISOR" description="" />
+			<bitenum id="USER" value="1" token="USER" description="" />
+		</bitfield>
+		<bitfield id="_RESV" width="1" begin="5" end="5" resetval="0" description="Reserved" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="DBGM" width="1" begin="4" end="4" resetval="0" description="Emulator debug mask" range="" rwaccess="R">
+			<bitenum id="EMU_ENABLE" value="0" token="EMU_ENABLE" description="" />
+			<bitenum id="EMU_DISABLE" value="1" token="EMU_DISABLE" description="" />
+		</bitfield>
+		<bitfield id="XEN" width="1" begin="3" end="3" resetval="0" description="Maskable exception enable" range="" rwaccess="RW">
+			<bitenum id="ENABLE" value="1" token="ENABLE" description="" />
+			<bitenum id="DISABLE" value="0" token="DISABLE" description="" />
+		</bitfield>
+		<bitfield id="GEE" width="1" begin="2" end="2" resetval="0" description="Globale exception enable" range="" rwaccess="RW">
+			<bitenum id="ENABLE" value="1" token="ENABLE" description="" />
+			<bitenum id="DISABLE" value="0" token="DISABLE" description="" />
+		</bitfield>
+		<bitfield id="SGIE" width="1" begin="1" end="1" resetval="0" description="Saved global interrupt enable" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="GIE" width="1" begin="0" end="0" resetval="0" description="Global interrupt enable" range="" rwaccess="RW">
+			<bitenum id="ENABLE" value="1" token="ENABLE" description="" />
+			<bitenum id="DISABLE" value="0" token="DISABLE" description="" />
+		</bitfield>
+	</register>
+	<register id="ETSR" acronym="ETSR" width="32" description="Exception TSR snapshot">
+		<bitfield id="_RESV" width="16" begin="31" end="16" resetval="0" description="Reserved" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="IB" width="1" begin="15" end="15" resetval="0" description="Interrupts blocked" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="SPLX" width="1" begin="14" end="14" resetval="0" description="SPLOOP Executing " range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="_RESV" width="3" begin="13" end="11" resetval="0" description="Reserved" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="EXC" width="1" begin="10" end="10" resetval="0" description="Execption Processing" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="INT" width="1" begin="9" end="9" resetval="0" description="Interrupt Processing" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="_RESV" width="1" begin="8" end="8" resetval="0" description="Reserved" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="CXM" width="2" begin="7" end="6" resetval="0" description="Current Execution Mode" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="_RESV" width="1" begin="5" end="5" resetval="0" description="Reserved" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="DBGM" width="1" begin="4" end="4" resetval="0" description="Emulator debug mask" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="XEN" width="1" begin="3" end="3" resetval="0" description="Maskable exception enable" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="GEE" width="1" begin="2" end="2" resetval="0" description="Globale exception enable" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="SGIE" width="1" begin="1" end="1" resetval="0" description="Saved global interrupt enable" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="GIE" width="1" begin="0" end="0" resetval="0" description="Global interrupt enable" range="" rwaccess="RW">
+		</bitfield>
+	</register>
+	<register id="EFR" acronym="EFR" width="32" description="Exception Flag Register">
+		<bitfield id="NXF" width="1" begin="31" end="31" resetval="0" description="NMI Exception flag" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="EXF" width="1" begin="30" end="30" resetval="0" description="EXCEP Exception flag" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="_RESV" width="28" begin="29" end="2" resetval="0" description="Reserved" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="IXF" width="1" begin="1" end="1" resetval="0" description="Internal Exception flag" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="OXF" width="1" begin="0" end="0" resetval="0" description="OSSR Exception flag" range="" rwaccess="RW">
+		</bitfield>
+	</register>
+	<register id="ECR" acronym="ECR" width="32" description="Exception clear register">
+		<bitfield id="NXC" width="1" begin="31" end="31" resetval="0" description="NMI Exception Clear" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="EXC" width="1" begin="30" end="30" resetval="0" description="EXCEP Exception Clear" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="_RESV" width="28" begin="29" end="2" resetval="0" description="Reserved" range="" rwaccess="R">
+		</bitfield>
+		<bitfield id="IXC" width="1" begin="1" end="1" resetval="0" description="Internal Exception Clear" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="OXC" width="1" begin="0" end="0" resetval="0" description="OSSR Exception Clear" range="" rwaccess="RW">
+		</bitfield>
+	</register>
+	<register id="IERR" acronym="IERR" width="32" description="Internal exception cause register">
+	</register>
+
+	<instance href="..\Modules\64x+NotVisible.xml" id="" xml="64x+NotVisible.xml" xmlpath="..\Modules\" HW_revision="1.0" description="" requestor="TMS320C64XX" baseaddr="0" size="00" accessnumbytes="4" permissions="p"/>
+	<instance href="..\Modules\c646xRegisterPairs.xml" id="RegisterPairs" xml="c646xRegisterPairs.xml" xmlpath="..\Modules\" HW_revision="1.0" description="RegisterPairs" requestor="TMS320C646X" baseaddr="0" size="00" accessnumbytes="4" permissions="p"/>
+</cpu>

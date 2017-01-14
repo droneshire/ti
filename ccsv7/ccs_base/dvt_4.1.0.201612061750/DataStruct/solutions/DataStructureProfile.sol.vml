@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewStates>
+<editors>
+<editorArea activeWorkbook="DefaultEditorWorkbook">
+<info part="DefaultEditorWorkbook">
+<folder appearance="1" expanded="2">
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+</presentation>
+</folder>
+</info>
+</editorArea>
+<editor activePart="true" focus="true" id="com.ti.dvt.gsb.editor.GsbEditor" name="DataStructureProfile" partName="DataStructureProfile" path="C:/TexasInstruments/CCS4.2_1030/ccsv4/dvt/DataStruct/solutions/DataStructureProfile" title="DataStructureProfile" tooltip="C:TexasInstruments/CCS4.2_1030/ccsv4/dvt/DataStruct/solutions/DataStructureProfile" workbook="DefaultEditorWorkbook">
+<input factoryID="com.ti.dvt.gsb.PathEditorInputFactory" path="C:/TexasInstruments/CCS4.2_1030/ccsv4/dvt/DataStruct/solutions/DataStructureProfile"/>
+</editor>
+</editors>
+<perspectives>
+<perspective editorAreaVisible="1" fixed="0" version="0.016">
+<descriptor descriptor="org.eclipse.cdt.ui.CPerspective" id="Solution" label="Solution"/>
+<alwaysOnActionSet id="com.ti.ccstudio.debug.ui.licensing"/>
+<alwaysOnActionSet id="com.ti.ccstudio.pinport.common.actionSet"/>
+<alwaysOnActionSet id="com.ti.ccstudio.profile.setup.actionSet"/>
+<alwaysOnActionSet id="com.ti.ccstudio.project.ui.actionSet_Project_Build"/>
+<alwaysOnActionSet id="com.ti.ccstudio.system.GELmenu.actionSet"/>
+<alwaysOnActionSet id="com.ti.ccstudio.debug.ui.DebugActionSet.TargetConfiguration"/>
+<alwaysOnActionSet id="com.ti.ccstudio.trace.control.actionSet"/>
+<alwaysOnActionSet id="com.ti.ccstudio.ui.mediaWiki"/>
+<alwaysOnActionSet id="com.ti.ccstudio.useaccess.viewsMenuSet"/>
+<alwaysOnActionSet id="com.ti.dvt.graph.visualization.graph"/>
+<alwaysOnActionSet id="com.ti.dvt.solutioncontrol"/>
+<alwaysOnActionSet id="com.ti.dvt.ui.viewActionSet"/>
+<alwaysOnActionSet id="com.ti.dvt.trace.actions.TraceAction"/>
+<alwaysOnActionSet id="com.ti.dvt.via.plugin.ActionSet"/>
+<alwaysOnActionSet id="org.eclipse.cdt.ui.CodingActionSet"/>
+<alwaysOnActionSet id="org.eclipse.search.searchActionSet"/>
+<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.openExternalFile"/>
+<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.annotationNavigation"/>
+<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.navigation"/>
+<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.convertLineDelimitersTo"/>
+<alwaysOnActionSet id="org.eclipse.ui.actionSet.keyBindings"/>
+<alwaysOnActionSet id="org.eclipse.update.ui.softwareUpdates"/>
+<alwaysOnActionSet id="com.ti.dvt.profiler.actionSet"/>
+<alwaysOnActionSet id="com.ti.dvt.rovsupport"/>
+<alwaysOnActionSet id="com.ti.dvt.rta.actionSet"/>
+<alwaysOnActionSet id="org.eclipse.rtsc.xdctools.ui.actionSet"/>
+<alwaysOnActionSet id="org.eclipse.rtsc.xdaistools.ui.actionSet"/>
+<alwaysOnActionSet id="org.eclipse.cdt.ui.SearchActionSet"/>
+<alwaysOnActionSet id="org.eclipse.ui.NavigateActionSet"/>
+<alwaysOnActionSet id="com.ti.ccstudio.debug.ui.actionSet_Launch"/>
+<alwaysOnActionSet id="com.ti.ccstudio.ui.actionSet_managedBuild"/>
+<alwaysOnActionSet id="com.ti.ccstudio.project.ui.actionSet_Project"/>
+<alwaysOnActionSet id="org.eclipse.cdt.managedbuilder.ui.buildConfigActionSet"/>
+<alwaysOnActionSet id="org.eclipse.debug.ui.launchActionSet"/>
+<alwaysOnActionSet id="com.ti.dvt.gsb.actionSet"/>
+<show_view_action id="org.eclipse.cdt.ui.CView"/>
+<show_view_action id="com.ti.ccstudio.system.setup.ui.views.TargetConfigurationView"/>
+<show_view_action id="com.ti.ccstudio.scripting.console.ConsoleView"/>
+<show_view_action id="org.eclipse.search.ui.views.SearchView"/>
+<show_view_action id="org.eclipse.ui.console.ConsoleView"/>
+<show_view_action id="org.eclipse.ui.views.ContentOutline"/>
+<show_view_action id="org.eclipse.ui.views.ProblemView"/>
+<show_view_action id="org.eclipse.ui.views.PropertySheet"/>
+<show_view_action id="org.eclipse.ui.views.ResourceNavigator"/>
+<new_wizard_action id="com.ti.ccstudio.managedbuild.ui.wizards.project.NewProjectWizard"/>
+<new_wizard_action id="org.eclipse.cdt.make.ui.wizards.NewMakeCCProjectWizard"/>
+<new_wizard_action id="org.eclipse.cdt.ui.wizards.NewClassCreationWizard"/>
+<new_wizard_action id="org.eclipse.cdt.ui.wizards.NewSourceFileCreationWizard"/>
+<new_wizard_action id="org.eclipse.cdt.ui.wizards.NewHeaderFileCreationWizard"/>
+<new_wizard_action id="org.eclipse.cdt.ui.wizards.NewFileCreationWizard"/>
+<new_wizard_action id="org.eclipse.cdt.ui.wizards.NewFolderCreationWizard"/>
+<new_wizard_action id="com.ti.ccstudio.managedbuild.ui.wizards.project.NewRTSCConfigurationProjectWizard"/>
+<new_wizard_action id="com.ti.ccstudio.system.setup.editor.wizards.SystemSetupNewWizard"/>
+<new_wizard_action id="org.eclipse.rtsc.xdctools.buildDefinitions.DSPBIOS_5_31.tools.DSPBIOSCreateNew"/>
+<new_wizard_action id="org.eclipse.rtsc.xdctools.RTSCConfigFileWizard"/>
+<perspective_action id="org.eclipse.debug.ui.DebugPerspective"/>
+<perspective_action id="org.eclipse.team.ui.TeamSynchronizingPerspective"/>
+<perspective_action id="org.eclipse.cdt.ui.CPerspective"/>
+<view id="org.eclipse.cdt.ui.CView"/>
+<view id="org.eclipse.ui.views.ContentOutline"/>
+<layout>
+<mainWindow>
+<info folder="true" part="topLeft">
+<folder activePageID="org.eclipse.cdt.ui.CView" appearance="2" expanded="2">
+<page content="org.eclipse.cdt.ui.CView" label="C/C++ Projects"/>
+<page content="org.eclipse.ui.views.BookmarkView" label="LabelNotFound"/>
+<page content="com.ti.ccstudio.system.setup.ui.views.TargetConfigurationView" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+</presentation>
+</folder>
+</info>
+<info folder="true" part="stickyFolderRight" ratio="0.74950296" ratioLeft="754" ratioRight="252" relationship="2" relative="topLeft">
+<folder appearance="2" expanded="2">
+<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
+<page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
+<page content="org.eclipse.ui.cheatsheets.views.CheatSheetView" label="LabelNotFound"/>
+</folder>
+</info>
+<info part="org.eclipse.ui.editorss" ratio="0.24950299" ratioLeft="251" ratioRight="755" relationship="2" relative="topLeft"/>
+<info folder="true" part="topRight" ratio="0.7496689" ratioLeft="566" ratioRight="189" relationship="2" relative="org.eclipse.ui.editorss">
+<folder activePageID="org.eclipse.ui.views.ContentOutline" appearance="2" expanded="2">
+<page content="org.eclipse.ui.views.ContentOutline" label="Outline"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+</presentation>
+</folder>
+</info>
+<info part="org.eclipse.ui.console.ConsoleView" ratio="0.7" ratioLeft="497" ratioRight="213" relationship="4" relative="org.eclipse.ui.editorss"/>
+<info part="org.eclipse.ui.views.ProblemView" ratio="0.5" ratioLeft="283" ratioRight="283" relationship="2" relative="org.eclipse.ui.console.ConsoleView"/>
+<info part="org.eclipse.rtsc.xdctools.model.ui.views.packageView" ratio="0.5" ratioLeft="355" ratioRight="355" relationship="4" relative="topLeft"/>
+</mainWindow>
+</layout>
+</perspective>
+</perspectives>
+</ViewStates>

@@ -1,0 +1,8 @@
+<?xml version="1.0"?><drivers id="tixds510etb11">
+	<isa Type="ETB11" ProcID="0x75801004">
+		<driver file="..\..\..\emulation\drivers\tixds510etb11.dvr">
+			<connectionType Type="TIXDS510"/>
+            <connectionType Type="TIXDS110"/>
+		</driver>
+	</isa>
+</drivers>

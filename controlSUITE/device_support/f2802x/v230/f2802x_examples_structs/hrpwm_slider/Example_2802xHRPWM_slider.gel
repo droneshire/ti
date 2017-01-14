@@ -1,0 +1,21 @@
+/*
+// TI File $Revision: /main/2 $
+// Checkin $Date: December 17, 2009   14:34:20 $
+//###########################################################################
+//
+// This .gel file can be used to help demonstrate the example project.
+//
+//###########################################################################
+// $TI Release: F2802x Support Library v230 $
+// $Release Date: Fri May  8 07:43:05 CDT 2015 $
+// $Copyright: Copyright (C) 2008-2015 Texas Instruments Incorporated -
+//             http://www.ti.com/ ALL RIGHTS RESERVED $
+//###########################################################################
+*/
+
+menuitem "f2802x HRPWM FineDutySlider"
+slider FineDutySlider(1, 254, 1, 1, finedutyvalue)
+{
+
+ DutyFine = finedutyvalue;
+}

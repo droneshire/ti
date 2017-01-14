@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<board  id="DEVKITDMOTCTLPFC28035" XML_version="1" desc="Developer's Kit - Dual Motor Control and PFC (F28035)" description="Dual Motor Control and PFC Developer's Kit (F28035)">
+    <instance XML_version="1.2" href="devices/f28035.xml" id="F28035" xml="f28035.xml" xmlpath="." /> 
+</board>

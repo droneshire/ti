@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<translate name="RawDataTranslate">
+	<passthruAll>
+		        <removeField name="StartAddress"/>
+		   	<removeField name="Type"/>
+		   	<removeField name="Length"/>
+		   	<removeField name="Label"/>
+		   	<removeField name="SymbolAddress"/>
+		   	<removeField name="EndAddress"/>
+	</passthruAll>
+	<passthru name="Address" input ="StartAddress"/>
+        <passthru name="Symbol" input ="Label"/>
+</translate>

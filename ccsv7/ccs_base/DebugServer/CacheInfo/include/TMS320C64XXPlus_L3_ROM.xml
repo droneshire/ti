@@ -1,0 +1,99 @@
+﻿<!-- The GEM Memory hierarchy consists of the following:
+	L1P Memory: Region 0, Region 1 (PMC - Program Memory Controller)
+	L1P Cache 
+	L1D Memory: Region 0, Region 1 (DMC - Data Memory Controller)
+	L1D Cache 
+	L2 Memory: Region 0, Region 1  (UMC - Unified Memory Controller)
+	L2 Cache 
+	L3 (either ROM or cache) - optional
+	External Memory 
+	
+	The following variables are defined as External Entity Parameters:
+	
+	-->
+	
+<MemoryType>
+	<Name> &L3Region0Name;</Name>
+	<MemoryLevelName>&L3Region0Name;</MemoryLevelName>
+	<GTIMemHierarchyReadEnableFlags>0x08</GTIMemHierarchyReadEnableFlags>
+	<MemLevelBitFlag>0x08</MemLevelBitFlag>
+	<Description>&L3Region0Name;</Description>
+	<CanBeBypassed>false</CanBeBypassed>
+	<IsBypassedByDefault>false</IsBypassedByDefault>
+	<SimulatorSupportsConsistencyChecking>false</SimulatorSupportsConsistencyChecking>
+	<CanBeLocked>false</CanBeLocked>
+	<!-- CanBeSecured = false for simulator, true for emulator -->
+	<IsCache>false</IsCache>
+	<IsMapped>true</IsMapped>
+	<IsProgram>true</IsProgram>
+	<IsData>true</IsData>
+	<IsIOSpace>false</IsIOSpace>
+	<IsExternal>false</IsExternal>
+	<IsShared>false</IsShared>
+	<IsReserved>false</IsReserved>
+	<IsROM>true</IsROM>
+	<IsPaged>false</IsPaged>
+	<IsVirtualMemorySupported>false</IsVirtualMemorySupported>
+	<IsVirtualWayConversionEnabled>false</IsVirtualWayConversionEnabled>
+	<Linesize>&L3LineSize;</Linesize>
+	<HierarchyDepth>3</HierarchyDepth>
+	<!-- the following are only read if IsCache is false -->
+	<MappedMemory>
+		<PhysicalAddresses>
+			<CanBeDisabled>false</CanBeDisabled>
+			<StartAddress>
+				<IsFixed>true</IsFixed>
+				<FixedValue>&L3Region0StartAdrs;</FixedValue>
+			</StartAddress>
+			<Length>
+				<IsFixed>true</IsFixed>
+				<FixedValue>&L3Region0Length;</FixedValue>
+				<ConfigReg></ConfigReg>
+				<DecoderName></DecoderName>
+			</Length>
+		</PhysicalAddresses>
+	</MappedMemory>
+</MemoryType>
+<!-- id=7 : L3 memory Region 1 -->
+<MemoryType>
+	<Name>&L3Region1Name;</Name>
+	<MemoryLevelName>&L3Region1Name;</MemoryLevelName>
+	<GTIMemHierarchyReadEnableFlags>0x04</GTIMemHierarchyReadEnableFlags>
+	<MemLevelBitFlag>0x08</MemLevelBitFlag>	<Description>&L3Region1Name;</Description>
+	<CanBeBypassed>false</CanBeBypassed>
+	<SimulatorSupportsConsistencyChecking>false</SimulatorSupportsConsistencyChecking>
+	<CanBeLocked>false</CanBeLocked>
+	<!-- CanBeSecured = false for simulator, true for emulator -->
+	<IsCache>false</IsCache>
+	<IsMapped>true</IsMapped>
+	<IsProgram>true</IsProgram>
+	<IsData>true</IsData>
+	<IsIOSpace>false</IsIOSpace>
+	<IsExternal>false</IsExternal>
+	<IsShared>false</IsShared>
+	<IsReserved>false</IsReserved>
+	<IsROM>true</IsROM>
+	<IsPaged>false</IsPaged>
+	<IsVirtualMemorySupported>false</IsVirtualMemorySupported>
+	<IsVirtualWayConversionEnabled>false</IsVirtualWayConversionEnabled>
+	<Linesize>&L3LineSize;</Linesize>
+	<HierarchyDepth>3</HierarchyDepth>
+	<!-- the following are only read if IsCache is false -->
+	<MappedMemory>
+		<PhysicalAddresses>
+			<CanBeDisabled>false</CanBeDisabled>
+			<StartAddress>
+				<IsFixed>true</IsFixed>
+				<!-- For Himalaya Region 0, = 0x0 -->
+				<FixedValue>&L3Region1StartAdrs;</FixedValue>
+			</StartAddress>
+			<Length>
+				<IsFixed>true</IsFixed>
+				<!-- For Himalaya Region 0 = 0x0 -->
+				<FixedValue>&L3Region1Length;</FixedValue>
+				<ConfigReg></ConfigReg>
+				<DecoderName></DecoderName>
+			</Length>
+		</PhysicalAddresses>
+	</MappedMemory>
+</MemoryType>

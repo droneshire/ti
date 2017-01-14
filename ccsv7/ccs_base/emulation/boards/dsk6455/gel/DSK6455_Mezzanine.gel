@@ -1,0 +1,489 @@
+/*--------------------------------------------------------------*/
+/* DSK6455_Mezzanine.gel                                        */
+/* Version 3.30                                                */
+/*                                                              */
+/* This GEL file is designed to be used in conjunction with     */
+/* CCS 3.3 and the TMS320C6455 based DSK Mezzanine card.        */
+/*                                                              */
+/*--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------*/
+/* StartUp()                                                    */
+/* This function is called each time CCS is started.            */
+/* Customize this function to perform desired initialization.   */
+/*--------------------------------------------------------------*/
+StartUp()
+{
+    setup_memory_map();
+}
+
+#define PERLOCK	0x02AC0004	// Peripheral Lock Register
+#define PERCFG0 	0x02AC0008	// Peripheral Configuration register
+#define PERSTAT0	0x02AC0014	// Peripheral Status 0
+#define PERSTAT1 	0x02AC002C	// Peripheral Status 1
+#define PERCFG1	0x02AC002C	// Peripheral configuration 1
+
+#define DEVSTAT	0x02A80000  // Device Status Register
+
+/*--------------------------------------------------------------*/
+/* OnTargetConnect()                                            */
+/* This function is called by CCS when you do Debug->Connect on */
+/* CCS 3.X.                                                     */
+/*--------------------------------------------------------------*/
+OnTargetConnect()
+{
+    /*------------------------------------------------------*/
+    /* GEL_Reset() is used to deal with the worst case      */
+    /* senario of unknown target state.  If for some reason */
+    /* a reset is not desired upon target connection,       */
+    /* GEL_Reset() may be removed and replaced with         */
+    /* something "less brutal" like a cache initialization  */
+    /* function.                                            */
+    /*------------------------------------------------------*/
+    GEL_Reset();
+
+    init_PLL();
+    init_PLL2RGMII();
+    init_emif();
+
+    GEL_TextOut("GEL StartUp Complete.\n","2");
+}
+
+/*--------------------------------------------------------------*/
+/* OnReset()                                                    */
+/* This function is called by CCS when you do Debug->Resest.    */
+/* The goal is to put the C6x into a known good state with      */
+/* respect to cache, edma and interrupts.                       */
+/*--------------------------------------------------------------*/
+OnReset( int nErrorCode )
+{
+    init_emif();
+}
+
+/*--------------------------------------------------------------*/
+/* OnPreFileLoaded()                                            */
+/* This function is called automatically when the 'Load Program'*/
+/* Menu item is selected.                                       */
+/*--------------------------------------------------------------*/
+OnPreFileLoaded()
+{
+    /*------------------------------------------------------*/
+    /* GEL_Reset() is used to deal with the worst case      */
+    /* senario of unknown target state.  If for some reason */
+    /* a reset is not desired upon target connection,       */
+    /* GEL_Reset() may be removed and replaced with         */
+    /* something "less brutal" like a cache initialization  */
+    /* function.                                            */
+    /*------------------------------------------------------*/
+    GEL_Reset();
+
+    flush_cache();
+    IER = 0;
+    IFR = 0;
+    init_emif();
+}
+
+/*--------------------------------------------------------------*/
+/* OnRestart()                                                  */
+/* This function is called by CCS when you do Debug->Restart.   */
+/* The goal is to put the C6x into a known good state with      */
+/* respect to cache, edma and interrupts.                       */
+/* Failure to do this can cause problems when you restart and   */
+/* run your application code multiple times.  This is different */
+/* then OnPreFileLoaded() which will do a GEL_Reset() to get the*/
+/* C6x into a known good state.                                 */
+/*--------------------------------------------------------------*/
+OnRestart( int nErrorCode )
+{
+    /*------------------------------------------------------*/
+    /* Turn off L2 for DDR.  The app should           	*/
+    /* manage these for coherency in the application.       */
+    /*------------------------------------------------------*/
+    GEL_TextOut("Turn off cache segment\n");
+   
+    GEL_MemoryFill(0x01848380, 0, 0x10, 0x0);
+
+    /*------------------------------------------------------*/
+    /* Disable EDMA events and interrupts and clear any     */
+    /* pending events.                                      */
+    /*------------------------------------------------------*/
+    GEL_TextOut("Disable EDMA events\n");
+    *(int*)0x02A0105C = 0xFFFFFFFF; // IERH (disable high interrupts)
+    *(int*)0x02A0102C = 0xFFFFFFFF; // EERH (disable high events)
+    *(int*)0x02A01074 = 0xFFFFFFFF; // ICRH (clear high interrupts)
+    *(int*)0x02A0100C = 0xFFFFFFFF; // ICRH (clear high events)
+
+    *(int*)0x02A01058 = 0xFFFFFFFF; // IER  (disable low interrupts)
+    *(int*)0x02A01028 = 0xFFFFFFFF; // EER  (disable low events)
+    *(int*)0x02A01070 = 0xFFFFFFFF; // ICR  (clear low interrupts)
+    *(int*)0x02A01008 = 0xFFFFFFFF; // ICRH (clear low events)
+
+    /* Disable other interrupts */
+    IER = 0;
+    IFR = 0;
+}
+
+/*--------------------------------------------------------------*/
+/* setup_memory_map()                                           */
+/* Memory map setup                                             */
+/*--------------------------------------------------------------*/
+setup_memory_map()
+{
+    GEL_MapOn();
+    GEL_MapReset();
+
+    /* On-chip memory map */
+    //GEL_MapAdd(0x00000000, 0, 0x00100000, 0, 0); /* Reserved       	*/
+    GEL_MapAdd(0x00100000, 0, 0x00008000, 1, 1);   /* Internal ROM      */
+    GEL_MapAdd(0x00800000, 0, 0x00200000, 1, 1);   /* L2 SRAM		*/    
+    GEL_MapAdd(0x00E00000, 0, 0x00008000, 1, 1);   /* L1P SRAM	        */    
+    GEL_MapAdd(0x00F00000, 0, 0x00008000, 1, 1);   /* L1D SRAM          */    
+    GEL_MapAdd(0x01800000, 0, 0x00010000, 1, 1);   /* INT CTL REGS      */
+    GEL_MapAdd(0x01810000, 0, 0x00010000, 1, 1);   /* Power-down Control*/
+    GEL_MapAdd(0x01820000, 0, 0x00010000, 1, 1);   /* EMC REGS   	*/
+    GEL_MapAdd(0x01840000, 0, 0x00020000, 1, 1);   /* L1/L2 control     */
+    GEL_MapAdd(0x01BC0000, 0, 0x00040000, 1, 1);   /* Emulation         */
+    GEL_MapAdd(0x02880000, 0, 0x00000080, 1, 1);   /* HPI Control       */
+    GEL_MapAdd(0x028C0000, 0, 0x00000100, 1, 1);   /* McBSP0            */
+    GEL_MapAdd(0x02900000, 0, 0x00000100, 1, 1);   /* McBSP1            */
+    GEL_MapAdd(0x02940000, 0, 0x00000040, 1, 1);   /* Timer0            */
+    GEL_MapAdd(0x02980000, 0, 0x00000040, 1, 1);   /* Timer1            */
+    GEL_MapAdd(0x029A0000, 0, 0x00000200, 1, 1);   /* PLL Controller 1  */
+    GEL_MapAdd(0x029C0000, 0, 0x00000200, 1, 1);   /* PLL Controller 2  */
+    GEL_MapAdd(0x02A00000, 0, 0x00008000, 1, 1);   /* EDMA3 -TPCC       */
+    GEL_MapAdd(0x02A20000, 0, 0x00008000, 1, 1);   /* EDMA3 -TPTC0      */
+    GEL_MapAdd(0x02A28000, 0, 0x00008000, 1, 1);   /* EDMA3 -TPTC1      */
+    GEL_MapAdd(0x02A30000, 0, 0x00008000, 1, 1);   /* EDMA3 -TPTC2      */
+    GEL_MapAdd(0x02A38000, 0, 0x00008000, 1, 1);   /* EDMA3 -TPTC3      */
+    GEL_MapAdd(0x02A80000, 0, 0x00000500, 1, 1);   /* Chip level registers */
+    GEL_MapAdd(0x02AC0000, 0, 0x00020000, 1, 1);   /* Power saver       */
+    GEL_MapAdd(0x02B00000, 0, 0x00000100, 1, 1);   /* GPIO              */
+    GEL_MapAdd(0x02B04000, 0, 0x00000080, 1, 1);   /* I2C               */
+    GEL_MapAdd(0x02B40000, 0, 0x00000200, 1, 1);   /* Utopia            */
+    GEL_MapAdd(0x02B80000, 0, 0x00020000, 1, 1);   /* VCP2              */
+    GEL_MapAdd(0x02BA0000, 0, 0x00020000, 1, 1);   /* TCP2              */
+    GEL_MapAdd(0x02C00000, 0, 0x00000400, 1, 1);   /* PCI               */
+    GEL_MapAdd(0x02C80000, 0, 0x00001000, 1, 1);   /* EMAC CTL REGS     */
+    GEL_MapAdd(0x02C81000, 0, 0x00000800, 1, 1);   /* EMAC Control Module */
+    GEL_MapAdd(0x02C81800, 0, 0x00000800, 1, 1);   /* MDIO REGS         */
+    GEL_MapAdd(0x02C82000, 0, 0x00040000, 1, 1);   /* ECTL RAM          */
+    GEL_MapAdd(0x02D00000, 0, 0x00040000, 1, 1);   /* RapidIO Control   */
+    GEL_MapAdd(0x02E00000, 0, 0x00004000, 1, 1);   /* RapidIO CPPI RAM  */
+
+    GEL_MapAdd( 0x70000000, 0, 0x08000000, 1, 1 );  /* EMIF A Control   */
+    GEL_MapAdd( 0x78000000, 0, 0x08000000, 1, 1 );  /* EMIF B Control   */
+    GEL_MapAdd( 0xA0000000, 0, 0x10000000, 1, 1 );  /* EMIFA CE2        */
+    GEL_MapAdd( 0xB0000000, 0, 0x10000000, 1, 1 );  /* EMIFA CE3        */
+    GEL_MapAdd( 0xC0000000, 0, 0x10000000, 1, 1 );  /* EMIFA CE4        */
+    GEL_MapAdd( 0xD0000000, 0, 0x10000000, 1, 1 );  /* EMIFA CE5        */
+    GEL_MapAdd( 0xE0000000, 0, 0x10000000, 1, 1 );  /* DDR     0        */
+}
+
+/*--------------------------------------------------------------*/
+/* clear_memory_map()                                           */
+/* Memory map disable                                           */
+/*--------------------------------------------------------------*/
+clear_memory_map()
+{
+    GEL_MapOff();
+}
+
+/*--------------------------------------------------------------*/
+/* CPLD DEFINITIONS                                             */
+/*--------------------------------------------------------------*/
+#define CPLD_STAT         0xA0000000
+#define CPLD_DC           0xA0000001
+#define CPLD_REV          0xA0000004
+#define CPLD_MISC         0xA0000006
+
+#define Get_Board_Rev     ((*(char *)CPLD_REV) & 0x07)
+#define Get_Cpld_Rev      ((*(char *)CPLD_REV>>4) & 0x0F)
+#define Get_Switches      ((*(char *)CPLD_STAT>>4) & 0x0F)
+/*--------------------------------------------------------------*/
+/* init_PLL()                                                   */
+/* PLL initialization                                           */
+/*--------------------------------------------------------------*/
+#define PLLCTL_1	0x029A0100	// PLL1 control register
+#define PLLM_1		0x029A0110	// PLL1 multiplier control register
+#define PREDIV_1	0x029A0114	// PLL1 pre-divider control register
+#define PLLCMD_1	0x029A0138	// PLL1 controller command register
+#define PLLSTAT_1	0x029A013C	// PLL1 controller status register
+#define DCHANGE_1	0x029A0144	// PLL1 PLLDIV ratio change status register
+#define SYSTAT_1	0x029A0150	// PLL1 SYSCLK status register
+#define PLLDIV4_1	0x029A0160	// PLL1 controller divider 4 register
+#define PLLDIV5_1	0x029A0164	// PLL1 controller divider 5 register
+
+#define PLLDIV1_2	0x029C0118	// PLL2 controller divider 1 register
+#define PLLCMD_2	0x029C0138	// PLL2 controller command register
+#define PLLSTAT_2	0x029C013C	// PLL2 controller status register
+#define DCHANGE_2	0x029C0144	// PLL2 PLLDIV ratio change status register
+#define SYSTAT_2	0x029C0150	// PLL2 SYSCLK status register
+
+init_PLL()
+{
+    int i;
+
+    int PLLM_val =    20; 
+    int PREDIV_val =  1;
+    int PLLDIV4_val = 8;
+    int PLLDIV5_val = 4;
+
+    if (Get_Board_Rev == 0)
+	    PLLM_val = 25; // Old Rev, 40MHz CLKIN x 25 = 1GHz
+	if (Get_Board_Rev == 1)
+		PLLM_val = 20; // Old Rev, 50MHz CLKIN x 20 = 1GHz
+	if (Get_Board_Rev >= 2)
+	    PLLM_val = 24; // Old Rev, 50MHz CLKIN x 24 = 1.2GHz
+
+	if (PLLM_val > 0 && PLLM_val < 32)
+	{
+		if ( (PREDIV_val > 0) && (PREDIV_val < 33) )
+		{
+			/* In PLLCTL, write PLLENSRC = 0 (enable PLLEN bit).*/
+			*(int *)PLLCTL_1 &= ~(0x00000020);
+			/* In PLLCTL, write PLLEN = 0 (bypass mode).*/
+			*(int *)PLLCTL_1 &= ~(0x00000001);
+			/* Wait 4 cycles of the slowest of PLLOUT or reference clock source (CLKIN).*/
+			for (i=0 ; i<100 ; i++);
+			/*In PLLCTL, write PLLRST = 1 (PLL is reset).*/
+			*(int *)PLLCTL_1 |= 0x00000008;
+			/*If necessary, program PREDIV and PLLM.*/
+			*(int *)PLLM_1 = PLLM_val - 1;
+			*(int *)PREDIV_1 = (PREDIV_val - 1) | 0x8000;	/* set PLLDIV0 */
+			
+			/*If necessary, program PLLDIV1n. Note that you must apply the GO operation
+				to change these dividers to new ratios.*/
+
+				/* Check that the GOSTAT bit in PLLSTAT is cleared to show that no GO 
+					operation is currently in progress.*/
+				while( (*(int *)PLLSTAT_1) & 0x00000001);
+
+
+				/* Program the RATIO field in PLLDIVn to the desired new divide-down rate. 
+					If the RATIO field changed, the PLL controller will flag the change
+					in the corresponding bit of DCHANGE.*/
+				*(int *)PLLDIV4_1 = (PLLDIV4_val - 1) | 0x8000;	/* set PLLDIV4 */
+				*(int *)PLLDIV5_1 = (PLLDIV5_val - 1) | 0x8000;	/* set PLLDIV5 */
+
+				/* Set the GOSET bit in PLLCMD to initiate the GO operation to change
+					the divide values and align the SYSCLKs as programmed.*/
+				*(int *)PLLCMD_1 |= 0x00000001;
+
+				/* Read the GOSTAT bit in PLLSTAT to make sure the bit returns to 0
+					to indicate that the GO operation has completed.*/
+				while( (*(int *)PLLSTAT_1) & 0x00000001);
+
+			/* Wait for PLL to properly reset.(128 CLKIN1 cycles).*/
+			for (i=0 ; i<1000 ; i++);
+
+			/* In PLLCTL, write PLLRST = 0 to bring PLL out of reset.*/
+			*(int *)PLLCTL_1 &= ~(0x00000008);
+
+			/* Wait for PLL to lock (2000 CLKIN1 cycles). */
+			for (i=0 ; i<4000 ; i++);
+
+			/* In PLLCTL, write PLLEN = 1 to enable PLL mode. */
+			*(int *)PLLCTL_1 |= (0x00000001);
+
+			GEL_TextOut("PLL1 has been configured.\n");
+		}
+		else
+		{
+			GEL_TextOut("Pre-divider value must be between 1 and 32.\n","Output",2);
+		}
+	}
+	else
+	{
+		GEL_TextOut("Multiplier value must be between 1 and 32.\n","Output",2);
+	}
+}
+
+/*--------------------------------------------------------------*/
+/* init_PLL2RGMII()                                             */
+/* Clock setup for the RGMII interface                          */
+/*--------------------------------------------------------------*/
+
+#define PLLCTL_2	0x029C0100	// PLL2 control register
+#define PLLM_2	0x029C0110	// PLL2 multiplier control register
+#define PREDIV_2	0x029C0114	// PLL2 pre-divider control register
+#define PLLDIV1_2	0x029C0118	// PLL2 controller divider 1 register
+#define PLLCMD_2	0x029C0138	// PLL2 controller command register
+#define PLLSTAT_2	0x029C013C	// PLL2 controller status register
+#define DCHANGE_2	0x029C0144	// PLL2 PLLDIV ratio change status register
+#define SYSTAT_2	0x029C0150	// PLL2 SYSCLK status register
+
+init_PLL2RGMII()
+{
+    int i;
+
+    *(int *)PLLDIV1_2 = (5 - 1) | 0x8000;        /* set PLLDIV1 */
+
+    /* Check that the GOSTAT bit in PLLSTAT is cleared to show that no GO operation is currently in progress.*/
+    while( (*(int *)PLLSTAT_2) & 0x00000001);
+
+    /* Set the GOSET bit in PLLCMD to initiate the GO operation to change the divide values and align the SYSCLKs as programmed.*/
+    *(int *)PLLCMD_2 |= 0x00000001;
+
+    /* Read the GOSTAT bit in PLLSTAT to make sure the bit returns to 0 to indicate that the GO operation has completed.*/
+    while( (*(int *)PLLSTAT_2) & 0x00000001);
+    GEL_TextOut("PLL2 has been configured.\n");
+}
+
+
+/*--------------------------------------------------------------*/
+/* init_emif()                                                  */
+/* Emif initialization                                          */
+/*--------------------------------------------------------------*/
+
+#define EMIFA_BASE_ADDR (0x70000000)
+
+#define EMIFA_MIDR     (*(int*)(EMIFA_BASE_ADDR + 0x00000000))
+#define EMIFA_STAT     (*(int*)(EMIFA_BASE_ADDR + 0x00000004))
+#define EMIFA_BPRIO    (*(int*)(EMIFA_BASE_ADDR + 0x00000020))
+#define EMIFA_CE2CFG   (*(int*)(EMIFA_BASE_ADDR + 0x00000080))
+#define EMIFA_CE3CFG   (*(int*)(EMIFA_BASE_ADDR + 0x00000084))
+#define EMIFA_CE4CFG   (*(int*)(EMIFA_BASE_ADDR + 0x00000088))
+#define EMIFA_CE5CFG   (*(int*)(EMIFA_BASE_ADDR + 0x0000008C))
+#define EMIFA_AWCC     (*(int*)(EMIFA_BASE_ADDR + 0x000000A0))
+
+#define DDR_BASE_ADDR (0x78000000)
+
+#define DDR_MIDR     (*(int*)(DDR_BASE_ADDR + 0x00000000))
+#define DDR_SDCFG    (*(int*)(DDR_BASE_ADDR + 0x00000008))
+#define DDR_SDRFC    (*(int*)(DDR_BASE_ADDR + 0x0000000C))
+#define DDR_SDTIM1   (*(int*)(DDR_BASE_ADDR + 0x00000010))
+#define DDR_SDRIM2   (*(int*)(DDR_BASE_ADDR + 0x00000014))
+#define DDR_DDRPHYC  (*(int*)(DDR_BASE_ADDR + 0x000000E4))
+
+init_emif()
+{
+	/* Enable the async EMIF and the DDR2 Memory Controller */
+	*(int *)PERCFG1 = 0x00000003;
+
+	/* Configure async EMIF */
+    EMIFA_CE2CFG = 0x00240120; /* 8-bit async, 10 cycle read/write strobe */
+    EMIFA_CE3CFG = 0x00240120; /* 8-bit async, 10 cycle read/write strobe */
+    EMIFA_CE4CFG = 0x00240122; /* 32-bit async, 10 cycle read/write strobe */
+    EMIFA_CE5CFG = 0x00240122; /* 32-bit async, 10 cycle read/write strobe */
+    EMIFA_BPRIO  = 0x000000FE; /* Enable priority based starvation control SPRU971A sec. 7.2 */
+
+	/* Configure DDR for 500MHz operation (sequence is order dependent) */
+    DDR_SDCFG    = 0x00D38822; /* Unlock boot + timing, CAS4, 4 banks, 10 bit column */
+    DDR_SDRFC    = 0x000007A2; /* Refresh */
+    DDR_SDTIM1   = 0x3EDB4B91; /* Timing 1 */
+    DDR_SDRIM2   = 0x00A2C722; /* Timing 2 */
+    DDR_DDRPHYC  = 0x00000005; /* PHY read latency for CAS 4 is 4 + 2 - 1 */
+    DDR_SDCFG    = 0x00538822; /* Lock, CAS4, 4 banks, 10 bit column, lock timing */
+}
+/*--------------------------------------------------------------*/
+/* init_cpld()                                                  */
+/* CPLD Initialization                                          */
+/*--------------------------------------------------------------*/
+init_cpld()
+{
+    *(char*)CPLD_STAT = 0;
+    *(char*)CPLD_DC   = 0;
+    *(char*)CPLD_MISC = 0;
+}
+
+/*--------------------------------------------------------------*/
+/* flush_cache()                                                */
+/* Flush L1 & L2 cache                                          */
+/*--------------------------------------------------------------*/
+flush_cache()
+{
+    /* Invalidate L1I and L1D */
+    *(int*)0x01840000 = (*(int*)0x01840000 | 0x00000300);
+
+    /* Clean L2 */
+    *(int*)0x01845004 = 0x1;
+}
+
+/*--------------------------------------------------------------*/
+/* DSK6455 Mezzanine MENU                                       */
+/*--------------------------------------------------------------*/
+menuitem "DSK6455 Mezzanine Functions";
+
+hotmenu Reset()
+{
+    GEL_Reset( );
+}
+
+hotmenu InitPLL()
+{
+    init_PLL();
+}
+
+hotmenu InitEmif()
+{
+    init_emif();
+}
+
+hotmenu InitCpld()
+{
+    init_cpld();
+}
+
+/*--------------------------------------------------------------*/
+/* RESET MENU                                                   */
+/*--------------------------------------------------------------*/
+menuitem "Resets";
+
+hotmenu ClearBreakPts_Reset_EMIFset()
+{
+    GEL_BreakPtReset();
+    GEL_Reset();
+    init_emif();
+}
+
+hotmenu FlushCache()
+{
+    flush_cache();
+}
+
+/*--------------------------------------------------------------*/
+/* MEMORY MAP MENU                                              */
+/*--------------------------------------------------------------*/
+menuitem "Memory Map";
+
+hotmenu SetMemoryMap()
+{
+    setup_memory_map();
+}
+
+hotmenu ClearMemoryMap()
+{
+    clear_memory_map();
+}
+
+/*--------------------------------------------------------------*/
+/* LED_cycle()                                                  */
+/*--------------------------------------------------------------*/
+LED_cycle()
+{
+    #define LED0_on     *(char*)CPLD_STAT = 0x01
+    #define LED1_on     *(char*)CPLD_STAT = 0x02
+    #define LED2_on     *(char*)CPLD_STAT = 0x04
+    #define LED3_on     *(char*)CPLD_STAT = 0x08
+    #define LEDs_off    *(char*)CPLD_STAT = 0x00
+
+    LED3_on;
+    LED2_on;
+    LED1_on;
+    LED2_on;
+    LED3_on;
+    LEDs_off;
+}
+
+/*--------------------------------------------------------------*/
+/* Check DSK MENU                                               */
+/*--------------------------------------------------------------*/
+menuitem "Check DSK";
+hotmenu QuickTest()
+{
+    LED_cycle();
+    LED_cycle();
+    LED_cycle();
+    GEL_TextOut(" Switches: %d  Board Revision: %d CPLD Revision: %d\n\n",
+                "DSKOutput", 1, 1, 1, Get_Switches, Get_Board_Rev, Get_Cpld_Rev);
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- 
+  TI File $Revision: 
+  Checkin $Date: 
+  --> 
+
+<!--  F2805x DEV EMU REGS Registers 
+     =================================== 
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     --> 
+<module id="DEV EMU REGS" HW_revision="" XML_version="1" description="DEV EMU REGS Registers">
+    <register id="DEVICECNF" acronym="DEVICECNF" offset="0" page="1" width="32" description="Device Configuration Register" />
+    <register id="PARTID" acronym="PARTID" offset="2" page="1" width="16" description="Device ID Register" />
+    <register id="REVID" acronym="REVID" offset="3" page="1" width="16" description="Revision ID Register" />
+    <!--  2 empty  -->
+    <!--  2 empty  -->
+    <!--  2 empty  -->
+    <!--  2 empty  -->
+</module>

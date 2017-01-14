@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="Function Profiling" basedir=".">
+
+	<property name="dvt.activity.name" value="Hardware Trace Analyzer/${ant.project.name}"/>
+  	<property name="dvt.activity.description" value="Collect Address and Timing data and execute Function Profiling.&#10;Other analysis are available from the Analyze button in the Trace Viewer."/>
+
+   	<property name="uc_name" value="Function_Profiling" />
+	<property name="technology" value="Hardware Core Trace" />
+
+	<dvt.import file="../../scripts/FunctionProfilingDialog.js"/>
+	<dvt.import file="../../scripts/CoreTrace.js"/>
+
+	<dvt.property>
+		version=1.0.0
+		dvt.activity.priority = 40
+
+		<!-- Data Provider and AF information-->
+		dataproviders=Trace
+		Trace.name=Trace Viewer
+		Trace.analyzer=Function Profiler
+	</dvt.property>
+	
+	<dvt.configaf id="ShowLibraries" label="Show TI Libraries" tooltip="Show TI Libraries" values="Trace Viewer.Function Profiler.cfgShowLibraries" defaultValue="false">
+		<job>
+			<jobProperty name="Trace Viewer.Function Profiler.cfgShowLibraries" />
+		</job>
+	</dvt.configaf>	
+	
+	<dvt.configaf id="ProfileLevel" label="Profile level" tooltip="Select the profile level" values="Exclusive,Inclusive,Callee" defaultValue="Callee">
+		<job>
+			<jobProperty name="Trace Viewer.Function Profiler.cfgProfileLevel" />
+		</job>
+	</dvt.configaf>	
+	
+	<dvt.configaf id="NoWizard" label="" tooltip="" values="Trace Viewer.Function Profiler.cfgNoWizard" defaultValue="true">
+		<job>
+			<jobProperty name="Trace Viewer.Function Profiler.cfgNoWizard" />
+		</job>
+	</dvt.configaf>	
+	
+</project>

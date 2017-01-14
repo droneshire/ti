@@ -1,0 +1,60 @@
+<SDDefaults>
+  <EmulatorClass id="XDS510PP">
+    <Default id="EmuPortMode">SPP8</Default>
+    <Default id="EmuPortSpeed">0</Default>
+    <Default id="EmuAddOptoPod">NO</Default>
+    <Default id="EmuDisablePolling">YES</Default>
+    <Default id="EmuProductName">XDS510PP_PLUS</Default>
+    <Default id="EmuDoWaitInReset">NO</Default>
+    <Default id="DlogEmuPinEnable">YES</Default>
+    <Default id="DlogRtdxEnable">NO</Default>
+    <Default id="DlogStopOnBufferFull">YES</Default>
+    <Default id="DlogInvertDataRecv">NO</Default>
+    <Default id="DlogInvertFrameSync">NO</Default>
+    <Default id="DlogInvertClk">NO</Default>
+    <Default id="DlogStoreIncremental">YES</Default>
+    <Default id="DlogUseDlogExpress">YES</Default>
+    <Default id="DlogBinFileName">c:\tic27x\specdig\examples\c27x\sddlog</Default>
+    <Default id="DlogStatusFile">c:\tic27x\specdig\examples\c27x\dlstat.txt</Default>
+    <Default id="DlogBinFileSize">2048</Default>
+  </EmulatorClass>
+   <EmulatorClass id="SPI525">
+    <Default id="EmuPortMode">PCI</Default>
+    <Default id="EmuPortSpeed">0</Default>
+    <Default id="EmuAddOptoPod">NO</Default>
+    <Default id="EmuDisablePolling">YES</Default>
+    <Default id="EmuProductName">SPI525</Default>
+    <Default id="EmuDoWaitInReset">NO</Default>
+    <Default id="DlogEmuPinEnable">YES</Default>
+    <Default id="DlogRtdxEnable">NO</Default>
+    <Default id="DlogStopOnBufferFull">YES</Default>
+    <Default id="DlogInvertDataRecv">NO</Default>
+    <Default id="DlogInvertFrameSync">NO</Default>
+    <Default id="DlogInvertClk">NO</Default>
+    <Default id="DlogStoreIncremental">YES</Default>
+    <Default id="DlogUseDlogExpress">YES</Default>
+    <Default id="DlogBinFileName">c:\tic27x\specdig\examples\c27x\sddlog</Default>
+    <Default id="DlogStatusFile">c:\tic27x\specdig\examples\c27x\dlstat.txt</Default>
+    <Default id="DlogBinFileSize">2048</Default>
+  </EmulatorClass>
+  <EmulatorClass id="XDS510USB">
+    <Default id="EmuPortMode">USB</Default>
+    <Default id="EmuPortSpeed">0</Default>
+    <Default id="EmuAddOptoPod">NO</Default>
+    <Default id="EmuDisablePolling">YES</Default>
+    <Default id="EmuProductName">XDS510USB</Default>
+    <Default id="EmuDoWaitInReset">NO</Default>
+    <Default id="EmuIoOffAtExit">YES</Default>
+    <Default id="EmuIoOffAtDisconnect">YES</Default>
+    <Default id="EmuJclkMode">Counter</Default>
+    <Default id="EmuJclkFreqMHz">13</Default>
+    <Default id="EmuTckDiv">1</Default>
+    <Default id="EmuAltTckTiming">NO</Default>
+    <Default id="EmuPowerMode">Threshold_1Volt_IO</Default>
+    <Default id="Emu0PinLevel">HIZ</Default>
+    <Default id="Emu1PinLevel">HIZ</Default>
+    <Default id="EmuAssertSysReset">NO</Default>
+    <Default id="EmuPulseTrst">NO</Default>
+    <Default id="EmuSerialNumber">ANY</Default>	
+  </EmulatorClass>
+</SDDefaults>

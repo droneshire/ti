@@ -1,0 +1,376 @@
+/********************************************************************/
+/* f28044.gel                                                       */
+/* Version 4.00.1                                                   */
+/*                                                                  */
+/* This GEL file is to be used with the TMS320F28044 DSP.           */
+/* Changes may be required to support specific hardware designs.    */
+/*                                                                  */
+/* Code Composer Studio supports six reserved GEL functions that    */
+/* automatically get executed if they are defined. They are:        */
+/*                                                                  */
+/* StartUp()              - Executed whenever CCS is invoked        */
+/* OnReset()              - Executed after Debug->Reset CPU         */
+/* OnRestart()            - Executed after Debug->Restart           */
+/* OnPreFileLoaded()      - Executed before File->Load Program      */
+/* OnFileLoaded()         - Executed after File->Load Program       */
+/* OnTargetConnect()      - Executed after Debug->Connect           */
+/*                                                                  */
+/********************************************************************/
+
+StartUp()
+{
+
+/* The next line automatically loads the .gel file that comes   */
+/* with the DSP2804x Peripheral Header Files download.  To use, */
+/* uncomment, and copy the peripheral header .gel file to       */
+/* same directory as device .gel file.                          */
+//  GEL_LoadGel("$(GEL_file_dir)\\DSP2804x_Peripheral.gel");
+}
+
+OnReset(int nErrorCode)
+{
+    if (GEL_IsInRealtimeMode())   /* If in real-time-mode */
+    {
+    }
+    else    /* Put device in C28x mode */
+    {
+         C28x_Mode();
+    }
+    Unlock_CSM();
+}
+
+OnRestart(int nErrorCode)
+{
+/* CCS will call OnRestart() when you do a Debug->Restart and   */
+/* after you load a new file.  Between running interrupt based  */
+/* programs, this function will clear interrupts and help keep  */
+/* the processor from going off into invalid memory.            */
+     if (GEL_IsInRealtimeMode())   /* If in real-time-mode */
+    {
+    }
+    else    /* Put device in C28x mode */
+    {
+         C28x_Mode();
+    }
+     IER = 0;
+     IFR = 0;
+}
+
+OnPreFileLoaded()
+{
+    GEL_Reset();
+}
+
+OnFileLoaded(int nErrorCode, int bSymbolsOnly)
+{
+}
+
+OnTargetConnect()
+{
+    if (GEL_IsInRealtimeMode())   /* If in real-time-mode */
+    {
+    }
+    else    /* Put device in C28x mode */
+    {
+         C28x_Mode();
+    }
+    F28044_Memory_Map();       /* Initialize the CCS memory map */
+
+/* Check to see if CCS has been started-up with the DSP already */
+/* running in real-time mode.  The user can add whatever        */
+/* custom initialization stuff they want to each case.          */
+
+    if (GEL_IsInRealtimeMode())     /* Do real-time mode target initialization */
+    {
+
+    }
+    else                            /* Do stop-mode target initialization */
+    {
+        GEL_Reset();                /* Reset DSP */
+    }
+}
+
+
+
+/********************************************************************/
+/* These functions are useful to engage/disengage realtime          */
+/* emulation mode during debug.  They save the user from having to  */
+/* manually perform these steps in CCS.                             */
+/********************************************************************/
+menuitem "Realtime Emulation Control";
+
+hotmenu Run_Realtime_with_Reset()
+{
+    GEL_Reset();                /* Reset the DSP */
+    ST1 = ST1 & 0xFFFD;         /* clear DBGM bit in ST1 */
+    GEL_EnableRealtime();       /* Enable Realtime mode */
+    GEL_Run();                  /* Run the DSP */
+}
+hotmenu Run_Realtime_with_Restart()
+{
+    GEL_Restart();              /* Reset the DSP */
+    ST1 = ST1 & 0xFFFD;         /* clear DBGM bit in ST1 */
+    GEL_EnableRealtime();       /* Enable Realtime mode */
+    GEL_Run();                  /* Run the DSP */
+}
+hotmenu Full_Halt()
+{
+    GEL_DisableRealtime();      /* Disable Realtime mode */
+    GEL_Halt();                 /* Halt the DSP */
+}
+hotmenu Full_Halt_with_Reset()
+{
+    GEL_DisableRealtime();      /* Disable Realtime mode */
+    GEL_Halt();                 /* Halt the DSP */
+    GEL_Reset();                /* Reset the DSP */
+}
+
+/********************************************************************/
+/* These functions are launched by the GEL_Toolbar button plugin    */
+/********************************************************************/
+GEL_Toolbar1()
+{
+    Run_Realtime_with_Reset();
+}
+GEL_Toolbar2()
+{
+    Run_Realtime_with_Restart();
+}
+GEL_Toolbar3()
+{
+    Full_Halt();
+}
+GEL_Toolbar4()
+{
+    Full_Halt_with_Reset();
+}
+
+GEL_Toolbar5()
+{
+    Full_Halt_with_Reset();
+    GEL_Restart();
+}
+
+
+/********************************************************************/
+/*                         F28044 Memory Map                        */
+/*                                                                  */
+/*   Note: M0M1MAP and VMAP signals tied high on F28044 core        */
+/*                                                                  */
+/*   0x000000 - 0x0003ff   M0 SARAM                (Prog and Data)  */
+/*   0x000400 - 0x0007ff   M1 SARAM                (Prog and Data)  */
+/*   0x000800 - 0x000fff   Peripheral Frame0 (PF0) (Data only)      */
+/*   0x006000 - 0x006fff   Peripheral Frame1 (PF1) (Data only)      */
+/*   0x007000 - 0x007fff   Peripheral Frame2 (PF2) (Data only)      */
+/*   0x008000 - 0x008fff   L0 SARAM                (Prog and Data)  */
+/*   0x009000 - 0x009fff   L1 SARAM                (Prog and Data)  */
+/*   0x3d7800 - 0x3d7bff   OTP                     (Prog and Data)  */
+/*   0x3e8000 - 0x3f7fff   FLASH                   (Prog and Data)  */
+/*   0x3f8000 - 0x3f8fff   L0 SARAM Mirror         (Prog and Data)  */
+/*   0x3f9000 - 0x3f9fff   L1 SARAM Mirror         (Prog and Data)  */
+/*   0x3ff000 - 0x3fffff   BOOT ROM                (Prog and Data)  */
+/********************************************************************/
+menuitem "Initialize Memory Map";
+
+hotmenu F28044_Memory_Map()
+{
+    GEL_MapReset();
+    GEL_MapOn();
+
+    /* Program memory maps */
+    GEL_MapAdd(0x0,0,0x400,1,1);                 /* M0 SARAM        */
+    GEL_MapAdd(0x400,0,0x400,1,1);               /* M1 SARAM        */
+    GEL_MapAdd(0x8000,0,0x1000,1,1);             /* L0 SARAM        */
+    GEL_MapAdd(0x9000,0,0x1000,1,1);             /* L1 SARAM        */
+    GEL_MapAdd(0x3d7800,0,0x400,1,0);            /* OTP             */
+    GEL_MapAdd(0x3e8000,0,0x10000,1,0);          /* FLASH           */
+    GEL_MapAdd(0x3f8000,0,0x1000,1,1);           /* L0 SARAM Mirror */
+    GEL_MapAdd(0x3f9000,0,0x1000,1,1);           /* L1 SARAM Mirror */
+    GEL_MapAdd(0x3ff000,0,0x1000,1,0);           /* BOOT ROM        */
+
+
+    /* Data memory maps */
+    GEL_MapAdd(0x0,1,0x400,1,1);                 /* M0 SARAM        */
+    GEL_MapAdd(0x400,1,0x400,1,1);               /* M1 SARAM        */
+    GEL_MapAdd(0x800,1,0x800,1,1);               /* PF0             */
+    GEL_MapAdd(0x6000,1,0x1000,1,1);             /* PF1             */
+    GEL_MapAddStr(0x7000,1,0x1000,"R|W|AS2",0);  /* PF2             */
+    GEL_MapAdd(0x8000,1,0x1000,1,1);             /* L0 SARAM        */
+    GEL_MapAdd(0x9000,1,0x1000,1,1);             /* L1 SARAM        */
+    GEL_MapAdd(0x3d7800,1,0x800,1,0);            /* OTP             */
+    GEL_MapAdd(0x3e8000,1,0x10000,1,0);          /* FLASH           */
+    GEL_MapAdd(0x3f8000,1,0x1000,1,1);           /* L0 SARAM Mirror */
+    GEL_MapAdd(0x3f9000,1,0x1000,1,1);           /* L1 SARAM Mirror */
+    GEL_MapAdd(0x3ff000,1,0x1000,1,0);           /* BOOT ROM        */
+}
+
+
+/********************************************************************/
+/* The ESTOP0 fill functions are useful for debug.  They fill the   */
+/* RAM with software breakpoints that will trap runaway code.       */
+/********************************************************************/
+hotmenu Fill_F28044_RAM_with_ESTOP0()
+{
+    GEL_MemoryFill(0x000000,1,0x000800,0x7625);      /* Fill M0/M1  */
+    GEL_MemoryFill(0x008000,1,0x002000,0x7625);      /* Fill L0/L1  */
+}
+
+
+/********************************************************************/
+menuitem "Watchdog";
+hotmenu Disable_WD()
+{
+    *0x7029 = *0x7029 | 0x0068;                /* Set the WDDIS bit */
+    *0x7025 = 0x0055;                          /* Service the WD    */
+    *0x7025 = 0x00AA;                          /*  once to be safe. */
+    GEL_TextOut("\nWatchdog Timer Disabled");
+}
+
+
+/********************************************************************/
+menuitem "Code Security Module"
+hotmenu Unlock_CSM()
+{
+    /* Perform dummy reads of the password locations */
+    XAR0 = *0x3F7FF8;
+    XAR0 = *0x3F7FF9;
+    XAR0 = *0x3F7FFA;
+    XAR0 = *0x3F7FFB;
+    XAR0 = *0x3F7FFC;
+    XAR0 = *0x3F7FFD;
+    XAR0 = *0x3F7FFE;
+    XAR0 = *0x3F7FFF;
+
+    /* Write passwords to the KEY registers.  0xFFFF's are dummy passwords.
+       User should replace them with the correct password for their DSP */
+    *0xAE0 = 0xFFFF;
+    *0xAE1 = 0xFFFF;
+    *0xAE2 = 0xFFFF;
+    *0xAE3 = 0xFFFF;
+    *0xAE4 = 0xFFFF;
+    *0xAE5 = 0xFFFF;
+    *0xAE6 = 0xFFFF;
+    *0xAE7 = 0xFFFF;
+}
+
+
+/********************************************************************/
+menuitem "Addressing Modes";
+
+hotmenu C28x_Mode()
+{
+    ST1 = ST1 & (~0x0100);      /*   AMODE = 0  */
+    ST1 = ST1 | 0x0200;         /* OBJMODE = 1  */
+}
+
+hotmenu C24x_Mode()
+{
+    ST1 = ST1 | 0x0100;         /*   AMODE = 1  */
+    ST1 = ST1 | 0x0200;         /* OBJMODE = 1  */
+}
+
+hotmenu C27x_Mode()
+{
+    ST1 = ST1 & (~0x0100);      /*   AMODE = 0  */
+    ST1 = ST1 & (~0x0200);      /* OBJMODE = 0  */
+}
+
+
+/********************************************************************/
+/*                            PLL Ratios                            */
+/*                                                                  */
+/* The following table describes the PLL clocking ratios (0..10)    */
+/*                                                                  */
+/*   Ratio        CLKIN         Description                         */
+/*   -----    --------------    ------------                        */
+/*     0      OSCCLK/2          PLL bypassed                        */
+/*     1      (OSCCLK * 1)/2    10 Mhz for 20 Mhz CLKIN             */
+/*     2      (OSCCLK * 2)/2    20 Mhz for 20 Mhz CLKIN             */
+/*     3      (OSCCLK * 3)/2    30 Mhz for 20 Mhz CLKIN             */
+/*     4      (OSCCLK * 4)/2    40 Mhz for 20 Mhz CLKIN             */
+/*     5      (OSCCLK * 5)/2    50 Mhz for 20 Mhz CLKIN             */
+/*     6      (OSCCLK * 6)/2    60 Mhz for 20 Mhz CLKIN             */
+/*     7      (OSCCLK * 7)/2    70 Mhz for 20 Mhz CLKIN             */
+/*     8      (OSCCLK * 8)/2    80 Mhz for 20 Mhz CLKIN             */
+/*     9      (OSCCLK * 9)/2    90 Mhz for 20 Mhz CLKIN             */
+/*    10      (OSCCLK * 10)/2  100 Mhz for 20 Mhz CLKIN             */
+/********************************************************************/
+menuitem "Set PLL Ratio";
+
+hotmenu Bypass()
+{
+    *0x7021 = 0;    /* CLKIN = OSCCLK/2, PLL is bypassed */
+    PLL_Wait();
+}
+hotmenu OSCCLK_x1_divided_by_2()
+{
+    *0x7021 = 1;    /* CLKIN = (OSCCLK * 1)/2 */
+    PLL_Wait();
+}
+hotmenu OSCCLK_x2_divided_by_2()
+{
+    *0x7021 = 2;    /* CLKIN = (OSCCLK * 2)/2 */
+    PLL_Wait();
+}
+hotmenu OSCCLK_x3_divided_by_2()
+{
+    *0x7021 = 3;    /* CLKIN = (OSCCLK * 3)/2 */
+    PLL_Wait();
+}
+hotmenu OSCCLK_x4_divided_by_2()
+{
+    *0x7021 = 4;    /* CLKIN = (OSCCLK * 4)/2 */
+    PLL_Wait();
+}
+hotmenu OSCCLK_x5_divided_by_2()
+{
+    *0x7021 = 5;    /* CLKIN = (OSCCLK * 5)/2 */
+    PLL_Wait();
+}
+hotmenu OSCCLK_x6_divided_by_2()
+{
+    *0x7021 = 6;    /* CLKIN = (OSCCLK * 6)/2 */
+    PLL_Wait();
+}
+hotmenu OSCCLK_x7_divided_by_2()
+{
+    *0x7021 = 7;    /* CLKIN = (OSCCLK * 7)/2 */
+    PLL_Wait();
+}
+hotmenu OSCCLK_x8_divided_by_2()
+{
+    *0x7021 = 8;    /* CLKIN = (OSCCLK * 8)/2 */
+    PLL_Wait();
+}
+hotmenu OSCCLK_x9_divided_by_2()
+{
+    *0x7021 = 9;    /* CLKIN = (OSCCLK * 9)/2 */
+    PLL_Wait();
+}
+hotmenu OSCCLK_x10_divided_by_2()
+{
+    *0x7021 = 10;    /* CLKIN = (OSCCLK * 10)/2 */
+    PLL_Wait();
+}
+
+/********************************************************************/
+/* For F280x devices, check the PLLOCKS bit for PLL lock.           */
+/********************************************************************/
+PLL_Wait()
+{
+    int PLLSTS;
+    int delay = 0;
+
+    PLLSTS = 0x7011;
+
+
+    while ( ( (unsigned int)*PLLSTS & 0x0001) != 0x0001)
+    {
+        delay++;
+        GEL_TextOut("Waiting for PLL Lock, PLLSTS = %x\n",,,,,(unsigned int)*PLLSTS);
+    }
+    GEL_TextOut("\nPLL lock complete, PLLSTS = %x\n",,,,,(unsigned int)*PLLSTS);
+}
+
+/********************************************************************/
+/*** End of file ***/

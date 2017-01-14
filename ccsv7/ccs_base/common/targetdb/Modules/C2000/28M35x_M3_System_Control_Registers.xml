@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- 
+  TI File $Revision: 
+  Checkin $Date: 
+  --> 
+
+<!--  28M35x SYSCTL REGS Registers 
+     =================================== 
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     --> 
+<module id="SYSCTL REGS" HW_revision="" XML_version="1" description="SYSCTL REGS Registers">
+    <register id="SYSPLLCTL" acronym="SYSPLLCTL" offset="0" page="1" width="32" description="System PLL Configuration Register" />
+    <register id="SYSPLLMULT" acronym="SYSPLLMULT" offset="4" page="1" width="32" description="System PLL Multiplier" />
+    <register id="SYSPLLSTS" acronym="SYSPLLSTS" offset="8" page="1" width="32" description="System PLL lock status" />
+    <register id="SYSDIVSEL" acronym="SYSDIVSEL" offset="12" page="1" width="32" description="System clock divider" />
+    <register id="M3SSDIVSEL" acronym="M3SSDIVSEL" offset="16" page="1" width="32" description="M3 Sub system clock divider" />
+    <!--  4 empty  -->
+    <!--  4 empty  -->
+    <!--  4 empty  -->
+    <register id="UPLLCTL" acronym="UPLLCTL" offset="32" page="1" width="32" description="USB PLL config register" />
+    <register id="UPLLMULT" acronym="UPLLMULT" offset="36" page="1" width="32" description="USB PLL Multiplier" />
+    <register id="UPLLSTS" acronym="UPLLSTS" offset="40" page="1" width="32" description="USB PLL lock status" />
+    <!--  4 empty  -->
+    <register id="MCLKSTS" acronym="MCLKSTS" offset="48" page="1" width="32" description="Missing clock status register" />
+    <register id="MCLKCTL" acronym="MCLKCTL" offset="52" page="1" width="32" description="Missing clock configuration register" />
+    <register id="MCLKFRCCLR" acronym="MCLKFRCCLR" offset="56" page="1" width="32" description="Missing clock force register" />
+    <register id="MCLKEN" acronym="MCLKEN" offset="60" page="1" width="32" description="Missing clock enable register" />
+    <register id="MREFCLKLIM" acronym="MREFCLKLIM" offset="64" page="1" width="32" description="Missing clock reference limit registers" />
+    <!--  12 empty  -->
+    <register id="XPLLCLKCFG" acronym="XPLLCLKCFG" offset="80" page="1" width="32" description="XPLL clkout control register" />
+    <!--  12 empty  -->
+    <register id="CCLKOFF" acronym="CCLKOFF" offset="96" page="1" width="32" description="C28 clock disable register" />
+    <!--  12 empty  -->
+    <register id="CAN0BCLKSEL" acronym="CAN0BCLKSEL" offset="112" page="1" width="32" description="Bit clock source selection for CAN0" />
+    <register id="CAN1BCLKSEL" acronym="CAN1BCLKSEL" offset="116" page="1" width="32" description="Bit clock source selection for CAN1" />
+    <!--  8 empty  -->
+    <register id="CLPMSTAT" acronym="CLPMSTAT" offset="128" page="1" width="32" description="C28 Low Power Mode Status" />
+    <!--  60 empty  -->
+    <register id="CRESCNF" acronym="CRESCNF" offset="192" page="1" width="32" description="C28 Reset Configuration" />
+    <register id="CRESSTS" acronym="CRESSTS" offset="196" page="1" width="32" description="C28 Reset Status" />
+    <register id="FUSEERR" acronym="FUSEERR" offset="200" page="1" width="32" description="Efuse Error Status" />
+    <register id="MWIR" acronym="MWIR" offset="204" page="1" width="32" description="WIR Decode Latch Register" />
+    <!--  48 empty  -->
+    <register id="MCNF" acronym="MCNF" offset="256" page="1" width="32" description="M3 Sub System Configuration" />
+    <!--  4 empty  -->
+    <register id="SERPLOOP" acronym="SERPLOOP" offset="264" page="1" width="32" description="Serial Port Loop Back Control" />
+    <register id="MCIBSTATUS" acronym="MCIBSTATUS" offset="268" page="1" width="32" description="Analog System Status Register" />
+    <register id="CCNF0" acronym="CCNF0" offset="272" page="1" width="32" description="C28 Peripheral Configuration 0" />
+    <register id="CCNF1" acronym="CCNF1" offset="276" page="1" width="32" description="C28 Peripheral Configuration 1" />
+    <register id="CCNF2" acronym="CCNF2" offset="280" page="1" width="32" description="C28 Peripheral Configuration 2" />
+    <register id="CCNF3" acronym="CCNF3" offset="284" page="1" width="32" description="C28 Peripheral Configuration 3" />
+    <register id="CCNF4" acronym="CCNF4" offset="288" page="1" width="32" description="C28 Peripheral Configuration 4" />
+    <!--  12 empty  -->
+    <register id="MEMCNF" acronym="MEMCNF" offset="304" page="1" width="32" description="M3 Memory Configuration" />
+    <!--  76 empty  -->
+    <register id="MWRALLOW" acronym="MWRALLOW" offset="384" page="1" width="32" description="M3 Configuration Write Allow" />
+    <register id="MLOCK" acronym="MLOCK" offset="388" page="1" width="32" description="M3 Configuration Lock Register" />
+    <!--  9848 empty  -->
+    <register id="DID0" acronym="DID0" offset="10240" page="1" width="32" description="Device ID 0" />
+    <register id="DID1" acronym="DID1" offset="10244" page="1" width="32" description="Device ID 1" />
+    <!--  8 empty  -->
+    <register id="DC1" acronym="DC1" offset="10256" page="1" width="32" description="Device Capabilities 1" />
+    <register id="DC2" acronym="DC2" offset="10260" page="1" width="32" description="Device Capabilities 2" />
+    <!--  4 empty  -->
+    <register id="DC4" acronym="DC4" offset="10268" page="1" width="32" description="Device Capabilities 4" />
+    <!--  4 empty  -->
+    <register id="DC6" acronym="DC6" offset="10276" page="1" width="32" description="Device Capabilities 6" />
+    <register id="DC7" acronym="DC7" offset="10280" page="1" width="32" description="Device Capabilities 7" />
+    <!--  20 empty  -->
+    <register id="SRCR0" acronym="SRCR0" offset="10304" page="1" width="32" description="Software Reset Control 0" />
+    <register id="SRCR1" acronym="SRCR1" offset="10308" page="1" width="32" description="Software Reset Control 1" />
+    <register id="SRCR2" acronym="SRCR2" offset="10312" page="1" width="32" description="Software Reset Control 2" />
+    <register id="SRCR3" acronym="SRCR3" offset="10316" page="1" width="32" description="Software Reset Control 3" />
+    <!--  12 empty  -->
+    <register id="RESC" acronym="RESC" offset="10332" page="1" width="32" description="M3 Reset Cause" />
+    <register id="RCC" acronym="RCC" offset="10336" page="1" width="32" description="Run Mode Clock" />
+    <!--  8 empty  -->
+    <register id="GPIOHBCTL" acronym="GPIOHBCTL" offset="10348" page="1" width="32" description="GPIO High Performance Bus Control" />
+    <!--  144 empty  -->
+    <register id="RCGC0" acronym="RCGC0" offset="10496" page="1" width="32" description="Run Mode Clock Gating Control - Register 0" />
+    <register id="RCGC1" acronym="RCGC1" offset="10500" page="1" width="32" description="Run Mode Clock Gating Control - Register 1" />
+    <register id="RCGC2" acronym="RCGC2" offset="10504" page="1" width="32" description="Run Mode Clock Gating Control - Register 2" />
+    <register id="RCGC3" acronym="RCGC3" offset="10508" page="1" width="32" description="Run Mode Clock Gating Control - Register 3" />
+    <register id="SCGC0" acronym="SCGC0" offset="10512" page="1" width="32" description="Sleep Mode Clock Gating Control - Register 0" />
+    <register id="SCGC1" acronym="SCGC1" offset="10516" page="1" width="32" description="Sleep Mode Clock Gating Control - Register 1" />
+    <register id="SCGC2" acronym="SCGC2" offset="10520" page="1" width="32" description="Sleep Mode Clock Gating Control - Register 2" />
+    <register id="SCGC3" acronym="SCGC3" offset="10524" page="1" width="32" description="Sleep Mode Clock Gating Control - Register 3" />
+    <register id="DCGC0" acronym="DCGC0" offset="10528" page="1" width="32" description="Deep Sleep Mode Clock Gating Control - Register 0" />
+    <register id="DCGC1" acronym="DCGC1" offset="10532" page="1" width="32" description="Deep Sleep Mode Clock Gating Control - Register 1" />
+    <register id="DCGC2" acronym="DCGC2" offset="10536" page="1" width="32" description="Deep Sleep Mode Clock Gating Control - Register 2" />
+    <register id="DCGC3" acronym="DCGC3" offset="10540" page="1" width="32" description="Deep Sleep Mode Clock Gating Control - Register 3" />
+    <!--  20 empty  -->
+    <register id="DSLPCLKCFG" acronym="DSLPCLKCFG" offset="10564" page="1" width="32" description="Deep Sleep Clock Configuration" />
+    <!--  76 empty  -->
+    <register id="DC10" acronym="DC10" offset="10644" page="1" width="32" description="Device Configuration 10" />
+    <!--  8 empty  -->
+    <register id="NVMSTAT" acronym="NVMSTAT" offset="10656" page="1" width="32" description="Non-Volatile Memory Status" />
+</module>

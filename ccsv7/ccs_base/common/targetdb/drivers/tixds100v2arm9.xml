@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<drivers id="ARM9">
+	<isa Type="ARM9" ProcID="0x75800930">
+        <driver file="..\..\..\emulation\drivers\tixds510arm9.dvr">
+			<connectionType Type="TIXDS100v2"/>
+		</driver>
+	</isa>
+    <driverProperties>
+        <version number="1.0"/>
+        <choicelist id="Endianess" type="string_list">
+            <choice value="Little Endian"/>
+            <choice value="Big Endian"/>
+        </choicelist>
+        <choicelist id="ARM Fast Download" type="string_list">
+            <choice value="On"/>
+            <choice value="Off"/>
+        </choicelist>
+        <choicelist id="Advanced Debug" type="string_list">
+            <choice value="On"/>
+            <choice value="Off"/>
+        </choicelist>
+        <choicelist id="Arm9 Core" type="string_list">
+            <choice value="Auto-detect"/>
+            <choice value="Arm9 generic"/>
+            <choice value="Arm926"/>
+            <choice value="Arm946"/>
+            <choice value="Arm968"/>
+            <choice value="Arm925"/>
+            <choice value="Arm915"/>
+            <choice value="Arm9ES"/>
+        </choicelist>
+        <choicelist id="Target Timeouts" type="string_list">
+            <choice value="Very Fast"/>
+            <choice value="Fast"/>
+            <choice value="Medium/Normal"/>
+            <choice value="Slow"/>
+            <choice value="Very Slow"/>
+        </choicelist>
+        <hierarchy>
+            <hchoice depends="none" key="Endianess"/>
+            <hchoice depends="none" key="ARM Fast Download"/>
+            <hchoice depends="none" key="Advanced Debug"/>
+            <hchoice depends="none" key="Arm9 Core"/>
+            <hchoice depends="none" key="Target Timeouts"/>
+        </hierarchy>
+        <current>
+            <cchoice key="Endianess" value="Little Endian"/>
+            <cchoice key="ARM Fast Download" value="On"/>
+            <cchoice key="Advanced Debug" value="On"/>
+            <cchoice key="Arm9 Core" value="Auto-detect"/>
+            <cchoice key="Target Timeouts" value="Very Fast"/>
+        </current>
+    </driverProperties>
+</drivers>

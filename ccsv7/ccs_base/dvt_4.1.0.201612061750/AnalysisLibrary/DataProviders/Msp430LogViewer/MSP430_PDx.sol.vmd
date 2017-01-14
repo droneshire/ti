@@ -1,0 +1,937 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_38" class="java.beans.XMLDecoder"> 
+ <object class="com.ti.dvt.ui.views.core.ViewModel"> 
+  <void property="viewConnectionMgr"> 
+   <void property="connections"> 
+    <void method="add"> 
+     <object class="com.ti.dvt.ui.views.core.ViewConnection"> 
+      <void property="source"> 
+       <string>bLogMSP</string> 
+      </void> 
+      <void property="target"> 
+       <string>com.ti.dvt.ui.views.table:Logs@1</string> 
+      </void> 
+     </object> 
+    </void> 
+    <void method="add"> 
+     <object class="com.ti.dvt.ui.views.core.ViewConnection"> 
+      <void property="source"> 
+       <string>bLogMSP2b</string> 
+      </void> 
+      <void property="target"> 
+       <string>com.ti.dvt.ui.views.line:Power</string> 
+      </void> 
+     </object> 
+    </void> 
+    <void method="add"> 
+     <object class="com.ti.dvt.ui.views.core.ViewConnection"> 
+      <void property="source"> 
+       <string>bLogMSPb</string> 
+      </void> 
+      <void property="target"> 
+       <string>com.ti.dvt.ui.views.dvtgraph:States</string> 
+      </void> 
+     </object> 
+    </void> 
+    <void method="add"> 
+     <object class="com.ti.dvt.ui.views.core.ViewConnection"> 
+      <void property="source"> 
+       <string>bLogMSP2</string> 
+      </void> 
+      <void property="target"> 
+       <string>com.ti.dvt.ui.views.line:Energy</string> 
+      </void> 
+     </object> 
+    </void> 
+   </void> 
+  </void> 
+  <void property="viewGroupMgr"> 
+   <void property="viewGroups"> 
+    <void method="put"> 
+     <string>MSP430_PD</string> 
+     <object class="com.ti.dvt.ui.views.core.ViewGroup"> 
+      <void property="memberIDs"> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.dvtgraph:States</string> 
+       </void> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.line:Energy</string> 
+       </void> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.line:Power</string> 
+       </void> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.table:Logs@1</string> 
+       </void> 
+      </void> 
+      <void property="name"> 
+       <string>MSP430_PD</string> 
+      </void> 
+     </object> 
+    </void> 
+   </void> 
+  </void> 
+  <void property="viewInfoMap"> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.dvtgraph:States</string> 
+    <object class="com.ti.dvt.ui.views.core.ViewInfo"> 
+     <void property="paneInfoColl"> 
+      <void method="add"> 
+       <object class="com.ti.dvt.ui.views.core.PaneInfo"> 
+        <void property="ID"> 
+         <string>com.ti.dvt.ui.views.dvtgraph:States</string> 
+        </void> 
+        <void property="properties"> 
+         <object class="com.ti.dvt.ui.views.core.DVTGraphProperty"> 
+          <void property="XDisplayFormat"> 
+           <string>Time ns!auto!#,##0</string> 
+          </void> 
+          <void property="XFieldName"> 
+           <string>Time</string> 
+          </void> 
+          <void property="XRange"> 
+           <void property="span"> 
+            <double>10000.0</double> 
+           </void> 
+          </void> 
+          <void property="YRange"> 
+           <void property="end"> 
+            <double>5.0</double> 
+           </void> 
+          </void> 
+          <void property="alreadySorted"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="axesProps"> 
+           <void index="0"> 
+            <void property="XAxis"> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>0</int> 
+               <int>255</int> 
+               <int>0</int> 
+              </object> 
+             </void> 
+            </void> 
+            <void property="YAxis"> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>0</int> 
+               <int>255</int> 
+               <int>0</int> 
+              </object> 
+             </void> 
+             <void property="scale"> 
+              <string>Log</string> 
+             </void> 
+             <void property="title"> 
+              <string> </string> 
+             </void> 
+            </void> 
+           </void> 
+          </void> 
+          <void property="backgroundRGB"> 
+           <object class="org.eclipse.swt.graphics.RGB"> 
+            <int>70</int> 
+            <int>70</int> 
+            <int>70</int> 
+           </object> 
+          </void> 
+          <void property="foregroundRGB"> 
+           <object class="org.eclipse.swt.graphics.RGB"> 
+            <int>255</int> 
+            <int>255</int> 
+            <int>255</int> 
+           </object> 
+          </void> 
+          <void property="showBookMark"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="showContextMenu"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="showFilter"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="showGrouping"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="showMeasurementMark"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="showProperties"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="showScrollLock"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="showTooltips"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="solutionName"> 
+           <string>MSP430_PDx</string> 
+          </void> 
+          <void property="stateCategoryMap"> 
+           <void method="put"> 
+            <string>PM</string> 
+            <object class="java.util.ArrayList"> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="label"> 
+                <string>&lt;Undetermined&gt;</string> 
+               </void> 
+               <void property="visible"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="label"> 
+                <string>&lt;Protected&gt;</string> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object class="org.eclipse.swt.graphics.RGB"> 
+                 <int>255</int> 
+                 <int>0</int> 
+                 <int>0</int> 
+                </object> 
+               </void> 
+               <void property="label"> 
+                <string>AM</string> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object class="org.eclipse.swt.graphics.RGB"> 
+                 <int>255</int> 
+                 <int>168</int> 
+                 <int>0</int> 
+                </object> 
+               </void> 
+               <void property="label"> 
+                <string>LPM0</string> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object class="org.eclipse.swt.graphics.RGB"> 
+                 <int>255</int> 
+                 <int>255</int> 
+                 <int>0</int> 
+                </object> 
+               </void> 
+               <void property="label"> 
+                <string>LPM1</string> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object class="org.eclipse.swt.graphics.RGB"> 
+                 <int>168</int> 
+                 <int>255</int> 
+                 <int>0</int> 
+                </object> 
+               </void> 
+               <void property="label"> 
+                <string>LPM2</string> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object class="org.eclipse.swt.graphics.RGB"> 
+                 <int>0</int> 
+                 <int>255</int> 
+                 <int>168</int> 
+                </object> 
+               </void> 
+               <void property="label"> 
+                <string>LPM3</string> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object class="org.eclipse.swt.graphics.RGB"> 
+                 <int>0</int> 
+                 <int>255</int> 
+                 <int>255</int> 
+                </object> 
+               </void> 
+               <void property="label"> 
+                <string>LPM3.5</string> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object class="org.eclipse.swt.graphics.RGB"> 
+                 <int>0</int> 
+                 <int>168</int> 
+                 <int>255</int> 
+                </object> 
+               </void> 
+               <void property="label"> 
+                <string>LPM4</string> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object class="org.eclipse.swt.graphics.RGB"> 
+                 <int>0</int> 
+                 <int>0</int> 
+                 <int>255</int> 
+                </object> 
+               </void> 
+               <void property="label"> 
+                <string>LPM4.5</string> 
+               </void> 
+              </object> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="put"> 
+            <string>OnOff</string> 
+            <object class="java.util.ArrayList"> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object class="org.eclipse.swt.graphics.RGB"> 
+                 <int>255</int> 
+                 <int>255</int> 
+                 <int>255</int> 
+                </object> 
+               </void> 
+               <void property="label"> 
+                <string>off</string> 
+               </void> 
+               <void property="visible"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object class="org.eclipse.swt.graphics.RGB"> 
+                 <int>0</int> 
+                 <int>128</int> 
+                 <int>255</int> 
+                </object> 
+               </void> 
+               <void property="label"> 
+                <string>on</string> 
+               </void> 
+               <void property="value"> 
+                <int>1</int> 
+               </void> 
+              </object> 
+             </void> 
+            </object> 
+           </void> 
+          </void> 
+          <void property="stateDetect"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="transition"> 
+           <boolean>false</boolean> 
+          </void> 
+         </object> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="title"> 
+      <string>States</string> 
+     </void> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.line:Energy</string> 
+    <object class="com.ti.dvt.ui.views.core.ViewInfo"> 
+     <void property="paneInfoColl"> 
+      <void method="add"> 
+       <object class="com.ti.dvt.ui.views.core.PaneInfo"> 
+        <void property="ID"> 
+         <string>com.ti.dvt.ui.views.line:Energy</string> 
+        </void> 
+        <void property="properties"> 
+         <object class="com.ti.dvt.ui.views.core.LineProp"> 
+          <void property="XDisplayFormat"> 
+           <string>Time ns!auto!#,##0</string> 
+          </void> 
+          <void property="XFieldName"> 
+           <string>Time</string> 
+          </void> 
+          <void property="XRange"> 
+           <void property="span"> 
+            <double>5.0E7</double> 
+           </void> 
+          </void> 
+          <void property="XUnit"> 
+           <string>ms</string> 
+          </void> 
+          <void property="YRange"> 
+           <void property="auto"> 
+            <boolean>true</boolean> 
+           </void> 
+           <void property="end"> 
+            <double>100000.0</double> 
+           </void> 
+          </void> 
+          <void property="YTitle"> 
+           <string>Energy</string> 
+          </void> 
+          <void property="YUnit"> 
+           <string>uJ</string> 
+          </void> 
+          <void property="alreadySorted"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="axesProps"> 
+           <void index="0"> 
+            <void property="XAxis"> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>0</int> 
+               <int>255</int> 
+               <int>0</int> 
+              </object> 
+             </void> 
+             <void property="showGridLines"> 
+              <string>None</string> 
+             </void> 
+            </void> 
+            <void property="YAxis"> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>0</int> 
+               <int>255</int> 
+               <int>0</int> 
+              </object> 
+             </void> 
+             <void property="showGridLines"> 
+              <string>Major</string> 
+             </void> 
+            </void> 
+           </void> 
+          </void> 
+          <void property="backgroundRGB"> 
+           <object class="org.eclipse.swt.graphics.RGB"> 
+            <int>72</int> 
+            <int>72</int> 
+            <int>72</int> 
+           </object> 
+          </void> 
+          <void property="channelProps"> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>Energy</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>0</int> 
+               <int>255</int> 
+               <int>255</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="channelName"> 
+              <string>Reference</string> 
+             </void> 
+             <void property="fieldName"> 
+              <string>EnergyRef</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>255</int> 
+               <int>255</int> 
+               <int>0</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+          </void> 
+          <void property="foregroundRGB"> 
+           <object class="org.eclipse.swt.graphics.RGB"> 
+            <int>0</int> 
+            <int>255</int> 
+            <int>0</int> 
+           </object> 
+          </void> 
+          <void property="gridAutoYOption"> 
+           <string>Major</string> 
+          </void> 
+          <void property="gridColor"> 
+           <object class="org.eclipse.swt.graphics.RGB"> 
+            <int>0</int> 
+            <int>255</int> 
+            <int>0</int> 
+           </object> 
+          </void> 
+          <void property="gridOption"> 
+           <string>Automatic</string> 
+          </void> 
+          <void property="scrollLock"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="showBookMark"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="showContextMenu"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="showFilter"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="showFind"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="showGrouping"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="showMeasurementMark"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="showProperties"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="showScrollLock"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="solutionName"> 
+           <string>MSP430_PDx</string> 
+          </void> 
+         </object> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="title"> 
+      <string>Energy</string> 
+     </void> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.line:Power</string> 
+    <object class="com.ti.dvt.ui.views.core.ViewInfo"> 
+     <void property="paneInfoColl"> 
+      <void method="add"> 
+       <object class="com.ti.dvt.ui.views.core.PaneInfo"> 
+        <void property="ID"> 
+         <string>com.ti.dvt.ui.views.line:Power</string> 
+        </void> 
+        <void property="properties"> 
+         <object class="com.ti.dvt.ui.views.core.LineProp"> 
+          <void property="XDisplayFormat"> 
+           <string>Time ns!auto!#,##0</string> 
+          </void> 
+          <void property="XFieldName"> 
+           <string>Time</string> 
+          </void> 
+          <void property="XRange"> 
+           <void property="span"> 
+            <double>5.0E7</double> 
+           </void> 
+          </void> 
+          <void property="YDisplayFormat"> 
+           <string>None</string> 
+          </void> 
+          <void property="YRange"> 
+           <void property="auto"> 
+            <boolean>true</boolean> 
+           </void> 
+           <void property="end"> 
+            <double>360.0</double> 
+           </void> 
+          </void> 
+          <void property="YTitle"> 
+           <string>Power</string> 
+          </void> 
+          <void property="YUnit"> 
+           <string>mW</string> 
+          </void> 
+          <void property="alreadySorted"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="axesProps"> 
+           <void index="0"> 
+            <void property="XAxis"> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>0</int> 
+               <int>255</int> 
+               <int>0</int> 
+              </object> 
+             </void> 
+             <void property="showGridLines"> 
+              <string>None</string> 
+             </void> 
+            </void> 
+            <void property="YAxis"> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>0</int> 
+               <int>255</int> 
+               <int>0</int> 
+              </object> 
+             </void> 
+             <void property="showGridLines"> 
+              <string>Major</string> 
+             </void> 
+            </void> 
+           </void> 
+          </void> 
+          <void property="backgroundRGB"> 
+           <object class="org.eclipse.swt.graphics.RGB"> 
+            <int>72</int> 
+            <int>72</int> 
+            <int>72</int> 
+           </object> 
+          </void> 
+          <void property="channelProps"> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="fieldName"> 
+              <string>Power</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>0</int> 
+               <int>255</int> 
+               <int>255</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="add"> 
+            <object class="com.ti.dvt.ui.views.core.LineFieldProp"> 
+             <void property="annotationFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+             <void property="channelName"> 
+              <string>Reference</string> 
+             </void> 
+             <void property="drawAs"> 
+              <string>Connected line</string> 
+             </void> 
+             <void property="fieldName"> 
+              <string>Reference</string> 
+             </void> 
+             <void property="foregroundRGB"> 
+              <object class="org.eclipse.swt.graphics.RGB"> 
+               <int>255</int> 
+               <int>255</int> 
+               <int>0</int> 
+              </object> 
+             </void> 
+             <void property="schemeFieldIndex"> 
+              <int>-1</int> 
+             </void> 
+            </object> 
+           </void> 
+          </void> 
+          <void property="foregroundRGB"> 
+           <object class="org.eclipse.swt.graphics.RGB"> 
+            <int>0</int> 
+            <int>255</int> 
+            <int>0</int> 
+           </object> 
+          </void> 
+          <void property="gridAutoYOption"> 
+           <string>Major</string> 
+          </void> 
+          <void property="gridColor"> 
+           <object class="org.eclipse.swt.graphics.RGB"> 
+            <int>0</int> 
+            <int>255</int> 
+            <int>0</int> 
+           </object> 
+          </void> 
+          <void property="gridOption"> 
+           <string>Automatic</string> 
+          </void> 
+          <void property="scrollLock"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="showBookMark"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="showContextMenu"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="showFilter"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="showFind"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="showGrouping"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="showMeasurementMark"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="showProperties"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="showScrollLock"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="solutionName"> 
+           <string>MSP430_PDx</string> 
+          </void> 
+         </object> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="title"> 
+      <string>Power</string> 
+     </void> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:Logs@1</string> 
+    <object class="com.ti.dvt.ui.views.core.ViewInfo"> 
+     <void property="paneInfoColl"> 
+      <void method="add"> 
+       <object class="com.ti.dvt.ui.views.core.PaneInfo"> 
+        <void property="ID"> 
+         <string>com.ti.dvt.ui.views.table:Logs@1</string> 
+        </void> 
+        <void property="properties"> 
+         <object class="com.ti.dvt.ui.views.core.TableProp"> 
+          <void property="XFieldName"> 
+           <string>Time</string> 
+          </void> 
+          <void property="allowSort"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="solutionName"> 
+           <string>MSP430_PDx</string> 
+          </void> 
+          <void property="tableMeta"> 
+           <void property="columnMetaMap"> 
+            <void method="put"> 
+             <string>PM</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>32</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Time</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>41</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>EnergyUsage</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>82</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Power</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>65</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Energy</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>71</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Function</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="width"> 
+               <int>61</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Duration</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>60</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Voltage</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>54</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>LDORange</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>70</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>DSR</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>35</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>Current</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>54</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void method="put"> 
+             <string>PC</string> 
+             <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+              <void property="alignment"> 
+               <int>131072</int> 
+              </void> 
+              <void property="width"> 
+               <int>29</int> 
+              </void> 
+             </object> 
+            </void> 
+           </void> 
+           <void property="columnOrder"> 
+            <array class="java.lang.String" length="13"> 
+             <void index="0"> 
+              <string></string> 
+             </void> 
+             <void index="1"> 
+              <string>Time</string> 
+             </void> 
+             <void index="2"> 
+              <string>Current</string> 
+             </void> 
+             <void index="3"> 
+              <string>Voltage</string> 
+             </void> 
+             <void index="4"> 
+              <string>DSR</string> 
+             </void> 
+             <void index="5"> 
+              <string>PM</string> 
+             </void> 
+             <void index="6"> 
+              <string>PC</string> 
+             </void> 
+             <void index="7"> 
+              <string>LDORange</string> 
+             </void> 
+             <void index="8"> 
+              <string>Duration</string> 
+             </void> 
+             <void index="9"> 
+              <string>Power</string> 
+             </void> 
+             <void index="10"> 
+              <string>EnergyUsage</string> 
+             </void> 
+             <void index="11"> 
+              <string>Energy</string> 
+             </void> 
+             <void index="12"> 
+              <string>Function</string> 
+             </void> 
+            </array> 
+           </void> 
+          </void> 
+         </object> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="title"> 
+      <string>Logs</string> 
+     </void> 
+    </object> 
+   </void> 
+  </void> 
+ </object> 
+</java> 

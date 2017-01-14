@@ -1,0 +1,311 @@
+<?xml version="1.0"?>
+
+<!-- Trace subsystem setup attributes for device -->
+<device id="W3G" value="0x0B7BC02F" mask="0x0FFFFFFF" HW_revision="1.0" XML_version="1.0">
+
+	<FileVersion version="2.0.0.0" Copyright="Copyright (c) 2009 Texas Instruments"></FileVersion>
+	
+	<!-- Trace route topology. Every route entry specifies a soure to sink/pin route for a given source.
+	Multiple routes shows multiple possible paths available for trace and user can select one for an 
+	active debug session -->
+			
+	<trace_routes>
+		<route>
+			<source source="C55XPDSP"/>
+			<link module=""/>
+			<sink module=""/>
+			<pin module="MOD_DRM"/>
+		</route> 
+		
+		<route>
+			<source source="C55XPDSP"/>
+			<link module=""/>
+			<sink module="MOD_ETB0"/>
+			<pin module=""/>
+		</route> 
+		
+		<route>
+			<source source="ARM9CPU"/>
+			<link module=""/>
+			<sink module="MOD_ETB1"/>
+			<pin module=""/>
+		</route> 
+		<route>
+			<source source="MIPISTM"/>
+			<link module=""/>
+			<sink module=""/>
+			<pin module="MOD_DRM"/>
+		</route> 
+		<route>
+			<source source="ARM9CPU"/>
+			<link module=""/>
+			<sink module="MOD_TPIU"/>
+			<pin module="MOD_DRM"/>
+		</route> 
+		
+	</trace_routes>
+
+	<!-- Supported proc access mechanisms for the device -->
+	<procs>
+		<!-- C55x+ DSP core -->
+		<proc id="TMS320C55XP_0" kind="tms320c55plus">
+			<identifier>
+				<register id="" address="" page="" addrunit="" width="" type=""/>
+				<value idvalue="" />
+			</identifier> 
+			
+		</proc> 
+		
+		<!-- ARM9 core -->
+		<proc id="ARM9_0" kind="arm9xx" >
+			<identifier>
+				<register id="" address="" page="" addrunit="" width="" type=""/>
+				<value idvalue="" />
+			</identifier> 
+		</proc> 
+		
+		<!-- DSP ETB -->
+		<proc id="ETBCS_0" kind="cs_etb">
+			<identifier>
+				<register id="BASE_ADDRESS" address="" page="" addrunit="" width="" type="reg"/>
+				<value idvalue="0x5c322000" />
+			</identifier> 
+			
+		</proc>
+				
+		<!-- STM -->
+		<proc id="CS_STM_0" kind="cs_stm">
+			<identifier>
+				<register id="BASE_ADDRESS" address="" page="" addrunit="" width="" type="reg"/>
+				<value idvalue="0x5c322000" />
+			</identifier> 
+		</proc >
+		
+		<!-- DAP PC access -->
+		<proc id="CS_DAP_PC_0"  kind="cs_dap_pc">
+			<identifier idvalue="" idregister="" />
+		</proc>
+		
+	</procs>
+
+	<!-- Available Trace sources for the device -->
+	<sources>
+		<!-- DSP Trace source -->
+		<source id="C55XDSP" proc="TMS320C55XP_0" stmmaster = "true">
+			<components>
+				<component module="MOD_RADTF0"/>
+			</components> 
+			<characteristics>
+				<characteristic id="CHAR_TRACEMODE" description="" value="free"/> 
+				<characteristic id="CHAR_TRACEPLLBASE" description="" value="0x0"/>
+				<characteristic id="CHAR_TRACEPLLOFFSET" description="" value="0x0"/>
+			</characteristics>
+		</source> 
+		
+		<!-- ARM9 ETM Trace source -->
+		<source id="ARM9CPU" proc="ARM9_0" stmmaster = "true" >
+		</source> 
+		
+		<!-- System Trace source -->
+		<source id="MIPISTM" proc="CS_STM_0" stmmaster = "true">
+			<components>
+				<component module="MOD_STMMASTERS_CONTROL"/>
+				<component module="MOD_SWMASTER0"/>
+				<component module="MOD_OCPWP0"/>
+			</components> 
+			<characteristics>
+				<characteristic id="CHAR_MAXEXPORTFREQMHZ" value="83"/>
+			</characteristics>
+		</source>
+	</sources> 
+
+	<!-- Available modules asscoiated with various modules in the device -->
+	<modules> 
+		<!-- ADTF module associated with C55x+ DSP trace to ETB -->
+		<module id="MOD_RADTF0" kind="radtf" proc="TMS320C55XP_0" version="1.0" >
+			<registers>
+				<register id="DTFCR" address="0x5C320000" page="0" addrunit="1" width="32" type="mem" />
+				<register id="TAGSET" address="0x5C320FA0" page="0" addrunit="1" width="32" type="mem" />	
+				<register id="TAGCLR" address="0x5C320FA4" page="0" addrunit="1" width="32" type="mem" />
+				<register id="LOCK" address="0x5C320FB0" page="0" addrunit="1" width="32" type="mem" />		
+				<register id="LOCK_STATUS" address="0x5C320FB4" page="0" addrunit="1" width="32" type="mem" />
+				<register id="ID" address="0x5C320FC8" page="0" addrunit="1" width="32" type="mem" />
+			</registers>
+			
+			<characteristics>
+				<characteristic id="CHAR_PRIMARYCLOCK" description="" value="10"/>
+				<characteristic id="CHAR_SECONDARYCLOCK" description="" value="11"/>
+				<characteristic id="CHAR_TRACEDATAORDER" description="" value="0,1,2,3,4,5,6,7,8,9"/>
+			</characteristics> 
+		</module> 
+				
+		<!-- SM module associated with System Trace -->
+		<module id="MOD_STMMASTERS_CONTROL" kind="swmctrl" proc="CS_STM_0" version="1.0" >
+			<characteristics>
+				<characteristic id="SWMSCTRL_MODENA" description="SW Master Control for Modena?" value="Modena_None,Modena_CPU0,Modena_CPU1,Modena_Either"/>
+				<characteristic id="SWMSCTRL_TESLA" description="SW Master Control for  Tesla?" value="Teslae_None,Teslae_CPU0"/> 
+				<characteristic id="SWMSCTRL_IVAHD0" description="SW Master Control for IVA-HD 0?" value="IVAHD0_None,IVAHD0_CPU0"/>
+				<characteristic id="SWMSCTRL_IVAHD1" description="SW Master Control for IVA-HD 1?" value="IVAHD1_None,IVAHD1_CPU1"/>
+				<characteristic id="SWMSCTRL_DUCATI" description="SW Master Control for Ducati?" value="Ducati_None,Ducati_CPU0,Ducati_CPU1"/>
+				<characteristic id="SWMSCTRL_CHIRON" description="SW Master Control for Chiron?" value="Chiron_None,Chiron_CPU0"/>
+				
+				
+			</characteristics> 
+			
+			<mapping id="value.username">
+				<map value="Modena_None" username="None"/>
+				<map value="Modena_CPU0" username="CPU0"/>
+				<map value="Modena_CPU1" username="CPU1"/>
+				<map value="Modena_Either" username="Either"/>
+				<!-- Add more...-->
+			</mapping>
+			
+			<mapping id="value.swmasterid">
+				<map value="Modena_None" swmasterid="0x0??"/>
+				<map value="Modena_CPU0" swmasterid="0x0??"/>
+				<map value="Modena_CPU1" swmasterid="0x0??"/>
+				<map value="Modena_Either" swmasterid="0x0??"/>
+				<!-- Add more...-->
+			</mapping>
+		
+		<mapping id="value.coreidmask">
+				<map value="Modena_None" coreidmask="0x0??"/>
+				<map value="Modena_CPU0" coreidmask="0x0??"/>
+				<map value="Modena_CPU1" coreidmask="0x0??"/>
+				<map value="Modena_Either" coreidmask="0x0??"/>
+				<!-- Add more...-->
+			</mapping>
+			
+		</module>	
+		
+		<module id="MOD_SWMASTER0" kind="stm" proc="CS_STM_0" version="1.0" >
+			<registers>
+				<register id="ATB_CONFIG" address="0x5c332044" page="0" addrunit="4" width="32" type="mem" />		
+				<register id="ATB_POINTER" address="0x5c332048" page="0" addrunit="4" width="32" type="mem" />		
+			</registers>
+
+			<mapping id="masterid.name">
+				<map masterid="0x08" name="ARM9"/>
+				<map masterid="0x10" name="MDMA"/>
+				<map masterid="0x18" name="SDMA"/>
+				<map masterid="0x50" name="C55XP"/>
+				<map masterid="0x40" name="DISPLAY"/>
+				<map masterid="0x60" name="DAP"/>
+			</mapping>
+			
+			<mapping id="masterid.proc">
+				<map masterid="0x08" proc="ARM9_0"/>
+				<map masterid="0x50" proc="TMS320C55XP_0"/>
+			</mapping>
+			
+			<mapping id="masterid.decoder">
+				<map masterid="*"  decoder="StmDecodeUnitSoftwareMessage"/>
+			</mapping>
+		
+		</module>	
+				
+		<!-- OCPWP module associated with System Trace -->
+		<module id="MOD_OCPWP0" kind="ocpwp" proc="CS_STM_0" version="1.0" >
+			<registers>
+				<register id="TFCR0" address="0x5c330030" page="0" addrunit="4" width="32" type="mem" />		
+				<register id="TFCR1" address="0x5c330034" page="0" addrunit="4" width="32" type="mem" />		
+				<register id="TFCR2" address="0x5c330038" page="0" addrunit="4" width="32" type="mem" />		
+				<register id="TFCR3" address="0x5c33003c" page="0" addrunit="4" width="32" type="mem" />		
+			</registers>
+			
+			<!-- Reverse lookup for UBM/AET database using key -->
+			<characteristics>
+				<characteristic id="CONTROL_EVENT" value="true"/>
+				<characteristic id="CONTROL_DATA " value="true"/>
+			</characteristics>
+		
+			<!-- Reverse lookup for UBM/AET database using key -->
+			<mapping id="eventbit.name">
+				<map eventbit="1" name="Interrupt"/>
+				<map eventbit="2" name="DMA Stop"/>
+			</mapping>			
+			
+			<mapping id="masterid.name">
+				<map masterid="0x80" name="OCPWP_PROBE0"/>
+				<map masterid="0x81" name="OCPWP_PROBE1"/>
+				<map masterid="0x82" name="OCPWP_PROBE2"/>
+				<map masterid="0x83" name="OCPWP_PROBE3"/>
+				<map masterid="0x84" name="OCPWP_PROBE1"/>
+				<map masterid="0x85" name="OCPWP_PROBE2"/>
+				<map masterid="0x86" name="OCPWP_PROBE3"/>
+				<map masterid="0x87" name="OCPWP_PROBE4"/>
+			</mapping>
+			
+			<mapping id="masterid.width">
+				<map masterid="0x80" width="32"/>
+				<map masterid="0x81" width="64"/>
+				<map masterid="0x82" width="32"/>
+				<map masterid="0x83" width="64"/>
+				<map masterid="0x84" width="32"/>
+				<map masterid="0x85" width="64"/>
+				<map masterid="0x86" width="32"/>
+				<map masterid="0x87" width="64"/>
+			</mapping>
+			
+			<mapping id="event.name">
+				<map event="0x0" name="ARM9_DATA"/>
+				<map event="0x1" name="ARM9_INST"/>
+				<map event="0x12" name="SDMA_RD0"/>
+				<map event="0x13" name="SDMA_RD1"/>
+				<map event="0x14" name="SDMA_RD2"/>
+			</mapping>
+			
+			<mapping id="event.type">
+				<map event="0x0" type="initiator"/>
+				<map event="0x1" type="initiator"/>
+				<map event="0x12" type="initiator"/>
+				<map event="0x13" type="initiator"/>
+				<map event="0x14" type="initiator"/>
+			</mapping>
+			
+			<mapping id="masterid.decoder">
+				<map masterid="*" decoder="OCPDecoderUnit"/>
+			</mapping>
+
+		</module> 
+
+		<!-- ETB module associated with C55x+ DSP-->
+		<module id="MOD_ETB0" kind="cs_etb" proc="ETBCS_0" version="1.0" >
+			<registers>
+				<register id="ID" address="ETBCS_ID"  page="" addrunit="1" width="32" type="reg"/>		
+				<register id="RDP" address="ETBCS_RDP" page="" addrunit="1" width="32" type="reg"/>		
+				<register id="STS" address="ETBCS_STS" page="" addrunit="1" width="32" type="reg"/>		
+				<register id="RRD" address="ETBCS_RRD" page="" addrunit="1" width="32" type="reg"/>
+				<register id="RRP" address="ETBCS_RRP" page="" addrunit="1" width="32" type="reg"/>
+				<register id="RWD" address="ETBCS_RWD" page="" addrunit="1" width="32" type="reg"/>
+				<register id="RWP" address="ETBCS_RWP" page="" addrunit="1" width="32" type="reg"/>						
+				<register id="TRG" address="ETBCS_TRG" page="" addrunit="1" width="32" type="reg"/>		
+				<register id="CTL" address="ETBCS_CTL" page="" addrunit="1" width="32" type="reg"/>		
+				<register id="FFSR" address="ETBCS_FFSR" page="" addrunit="1" width="32" type="reg"/>
+				<register id="FFCR" address="ETBCS_FFCR" page="" addrunit="1" width="32" type="reg"/>
+				<register id="LOCK" address="ETBCS_LOCK_ACCESS" page="" addrunit="1" width="32" type="reg"/>
+				<register id="LOCK_STATUS" address="ETBCS_LOCK_STATUS" page="" addrunit="1" width="32" type="reg"/>
+			</registers>
+			
+			<characteristics>
+				<characteristic id="CHAR_FFCRDISABLE" value="true"/>
+			</characteristics> 
+			
+		</module>
+
+
+		<!-- Pins module associated with a possible TPIU?-->
+		<module id ="MOD_DRM"  kind="drm" proc="ARM9_0" version="1.0" >
+			<registers>
+			</registers>
+		</module>	
+
+		<module id ="MOD_TPIU"  kind="tpiu" proc="CS_DAP_PC_0" version="1.0" >
+			<registers>
+	
+			</registers>
+		</module>	
+
+	</modules>
+
+</device>

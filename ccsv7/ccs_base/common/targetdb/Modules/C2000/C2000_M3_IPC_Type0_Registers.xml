@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- 
+  TI File $Revision: 
+  Checkin $Date: 
+  --> 
+
+<!--  28M35x IPC REGS Registers 
+     =================================== 
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     --> 
+<module id="IPC REGS" HW_revision="" XML_version="1" description="IPC REGS Registers">
+    <register id="CTOMIPCACK" acronym="CTOMIPCACK" offset="0" page="1" width="32" description="C28 to M3 Interrupt Request Clear" />
+    <register id="CTOMIPCSTS" acronym="CTOMIPCSTS" offset="4" page="1" width="32" description="C28 to M3 Interrupt Status" />
+    <register id="MTOCIPCSET" acronym="MTOCIPCSET" offset="8" page="1" width="32" description="M3 to C28 Interrupt Request Set" />
+    <register id="MTOCIPCCLR" acronym="MTOCIPCCLR" offset="12" page="1" width="32" description="M3 to C28 Interrupt Request Clear" />
+    <register id="MTOCIPCFLG" acronym="MTOCIPCFLG" offset="16" page="1" width="32" description="M3 to C28 Interrupt Status Flag" />
+    <!--  4 empty  -->
+    <register id="MIPCCOUNTERL" acronym="MIPCCOUNTERL" offset="24" page="1" width="32" description="IPC Counter Low Register" />
+    <register id="MIPCCOUNTERH" acronym="MIPCCOUNTERH" offset="28" page="1" width="32" description="IPC Counter High Register" />
+    <register id="CTOMIPCCOM" acronym="CTOMIPCCOM" offset="32" page="1" width="32" description="C28 to M3 Command" />
+    <register id="CTOMIPCADDR" acronym="CTOMIPCADDR" offset="36" page="1" width="32" description="C28 to M3 Address" />
+    <register id="CTOMIPCDATAW" acronym="CTOMIPCDATAW" offset="40" page="1" width="32" description="C28 to M3 Data Write" />
+    <register id="CTOMIPCDATAR" acronym="CTOMIPCDATAR" offset="44" page="1" width="32" description="C28 to M3 Data Read" />
+    <register id="MTOCIPCCOM" acronym="MTOCIPCCOM" offset="48" page="1" width="32" description="M3 to C28 Command Register" />
+    <register id="MTOCIPCADDR" acronym="MTOCIPCADDR" offset="52" page="1" width="32" description="M3 to C28 Address" />
+    <register id="MTOCIPCDATAW" acronym="MTOCIPCDATAW" offset="56" page="1" width="32" description="M3 to C28 Data Write" />
+    <register id="MTOCIPCDATAR" acronym="MTOCIPCDATAR" offset="60" page="1" width="32" description="M3 to C28 Data Read" />
+    <register id="CTOMIPCBOOTSTS" acronym="CTOMIPCBOOTSTS" offset="64" page="1" width="32" description="IPC Boot Status" />
+    <register id="MTOCIPCBOOTMODE" acronym="MTOCIPCBOOTMODE" offset="68" page="1" width="32" description="IPC Boot Mode" />
+    <register id="MPUMPREQUEST" acronym="MPUMPREQUEST" offset="72" page="1" width="32" description="Flash Programming Semaphore Pump Request" />
+    <register id="MCLKREQUEST" acronym="MCLKREQUEST" offset="76" page="1" width="32" description="Clock Configuratioin Semaphore M3 Request" />
+</module>

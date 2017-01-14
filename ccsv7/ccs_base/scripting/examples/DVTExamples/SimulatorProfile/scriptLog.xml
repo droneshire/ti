@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<?xml-stylesheet type="text/xsl" href="../DefaultStylesheet.xsl"?>
+<log>
+<record>
+  <date>2013-08-02T15:54:09</date>
+  <millis>1375473249548</millis>
+  <sequence>7</sequence>
+  <logger>com.ti</logger>
+  <level>INFO</level>
+  <class>com.ti.ccstudio.scripting.environment.ScriptingEnvironment</class>
+  <method>traceWrite</method>
+  <thread>10</thread>
+  <message>Launching debugger</message>
+</record>
+<record>
+  <date>2013-08-02T15:54:10</date>
+  <millis>1375473250089</millis>
+  <sequence>68</sequence>
+  <logger>com.ti</logger>
+  <level>INFO</level>
+  <class>com.ti.ccstudio.scripting.environment.ScriptingEnvironment</class>
+  <method>traceWrite</method>
+  <thread>10</thread>
+  <message>Setting up Profiler</message>
+</record>
+<record>
+  <date>2013-08-02T15:54:10</date>
+  <millis>1375473250464</millis>
+  <sequence>77</sequence>
+  <logger>com.ti</logger>
+  <level>INFO</level>
+  <class>com.ti.ccstudio.scripting.environment.ScriptingEnvironment</class>
+  <method>traceWrite</method>
+  <thread>10</thread>
+  <message>Loading Program</message>
+</record>
+<record>
+  <date>2013-08-02T15:54:10</date>
+  <millis>1375473250596</millis>
+  <sequence>115</sequence>
+  <logger>com.ti</logger>
+  <level>INFO</level>
+  <class>com.ti.ccstudio.scripting.environment.ScriptingEnvironment</class>
+  <method>traceWrite</method>
+  <thread>10</thread>
+  <message>Running target</message>
+</record>
+<record>
+  <date>2013-08-02T15:54:10</date>
+  <millis>1375473250610</millis>
+  <sequence>119</sequence>
+  <logger>com.ti.debug.engine.scripting.DebugSession</logger>
+  <level>INFO</level>
+  <class>com.ti.debug.engine.scripting.DebugSession$CIOStdOutListener</class>
+  <method>onEvent</method>
+  <thread>13</thread>
+  <message>
+</message>
+</record>
+<record>
+  <date>2013-08-02T15:54:10</date>
+  <millis>1375473250614</millis>
+  <sequence>120</sequence>
+  <logger>com.ti.debug.engine.scripting.DebugSession</logger>
+  <level>INFO</level>
+  <class>com.ti.debug.engine.scripting.DebugSession$CIOStdOutListener</class>
+  <method>onEvent</method>
+  <thread>13</thread>
+  <message>*********** READING INPUT FILE ../prog_1.nsm ***********
+</message>
+</record>
+<record>
+  <date>2013-08-02T15:54:10</date>
+  <millis>1375473250616</millis>
+  <sequence>121</sequence>
+  <logger>com.ti.debug.engine.scripting.DebugSession</logger>
+  <level>INFO</level>
+  <class>com.ti.debug.engine.scripting.DebugSession$CIOStdOutListener</class>
+  <method>onEvent</method>
+  <thread>13</thread>
+  <message>Started Decoding...
+</message>
+</record>
+<record>
+  <date>2013-08-02T15:54:10</date>
+  <millis>1375473250663</millis>
+  <sequence>122</sequence>
+  <logger>com.ti.debug.engine.scripting.DebugSession</logger>
+  <level>INFO</level>
+  <class>com.ti.debug.engine.scripting.DebugSession$CIOStdOutListener</class>
+  <method>onEvent</method>
+  <thread>13</thread>
+  <message>MOVI A 100
+</message>
+</record>
+<record>
+  <date>2013-08-02T15:54:10</date>
+  <millis>1375473250669</millis>
+  <sequence>123</sequence>
+  <logger>com.ti.debug.engine.scripting.DebugSession</logger>
+  <level>INFO</level>
+  <class>com.ti.debug.engine.scripting.DebugSession$CIOStdOutListener</class>
+  <method>onEvent</method>
+  <thread>13</thread>
+  <message>MOVI B 200
+</message>
+</record>
+<record>
+  <date>2013-08-02T15:54:10</date>
+  <millis>1375473250671</millis>
+  <sequence>124</sequence>
+  <logger>com.ti.debug.engine.scripting.DebugSession</logger>
+  <level>INFO</level>
+  <class>com.ti.debug.engine.scripting.DebugSession$CIOStdOutListener</class>
+  <method>onEvent</method>
+  <thread>13</thread>
+  <message>ADD A B
+</message>
+</record>
+<record>
+  <date>2013-08-02T15:54:10</date>
+  <millis>1375473250675</millis>
+  <sequence>125</sequence>
+  <logger>com.ti.debug.engine.scripting.DebugSession</logger>
+  <level>INFO</level>
+  <class>com.ti.debug.engine.scripting.DebugSession$CIOStdOutListener</class>
+  <method>onEvent</method>
+  <thread>13</thread>
+  <message>MULT A B
+</message>
+</record>
+<record>
+  <date>2013-08-02T15:54:10</date>
+  <millis>1375473250678</millis>
+  <sequence>126</sequence>
+  <logger>com.ti.debug.engine.scripting.DebugSession</logger>
+  <level>INFO</level>
+  <class>com.ti.debug.engine.scripting.DebugSession$CIOStdOutListener</class>
+  <method>onEvent</method>
+  <thread>13</thread>
+  <message>SUB A B
+</message>
+</record>
+<record>
+  <date>2013-08-02T15:54:10</date>
+  <millis>1375473250681</millis>
+  <sequence>127</sequence>
+  <logger>com.ti.debug.engine.scripting.DebugSession</logger>
+  <level>INFO</level>
+  <class>com.ti.debug.engine.scripting.DebugSession$CIOStdOutListener</class>
+  <method>onEvent</method>
+  <thread>13</thread>
+  <message>WRITE A
+</message>
+</record>
+<record>
+  <date>2013-08-02T15:54:10</date>
+  <millis>1375473250685</millis>
+  <sequence>128</sequence>
+  <logger>com.ti.debug.engine.scripting.DebugSession</logger>
+  <level>INFO</level>
+  <class>com.ti.debug.engine.scripting.DebugSession$CIOStdOutListener</class>
+  <method>onEvent</method>
+  <thread>13</thread>
+  <message>A = 59800
+</message>
+</record>
+<record>
+  <date>2013-08-02T15:54:10</date>
+  <millis>1375473250686</millis>
+  <sequence>129</sequence>
+  <logger>com.ti.debug.engine.scripting.DebugSession</logger>
+  <level>INFO</level>
+  <class>com.ti.debug.engine.scripting.DebugSession$CIOStdOutListener</class>
+  <method>onEvent</method>
+  <thread>13</thread>
+  <message>WRITE B
+</message>
+</record>
+<record>
+  <date>2013-08-02T15:54:10</date>
+  <millis>1375473250691</millis>
+  <sequence>130</sequence>
+  <logger>com.ti.debug.engine.scripting.DebugSession</logger>
+  <level>INFO</level>
+  <class>com.ti.debug.engine.scripting.DebugSession$CIOStdOutListener</class>
+  <method>onEvent</method>
+  <thread>13</thread>
+  <message>B = 200
+</message>
+</record>
+<record>
+  <date>2013-08-02T15:54:10</date>
+  <millis>1375473250694</millis>
+  <sequence>131</sequence>
+  <logger>com.ti.debug.engine.scripting.DebugSession</logger>
+  <level>INFO</level>
+  <class>com.ti.debug.engine.scripting.DebugSession$CIOStdOutListener</class>
+  <method>onEvent</method>
+  <thread>13</thread>
+  <message>Stopped Decoding...
+</message>
+</record>
+<record>
+  <date>2013-08-02T15:54:10</date>
+  <millis>1375473250696</millis>
+  <sequence>132</sequence>
+  <logger>com.ti.debug.engine.scripting.DebugSession</logger>
+  <level>INFO</level>
+  <class>com.ti.debug.engine.scripting.DebugSession$CIOStdOutListener</class>
+  <method>onEvent</method>
+  <thread>13</thread>
+  <message>
+</message>
+</record>
+<record>
+  <date>2013-08-02T15:54:10</date>
+  <millis>1375473250698</millis>
+  <sequence>133</sequence>
+  <logger>com.ti.debug.engine.scripting.DebugSession</logger>
+  <level>INFO</level>
+  <class>com.ti.debug.engine.scripting.DebugSession$CIOStdOutListener</class>
+  <method>onEvent</method>
+  <thread>13</thread>
+  <message>*********** READING INPUT FILE ../prog_2.nsm ***********
+</message>
+</record>
+<record>
+  <date>2013-08-02T15:54:10</date>
+  <millis>1375473250699</millis>
+  <sequence>134</sequence>
+  <logger>com.ti.debug.engine.scripting.DebugSession</logger>
+  <level>INFO</level>
+  <class>com.ti.debug.engine.scripting.DebugSession$CIOStdOutListener</class>
+  <method>onEvent</method>
+  <thread>13</thread>
+  <message>Started Decoding...
+</message>
+</record>
+<record>
+  <date>2013-08-02T15:54:10</date>
+  <millis>1375473250701</millis>
+  <sequence>135</sequence>
+  <logger>com.ti.debug.engine.scripting.DebugSession</logger>
+  <level>INFO</level>
+  <class>com.ti.debug.engine.scripting.DebugSession$CIOStdOutListener</class>
+  <method>onEvent</method>
+  <thread>13</thread>
+  <message>MOVI A 400
+</message>
+</record>
+<record>
+  <date>2013-08-02T15:54:10</date>
+  <millis>1375473250704</millis>
+  <sequence>136</sequence>
+  <logger>com.ti.debug.engine.scripting.DebugSession</logger>
+  <level>INFO</level>
+  <class>com.ti.debug.engine.scripting.DebugSession$CIOStdOutListener</class>
+  <method>onEvent</method>
+  <thread>13</thread>
+  <message>MOVI C 200
+</message>
+</record>
+<record>
+  <date>2013-08-02T15:54:10</date>
+  <millis>1375473250708</millis>
+  <sequence>137</sequence>
+  <logger>com.ti.debug.engine.scripting.DebugSession</logger>
+  <level>INFO</level>
+  <class>com.ti.debug.engine.scripting.DebugSession$CIOStdOutListener</class>
+  <method>onEvent</method>
+  <thread>13</thread>
+  <message>SUBI C 100
+</message>
+</record>
+<record>
+  <date>2013-08-02T15:54:10</date>
+  <millis>1375473250710</millis>
+  <sequence>138</sequence>
+  <logger>com.ti.debug.engine.scripting.DebugSession</logger>
+  <level>INFO</level>
+  <class>com.ti.debug.engine.scripting.DebugSession$CIOStdOutListener</class>
+  <method>onEvent</method>
+  <thread>13</thread>
+  <message>MULTI A 10
+</message>
+</record>
+<record>
+  <date>2013-08-02T15:54:10</date>
+  <millis>1375473250716</millis>
+  <sequence>139</sequence>
+  <logger>com.ti.debug.engine.scripting.DebugSession</logger>
+  <level>INFO</level>
+  <class>com.ti.debug.engine.scripting.DebugSession$CIOStdOutListener</class>
+  <method>onEvent</method>
+  <thread>13</thread>
+  <message>DIV A C
+</message>
+</record>
+<record>
+  <date>2013-08-02T15:54:10</date>
+  <millis>1375473250720</millis>
+  <sequence>140</sequence>
+  <logger>com.ti.debug.engine.scripting.DebugSession</logger>
+  <level>INFO</level>
+  <class>com.ti.debug.engine.scripting.DebugSession$CIOStdOutListener</class>
+  <method>onEvent</method>
+  <thread>13</thread>
+  <message>WRITE A
+</message>
+</record>
+<record>
+  <date>2013-08-02T15:54:10</date>
+  <millis>1375473250721</millis>
+  <sequence>141</sequence>
+  <logger>com.ti.debug.engine.scripting.DebugSession</logger>
+  <level>INFO</level>
+  <class>com.ti.debug.engine.scripting.DebugSession$CIOStdOutListener</class>
+  <method>onEvent</method>
+  <thread>13</thread>
+  <message>A = 40
+</message>
+</record>
+<record>
+  <date>2013-08-02T15:54:10</date>
+  <millis>1375473250724</millis>
+  <sequence>142</sequence>
+  <logger>com.ti.debug.engine.scripting.DebugSession</logger>
+  <level>INFO</level>
+  <class>com.ti.debug.engine.scripting.DebugSession$CIOStdOutListener</class>
+  <method>onEvent</method>
+  <thread>13</thread>
+  <message>WRITE C
+</message>
+</record>
+<record>
+  <date>2013-08-02T15:54:10</date>
+  <millis>1375473250726</millis>
+  <sequence>143</sequence>
+  <logger>com.ti.debug.engine.scripting.DebugSession</logger>
+  <level>INFO</level>
+  <class>com.ti.debug.engine.scripting.DebugSession$CIOStdOutListener</class>
+  <method>onEvent</method>
+  <thread>13</thread>
+  <message>C = 100
+</message>
+</record>
+<record>
+  <date>2013-08-02T15:54:10</date>
+  <millis>1375473250729</millis>
+  <sequence>144</sequence>
+  <logger>com.ti.debug.engine.scripting.DebugSession</logger>
+  <level>INFO</level>
+  <class>com.ti.debug.engine.scripting.DebugSession$CIOStdOutListener</class>
+  <method>onEvent</method>
+  <thread>13</thread>
+  <message>Stopped Decoding...
+</message>
+</record>
+<record>
+  <date>2013-08-02T15:54:10</date>
+  <millis>1375473250734</millis>
+  <sequence>148</sequence>
+  <logger>com.ti</logger>
+  <level>INFO</level>
+  <class>com.ti.ccstudio.scripting.environment.ScriptingEnvironment</class>
+  <method>traceWrite</method>
+  <thread>10</thread>
+  <message>Halting target</message>
+</record>
+<record>
+  <date>2013-08-02T15:54:10</date>
+  <millis>1375473250735</millis>
+  <sequence>152</sequence>
+  <logger>com.ti</logger>
+  <level>INFO</level>
+  <class>com.ti.ccstudio.scripting.environment.ScriptingEnvironment</class>
+  <method>traceWrite</method>
+  <thread>10</thread>
+  <message>Waiting for Profiler to complete</message>
+</record>
+<record>
+  <date>2013-08-02T15:54:11</date>
+  <millis>1375473251756</millis>
+  <sequence>153</sequence>
+  <logger>com.ti</logger>
+  <level>INFO</level>
+  <class>com.ti.ccstudio.scripting.environment.ScriptingEnvironment</class>
+  <method>traceWrite</method>
+  <thread>10</thread>
+  <message>Data exported to:C:\ti\ccs5_5_48\ccsv5\ccs_base\dvt_3.5.0.201307291314\FunctionProfile\solutions\FunctionProfile_cycle.CPU.csv</message>
+</record>
+<record>
+  <date>2013-08-02T15:54:11</date>
+  <millis>1375473251759</millis>
+  <sequence>154</sequence>
+  <logger>com.ti</logger>
+  <level>INFO</level>
+  <class>com.ti.ccstudio.scripting.environment.ScriptingEnvironment</class>
+  <method>traceWrite</method>
+  <thread>10</thread>
+  <message>Shutting Down</message>
+</record>
+</log>

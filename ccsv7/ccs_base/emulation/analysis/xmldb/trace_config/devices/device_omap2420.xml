@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!-- This file defines how ETB Trace attributes are available for a device.
+	 This information is used by Trace subsystem to find out setup parameters 
+	 and way to access and configure those parameters. 
+ -->
+<!-- ETB Trace Setup Attributes for OMAP2420 -->
+
+<device id="OMAP2420" value="0x01CE4801" mask="0x01FFFFFF" HW_revision="1.0" XML_version="1.0">
+<FileVersion version="2.0.0.0" Copyright="Copyright (c) 2005-2007 Texas Instruments"></FileVersion>
+	<trace_routes>
+		<route>
+			<source source="CPU_0"/>
+			<link module=""/>
+			<sink module="MOD_ETB0"/>
+			<pin module=""/>
+		</route> 						
+	</trace_routes>
+
+	<!-- Supported proc access mechanisms for the device -->
+	<procs>
+		<!-- Arm 11 core -->
+		<proc id="ARM11_0" kind="arm11xx">			
+		</proc> 
+
+		<!-- CS ETB core -->
+		<proc id="ETB11_0" kind="etb11">			
+		</proc> 
+				
+		<!-- DAP PC access -->
+		<proc id="ICEPICK_B_0"  kind="icepick_b">
+			<identifier idvalue="" idregister="" />
+		</proc>
+		
+	</procs>
+
+	<!-- Available Trace sources for the device -->
+	<sources>
+		<!-- processor Trace source -->
+		<source id="CPU_0" proc="ARM11_0" stmmaster = "false">					
+		</source> 				
+	</sources>
+	
+	<modules> 
+		<!-- ETB module associated with tiarm11xx-->
+		<module id="MOD_ETB0" kind="etb11" proc="ETB11_0" version="1.0" >
+			<registers>
+  				<register id="ID" address="ETB11_ID" page="" addrunit="1" width="32" type="reg" /> 
+  				<register id="RDP" address="ETB11_RDP" page="" addrunit="1" width="32" type="reg" /> 
+	  			<register id="RWP" address="ETB11_RWP" page="" addrunit="1" width="32" type="reg" /> 
+	  			<register id="STS" address="ETB11_STS" page="" addrunit="1" width="32" type="reg" /> 
+  				<register id="RRD" address="ETB11_RRD" page="" addrunit="1" width="32" type="reg" /> 
+  				<register id="RRP" address="ETB11_RRP" page="" addrunit="1" width="32" type="reg" /> 
+	  			<register id="RWD" address="ETB11_RWD" page="" addrunit="1" width="32" type="reg" /> 
+  				<register id="TRG" address="ETB11_TRG" page="" addrunit="1" width="32" type="reg" /> 
+	  			<register id="CTL" address="ETB11_CTL" page="" addrunit="1" width="32" type="reg" /> 
+	  		</registers>
+		</module>
+	
+		<module id="DTF" kind="DTF" access="ICEPICK_B_0" version="1.0">
+			<register id="IP_SYS_CNTL" address="IP_SYS_CNTL" page="" width="16" type="reg"/>
+		</module> 
+		
+	</modules>
+	
+</device>
+	

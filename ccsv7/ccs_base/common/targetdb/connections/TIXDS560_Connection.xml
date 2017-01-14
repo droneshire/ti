@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+
+<!-- This is a USCIF35 compatible XML.                        -->
+<!-- Copyright (c) 2011-2014, Texas Instruments Incorporated. -->
+
+<connection desc="Texas Instruments XDS560 Debug Probe" id="TI XDS560 Emulator">
+
+	<connectionType Type="TIXDS560"/>
+
+	<property Name="Diagnostic Command" Type="hiddenfield" Value="%ccs_base%/common/uscif/dbgjtag -f %boarddatafile% -rv -o -F inform,logfile=yes -S pathlength -S integrity" ID="DiagnosticCommand"/>
+	<property desc="Debug Probe Filename" id="Emulator Filename" Type="hiddenfield" Value="xds560.out" ID="USCIF.ECOM_DRVR"/>
+
+	<property desc="Debug Probe I/O Port" id="Emulator I/O Port" Type="choicelist" Value="0" ID="USCIF.ECOM_PORT">
+
+		<choice Name="The XDS560 is at port 0x0" value="0x0" />
+		<choice Name="The XDS560 is at port 0x1" value="0x1" />
+		<choice Name="The XDS560 is at port 0x2" value="0x2" />
+		<choice Name="The XDS560 is at port 0x3" value="0x3" />
+
+	</property>
+
+	<property Name="JTAG TCLK Frequency (MHz)" Type="choicelist" Value="1" ID="USCIF.TCLK_PROGRAM">
+
+		<choice Name="Automatic with faster 35.0MHz limit" value="AUTOMATIC">
+			<property Name="Automatic" Type="hiddenfield" Value="EXCHANGE" ID="USCIF.TCLK_FREQUENCY"/>
+		</choice>
+		<choice Name="Automatic with legacy 10.368MHz limit" value="AUTOMATIC">
+			<property Name="Automatic" Type="hiddenfield" Value="LEGACY" ID="USCIF.TCLK_FREQUENCY"/>
+		</choice>
+		<choice Name="Automatic with user specified limit" value="AUTOMATIC">
+			<property Name="Enter any value from 0.50 to 35.0" Type="stringfield" Value="10.368" ID="USCIF.TCLK_FREQUENCY"/>
+		</choice>
+		<choice Name="Fixed with user specified value" value="SPECIFIC">
+			<property Name="Enter any value from 0.50 to 35.0" Type="stringfield" Value="10.368" ID="USCIF.TCLK_FREQUENCY"/>
+		</choice>
+
+	</property>
+
+	<property Name="TMS/TDO Output Timing" Type="choicelist" Value="1" ID="USCIF.TDOEDGE">
+
+		<choice Name="Rising edge allows faster TCLK" value="RISE" />
+		<choice Name="Falling edge is JTAG standard"  value="FALL" />
+
+	</property>
+
+</connection>

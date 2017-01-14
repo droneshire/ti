@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<drivers id="TMS320C64XP">
+	<isa Type="TMS320C674X" ProcID="0x50019F40">
+		<driver file="..\..\..\emulation\drivers\tixds6400_plus.dvr">
+			<property Type="hiddenfield" Value="true" id="realtimeEnabled" />
+			<connectionType Type="TIXDS100v2"/>
+		</driver>
+	</isa>
+</drivers>

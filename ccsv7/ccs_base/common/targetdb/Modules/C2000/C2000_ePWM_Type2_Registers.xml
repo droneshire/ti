@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- 
+  TI File $Revision: 
+  Checkin $Date: 
+  --> 
+
+<!--  F28M35x EPWM REGS Registers 
+     =================================== 
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     --> 
+<module id="EPWM REGS" HW_revision="" XML_version="1" description="EPWM REGS Registers">
+    <register id="TBCTL" acronym="TBCTL" offset="0" page="1" width="16" description="Time Base Control Register" />
+    <register id="TBSTS" acronym="TBSTS" offset="1" page="1" width="16" description="Time Base Status Register" />
+    <register id="TBPHSHR" acronym="TBPHSHR" offset="2" page="1" width="16" description="Time Base Phase High Resolution Register " />
+    <register id="TBPHS" acronym="TBPHS" offset="3" page="1" width="16" description="Time Base Phase Register " />
+    <register id="TBCTR" acronym="TBCTR" offset="4" page="1" width="16" description="Time Base Counter Register" />
+    <register id="TBPRD" acronym="TBPRD" offset="5" page="1" width="16" description="Time Base Period Register " />
+    <register id="TBPRDHR" acronym="TBPRDHR" offset="6" page="1" width="16" description="Time Base Period High Resolution Register " />
+    <register id="CMPCTL" acronym="CMPCTL" offset="7" page="1" width="16" description="Counter Compare Control Register" />
+    <register id="CMPAHR" acronym="CMPAHR" offset="8" page="1" width="16" description="Counter Compare A High Resolution Register " />
+    <register id="CMPA" acronym="CMPA" offset="9" page="1" width="16" description="Counter Compare A Register " />
+    <register id="CMPB" acronym="CMPB" offset="10" page="1" width="16" description="Counter Compare B Register " />
+    <register id="AQCTLA" acronym="AQCTLA" offset="11" page="1" width="16" description="Action Qualifier Control Register For Output A " />
+    <register id="AQCTLB" acronym="AQCTLB" offset="12" page="1" width="16" description="Action Qualifier Control Register For Output B " />
+    <register id="AQSFRC" acronym="AQSFRC" offset="13" page="1" width="16" description="Action Qualifier Software Force Register" />
+    <register id="AQCSFRC" acronym="AQCSFRC" offset="14" page="1" width="16" description="Action Qualifier Continuous S/W Force Register " />
+    <register id="DBCTL" acronym="DBCTL" offset="15" page="1" width="16" description="Dead-Band Generator Control Register" />
+    <register id="DBRED" acronym="DBRED" offset="16" page="1" width="16" description="Dead-Band Generator Rising Edge Delay Count Register " />
+    <register id="DBFED" acronym="DBFED" offset="17" page="1" width="16" description="Dead-Band Generator Falling Edge Delay Count Register" />
+    <register id="TZSEL" acronym="TZSEL" offset="18" page="1" width="16" description="Trip Zone Select Register " />
+    <register id="TZDCSEL" acronym="TZDCSEL" offset="19" page="1" width="16" description="Trip Zone Digital Comparator Select Register" />
+    <register id="TZCTL" acronym="TZCTL" offset="20" page="1" width="16" description="Trip Zone Control Register" />
+    <register id="TZEINT" acronym="TZEINT" offset="21" page="1" width="16" description="Trip Zone Enable Interrupt Register" />
+    <register id="TZFLG" acronym="TZFLG" offset="22" page="1" width="16" description="Trip Zone Flag Register" />
+    <register id="TZCLR" acronym="TZCLR" offset="23" page="1" width="16" description="Trip Zone Clear Register" />
+    <register id="TZFRC" acronym="TZFRC" offset="24" page="1" width="16" description="Trip Zone Force Register" />
+    <register id="ETSEL" acronym="ETSEL" offset="25" page="1" width="16" description="Event Trigger Selection Register" />
+    <register id="ETPS" acronym="ETPS" offset="26" page="1" width="16" description="Event Trigger Pre-Scale Register" />
+    <register id="ETFLG" acronym="ETFLG" offset="27" page="1" width="16" description="Event Trigger Flag Register" />
+    <register id="ETCLR" acronym="ETCLR" offset="28" page="1" width="16" description="Event Trigger Clear Register" />
+    <register id="ETFRC" acronym="ETFRC" offset="29" page="1" width="16" description="Event Trigger Force Register" />
+    <register id="PCCTL" acronym="PCCTL" offset="30" page="1" width="16" description="PWM Chopper Control Register" />
+    <!--  1 empty  -->
+    <register id="HRCNFG" acronym="HRCNFG" offset="32" page="1" width="16" description="HRPWM Configuration Register" />
+    <register id="HRPWR" acronym="HRPWR" offset="33" page="1" width="16" description="HRPWM Power Register" />
+    <!--  1 empty  -->
+    <!--  1 empty  -->
+    <!--  1 empty  -->
+    <!--  1 empty  -->
+    <!--  1 empty  -->
+    <register id="HRCNFG2" acronym="HRCNFG2" offset="39" page="1" width="16" description="HRPWM Configuration 2 Register" />
+    <register id="HRPCTL" acronym="HRPCTL" offset="40" page="1" width="16" description="High Resolution Period Control Register " />
+    <!--  1 empty  -->
+    <register id="TBPRDHRM" acronym="TBPRDHRM" offset="42" page="1" width="16" description="Time Base Period High Resolution Mirror Register " />
+    <register id="TBPRDM" acronym="TBPRDM" offset="43" page="1" width="16" description="Time Base Period Mirror Register " />
+    <register id="CMPAHRM" acronym="CMPAHRM" offset="44" page="1" width="16" description="Compare A High Resolution Mirror Register" />
+    <register id="CMPAM" acronym="CMPAM" offset="45" page="1" width="16" description="Compare A Mirror Register " />
+    <!--  2 empty  -->
+    <register id="DCTRIPSEL" acronym="DCTRIPSEL" offset="48" page="1" width="16" description="Digital Compare Trip Select Register" />
+    <register id="DCACTL" acronym="DCACTL" offset="49" page="1" width="16" description="Digital Compare A Control Register" />
+    <register id="DCBCTL" acronym="DCBCTL" offset="50" page="1" width="16" description="Digital Compare B Control Register" />
+    <register id="DCFCTL" acronym="DCFCTL" offset="51" page="1" width="16" description="Digital Compare Filter Control Register" />
+    <register id="DCCAPCTL" acronym="DCCAPCTL" offset="52" page="1" width="16" description="Digital Compare Capture Control Register" />
+    <register id="DCFOFFSET" acronym="DCFOFFSET" offset="53" page="1" width="16" description="Digital Compare Filter Offset Register " />
+    <register id="DCFOFFSETCNT" acronym="DCFOFFSETCNT" offset="54" page="1" width="16" description="Digital Compare Filter Offset Counter Register" />
+    <register id="DCFWINDOW" acronym="DCFWINDOW" offset="55" page="1" width="16" description="Digital Compare Filter Window Register" />
+    <register id="DCFWINDOWCNT" acronym="DCFWINDOWCNT" offset="56" page="1" width="16" description="Digital Compare Filter Window Counter Register" />
+    <register id="DCCAP" acronym="DCCAP" offset="57" page="1" width="16" description="Digital Compare Counter Capture Register " />
+    <!--  2 empty  -->
+    <!--  1 empty  -->
+    <!--  1 empty  -->
+    <!--  1 empty  -->
+    <!--  1 empty  -->
+    <register id="TBCTL2" acronym="TBCTL2" offset="64" page="1" width="16" description="Time Base Control Register 2" />
+    <register id="CMPCTL2" acronym="CMPCTL2" offset="65" page="1" width="16" description="Counter Compare Control Register 2" />
+    <!--  5 empty  -->
+    <register id="AQCTLR" acronym="AQCTLR" offset="71" page="1" width="16" description="Action Qualifier Control Register" />
+    <!--  1 empty  -->
+    <!--  1 empty  -->
+    <register id="CMPBHR" acronym="CMPBHR" offset="74" page="1" width="16" description="Compare B High Resolution Register " />
+    <!--  1 empty  -->
+    <register id="DCAHTRIPSEL" acronym="DCAHTRIPSEL" offset="76" page="1" width="16" description="Digital Compare AH Trip Select " />
+    <register id="DCALTRIPSEL" acronym="DCALTRIPSEL" offset="77" page="1" width="16" description="Digital Compare AL Trip Select " />
+    <register id="DCBHTRIPSEL" acronym="DCBHTRIPSEL" offset="78" page="1" width="16" description="Digital Compare BH Trip Select " />
+    <register id="DCBLTRIPSEL" acronym="DCBLTRIPSEL" offset="79" page="1" width="16" description="Digital Compare BL Trip Select " />
+    <register id="ETINTPS" acronym="ETINTPS" offset="80" page="1" width="16" description="Event-Trigger Interrupt Pre-Scale Register" />
+    <register id="ETSOCPS" acronym="ETSOCPS" offset="81" page="1" width="16" description="Event-Trigger SOC Pre-Scale Register" />
+    <register id="ETCNTINITCTL" acronym="ETCNTINITCTL" offset="82" page="1" width="16" description="Event-Trigger Counter Initialization Control Register" />
+    <register id="ETCNTINIT" acronym="ETCNTINIT" offset="83" page="1" width="16" description="Event-Trigger Counter Initialization Register" />
+    <!--  10 empty  -->
+    <register id="EPWMXLINK" acronym="EPWMXLINK" offset="94" page="1" width="32" description="EPWMx Link Register" />
+    <register id="TBPHSHRM" acronym="TBPHSHRM" offset="96" page="1" width="16" description="Time Base Phase High Resolution Mirror Register" />
+    <register id="TBPHSM" acronym="TBPHSM" offset="97" page="1" width="16" description="Time Base Phase Mirror Register " />
+    <register id="TBPRDHRM2" acronym="TBPRDHRM2" offset="98" page="1" width="16" description="Time Base Period High Resolution Mirror 2 Register " />
+    <register id="TBPRDM2" acronym="TBPRDM2" offset="99" page="1" width="16" description="Time Base Period Mirror 2 Register  " />
+    <register id="CMPAHRM2" acronym="CMPAHRM2" offset="100" page="1" width="16" description="Counter Compare A High Resolution Mirror 2 Register " />
+    <register id="CMPAM2" acronym="CMPAM2" offset="101" page="1" width="16" description="Counter Compare A Mirror 2 Register" />
+    <register id="CMPBHRM" acronym="CMPBHRM" offset="102" page="1" width="16" description="Counter Compare B Mirror High Resolution Register " />
+    <register id="CMPBM" acronym="CMPBM" offset="103" page="1" width="16" description="Counter Compare B Mirror Register " />
+    <!--  1 empty  -->
+    <register id="CMPC" acronym="CMPC" offset="105" page="1" width="16" description="Counter Compare C Register" />
+    <!--  1 empty  -->
+    <register id="CMPD" acronym="CMPD" offset="107" page="1" width="16" description="Counter Compare D Register" />
+    <register id="DBREDHR" acronym="DBREDHR" offset="108" page="1" width="16" description="Dead-Band Generator Rising Edge Delay High Resolution Mirror Register " />
+    <register id="DBREDM" acronym="DBREDM" offset="109" page="1" width="16" description="Dead-Band Generator Rising Edge Delay Count Mirror Register " />
+    <register id="DBFEDHR" acronym="DBFEDHR" offset="110" page="1" width="16" description="Dead-Band Generator Falling Edge Delay High Resolution Register " />
+    <register id="DBFEDM" acronym="DBFEDM" offset="111" page="1" width="16" description="Dead-Band Generator Falling Edge Delay Count Register " />
+    <register id="ETCLRM" acronym="ETCLRM" offset="112" page="1" width="16" description="Event Trigger Clear Register " />
+    <register id="TZCLRM" acronym="TZCLRM" offset="113" page="1" width="16" description="Trip Zone Clear Register " />
+    <!--  1 empty  -->
+    <register id="AQCTLAM" acronym="AQCTLAM" offset="115" page="1" width="16" description="Action Qualifier Control Register For Output A " />
+    <register id="AQCTLBM" acronym="AQCTLBM" offset="116" page="1" width="16" description="Action Qualifier Control Register For Output B " />
+    <register id="AQSFRCM" acronym="AQSFRCM" offset="117" page="1" width="16" description="Action Qualifier Software Force Register " />
+    <register id="AQCSFRCM" acronym="AQCSFRCM" offset="118" page="1" width="16" description="Action Qualifier Continuous S/W Force Register " />
+    <!--  9 empty  -->
+</module>

@@ -1,0 +1,47 @@
+<Panel id="XDS510USB-PLUS">XDS510USB-PLUS CUSTOM
+
+  <Control id="Default" type="Button" >&amp;Default</Control>
+
+  <Control id="EmuJclkMode" type="ComboBox" >TCK Mode:
+	<Value id="Counter">Counter</Value>
+	<Value id="Adaptive">Adaptive</Value>
+	<Value id="FastAdaptive">FastAdaptive</Value>
+        <Value id="CounterITckr">CounterITckr</Value>
+  </Control>
+
+  <Control id="EmuJclkFreqMHz" type="SpinEdit" >TCK Frequency MHz (Counter mode):
+    <Value id="Min">1</Value>
+    <Value id="Max">32</Value>
+  </Control>
+
+  <Control id="EmuTckDiv" type="SpinEdit" >TCK Divisor/Adaptive TCK Delay:
+    <Value id="Min">1</Value>
+    <Value id="Max">0x1000</Value>
+  </Control>
+
+  <Control id="EmuAltTckTiming" type="CheckBox" >Non-Compliant JTAG timing (faster)</Control>
+
+  <Control id="EmuPowerMode" type="ComboBox" >Target Power Detect Threshold:
+	<Value id="POWER_LVL_LOW">Threshold_1Volt_IO</Value>
+	<Value id="POWER_LVL_HIGH">Threshold_3Volt_IO</Value>
+  </Control>
+
+  <Control id="EmuIoOffAtExit"   type="CheckBox" >JTAG I/O OFF on exit</Control>
+  <Control id="EmuIoOffAtDisconnect"   type="CheckBox" >JTAG I/O OFF on disconnect</Control>
+
+  <Control id="Emu0PinLevel" type="ComboBox" >EMU0 Startup Pin State:
+	<Value id="HIZ">HIZ</Value>
+	<Value id="HIGH">HIGH</Value>
+	<Value id="LOW">LOW</Value>
+  </Control>
+  
+  <Control id="Emu1PinLevel" type="ComboBox" >EMU1 Startup Pin State:
+	<Value id="HIZ">HIZ</Value>
+	<Value id="HIGH">HIGH</Value>
+	<Value id="LOW">LOW</Value>
+  </Control>
+  <Control id="EmuAssertSysReset"   type="CheckBox" >Assert target system reset on startup:</Control>
+  <Control id="EmuPulseTrst"        type="CheckBox" >Pulse TRST on startup:</Control>
+  <Control id="EmuSerialNumber"     type="Edit"     >Emulator Serial Number</Control>
+ 
+</Panel>

@@ -1,0 +1,1585 @@
+<?xml version="1.0"?>
+
+<!-- Trace subsystem setup attributes for device -->
+<device id="Omap5432_ES2" value="0x1B99802F" mask="0xFFFFFFFF" HW_revision="1.0" XML_version="1.0">
+
+	<FileVersion version="2.0.0.0" Copyright="Copyright (c) 2009 Texas Instruments"></FileVersion>
+	
+	<!-- Trace route topology. Every route entry specifies a soure to sink/pin route for a given source.
+	Multiple routes shows multiple possible paths available for trace and user can select one for an 
+	active debug session -->
+			
+	<trace_routes> 
+		<route>
+			<source source="CSSTM_0"/>
+			<link module=""/>
+			<sink module="MOD_ETB0"/>
+			<pin module=""/>
+		</route> 
+
+		<route>
+			<source source="CSSTM_0"/>
+			<link module=""/>
+			<sink module="MOD_TPIU"/>
+			<pin module="MOD_DRM"/>
+		</route>
+		
+		<route>
+			<source source="CortexA15_0"/>
+			<link module=""/>
+			<sink module="MOD_ETB0"/>
+			<pin module=""/>
+		</route> 
+
+		<route>
+			<source source="CortexA15_0"/>
+			<link module=""/>
+			<sink module="MOD_TPIU"/>
+			<pin module="MOD_DRM"/>
+		</route> 
+
+		<route>
+			<source source="CortexA15_1"/>
+			<link module=""/>
+			<sink module="MOD_ETB0"/>
+			<pin module=""/>
+		</route>
+		
+		<route>
+			<source source="CortexA15_1"/>
+			<link module=""/>
+			<sink module="MOD_TPIU"/>
+			<pin module="MOD_DRM"/>
+		</route> 
+	</trace_routes>
+
+	<!-- Supported proc access mechanisms for the device -->
+	<procs>
+		<!-- MPU Sub System A15_0 -->
+		<proc id="CortexA15_0" kind="cortex_axx" traceid="1">
+			<identifier>
+				<register id="REG_CTXA9_CP15_C0_MPIDR" address="REG_CTXA9_CP15_C0_MPIDR" page="" addrunit="" width="" type="reg"/>
+				<value idvalue="0x80000000" />
+			</identifier> 			
+		</proc>
+
+		<!-- MPU Sub System A15_1 -->
+		<proc id="CortexA15_1" kind="cortex_axx" traceid="2">
+			<identifier>
+				<register id="REG_CTXA9_CP15_C0_MPIDR" address="REG_CTXA9_CP15_C0_MPIDR" page="" addrunit="" width="" type="reg"/>
+				<value idvalue="0x80000001" />
+			</identifier> 			
+		</proc>
+
+		<!-- IPU System M4_0 -->
+		<proc id="Cortex_M4_0" kind="cortex_mxx" traceid="3">
+			<identifier>
+				<register id="PID0" address="0xE00FFFE0" page="0" addrunit="1" width="32" type="mem"/>
+				<value idvalue="0" />
+			</identifier> 
+			
+		</proc>
+	
+		<!-- IPU System M4_1 -->
+		<proc id="Cortex_M4_1" kind="cortex_mxx" traceid="4">
+			<identifier>
+				<register id="PID0" address="0xE00FFFE0" page="0" addrunit="1" width="32" type="mem"/>
+				<value idvalue="1" />
+			</identifier> 
+			
+		</proc>
+		
+		<!-- IVA-HD System Arm9_0/ICONT0 -->
+		<proc id="Arm9_0" kind="arm9xx" traceid="5">
+			<identifier>
+				<register id="" address="" page="" addrunit="" width="" type="reg"/>
+				<value idvalue="" />
+			</identifier> 			
+		</proc>
+
+		<!-- IVA-HD System Arm9_1/ICONT1 -->
+		<proc id="Arm9_1" kind="arm9xx" traceid="6">
+			<identifier>
+				<register id="" address="" page="" addrunit="" width="" type="reg"/>
+				<value idvalue="" />
+			</identifier> 			
+		</proc>
+	
+		<!-- IVA-HD System DSP -->
+		<proc id="C646x_0" kind="tms320c646x" traceid="7">			
+		</proc>
+		
+		<!-- SYSTEM Trace ETB -->
+		<proc id="CSETB_0" kind="cs_etb" >
+			<identifier>
+				<register id="BASE_ADDRESS" address="" page="" addrunit="" width="" type="reg"/>
+				<value idvalue="0x54167000" />
+			</identifier> 
+			
+		</proc>
+				
+		<!-- STM -->
+		<proc id="CSSTM_0" kind="cs_stm" traceid="8">
+			<identifier>
+				<register id="BASE_ADDRESS" address="" page="" addrunit="" width="" type="reg"/>
+				<value idvalue="0xD4161000" />
+			</identifier> 
+		</proc >
+		
+		<!-- DAP PC access -->
+		<proc id="CS_DAP_DebugSS"  kind="cs_dap_pc">
+			<identifier idvalue="" idregister="" />
+		</proc>
+
+	</procs>
+
+	<!-- Available Trace sources for the device -->
+	<sources>		
+		<!-- System Trace source -->
+		<source id="Cortex_M4_0" proc="Cortex_M4_0" stmmaster = "true">
+			<components>
+				<component module="MOD_CROSS_TRIGGERING_XTRIG"/>
+			</components> 
+			<characteristics>
+				<characteristic id="DEV_CHAR_SCTMMODULENUM" value="1"/>
+				<characteristic id="DEV_CHAR_SCTMFILE" value="AET_PropertySCTM_OMAP5.xml"/>
+				<characteristic id="DEV_CHAR_CTI" value="0"/> 
+				<characteristic id="DEV_CHAR_CTIFUNNAME" value="Cross Trigger(XTRIG)"/> 
+				<characteristic id="DEV_CHAR_CTIFILE" value="AET_PropertyCTI_GB1.xml"/> 
+			</characteristics>
+		</source>
+
+		<source id="Cortex_M4_1" proc="Cortex_M4_1" stmmaster = "true">
+			<components>
+				<component module="MOD_CROSS_TRIGGERING_XTRIG"/>
+			</components> 
+			<characteristics>
+				<characteristic id="DEV_CHAR_SCTMMODULENUM" value="1"/>
+				<characteristic id="DEV_CHAR_SCTMFILE" value="AET_PropertySCTM_OMAP5.xml"/>
+				<characteristic id="DEV_CHAR_CTI" value="0"/> 
+				<characteristic id="DEV_CHAR_CTIFUNNAME" value="Cross Trigger(XTRIG)"/> 
+				<characteristic id="DEV_CHAR_CTIFILE" value="AET_PropertyCTI_GB1.xml"/> 
+			</characteristics>
+		</source>
+
+		<source id="CortexA15_0" proc="CortexA15_0" stmmaster = "true">
+			<components>
+				<component module="MOD_CROSS_TRIGGERING_A15_0"/>
+			</components> 
+			<characteristics>
+				<characteristic id="DEV_CHAR_CTI" value="1"/> 
+				<characteristic id="DEV_CHAR_CTIFUNNAME" value="Cross Trigger"/> 
+				<characteristic id="DEV_CHAR_CTIFILE" value="AET_PropertyCTI_OMAP5.xml"/> 
+				<characteristic id="DEV_CHAR_CTIFUNNUM" value="0x90001000"/> 
+				<characteristic id="DEV_CHAR_CT_MOD_EXT" value="A15_0"/> 
+				<characteristic id="DEV_CHAR_ATB_ID" value="0x20"/> 
+				<characteristic id="DEV_CHAR_ETMPTM_BASEADDR" value="0x8000C000"/>
+			</characteristics>
+
+		</source>
+
+		<source id="CortexA15_1" proc="CortexA15_1" stmmaster = "true">
+			<components>
+				<component module="MOD_CROSS_TRIGGERING_A15_1"/>
+			</components> 
+			<characteristics>
+				<characteristic id="DEV_CHAR_CTI" value="1"/> 
+				<characteristic id="DEV_CHAR_CTIFUNNAME" value="Cross Trigger"/> 
+				<characteristic id="DEV_CHAR_CTIFILE" value="AET_PropertyCTI_OMAP5.xml"/> 
+				<characteristic id="DEV_CHAR_CTIFUNNUM" value="0x90001000"/> 
+				<characteristic id="DEV_CHAR_CT_MOD_EXT" value="A15_1"/> 
+				<characteristic id="DEV_CHAR_ATB_ID" value="0x21"/> 
+				<characteristic id="DEV_CHAR_ETMPTM_BASEADDR" value="0x8000D000"/>
+			</characteristics>
+		</source>
+
+		<source id="Arm9_0" proc="Arm9_0" stmmaster = "true">
+			<components>
+				<component module="MOD_CROSS_TRIGGERING_XTRIG"/>
+			</components> 
+			<characteristics>
+				<characteristic id="DEV_CHAR_CTI" value="0"/> 
+				<characteristic id="DEV_CHAR_CTIFUNNAME" value="Cross Trigger(XTRIG)"/> 
+				<characteristic id="DEV_CHAR_CTIFILE" value="AET_PropertyCTI_GB1.xml"/> 
+			</characteristics>
+		</source>
+
+		<source id="Arm9_1" proc="Arm9_0" stmmaster = "true">
+			<components>
+				<component module="MOD_CROSS_TRIGGERING_XTRIG"/>
+			</components> 
+			<characteristics>
+				<characteristic id="DEV_CHAR_CTI" value="0"/> 
+				<characteristic id="DEV_CHAR_CTIFUNNAME" value="Cross Trigger(XTRIG)"/> 
+				<characteristic id="DEV_CHAR_CTIFILE" value="AET_PropertyCTI_GB1.xml"/> 
+			</characteristics>
+		</source>
+
+		<source id="C646x_0" proc="C646x_0" stmmaster = "true">
+			<components>
+				<component module="MOD_CROSS_TRIGGERING_XTRIG"/>
+			</components> 
+			<characteristics>
+				<characteristic id="DEV_CHAR_CTI" value="0"/> 
+				<characteristic id="DEV_CHAR_CTIFUNNAME" value="Cross Trigger(XTRIG)"/> 
+				<characteristic id="DEV_CHAR_CTIFILE" value="AET_PropertyCTI_GB1.xml"/> 
+			</characteristics>
+		</source>
+		
+		<!-- This is primary STM source which contains total number of STM module -->
+		<source id="CSSTM_0" proc="CSSTM_0" stmmaster = "true">
+			<components>
+				<component module="MOD_POWERPRO"/>
+				<component module="MOD_CLOCKPRO"/>
+				<component module="MOD_STMMASTERS_CONTROL"/>
+				<component module="MOD_SWMASTER0"/>
+				<component module="MOD_OCPWP0"/>
+				<component module="MOD_SMSET"/>
+				<component module="MOD_SC"/>
+				<component module="MOD_CONFIGINFO"/>
+				<component module="MOD_PREPROCESS"/>
+			</components> 
+			<characteristics>
+				<characteristic id="CHAR_MAXEXPORTFREQMHZ" value="83"/>
+				<characteristic id="DEV_CHAR_STMTYPE" value="2"/>
+				<characteristic id="DEV_CHAR_PPFMODULENUM" value="3"/>
+				<characteristic id="DEV_CHAR_STM_BASEADDRESS" value="0xD4161000"/>
+				<characteristic id="DEV_CHAR_STM_CM_BASEADDRESS" value="0x4A307A00"/>
+				<characteristic id="DEV_CHAR_STM_SW_MASTER_DEFAULT" value="0x10204400"/>
+				<characteristic id="DEV_CHAR_STM_HW_MASTER_DEFAULT" value="0xF4FCF8E0"/>
+				<characteristic id="DEV_CHAR_STM_SC_MASTER_SHIFT" value="true"/>
+				<characteristic id="DEV_CHAR_STM_TOTAL_NUMBER" value="2"/>
+				<!-- Defines how many CS_STM units to create. Not supported yet. -->
+				<!-- <characteristic id="DEV_CHAR_CS_STM_UNITS" value="1"/> -->
+				<!-- Defines DLL name which includes the function to create CS_STM export -->
+				<characteristic id="DEV_CHAR_CS_STM_DLL" value="CS_STM_Export"/>
+				<!-- Defines the trace id of the first CS_STM unit -->
+				<characteristic id="DEV_CHAR_CS_STM_TRACE_ID_0" value="32"/>
+				<!-- Defines the base address of the first CS_STM unit -->
+				<characteristic id="DEV_CHAR_CS_STM_ADDR_0" value="0xD415A000"/>
+				<characteristic id="DEV_CHAR_ATB_ID" value="0x40"/> 
+				<characteristic id="DEV_CHAR_ATB_STP_VERSION" value="2"/> 
+				<characteristic id="DEV_CHAR_DRMBASE_ADDR" value="0xD4160000"/>
+			</characteristics>
+		</source>
+    
+	</sources> 
+
+	<!-- Available modules asscoiated with various modules in the device -->
+	<modules> 
+				
+		<!-- SM module associated with System Trace -->
+		<module id="MOD_STMMASTERS_CONTROL" kind="swmctrl" proc="CSSTM_0" version="1.0" >
+			<characteristics>				
+				<characteristic id="SWMSCTRL_DSP" description="SW Master Control for DSP?" value="DSP_None,DSP_CPU0"/> 
+				<characteristic id="SWMSCTRL_IVAHD0" description="SW Master Control for IVA-HD 0?" value="IVAHD0_None,IVAHD0_CPU0"/>
+				<characteristic id="SWMSCTRL_IVAHD1" description="SW Master Control for IVA-HD 1?" value="IVAHD1_None,IVAHD1_CPU1"/>
+				<characteristic id="SWMSCTRL_IPU" description="SW Master Control for IPU?" value="IPU_None,IPU_CPU0,IPU_CPU1"/>
+				<characteristic id="SWMSCTRL_MPUSS" description="SW Master Control for MPUSS?" value="MPUSS_None,MPUSS_CPU0"/>
+								
+			</characteristics> 
+			
+			<mapping id="value.username">
+				<map value="MPUSS_None" username="None"/>
+				<map value="MPUSS_CPU0" username="CPU0"/>
+				<map value="MPUSS_CPU1" username="CPU1"/>
+				<map value="MPUSS_Either" username="Either"/>
+				<!-- Add more...-->
+			</mapping>
+			
+			<mapping id="value.swmasterid">
+				<map value="MPUSS_None" swmasterid="0x0??"/>
+				<map value="MPUSS_CPU0" swmasterid="0x0??"/>
+				<map value="MPUSS_CPU1" swmasterid="0x0??"/>
+				<map value="MPUSS_Either" swmasterid="0x0??"/>
+				<!-- Add more...-->
+			</mapping>
+		
+		<mapping id="value.coreidmask">
+				<map value="MPUSS_None" coreidmask="0x0??"/>
+				<map value="MPUSS_CPU0" coreidmask="0x0??"/>
+				<map value="MPUSS_CPU1" coreidmask="0x0??"/>
+				<map value="MPUSS_Either" coreidmask="0x0??"/>
+				<!-- Add more...-->
+			</mapping>
+			
+		</module>	
+		
+		<module id="MOD_SWMASTER0" kind="STM" proc="CSSTM_0" version="2.0" >
+			<registers>
+				<register id="ATB_CONFIG" address="0xD4161044" page="0" addrunit="4" width="32" type="mem" />		
+				<register id="ATB_POINTER" address="0xD4161048" page="0" addrunit="4" width="32" type="mem" />		
+			</registers>
+
+			<mapping id="masterid.name">
+				<map masterid="0x00" name="CortexA15_0"/>			
+				<map masterid="0x01" name="CortexA15_1"/>		
+				<map masterid="0x20" name="IVA-HD_DSP"/>														
+				<map masterid="0x40" name="CSSTM_CortexA15_0"/>			
+				<map masterid="0x41" name="CSSTM_CortexA15_1"/>
+				<map masterid="0x44" name="CortexM4_0"/>
+				<map masterid="0x45" name="CortexM4_1"/>				
+				<map masterid="0x34" name="IVA-HD_ICONT0"/>						
+				<map masterid="0x38" name="IVA-HD_ICONT1"/>						
+			</mapping>
+			
+			<mapping id="masterid.proc">
+				<map masterid="0x00" proc="CortexA15_0"/>
+				<map masterid="0x01" proc="CortexA15_1"/>
+				<map masterid="0x20" proc="C646x_0"/>
+				<map masterid="0x40" proc="CSSTM_CortexA15_0"/>			
+				<map masterid="0x41" proc="CSSTM_CortexA15_1"/>
+				<map masterid="0x44" proc="Cortex_M4_0"/>
+				<map masterid="0x45" proc="Cortex_M4_1"/>		
+				<map masterid="0x34" proc="Arm9_0"/>
+				<map masterid="0x38" proc="Arm9_1"/>						
+			</mapping>
+			
+			<mapping id="masterid.decoder">
+				<map masterid="*"  decoder="StmDecodeUnitSoftwareMessage"/>
+			</mapping>
+		
+		</module>	
+				
+		<module id="MOD_PREPROCESS" kind="STM" proc="CSSTM_0" version="2.0" >
+			<mapping id="masterid.name">
+				<map masterid="0x00" name="CortexA15_0"/>			
+				<map masterid="0x01" name="CortexA15_1"/>		
+				<map masterid="0x20" name="IVA-HD_DSP"/>
+				<map masterid="0x40" name="CSSTM_CortexA15_0"/>			
+				<map masterid="0x41" name="CSSTM_CortexA15_1"/>
+				<map masterid="0x44" name="CortexM4_0"/>
+				<map masterid="0x45" name="CortexM4_1"/>	
+				<map masterid="0x34" name="IVA-HD_ICONT0"/>						
+				<map masterid="0x38" name="IVA-HD_ICONT1"/>						
+			</mapping>
+			
+			<mapping id="masterid.proc">
+				<map masterid="0x00" proc="CortexA15_0"/>
+				<map masterid="0x01" proc="CortexA15_1"/>
+				<map masterid="0x20" proc="C646x_0"/>
+				<map masterid="0x40" proc="CSSTM_CortexA15_0"/>			
+				<map masterid="0x41" proc="CSSTM_CortexA15_1"/>
+				<map masterid="0x44" proc="Cortex_M4_0"/>
+				<map masterid="0x45" proc="Cortex_M4_1"/>		
+				<map masterid="0x34" proc="Arm9_0"/>
+				<map masterid="0x38" proc="Arm9_1"/>
+			</mapping>
+			
+			<mapping id="masterid.decoder">
+				<map masterid="*"  decoder="StmDecodeUnitPreprocessor"/>
+			</mapping>
+		</module>	
+
+		<!-- OCPWP module associated with System Trace -->
+		<module id="MOD_OCPWP0" kind="ocpwp" proc="CSSTM_0" version="1.0" >
+			<!-- Reverse lookup for UBM/AET database using key -->
+			<characteristics>
+				<characteristic id="CONTROL_EVENT" value="true"/>
+				<characteristic id="CONTROL_DATA " value="true"/>
+			</characteristics>
+		
+			<!-- Reverse lookup for UBM/AET database using key -->
+			<mapping id="eventbit.name">
+				<map eventbit="1" name="Interrupt"/>
+				<map eventbit="2" name="DMA Stop"/>
+			</mapping>			
+			
+			<mapping id="masterid.name">
+				<map masterid="0xE4" name="OCPWP_PROBE0"/>
+				<map masterid="0xE5" name="OCPWP_PROBE1"/>
+				<map masterid="0xE6" name="OCPWP_PROBE2"/>
+				<map masterid="0xE7" name="OCPWP_PROBE3"/>			
+			</mapping>
+			
+			<mapping id="masterid.width">
+				<map masterid="0xE4" width="64"/>
+				<map masterid="0xE5" width="64"/>
+				<map masterid="0xE6" width="64"/>
+				<map masterid="0xE7" width="64"/>
+			</mapping>
+			
+			<mapping id="event.name">
+				<map event="0x0" name="ARM9_DATA"/>
+			</mapping>
+			
+			<mapping id="event.type">
+				<map event="0x0" type="initiator"/>
+			</mapping>
+			
+			<mapping id="masterid.decoder">
+				<map masterid="*" decoder="OCPDecoderUnitH08"/>
+			</mapping>
+
+		</module> 
+
+		<!-- ETB module -->
+		<module id="MOD_ETB0" kind="cs_tbr" proc="CSETB_0" version="2.0" >
+			<registers>
+				<register id="DEVID" address="DEVID"  page="" addrunit="1" width="32" type="reg"/>		
+				<register id="RAMSZ" address="RAMSZ" page="" addrunit="1" width="32" type="reg"/>	
+				<register id="STAT" address="STAT" page="" addrunit="1" width="32" type="reg"/>		
+				<register id="RAMRDAT" address="RAMRDAT" page="" addrunit="1" width="32" type="reg"/>
+				<register id="RAMRPTR" address="RAMRPTR" page="" addrunit="1" width="32" type="reg"/>
+				<register id="RAMWPTR" address="RAMWPTR" page="" addrunit="1" width="32" type="reg"/>
+				<register id="TRGCNT" address="TRGCNT" page="" addrunit="1" width="32" type="reg"/>
+				<register id="CTRL" address="CTRL" page="" addrunit="1" width="32" type="reg"/>		
+				<register id="RAMWDAT" address="RAMWDAT" page="" addrunit="1" width="32" type="reg"/>		
+				<register id="IDPERIOD" address="IDPERIOD" page="" addrunit="1" width="32" type="reg"/>
+				<register id="OPSTAT" address="OPSTAT" page="" addrunit="1" width="32" type="reg"/>
+				<register id="OPCTRL" address="OPCTRL" page="" addrunit="1" width="32" type="reg"/>
+				<register id="LOCKACC" address="LOCKACC" page="" addrunit="1" width="32" type="reg"/>
+				<register id="LOCKSTAT" address="LOCKSTAT" page="" addrunit="1" width="32" type="reg"/>
+				<register id="SEQCNTL" address="SEQCNTL" page="" addrunit="1" width="32" type="reg"/>
+				
+			</registers>
+			<characteristics>
+				<characteristic id="DEV_CHAR_FFCRDISABLE" value="0"/>
+			</characteristics> 
+			
+		</module>
+
+
+
+		<!-- Clock Profiler module associated with System Trace -->
+
+		<module id="MOD_CLOCKPRO" kind="clockpro" proc="CSSTM_0" version="1.0" >
+			
+			<!-- Reverse lookup for UBM/AET database using key -->
+			<characteristics>
+				<characteristic id="CONTROL_EVENT" value="true"/>
+				<characteristic id="CONTROL_DATA " value="true"/>
+			</characteristics>
+
+
+
+
+		    <!-- MasterId ^ ClassStartingIndex (Class Name)  ^ ClassEndingIndex ^ Master ID Name -->
+			<mapping id="cmmasterclassmapping.name">
+				<map cmmasterclassmapping="1" name="f8^0^10^CM1"/>
+				<map cmmasterclassmapping="2" name="fc^11^21^CM2"/>
+				<map cmmasterclassmapping="3" name="f4^22^25^PM"/>				
+			</mapping>
+
+
+			<!-- Lookup for CM Event Class Names (m_sClassNames[ClassIndex]) -->
+			<!-- ClassNames ^ ModuleEventId (Id in D8 data) ^ ModuleMapping (index to listing below) ^ SwapClassAndDomain columns in output -->
+
+			<mapping id="cmeventclass.name">
+				<map cmeventclass="0" name="Clock Domain State^0^0^0"/>
+				<map cmeventclass="1" name="Clock frequency divider ratio update^2^1^0"/>
+				<map cmeventclass="2" name="Clock source selection update^3^2^0"/>
+				<map cmeventclass="3" name="CORE^16^3^1"/>
+				<map cmeventclass="4" name="MPU^17^17^1"/>
+				<map cmeventclass="5" name="IVA^18^15^1"/>
+				<map cmeventclass="6" name="ABE^19^19^1"/>
+				<map cmeventclass="7" name="Target activity^32^7^0"/>
+				<map cmeventclass="8" name="Target activity^33^8^0"/>
+				<map cmeventclass="9" name="Initiator activity^34^9^0"/>
+				<map cmeventclass="10" name="Initiator activity^35^10^0"/>
+				<map cmeventclass="11" name="Clock Domain State^0^4^0"/>
+				<map cmeventclass="12" name="Clock frequency divider ratio update^1^5^0"/>
+				<map cmeventclass="13" name="Clock source selection update^3^6^0"/>
+				<map cmeventclass="14" name="PER^16^16^1"/>
+				<map cmeventclass="15" name="USB^17^18^1"/>
+				<map cmeventclass="16" name="UNIPRO1^18^18^1"/>
+				<map cmeventclass="17" name="UNIPRO2^19^18^1"/>
+				<map cmeventclass="18" name="Target activity^32^11^0"/>
+				<map cmeventclass="19" name="Target activity^33^12^0"/>
+				<map cmeventclass="20" name="Initiator activity^34^13^0"/>
+				<map cmeventclass="21" name="Initiator activity^35^14^0"/>
+				<map cmeventclass="22" name="Logic Voltage(500mV-1650mV)^0^20^0"/>
+				<map cmeventclass="23" name="Memory Voltage(mV)^1^21^0"/>
+				<map cmeventclass="24" name="Logic Power State^2^22^0"/>
+				<map cmeventclass="25" name="Memory Power State^3^23^0"/>
+			</mapping>	
+
+
+	<!-- Class string ^ class string type ^ module bit size ^ Data message ID ^ MessageIsDataValue-->
+
+			<!-- x Lookup for clk domain state Names (m_sModuleStrings[ClassIndex]) Size:m_NumberOfModules[ClassIndex]-->
+			<mapping id="modulesclass0.name">
+				<map modulesclass0="0" name="MPU GCLK^State^1^1^0"/>
+				<map modulesclass0="1" name="DSP GCLK^State^1^1^0"/>
+				<map modulesclass0="2" name="ABE 24M GFCLK^State^1^1^0"/>
+				<map modulesclass0="3" name="ABE SYS CLK^State^1^1^0"/>
+				<map modulesclass0="4" name="ABE GICLK^State^1^1^0"/>
+				<map modulesclass0="5" name="DPLL ABEx2 CLK^State^1^1^0"/>
+				<map modulesclass0="6" name="ABE LP CLK^State^1^1^0"/>
+				<map modulesclass0="7" name="ABE 32K CLK^State^1^1^0"/>
+				<map modulesclass0="8" name="COREAON 32K GFCLK^State^1^1^0"/>
+				<map modulesclass0="9" name="COREAON L4 GICLK^State^1^1^0"/>
+				<map modulesclass0="10" name="WKUPAON GICLK^State^1^1^0"/>
+				<map modulesclass0="11" name="WKUPAON 32K GFCLK^State^1^1^0"/>
+				<map modulesclass0="12" name="FUNC 24M GFCLK^State^1^1^0"/>
+			</mapping>	
+
+
+
+			<!-- x Lookup for clk freq divider ratio Names -->
+			<mapping id="modulesclass1.name">
+				<map modulesclass1="1" name="ABE^Value^2^0^0"/>
+				<map modulesclass1="2" name="---RESERVED---^Value^2^0^0"/>
+				<map modulesclass1="3" name="DIV MPU HS^Value^2^0^0"/>
+				<map modulesclass1="4" name="---RESERVED---^Value^2^0^0"/>
+				<map modulesclass1="5" name="DIV IVA HS^Value^2^0^0"/>
+				<map modulesclass1="6" name="---RESERVED---^Value^2^0^0"/>
+				<map modulesclass1="7" name="AESS FCLK^Value^1^0^0"/>
+				<map modulesclass1="8" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass1="9" name="SYS CLK DIV^Value^1^0^0"/>
+				<map modulesclass1="10" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass1="11" name="L4 DIV^Value^1^0^0"/>
+				<map modulesclass1="12" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass1="13" name="L3 DIV^Value^1^0^0"/>
+				<map modulesclass1="14" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass1="15" name="TS CLK DIV^Value^2^0^0"/>
+			</mapping>	
+
+
+			<!-- x Lookup for clk source selection update names -->
+			<mapping id="modulesclass2.name">
+				<map modulesclass2="1" name="ABE DPLL REFCLK MUX^Value^1^0^0"/>
+				<map modulesclass2="2" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="3" name="DPLL CORE BYP M2^Value^1^0^0"/>
+				<map modulesclass2="4" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="5" name="DPLL CORE BYP M3^Value^1^0^0"/>
+				<map modulesclass2="6" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="7" name="ABE DPLL BYPASS CLK MUX^Value^1^0^0"/>
+				<map modulesclass2="8" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass2="9" name="TIMER1 CLK MUX^value^1^0^0"/>
+			</mapping>	
+
+
+	<!-- Class string ^ class string type ^ module bit size ^ Data message ID ^ MessageIsDataValue-->
+			<!-- x Lookup for CORE dpll settings update names -->
+			<mapping id="modulesclass3.name">
+				<map modulesclass3="0" name="DPLL Status^State^3^2^0"/>
+				<map modulesclass3="1" name="---RESERVED---^Value^5^0^0"/>
+				<map modulesclass3="2" name="DPLL Setting N^Value^7^0^0"/>
+				<map modulesclass3="3" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass3="4" name="DPLL Setting M^Value^11^0^0"/>
+				<map modulesclass3="5" name="---RESERVED---^Value^5^0^0"/>
+				<map modulesclass3="6" name="DPLL Setting M2^Value^5^0^0"/>
+				<map modulesclass3="7" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass3="8" name="DPLL Setting M3^Value^5^0^0"/>
+				<map modulesclass3="9" name="---RESERVED---^Value^19^0^0"/>
+				<map modulesclass3="10" name="DPLL Setting H11^Value^6^0^0"/>
+				<map modulesclass3="11" name="---RESERVED---^Value^2^0^0"/>
+				<map modulesclass3="12" name="DPLL Setting H12^Value^6^0^0"/>
+				<map modulesclass3="13" name="---RESERVED---^Value^2^0^0"/>
+				<map modulesclass3="14" name="DPLL Setting H13^Value^6^0^0"/>
+				<map modulesclass3="15" name="---RESERVED---^State^2^0^0"/>
+				<map modulesclass3="16" name="DPLL Setting H14^Value^6^0^0"/>
+				<map modulesclass3="17" name="---RESERVED---^State^2^0^0"/>
+				<map modulesclass3="18" name="---RESERVED---^Value^6^0^0"/>
+				<map modulesclass3="19" name="---RESERVED---^State^2^0^0"/>
+				<map modulesclass3="20" name="DPLL Setting H22^Value^6^0^0"/>
+				<map modulesclass3="21" name="---RESERVED---^State^2^0^0"/>
+				<map modulesclass3="22" name="DPLL Setting H23^Value^6^0^0"/>
+				<map modulesclass3="23" name="---RESERVED---^State^2^0^0"/>
+				<map modulesclass3="24" name="---RESERVED---^Value^6^0^0"/>
+			</mapping>	
+
+
+			<!-- x Lookup for clk domain state - CM2 names -->
+			<mapping id="modulesclass4.name">
+				<map modulesclass4="0" name="L3 MAIN1^State^1^1^0"/>
+				<map modulesclass4="1" name="L3 MAIN2^State^1^1^0"/>
+				<map modulesclass4="2" name="IPU^State^1^1^0"/>
+				<map modulesclass4="3" name="L3 DMA^State^1^1^0"/>
+				<map modulesclass4="4" name="EMIF PHY^State^1^1^0"/>
+				<map modulesclass4="5" name="CORE DLL^State^1^1^0"/>
+				<map modulesclass4="6" name="EMIF L3^State^1^1^0"/>
+				<map modulesclass4="7" name="C2C GICLK^State^1^1^0"/>
+				<map modulesclass4="8" name="C2C GFCLK^State^1^1^0"/>
+				<map modulesclass4="9" name="MIPIEXT L3^State^1^1^0"/>
+				<map modulesclass4="10" name="L4CFG L4^State^1^1^0"/>
+				<map modulesclass4="11" name="IVA^State^1^1^0"/>
+				<map modulesclass4="12" name="FDIF^State^1^1^0"/>
+				<map modulesclass4="13" name="CAM MAIN^State^1^1^0"/>
+				<map modulesclass4="14" name="CAM L3^State^1^1^0"/>
+				<map modulesclass4="15" name="CAM BOOST^State^1^1^0"/>
+				<map modulesclass4="16" name="DSS SYS^State^1^1^0"/>
+				<map modulesclass4="17" name="DSS^State^1^1^0"/>
+				<map modulesclass4="18" name="DSS L3^State^1^1^0"/>
+				<map modulesclass4="19" name="GPU HYD^State^1^1^0"/>
+				<map modulesclass4="20" name="GPU CORE^State^1^1^0"/>
+				<map modulesclass4="21" name="GPU L3^State^1^1^0"/>
+				<map modulesclass4="22" name="UTMI ROOT^State^1^1^0"/>
+				<map modulesclass4="23" name="SATA REF^State^1^1^0"/>
+				<map modulesclass4="24" name="MMC1^State^1^1^0"/>
+				<map modulesclass4="25" name="MMC2^State^1^1^0"/>
+				<map modulesclass4="26" name="HSI^State^1^1^0"/>
+				<map modulesclass4="27" name="USB DPLL HS^State^1^1^0"/>
+				<map modulesclass4="28" name="USB OTG SS^State^1^1^0"/>
+				<map modulesclass4="29" name="USB DPL CLK^State^1^1^0"/>
+				<map modulesclass4="30" name="L3INIT 48M^State^1^1^0"/>
+				<map modulesclass4="31" name="L3INIT L4^State^1^1^0"/>
+				<map modulesclass4="32" name="L3INIT L3^State^1^1^0"/>
+				<map modulesclass4="33" name="PER ABE 24M^State^1^1^0"/>
+				<map modulesclass4="34" name="PER 96M^State^1^1^0"/>
+				<map modulesclass4="35" name="PER 48M^State^1^1^0"/>
+				<map modulesclass4="36" name="PER 24M^State^1^1^0"/>
+				<map modulesclass4="37" name="L4PER L4^State^1^1^0"/>
+				<map modulesclass4="38" name="UNIPRO1 DPLL^State^1^1^0"/>
+				<map modulesclass4="39" name="UNIPRO2 DPLL^State^1^1^0"/>
+				<map modulesclass4="40" name="UNIPRO1 PHY^State^1^1^0"/>
+				<map modulesclass4="41" name="UNIPRO1 TXPHY LS^State^1^1^0"/>
+				<map modulesclass4="42" name="UNIPRO2 PHY LS^State^1^1^0"/>
+				<map modulesclass4="43" name="CORE USB OTG SS^State^1^1^0"/>
+				<map modulesclass4="44" name="MIPIEXT PHY REF^State^1^1^0"/>
+				<map modulesclass4="45" name="UNIPRO2 PHY REF^State^1^1^0"/>
+				<map modulesclass4="46" name="PER 12M^State^1^1^0"/>
+			</mapping>	
+	
+
+	<!-- Class string ^ class string type ^ module bit size ^ Data message ID ^ MessageIsDataValue-->
+			<!-- x Lookup for clk freq divide ratio - CM2 names -->
+			<mapping id="modulesclass5.name">
+				<map modulesclass5="0" name="FDIF^Value^1^0^0"/>
+				<map modulesclass5="1" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass5="2" name="L3INIT 60M^Value^1^0^0"/>
+				<map modulesclass5="3" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass5="4" name="HSI^Value^1^0^0"/>
+				<map modulesclass5="5" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass5="6" name="MMC1^Value^1^0^0"/>
+				<map modulesclass5="7" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass5="8" name="MMC2^Value^1^0^0"/>
+			</mapping>	
+
+			<!-- x Lookup for clk source selection update - CM2 names -->
+			<mapping id="modulesclass6.name">
+				<map modulesclass6="1" name="DPLL PER BYP M2^Value^1^0^0"/>
+				<map modulesclass6="2" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass6="3" name="DPLL USB BYP M2^Value^1^0^0"/>
+				<map modulesclass6="4" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass6="5" name="GPU CORE CLK MUX^Value^1^0^0"/>
+				<map modulesclass6="6" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass6="7" name="GPU HYD CLK MUX^Value^1^0^0"/>
+				<map modulesclass6="8" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass6="9" name="MMC1 FCLK MUX^Value^1^0^0"/>
+				<map modulesclass6="10" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass6="11" name="MMC2 FCLK MUX^Value^1^0^0"/>
+				<map modulesclass6="10" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass6="11" name="EMIF LL CLK MUX^Value^1^0^0"/>
+			</mapping>
+
+
+	<!-- Class string ^ class string type ^ module bit size ^ Data message ID ^ MessageIsDataValue-->
+			<!-- x Lookup for Target activity (8-bit counters) ACT_CM1 -->
+			<mapping id="modulesclass7.name">
+				<map modulesclass7="0" name="DMIC IDLE^Value^8^0^0"/>
+				<map modulesclass7="1" name="L4_ABE IDLE^Value^8^0^0"/>
+				<map modulesclass7="2" name="MCASP IDLE^Value^8^0^0"/>
+				<map modulesclass7="3" name="MCBSP1 IDLE^Value^8^0^0"/>
+				<map modulesclass7="4" name="MCBSP2 IDLE^Value^8^0^0"/>
+				<map modulesclass7="5" name="MCBSP3 IDLE^Value^8^0^0"/>
+				<map modulesclass7="6" name="MCPDM IDLE^Value^8^0^0"/>
+				<map modulesclass7="7" name="SLIMBUS IDLE^Value^8^0^0"/>
+				<map modulesclass7="8" name="TIMER_ABE IDLE^Value^8^0^0"/>
+			</mapping>	
+
+
+			<!-- x Lookup for Target activity (4-bit counters) - ACT_CM1 -->
+			<mapping id="modulesclass8.name">
+				<map modulesclass8="0" name="DMIC IDLE^Value^4^0^0"/>
+				<map modulesclass8="1" name="L4_ABE IDLE^Value^4^0^0"/>
+				<map modulesclass8="2" name="MCASP IDLE^Value^4^0^0"/>
+				<map modulesclass8="3" name="MCBSP1 IDLE^Value^4^0^0"/>
+				<map modulesclass8="4" name="MCBSP2 IDLE^Value^4^0^0"/>
+				<map modulesclass8="5" name="MCBSP3 IDLE^Value^4^0^0"/>
+				<map modulesclass8="6" name="MCPDM IDLE^Value^4^0^0"/>
+				<map modulesclass8="7" name="SLIMBUS IDLE^Value^4^0^0"/>
+				<map modulesclass8="8" name="TIMER_ABE IDLE^Value^4^0^0"/>
+			</mapping>	
+	
+			
+	<!-- Class string ^ class string type ^ module bit size ^ Data message ID ^ MessageIsDataValue-->
+			<!-- x Lookup for Initiator activity (8-bit counters) - ACT_CM1 -->
+			<mapping id="modulesclass9.name">
+				<map modulesclass9="0" name="AESS STANDBY^Value^8^0^0"/>
+				<map modulesclass9="1" name="DSP STANDBY^Value^8^0^0"/>
+				<map modulesclass9="2" name="CMPU_CPU0^Value^8^0^0"/>
+				<map modulesclass9="3" name="CMPU_CPU1^Value^8^0^0"/>
+				<map modulesclass9="4" name="MPU STANDBY^Value^8^0^0"/>
+			</mapping>	
+
+
+			<!-- x Lookup for Initiator activity (4-bit counters) - ACT_CM1 -->
+			<mapping id="modulesclass10.name">
+				<map modulesclass10="0" name="AESS STANDBY^Value^4^0^0"/>
+				<map modulesclass10="1" name="DSP STANDBY^Value^4^0^0"/>
+				<map modulesclass10="2" name="MPU CPU0^Value^4^0^0"/>
+				<map modulesclass10="3" name="MPU CPU1^Value^4^0^0"/>
+				<map modulesclass10="4" name="MPU STANDBY^Value^4^0^0"/>
+			</mapping>
+
+
+	<!-- Class string ^ class string type ^ module bit size ^ Data message ID ^ MessageIsDataValue-->
+			<!-- x Lookup for Target activity (8-bit counters) ACT_CM2 -->
+			<mapping id="modulesclass11.name">
+				<map modulesclass11="0" name="CAL^Value^8^0^0"/>
+				<map modulesclass11="1" name="C2C_LLI_OCP_FW^Value^8^0^0"/>
+				<map modulesclass11="2" name="DMM^Value^8^0^0"/>
+				<map modulesclass11="3" name="EMIF1^Value^8^0^0"/>
+				<map modulesclass11="4" name="EMIF2^Value^8^0^0"/>
+				<map modulesclass11="5" name="EMIF OCP FW^Value^8^0^0"/>
+				<map modulesclass11="6" name="GPMC^Value^8^0^0"/>
+				<map modulesclass11="7" name="L3_MAIN_1^Value^8^0^0"/>
+				<map modulesclass11="8" name="L2_MAIN_2^Value^8^0^0"/>
+				<map modulesclass11="9" name="L2_MAIN_3^Value^8^0^0"/>
+				<map modulesclass11="10" name="L4_CFG^Value^8^0^0"/>
+				<map modulesclass11="11" name="MODEM_ICR^Value^8^0^0"/>
+				<map modulesclass11="12" name="OCMC_RAM^Value^8^0^0"/>
+				<map modulesclass11="13" name="SPINLOCK^Value^8^0^0"/>
+				<map modulesclass11="14" name="SL2^Value^8^0^0"/>
+				<map modulesclass11="15" name="USB_TLL_HS^Value^8^0^0"/>
+				<map modulesclass11="16" name="SECURITY^Value^8^0^0"/>
+				<map modulesclass11="17" name="GP_TIM^Value^8^0^0"/>
+				<map modulesclass11="18" name="I2C^Value^8^0^0"/>
+				<map modulesclass11="19" name="L4_PER^Value^8^0^0"/>
+				<map modulesclass11="20" name="MCSPI^Value^8^0^0"/>
+				<map modulesclass11="21" name="MMC_SLAVE^Value^8^0^0"/>
+				<map modulesclass11="22" name="SLIMBUS2^Value^8^0^0"/>
+				<map modulesclass11="23" name="UART^Value^8^0^0"/>
+			</mapping>	
+
+
+			<!-- x Lookup for Target activity (4-bit counters) - ACT_CM2 -->
+			<mapping id="modulesclass12.name">
+				<map modulesclass12="0" name="CAL^Value^4^0^0"/>
+				<map modulesclass12="1" name="C2C_LLI_OCP_FW^Value^4^0^0"/>
+				<map modulesclass12="2" name="DMM^Value^4^0^0"/>
+				<map modulesclass12="3" name="EMIF1^Value^4^0^0"/>
+				<map modulesclass12="4" name="EMIF2^Value^4^0^0"/>
+				<map modulesclass12="5" name="EMIF_OCP_FW^Value^4^0^0"/>
+				<map modulesclass12="6" name="GPMC^Value^4^0^0"/>
+				<map modulesclass12="7" name="L3_MAIN_1^Value^4^0^0"/>
+				<map modulesclass12="8" name="L2_MAIN_2^Value^4^0^0"/>
+				<map modulesclass12="9" name="L2_MAIN_3^Value^4^0^0"/>
+				<map modulesclass12="10" name="L4_CFG^Value^4^0^0"/>
+				<map modulesclass12="11" name="MODEM_ICR^Value^4^0^0"/>
+				<map modulesclass12="12" name="OCMC_RAM^Value^4^0^0"/>
+				<map modulesclass12="13" name="SPINLOCK^Value^4^0^0"/>
+				<map modulesclass12="14" name="SL2^Value^4^0^0"/>
+				<map modulesclass12="15" name="USB_TLL_HS^Value^4^0^0"/>
+				<map modulesclass12="16" name="SECURITY^Value^4^0^0"/>
+				<map modulesclass12="17" name="GP_TIM^Value^4^0^0"/>
+				<map modulesclass12="18" name="I2C^Value^4^0^0"/>
+				<map modulesclass12="19" name="L4_PER^Value^4^0^0"/>
+				<map modulesclass12="20" name="MCSPI^Value^4^0^0"/>
+				<map modulesclass12="21" name="MMC_SLAVE^Value^4^0^0"/>
+				<map modulesclass12="22" name="SLIMBUS2^Value^4^0^0"/>
+				<map modulesclass12="23" name="UART^Value^4^0^0"/>
+			</mapping>	
+	
+			
+	<!-- Class string ^ class string type ^ module bit size ^ Data message ID ^ MessageIsDataValue-->
+			<!-- x Lookup for Initiator activity (8-bit counters) - ACT_CM2 -->
+			<mapping id="modulesclass13.name">
+				<map modulesclass13="0" name="FDIF^Value^8^0^0"/>
+				<map modulesclass13="1" name="ISS^Value^8^0^0"/>
+				<map modulesclass13="2" name="C2C_LLI^Value^8^0^0"/>
+				<map modulesclass13="3" name="IPU^Value^8^0^0"/>
+				<map modulesclass13="4" name="UNIPRO1^Value^8^0^0"/>
+				<map modulesclass13="5" name="DMA_SYSTEM^Value^8^0^0"/>
+				<map modulesclass13="6" name="BB2D^Value^8^0^0"/>
+				<map modulesclass13="7" name="DSS^Value^8^0^0"/>
+				<map modulesclass13="8" name="GPU^Value^8^0^0"/>
+				<map modulesclass13="9" name="IVA^Value^8^0^0"/>
+				<map modulesclass13="10" name="HSI^Value^8^0^0"/>
+				<map modulesclass13="11" name="MMC1^Value^8^0^0"/>
+				<map modulesclass13="12" name="MMC2^Value^8^0^0"/>
+				<map modulesclass13="13" name="SATA^Value^8^0^0"/>
+				<map modulesclass13="14" name="UNIPRO2^Value^8^0^0"/>
+				<map modulesclass13="15" name="USB_HOST_HS^Value^8^0^0"/>
+				<map modulesclass13="16" name="USB_OGT_SS^Value^8^0^0"/>
+				<map modulesclass13="17" name="DMA_CRYPTO^Value^8^0^0"/>
+			</mapping>	
+
+
+			<!-- x Lookup for Initiator activity (4-bit counters) - ACT_CM2 -->
+			<mapping id="modulesclass14.name">
+				<map modulesclass14="0" name="FDIF^Value^4^0^0"/>
+				<map modulesclass14="1" name="ISS^Value^4^0^0"/>
+				<map modulesclass14="2" name="C2C_LLI^Value^4^0^0"/>
+				<map modulesclass14="3" name="IPU^Value^4^0^0"/>
+				<map modulesclass14="4" name="UNIPRO1^Value^4^0^0"/>
+				<map modulesclass14="5" name="DMA_SYSTEM^Value^4^0^0"/>
+				<map modulesclass14="6" name="BB2D^Value^4^0^0"/>
+				<map modulesclass14="7" name="DSS^Value^4^0^0"/>
+				<map modulesclass14="8" name="GPU^Value^4^0^0"/>
+				<map modulesclass14="9" name="IVA^Value^4^0^0"/>
+				<map modulesclass14="10" name="HSI^Value^4^0^0"/>
+				<map modulesclass14="11" name="MMC1^Value^4^0^0"/>
+				<map modulesclass14="12" name="MMC2^Value^4^0^0"/>
+				<map modulesclass14="13" name="SATA^Value^4^0^0"/>
+				<map modulesclass14="14" name="UNIPRO2^Value^4^0^0"/>
+				<map modulesclass14="15" name="USB_HOST_HS^Value^4^0^0"/>
+				<map modulesclass14="16" name="USB_OTG_SS^Value^4^0^0"/>
+				<map modulesclass14="17" name="DMA_CRYPTO^Value^4^0^0"/>
+			</mapping>
+
+
+			<!-- x Lookup for IVA dpll settings update names -->
+			<mapping id="modulesclass15.name">
+				<map modulesclass15="0" name="DPLL Status^State^3^2^0"/>
+				<map modulesclass15="1" name="---RESERVED---^Value^5^0^0"/>
+				<map modulesclass15="2" name="DPLL Setting N^Value^7^0^0"/>
+				<map modulesclass15="3" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass15="4" name="DPLL Setting M^Value^11^0^0"/>
+				<map modulesclass15="5" name="---RESERVED---^Value^32^0^0"/>
+				<map modulesclass15="6" name="DPLL Setting H11^Value^6^0^0"/>
+				<map modulesclass15="7" name="---RESERVED---^Value^2^0^0"/>
+				<map modulesclass15="8" name="DPLL Setting H12^Value^6^0^0"/>
+				<map modulesclass15="9" name="---RESERVED---^Value^18^0^0"/>
+				<map modulesclass15="10" name="---RESERVED---^State^32^0^0"/>
+			</mapping>	
+
+
+	<!-- Class string ^ class string type ^ module bit size ^ Data message ID ^ MessageIsDataValue-->
+			<!-- xx Lookup for PER dpll settings update names -->
+			<mapping id="modulesclass16.name">
+				<map modulesclass16="0" name="DPLL Status^State^3^2^0"/>
+				<map modulesclass16="1" name="---RESERVED---^Value^5^0^0"/>
+				<map modulesclass16="2" name="DPLL Setting N^Value^7^0^0"/>
+				<map modulesclass16="3" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass16="4" name="DPLL Setting M^Value^11^0^0"/>
+				<map modulesclass16="5" name="---RESERVED---^Value^5^0^0"/>
+				<map modulesclass16="6" name="DPLL Setting M2^Value^5^0^0"/>
+				<map modulesclass16="7" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass16="8" name="DPLL Setting M3^Value^5^0^0"/>
+				<map modulesclass16="9" name="---RESERVED---^Value^19^0^0"/>
+				<map modulesclass16="10" name="DPLL Setting H11^Value^6^0^0"/>
+				<map modulesclass16="11" name="---RESERVED---^Value^2^0^0"/>
+				<map modulesclass16="12" name="DPLL Setting H12^Value^6^0^0"/>
+				<map modulesclass16="13" name="---RESERVED---^Value^2^0^0"/>
+				<map modulesclass16="14" name="---RESERVED---^Value^6^0^0"/>
+				<map modulesclass16="15" name="---RESERVED---^State^2^0^0"/>
+				<map modulesclass16="16" name="DPLL Setting H14^Value^6^0^0"/>
+			</mapping>	
+
+
+			<!-- x Lookup for MPU dpll settings update names -->
+			<mapping id="modulesclass17.name">
+				<map modulesclass17="0" name="DPLL Status^State^3^2^0"/>
+				<map modulesclass17="1" name="---RESERVED---^State^5^0^0"/>
+				<map modulesclass17="2" name="DPLL Setting N^Value^7^0^0"/>
+				<map modulesclass17="3" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass17="4" name="DPLL Setting M^Value^11^0^0"/>
+				<map modulesclass17="5" name="---RESERVED---^Value^5^0^0"/>
+				<map modulesclass17="6" name="DPLL Setting M2^Value^5^0^0"/>
+				<map modulesclass17="7" name="---RESERVED---^Value^27^0^0"/>
+				<map modulesclass17="8" name="---RESERVED---^Value^32^0^0"/>
+				<map modulesclass17="9" name="---RESERVED---^Value^32^0^0"/>
+			</mapping>	
+
+	<!-- Class string ^ class string type ^ module bit size ^ Data message ID ^ MessageIsDataValue-->
+			<!-- x Lookup for CM2 USB and UNIPRO1 and UNIPRO2 dpll settings update names -->
+			<mapping id="modulesclass18.name">
+				<map modulesclass18="0" name="DPLL Status^State^3^2^0"/>
+				<map modulesclass18="1" name="---RESERVED---^State^5^0^0"/>
+				<map modulesclass18="2" name="DPLL Setting N^Value^8^0^0"/>
+				<map modulesclass18="4" name="DPLL Setting M^Value^12^0^0"/>
+				<map modulesclass18="5" name="---RESERVED---^Value^4^0^0"/>
+				<map modulesclass18="6" name="DPLL Setting M2^Value^7^0^0"/>
+				<map modulesclass18="7" name="---RESERVED---^Value^25^0^0"/>
+				<map modulesclass18="8" name="---RESERVED---^Value^32^0^0"/>
+				<map modulesclass18="9" name="---RESERVED---^Value^32^0^0"/>
+			</mapping>	
+
+
+			<!-- x Lookup for ABE dpll settings update names -->
+			<mapping id="modulesclass19.name">
+				<map modulesclass19="0" name="DPLL Status^State^3^2^0"/>
+				<map modulesclass19="1" name="---RESERVED---^State^5^0^0"/>
+				<map modulesclass19="2" name="DPLL Setting N^Value^7^0^0"/>
+				<map modulesclass19="3" name="---RESERVED---^Value^1^0^0"/>
+				<map modulesclass19="4" name="DPLL Setting M^Value^11^0^0"/>
+				<map modulesclass19="5" name="---RESERVED---^Value^5^0^0"/>
+				<map modulesclass19="6" name="DPLL Setting M2^Value^5^0^0"/>
+				<map modulesclass19="7" name="---RESERVED---^Value^3^0^0"/>
+				<map modulesclass19="8" name="DPLL Setting M3^Value^5^0^0"/>
+				<map modulesclass19="9" name="---RESERVED---^Value^19^0^0"/>
+				<map modulesclass19="10" name="---RESERVED---^Value^32^0^0"/>
+				<map modulesclass19="11" name="---RESERVED---^Value^32^0^0"/>
+			</mapping>
+
+
+			<!-- Class string ^ class string type ^ module bit size ^ Data message ID ^ MessageIsDataValue-->
+
+			<!-- x Lookup for Logic Voltage Domain OPP Change -->
+			<mapping id="modulesclass20.name">
+				<map modulesclass20="0" name="VDD_MPU_L voltage domain (mVolts)^Value^8^5^1"/>
+				<map modulesclass20="1" name="---RESERVED---^Value^8^0^0"/>
+				<map modulesclass20="2" name="VDD_MM_L volatge domain (mVolts)^Value^8^5^1"/>
+				<map modulesclass20="3" name="---RESERVED---^Value^8^0^0"/>
+				<map modulesclass20="4" name="VDD_CORE_L volatge domain (mVolts)^Value^8^5^1"/>
+			</mapping>	
+
+
+			<!-- x Lookup for Memory Voltage Domain OPP Change -->
+			<mapping id="modulesclass21.name">
+				<map modulesclass21="0" name="VDD MPU_M^State^1^3^0"/>
+				<map modulesclass21="1" name="---RESERVED---^State^7^0^0"/>	
+				<map modulesclass21="2" name="VDD MM_M^State^1^3^0"/>
+				<map modulesclass21="3" name="---RESERVED---^State^7^0^0"/>		
+				<map modulesclass21="4" name="VDD CORE_M^State^1^3^0"/>
+			</mapping>	
+
+
+	<!-- Class string ^ class string type ^ module bit size ^ Data message ID ^ MessageIsDataValue-->
+			<!-- x Lookup for Logic Power Domain State Change -->
+			<mapping id="modulesclass22.name">
+				<map modulesclass22="0" name="MPU^State^4^4^0"/>
+				<map modulesclass22="1" name="CPU0^State^4^4^0"/>
+				<map modulesclass22="2" name="CPU1^State^4^4^0"/>
+				<map modulesclass22="3" name="DSP^State^4^4^0"/>
+				<map modulesclass22="4" name="ABE^State^4^4^0"/>
+				<map modulesclass22="5" name="CORE^State^4^4^0"/>
+				<map modulesclass22="6" name="IVA^State^4^4^0"/>
+				<map modulesclass22="7" name="CAM^State^4^4^0"/>
+				<map modulesclass22="8" name="DSS^State^4^4^0"/>
+				<map modulesclass22="9" name="GPU^State^4^4^0"/>
+				<map modulesclass22="10" name="L3INT^State^4^4^0"/>
+				<map modulesclass22="11" name="L4PER^State^4^4^0"/>
+				<map modulesclass22="12" name="CUSTEFUSE^State^4^4^0"/>
+			</mapping>			
+			
+
+			<!-- x Lookup for Memory Power Domain State Change -->
+			<mapping id="modulesclass23.name">
+				<map modulesclass23="0" name="MPU L2^State^2^6^0"/>
+				<map modulesclass23="1" name="MPU RAM^State^2^6^0"/>
+				<map modulesclass23="2" name="MPU CPU0 L1^State^2^6^0"/>
+				<map modulesclass23="3" name="MPU CPU1 L1^State^2^6^0"/>
+				<map modulesclass23="4" name="DSP L1^State^2^6^0"/>
+				<map modulesclass23="5" name="DSP L2^State^2^6^0"/>
+				<map modulesclass23="6" name="DSP EDMA^State^2^6^0"/>
+				<map modulesclass23="7" name="AESSMEM^State^2^6^0"/>
+				<map modulesclass23="8" name="PERIPH MEM^State^2^6^0"/>
+				<map modulesclass23="9" name="CORE NRET BANK^State^2^6^0"/>
+				<map modulesclass23="10" name="CORE OCMRAM^State^2^6^0"/>
+				<map modulesclass23="11" name="CORE IPU L2RAM^State^2^6^0"/>
+				<map modulesclass23="12" name="CORE IPU UNICACHE^State^2^6^0"/>
+				<map modulesclass23="13" name="CORE OTHER BANK^State^2^6^0"/>
+				<map modulesclass23="14" name="IVA HWA MEM^State^2^6^0"/>
+				<map modulesclass23="15" name="IVA SL2 MEM^State^2^6^0"/>
+				<map modulesclass23="16" name="IVA TCMI MEM^State^2^6^0"/>
+				<map modulesclass23="17" name="IVA TCM2 MEM^State^2^6^0"/>
+				<map modulesclass23="18" name="CAM MEM^State^2^6^0"/>
+				<map modulesclass23="19" name="DSS MEM^State^2^6^0"/>
+				<map modulesclass23="20" name="GPU MEM^State^2^6^0"/>
+				<map modulesclass23="21" name="L3INIT BANK1^State^2^6^0"/>
+				<map modulesclass23="22" name="L3INIT BANK2^State^2^6^0"/>
+			</mapping>	
+
+
+
+			<!-- Lookup for CM Event String 1 -->
+			<mapping id="cmeventstring1.name">
+				<map cmeventstring1="1" name="Off"/>
+				<map cmeventstring1="2" name="On"/>
+			</mapping>
+
+
+			<mapping id="cmeventstring2.name">
+				<map cmeventstring2="1" name="DPLL is not yet initialized or internal FSM are in transient state"/>
+				<map cmeventstring2="2" name="DPLL STATUS = LP Stop"/>
+				<map cmeventstring2="3" name="DPLL STATUS = FR Stop"/>
+				<map cmeventstring2="4" name="DPLL STATUS = reserved"/>
+				<map cmeventstring2="5" name="DPLL STATUS = bad data"/>
+				<map cmeventstring2="6" name="DPLL STATUS = LP Bypass"/>
+				<map cmeventstring2="7" name="DPLL STATUS = FR Bypass"/>
+				<map cmeventstring2="8" name="DPLL STATUS = Locked"/>
+			</mapping>
+
+			<!-- Lookup for Voltage Domain OPP -->
+			<mapping id="cmeventstring3.name">
+				<map cmeventstring3="0" name="LDO is in SLEEP mode and operating at trimmed voltage"/>
+				<map cmeventstring3="1" name="LDO is in ON mode and operating at normal voltage."/>
+			</mapping>
+
+			<!-- Lookup for PM Event String 2 -->
+			<mapping id="cmeventstring4.name">
+                <map cmeventstring4="1" name="Off"/>
+                <map cmeventstring4="2" name="bad data"/>
+                <map cmeventstring4="3" name="bad data"/>
+                <map cmeventstring4="4" name="bad data"/>
+                <map cmeventstring4="5" name="OSWR"/>
+                <map cmeventstring4="6" name="Hg Slow"/>
+                <map cmeventstring4="7" name="CSWR"/>
+                <map cmeventstring4="8" name="Hg Fast"/>
+                <map cmeventstring4="9" name="bad data"/>
+                <map cmeventstring4="10" name="bad data"/>
+                <map cmeventstring4="11" name="Inactive"/>
+                <map cmeventstring4="12" name="bad data"/>
+                <map cmeventstring4="13" name="bad data"/>
+                <map cmeventstring4="14" name="bad data"/>
+                <map cmeventstring4="15" name="On"/>
+                <map cmeventstring4="16" name="bad data"/>                
+			</mapping>
+			<!-- Lookup for Voltage Domain OPP -->
+			<!-- The translation table can be found from PALMAS spec Page 41, under SMPS12_VOLTAGE register range table -->
+			<!-- The value in name field is in mV -->
+			<mapping id="cmeventstring5.name">
+				<map cmeventstring5="0" name="0"/>
+				<map cmeventstring5="1" name="500"/>
+				<map cmeventstring5="2" name="500"/>
+				<map cmeventstring5="3" name="500"/>
+				<map cmeventstring5="4" name="500"/>
+				<map cmeventstring5="5" name="500"/>
+				<map cmeventstring5="6" name="500"/>
+				<map cmeventstring5="7" name="510"/>
+				<map cmeventstring5="8" name="520"/>
+				<map cmeventstring5="9" name="530"/>
+				<map cmeventstring5="10" name="540"/>
+				<map cmeventstring5="11" name="550"/>
+				<map cmeventstring5="12" name="560"/>
+				<map cmeventstring5="13" name="570"/>
+				<map cmeventstring5="14" name="580"/>
+				<map cmeventstring5="15" name="590"/>
+				<map cmeventstring5="16" name="600"/>
+				<map cmeventstring5="17" name="610"/>
+				<map cmeventstring5="18" name="620"/>
+				<map cmeventstring5="19" name="630"/>
+				<map cmeventstring5="20" name="640"/>
+				<map cmeventstring5="21" name="650"/>
+				<map cmeventstring5="22" name="660"/>
+				<map cmeventstring5="23" name="670"/>
+				<map cmeventstring5="24" name="680"/>
+				<map cmeventstring5="25" name="690"/>
+				<map cmeventstring5="26" name="700"/>
+				<map cmeventstring5="27" name="710"/>
+				<map cmeventstring5="28" name="720"/>
+				<map cmeventstring5="29" name="730"/>
+				<map cmeventstring5="30" name="740"/>
+				<map cmeventstring5="31" name="750"/>
+				<map cmeventstring5="32" name="760"/>
+				<map cmeventstring5="33" name="770"/>
+				<map cmeventstring5="34" name="780"/>
+				<map cmeventstring5="35" name="790"/>
+				<map cmeventstring5="36" name="800"/>
+				<map cmeventstring5="37" name="810"/>
+				<map cmeventstring5="38" name="820"/>
+				<map cmeventstring5="39" name="830"/>
+				<map cmeventstring5="40" name="840"/>
+				<map cmeventstring5="41" name="850"/>
+				<map cmeventstring5="42" name="860"/>
+				<map cmeventstring5="43" name="870"/>
+				<map cmeventstring5="44" name="880"/>
+				<map cmeventstring5="45" name="890"/>
+				<map cmeventstring5="46" name="900"/>
+				<map cmeventstring5="47" name="910"/>
+				<map cmeventstring5="48" name="920"/>
+				<map cmeventstring5="49" name="930"/>
+				<map cmeventstring5="50" name="940"/>
+				<map cmeventstring5="51" name="950"/>
+				<map cmeventstring5="52" name="960"/>
+				<map cmeventstring5="53" name="970"/>
+				<map cmeventstring5="54" name="980"/>
+				<map cmeventstring5="55" name="990"/>
+				<map cmeventstring5="56" name="1000"/>
+				<map cmeventstring5="57" name="1010"/>
+				<map cmeventstring5="58" name="1020"/>
+				<map cmeventstring5="59" name="1030"/>
+				<map cmeventstring5="60" name="1040"/>
+				<map cmeventstring5="61" name="1050"/>
+				<map cmeventstring5="62" name="1060"/>
+				<map cmeventstring5="63" name="1070"/>
+				<map cmeventstring5="64" name="1080"/>
+				<map cmeventstring5="65" name="1090"/>
+				<map cmeventstring5="66" name="1100"/>
+				<map cmeventstring5="67" name="1110"/>
+				<map cmeventstring5="68" name="1120"/>
+				<map cmeventstring5="69" name="1130"/>
+				<map cmeventstring5="70" name="1140"/>
+				<map cmeventstring5="71" name="1150"/>
+				<map cmeventstring5="72" name="1160"/>
+				<map cmeventstring5="73" name="1170"/>
+				<map cmeventstring5="74" name="1180"/>
+				<map cmeventstring5="75" name="1190"/>
+				<map cmeventstring5="76" name="1200"/>
+				<map cmeventstring5="77" name="1210"/>
+				<map cmeventstring5="78" name="1220"/>
+				<map cmeventstring5="79" name="1230"/>
+				<map cmeventstring5="80" name="1240"/>
+				<map cmeventstring5="81" name="1250"/>
+				<map cmeventstring5="82" name="1260"/>
+				<map cmeventstring5="83" name="1270"/>
+				<map cmeventstring5="84" name="1280"/>
+				<map cmeventstring5="85" name="1290"/>
+				<map cmeventstring5="86" name="1300"/>
+				<map cmeventstring5="87" name="1310"/>
+				<map cmeventstring5="88" name="1320"/>
+				<map cmeventstring5="89" name="1330"/>
+				<map cmeventstring5="90" name="1340"/>
+				<map cmeventstring5="91" name="1350"/>
+				<map cmeventstring5="92" name="1360"/>
+				<map cmeventstring5="93" name="1370"/>
+				<map cmeventstring5="94" name="1380"/>
+				<map cmeventstring5="95" name="1390"/>
+				<map cmeventstring5="96" name="1400"/>
+				<map cmeventstring5="97" name="1410"/>
+				<map cmeventstring5="98" name="1420"/>
+				<map cmeventstring5="99" name="1430"/>
+				<map cmeventstring5="100" name="1440"/>
+				<map cmeventstring5="101" name="1450"/>
+				<map cmeventstring5="102" name="1460"/>
+				<map cmeventstring5="103" name="1470"/>
+				<map cmeventstring5="104" name="1480"/>
+				<map cmeventstring5="105" name="1490"/>
+				<map cmeventstring5="106" name="1500"/>
+				<map cmeventstring5="107" name="1510"/>
+				<map cmeventstring5="108" name="1520"/>
+				<map cmeventstring5="109" name="1530"/>
+				<map cmeventstring5="110" name="1540"/>
+				<map cmeventstring5="111" name="1550"/>
+				<map cmeventstring5="112" name="1560"/>
+				<map cmeventstring5="113" name="1570"/>
+				<map cmeventstring5="114" name="1580"/>
+				<map cmeventstring5="115" name="1590"/>
+				<map cmeventstring5="116" name="1600"/>
+				<map cmeventstring5="117" name="1610"/>
+				<map cmeventstring5="118" name="1620"/>
+				<map cmeventstring5="119" name="1630"/>
+				<map cmeventstring5="120" name="1640"/>
+				<map cmeventstring5="121" name="1650"/>
+				<map cmeventstring5="122" name="1650"/>
+				<map cmeventstring5="123" name="1650"/>
+				<map cmeventstring5="124" name="1650"/>
+				<map cmeventstring5="125" name="1650"/>
+				<map cmeventstring5="126" name="1650"/>
+				<map cmeventstring5="127" name="1650"/>
+			</mapping>
+
+			<mapping id="cmeventstring6.name">
+				<map cmeventstring6="1" name="Off"/>
+				<map cmeventstring6="2" name="Ret"/>
+				<map cmeventstring6="3" name="Inactive"/>
+				<map cmeventstring6="4" name="On"/>
+			</mapping>
+
+
+			<mapping id="masterid.proc">
+				<map masterid="0xF8" proc="CSSTM_0"/>
+				<map masterid="0xFc" proc="CSSTM_0"/>
+				<map masterid="0xF4" proc="CSSTM_0"/>				
+			</mapping>
+			
+
+			<mapping id="masterid.name">
+				<map masterid="0xF8" name="CLOCKPRO"/>
+				<map masterid="0xFC" name="CLOCKPRO"/>
+				<map masterid="0xF4" name="CLOCKPRO"/>		
+			</mapping>
+			
+			<mapping id="masterid.width">
+				<map masterid="0xF8" width="64"/>
+				<map masterid="0xFC" width="64"/>
+				<map masterid="0xF4" width="64"/>				
+			</mapping>
+			
+			<mapping id="masterid.decoder">
+					<map masterid="*"  decoder="StmDecoderUnitClockProfiler"/>
+			</mapping>
+		</module> 
+
+		<module id="MOD_SMSET" kind="SMSET" proc="CSSTM_0" version="1.0" >
+		
+			<mapping id="eventid.module">
+				<map eventid="0" module="Invalid"/>
+				<map eventid="1" module="iCONT1"/>
+				<map eventid="2" module="iCONT1"/>
+				<map eventid="3" module="iCONT1"/>
+				<map eventid="4" module="iCONT1"/>
+				<map eventid="5" module="iCONT1"/>
+				<map eventid="6" module="iCONT1"/>
+				<map eventid="7" module="iCONT1"/>
+				<map eventid="8" module="iCONT1"/>
+				<map eventid="9" module="iCONT1"/>
+				<map eventid="10" module="iCONT1"/>
+				<map eventid="11" module="iCONT1"/>
+				<map eventid="12" module="iCONT1"/>
+				<map eventid="13" module="iCONT2"/>
+				<map eventid="14" module="iCONT2"/>
+				<map eventid="15" module="iCONT2"/>
+				<map eventid="16" module="iCONT2"/>
+				<map eventid="17" module="iCONT2"/>
+				<map eventid="18" module="iCONT2"/>
+				<map eventid="19" module="iCONT2"/>
+				<map eventid="20" module="iCONT2"/>
+				<map eventid="21" module="iCONT2"/>
+				<map eventid="22" module="iCONT2"/>
+				<map eventid="23" module="iCONT2"/>
+				<map eventid="24" module="iCONT2"/>
+				<map eventid="25" module="iME3"/>
+				<map eventid="26" module="iME3"/>
+				<map eventid="27" module="iLF3"/>
+				<map eventid="28" module="iLF3"/>
+				<map eventid="29" module="iPE3"/>
+				<map eventid="30" module="iPE3"/>
+				<map eventid="31" module="iPE3"/>
+				<map eventid="32" module="iPE3"/>
+				<map eventid="33" module="iPE3"/>
+				<map eventid="34" module="iPE3"/>
+				<map eventid="35" module="CALC3"/>
+				<map eventid="36" module="CALC3"/>
+				<map eventid="37" module="CALC3"/>
+				<map eventid="38" module="CALC3"/>
+				<map eventid="39" module="CALC3"/>
+				<map eventid="40" module="CALC3"/>
+				<map eventid="41" module="ECD3"/>
+				<map eventid="42" module="ECD3"/>
+				<map eventid="43" module="ECD3"/>
+				<map eventid="44" module="ECD3"/>
+				<map eventid="45" module="ECD3"/>
+				<map eventid="46" module="ECD3"/>
+				<map eventid="47" module="MC3"/>
+				<map eventid="48" module="MC3"/>
+				<map eventid="49" module="MC3"/>
+				<map eventid="50" module="MC3"/>
+				<map eventid="51" module="MC3"/>
+				<map eventid="52" module="MC3"/>
+			</mapping>
+					
+			<mapping id="eventid.class">
+				<map eventid="0" class="Invalid"/>
+				<map eventid="1" class="task1"/>
+				<map eventid="2" class="task1"/>
+				<map eventid="3" class="task2"/>
+				<map eventid="4" class="task2"/>
+				<map eventid="5" class="task3"/>
+				<map eventid="6" class="task3"/>
+				<map eventid="7" class="task4"/>
+				<map eventid="8" class="task4"/>
+				<map eventid="9" class="task5"/>
+				<map eventid="10" class="task5"/>
+				<map eventid="11" class="task5"/>
+				<map eventid="12" class="task5"/>
+				<map eventid="13" class="task1"/>
+				<map eventid="14" class="task1"/>
+				<map eventid="15" class="task2"/>
+				<map eventid="16" class="task2"/>
+				<map eventid="17" class="task2"/>
+				<map eventid="18" class="task2"/>
+				<map eventid="19" class="task3"/>
+				<map eventid="20" class="task3"/>
+				<map eventid="21" class="task4"/>
+				<map eventid="22" class="task4"/>
+				<map eventid="23" class="task6"/>
+				<map eventid="24" class="task6"/>
+				<map eventid="25" class="computation"/>
+				<map eventid="26" class="computation"/>
+				<map eventid="27" class="computation"/>
+				<map eventid="28" class="computation"/>
+				<map eventid="29" class="load"/>
+				<map eventid="30" class="load"/>
+				<map eventid="31" class="computation"/>
+				<map eventid="32" class="computation"/>
+				<map eventid="33" class="store"/>
+				<map eventid="34" class="store"/>
+				<map eventid="35" class="load"/>
+				<map eventid="36" class="load"/>
+				<map eventid="37" class="computation"/>
+				<map eventid="38" class="computation"/>
+				<map eventid="39" class="store"/>
+				<map eventid="40" class="store"/>
+				<map eventid="41" class="load"/>
+				<map eventid="42" class="load"/>
+				<map eventid="43" class="computation"/>
+				<map eventid="44" class="computation"/>
+				<map eventid="45" class="store"/>
+				<map eventid="46" class="store"/>
+				<map eventid="47" class="load"/>
+				<map eventid="48" class="load"/>
+				<map eventid="49" class="computation"/>
+				<map eventid="50" class="computation"/>
+				<map eventid="51" class="store"/>
+				<map eventid="52" class="store"/>
+			</mapping>
+					
+			<mapping id="eventid.type">
+				<map eventid="0" type="Invalid"/>
+				<map eventid="1" type="Event"/>
+				<map eventid="2" type="Event"/>
+				<map eventid="3" type="Event"/>
+				<map eventid="4" type="Event"/>
+				<map eventid="5" type="Event"/>
+				<map eventid="6" type="Event"/>
+				<map eventid="7" type="Event"/>
+				<map eventid="8" type="Event"/>
+				<map eventid="9" type="Event"/>
+				<map eventid="10" type="Event"/>
+				<map eventid="11" type="Event"/>
+				<map eventid="12" type="Event"/>
+				<map eventid="13" type="Event"/>
+				<map eventid="14" type="Event"/>
+				<map eventid="15" type="Event"/>
+				<map eventid="16" type="Event"/>
+				<map eventid="17" type="Event"/>
+				<map eventid="18" type="Event"/>
+				<map eventid="19" type="Event"/>
+				<map eventid="20" type="Event"/>
+				<map eventid="21" type="Event"/>
+				<map eventid="22" type="Event"/>
+				<map eventid="23" type="Event"/>
+				<map eventid="24" type="Event"/>
+				<map eventid="25" type="Event"/>
+				<map eventid="26" type="Event"/>
+				<map eventid="27" type="Event"/>
+				<map eventid="28" type="Event"/>
+				<map eventid="29" type="Event"/>
+				<map eventid="30" type="Event"/>
+				<map eventid="31" type="Event"/>
+				<map eventid="32" type="Event"/>
+				<map eventid="33" type="Event"/>
+				<map eventid="34" type="Event"/>
+				<map eventid="35" type="Event"/>
+				<map eventid="36" type="Event"/>
+				<map eventid="37" type="Event"/>
+				<map eventid="38" type="Event"/>
+				<map eventid="39" type="Event"/>
+				<map eventid="40" type="Event"/>
+				<map eventid="41" type="Event"/>
+				<map eventid="42" type="Event"/>
+				<map eventid="43" type="Event"/>
+				<map eventid="44" type="Event"/>
+				<map eventid="45" type="Event"/>
+				<map eventid="46" type="Event"/>
+				<map eventid="47" type="Event"/>
+				<map eventid="48" type="Event"/>
+				<map eventid="49" type="Event"/>
+				<map eventid="50" type="Event"/>
+				<map eventid="51" type="Event"/>
+				<map eventid="52" type="Event"/>
+			</mapping>
+			
+					
+			<mapping id="eventid.msg">
+				<map eventid="0" msg="Invalid"/>
+				<map eventid="1" msg="start"/>
+				<map eventid="2" msg="stop"/>
+				<map eventid="3" msg="start"/>
+				<map eventid="4" msg="stop"/>
+				<map eventid="5" msg="start"/>
+				<map eventid="6" msg="stop"/>
+				<map eventid="7" msg="start"/>
+				<map eventid="8" msg="stop"/>
+				<map eventid="9" msg="start"/>
+				<map eventid="10" msg="stop"/>
+				<map eventid="11" msg="start"/>
+				<map eventid="12" msg="stop"/>
+				<map eventid="13" msg="start"/>
+				<map eventid="14" msg="stop"/>
+				<map eventid="15" msg="start"/>
+				<map eventid="16" msg="stop"/>
+				<map eventid="17" msg="start"/>
+				<map eventid="18" msg="stop"/>
+				<map eventid="19" msg="start"/>
+				<map eventid="20" msg="stop"/>
+				<map eventid="21" msg="start"/>
+				<map eventid="22" msg="stop"/>
+				<map eventid="23" msg="start"/>
+				<map eventid="24" msg="stop"/>
+				<map eventid="25" msg="start"/>
+				<map eventid="26" msg="stop"/>
+				<map eventid="27" msg="start"/>
+				<map eventid="28" msg="stop"/>
+				<map eventid="29" msg="start"/>
+				<map eventid="30" msg="stop"/>
+				<map eventid="31" msg="start"/>
+				<map eventid="32" msg="stop"/>
+				<map eventid="33" msg="start"/>
+				<map eventid="34" msg="stop"/>
+				<map eventid="35" msg="start"/>
+				<map eventid="36" msg="stop"/>
+				<map eventid="37" msg="start"/>
+				<map eventid="38" msg="stop"/>
+				<map eventid="39" msg="start"/>
+				<map eventid="40" msg="stop"/>
+				<map eventid="41" msg="start"/>
+				<map eventid="42" msg="stop"/>
+				<map eventid="43" msg="start"/>
+				<map eventid="44" msg="stop"/>
+				<map eventid="45" msg="start"/>
+				<map eventid="46" msg="stop"/>
+				<map eventid="47" msg="start"/>
+				<map eventid="48" msg="stop"/>
+				<map eventid="49" msg="start"/>
+				<map eventid="50" msg="stop"/>
+				<map eventid="51" msg="start"/>
+				<map eventid="52" msg="stop"/>
+			</mapping>
+					
+			<mapping id="masterid.name">
+				<map masterid="0xF0" name="SMSET"/>
+			</mapping>
+			
+			<mapping id="masterid.width">
+				<map masterid="0xF0" width="64"/>
+			</mapping>
+			
+			<mapping id="masterid.decoder">
+					<map masterid="*"  decoder="SetDecoder"/>
+			</mapping>
+					
+		</module>	
+
+		<module id ="MOD_SC"  kind="SC" proc="CSSTM_0" version="1.0" >
+			
+			<mapping id="masterid.name">
+				<map masterid="0xE0" name="SM_STATISTICS_UNIT0"/>
+				<map masterid="0xE1" name="SM_STATISTICS_UNIT1"/>
+				<map masterid="0xE2" name="SM_STATISTICS_UNIT2"/>
+			</mapping>
+			
+			<mapping id="masterid.width">
+				<map masterid="0xE0" width="64"/>
+				<map masterid="0xE1" width="64"/>
+				<map masterid="0xE2" width="64"/>
+			</mapping>
+			
+			<mapping id="masterid.cntnum">
+				<map masterid="0xE0" cntnum="8"/>
+				<map masterid="0xE1" cntnum="4"/>
+				<map masterid="0xE2" cntnum="4"/>
+			</mapping>
+			
+			<mapping id="masterid.decoder">
+				<map masterid="*"  decoder="SCDecoderUnit"/>
+			</mapping>
+
+			<mapping id="unitname.moduletype">
+				<map unitname="SDRAM" moduletype="OCP"/>
+				<map unitname="LAT0" moduletype="NTTP"/>
+				<map unitname="LAT1" moduletype="NTTP"/>
+			</mapping>
+			
+			<mapping id="unitname.address">
+				<map unitname="SDRAM" address="0x45001000"/>
+				<map unitname="LAT0" address="0x45002000"/>
+				<map unitname="LAT1" address="0x45003000"/>
+			</mapping>
+			
+			<mapping id="unitname.cntinfor">
+				<map unitname="SDRAM" cntinfor="8^2^1^2^1^1^1^0^0"/>
+				<map unitname="LAT0" cntinfor="4"/>
+				<map unitname="LAT1" cntinfor="4"/>
+			</mapping>
+			
+			<mapping id="unitname.probid">
+				<map unitname="SDRAM" probid="0^0^1^1^2^2^3^3^4^4"/>
+				<map unitname="LAT0" probid="5^5^6^6^7^7^8^8^9^9^10^10^12^12^15^15"/>
+				<map unitname="LAT1" probid="11^11^5^5^8^8^14^14^13^13"/>
+			</mapping>
+			
+		</module> 
+		<module id ="MOD_CONFIGINFO"  kind="CONFIGINFO" proc="CSSTM_0" version="1.0" >
+			
+			<mapping id="ubmfunnum.filename">
+				<map ubmfunnum="0x80000000" filename="OCPType_2600_OMAP5.xml"/>
+				<map ubmfunnum="0x80000002" filename="AET_PropertyOCP_OMAP5.xml"/>
+				<map ubmfunnum="0x80000005" filename="AET_PropertySMSET.xml"/>
+				<map ubmfunnum="0x80000006" filename="AET_PropertyPMG_omap5.xml"/>
+				<map ubmfunnum="0x80000007" filename="AET_PropertyCMG0_omap5.xml"/>
+				<map ubmfunnum="0x80000008" filename="AET_PropertyCMG1_omap5.xml"/>
+				<map ubmfunnum="0xC000000A" filename="AET_PropertyPPFOMAP5430ES2.xml"/>
+				<map ubmfunnum="0x8000000F" filename="AET_PropertyCS_STM_OMAP5.xml"/>
+			</mapping>
+			
+	<!-- Make sure this section should be consistent with OCPTYPE_2600_OMAP4.xml-->
+			<mapping id="ubmfunnum.funcname">
+				<map ubmfunnum="0x80000000" funcname="STM Functions"/>
+				<map ubmfunnum="0x80000002" funcname="OCP Traffic Monitoring"/>
+				<map ubmfunnum="0x80000005" funcname="System Event Detection"/>
+				<map ubmfunnum="0x80000006" funcname="Power Management Profiling"/>
+				<map ubmfunnum="0x80000007" funcname="Clock Management Profiling 1"/>
+				<map ubmfunnum="0x80000008" funcname="Clock Management Profiling 2"/>
+				<map ubmfunnum="0xC000000A" funcname="Performance Probe"/>
+				<map ubmfunnum="0x8000000F" funcname="Trace Export Configuration"/>
+			</mapping>
+		</module> 
+		
+		<module id ="MOD_CROSS_TRIGGERING_A15_0"  kind="CHANNELS" proc="CortexA15_0" version="1.0" >		
+			<mapping id="gbgroup.channels">
+				<!-- This is the group within MPU -->
+				<map gbgroup="0" channels="0^1^2^3"/>
+				<!-- This is the group of cross triggering across XTRIG -->
+				<map gbgroup="1" channels="1^0"/>
+			</mapping>
+			<mapping id="syncgroup.channels">
+				<map syncgroup="0" channels="1"/>
+			</mapping>
+			<characteristics>
+				<!-- This name should be consistent with the name defined in DEV_CHAR_CTIFILE -->
+				<characteristic id="DEV_CHAR_SMP_CPUNAME" value="Cortex A15 CPU 0"/> 
+				<!-- This value should be consistent with the value defined in DEV_CHAR_CTIFILE -->
+				<characteristic id="DEV_CHAR_GBBPCPU_ID" value="0x89000100"/> 
+				<!-- This value should be consistent with the value defined in DEV_CHAR_CTIFILE -->
+				<characteristic id="DEV_CHAR_SYNCCPU_ID" value="0x8A000720"/> 
+			</characteristics>
+		</module> 
+		
+		<module id ="MOD_CROSS_TRIGGERING_A15_1"  kind="CHANNELS" proc="CortexA15_1" version="1.0" >		
+			<mapping id="gbgroup.channels">
+				<!-- This is the group within MPU -->
+				<map gbgroup="0" channels="0^1^2^3"/>
+				<!-- This is the group of cross triggering across XTRIG -->
+				<map gbgroup="1" channels="1^0"/>
+			</mapping>
+			<mapping id="syncgroup.channels">
+				<map syncgroup="0" channels="1"/>
+			</mapping>
+			<characteristics>
+				<!-- This name should be consistent with the name defined in DEV_CHAR_CTIFILE -->
+				<characteristic id="DEV_CHAR_SMP_CPUNAME" value="Cortex A15 CPU 1"/> 
+				<!-- This value should be consistent with the value defined in DEV_CHAR_CTIFILE -->
+				<characteristic id="DEV_CHAR_GBBPCPU_ID" value="0x89000200"/> 
+				<!-- This value should be consistent with the value defined in DEV_CHAR_CTIFILE -->
+				<characteristic id="DEV_CHAR_SYNCCPU_ID" value="0x8A001720"/> 
+			</characteristics>
+		</module> 
+		
+		<module id ="MOD_CROSS_TRIGGERING_XTRIG"  kind="CHANNELS" proc="XTRIG" version="1.0" >		
+			<mapping id="gbgroup.channels">
+				<!-- This is the group of cross triggering across CTI -->
+				<map gbgroup="1" channels="NA"/>
+				<!-- This is the group within XTRIG -->
+				<map gbgroup="2" channels="NA"/>
+			</mapping>
+			<mapping id="syncgroup.channels">
+				<map syncgroup="0" channels=""/>
+			</mapping>
+			<characteristics>
+				<characteristic id="DEV_CHAR_SMP_CPUNAME" value="XTRIG"/> 
+			</characteristics>
+		</module> 
+		
+		<!-- Pins module -->
+		<module id ="MOD_DRM"  kind="drm" proc="CSSTM_0" version="1.0" >
+			<registers>
+			</registers>
+			<mapping id="program.pinouts">
+				<map program="0" pinouts="pti=2,0,1,3,4" />
+				<map program="1" pinouts="pti=2,0,1" />
+				<map program="2" pinouts="pti=1,0" />
+				<map program="3" pinouts="tpiu=2,5,4,1,0" />
+				<map program="4" pinouts="tpiu=2,1,0" />
+				<map program="5" pinouts="tpiu=2,0" />
+			</mapping>
+		</module>
+
+		<!-- version 1 indicates a regular TPIU type -->
+		<module id ="MOD_TPIU"  kind="tpiu" proc="CS_DAP_DebugSS" version="1" >
+			<registers>
+			</registers>
+			<characteristics>
+				<characteristic id="DEV_CHAR_TPIUTYPE" value="1"/> 
+				<characteristic id="DEV_CHAR_TPIUBASE" value="0xD4163000"/> 
+			</characteristics>
+		</module>	
+
+	</modules>
+
+</device>

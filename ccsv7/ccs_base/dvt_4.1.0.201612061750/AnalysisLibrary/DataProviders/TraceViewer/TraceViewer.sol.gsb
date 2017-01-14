@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_35" class="java.beans.XMLDecoder"> 
+ <object class="com.ti.dvt.datamodel.solution.GsbLabelManager"> 
+  <void property="gsbLabelList"> 
+   <void method="add"> 
+    <object class="com.ti.dvt.datamodel.solution.GsbLabel"> 
+     <void property="gsbLabelContents"> 
+      <string>Req: for scripting buffers shall have the same name as the view</string> 
+     </void> 
+    </object> 
+   </void> 
+  </void> 
+ </object> 
+</java> 

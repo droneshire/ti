@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<drivers id="JLINKetb11">	
+	<isa Type="ETB11" ProcID="0x75801004">		
+		<driver file="NONE">			
+			<connectionType Type="JLink"/>		
+		</driver>	
+	</isa>
+</drivers>

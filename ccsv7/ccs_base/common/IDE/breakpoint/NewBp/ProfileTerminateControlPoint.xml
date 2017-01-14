@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<newBreakpoint xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="schema.xsd" name="Profile Control Point | Terminate Profiling" breakpointType="0">
+  <targets>
+    <target>
+      <type>*</type>
+      <familyId>320,470</familyId>
+      <subfamilyId>*</subfamilyId>
+      <revision>*</revision>
+    </target>  
+  </targets>
+
+  <defaultProperty>
+    <property name="Miscellaneous.Name" value="Profile Control Point" />
+    <property name="Debugger Response.Action" value="Control Profiling" />
+  </defaultProperty>
+  <submitSequence>
+    <id>Hardware Configuration.Location</id>
+    <id>Debugger Response.Action.Type</id>
+  </submitSequence>
+  <showIn>
+    <editor autoSubmit="true" selectionType="source">
+		<property>
+  			<id>Hardware Configuration.Location</id> 
+  			<selectionLocation>lineStart</selectionLocation> 
+  		</property>
+  	</editor>
+  	<disassemblyView autoSubmit="true">
+  		<property>
+  			<id>Hardware Configuration.Location</id>
+  			<selectionLocation>selection</selectionLocation> 
+  		</property>
+  	</disassemblyView>
+  </showIn>
+  <dialog colCount="2">
+    <label id="label_location" widthHint="70" heightHint="15" verticalAlign="center">
+      <text>Location:</text>
+    </label>
+    <textBox id="Hardware Configuration.Location" widthHint="150" heightHint="15" verticalAlign="center" horizontalAlign="fill">
+      <text>Enter control point location...</text>
+	</textBox>
+    <label id="label_ctrlpttype" widthHint="70" heightHint="15" verticalAlign="center">
+      <text>Control Point Type:</text>
+    </label>
+    <comboBox id="Debugger Response.Action.Type" widthHint="150" heightHint="15" verticalAlign="center" horizontalAlign="fill">
+      <text>Terminate Profiling</text>
+      <choices>
+        <item>Pause Profiling</item>
+        <item>Resume Profiling</item>
+        <item>Terminate Profiling</item>
+      </choices>
+    </comboBox>
+  </dialog>
+</newBreakpoint>

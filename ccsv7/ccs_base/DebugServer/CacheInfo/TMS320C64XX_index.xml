@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- TMS320C64XX xml file -->
+<CodeComposer>
+    <CcsMemoryServer>
+            <XMLFileVersion>1.0.0.0</XMLFileVersion>
+            		<XMLFileVersion>1.0.0.0</XMLFileVersion>
+			<!-- TraceLevel 0=off,1=error,2=warning,3=transactions,4=events,5=info,6=verbose -->
+			<!-- CtrvTraceLevel 0=off,1=error,2=warning,3=transactions,4=events,5=info,6=verbose -->
+			<!-- MptvTraceLevel 0=off,1=error,2=warning,3=transactions,4=events,5=info,6=verbose -->
+			<!-- set SendTraceEventsToOutputWindow true to output trace data to the CCS Output window-->
+			<!-- set LogTraceEventsToFile to the name of the file to log events to -->
+			<!-- set TraceRequestLifecycle true to trace construction and recycling of request descriptors -->
+			<!-- set TraceVerboseMinAdrs to the first hex address to trace in detail -->
+			<!-- set TraceVerboseMaxAdrs to the last hex address to trace in detail -->
+			<RegisterDefinitions>
+				<Register>
+					<Name>DM_DEVICE_ID</Name>
+					<Address>0x01c40028</Address>
+					<LengthInMAUs>4</LengthInMAUs>
+					<NumRegistersInSet>1</NumRegistersInSet>
+					<MemoryPageNumber>0</MemoryPageNumber>
+					<IsMemoryMapped>true</IsMemoryMapped>
+					<IsRegValueReadOnHalt>false</IsRegValueReadOnHalt>
+					<IsRegValueSetDuringPrefetch>false</IsRegValueSetDuringPrefetch>
+					<IsRegValueContextRestoreReqd>false</IsRegValueContextRestoreReqd>
+					<RegDecoder>IsDM6437</RegDecoder>
+					<RegDecoder>IsDM6467</RegDecoder>
+				</Register>
+				<Register>
+					<Name>CCCFG_1c00004</Name>
+					<Address>0x01c00004</Address>
+					<LengthInMAUs>4</LengthInMAUs>
+					<NumRegistersInSet>1</NumRegistersInSet>
+					<MemoryPageNumber>0</MemoryPageNumber>
+					<IsMemoryMapped>true</IsMemoryMapped>
+					<IsRegValueReadOnHalt>false</IsRegValueReadOnHalt>
+					<IsRegValueSetDuringPrefetch>false</IsRegValueSetDuringPrefetch>
+					<IsRegValueContextRestoreReqd>false</IsRegValueContextRestoreReqd>
+					<RegDecoder>IsDaVinci</RegDecoder>
+					<RegDecoder>IsOMAP2430</RegDecoder>
+					<RegDecoder>IsTesla</RegDecoder>
+				</Register>
+				<Register>
+					<Name>CI_DEVICE_ID</Name>
+					<Address>0x02a80008</Address>
+					<LengthInMAUs>4</LengthInMAUs>
+					<NumRegistersInSet>1</NumRegistersInSet>
+					<MemoryPageNumber>0</MemoryPageNumber>
+					<IsMemoryMapped>true</IsMemoryMapped>
+					<IsRegValueReadOnHalt>false</IsRegValueReadOnHalt>
+					<IsRegValueSetDuringPrefetch>false</IsRegValueSetDuringPrefetch>
+					<IsRegValueContextRestoreReqd>false</IsRegValueContextRestoreReqd>
+					<RegDecoder>IsTomahawk</RegDecoder>
+					<RegDecoder>IsHimalaya</RegDecoder>
+				</Register>
+				<Register>
+					<Name>CCCFG_2a00004</Name>
+					<Address>0x02a00004</Address>
+					<LengthInMAUs>4</LengthInMAUs>
+					<NumRegistersInSet>1</NumRegistersInSet>
+					<MemoryPageNumber>0</MemoryPageNumber>
+					<IsMemoryMapped>true</IsMemoryMapped>
+					<IsRegValueReadOnHalt>false</IsRegValueReadOnHalt>
+					<IsRegValueSetDuringPrefetch>false</IsRegValueSetDuringPrefetch>
+					<IsRegValueContextRestoreReqd>false</IsRegValueContextRestoreReqd>
+					<RegDecoder>IsCurie</RegDecoder>
+					<RegDecoder>IsFaraday</RegDecoder>
+					<RegDecoder>IsKailash</RegDecoder>
+				</Register>
+				
+			</RegisterDefinitions>
+
+			<!-- the following register decoders are used to decode bitfields in
+			the registers defined for this device-->
+			<!-- Decoders perform the following sequence of operations:
+				1) XOR XorWithRegValue with register valuex
+				2) Mask with BitfieldMask property 
+				3) shift right by BitfieldShift bits 
+				4a) if a <StringTable> field is present with <NumStrings> > 0, use result of step 3 as index into lookup table of strings and 
+					set string result = value from table.  No further processing is done in this case.
+				4b) if a <DecoderTable> field is present with <NumDecoders> > 0, use result of step 3 as index into lookup table of decoders and
+					call the specified decoder and sets result = value and string result = string from the decoder 
+				4c) if a <LookupTable> field is present with <NumIndexValues> > 0, use result of step 3 as index into lookup table and set result = value from table 
+				5) multiply the result from step 4b or 4c by floating point Multiplier value (e.g. set to 0.25 to divide by 4)  
+				6) add AddToProduct value 
+				7) if IsTrueIfResultIsZero, decode_bool returns true if 0, false if non-zero
+	
+				If any of these properties are not defined, they are set to the
+				following default values:
+				XorWithRegValue = 0
+				BitfieldMask = 0xffffffff
+				BitfieldShift = 0
+				Multiplier = 1.0
+				AddToProduct = 0
+				IsTrueIfResultIsZero = false
+			-->
+			
+			<DecoderDefinitions>
+			
+				<!-- DM_DEVICE_ID decoders.
+				      Decoder returns true if magic number matches.
+				      String table contains the name of the associated XML file
+				      target device -->
+				<Decoder>
+					<DecoderName>IsDM6437</DecoderName>
+					<XorWithRegValue>0x0B72102F</XorWithRegValue>
+					<!-- XorWithRegValue for CCCFG: 0x00223445 -->
+					<BitfieldMask>0x0FFFFFFE</BitfieldMask>
+					<BitfieldShift>0</BitfieldShift>
+					<Multiplier>1.0</Multiplier>
+					<AddToProduct>0</AddToProduct>
+					<IsTrueIfResultIsZero>true</IsTrueIfResultIsZero>
+					<StringTable>
+						<NumStrings>1</NumStrings>
+						<Array index="0">TMS320C64XX_DM6437.xml</Array>
+					</StringTable>	
+				</Decoder>
+				<Decoder>
+					<DecoderName>IsDM6467</DecoderName>
+					<XorWithRegValue>0x0B77002F</XorWithRegValue>
+					<!-- XorWithRegValue for CCCFG: 0x01335445 -->
+					<BitfieldMask>0x0FFFFFFE</BitfieldMask>
+					<BitfieldShift>0</BitfieldShift>
+					<Multiplier>1.0</Multiplier>
+					<AddToProduct>0</AddToProduct>
+					<IsTrueIfResultIsZero>true</IsTrueIfResultIsZero>
+					<StringTable>
+						<NumStrings>1</NumStrings>
+						<Array index="0">TMS320C64XX_DM6467.xml</Array>
+					</StringTable>	
+				</Decoder>
+				<!-- 0x1c00004 decoders.
+				      Decoder returns true if magic number matches.
+				      String table contains the name of the associated XML file
+				      target device -->
+				<Decoder>
+					<DecoderName>IsDaVinci</DecoderName>
+					<XorWithRegValue>0x00213445</XorWithRegValue>
+					<BitfieldMask>0xFFFFFFFF</BitfieldMask>
+					<BitfieldShift>0</BitfieldShift>
+					<Multiplier>1.0</Multiplier>
+					<AddToProduct>0</AddToProduct>
+					<IsTrueIfResultIsZero>true</IsTrueIfResultIsZero>
+					<StringTable>
+						<NumStrings>1</NumStrings>
+						<Array index="0">TMS320C64XX_DaVinci.xml</Array>
+					</StringTable>	
+				</Decoder>
+				<Decoder>
+					<DecoderName>IsOMAP2430</DecoderName>
+					<XorWithRegValue>0x03313425</XorWithRegValue>
+					<BitfieldMask>0xFFFFFFFF</BitfieldMask>
+					<BitfieldShift>0</BitfieldShift>
+					<Multiplier>1.0</Multiplier>
+					<AddToProduct>0</AddToProduct>
+					<IsTrueIfResultIsZero>true</IsTrueIfResultIsZero>
+					<StringTable>
+						<NumStrings>1</NumStrings>
+						<Array index="0">TMS320C64XX_OMAP2430.xml</Array>
+					</StringTable>	
+				</Decoder>
+				<!-- CI_DEVICE_ID  decoders.
+				      Decoder returns true if magic number matches.
+				      String table contains the name of the associated XML file
+				      target device -->				
+				<Decoder>
+					<!-- Actual Tomahawk EVM hardware returns 0x3334425 from the CCCFG reg
+                                             instead of 0x01334425 as found during device bring up.
+                                             This is the same as Himalaya, so use the DEVICE_ID register instead.  -->				
+					<DecoderName>IsTomahawk</DecoderName>
+					<XorWithRegValue>0x0009102E</XorWithRegValue>
+					<BitfieldMask>0x0FFFFFFE</BitfieldMask>
+					<BitfieldShift>0</BitfieldShift>
+					<Multiplier>1.0</Multiplier>
+					<AddToProduct>0</AddToProduct>
+					<IsTrueIfResultIsZero>true</IsTrueIfResultIsZero>
+					<StringTable>
+						<NumStrings>1</NumStrings>
+						<Array index="0">TMS320C64XX_Tomahawk.xml</Array>
+					</StringTable>	
+				</Decoder>
+				<Decoder>
+					<!-- Actual Himalaya hardware returns 0x3334425 from the CCCFG reg
+                                             instead of 0x0013334445 as is returned by the simulator -->
+					<DecoderName>IsHimalaya</DecoderName>
+					<XorWithRegValue>0x0008A02E</XorWithRegValue>
+					<BitfieldMask>0x0FFFFFFE</BitfieldMask>
+					<BitfieldShift>0</BitfieldShift>
+					<Multiplier>1.0</Multiplier>
+					<AddToProduct>0</AddToProduct>
+					<IsTrueIfResultIsZero>true</IsTrueIfResultIsZero>
+					<StringTable>
+						<NumStrings>1</NumStrings>
+						<Array index="0">TMS320C64XX_Himalaya.xml</Array>
+					</StringTable>	
+				</Decoder>			
+				<!-- 0x2a00004 decoders.
+				      Decoder returns true if magic number matches.
+				      String table contains the name of the associated XML file
+				      target device -->
+				<Decoder>
+					<DecoderName>IsCurie</DecoderName>
+					<XorWithRegValue>0x03354445</XorWithRegValue>
+					<BitfieldMask>0xFFFFFFFF</BitfieldMask>
+					<BitfieldShift>0</BitfieldShift>
+					<Multiplier>1.0</Multiplier>
+					<AddToProduct>0</AddToProduct>
+					<IsTrueIfResultIsZero>true</IsTrueIfResultIsZero>
+					<StringTable>
+						<NumStrings>1</NumStrings>
+						<Array index="0">TMS320C64XX_Curie.xml</Array>
+					</StringTable>	
+				</Decoder>
+				<Decoder>
+					<DecoderName>IsFaraday</DecoderName>
+					<XorWithRegValue>0x03354445</XorWithRegValue>
+					<BitfieldMask>0xFFFFFFFF</BitfieldMask>
+					<BitfieldShift>0</BitfieldShift>
+					<Multiplier>1.0</Multiplier>
+					<AddToProduct>0</AddToProduct>
+					<IsTrueIfResultIsZero>true</IsTrueIfResultIsZero>
+					<StringTable>
+						<NumStrings>1</NumStrings>
+						<Array index="0">TMS320C64XX_Faraday.xml</Array>
+					</StringTable>	
+				</Decoder>
+				<Decoder>
+					<DecoderName>IsKailash</DecoderName>
+					<XorWithRegValue>0x03335445</XorWithRegValue>
+					<BitfieldMask>0xFFFFFFFF</BitfieldMask>
+					<BitfieldShift>0</BitfieldShift>
+					<Multiplier>1.0</Multiplier>
+					<AddToProduct>0</AddToProduct>
+					<IsTrueIfResultIsZero>true</IsTrueIfResultIsZero>
+					<StringTable>
+						<NumStrings>1</NumStrings>
+						<Array index="0">TMS320C64XX_Kailash.xml</Array>
+					</StringTable>	
+				</Decoder>
+				<Decoder>
+					<DecoderName>IsTesla</DecoderName>
+					<XorWithRegValue>0x03313445</XorWithRegValue>
+					<BitfieldMask>0xFFFFFFFF</BitfieldMask>
+					<BitfieldShift>0</BitfieldShift>
+					<Multiplier>1.0</Multiplier>
+					<AddToProduct>0</AddToProduct>
+					<IsTrueIfResultIsZero>true</IsTrueIfResultIsZero>
+					<StringTable>
+						<NumStrings>1</NumStrings>
+						<Array index="0">TMS320C646X_Tesla.xml</Array>
+					</StringTable>	
+				</Decoder>
+
+			</DecoderDefinitions>
+    </CcsMemoryServer>
+</CodeComposer>

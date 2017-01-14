@@ -1,0 +1,263 @@
+/*******************************************************************/
+/* AR16xx Sequences for configuring the trace infrastructure to    */
+/* support different trace routes.                                 */
+/*                                                                 */
+/* Expected to be run from CS_DAP_0                                */
+/*******************************************************************/
+
+#define uint32_t                unsigned int
+#define WR_MEM_32(addr, data)   *(uint32_t*)(addr) =(uint32_t)(data)
+#define RD_MEM_32(addr)         *(uint32_t*)(addr)
+
+#define CS_LAR_UNLOCK_CODE 0xC5ACCE55
+
+#define ATB_REP_IDFILTER0 0x000
+#define ATB_REP_IDFILTER1 0x004
+#define ATB_REP_LAR       0xFB0
+#define ATB_REP_LSR       0xFB4
+
+#define MSS_IOMUX_PADBV_CFG_REG 0xFFFFEABC // TRACE_CLK
+#define MSS_IOMUX_PADBW_CFG_REG 0xFFFFEAC0 // TRACE_CTL
+#define MSS_IOMUX_PADBF_CFG_REG 0xFFFFEA7C // TRACE DATA0  (DP0)
+#define MSS_IOMUX_PADBG_CFG_REG 0xFFFFEA80 // TRACE DATA1  (DP1)
+#define MSS_IOMUX_PADBH_CFG_REG 0xFFFFEA84 // TRACE DATA2  (DP2)
+#define MSS_IOMUX_PADBI_CFG_REG 0xFFFFEA88 // TRACE DATA3  (DP3)
+#define MSS_IOMUX_PADBJ_CFG_REG 0xFFFFEA8C // TRACE DATA4  (DP4)
+#define MSS_IOMUX_PADBK_CFG_REG 0xFFFFEA90 // TRACE DATA5  (DP5)
+#define MSS_IOMUX_PADBL_CFG_REG 0xFFFFEA94 // TRACE DATA6  (DP6)
+#define MSS_IOMUX_PADBM_CFG_REG 0xFFFFEA98 // TRACE DATA7  (DP7)
+#define MSS_IOMUX_PADBN_CFG_REG 0xFFFFEA9C // TRACE DATA8  (DP8)
+#define MSS_IOMUX_PADBO_CFG_REG 0xFFFFEAA0 // TRACE DATA9  (DP9)
+#define MSS_IOMUX_PADBP_CFG_REG 0xFFFFEAA4 // TRACE DATA10 (DP10)
+#define MSS_IOMUX_PADBQ_CFG_REG 0xFFFFEAA8 // TRACE DATA11 (DP11)
+#define MSS_IOMUX_PADBR_CFG_REG 0xFFFFEAAC // TRACE DATA12 (DP12)
+#define MSS_IOMUX_PADBS_CFG_REG 0xFFFFEAB0 // TRACE DATA13 (DP13)
+#define MSS_IOMUX_PADBT_CFG_REG 0xFFFFEAB4 // TRACE DATA14 (DP14)
+#define MSS_IOMUX_PADBU_CFG_REG 0xFFFFEAB8 // TRACE DATA15 (DP15)
+#define MSS_IOMUX_IOCFGKICK0    0xFFFFEBF8
+#define MSS_IOMUX_IOCFGKICK1    0xFFFFEBFC
+
+#define IOCFGKICK0_MAGIC_NUM  0x83E70B13
+#define IOCFGKICK1_MAGIC_NUM  0x95A4F1E0
+
+#define PAD_REG_OE_SLEWCTRL_HSR    (1 << 10)
+#define PAD_REG_OE_OVERRIDE_CLR    (1 << 7)
+#define PAD_REG_OE_OVERRIDE_CTRL   (1 << 6)
+#define PAD_REG_OE_FUNC_SEL(x)     (x & 0xF)
+
+#define PAD_REG_FUNC_TRACE(cfg_reg) WR_MEM_32(cfg_reg, (PAD_REG_OE_OVERRIDE_CTRL | PAD_REG_OE_FUNC_SEL(0)))
+
+#define MSS_PRCM_TOPRCM_VIEW    0xFFFFE100
+#define TOPRCM_TRCCLKCTL_OFF    0x2DC
+
+#define MSS_DEBUGSS_VIEW        0xFFA00000
+#define DEBUGSS_GEM_ATB_REP_OFF 0x34000
+#define DEBUGSS_MSS_ATB_REP_OFF 0x38000
+
+#define MSS__MSS_ATB_IDFILTER0  (MSS_DEBUGSS_VIEW + DEBUGSS_MSS_ATB_REP_OFF + ATB_REP_IDFILTER0)
+#define MSS__MSS_ATB_IDFILTER1  (MSS_DEBUGSS_VIEW + DEBUGSS_MSS_ATB_REP_OFF + ATB_REP_IDFILTER1)
+#define MSS__MSS_ATB_LAR        (MSS_DEBUGSS_VIEW + DEBUGSS_MSS_ATB_REP_OFF + ATB_REP_LAR)
+#define MSS__MSS_ATB_LSR        (MSS_DEBUGSS_VIEW + DEBUGSS_MSS_ATB_REP_OFF + ATB_REP_LSR)
+#define MSS__GEM_ATB_IDFILTER0  (MSS_DEBUGSS_VIEW + DEBUGSS_GEM_ATB_REP_OFF + ATB_REP_IDFILTER0)
+#define MSS__GEM_ATB_IDFILTER1  (MSS_DEBUGSS_VIEW + DEBUGSS_GEM_ATB_REP_OFF + ATB_REP_IDFILTER1)
+#define MSS__GEM_ATB_LAR        (MSS_DEBUGSS_VIEW + DEBUGSS_GEM_ATB_REP_OFF + ATB_REP_LAR)
+#define MSS__GEM_ATB_LSR        (MSS_DEBUGSS_VIEW + DEBUGSS_GEM_ATB_REP_OFF + ATB_REP_LSR)
+
+#define MSS__TRCCLKCTL          (MSS_PRCM_TOPRCM_VIEW + TOPRCM_TRCCLKCTL_OFF)
+
+hotmenu set_export_clock_TPIU_fastest()
+{
+	   GEL_TextOut("\n +----------------------------------------------------+ \n");
+	   GEL_TextOut("\n Configuring TPIU Export Clock to /3 \n");
+
+	// Fastest is /3
+	WR_MEM_32(MSS__TRCCLKCTL, 0x3);
+}
+
+hotmenu set_export_clock_TPIU_default()
+{
+	GEL_TextOut("\n +----------------------------------------------------+ \n");
+	GEL_TextOut("\n Configuring TPIU Export Clock to /4 \n");
+	
+	// Default is /4
+	WR_MEM_32(MSS__TRCCLKCTL, 0x3);
+}
+
+hotmenu set_export_clock_TPIU_slowest()
+{
+	GEL_TextOut("\n +----------------------------------------------------+ \n");
+	GEL_TextOut("\n Configuring TPIU Export Clock to /15 \n");
+	
+	// Default is /15
+	WR_MEM_32(MSS__TRCCLKCTL, 0xF);
+}
+
+hotmenu enable_DSP_to_ETB()
+{
+	   GEL_TextOut("\n +----------------------------------------------------+ \n");
+	   GEL_TextOut("\n Configuring Trace Infrastructure for DSP -> ETB \n");
+	
+   // Program DSP's replicator to forward trace to ETB and block trace to TPIU
+   WR_MEM_32(MSS__GEM_ATB_LAR, CS_LAR_UNLOCK_CODE);
+   WR_MEM_32(MSS__GEM_ATB_IDFILTER0, 0x00 );
+   WR_MEM_32(MSS__GEM_ATB_IDFILTER1, 0xFF );
+
+   // Program CR4's replicator to  block trace to ETB
+   WR_MEM_32(MSS__MSS_ATB_LAR, CS_LAR_UNLOCK_CODE);
+   WR_MEM_32(MSS__MSS_ATB_IDFILTER0, 0xFF );
+}
+
+hotmenu enable_DSP_to_TPIU()
+{
+	   GEL_TextOut("\n +----------------------------------------------------+ \n");
+	   GEL_TextOut("\n Configuring Trace Infrastructure for DSP -> TPIU \n");
+	
+   // Program DSP's replicator to forward trace to TPIU and block trace to ETB
+   WR_MEM_32(MSS__GEM_ATB_LAR, CS_LAR_UNLOCK_CODE);
+   WR_MEM_32(MSS__GEM_ATB_IDFILTER0, 0xFF );
+   WR_MEM_32(MSS__GEM_ATB_IDFILTER1, 0x00 );
+
+   // Program CR4's replicator to  block trace to TPIU
+   WR_MEM_32(MSS__MSS_ATB_LAR, CS_LAR_UNLOCK_CODE);
+   WR_MEM_32(MSS__MSS_ATB_IDFILTER1, 0xFF );
+}
+
+hotmenu enable_CR4_to_ETB()
+{
+   GEL_TextOut("\n +----------------------------------------------------+ \n");
+   GEL_TextOut("\n Configuring Trace Infrastructure for Cortex R4 -> ETB \n");
+	 
+   // Program CR4's replicator to forward trace to ETB and block trace to TPIU
+   WR_MEM_32(MSS__MSS_ATB_LAR, CS_LAR_UNLOCK_CODE);
+   WR_MEM_32(MSS__MSS_ATB_IDFILTER0, 0x00 );
+   WR_MEM_32(MSS__MSS_ATB_IDFILTER1, 0xFF );
+
+   // Program DSP's replicator to forward  block trace to ETB
+   WR_MEM_32(MSS__GEM_ATB_LAR, CS_LAR_UNLOCK_CODE);
+   WR_MEM_32(MSS__GEM_ATB_IDFILTER0, 0xFF );
+}
+
+hotmenu enable_CR4_to_TPIU()
+{
+	   GEL_TextOut("\n +--------------------------------=-------------------+ \n");
+	   GEL_TextOut("\n Configuring Trace Infrastructure for Cortex R4 -> TPIU \n");
+	
+   // Program CR4's replicator to forward trace to TPIU and block trace to ETB
+   WR_MEM_32(MSS__MSS_ATB_LAR, CS_LAR_UNLOCK_CODE);
+   WR_MEM_32(MSS__MSS_ATB_IDFILTER0, 0xFF );
+   WR_MEM_32(MSS__MSS_ATB_IDFILTER1, 0x00 );
+
+   // Program DSP's replicator to forward  block trace to TPIU
+   WR_MEM_32(MSS__GEM_ATB_LAR, CS_LAR_UNLOCK_CODE);
+   WR_MEM_32(MSS__GEM_ATB_IDFILTER1, 0xFF );
+}
+
+unlock_iomux()
+{
+   WR_MEM_32(MSS_IOMUX_IOCFGKICK0, IOCFGKICK0_MAGIC_NUM);
+   WR_MEM_32(MSS_IOMUX_IOCFGKICK1, IOCFGKICK1_MAGIC_NUM);
+}
+
+hotmenu configure_iomux_8pin_TPIU()
+{
+   GEL_TextOut("\n +----------------------------------------------------+ \n");
+   GEL_TextOut("\n Configuring IOMUX to expose \n");
+   GEL_TextOut("\n + TRACE_CLK \n");
+   GEL_TextOut("\n + TRACE_CTL \n");
+   GEL_TextOut("\n + DP0 \n");
+   GEL_TextOut("\n + DP1 \n");
+   GEL_TextOut("\n + DP2 \n");
+   GEL_TextOut("\n + DP3 \n");
+   GEL_TextOut("\n + DP4 \n");
+   GEL_TextOut("\n + DP5 \n");
+   GEL_TextOut("\n + DP6 \n");
+   GEL_TextOut("\n + DP7 \n");
+
+   unlock_iomux();  
+   PAD_REG_FUNC_TRACE(MSS_IOMUX_PADBV_CFG_REG); // TRACE_CLK
+   PAD_REG_FUNC_TRACE(MSS_IOMUX_PADBW_CFG_REG); // TRACE_CTL
+   PAD_REG_FUNC_TRACE(MSS_IOMUX_PADBF_CFG_REG); // TRACE DATA0
+   PAD_REG_FUNC_TRACE(MSS_IOMUX_PADBG_CFG_REG); // TRACE DATA1
+   PAD_REG_FUNC_TRACE(MSS_IOMUX_PADBH_CFG_REG); // TRACE DATA2
+   PAD_REG_FUNC_TRACE(MSS_IOMUX_PADBI_CFG_REG); // TRACE DATA3
+   PAD_REG_FUNC_TRACE(MSS_IOMUX_PADBJ_CFG_REG); // TRACE DATA4
+   PAD_REG_FUNC_TRACE(MSS_IOMUX_PADBK_CFG_REG); // TRACE DATA5
+   PAD_REG_FUNC_TRACE(MSS_IOMUX_PADBL_CFG_REG); // TRACE DATA6
+   PAD_REG_FUNC_TRACE(MSS_IOMUX_PADBM_CFG_REG); // TRACE DATA7
+}
+
+hotmenu configure_iomux_10pin_TPIU()
+{
+   GEL_TextOut("\n +----------------------------------------------------+ \n");
+   GEL_TextOut("\n Configuring IOMUX to expose \n");
+   GEL_TextOut("\n + TRACE_CLK \n");
+   GEL_TextOut("\n + TRACE_CTL \n");
+   GEL_TextOut("\n + DP0 \n");
+   GEL_TextOut("\n + DP1 \n");
+   GEL_TextOut("\n + DP2 \n");
+   GEL_TextOut("\n + DP3 \n");
+   GEL_TextOut("\n + DP4 \n");
+   GEL_TextOut("\n + DP5 \n");
+   GEL_TextOut("\n + DP6 \n");
+   GEL_TextOut("\n + DP7 \n");
+   GEL_TextOut("\n + DP8 \n");
+   GEL_TextOut("\n + DP9 \n");
+
+   unlock_iomux();  
+   PAD_REG_FUNC_TRACE(MSS_IOMUX_PADBV_CFG_REG); // TRACE_CLK
+   PAD_REG_FUNC_TRACE(MSS_IOMUX_PADBW_CFG_REG); // TRACE_CTL
+   PAD_REG_FUNC_TRACE(MSS_IOMUX_PADBF_CFG_REG); // TRACE DATA0
+   PAD_REG_FUNC_TRACE(MSS_IOMUX_PADBG_CFG_REG); // TRACE DATA1
+   PAD_REG_FUNC_TRACE(MSS_IOMUX_PADBH_CFG_REG); // TRACE DATA2
+   PAD_REG_FUNC_TRACE(MSS_IOMUX_PADBI_CFG_REG); // TRACE DATA3
+   PAD_REG_FUNC_TRACE(MSS_IOMUX_PADBJ_CFG_REG); // TRACE DATA4
+   PAD_REG_FUNC_TRACE(MSS_IOMUX_PADBK_CFG_REG); // TRACE DATA5
+   PAD_REG_FUNC_TRACE(MSS_IOMUX_PADBL_CFG_REG); // TRACE DATA6
+   PAD_REG_FUNC_TRACE(MSS_IOMUX_PADBM_CFG_REG); // TRACE DATA7
+   PAD_REG_FUNC_TRACE(MSS_IOMUX_PADBN_CFG_REG); // TRACE DATA8
+   PAD_REG_FUNC_TRACE(MSS_IOMUX_PADBO_CFG_REG); // TRACE DATA9
+}
+
+hotmenu configure_iomux_16pin_TPIU()
+{
+   GEL_TextOut("\n +----------------------------------------------------+ \n");
+   GEL_TextOut("\n Configuring IOMUX to expose \n");
+   GEL_TextOut("\n + TRACE_CLK \n");   
+   GEL_TextOut("\n + TRACE_CTL \n");
+   GEL_TextOut("\n + DP0 \n");
+   GEL_TextOut("\n + DP1 \n");
+   GEL_TextOut("\n + DP2 \n");
+   GEL_TextOut("\n + DP3 \n");
+   GEL_TextOut("\n + DP4 \n");
+   GEL_TextOut("\n + DP5 \n");
+   GEL_TextOut("\n + DP6 \n");
+   GEL_TextOut("\n + DP7 \n");
+   GEL_TextOut("\n + DP8 \n");
+   GEL_TextOut("\n + DP9 \n");
+   GEL_TextOut("\n + DP10 \n");
+   GEL_TextOut("\n + DP11 \n");
+   GEL_TextOut("\n + DP12 \n");
+   GEL_TextOut("\n + DP13 \n");
+   GEL_TextOut("\n + DP14 \n");
+   GEL_TextOut("\n + DP15 \n");
+
+   unlock_iomux();  
+   PAD_REG_FUNC_TRACE(MSS_IOMUX_PADBV_CFG_REG); // TRACE_CLK
+   PAD_REG_FUNC_TRACE(MSS_IOMUX_PADBW_CFG_REG); // TRACE_CTL
+   PAD_REG_FUNC_TRACE(MSS_IOMUX_PADBF_CFG_REG); // TRACE DATA0
+   PAD_REG_FUNC_TRACE(MSS_IOMUX_PADBG_CFG_REG); // TRACE DATA1
+   PAD_REG_FUNC_TRACE(MSS_IOMUX_PADBH_CFG_REG); // TRACE DATA2
+   PAD_REG_FUNC_TRACE(MSS_IOMUX_PADBI_CFG_REG); // TRACE DATA3
+   PAD_REG_FUNC_TRACE(MSS_IOMUX_PADBJ_CFG_REG); // TRACE DATA4
+   PAD_REG_FUNC_TRACE(MSS_IOMUX_PADBK_CFG_REG); // TRACE DATA5
+   PAD_REG_FUNC_TRACE(MSS_IOMUX_PADBL_CFG_REG); // TRACE DATA6
+   PAD_REG_FUNC_TRACE(MSS_IOMUX_PADBM_CFG_REG); // TRACE DATA7
+   PAD_REG_FUNC_TRACE(MSS_IOMUX_PADBN_CFG_REG); // TRACE DATA8
+   PAD_REG_FUNC_TRACE(MSS_IOMUX_PADBO_CFG_REG); // TRACE DATA9
+   PAD_REG_FUNC_TRACE(MSS_IOMUX_PADBP_CFG_REG); // TRACE DATA10
+   PAD_REG_FUNC_TRACE(MSS_IOMUX_PADBQ_CFG_REG); // TRACE DATA11
+   PAD_REG_FUNC_TRACE(MSS_IOMUX_PADBR_CFG_REG); // TRACE DATA12
+   PAD_REG_FUNC_TRACE(MSS_IOMUX_PADBS_CFG_REG); // TRACE DATA13
+   PAD_REG_FUNC_TRACE(MSS_IOMUX_PADBT_CFG_REG); // TRACE DATA14
+   PAD_REG_FUNC_TRACE(MSS_IOMUX_PADBU_CFG_REG); // TRACE DATA15
+}

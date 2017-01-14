@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+
+<!-- Trace subsystem setup attributes for device -->
+<device id="Gladiator" value="0x0B8A002F" mask="0x0FFFFFFF" HW_revision="1.0" XML_version="1.0">
+
+	<FileVersion version="2.0.0.0" Copyright="Copyright (c) 2009 Texas Instruments"></FileVersion>
+	
+	<!-- Trace route topology. Every route entry specifies a soure to sink/pin route for a given source.
+	Multiple routes shows multiple possible paths available for trace and user can select one for an 
+	active debug session -->
+			
+	<trace_routes> 
+		<route>
+			<source source="CortexR4_0"/>
+			<link module=""/>
+			<sink module="MOD_TPIU"/>
+			<pin module="MOD_DRM"/>
+		</route>
+		
+	</trace_routes>
+
+	<procs>
+		<proc id="CortexR4_0" kind="cortex_rxx" traceid="1">
+			<identifier>
+				<register id="" address="" page="" addrunit="" width="" type="reg"/>
+				<value idvalue="" />
+			</identifier>
+		</proc>
+
+		<proc id="Dap"  kind="cs_dap">
+			<identifier idvalue="" idregister="" />
+		</proc>
+	
+	</procs>
+
+	<!-- Available Trace sources for the device -->
+	<sources>		
+		
+		<source id="CortexR4_0" proc="CortexR4_0" stmmaster = "false">
+			<characteristics>
+				<characteristic id="DEV_CHAR_ATB_ID" value="0x20"/>
+				<characteristic id="DEV_CHAR_ETMPTM_BASEADDR" value="0x80002000"/>
+			</characteristics>
+		</source>
+		
+		<source id="Dap" proc="Dap" stmmaster = "false">
+			<components>
+				<component module="MOD_DRMMAP"/>
+			</components> 
+			<characteristics>
+			</characteristics>
+		</source> 
+
+	</sources> 
+
+	<!-- Available modules asscoiated with various modules in the device -->
+	<modules> 
+		<!-- Pin module -->
+		<module id ="MOD_DRM"  kind="drm" proc="" version="1.0" >
+			<registers>
+			</registers>
+			<mapping id="program.pinouts">
+				<map program="0"  pinouts="tpiu=2,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,1,0" />
+				<map program="1"  pinouts="tpiu=2,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,1,0" />
+				<map program="2"  pinouts="tpiu=2,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,1,0" />
+				<map program="3"  pinouts="tpiu=2,17,16,15,14,13,12,11,10,9,8,7,6,5,4,1,0" />
+				<map program="4"  pinouts="tpiu=2,16,15,14,13,12,11,10,9,8,7,6,5,4,1,0" />
+				<map program="5"  pinouts="tpiu=2,15,14,13,12,11,10,9,8,7,6,5,4,1,0" />
+				<map program="6"  pinouts="tpiu=2,14,13,12,11,10,9,8,7,6,5,4,1,0" />
+				<map program="7"  pinouts="tpiu=2,13,12,11,10,9,8,7,6,5,4,1,0" />
+				<map program="8"  pinouts="tpiu=2,12,11,10,9,8,7,6,5,4,1,0" />
+				<map program="9"  pinouts="tpiu=2,11,10,9,8,7,6,5,4,1,0" />
+				<map program="10" pinouts="tpiu=2,9,8,7,6,5,4,1,0" />
+			</mapping>
+		</module>
+
+		<!-- version 1 indicates a regular TPIU type -->
+		<module id ="MOD_TPIU"  kind="tpiu" proc="Dap" version="1.0" >
+			<registers>
+			</registers>
+			<characteristics>
+				<characteristic id="DEV_CHAR_TPIUTYPE" value="1"/> 
+				<characteristic id="DEV_CHAR_TPIUBASE" value="0x80003000"/> 
+				<characteristic id="DEV_CHAR_TPIU_EXTCTL_OUT" value="1"/> 
+			</characteristics>
+		</module>
+		
+	</modules>
+
+</device>

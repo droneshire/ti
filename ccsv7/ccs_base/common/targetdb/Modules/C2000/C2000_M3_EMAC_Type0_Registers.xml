@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- 
+  TI File $Revision: 
+  Checkin $Date: 
+  --> 
+
+<!--  28M35x EMAC REGS Registers 
+     =================================== 
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     --> 
+<module id="EMAC REGS" HW_revision="" XML_version="1" description="EMAC REGS Registers">
+    <register id="MACRIS_ACK" acronym="MACRIS_ACK" offset="0" page="1" width="32" description="EMAC Raw Interrupt Status \ Acknowledge" />
+    <register id="MACIM" acronym="MACIM" offset="4" page="1" width="32" description="EMAC Interrupt Mask" />
+    <register id="MACRCTL" acronym="MACRCTL" offset="8" page="1" width="32" description="EMAC Receive Control" />
+    <register id="MACTCTL" acronym="MACTCTL" offset="12" page="1" width="32" description="EMAC Transmit Control" />
+    <register id="MACDATA" acronym="MACDATA" offset="16" page="1" width="32" description="EMAC Data" />
+    <register id="MACIA0" acronym="MACIA0" offset="20" page="1" width="32" description="EMAC Individual Adddress 0" />
+    <register id="MACIA1" acronym="MACIA1" offset="24" page="1" width="32" description="EMAC Individual Adddress 1" />
+    <register id="MACTHR" acronym="MACTHR" offset="28" page="1" width="32" description="EMAC Threshold" />
+    <register id="MACMCTL" acronym="MACMCTL" offset="32" page="1" width="32" description="EMAC Management Control" />
+    <register id="MACMDV" acronym="MACMDV" offset="36" page="1" width="32" description="EMAC Management Divider" />
+    <!--  4 empty  -->
+    <register id="MACMTXD" acronym="MACMTXD" offset="44" page="1" width="32" description="EMAC Management Transmit Data" />
+    <register id="MACMRXD" acronym="MACMRXD" offset="48" page="1" width="32" description="EMAC Management Receive Data" />
+    <register id="MACNP" acronym="MACNP" offset="52" page="1" width="32" description="EMAC Number of Packets" />
+    <register id="MACTR" acronym="MACTR" offset="56" page="1" width="32" description="EMAC Transmission Request" />
+    <register id="MACTS" acronym="MACTS" offset="60" page="1" width="32" description="EMAC Timer Support" />
+    <!--  4 empty  -->
+    <!--  4 empty  -->
+</module>

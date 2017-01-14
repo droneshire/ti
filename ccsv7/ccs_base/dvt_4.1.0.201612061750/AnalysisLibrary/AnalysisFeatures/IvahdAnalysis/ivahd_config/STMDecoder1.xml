@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<translate name="STM decoder1">
+  <passthruAll/>
+  <!--
+  <recordEval field="Time2" type="ulong" display="Decimal">
+    <item expression="accum(deltaCycle)"/>
+  </recordEval>
+  -->
+  <passthru name="SourceID" input="((Event+1) &amp; 0xFFFE)-1" />
+  <passthru name="EventID"  input="Event &amp; 0x0001" />
+  <stringParser delimiters="_" multi="yes" input="EventString">
+    <string name="Originator" translate="$1" />
+    <string name="Source" translate="$1_$2" />
+    <string name="SrcEvent"  translate="$3" />
+  </stringParser>
+</translate>

@@ -1,0 +1,38 @@
+
+<div id="codePreviewViewHeader" ng-if="curOpenedFile">
+	<span id="curOpenedFile" style="display:inline">{{getFileName(curOpenedFile)}}</span>
+	
+	<span style="display:inline">
+		<!-- Single button -->
+		<div dropdown is-open="isFileListDropDownOpened" style="border:none;" >
+			<button type="button" dropdown-toggle ng-disabled="disabled" style="background-color:#ebebeb;border:none;" title="Choose a different file to preview">
+				<span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu shadow3" role="menu" style="padding:0;border:none;border-radius:0 0 3px 3px;">
+				<li ng-repeat="fileEntry in srvFileListVM.filteredFileListArray | orderBy:$root.natural('name')" style="text-align:left;border-bottom:1px solid #eeeeee;margin:0 auto;">
+					<a href="" ng-click="openFile(fileEntry)" title="Open code preview for {{getFileName(fileEntry)}}" style="font-size:14px;">{{getFileName(fileEntry)}}</a>
+				</li>
+			</ul>
+		</div>
+	</span>
+	
+	<div style="float:right;position:relative;top:-3px;left:2px;">
+		<button id="backToFileListView" type="button" class="btn btn-xs trexStyleBtn trexBtnMd" ng-click="closeCodeFile()" title="Back to File List">
+			<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+		</button>
+		
+		<button type="button" class="btn btn-xs trexStyleBtn trexBtnMd" ng-click="downloadFile(curOpenedFile)" title="Download File">
+			<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+		</button>
+	</div>
+	
+	<div class="codeGenOptionsPopDiv shadow3" ng-show="popoverIsVisible" style="font-weight:normal;top:30px;">
+		<div style="padding-top:4px;padding-bottom:2px;">
+			<div style="border-top:1px solid #ddd;padding-top:10px;text-align:center;">
+				<button ng-click="openFile(curOpenedFile)" class="configureBtn configureBtnBlue">Apply Settings</button>
+				<button ng-click="closePopOver()" class="configureBtn configureBtnBlue">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="editor" ng-click="closePopOver()"></div>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+  TI File $Revision: /main/1 $
+  Checkin $Date: August 5, 2009   17:02:55 $
+  -->
+
+<!-- C2000 Event Manager A Registers
+     ===================================
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     -->
+<module id="EVA" HW_revision="" XML_version="1" description="EVA Registers">
+ <register id="GPTCONA" acronym="GPTCONA" offset="0" page="1" width="16" description="0x7400" />
+ <register id="T1CNT" acronym="T1CNT" offset="1" page="1" width="16" description="0x7401" />
+ <register id="T1CMPR" acronym="T1CMPR" offset="2" page="1" width="16" description="0x7402" />
+ <register id="T1PR" acronym="T1PR" offset="3" page="1" width="16" description="0x7403" />
+ <register id="T1CON" acronym="T1CON" offset="4" page="1" width="16" description="0x7404" />
+ <register id="T2CNT" acronym="T2CNT" offset="5" page="1" width="16" description="0x7405" />
+ <register id="T2CMPR" acronym="T2CMPR" offset="6" page="1" width="16" description="0x7406" />
+ <register id="T2PR" acronym="T2PR" offset="7" page="1" width="16" description="0x7407" />
+ <register id="T2CON" acronym="T2CON" offset="8" page="1" width="16" description="0x7408" />
+ <register id="EXTCONA" acronym="EXTCONA" offset="9" page="1" width="16" description="0x7409" />
+ <!-- 7 empty -->        
+ <register id="COMCONA" acronym="COMCONA" offset="17" page="1" width="16" description="0x7411" />
+ <!-- 1 empty -->        
+ <register id="ACTRA" acronym="ACTRA" offset="19" page="1" width="16" description="0x7413" />
+ <!-- 1 empty -->        
+ <register id="DBTCONA" acronym="DBTCONA" offset="21" page="1" width="16" description="0x7415" />
+ <!-- 1 empty -->        
+ <register id="CMPR1" acronym="CMPR1" offset="23" page="1" width="16" description="0x7417" />
+ <register id="CMPR2" acronym="CMPR2" offset="24" page="1" width="16" description="0x7418" />
+ <register id="CMPR3" acronym="CMPR3" offset="25" page="1" width="16" description="0x7419" />
+ <!-- 6 empty -->        
+ <register id="CAPCONA" acronym="CAPCONA" offset="32" page="1" width="16" description="0x7420" />
+ <!-- 1 empty -->        
+ <register id="CAPFIFOA" acronym="CAPFIFOA" offset="34" page="1" width="16" description="0x7422" />
+ <register id="CAP1FIFO" acronym="CAP1FIFO" offset="35" page="1" width="16" description="0x7423" />
+ <register id="CAP2FIFO" acronym="CAP2FIFO" offset="36" page="1" width="16" description="0x7424" />
+ <register id="CAP3FIFO" acronym="CAP3FIFO" offset="37" page="1" width="16" description="0x7425" />
+ <!-- 1 empty -->        
+ <register id="CAP1FBOT" acronym="CAP1FBOT" offset="39" page="1" width="16" description="0x7427" />
+ <register id="CAP2FBOT" acronym="CAP2FBOT" offset="40" page="1" width="16" description="0x7428" />
+ <register id="CAP3FBOT" acronym="CAP3FBOT" offset="41" page="1" width="16" description="0x7429" />
+ <!-- 2 empty -->        
+ <register id="EVAIMRA" acronym="EVAIMRA" offset="44" page="1" width="16" description="0x742C" />
+ <register id="EVAIMRB" acronym="EVAIMRB" offset="45" page="1" width="16" description="0x742D" />
+ <register id="EVAIMRC" acronym="EVAIMRC" offset="46" page="1" width="16" description="0x742E" />
+ <register id="EVAIFRA" acronym="EVAIFRA" offset="47" page="1" width="16" description="0x742F" />
+ <register id="EVAIFRB" acronym="EVAIFRB" offset="48" page="1" width="16" description="0x7430" />
+ <register id="EVAIFRC" acronym="EVAIFRC" offset="49" page="1" width="16" description="0x7431" />
+</module>

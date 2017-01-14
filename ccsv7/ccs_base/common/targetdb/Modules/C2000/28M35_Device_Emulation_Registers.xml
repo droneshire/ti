@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- 
+  TI File $Revision: 
+  Checkin $Date: 
+  --> 
+
+<!--  C28M35x DEV EMU REGS Registers 
+     =================================== 
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     --> 
+<module id="DEV EMU REGS" HW_revision="" XML_version="1" description="DEV EMU REGS Registers">
+    <register id="DEVICECNF" acronym="DEVICECNF" offset="0" page="1" width="32" description="Device Configuration Register" />
+    <register id="PARTID" acronym="PARTID" offset="2" page="1" width="16" description="Device ID Register" />
+    <register id="REVID" acronym="REVID" offset="3" page="1" width="16" description="Revision Register" />
+    <!--  2 empty  -->
+    <register id="CCNF0" acronym="CCNF0" offset="6" page="1" width="32" description="C28 Peripheral Configuration 0" />
+    <register id="CCNF1" acronym="CCNF1" offset="8" page="1" width="32" description="C28 Peripheral Configuration 1" />
+    <register id="CCNF2" acronym="CCNF2" offset="10" page="1" width="32" description="C28 Peripheral Configuration 2" />
+    <register id="CCNF3" acronym="CCNF3" offset="12" page="1" width="32" description="C28 Peripheral Configuration 3" />
+    <register id="CCNF4" acronym="CCNF4" offset="14" page="1" width="32" description="C28 Peripheral Configuration 4" />
+    <!--  54 empty  -->
+    <register id="MEMCNF" acronym="MEMCNF" offset="70" page="1" width="32" description="M3 Memory Configuartion Register" />
+</module>

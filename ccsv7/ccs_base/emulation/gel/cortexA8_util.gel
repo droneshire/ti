@@ -1,0 +1,177 @@
+/********************************************************************************************/ 
+/* This GEL file is loaded on the command line of Code Composer                             */
+/*                                                                                          */
+/* History:                                                                                 */
+/* Version  Author         Date        Comments                                             */
+/* 1.0      Kamal Nehal    Unknown     Initial Version OMAP3430                             */
+/* 1.1      Krishna Allam  11/30/2009  Removed use of GEL_WatchAdd                          */
+/*                                     It is not supported in CCSv4                         */
+/*                                     User options removed are as follows:                 */
+/*                                     hotmenu NEON_Registers()                             */
+/*                                     hotmenu System_Config_and_Control_Registers()        */
+/*                                     hotmenu MMU_and_Config_Control_Registers()           */
+/*                                     hotmenu Cache_Config_and_Control_Registers()         */
+/*                                     hotmenu DMA_Control_Registers()                      */
+/*                                     hotmenu Cache_and_TLB_Registers()                    */
+/*                                     hotmenu System_Performance_and_Monitoring_Registers()*/
+/********************************************************************************************/
+
+menuitem "CortexA8_Features"
+
+
+hotmenu Enter_Secure_Mode()
+{
+
+  int reg;
+
+  REG_TZ_SECURE = 1;
+
+  reg = REG_TZ_SECURE;
+  
+ 
+  if (reg & 1)
+  {
+     GEL_TextOut("The core is in SECURE state.\n");
+  }
+  else
+  {
+     GEL_TextOut("The core is not in SECURE state. n");
+  }
+
+}
+
+hotmenu Enter_Non_Secure_Mode()
+{
+
+  int reg;
+
+  REG_TZ_SECURE = 0;
+
+  reg = REG_TZ_SECURE;
+  
+ 
+  if (reg == 0)
+  {
+     GEL_TextOut("The core is in non-SECURE state. \n");
+  }
+  else
+  {
+     GEL_TextOut("The core is still in SECURE state!\n");
+  }
+
+}
+
+#define MMU_ON  0x00000001
+#define MMU_OFF ~MMU_ON
+
+hotmenu Enable_MMU()
+{
+   int status;
+
+    status =  CP15_CONTROL_REGISTER;
+    status |= MMU_ON;
+    CP15_CONTROL_REGISTER = status;
+
+    status = CP15_CONTROL_REGISTER;
+
+    if ( (status & MMU_ON) == MMU_ON )
+    {
+        GEL_TextOut("MMU IS ON: \n\n");
+    }
+   else
+   {
+       GEL_TextOut("MMU IS OFF: \n\n");
+   }
+}
+
+hotmenu Disable_MMU()
+{
+    int status;
+
+    status =  CP15_CONTROL_REGISTER;
+    status &= MMU_OFF;
+    CP15_CONTROL_REGISTER= status;
+
+    status = CP15_CONTROL_REGISTER;
+
+    if ( (status & MMU_ON) == MMU_ON )
+    {
+        GEL_TextOut("MMU IS ON: \n\n");
+    }
+    else
+    {
+       GEL_TextOut("MMU IS OFF: \n\n");
+    }
+}
+
+
+hotmenu Set_AHB_download_ON()
+{
+
+  int reg;
+
+  REG_AHB_DOWNLOAD= 1;
+
+  reg = REG_AHB_DOWNLOAD;
+  
+ 
+  if (reg & 1)
+  {
+     GEL_TextOut("The code download over AHB is turned ON.\n");
+  }
+}
+
+hotmenu Set_AHB_download_OFF()
+{
+
+  int reg;
+
+  REG_AHB_DOWNLOAD= 0;
+
+  reg = REG_AHB_DOWNLOAD;
+  
+ 
+  if (reg == 0)
+  {
+     GEL_TextOut("The code download over AHB is turned OFF.\n");
+  }
+}
+
+menuitem "NEON"
+
+
+hotmenu Enable_NEON()
+{
+
+  int reg;
+
+  REG_NEON_ENABLE = 1;
+
+  // read back
+  reg =   REG_NEON_ENABLE;
+
+  if ( reg )
+	GEL_TextOut("\n\NEON is enabled\n\n");
+  else
+	GEL_TextOut("\n\NEON is not-enabled!\n");
+
+}
+
+hotmenu Disable_NEON()
+{
+
+  int reg;
+
+
+  REG_NEON_ENABLE = 0;
+
+  // read back
+  reg =   REG_NEON_ENABLE;
+
+  if ( reg == 0 )
+	GEL_TextOut("\n\NEON is disabled.\n\n");
+  else
+	GEL_TextOut("\n\NEON is still enabled!\n");
+
+}
+

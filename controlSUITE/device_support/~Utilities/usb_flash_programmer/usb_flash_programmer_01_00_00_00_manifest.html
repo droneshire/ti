@@ -1,0 +1,379 @@
+<!--
+Texas Instruments Manifest Format 2.0
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<!-- @Start Style -->
+<!-- Default style in case someone doesnt have Internet Access -->
+<style type="text/css" id="internalStyle">
+	body, div, p {
+		font-family: Lucida Grande, Verdana, Geneva, Arial, sans-serif;
+		font-size: 13px;
+		line-height: 1.3;
+	}
+	body {
+		margin: 20px;	
+	}
+	h1 {
+		font-size: 150%;
+	}
+	h2 {
+		font-size: 120%;
+	}
+	h3 {
+		font-size: 100%;
+	}
+	img {
+		border: 0px;
+		vertical-align: middle;
+	}
+	table, th, td, tr {
+		border: 1px solid black;	
+		font-family: Lucida Grande, Verdana, Geneva, Arial, sans-serif;
+		font-size: 13px;
+		line-height: 1.3;
+		empty-cells: show;  
+		padding: 5px;
+	}
+	table {
+		border-collapse: collapse; 
+		width: 100%;
+	}
+	tr {
+		page-break-inside: avoid;
+	}
+	#TIlogoLeft {
+		background-color: black; 
+		padding: 0;
+		width: 20%;
+	}
+	#TIlogoRight {
+		background-color: red; 
+		padding: 0;
+	}
+	#ProductName {
+		text-align: center;
+	}
+	#ReleaseDate {
+		text-align: center;
+	}
+	.LogoSection {
+		margin: 0;
+		padding: 0;
+	}
+	.HeaderSection {
+		margin: 25px 0 25px 0;
+		padding: 0;
+	}
+	.LegendSection {
+		margin: 25px 0 25px 0;
+	}
+	.ExportSection {
+		margin: 25px 0 25px 0;
+	}
+	.DisclaimerSection {
+		margin: 25px 0 25px 0;	
+	}
+	.CreditSection {
+		margin: 25px 0 25px 0;	
+	}
+	.LicenseSection {
+		margin: 25px 0 25px 0;	
+	}
+	.ManifestTable {
+		margin: 25px 0 25px 0;	
+	}
+</style> 
+<!-- Override style from TI if they have Internet Access -->
+<link type="text/css" rel="stylesheet" href="timanifeststyle.css">
+<!-- @End Style -->
+<title>Texas Instruments Manifest</title>
+</head>
+
+<body><!-- Logo display, will need to fix up the URLs, this is just for testing.. Image alternate display not wporking well yet -->
+<div class="LogoSection">
+<table>
+  <tbody>
+    <tr>
+      <td id="TIlogoLeft">
+        <a href="http://www.ti.com/">
+          <!-- img src="tilogo.gif" alt="Texas Instruments Incorporated" -->
+		  <img alt="" src="data:image/gif;base64,R0lGODlh3gA2AKIAAAAAAP///7u7u29vbz8/PwYGBujo6BgYGCH5BAAAAAAALAAAAADeADYAAAP/CLrc/jDKSau9OOvNu/9gKI5kaZ5oqq5s675wLM90bd94ru987//AoHBILBqPyKRyyWw6n9CodHorDALYLIHKJVqz2q44eAUHtoDB4DBu48rgLQErcNtnX7NhMDcICIB3gix5ZmtqAAZZew8EAo+QkQIDNVZqiIM1cHGKZ4YPAmaiAWw0c1gFmZqjB3SbZ6kNe6WhsAeOlDV0qjSFAXUAp7lwuREFtVsFgMvLB7fNAM+BCs+lDLd8BNYOuxfV22PL0RiWlwO1u3kDqejAEsjR6GB86FsHoYwA6gxWnVgGEegUuIelWJk6jswAGlXQ36J1xBSoQwfulIEDr/6l+VeK/+AehrAGOHRnAWRBbbWegckXAV6wk4AeRQtDQBEaBYsYlMl2hUCsBt0iKgilT9EfAlfO7SmzdKkrkQUT/fqZSECqLCSlntH375IAA1tqGUilLIBSNVnU+NmJNBRVChlF1QwAdlRWBy5P3QymwCLBYhs73cTHYBq3X33nDQ2wcWuBgef0FRD4GK3jU3VCZZUJAIw1OGg0P+4bFiubOWoOsEP1+KvZn3wurDbZ6lfcuw3yYkFjRSeYzRe7ARAbW0K3PmGIMi0OFDG1Mmha+RnufAHn3xL9ha6uTZ/rXagZ1GKAtTsHeWb+FEQvHILuX4+mLzj2j2r4TrFesTwMbE5Cuv8JzbTSGuRV1xgfUJFC3WbA0JWFalcItpgf8YU2yT/qATaedent5cBb8zk0DzIitgfKbonRFV9Wp2xl3UXq5Ccibp05598BnRigiAIJmrZAexkJQIuBwzX4CB3SQbeYQkPVAUco63DI2HzsAdYAiAvEZdYlaVQ5wXs3+bQAjovEUoBRR9LVAFLaPXCcY/KMqVRasQB5kiJgLcYgTkJiuCWKC2ZpIY/z/LRhYefkBAGW1HTyRy2UjObLHxSAOZ948EUVGCSC3SLZbB7iZKOLc2GRRgMH/VhdHnJwFCgD8iEGx0VKvpqbO+hoaCppEg3UiTES1CTkhNaQ+Qs4LQGql07/lET4mIQ6SvTSVGZ9Bmhz/bkYzK+PFKtpje6wumRm1wrLZzSdQASoZvyswdmSuk7p616HfkjBTxZBQucFgqXCFKdn1NpiUlQJhs8kteBWG0AbATbXS2tBlaeoVkmJRova4KkGPmhMFdiSYmq8cbTRYhrlkiHaNufJ9mIgVqEXnAOJM5JE4sgjudQ8bF82x+cKBP4Iiedecyjgx2/WtMNjjhcL9h+S4xq9RYJgsbeeUbmdrPTSQbPccsyijEXOfI8xyuinVJH1wdkS/MQ2Bc5Iq08DyHYwGglvPyCilbz0fa8GLV7r9+Btb7CJ14Qnzg8HpdKoOOF5Py752JNXvrblNphzEHnmnF/a+ecTbA465qKPXnnppkuOeuqKr8465K+z7nrsfc9Ouyq23z5I7rrfwXvvbhSQAAA7" />
+        </a>
+      </td>
+      <td id="TILogoRight">
+        <!-- img src="titagline.gif" alt="Technology for Innovators(tm)"-->
+		<img alt="" src="data:image/gif;base64,R0lGODlhOgEaALMAAP8AAP////92dv+3t/+Njf/W1v/t7f8hIf/19f+jo//Hx/8/P/9cXP/j4//6+v/+/iH5BAAAAAAALAAAAAA6ARoAAAT/EMhJq7046827/2AojmRpnmiqrmzrvnAsz3Rt33iu73zv/8CgcEgsGo/IpHLJbDqft0NDMCBQodis1jcADBKE7nYcCpjPgU5AQBKkVYOHAeRudqtXsh60/vRHdSoBBCGBNAkLe4o4f2psgG8pjR6GM5OLmDB/DA0GBoQADAgICRIBBQUOYgwGCg2kEgudBgUHAIGcBg0MsZ0NCnMGYgsBtqEGAbCynrW3AQONgcIFBgiErK6wAAfUtLbCscWiowoAyLDczLZu0AIJCAYOoJn0G38ObAwPEvLEts/O1vUhsA8AAjGonEmA9W6hGAVpEjiQoKBAhT8HJSRkVyEQQAAJ//a5YeMPQIFyACqCnJjSIgFCB4oB+HOSokWOAB6wIWCxnk8MfYh5QsYg5sVHfQLVMSqhztJIxWIaC6QzJy8KfZgqrNT0zR+nUNl8fSMvZ6IDwJCJRfoI7IR4Cub9nDsha6RwR02xUZpGq1utUWUq9FKgYV6/abgOHjt45tquEgY0SDDHoJg+fxhXolKNrmfH/EoR5EdAKmjQfB1qvPmGIQIJ3g4gC2egVF7LqxtP8Ng2cViTKFUCIGbNFKEEmB/VbDlYdqLRn+du8oTg6jjbmfe+CbTM2+BcuySgbQVtQoOCt7s3U8wbsqGs3ZppZLnylwFe8Uql825ogANPckUnYDoOCogxQGXADajggjcw4AA8DSSyTQASMmjhhTQscBWGHHbo4YcghijiiCSWaOKJKKao4oostugiFBEAADs=" />
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div><div class="HeaderSection">
+<h1 id="ProductName">
+<!-- @Start Product -->
+usb_flash_programmer Manifest
+<!-- @End Product -->
+</h1>
+
+<h2 id="ReleaseDate">
+<!-- @Start Date -->
+01-15-2015
+<!-- @End Date -->
+</h2>
+</div><div class="LegendSection">
+<h2>Legend</h2>
+<p>(explanation of the fields in the Manifest Table below)</p>
+<table>
+<tbody>
+<tr>
+<td>
+<b>Software Name </b>
+</td>
+<td>
+The name of the application or file
+</td>
+</tr>
+<tr>
+<td>
+<b>Version</b>
+</td>
+<td>
+Version of the application or file
+</td>
+</tr>
+<tr>
+<td>
+<b>License Type</b>
+</td>
+<td>
+Type of license(s) under which TI will be providing
+software to the licensee (e.g. BSD-3-Clause, GPL-2.0, TI TSPA License, TI
+Commercial License). The license could be under Commercial terms or Open Source. See Open Source Reference License Disclaimer in
+the Disclaimers Section. Whenever possible, TI will use an <a href="http://spdx.org/licenses/"> SPDX Short Identifier </a> for an Open Source
+License. TI Commercial license terms are not usually included in the manifest and are conveyed through a variety 
+of means such as a clickwrap license upon install, 
+a signed license agreement and so forth.
+</td>
+</tr>
+<tr>
+<td>
+<b>Location</b>
+</td>
+<td>
+The directory name and path on the media or a specific file where the Software is located. Typically fully qualified path names 
+are not used and instead the relevant top level directory of the application is given. 
+A notation often used in the manifests is [as installed]/directory/*. Note that the asterisk implies that all
+files under that directory are licensed as the License Type field denotes. Any exceptions to this will 
+generally be denoted as [as installed]/directory/* except as noted below which means as shown in subsequent rows of 
+the manifest.
+</td>
+</tr>
+<tr>
+<td>
+<b>Delivered As</b>
+</td>
+<td>
+This field will either be &#8220;Source&#8221;, &#8220;Binary&#8221; or &#8220;Source
+and Binary&#8221; and is the primary form the content of the Software is delivered
+in. If the Software is delivered in an archive format, this field
+applies to the contents of the archive. If the word Limited is used
+with Source, as in &#8220;Limited Source&#8221; or &#8220;Limited Source and Binary&#8221; then
+only portions of the Source for the application are provided.
+</td>
+</tr>
+<tr>
+<td>
+<b>Modified by TI</b>
+</td>
+<td>
+This field will either be &#8220;Yes&#8221; or &#8220;No&#8221;. A &#8220;Yes&#8221; means
+TI has made changes to the Software. A &#8220;No&#8221; means TI has not made any
+changes. Note: This field is not applicable for Software &#8220;Obtained
+from&#8221; TI.
+</td>
+</tr>
+<tr>
+<td>
+<b>Obtained from</b>
+</td>
+<td>
+This field specifies from where or from whom TI obtained
+the Software. It may be a URL to an Open Source site, a 3<sup>rd</sup>
+party licensor, or TI. See Links Disclaimer in the Disclaimers
+Section.
+</td>
+</tr>
+</tbody>
+</table>
+</div><div class="DisclaimerSection">
+<h2>Disclaimers</h2>
+<h3>Export Control Classification Number (ECCN)</h3>
+<p>Any use of ECCNs listed in the Manifest is at the user&#8217;s risk
+and without recourse to TI. Your
+company, as the exporter of record, is responsible for determining the
+correct classification of any item at
+the time of export. Any export classification by TI of Software is for
+TI&#8217;s internal use only and shall not be construed as a representation
+or warranty
+regarding the proper export classification for such Software or whether
+an export
+license or other documentation is required for exporting such Software</p>
+<h3>Links in the Manifest</h3>
+<p>Any
+links appearing on this Manifest
+(for example in the &#8220;Obtained from&#8221; field) were verified at the time
+the Manifest was created. TI makes no guarantee that any listed links
+will
+remain active in the future.</p>
+<h3>Open Source License References</h3>
+<p>Your company is responsible for confirming the
+applicable license terms for any open source Software
+listed in this Manifest that was not &#8220;Obtained from&#8221; TI. Any open
+source license
+specified in this Manifest for Software that was
+not &#8220;Obtained from&#8221; TI is for TI&#8217;s internal use only and shall not be
+construed as a representation or warranty regarding the proper open
+source license terms
+for such Software.</p>
+</div><div class="ExportSection">
+<h2>Export Information</h2>
+<p>ECCN for Software included in this release:</p>
+3D991 (Embedded Software)
+</div><div class="ManifestTable">
+<!-- h2>Manifest Table</h2 -->
+ 
+ <table> 
+ <tbody> 
+ 
+ <h2> 
+  usb_flash_programmer Manifest Table 
+ </h2> 
+ 
+  
+ <p> 
+ 
+ See the Legend above for a description of these columns. 
+ 
+ </p> 
+  
+ <table id="targetpackages" name="targetpackages"> 
+ <thead>  
+ 	<tr> 
+ 		<td><b>Software Name</b></td> 
+ 		<td><b>Version</b></td> 
+ 		<td><b>License Type</b></td> 
+ 		<td><b>Delivered As</b></td> 
+ 		<td><b>Modified by TI</b></td> 
+ 		<td></td> 
+ 		<td></td> 
+ 	</tr> 
+ </thead>  
+ 
+ 
+ <tbody> 
+ 	<tr> 
+ 		<td id="name" name="name" rowspan="2"> 
+ usb_flash_programmer 
+ </td> 
+ 		<td id="version" name="version" rowspan="2"> 
+ 01_00_00_00 
+ </td> 
+ 		<td id="license" name="license" rowspan="2"> 
+ TI Commerical 
+ </td> 
+ 		<td id="delivered" name="delivered" rowspan="2"> 
+ Source and Binary 
+ </td> 
+ 		<td id="modified" name="modified" rowspan="2"> 
+  
+ </td> 
+ 		<td><b>Location</b></td> 
+ 		<td id="location" name="location"> 
+ [instal_dir]/* 
+ </td> 
+ 	</tr> 
+ 	<tr> 
+ 		<td><b>Obtained from</b></td> 
+ 		<td id="obtained" name="obtained"> 
+  
+ </td> 
+ 	</tr> 
+ 
+ <tbody> 
+ 	<tr> 
+ 		<td id="name" name="name" rowspan="2"> 
+ WdfCoInstaller01009.dll 
+ </td> 
+ 		<td id="version" name="version" rowspan="2"> 
+ 7.1.0 
+ </td> 
+ 		<td id="license" name="license" rowspan="2"> 
+ Microsoft Redistributable License 
+ </td> 
+ 		<td id="delivered" name="delivered" rowspan="2"> 
+ Binary 
+ </td> 
+ 		<td id="modified" name="modified" rowspan="2"> 
+ No 
+ </td> 
+ 		<td><b>Location</b></td> 
+ 		<td id="location" name="location"> 
+ [instal_dir]/windows_driver/amd64/WdfCoInstaller01009.dll<br/>[instal_dir]/windows_driver/x86/WdfCoInstaller01009.dll 
+ </td> 
+ 	</tr> 
+ 	<tr> 
+ 		<td><b>Obtained from</b></td> 
+ 		<td id="obtained" name="obtained"> 
+ http://www.microsoft.com/en-us/download/details.aspx?id=11800 
+ </td> 
+ 	</tr> 
+ 
+ <tbody> 
+ 	<tr> 
+ 		<td id="name" name="name" rowspan="2"> 
+ winusbcoinstaller2.dll 
+ </td> 
+ 		<td id="version" name="version" rowspan="2"> 
+ 7.1.0 
+ </td> 
+ 		<td id="license" name="license" rowspan="2"> 
+ Microsoft Redistributable License 
+ </td> 
+ 		<td id="delivered" name="delivered" rowspan="2"> 
+ Binary 
+ </td> 
+ 		<td id="modified" name="modified" rowspan="2"> 
+ No 
+ </td> 
+ 		<td><b>Location</b></td> 
+ 		<td id="location" name="location"> 
+ [instal_dir]/windows_driver/amd64/winusbcoinstaller2.dll<br/>[instal_dir]/windows_driver/x86/winusbcoinstaller2.dll 
+ </td> 
+ 	</tr> 
+ 	<tr> 
+ 		<td><b>Obtained from</b></td> 
+ 		<td id="obtained" name="obtained"> 
+ http://www.microsoft.com/en-us/download/details.aspx?id=11800 
+ </td> 
+ 	</tr> 
+ 
+ </tbody> 
+ </table> 
+  
+ </p> 
+ </p> 
+ <p> 
+
+</div><div class="CreditSection">
+<h2>Credits</h2>
+<BR> <BR><BR><BR><BR>
+</div><div class="LicenseSection">
+<h2>Licenses</h2>
+<BR><BR><BR>MICROSOFT SOFTWARE LICENSE TERMS<BR>MICROSOFT WINDOWS DRIVER KIT <BR>These license terms are an agreement between Microsoft Corporation (or based on where you live, one of its affiliates) and you.  Please read them.  They apply to the software named above, which includes the media on which you received it, if any.  The terms also apply to any Microsoft<BR>* updates,<BR>* supplements,<BR>* Internet-based services, and <BR>* support services<BR>for this software, unless other terms accompany those items.  If so, those terms apply.<BR>By using the software, you accept these terms.  If you do not accept them, do not use the software.<BR>If you comply with these license terms, you have the rights below.<BR>1. INSTALLATION AND USE RIGHTS.  <BR>a. Installation and Use.  One user may install and use any number of copies of the software on your devices to design, develop and test your programs.<BR>b. Included Microsoft Programs.  The software contains other Microsoft programs. In some cases, those programs and the license terms that apply to your use of them are addressed specifically in these license terms. For all other included Microsoft programs, these license terms govern your use.<BR>c. Device Simulation Framework.  One user may install and use any number of copies of the Device Simulation Framework on your devices for the sole purpose of testing the interoperability of your devices, drivers and firmware with Windows.  For the avoidance of doubt, the Device Simulation Framework shall not be used for testing software you have designed and developed using a software development kit other than the Windows Driver Kit.<BR>d. Third Party Programs.  The software contains third party programs.  These license terms as well as any license terms accompanying the third party program files apply to your use of them.<BR>2. ADDITIONAL LICENSING REQUIREMENTS AND/OR USE RIGHTS.<BR>a. Distributable Code.  The software contains code that you are permitted to distribute in programs you develop if you comply with the terms below.<BR>i. Right to Use and Distribute.  The code and text files listed below are “Distributable Code.”<BR>* REDIST.TXT Files.  You may copy and distribute the object code form of code listed in REDIST.TXT files.<BR>* Sample Code. You may modify, copy and distribute only in object code form the sample code found in the SRC directory of the Windows Driver Kit, except that you may also modify, copy, and distribute in source code form the sample code listed in the SAMPLES.TXT file. <BR>* Third Party Distribution.  You may permit distributors of your programs to copy and distribute the Distributable Code as part of those programs.<BR>ii. Distribution Requirements.  For any Distributable Code you distribute, you must<BR>* add significant primary functionality to it in your programs;<BR>* require distributors and external end users to agree to terms that protect it at least as much as this agreement; <BR>* display your valid copyright notice on your programs; and<BR>* indemnify, defend, and hold harmless Microsoft from any claims, including attorneys’ fees, related to the distribution or use of your programs.<BR>iii. Distribution Restrictions.  You may not<BR>* alter any copyright, trademark or patent notice in the Distributable Code; <BR>* use Microsoft’s trademarks in your programs’ names or in a way that suggests your programs come from or are endorsed by Microsoft; <BR>* distribute Distributable Code to run on a platform other than the Windows platform;<BR>* include Distributable Code in malicious, deceptive or unlawful programs; or<BR>* modify or distribute the source code of any Distributable Code so that any part of it becomes subject to an Excluded License.  An Excluded License is one that requires, as a condition of use, modification or distribution, that<BR>* the code be disclosed or distributed in source code form; or <BR>* others have the right to modify it.<BR>3. SCOPE OF LICENSE.  The software is licensed, not sold. This agreement only gives you some rights to use the software.  Microsoft reserves all other rights.  Unless applicable law gives you more rights despite this limitation, you may use the software only as expressly permitted in this agreement.  In doing so, you must comply with any technical limitations in the software that only allow you to use it in certain ways.    You may not<BR>* work around any technical limitations in the software;<BR>* reverse engineer, decompile or disassemble the software, except and only to the extent that applicable law expressly permits, despite this limitation;<BR>* make more copies of the software than specified in this agreement or allowed by applicable law, despite this limitation;<BR>* publish the software for others to copy;<BR>* rent, lease or lend the software;<BR>* transfer the software or this agreement to any third party; or<BR>* use the software for commercial software hosting services.<BR>4. BACKUP COPY.  You may make one backup copy of the software.  You may use it only to reinstall the software.<BR>5. DOCUMENTATION.  Any person that has valid access to your computer or internal network may copy and use the documentation for your internal, reference purposes.<BR>6. EXPORT RESTRICTIONS.  The software is subject to United States export laws and regulations.  You must comply with all domestic and international export laws and regulations that apply to the software.  These laws include restrictions on destinations, end users and end use.  For additional information, see www.microsoft.com/exporting.<BR>7. SUPPORT SERVICES. Because this software is “as is,” we may not provide support services for it.<BR>8. ENTIRE AGREEMENT.  This agreement, and the terms for supplements, updates, Internet-based services and support services that you use, are the entire agreement for the software and support services.<BR>9. APPLICABLE LAW.<BR>a. United States.  If you acquired the software in the United States, Washington state law governs the interpretation of this agreement and applies to claims for breach of it, regardless of conflict of laws principles.  The laws of the state where you live govern all other claims, including claims under state consumer protection laws, unfair competition laws, and in tort.<BR>b. Outside the United States.  If you acquired the software in any other country, the laws of that country apply.<BR>10. LEGAL EFFECT.  This agreement describes certain legal rights.  You may have other rights under the laws of your country.  You may also have rights with respect to the party from whom you acquired the software.  This agreement does not change your rights under the laws of your country if the laws of your country do not permit it to do so.<BR>11. DISCLAIMER OF WARRANTY.   The software is licensed “as-is.”  You bear the risk of using it.  Microsoft gives no express warranties, guarantees or conditions.  You may have additional consumer rights under your local laws which this agreement cannot change.  To the extent permitted under your local laws, Microsoft excludes the implied warranties of merchantability, fitness for a particular purpose and non-infringement.<BR>12. LIMITATION ON AND EXCLUSION OF REMEDIES AND DAMAGES.   You can recover from Microsoft and its suppliers only direct damages up to U.S. $5.00.  You cannot recover any other damages, including consequential, lost profits, special, indirect or incidental damages.<BR>This limitation applies to<BR>* anything related to the software, services, content (including code) on third party Internet sites, or third party programs; and<BR>* claims for breach of contract, breach of warranty, guarantee or condition, strict liability, negligence, or other tort to the extent permitted by applicable law.<BR>It also applies even if Microsoft knew or should have known about the possibility of the damages.  The above limitation or exclusion may not apply to you because your country may not allow the exclusion or limitation of incidental, consequential or other damages.<BR>Please note: As this software is distributed in Quebec, Canada, some of the clauses in this agreement are provided below in French.<BR>Remarque : Ce logiciel étant distribué au Québec, Canada, certaines des clauses dans ce contrat sont fournies ci-dessous en français.<BR>EXONÉRATION DE GARANTIE. Le logiciel visé par une licence est offert « tel quel ». Toute utilisation de ce logiciel est à votre seule risque et péril. Microsoft n’accorde aucune autre garantie expresse. Vous pouvez bénéficier de droits additionnels en vertu du droit local sur la protection des consommateurs, que ce contrat ne peut modifier. La ou elles sont permises par le droit locale, les garanties implicites de qualité marchande, d’adéquation à un usage particulier et d’absence de contrefaçon sont exclues.<BR>LIMITATION DES DOMMAGES-INTÉRÊTS ET EXCLUSION DE RESPONSABILITÉ POUR LES DOMMAGES.  Vous pouvez obtenir de Microsoft et de ses fournisseurs une indemnisation en cas de dommages directs uniquement à hauteur de 5,00 $ US. Vous ne pouvez prétendre à aucune indemnisation pour les autres dommages, y compris les dommages spéciaux, indirects ou accessoires et pertes de bénéfices.<BR>Cette limitation concerne :<BR>* tout  ce qui est relié au logiciel, aux services ou au contenu (y compris le code) figurant sur des sites Internet tiers ou dans des programmes tiers ; et<BR>* les réclamations au titre de violation de contrat ou de garantie, ou au titre de responsabilité stricte, de négligence ou d’une autre faute dans la limite autorisée par la loi en vigueur.<BR>Elle s’applique également, même si Microsoft connaissait ou devrait connaître l’éventualité d’un tel dommage.  Si votre pays n’autorise pas l’exclusion ou la limitation de responsabilité pour les dommages indirects, accessoires ou de quelque nature que ce soit, il se peut que la limitation ou l’exclusion ci-dessus ne s’appliquera pas à votre égard.<BR>EFFET JURIDIQUE.  Le présent contrat décrit certains droits juridiques. Vous pourriez avoir d’autres droits prévus par les lois de votre pays.  Le présent contrat ne modifie pas les droits que vous confèrent les lois de votre pays si celles-ci ne le permettent pas.<BR><BR><BR><BR><BR><BR>
+</div>
+
+</body></html>

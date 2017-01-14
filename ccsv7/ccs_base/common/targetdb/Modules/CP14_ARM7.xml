@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module id="CP14" HW_revision="1" XML_version="1" description="CP14 Registers (ARM7TDMI)">
+
+	<register id="WP0_ADDR" acronym="WP0_ADDR" width="32" description="Watchpoint address value register" />
+	<register id="WP0_AMASK" acronym="WP0_AMASK" width="32" description="Watchpoint address mask register" />
+	<register id="WP0_DATA" acronym="WP0_DATA" width="32" description="Watchpoint data value register" />
+	<register id="WP0_DMASK" acronym="WP0_DMASK" width="32" description="Watchpoint data mask register" />
+	<register id="WP0_CTRL" acronym="WP0_CTRL" width="9" description="Watchpoint control register">
+		<bitfield id="nRW" width="1" begin="0" end="0" resetval="0" description="Compares against the write signal from the core to detect the direction of bus activity" range="" rwaccess="RW">
+			<bitenum id="1" value="0" token="0 - read cycle" description="0 - read cycle" />
+			<bitenum id="2" value="1" token="1 - write cycle" description="1 - write cycle" />
+		</bitfield>
+		<bitfield id="MAS" width="2" begin="2" end="1" resetval="0" description="Compares against the MAS signal from the core to detect the size of bus activity" range="" rwaccess="RW" />
+		<bitfield id="nOPC" width="1" begin="3" end="3" resetval="0" description="Detects if the current cycle is an instruction fetch or a data access" range="" rwaccess="RW">
+			<bitenum id="1" value="0" token="0 - instruction fetch" description="0 - instruction fetch" />
+			<bitenum id="2" value="1" token="1 - data access" description="1 - data access" />
+		</bitfield>
+		<bitfield id="nTRANS" width="1" begin="4" end="4" resetval="0" description="Compares against the not translate signal from the core to distinguish between user mode and non-user mode access" range="" rwaccess="RW">
+			<bitenum id="1" value="0" token="0 - user mode access" description="0 - user mode access" />
+			<bitenum id="2" value="1" token="1 - non-user mode access" description="1 - non-user mode access" />
+		</bitfield>
+		<bitfield id="EXTERN" width="1" begin="5" end="5" resetval="0" description="An external input to EmbeddedICE that enables the watchpoint to be dependent upon some external condition" range="" rwaccess="RW" />
+		<bitfield id="CHAIN" width="1" begin="6" end="6" resetval="0" description="Can be connected to the chain output of another watchpoint to implement debug request" range="" rwaccess="RW" />
+		<bitfield id="RANGE" width="1" begin="7" end="7" resetval="0" description="Can be connected to another watchpoint unit" range="" rwaccess="RW" />
+		<bitfield id="ENABLE" width="1" begin="8" end="8" resetval="0" description="When a watchpoint match occurs, the internal BREAKPT signal is asserted only when the ENABLE bit is set" range="" rwaccess="RW" />
+	</register>
+	<register id="WP0_CMASK" acronym="WP0_CMASK" width="8" description="Watchpoint control mask register" />
+	<register id="WP1_ADDR" acronym="WP1_ADDR" width="32" description="Watchpoint address value register" />
+	<register id="WP1_AMASK" acronym="WP1_AMASK" width="32" description="Watchpoint address mask register" />
+	<register id="WP1_DATA" acronym="WP1_DATA" width="32" description="Watchpoint data value register" />
+	<register id="WP1_DMASK" acronym="WP1_DMASK" width="32" description="Watchpoint data mask register" />
+	<register id="WP1_CTRL" acronym="WP1_CTRL" width="9" description="Watchpoint control register">
+		<bitfield id="nRW" width="1" begin="0" end="0" resetval="0" description="Compares against the write signal from the core to detect the direction of bus activity" range="" rwaccess="RW">
+			<bitenum id="1" value="0" token="0 - read cycle" description="0 - read cycle" />
+			<bitenum id="2" value="1" token="1 - write cycle" description="1 - write cycle" />
+		</bitfield>
+		<bitfield id="MAS" width="2" begin="2" end="1" resetval="0" description="Compares against the MAS signal from the core to detect the size of bus activity" range="" rwaccess="RW" />
+		<bitfield id="nOPC" width="1" begin="3" end="3" resetval="0" description="Detects if the current cycle is an instruction fetch or a data access" range="" rwaccess="RW">
+			<bitenum id="1" value="0" token="0 - instruction fetch" description="0 - instruction fetch" />
+			<bitenum id="2" value="1" token="1 - data access" description="1 - data access" />
+		</bitfield>
+		<bitfield id="nTRANS" width="1" begin="4" end="4" resetval="0" description="Compares against the not translate signal from the core to distinguish between user mode and non-user mode access" range="" rwaccess="RW">
+			<bitenum id="1" value="0" token="0 - user mode access" description="0 - user mode access" />
+			<bitenum id="2" value="1" token="1 - non-user mode access" description="1 - non-user mode access" />
+		</bitfield>
+		<bitfield id="EXTERN" width="1" begin="5" end="5" resetval="0" description="An external input to EmbeddedICE that enables the watchpoint to be dependent upon some external condition" range="" rwaccess="RW" />
+		<bitfield id="CHAIN" width="1" begin="6" end="6" resetval="0" description="Can be connected to the chain output of another watchpoint to implement debug request" range="" rwaccess="RW" />
+		<bitfield id="RANGE" width="1" begin="7" end="7" resetval="0" description="Can be connected to another watchpoint unit" range="" rwaccess="RW" />
+		<bitfield id="ENABLE" width="1" begin="8" end="8" resetval="0" description="When a watchpoint match occurs, the internal BREAKPT signal is asserted only when the ENABLE bit is set" range="" rwaccess="RW" />
+	</register>
+	<register id="WP1_CMASK" acronym="WP1_CMASK" width="8" description="Watchpoint control mask register" />
+
+</module>

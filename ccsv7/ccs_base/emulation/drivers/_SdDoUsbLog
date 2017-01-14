@@ -1,0 +1,4 @@
+Remove the "_" from the name to enable driver debug logs.
+The "_" was added for CCS v4 to prevent logging.  There is
+a bug in CCS v4 itself where it will ignore errors and
+keep making emulator calls which will create large log files. 

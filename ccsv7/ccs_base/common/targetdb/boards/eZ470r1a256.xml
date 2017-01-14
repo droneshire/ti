@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<board 	id="TMS470R1A256 eZTMS470" XML_version="1" desc="TMS470R1A256 eZTMS470" description="Spectrum Digital TMS470R1A256 EZ Board">
+  <processors>
+    <cpu HW_revision="" XML_version="1.2" desc="arm7" description="" id="arm7" isa="ARM7">
+      <property Type="filepathfield" Value="../../../emulation/boards/eZ470r1a256_v1/gel/ez470r1a256_v1.gel" id="GEL File"/>
+    </cpu>
+  </processors>
+</board>

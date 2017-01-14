@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module id="Debug" HW_revision="1" XML_version="1" description="IVA IHWA Debug Registers" hidden="false" >
+    <register id="DBG_CAP"  acronym="DBG_CAP"  width="32" description="Debug Capabilities Register" />
+    <register id="DBG_CNTL" acronym="DBG_CNTL" width="32" description="Debug Control Register" />
+</module>

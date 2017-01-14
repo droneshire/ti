@@ -1,0 +1,36 @@
+<ul id="outputHeadingAlt3" class="nav nav-tabs" style="margin-top:5px;padding-left:4px;" ng-show="!codePreviewViewStatus">
+	<li id="outputTab1" title="Move Requirements Tab to this column" ng-class="srvStyle.outputTab1Class()">
+		<a href="" ng-click="srvLayout.moveRequirementTab(2)">
+			<span class="viewHeadingAlt" style="font-size:14px">+Req</span>
+		</a>
+	</li>
+	<li id="outputTab2" ng-class="srvStyle.outputTab2Class()">
+		<a href="" ng-click="srvLayout.showColOnly(2)">
+			<span class="viewHeadingAlt">Requirements</span>
+		</a>
+	</li>
+	<li id="outputTab3" class="active">
+		<a href="">
+			<span class="viewHeading">Output</span>
+		</a>
+	</li>
+</ul>
+
+<div id="viewDevicePins" ng-init="max=false">
+	<div id="outputDefaultView" ng-show="!codePreviewViewStatus">
+		
+		<!-- 2. Summary File tab -->
+		<summary></summary>
+		<!-- 2. Generated File tab -->
+		<filelist></filelist>
+		<!-- 3. Pin View tab -->
+		<pinview></pinview>	
+
+	</div>
+
+<!-- 4. Code Preview tab -->
+	<div id="codePreviewTab"  ng-show="codePreviewViewStatus">
+		<editor><editor>
+	</div>
+
+</div>

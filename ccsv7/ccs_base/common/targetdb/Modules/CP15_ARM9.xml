@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module id="CP15" HW_revision="1" XML_version="1" description="CP15 Registers (ARM926-EJ)">
+	<register id="REG_CP15_REG15_DBG_OVR" acronym="DebugOverride" width="32" description="Debug Override Register">
+		
+        <bitfield id="_RESV" width="12" begin="12" end="0" resetval="0" description="[12:0]Reserved" range="" rwaccess="R">
+        </bitfield>
+        <bitfield id="MMUEDCE" width="1" begin="13" end="13" resetval="0" description="[13]MMU disabled, DCache enabled" range="" rwaccess="RW">
+			<bitenum id="1" value="0" token="0 - If MMU disabled, level one access NCNB" description="0 - If MMU disabled, level one access NCNB"/>
+			<bitenum id="2" value="1" token="1 - If MMU disabled, and DCache enabled level one access WT" description="1 - If MMU disabled, and DCache enabled level one access WT"/>
+		</bitfield>
+		<bitfield id="DNCBS" width="1" begin="14" end="14" resetval="0" description="[14]Disable NCB stores (before NCNB)" range="" rwaccess="RW">
+			<bitenum id="1" value="0" token="0 - Enable NCB stores" description="0 - Enable NCB stores"/>
+			<bitenum id="2" value="1" token="1 - Disable NCB stores" description="1 - Disable NCB stores"/>
+		</bitfield>
+		<bitfield id="DBLCG" width="1" begin="15" end="15" resetval="0" description="[15]Disable block-level clock gating" range="" rwaccess="RW">
+			<bitenum id="1" value="0" token="0 - Enable block-level clock gating" description="0 - Enable block-level clock gating"/>
+			<bitenum id="2" value="1" token="1 - Disable block-level clock gating" description="1 - Disable block-level clock gating"/>
+		</bitfield>
+		<bitfield id="DNCIP" width="1" begin="16" end="16" resetval="0" description="[16]Disable NC instruction prefetching" range="" rwaccess="RW">
+			<bitenum id="1" value="0" token="0 - Enable prefetching" description="0 - Enable prefetching"/>
+			<bitenum id="2" value="1" token="1 - Disable prefetching" description="1 - Disable prefetching"/>
+		</bitfield>
+        <bitfield id="AITLBM" width="1" begin="17" end="17" resetval="0" description="[17]Abort instruction TLB misses" range="" rwaccess="RW">
+			<bitenum id="1" value="0" token="0 - Do not abort ITLB miss" description="0 - Do not abort ITLB miss"/>
+			<bitenum id="2" value="1" token="1 - Abort ITLB miss" description="1 - Abort ITLB miss"/>
+		</bitfield>
+        <bitfield id="ADTLBM" width="1" begin="18" end="18" resetval="0" description="[18]Abort data TLB misses" range="" rwaccess="RW">
+			<bitenum id="1" value="0" token="0 - Do not abort DTLB miss" description="0 - Do not abort DTLB miss"/>
+			<bitenum id="2" value="1" token="1 - Abort DTLB miss" description="1 - Abort DTLB miss"/>
+		</bitfield>
+        <bitfield id="TstCleanAll" width="1" begin="19" end="19" resetval="0" description="[19]Test and Clean All" range="" rwaccess="RW">
+			<bitenum id="1" value="0" token="0 - Default behaviour" description="0 - Default behaviour for test and clean instructions"/>
+			<bitenum id="2" value="1" token="1 - Test and clean and invalidate instructions act on complete cache" description="1 - Modifies the behavior of tst and clean, and test, clean and invalidate instructions so they act on complete cache"/>
+		</bitfield>      
+        <bitfield id="RESV" width="12" begin="31" end="20" resetval="0" description="[31:20]Reserved" range="" rwaccess="R">
+		</bitfield>
+	</register>
+	<register id="REG_CP15_REG15_DBG_TST_ADDR" acronym="DT" width="32" description="Debug and Test Register">
+	</register>
+	<register id="REG_CP15_REG15_TRACE_CTRL" acronym="TRCCTRL" width="32" description="Trace Control Register">
+
+		<bitfield id="RESV" width="1" begin="0" end="0" resetval="0" description="Reserved" range="" rwaccess="R">
+      </bitfield>
+    	<bitfield id="IRQ" width="1" begin="1" end="1" resetval="0" description="IRQ interrupt" range="" rwaccess="RW">
+				<bitenum id="1" value="0" token="0 - IRQ interrupt prevents FIFOFULL, from stalling the CPU" description="0 - IRQ interrupt prevents FIFOFULL, from stalling the CPU"/>
+				<bitenum id="2" value="1" token="1 - IRQ interrupt does not prevent FIFOFULL, from stalling the CPU" description="1 - IRQ interrupt does not prevent FIFOFULL, from stalling the CPU"/>         
+	    </bitfield>
+  		<bitfield id="FIQ" width="1" begin="2" end="2" resetval="0" description="FIQ interrupt" range="" rwaccess="RW">
+         		<bitenum id="1" value="0" token="0 - FIQ interrupt prevents FIFOFULL, from stalling the CPU" description="0 - FIQ interrupt prevents FIFOFULL, from stalling the CPU"/>
+				<bitenum id="2" value="1" token="1 - FIQ interrupt does not prevent FIFOFULL, from stalling the CPU" description="1 - FIQ interrupt does not prevent FIFOFULL, from stalling the CPU"/>
+        </bitfield>
+		<bitfield id="_RESV" width="29" begin="31" end="3" resetval="0" description="Reserved" range="" rwaccess="R">
+      </bitfield>
+	</register>
+
+	<register id="REG_CP15_REG15_MMU_TST" acronym="MMUTST" width="32" description="MMU Test Register">
+	</register>
+
+	<register id="REG_CP15_REG15_CACHE_DBG_CTRL" acronym="CACHECTRL" width="32" description="Cache Control Register">
+	  <bitfield id="DDL" width="1" begin="0" end="0" resetval="0" description="Disable DCache linefill" range="" rwaccess="RW">
+         		<bitenum id="1" value="0" token="0 - Disable DCache linefill" description="0 - Disable DCache linefill"/>
+				<bitenum id="2" value="1" token="1 - Enable DCache linefill" description="1 - Enable DCache linefill"/>
+      </bitfield>
+	  <bitfield id="DIL" width="1" begin="1" end="1" resetval="0" description="Disable ICache linefill" range="" rwaccess="RW">
+				<bitenum id="1" value="0" token="0 - Enable ICache linefills" description="0 - Enable ICache linefills"/>
+				<bitenum id="2" value="1" token="1 - Disable ICache linefills" description="1 - Disable ICache linefills"/>         
+      </bitfield>
+      <bitfield id="DWB" width="1" begin="2" end="2" resetval="0" description="Disable Write back (force WT)" range="" rwaccess="RW">
+         		<bitenum id="1" value="0" token="0 - Enable writeback" description="0 - Enable writeback"/>
+				<bitenum id="2" value="1" token="1 - Disable writeback" description="1 - Disable writeback"/>
+      </bitfield>	
+		<bitfield id="_RESV" width="29" begin="31" end="3" resetval="0" description="Reserved" range="" rwaccess="R">
+      </bitfield>
+	</register>
+	<register id="REG_CP15_REG15_MMU_DBG_CTRL" acronym="MMUDCTRL" width="32" description="MMU Debug Control register">
+		<bitfield id="DDUTL" width="1" begin="0" end="0" resetval="0" description="Disable Write back (force WT)" range="" rwaccess="RW">
+        		<bitenum id="1" value="0" token="0 - Enable writeback" description="0 - Enable writeback"/>
+				<bitenum id="2" value="1" token="1 - Disable writeback" description="1 - Disable writeback"/>
+      </bitfield>
+            <bitfield id="DIUTL" width="1" begin="1" end="1" resetval="0" description="Disable Write back (force WT)" range="" rwaccess="RW">
+         		<bitenum id="1" value="0" token="0 - Enable writeback" description="0 - Enable writeback"/>
+				<bitenum id="2" value="1" token="1 - Disable writeback" description="1 - Disable writeback"/>
+      </bitfield>
+            <bitfield id="DDUTM" width="1" begin="2" end="2" resetval="0" description="Disable DCache linefill" range="" rwaccess="RW">
+         		<bitenum id="1" value="0" token="0 - Disable DCache linefill" description="0 - Disable DCache linefill"/>
+				<bitenum id="2" value="1" token="1 - Enable DCache linefill" description="1 - Enable DCache linefill"/>
+      </bitfield>
+      <bitfield id="DIUTM" width="1" begin="3" end="3" resetval="0" description="Disable ICache linefill" range="" rwaccess="RW">
+				<bitenum id="1" value="0" token="0 - Enable ICache linefills" description="0 - Enable ICache linefills"/>
+				<bitenum id="2" value="1" token="1 - Disable ICache linefills" description="1 - Disable ICache linefills"/>         
+      </bitfield>
+      <bitfield id="DMTLD" width="1" begin="4" end="4" resetval="0" description="Disable Write back (force WT)" range="" rwaccess="RW">
+         		<bitenum id="1" value="0" token="0 - Enable writeback" description="0 - Enable writeback"/>
+				<bitenum id="2" value="1" token="1 - Disable writeback" description="1 - Disable writeback"/>
+      </bitfield>
+      <bitfield id="DMTLI" width="1" begin="5" end="5" resetval="0" description="Disable DCache linefill" range="" rwaccess="RW">
+         		<bitenum id="1" value="0" token="0 - Disable DCache linefill" description="0 - Disable DCache linefill"/>
+				<bitenum id="2" value="1" token="1 - Enable DCache linefill" description="1 - Enable DCache linefill"/>
+      </bitfield>
+      <bitfield id="DMTMD" width="1" begin="6" end="6" resetval="0" description="Disable ICache linefill" range="" rwaccess="RW">
+				<bitenum id="1" value="0" token="0 - Enable ICache linefills" description="0 - Enable ICache linefills"/>
+				<bitenum id="2" value="1" token="1 - Disable ICache linefills" description="1 - Disable ICache linefills"/>         
+      </bitfield>
+      <bitfield id="DMTMI" width="1" begin="7" end="7" resetval="0" description="Disable Write back (force WT)" range="" rwaccess="RW">
+         		<bitenum id="1" value="0" token="0 - Enable writeback" description="0 - Enable writeback"/>
+				<bitenum id="2" value="1" token="1 - Disable writeback" description="1 - Disable writeback"/>
+      </bitfield>
+      <bitfield id="_RESV" width="24" begin="31" end="8" resetval="0" description="Reserved" range="" rwaccess="R">
+	  </bitfield>
+ 	</register>
+<!--	<register id="MEMREMAP" acronym="MEMREMAP" width="32" description="Memory Region Remap Register">
+		<bitfield id="DNCNB" width="2" begin="1" end="0" resetval="0" description="Disable ICache linefill" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="DNCB" width="2" begin="3" end="2" resetval="1" description="Disable Write back (force WT)" range="" rwaccess="RW">
+        </bitfield>
+		<bitfield id="DWT" width="2" begin="5" end="4" resetval="2" description="Disable DCache linefill" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="DWB" width="2" begin="7" end="6" resetval="3" description="Disable ICache linefill" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="INCNB" width="2" begin="9" end="8" resetval="0" description="Disable Write back (force WT)" range="" rwaccess="RW">
+        </bitfield>
+        <bitfield id="INCB" width="2" begin="11" end="10" resetval="1" description="Disable DCache linefill" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="IWT" width="2" begin="13" end="12" resetval="2" description="Disable ICache linefill" range="" rwaccess="RW">
+		</bitfield>
+		<bitfield id="IWB" width="2" begin="15" end="14" resetval="3" description="Disable Write back (force WT)" range="" rwaccess="RW">
+        </bitfield>
+        <bitfield id="_RESV" width="16" begin="31" end="16" resetval="0" description="Reserved" range="" rwaccess="R">
+        </bitfield>
+   </register>-->
+</module>

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<translate name="Accumulator">
+	<passthruAll>
+	</passthruAll>
+
+	<recordEval field="PipestallTime" type="integer">
+		<item expression="accum(Delta)"/>
+	</recordEval>
+</translate>

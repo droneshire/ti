@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+
+<!-- This configuration is intend for Omap35XX device  -->
+<!-- Trace subsystem setup attributes for device -->
+<device id="Omap35XX" value="0x1B89102F" mask="0x0FFFFFFF" HW_revision="1.0" XML_version="1.0">
+
+<FileVersion version="2.0.0.0" Copyright="Copyright (c) 2005-2007 Texas Instruments"></FileVersion>
+	<trace_routes>
+		<route>
+			<source source="CPU_0"/>
+			<link module=""/>
+			<sink module="MOD_ETB0"/>
+			<pin module=""/>
+		</route> 						
+		<route>
+			<source source="CPU_0"/>
+			<link module=""/>
+			<sink module="MOD_TPIU"/>
+			<pin module="MOD_DRM"/>
+		</route> 
+		<route>
+			<source source="MIPISTM"/>
+			<link module=""/>
+			<sink module=""/>
+			<pin module="MOD_DRM"/>
+		</route> 
+
+		
+	</trace_routes>
+
+	<!-- Supported proc access mechanisms for the device -->
+	<procs>
+		<!-- Arm cortexA core -->
+		<proc id="Cortex_A8_0" kind="cortex_axx">		
+		</proc> 
+
+		<!-- CS ETB core -->
+		<proc id="CSETB_0" kind="cs_etb">			
+		</proc> 
+				
+		<!-- STM -->
+		<proc id="CS_STM_0" kind="cs_stm">
+			<identifier>
+				<register id="BASE_ADDRESS" address="" page="" addrunit="" width="" type="reg"/>
+				<value idvalue="0x54500000" />
+			</identifier> 
+		</proc >
+		
+		<!-- DAP PC access -->
+		<proc id="CS_DAP_PC_0"  kind="cs_dap_pc">
+			<identifier idvalue="" idregister="" />
+		</proc>
+		
+	</procs>
+
+	<!-- Available Trace sources for the device -->
+	<sources>
+		<!-- processor Trace source -->
+		<source id="CPU_0" proc="Cortex_A8_0" stmmaster = "true">					
+		</source> 				
+		
+		<source id="MIPISTM" proc="CS_STM_0" stmmaster = "true">
+			<components>
+				<component module="MOD_SWMASTER0"/>
+			</components> 
+			<characteristics>
+				<characteristic id="CHAR_MAXEXPORTFREQMHZ" value="83"/>
+			</characteristics>
+		</source>
+
+	</sources>
+
+	<!-- Available modules asscoiated with various modules in the device -->
+	<modules> 
+		<module id="MOD_SWMASTER0" kind="STM" proc="CS_STM_0" version="0.0" >
+			<mapping id="masterid.name">
+				<map masterid="0x00" name="CortexA8_0"/>
+				<map masterid="0x01" name="C64Plus_0"/>
+			</mapping>
+		</module>	
+				
+	
+		<!-- ETB module associated with cortexAxx -->
+		<module id="MOD_ETB0" kind="cs_etb" proc="CSETB_0" version="1.0" >
+			<registers>
+  				<register id="ID" address="ETBCS_ID" page="" addrunit="1" width="32" type="reg" /> 
+  				<register id="RDP" address="ETBCS_RDP" page="" addrunit="1" width="32" type="reg" /> 
+	  			<register id="STS" address="ETBCS_STS" page="" addrunit="1" width="32" type="reg" /> 
+  				<register id="RRD" address="ETBCS_RRD" page="" addrunit="1" width="32" type="reg" /> 
+  				<register id="RRP" address="ETBCS_RRP" page="" addrunit="1" width="32" type="reg" /> 
+	  			<register id="RWD" address="ETBCS_RWD" page="" addrunit="1" width="32" type="reg" /> 
+  				<register id="RWP" address="ETBCS_RWP" page="" addrunit="1" width="32" type="reg" /> 
+  				<register id="TRG" address="ETBCS_TRG" page="" addrunit="1" width="32" type="reg" /> 
+	  			<register id="CTL" address="ETBCS_CTL" page="" addrunit="1" width="32" type="reg" /> 
+  				<register id="FFSR" address="ETBCS_FFSR" page="" addrunit="1" width="32" type="reg" /> 
+  				<register id="FFCR" address="ETBCS_FFCR" page="" addrunit="1" width="32" type="reg" /> 
+	  			<register id="LOCK" address="ETBCS_LOCK_ACCESS" page="" addrunit="1" width="32" type="reg" /> 
+  				<register id="LOCK_STATUS" address="ETBCS_LOCK_STATUS" page="" addrunit="1" width="32" type="reg" /> 
+	  		</registers>
+		</module>
+	
+		<!-- Pins module associated with a possible TPIU?-->
+		<module id ="MOD_DRM"  kind="drm" proc="Cortex_A8_0" version="1.0" >
+			<registers>
+			</registers>
+		</module>	
+
+		<module id ="MOD_TPIU"  kind="tpiu" proc="CS_DAP_PC_0" version="1.0" >
+			<registers>
+			</registers>
+			<characteristics>
+				<characteristic id="DEV_CHAR_TPIUBASE" value="0x54019000"/> 
+			</characteristics>
+		</module>	
+
+
+	</modules>
+</device>

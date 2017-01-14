@@ -1,0 +1,689 @@
+/********************************************************************/
+/* f28054M.gel                                                       */
+/* Version 4.00.5                                                   */
+/*                                                                  */
+/* This GEL file is to be used with the TMS320F28054M DSP.           */
+/* Changes may be required to support specific hardware designs.    */
+/*                                                                  */
+/* Code Composer Studio supports six reserved GEL functions that    */
+/* automatically get executed if they are defined. They are:        */
+/*                                                                  */
+/* StartUp()              - Executed whenever CCS is invoked        */
+/* OnReset()              - Executed after Debug->Reset CPU         */
+/* OnRestart()            - Executed after Debug->Restart           */
+/* OnPreFileLoaded()      - Executed before File->Load Program      */
+/* OnFileLoaded()         - Executed after File->Load Program       */
+/* OnTargetConnect()      - Executed after Debug->Connect           */
+/*                                                                  */
+/********************************************************************/
+
+StartUp()
+{
+}
+
+int emu_boot_set = 0;
+OnReset(int nErrorCode)
+{
+    if (GEL_IsInRealtimeMode())		/* If in real-time-mode */
+	{
+	}
+	else							/* Put device into C28x Mode */
+	{
+        C28x_Mode();   
+	}
+    Security_Unlock_Sequence();
+    Device_Configure();				/* Configures device for Debug */ 
+    Device_Cal();        
+//  Uncomment for the desired boot-mode on a reset:    
+//    EMU_BOOT_SARAM();				/* Set EMU Boot Variables - Boot to SARAM */
+//    EMU_BOOT_FLASH();				/* Set EMU Boot Variables - Boot to flash */
+}
+
+OnRestart(int nErrorCode)
+{
+/* CCS will call OnRestart() when you do a Debug->Restart and   */
+/* after you load a new file.  Between running __interrupt based  */
+/* programs, this function will clear __interrupts and help keep  */
+/* the processor from going off into invalid memory.            */
+     if (GEL_IsInRealtimeMode())	/* If in real-time-mode */
+	{
+	}
+	else							/* Put device into C28x Mode */
+	{
+        C28x_Mode();   
+	}
+     IER = 0;
+     IFR = 0;
+}
+
+OnPreFileLoaded()
+{
+    int i;
+	GEL_Reset();
+}
+
+OnFileLoaded(int nErrorCode, int bSymbolsOnly)
+{
+ if (!bSymbolsOnly) {
+   Device_Cal();
+ }
+}
+
+OnTargetConnect()
+{
+    if (GEL_IsInRealtimeMode())		/* If in real-time-mode */
+	{
+	}
+	else							/* Put device into C28x Mode */
+	{
+        C28x_Mode();   
+	}
+    F28054M_Memory_Map();			/* Initialize the CCS memory map */	
+	
+/* Check to see if CCS has been started-up with the DSP already */
+/* running in real-time mode.  The user can add whatever        */
+/* custom initialization stuff they want to each case.          */
+
+    if (GEL_IsInRealtimeMode())		/* Do real-time mode target initialization */
+    {
+
+    }
+    else							/* Do stop-mode target initialization */
+    {
+        GEL_Reset();				/* Reset DSP */
+    }
+}
+
+
+/********************************************************************/
+/* These functions are useful to engage/disengage realtime          */
+/* emulation mode during debug.  They save the user from having to  */
+/* manually perform these steps in CCS.                             */
+/********************************************************************/
+menuitem "Realtime Emulation Control";
+
+hotmenu Run_Realtime_with_Reset()
+{
+    GEL_Reset();					/* Reset the DSP */
+    ST1 = ST1 & 0xFFFD;				/* clear DBGM bit in ST1 */
+    GEL_EnableRealtime();			/* Enable Realtime mode */
+    GEL_Run();						/* Run the DSP */
+}
+hotmenu Run_Realtime_with_Restart()
+{
+    GEL_Restart();					/* Reset the DSP */
+    ST1 = ST1 & 0xFFFD;				/* clear DBGM bit in ST1 */
+    GEL_EnableRealtime();			/* Enable Realtime mode */
+    GEL_Run();						/* Run the DSP */
+}
+hotmenu Full_Halt()
+{
+    GEL_DisableRealtime();			/* Disable Realtime mode */
+    GEL_Halt();						/* Halt the DSP */
+}
+hotmenu Full_Halt_with_Reset()
+{
+    GEL_DisableRealtime();			/* Disable Realtime mode */
+    GEL_Halt();						/* Halt the DSP */
+    GEL_Reset();					/* Reset the DSP */
+}
+
+/********************************************************************/
+/* These functions are launched by the GEL_Toolbar button plugin    */
+/********************************************************************/
+GEL_Toolbar1()
+{
+    Run_Realtime_with_Reset();
+}
+GEL_Toolbar2()
+{
+    Run_Realtime_with_Restart();
+}
+GEL_Toolbar3()
+{
+    Full_Halt();
+}
+GEL_Toolbar4()
+{
+    Full_Halt_with_Reset();
+}
+
+GEL_Toolbar5()
+{
+    Full_Halt_with_Reset();
+    GEL_Restart();
+}
+
+
+/*********************************************************************/
+/*                         F28054M Memory Map                         */
+/*                                                                   */
+/*   Note: M0M1MAP and VMAP signals tied high on PICCOLO core        */
+/*                                                                   */
+/*   0x000000 - 0x0003ff   M0 SARAM                 (Prog and Data)  */
+/*   0x000400 - 0x0007ff   M1 SARAM                 (Prog and Data)  */
+/*   0x000800 - 0x001fff   Peripheral Frame0  (PF0) (Data only)      */
+/*   0x006000 - 0x0061ff   Peripheral Frame1A (PF1A)(Data only)      */
+/*   0x006400 - 0x006bff   Peripheral Frame3  (PF3) (Data only)      */
+/*   0x006f80 - 0x006fff   Peripheral Frame1  (PF1B)(Data only)      */
+/*   0x007000 - 0x007fff   Peripheral Frame2  (PF2) (Data only)      */
+/*   0x008800 - 0x0087ff   L1 SARAM                 (Prog and Data)  */
+/*   0x008c00 - 0x008bff   L2 SARAM                 (Prog and Data)  */
+/*   0x009000 - 0x009fff   L3 SARAM                 (Prog and Data)  */
+/*   0x3d7800 - 0x3d79ff   Z2 OTP                   (Prog and Data)  */
+/*   0x3d7a00 - 0x3d7bff   Z1 OTP                   (Prog and Data)  */
+/*   0x3d7e00 - 0x3d7e3f   Device Cal (TI OTP)      (Prog and Data)  */
+/*   0x3d7e81 - 0x3d7eb0   Calibration Data		    (Prog and Data)  */
+/*   0x3d7fcb - 0x3d7fec   Device Configuration     (Prog and Data)  */
+/*   0x3e8000 - 0x3f7fff   FLASH                    (Prog and Data)  */
+/*   0x3f8000 - 0x3f83ff   Z1 SCC ROM               (Prog only)      */
+/*   0x3f8400 - 0x3f87ff   Z2 SCC ROM               (Prog only)      */
+/*   0x3f8808 - 0x3fcfff   Z1 Secure ROM            (Prog and Data)  */
+/*   0x3fd000 - 0x3fffff   BOOT ROM                 (Prog and Data)  */
+/********************************************************************/
+menuitem "Initialize Memory Map";
+
+hotmenu F28054M_Memory_Map()
+{
+    GEL_MapReset();
+    GEL_MapOn();
+
+    /* Program memory maps */
+    GEL_MapAdd(0x0,0,0x400,1,1);					/* M0 SARAM        */
+    GEL_MapAdd(0x400,0,0x400,1,1);					/* M1 SARAM        */
+    GEL_MapAdd(0xD00,0,0x100,1,1);					/* PIEVECT(DSPBIOS)*/
+    GEL_MapAdd(0x8800,0,0x400,1,1);					/* L1 SARAM        */
+    GEL_MapAdd(0x8c00,0,0x400,1,1);					/* L2 SARAM        */
+    GEL_MapAdd(0x9000,0,0x1000,1,1);				/* L3 SARAM        */
+    GEL_MapAdd(0x3d7800,0,0x200,1,1);				/* Z2 OTP          */
+    GEL_MapAdd(0x3d7a00,0,0x200,1,1);				/* Z1 OTP          */
+    GEL_MapAdd(0x3d7e00,0,0x040,1,0);				/* Device Cal      */
+	GEL_MapAdd(0x3d7e81,0,0x030,1,0);				/* Calibration Data*/
+	GEL_MapAdd(0x3d7fcb,0,0x22,1,0);                /* Device Config   */
+	GEL_MapAdd(0x3d7ffe,0,0x2,1,1);					/* TI Internal     */
+    GEL_MapAdd(0x3e8000,0,0x10000,1,0);				/* FLASH           */
+    GEL_MapAdd(0x3f8000,0,0x400,1,0);				/* Z1 SCC ROM      */
+    GEL_MapAdd(0x3f8400,0,0x400,1,0);				/* Z2 SCC ROM      */
+	GEL_MapAdd(0x3f8800,0,0x4800,1,0);				/* Z1 SECURE ROM   */
+	GEL_MapAdd(0x3fd000,0,0x3000,1,0);				/* BOOT ROM        */
+
+    /* Data memory maps */
+    GEL_MapAdd(0x0,1,0x400,1,1);					/* M0 SARAM        */
+    GEL_MapAdd(0x400,1,0x400,1,1);					/* M1 SARAM        */
+    GEL_MapAdd(0x800,1,0x1800,1,1);					/* PF0             */
+    GEL_MapAdd(0x6000,1,0x0200,1,1);				/* PF1-A           */
+    GEL_MapAdd(0x6400,1,0x0800,1,1);				/* PF3             */
+    GEL_MapAdd(0x6f80,1,0x0080,1,1);				/* PF1-B           */
+    GEL_MapAddStr(0x7000,1,0x1000,"R|W|AS2",0);		/* PF2             */
+    GEL_MapAdd(0x8800,1,0x400,1,1);					/* L1 SARAM        */
+    GEL_MapAdd(0x8c00,1,0x400,1,1);					/* L2 SARAM        */
+    GEL_MapAdd(0x9000,1,0x1000,1,1);				/* L3 SARAM        */
+    GEL_MapAdd(0x3d7800,1,0x200,1,1);				/* Z2 OTP          */
+    GEL_MapAdd(0x3d7a00,1,0x200,1,1);				/* Z1 OTP          */
+    GEL_MapAdd(0x3d7e00,1,0x040,1,0);				/* Device Cal      */
+	GEL_MapAdd(0x3d7e81,1,0x030,1,0);				/* Calibration Data*/
+	GEL_MapAdd(0x3d7fcb,1,0x22,1,0);                /* Device Config   */
+	GEL_MapAdd(0x3d7ffe,1,0x2,1,0);					/* TI Internal     */
+    GEL_MapAdd(0x3e8000,1,0x10000,1,0);				/* FLASH           */
+	GEL_MapAdd(0x3f8000,1,0x400,1,0);				/* Z1 SCC ROM      */
+    GEL_MapAdd(0x3f8400,1,0x400,1,0);				/* Z2 SCC ROM      */ 
+	GEL_MapAdd(0x3f8800,1,0x4800,1,0);				/* Z1 SECURE ROM   */
+    GEL_MapAdd(0x3fd000,1,0x3000,1,0);				/* BOOT ROM        */
+}
+
+/********************************************************************/
+/* The ESTOP0 fill functions are useful for debug.  They fill the   */
+/* RAM with software breakpoints that will trap runaway code.       */
+/********************************************************************/
+hotmenu Fill_F28054M_RAM_with_ESTOP0()
+{
+    GEL_MemoryFill(0x000000,1,0x000800,0x7625);		/* Fill M0/M1  */
+    GEL_MemoryFill(0x008800,1,0x000800,0x7625);		/* Fill L1/L2  */
+    GEL_MemoryFill(0x009000,1,0x001000,0x7625);		/* Fill L3     */
+}
+
+/********************************************************************/
+/*              TI OTP and USER OTP Memory Dump                     */
+/********************************************************************/
+menuitem "OTP Dump";
+hotmenu OTP_Dump()
+{               
+                GEL_MemorySave(0x3d7a00,1, 0x200, "USER_OTP_Zone1.dat");
+                GEL_MemorySave(0x3d7800,1, 0x200, "USER_OTP_Zone2.dat"); 
+                
+                GEL_TextOut("\n********************************************************************** 
+                             \nUSER OTP Memory Dump Complete!  
+                             \nFile Output Directory: <CCS Install Directory>\\ccs<version>\\eclipse 
+                             \n                       (e.g. C:\\ti\\ccsv6\\eclipse)
+                             \n**********************************************************************\n"); 
+}
+
+/********************************************************************/
+menuitem "Watchdog";
+hotmenu Disable_WD()
+{
+    *0x7029 = *0x7029 | 0x0068;						/* Set the WDDIS bit */
+    *0x7025 = 0x0055;								/* Service the WD    */
+    *0x7025 = 0x00AA;								/*  once to be safe. */
+    GEL_TextOut("\nWatchdog Timer Disabled");
+}
+
+/********************************************************************/
+menuitem "Code Security Module"
+
+hotmenu Unlock_Z1_DCSM()
+{
+    int i;
+	unsigned long LinkPointer;
+	unsigned long *Z1_ZoneSelBlockPtr;
+	int bitpos = 29;
+	int zerofound = 0;
+	
+	LinkPointer = *(unsigned long *)0xB80;			/* Read Z1-Linkpointer out of Z1-LINKPOINTER register */
+	LinkPointer = LinkPointer << 2;					/* Bits 31 and 30 as most-sigificant 0 are invalid LinkPointer options */
+	while ((zerofound == 0) && (bitpos > -1))
+	{
+	    if ((LinkPointer & 0x80000000) == 0)
+		{
+		    zerofound = 1;
+			Z1_ZoneSelBlockPtr = (unsigned long *)(0x3D7A00 + ((bitpos + 2)*16));			
+		}
+		else
+		{
+		    bitpos--;
+			LinkPointer = LinkPointer << 1;
+		}
+	}
+	if (zerofound == 0)
+	{
+	    Z1_ZoneSelBlockPtr = (unsigned long *)0x3D7A10;
+	}
+	
+	/* Perform dummy reads of the Zone Select Block locations */
+	for (i = 0; i < 8; i++)
+	{
+	    XAR0 =  *Z1_ZoneSelBlockPtr; 
+		Z1_ZoneSelBlockPtr++;
+	}
+	
+    /* Write passwords to the KEY registers.  0xFFFFFFFF's are dummy passwords.
+       User should replace them with the correct password for their DSP */
+    *(unsigned long *)0xB90 = 0xFFFFFFFF;
+	*(unsigned long *)0xB92 = 0xFFFFFFFF;
+	*(unsigned long *)0xB94 = 0xFFFFFFFF;
+	*(unsigned long *)0xB96 = 0xFFFFFFFF;	
+    
+    if ((*(unsigned short *)0xB99 & (0x0020)) != 0x0020)
+    {
+        GEL_TextOut("\n Zone 1 is Secure.\n");
+    }	
+
+}
+
+hotmenu Unlock_Z2_DCSM()
+{
+    int i;
+	unsigned long LinkPointer;
+	unsigned long *Z2_ZoneSelBlockPtr;
+	int bitpos = 29;
+	int zerofound = 0;
+
+	LinkPointer = *(unsigned long *)0xBC0;			/* Read Z2-Linkpointer out of Z2-LINKPOINTER register */
+	LinkPointer = LinkPointer << 2;					/* Bits 31 and 30 as most-sigificant 0 are invalid LinkPointer options */
+	while ((zerofound == 0) && (bitpos > -1))
+	{
+	    if ((LinkPointer & 0x80000000) == 0)
+		{
+		    zerofound = 1;
+			Z2_ZoneSelBlockPtr = (unsigned long *)(0x3D7800 + ((bitpos + 2)*16));			
+		}
+		else
+		{
+		    bitpos--;
+			LinkPointer = LinkPointer << 1;
+		}
+	}
+	if (zerofound == 0)
+	{
+	    Z2_ZoneSelBlockPtr = (unsigned long *)0x3D7810;
+	}
+	
+	/* Perform dummy reads of the Zone Select Block locations */
+	for (i = 0; i < 8; i++)
+	{
+	    XAR0 =  *Z2_ZoneSelBlockPtr; 
+		Z2_ZoneSelBlockPtr++;
+	}
+	
+    /* Write passwords to the KEY registers.  0xFFFFFFFF's are dummy passwords.
+       User should replace them with the correct password for their DSP */
+    *(unsigned long *)0xBD0 = 0xFFFFFFFF;
+	*(unsigned long *)0xBD2 = 0xFFFFFFFF;
+	*(unsigned long *)0xBD4 = 0xFFFFFFFF;
+	*(unsigned long *)0xBD6 = 0xFFFFFFFF;	
+
+    if ((*(unsigned short *)0xBD9 & (0x0020)) != 0x0020)
+    {
+        GEL_TextOut("\n Zone 2 is Secure.\n");
+    }		
+
+}
+
+hotmenu Security_Unlock_Sequence()
+{
+	XAR0 = *(unsigned long *)0x3D7A00; // Read Z1 Linkpointer 
+	XAR0 = *(unsigned long *)0x3D7800; // Read Z2 Linkpointer 
+	XAR0 = *(unsigned long *)0x3D7A02; // Read Z1 OTPSECLOCK
+	XAR0 = *(unsigned long *)0x3D7802; // Read Z2 OTPSECLOCK
+    XAR0 = *(unsigned long *)0x3D7A04; // Read Z1 BOOTMODE
+	XAR0 = *(unsigned long *)0x3D7804; // Read Z2 BOOTMODE	
+	XAR0 = *(unsigned long *)0x3D7FFE; // Read SECDC
+	Unlock_Z1_DCSM();
+	Unlock_Z2_DCSM();	
+}
+
+/********************************************************************/
+menuitem "Addressing Modes";
+
+hotmenu C28x_Mode()
+{
+    ST1 = ST1 & (~0x0100);      /*   AMODE = 0  */
+    ST1 = ST1 | 0x0200;         /* OBJMODE = 1  */
+}
+
+hotmenu C24x_Mode()
+{
+    ST1 = ST1 | 0x0100;         /*   AMODE = 1  */
+    ST1 = ST1 | 0x0200;         /* OBJMODE = 1  */
+}
+
+hotmenu C27x_Mode()
+{
+    ST1 = ST1 & (~0x0100);      /*   AMODE = 0  */
+    ST1 = ST1 & (~0x0200);      /* OBJMODE = 0  */
+}
+
+/********************************************************************/
+/*                            PLL Ratios                            */
+/*                                                                  */
+/* The following table describes the PLL clocking ratios (0..10)    */
+/*                                                                  */
+/*   Ratio        CLKIN          Description                        */
+/*   -----    --------------     ------------                       */
+/*     0      OSCCLK/2           PLL bypassed                       */
+/*     1      (OSCCLK * 2)/2     10 Mhz for 10 Mhz CLKIN            */
+/*     2      (OSCCLK * 4)/2     20 Mhz for 10 Mhz CLKIN            */
+/*     3      (OSCCLK * 6)/2     30 Mhz for 10 Mhz CLKIN            */
+/*     4      (OSCCLK * 8)/2     40 Mhz for 10 Mhz CLKIN            */
+/*     5      (OSCCLK * 10)/2    50 Mhz for 10 Mhz CLKIN            */
+/*     6      (OSCCLK * 12)/2    60 Mhz for 10 Mhz CLKIN            */
+/********************************************************************/
+menuitem "Set PLL Ratio";
+
+hotmenu Bypass()
+{
+    *0x7021 = 0;       /* CLKIN = OSCCLK/1, PLL is bypassed */
+    DIVSEL_div1();     /* DIVSEL = 1/1                      */
+    PLL_Wait();
+}
+
+hotmenu OSCCLK_x1_divided_by_2()
+{
+    DIVSEL_div2();    /* DIVSEL = 1/2           */
+    *0x7021 = 1;      /* CLKIN = (OSCCLK * 1)/2 */
+    PLL_Wait();
+}
+hotmenu OSCCLK_x2_divided_by_2()
+{
+    DIVSEL_div2();    /* DIVSEL = 1/2           */
+    *0x7021 = 2;      /* CLKIN = (OSCCLK * 2)/2 */
+    PLL_Wait();
+}
+hotmenu OSCCLK_x3_divided_by_2()
+{
+    DIVSEL_div2();    /* DIVSEL = 1/2           */
+    *0x7021 = 3;      /* CLKIN = (OSCCLK * 3)/2 */
+    PLL_Wait();
+}
+hotmenu OSCCLK_x4_divided_by_2()
+{
+    DIVSEL_div2();    /* DIVSEL = 1/2           */
+    *0x7021 = 4;      /* CLKIN = (OSCCLK * 4)/2 */
+    PLL_Wait();
+}
+hotmenu OSCCLK_x5_divided_by_2()
+{
+    DIVSEL_div2();    /* DIVSEL = 1/2           */
+    *0x7021 = 5;      /* CLKIN = (OSCCLK * 5)/2 */
+    PLL_Wait();
+}
+hotmenu OSCCLK_x6_divided_by_2()
+{
+    DIVSEL_div2();    /* DIVSEL = 1/2           */
+    *0x7021 = 6;      /* CLKIN = (OSCCLK * 6)/2 */
+    PLL_Wait();
+}
+hotmenu OSCCLK_x7_divided_by_2()
+{
+    DIVSEL_div2();    /* DIVSEL = 1/2           */
+    *0x7021 = 7;      /* CLKIN = (OSCCLK * 7)/2 */
+    PLL_Wait();
+}
+hotmenu OSCCLK_x8_divided_by_2()
+{
+    DIVSEL_div2();    /* DIVSEL = 1/2           */
+    *0x7021 = 8;      /* CLKIN = (OSCCLK * 8)/2 */
+    PLL_Wait();
+}
+hotmenu OSCCLK_x9_divided_by_2()
+{
+    DIVSEL_div2();    /* DIVSEL = 1/2           */
+    *0x7021 = 9;      /* CLKIN = (OSCCLK * 9)/2 */
+    PLL_Wait();
+}
+hotmenu OSCCLK_x10_divided_by_2()
+{
+    DIVSEL_div2();    /* DIVSEL = 1/2           */
+    *0x7021 = 10;     /* CLKIN = (OSCCLK * 10)/2 */
+    PLL_Wait();
+}
+hotmenu OSCCLK_x12_divided_by_2()
+{
+    DIVSEL_div2();    /* DIVSEL = 1/2           */
+    *0x7021 = 12;     /* CLKIN = (OSCCLK * 12)/2 */
+    PLL_Wait();
+}
+
+// hotmenu OSCCLK_x1_divided_by_1()
+// {
+//     DIVSEL_div1();    /* DIVSEL = 1/1           */
+//     *0x7021 = 1;      /* CLKIN = (OSCCLK * 1)/1 */
+//     PLL_Wait();
+// }
+// hotmenu OSCCLK_x2_divided_by_1()
+// {
+//     DIVSEL_div1();    /* DIVSEL = 1/1           */
+//     *0x7021 = 2;      /* CLKIN = (OSCCLK * 2)/1 */
+//     PLL_Wait();
+// }
+// hotmenu OSCCLK_x3_divided_by_1()
+// {
+//     DIVSEL_div1();    /* DIVSEL = 1/1           */
+//     *0x7021 = 3;      /* CLKIN = (OSCCLK * 3)/1 */
+//     PLL_Wait();
+// }
+// hotmenu OSCCLK_x4_divided_by_1()
+// {
+//     DIVSEL_div1();    /* DIVSEL = 1/1           */
+//     *0x7021 = 4;      /* CLKIN = (OSCCLK * 4)/1 */
+//     PLL_Wait();
+// }
+// hotmenu OSCCLK_x5_divided_by_1()
+// {
+//     DIVSEL_div1();    /* DIVSEL = 1/1           */
+//     *0x7021 = 5;      /* CLKIN = (OSCCLK * 5)/1 */
+//     PLL_Wait();
+// }
+// hotmenu OSCCLK_x6_divided_by_1()
+// {
+//     DIVSEL_div1();    /* DIVSEL = 1/1           */
+//     *0x7021 = 6;      /* CLKIN = (OSCCLK * 6)/1 */
+//     PLL_Wait();
+// }
+// hotmenu OSCCLK_x7_divided_by_1()
+// {
+//     DIVSEL_div1();    /* DIVSEL = 1/1           */
+//     *0x7021 = 7;      /* CLKIN = (OSCCLK * 7)/1 */
+//     PLL_Wait();
+// }
+// hotmenu OSCCLK_x8_divided_by_1()
+// {
+//     DIVSEL_div1();    /* DIVSEL = 1/1           */
+//     *0x7021 = 8;      /* CLKIN = (OSCCLK * 8)/1 */
+//     PLL_Wait();
+// }
+// hotmenu OSCCLK_x9_divided_by_1()
+// {
+//     DIVSEL_div1();    /* DIVSEL = 1/1           */
+//     *0x7021 = 9;      /* CLKIN = (OSCCLK * 9)/1 */
+//     PLL_Wait();
+// }
+// hotmenu OSCCLK_x10_divided_by_1()
+// {
+//     DIVSEL_div1();    /* DIVSEL = 1/1           */
+//     *0x7021 = 10;     /* CLKIN = (OSCCLK * 10)/1 */
+//     PLL_Wait();
+// }
+//
+
+/********************************************************************/
+/* For F28054M devices, DIVSEL is 1/4 by default.  Switch it to 1/2  */
+/********************************************************************/
+
+DIVSEL_div2()
+{
+    int temp;
+    int PLLSTS;
+
+    PLLSTS = 0x7011;
+
+    temp  = *PLLSTS;
+    temp &=  0xFE7F;   /* Clear bits 7 & 8 */
+    temp |= 2 << 7;    /* Set bit 8        */
+    *PLLSTS = temp;    /* Switch to 1/2    */
+}
+
+/********************************************************************/
+/* For F28054M devices, DIVSEL is 1/4 by default.  Switch it to /1   */
+/********************************************************************/
+
+DIVSEL_div1()
+{
+    int temp;
+    int PLLSTS;
+
+    PLLSTS = 0x7011;
+
+    DIVSEL_div2();     /* First switch DIVSEL to 1/2 and wait */
+    wait();
+    temp  = *PLLSTS;
+    temp |= 3 << 7;    /* Set bits 7 & 8   */
+    *PLLSTS = temp;    /* Switch to 1/2    */
+}
+
+wait()
+{
+    int delay = 0;
+    for (delay = 0; delay <= 5; delay ++)
+    {}
+}
+
+/********************************************************************/
+/* For F28054M devices, check the PLLOCKS bit for PLL lock.          */
+/********************************************************************/
+PLL_Wait()
+{
+    int PLLSTS;
+    int delay = 0;
+
+    PLLSTS = 0x7011;
+
+
+    while ( ( (unsigned int)*PLLSTS & 0x0001) != 0x0001)
+    {
+        delay++;
+        GEL_TextOut("Waiting for PLL Lock, PLLSTS = %x\n",,,,,(unsigned int)*PLLSTS);
+    }
+    GEL_TextOut("\nPLL lock complete, PLLSTS = %x\n",,,,,(unsigned int)*PLLSTS);
+}
+
+/********************************************************************/
+/* Clock Source Selection                                           */
+/********************************************************************/
+menuitem "Clock Source Selection"
+hotmenu IntOsc1_Sel()
+{
+ *0x7012 &= ~0x0100;      /* Turn on INTOSC1 */
+ *0x7012 &= ~0x0001;      /* Switch to INTOSC1 */
+}
+hotmenu IntOsc2_Sel()
+{
+        *0x7012 &= ~0x0400;      /* Turn on INTOSC2 */
+ *0x7012 |= 0x0002;       /* Switch OSCCLKSRC2 to INTOSC2 */
+ *0x7012 |= 0x0001;       /* Switch OSCCLKSRC to INTOSC2 / External Clock */
+}
+hotmenu ExtOsc_Sel()
+{
+ *0x7012 &= ~0x4000;      /* Turn on XTALOSC */
+ *0x7012 &= ~0x2000;      /* Turn on XCLKIN */
+ *0x7012 &= ~0x0002;      /* Switch OSCCLKSRC2 to external clock */
+ *0x7012 |= 0x0001;       /* Switch OSCCLKSRC to INTOSC2 / External Clock */
+}
+
+
+/********************************************************************/
+/* Load the Device Calibration values from TI OTP                   */
+/********************************************************************/
+/***************THIS WILL CHANGE ***********************/
+menuitem "Device Calibration"
+hotmenu Device_Cal()
+{
+	XAR0 = *0x701C;
+	*0x701C |= 0x0008; //enable the ADC clock
+	*0x7014 = *0x3D7E03; //oscillator 1 trim register = oscillator 1 trim from OTP
+	*0x7016 = *0x3D7E05; //oscillator 2 trim register = oscillator 2 trim from OTP
+	*0x7140 = *0x3D7E0D; //ADC reference trim register = reference trim from OTP
+	*0x7141 = *0x3D7E0F; 
+    *0x714B = *0x3D7E11;
+	*0x701C = XAR0;
+	XAR0 = 0;
+
+}
+menuitem "Device Configure"
+hotmenu Device_Configure()
+{
+    *(unsigned short *)0x0986  = (*(unsigned short *)0x0986 & ~(0x1FF0)) |
+	((*(unsigned short *)0x003D7FDF & 0x1FF0));
+    *(unsigned long *)0x886 = *(unsigned long *)0x003D7FD0;
+    *(unsigned long *)0x888 = *(unsigned long *)0x003D7FD2;
+    *(unsigned long *)0x88A = *(unsigned long *)0x003D7FD4;
+}
+
+
+/********************************************************************/
+/* EMU Boot Mode - Set Boot Mode During Debug                       */
+/********************************************************************/
+menuitem "EMU Boot Mode Select"
+hotmenu EMU_BOOT_SARAM()
+{
+    *0xD00 =  0x55AA;  /* EMU_KEY = 0x 55AA */
+    *0xD01 =  0x000A;  /* Boot to SARAM     */
+}
+hotmenu EMU_BOOT_FLASH()
+{
+    *0xD00 =  0x55AA;  /* EMU_KEY = 0x 55AA */
+    *0xD01 =  0x000B;  /* Boot to FLASH     */
+}
+
+/********************************************************************/
+/*** End of file ***/

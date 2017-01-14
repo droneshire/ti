@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<translate name="dummy fields">
+  <stringParser delimiters=", " input="Line">	
+    <integer name="Delta Cycles" translate="$0" />
+    <hexuint name="Program Address" translate="$1" />
+    <hexuint name="Load Address" input="$2" />
+    <string name="Trace Status" translate="$3" />
+    <uinteger name="Cycle" translate="$4" />
+    <string name="Filename" translate="$5" />
+    <string name="Function" translate="$6" />
+    <hexuint name="Start Address" translate="$7" />
+    <hexuint name="End Address" translate="$8" />
+  </stringParser>
+</translate>
+

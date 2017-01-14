@@ -1,0 +1,7 @@
+<?xml version="1.0" ?> 
+<translate name="translate">
+  <passthru name="Time"            input="Time" /> 
+  <passthru name="Data"           input="Data_Message" /> 
+  <passthru name="Event"            input="Event == &quot;Resume&quot; ? &quot;Enter&quot; : Event" /> 
+  <passthru name="Presentation"    input="Presentation" /> 
+</translate>

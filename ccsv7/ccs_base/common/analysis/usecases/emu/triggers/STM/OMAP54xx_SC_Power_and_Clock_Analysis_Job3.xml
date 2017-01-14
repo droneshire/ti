@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<breakpoints xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="breakpoints.xsd">
+
+  <breakpoint type="AET">
+    <property>
+      <name>Hardware Configuration</name>
+      <property>
+        <name>Type</name>
+        <string>Trace</string>
+        <property>
+          <name>STM Trace Type</name>
+          <string>Clock Management Profiling 2</string>
+          <property>
+            <name>Profile Type</name>
+            <string>CM Event Capture</string>
+          </property>
+          <property>
+            <name>Idle Mode</name>
+            <string>No Idle</string>
+          </property>
+          <property>
+            <name>Sampling Window(cycles)</name>
+            <integer>255</integer>
+          </property>
+          <property>
+            <name>Clock Divide Factor</name>
+            <integer>1</integer>
+          </property>
+          <property>
+            <name>Start on Ext. Trigger</name>
+            <boolean>0</boolean>
+          </property>
+          <property>
+            <name>Stop on Ext. Trigger</name>
+            <boolean>0</boolean>
+          </property>
+          <property>
+            <name>Event Class Enable</name>
+            <string></string>
+            <property>
+              <name>Clock Domain State</name>
+              <string></string>
+              <property>
+                <name>Class Enable</name>
+                <boolean>1</boolean>
+              </property>
+              <property>
+                <name>Class Event List</name>
+                <string></string>
+                <property>
+                  <name>L3_1 GI</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>L3_2 GI</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>IPU G</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>L3 DMA GI</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>EMIF PHY G</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>CORE DLL G</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>EMIF L3 GI</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>C2C L4 GI</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>C2C L3 GI</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>MIPIEXT L3 GI</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>L4 CFG GI</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>IVA G</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>FDIF G</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>CAM MAIN G</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>CAM L3 GI</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>FDIF GF</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>CAM BOOST G</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>DSS SYS GF</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>DSS GF</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>DSS_ALWON_SYS</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>DSS L3 GI</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>GPU HYD G</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>GPU CORE G</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>GPU L3 G</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>UTMI ROOT GF</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>SATA REF GF</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>MMC1 GF</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>MMC2 GF</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>USB DPLL HS</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>USB OTG SS REF</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>USB DPLL</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>TLL_CH1 GF</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>L3INIT 48M GF</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>L3INIT L4 GI</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>L3INIT L3 GI</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>PER 96M GF</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>PER 48M GF</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>PER 24M GF</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>INIT_HSI GF</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>L4 PER L4 GI</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>UNIPRO1 DPLL</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>UNIPRO2 DPLL</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>UNIPRO1 TXPHY LS GF</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>UNIPRO2 PHY GF</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>EMAC_50MHZ</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>CORE US OTG SS LFPS TX</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>MIPIEXT PHY REF GF</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>UNIPRO2 PHY REF GF</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>PER 12M GF</name>
+                  <string></string>
+                </property>
+              </property>
+            </property>
+            <property>
+              <name>Frequence Divider</name>
+              <string></string>
+              <property>
+                <name>Class Enable (8 bit)</name>
+                <boolean>1</boolean>
+              </property>
+              <property>
+                <name>Class Enable (4 bit)</name>
+                <boolean>1</boolean>
+              </property>
+              <property>
+                <name>Class Event List</name>
+                <string></string>
+                <property>
+                  <name>FDIF FCLK</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>L3INIT 60M FCLK</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>HSI FCLK</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>MMC1 FCLK</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>MMC2 FCLK</name>
+                  <string></string>
+                </property>
+              </property>
+            </property>
+            <property>
+              <name>Source Selection Update</name>
+              <string></string>
+              <property>
+                <name>Class Enable</name>
+                <boolean>1</boolean>
+              </property>
+              <property>
+                <name>Class Event List</name>
+                <string></string>
+                <property>
+                  <name>DPLL PER BYP M2</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>DPLL USB BYP M2</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>GPU CORE CLK MUX</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>GPU HYD CLK MUX</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>MMC1 FCLI MUX</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>MMC2 FCLI MUX</name>
+                  <string></string>
+                </property>
+              </property>
+            </property>
+            <property>
+              <name>DPLL Setting Update</name>
+              <string></string>
+              <property>
+                <name>DPLL_PER</name>
+                <boolean>1</boolean>
+              </property>
+              <property>
+                <name>DPLL_USB</name>
+                <boolean>1</boolean>
+              </property>
+              <property>
+                <name>DPLL_UNIPRO1</name>
+                <boolean>1</boolean>
+              </property>
+              <property>
+                <name>DPLL_UNIPRO2</name>
+                <boolean>1</boolean>
+              </property>
+            </property>
+          </property>
+        </property>
+      </property>
+    </property>
+    <property>
+      <name>Miscellaneous</name>
+      <property>
+        <name>Group</name>
+        <string>Default Group</string>
+      </property>
+      <property>
+        <name>Name</name>
+        <string>Clock Management Profiling 2</string>
+      </property>
+    </property>
+    <enabled>0</enabled>
+  </breakpoint>
+
+</breakpoints>

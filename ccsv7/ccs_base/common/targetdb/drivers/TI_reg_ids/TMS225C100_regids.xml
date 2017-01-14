@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<register_ids id="AJSM" XML_version="2.0">
+	<register_id id="IDCODE" value="0" address="0" page="0" />
+	<register_id id="UNLOCK" value="1" address="0" page="0" />
+</register_ids>

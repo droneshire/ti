@@ -1,0 +1,1072 @@
+%%{
+    // Change to either "" or "MAP_" depending on if the code is to be in ROM 
+    // or not
+    var MAP_ = "MAP_";
+    
+    var date = new Date();
+
+    //PKG number is a number of current package
+    var getPKGNumber = function( assignment ) {
+        return assignment.devicePin.ball.toString();
+    };
+
+    //Return GPIO format: X.Y
+    var getGPIONumber = function( assignment ) {
+        var temp = assignment.devicePin.designSignalName.toString().split("/")[0]; //PX.Y.GPIO
+        return temp.substring(1, temp.length - 5); // remove ".GPIO"
+    };
+
+    var getGPIOPort = function( assignment ) {
+        var num = getGPIONumber(assignment);
+        return num.split(".")[0];
+    };
+
+    var getGPIOPin = function( assignment ) {
+        var num = getGPIONumber(assignment);
+        return num.split(".")[1];
+    };
+
+    var getGPIOName = function( assignment ) {
+        var name = assignment.peripheralPin.name.split(".")[1];
+        return name;
+    };
+
+    var getPeripheralPrefix = function( perip ) {
+        var res;
+        if ((res = perip.match(/^USCI_A[0-9]/gi))) {
+            return res[0];
+        }
+        else if ((res = perip.match(/^USCI_B[0-9]/gi))) {
+            return res[0];
+        }
+        else if ((res = perip.match(/^EUSCI_A[0-9]/gi))) {
+            return res[0];
+        }
+        else if ((res = perip.match(/^EUSCI_B[0-9]/gi))) {
+            return res[0];
+        }
+    };
+
+    var getPeripheralPrefixNoDigit = function( perip ) {
+        var res = getPeripheralPrefix(perip);
+
+        return res.replace(/[0-9]/g, '');
+    };
+
+%%}
+//*****************************************************************************
+// Board.c
+//
+// configure the device pins for different signals
+//
+// Copyright (C) 2015 Texas Instruments Incorporated - http://www.ti.com/ 
+// 
+// 
+//  Redistribution and use in source and binary forms, with or without 
+//  modification, are permitted provided that the following conditions 
+//  are met:
+//
+//    Redistributions of source code must retain the above copyright 
+//    notice, this list of conditions and the following disclaimer.
+//
+//    Redistributions in binary form must reproduce the above copyright
+//    notice, this list of conditions and the following disclaimer in the 
+//    documentation and/or other materials provided with the   
+//    distribution.
+//
+//    Neither the name of Texas Instruments Incorporated nor the names of
+//    its contributors may be used to endorse or promote products derived
+//    from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
+//  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
+//  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+//  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT 
+//  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+//  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT 
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+//  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+//  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+//  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//*****************************************************************************
+
+// This file was automatically generated on `date.toLocaleDateString()` at `date.toLocaleTimeString()`
+// by TI PinMux version `version`
+//
+//*****************************************************************************
+%%{
+    var intTable = {'EUSCI_A0_BASE': 'INT_EUSCIA0',
+                    'EUSCI_A1_BASE': 'INT_EUSCIA1',
+                    'EUSCI_A2_BASE': 'INT_EUSCIA2',
+                    'EUSCI_A3_BASE': 'INT_EUSCIA3',
+                    'EUSCI_B0_BASE': 'INT_EUSCIB0',
+                    'EUSCI_B1_BASE': 'INT_EUSCIB1',
+                    'EUSCI_B2_BASE': 'INT_EUSCIB2',
+                    'EUSCI_B3_BASE': 'INT_EUSCIB3',
+                    'TIMER_A0_BASE': 'INT_TA0_0',
+                    'TIMER_A1_BASE': 'INT_TA1_0',
+                    'TIMER_A2_BASE': 'INT_TA2_0',
+                    'TIMER_A3_BASE': 'INT_TA3_0',
+                    'TIMER32_0_BASE': 'INT_T32_INT1',
+                    'TIMER32_1_BASE': 'INT_T32_INT2',
+                    'WDT_A_BASE': 'INT_WDT_A',};
+
+    var dmaSPIChannel = {'EUSCI_A0_BASE':['DMA_CH1_EUSCIA0RX', 'DMA_CH0_EUSCIA0TX'],
+                         'EUSCI_A1_BASE':['DMA_CH3_EUSCIA1RX', 'DMA_CH2_EUSCIA1TX'],
+                         'EUSCI_A2_BASE':['DMA_CH5_EUSCIA2RX', 'DMA_CH4_EUSCIA2TX'],
+                         'EUSCI_A3_BASE':['DMA_CH7_EUSCIA3RX', 'DMA_CH6_EUSCIA3TX'],
+                         'EUSCI_B0_BASE':['DMA_CH1_EUSCIB0RX0', 'DMA_CH0_EUSCIB0TX0'],
+                         'EUSCI_B1_BASE':['DMA_CH3_EUSCIB1RX0', 'DMA_CH2_EUSCIB1TX0'],
+                         'EUSCI_B2_BASE':['DMA_CH5_EUSCIB2RX0', 'DMA_CH4_EUSCIB2TX0'],
+                         'EUSCI_B3_BASE':['DMA_CH7_EUSCIB3RX0', 'DMA_CH6_EUSCIB3TX0'],};
+                         
+    var availableTimerATable = ["TIMER_A3", "TIMER_A2", "TIMER_A1", "TIMER_A0"];
+    var selectedADCBufTimerTrigger = null;
+
+    adcHWAttrs = [];
+    adcBufHWAttrs = {};
+    adcBufChannels = [];
+    captureHWAttrs = {};
+    displayHWAttrs = {};
+    sdSpiHWAttrs = {};
+    spiHWAttrs = {};
+    uartHWAttrs = {};
+    i2cHWAttrs = {};
+    i2cSlaveHWAttrs = {};
+    gpioConfig = [];
+    powerHWAttrs = {'initialPerfLevel': '2', 'enablePolicy': 'true', 'enablePerf': 'true', 'enableParking': 'true'};
+    pwmHWAttrs = [];
+    timerHWAttrs = {};
+    timer32HWAttrs = {};
+    watchdogHWAttrs = {};
+
+    for( var i = 0; i < assignments.length; i++ ) { //by pin
+
+        var peripPort = getGPIOPort(assignments[i]);
+        var peripPin = getGPIOPin(assignments[i]);
+        var peripName = assignments[i].peripheral.name;
+
+        if (assignments[i].interfaceName.match(/^GPIO/gi)) {
+            // 1 = Input, 0 = Output
+            var isIO = assignments[i].configurables['i/o_pu/pd']['name'].indexOf("GPIO_CFG_IN");
+            var tempGPIO = 'GPIOMSP432_P' + peripPort +  '_' + peripPin;
+            tempGPIO += (" | " + assignments[i].configurables['i/o_pu/pd']['name']);
+            
+            if(isIO != -1)  //input
+            {
+                if((assignments[i].configurables['output_value']['name'] != 'none') ||
+                    assignments[i].configurables['output_strength']['name'] != 'none')
+                {
+                    throw new Error("Input needs no output at " + assignments[i].peripheralPin.name);
+                }
+                tempGPIO += (" | " + assignments[i].configurables['interrupt']['name']);
+                gpioConfig.push(tempGPIO);
+            }
+            else    //output
+            {
+                if(assignments[i].configurables['interrupt']['name'] != 'GPIO_CFG_IN_INT_NONE')
+                {
+                    throw new Error("Output needs no interrupt at " + assignments[i].peripheralPin.name);
+                }
+                if((assignments[i].configurables['output_value']['name'] === 'none') ||
+                    assignments[i].configurables['output_strength']['name'] === 'none')
+                {
+                    throw new Error("Output needs values at " + assignments[i].peripheralPin.name);
+                }
+                tempGPIO += (" | " + assignments[i].configurables['output_strength']['name']);
+                tempGPIO += (" | " + assignments[i].configurables['output_value']['name']);
+                gpioConfig.push(tempGPIO);
+            }
+        }
+        else if (assignments[i].interfaceName.match(/^ADC/gi)) {
+            if(assignments[i].peripheralPin.interfacePin.name.match(/A[0-9]{1,2}/) == null)
+            {
+                //skip VREF+, VREF-, VeREF+, or VeREF-
+                continue;
+            }
+            if(selectedUseCases[assignments[i].requirementName].name == "106_usecase_101")  //ADC
+            {
+                adcHWAttrs.push(
+                    {
+                        channel: assignments[i].peripheralPin.interfacePin.name, 
+                        gpioIdx: i,
+                        refVoltage: assignments[i].configurables['adcRefVoltage']['name'],
+                        resolution: assignments[i].configurables['resolution']['name'],
+                        reqName: assignments[i].requirementName + assignments[i].peripheralPin.interfacePin.name.match(/[^A]{1,2}$/gi)
+                    }
+                );
+            }
+            else    //ADCBuf
+            {
+                var tempRefV;
+                if(assignments[i].configurables['adcBufRefVoltage']['name'] === "external") {
+                    tempRefV = peripheralConfigurations[peripName]['external'];
+                }
+                else {
+                    tempRefV = assignments[i].configurables['adcBufRefVoltage']['name']
+                }
+                // TODO: will have to make it a 2D array to fully support multiple ADCBufs
+                adcBufChannels.push(
+                    {
+                        channel: assignments[i].peripheralPin.interfacePin.name,
+                        gpioIdx: i,
+                        refVoltage: tempRefV,
+                        refSource: assignments[i].configurables['refSource']['name']
+                    }
+                );
+            }
+        }
+        else if (assignments[i].interfaceName.match(/^SYSTEM/gi)) {
+            powerHWAttrs['initialPerfLevel'] = peripheralConfigurations[peripName]['initialPerfLevel']['name'];
+            powerHWAttrs['enablePolicy'] = peripheralConfigurations[peripName]['enablePolicy']['name'];
+            powerHWAttrs['enablePerf'] = peripheralConfigurations[peripName]['enablePerf']['name'];
+            powerHWAttrs['enableParking'] = peripheralConfigurations[peripName]['enableParking']['name'];
+        }
+        else if (assignments[i].interfaceName.match(/^SPI/gi)) {
+            if(selectedUseCases[assignments[i].requirementName].name == "101_usecase_102")  //sdSpi
+            {
+                if (sdSpiHWAttrs[peripName] == null ) {
+                    sdSpiHWAttrs[peripName] = {BaseAddr:"", ClockSource:"", 
+                                             CLK: {Port:"", Pin:"", Mode:""}, 
+                                             SIMO:{Port:"", Pin:"", Mode:""},
+                                             SOMI:{Port:"", Pin:"", Mode:""},
+                                             STE: {Port:"", Pin:"", Mode:""},
+                                             CS:  {Port:"", Pin:"", Mode:""},
+                                             ReqName: ""};
+                }
+
+                sdSpiHWAttrs[peripName].BaseAddr = getPeripheralPrefix(peripName) + "_BASE";
+                sdSpiHWAttrs[peripName].ClockSource = getPeripheralPrefixNoDigit(peripName) + "_SPI_CLOCKSOURCE_" + peripheralConfigurations[peripName]['clock_source']['name'];
+                sdSpiHWAttrs[peripName][getGPIOName(assignments[i])].Port = getGPIOPort(assignments[i]);
+                sdSpiHWAttrs[peripName][getGPIOName(assignments[i])].Pin = getGPIOPin(assignments[i]);
+                sdSpiHWAttrs[peripName][getGPIOName(assignments[i])].Mode = "UC" + getPeripheralPrefix(peripName).split("_")[1] + getGPIOName(assignments[i]);
+                sdSpiHWAttrs[peripName].ReqName = assignments[i].requirementName;
+            }
+            else    //spi
+            {
+                if (spiHWAttrs[peripName] == null ) {
+                    spiHWAttrs[peripName] = {BaseAddr:"", BitOrder:"", ClockSource:"", 
+                                             CLK: {Port:"", Pin:"", Mode:""}, 
+                                             SIMO:{Port:"", Pin:"", Mode:""},
+                                             SOMI:{Port:"", Pin:"", Mode:""},
+                                             STE: {Port:"", Pin:"", Mode:""},
+                                             PinMode:"", ReqName:""};
+                }
+
+                spiHWAttrs[peripName].BaseAddr = getPeripheralPrefix(peripName) + "_BASE";
+                spiHWAttrs[peripName].BitOrder = getPeripheralPrefixNoDigit(peripName) + "_SPI_" + peripheralConfigurations[peripName]['bit_order']['name'];
+                spiHWAttrs[peripName].ClockSource = getPeripheralPrefixNoDigit(peripName) + "_SPI_CLOCKSOURCE_" + peripheralConfigurations[peripName]['clock_source']['name'];
+                spiHWAttrs[peripName].PinMode = peripheralConfigurations[peripName]['pin_mode']['name'];
+                spiHWAttrs[peripName][getGPIOName(assignments[i])].Port = getGPIOPort(assignments[i]);
+                spiHWAttrs[peripName][getGPIOName(assignments[i])].Pin = getGPIOPin(assignments[i]);
+                spiHWAttrs[peripName][getGPIOName(assignments[i])].Mode = "UC" + getPeripheralPrefix(peripName).split("_")[1] + getGPIOName(assignments[i]);
+                spiHWAttrs[peripName].ReqName = assignments[i].requirementName;
+            }
+        }
+        else if (assignments[i].interfaceName.match(/^UART/gi)) {
+            if (uartHWAttrs[peripName] == null ) {
+                uartHWAttrs[peripName] = {BaseAddr:"", BitOrder:"", ClockSource:"",
+                                          RXD: {Port:"", Pin:"", Mode:""}, 
+                                          TXD: {Port:"", Pin:"", Mode:""},
+                                          ReqName:""};
+            }
+
+            uartHWAttrs[peripName].BaseAddr = getPeripheralPrefix(peripName) + "_BASE";
+            uartHWAttrs[peripName].BitOrder = getPeripheralPrefixNoDigit(peripName) + "_UART_" + peripheralConfigurations[peripName]['bit_order']['name'];
+            uartHWAttrs[peripName].ClockSource = getPeripheralPrefixNoDigit(peripName) + "_UART_CLOCKSOURCE_" + peripheralConfigurations[peripName]['clock_source']['name'];
+            uartHWAttrs[peripName][getGPIOName(assignments[i])].Port = getGPIOPort(assignments[i]);
+            uartHWAttrs[peripName][getGPIOName(assignments[i])].Pin = getGPIOPin(assignments[i]);
+            uartHWAttrs[peripName][getGPIOName(assignments[i])].Mode = "UC" + getPeripheralPrefix(peripName).split("_")[1] + getGPIOName(assignments[i]);
+            uartHWAttrs[peripName].ReqName = assignments[i].requirementName;
+        }
+        else if (assignments[i].interfaceName.match(/^DISPLAY/gi)) {
+            if (displayHWAttrs[peripName] == null) {
+                displayHWAttrs[peripName] = {BaseAddr:"", BitOrder:"", ClockSource:"",
+                                          RXD: {Port:"", Pin:"", Mode:""}, 
+                                          TXD: {Port:"", Pin:"", Mode:""},
+                                          ReqName:"", BaudRate:""}
+            }
+            displayHWAttrs[peripName].ReqName = assignments[i].requirementName;
+            displayHWAttrs[peripName].BaudRate = peripheralConfigurations[peripName]['baud_rate']['name'];
+            displayHWAttrs[peripName].BaseAddr = getPeripheralPrefix(peripName) + "_BASE";
+            displayHWAttrs[peripName][getGPIOName(assignments[i])].Port = getGPIOPort(assignments[i]);
+            displayHWAttrs[peripName][getGPIOName(assignments[i])].Pin = getGPIOPin(assignments[i]);
+            displayHWAttrs[peripName][getGPIOName(assignments[i])].Mode = "UC" + getPeripheralPrefix(peripName).split("_")[1] + getGPIOName(assignments[i]);
+            displayHWAttrs[peripName].BitOrder = getPeripheralPrefixNoDigit(peripName) + "_UART_" + peripheralConfigurations[peripName]['bit_order']['name'];
+            displayHWAttrs[peripName].ClockSource = getPeripheralPrefixNoDigit(peripName) + "_UART_CLOCKSOURCE_" + peripheralConfigurations[peripName]['clock_source']['name'];
+            if (Object.keys(displayHWAttrs).length > 1) {
+                throw new Error("Only one Display module allowed!");
+            }
+        }
+        else if (assignments[i].interfaceName.match(/^I2C/gi)) {
+            if (selectedUseCases[assignments[i].requirementName].name == "103_usecase_101")  //i2cMaster
+            {
+                if (i2cHWAttrs[peripName] == null ) {
+                i2cHWAttrs[peripName] = {BaseAddr:"", ClockSource:"",
+                                          SCL: {Port:"", Pin:"", Mode:""}, 
+                                          SDA: {Port:"", Pin:"", Mode:""},
+                                          ReqName:""};
+                }
+
+                i2cHWAttrs[peripName].BaseAddr = getPeripheralPrefix(peripName) + "_BASE";
+                i2cHWAttrs[peripName].ClockSource = getPeripheralPrefixNoDigit(peripName) + "_I2C_CLOCKSOURCE_" + peripheralConfigurations[peripName]['clock_source']['name'];
+                i2cHWAttrs[peripName][getGPIOName(assignments[i])].Port = getGPIOPort(assignments[i]);
+                i2cHWAttrs[peripName][getGPIOName(assignments[i])].Pin = getGPIOPin(assignments[i]);
+                i2cHWAttrs[peripName][getGPIOName(assignments[i])].Mode = "UC" + getPeripheralPrefix(peripName).split("_")[1] + getGPIOName(assignments[i]);
+                i2cHWAttrs[peripName].ReqName = assignments[i].requirementName
+            }
+            else {  //i2cSlave
+                if (i2cSlaveHWAttrs[peripName] == null ) {
+                    i2cSlaveHWAttrs[peripName] = {BaseAddr:"", SlaveAddress:"",
+                                              SCL: {Port:"", Pin:"", Mode:""}, 
+                                              SDA: {Port:"", Pin:"", Mode:""},
+                                              ReqName:""};
+                }
+
+                i2cSlaveHWAttrs[peripName].BaseAddr = getPeripheralPrefix(peripName) + "_BASE";
+                i2cSlaveHWAttrs[peripName].SlaveAddress = peripheralConfigurations[peripName]['slave_address'];
+                i2cSlaveHWAttrs[peripName][getGPIOName(assignments[i])].Port = getGPIOPort(assignments[i]);
+                i2cSlaveHWAttrs[peripName][getGPIOName(assignments[i])].Pin = getGPIOPin(assignments[i]);
+                i2cSlaveHWAttrs[peripName][getGPIOName(assignments[i])].Mode = "UC" + getPeripheralPrefix(peripName).split("_")[1] + getGPIOName(assignments[i]);
+                i2cSlaveHWAttrs[peripName].ReqName = assignments[i].requirementName;
+            }
+        }
+        else if (assignments[i].interfaceName.match(/^TIMER_A/gi)) {
+            if (selectedUseCases[assignments[i].requirementName].name == "104_usecase_102")    //PWM
+            {
+                pwmHWAttrs.push(
+                    {
+                        ClockSource: peripName.replace(/[0-9]/g,'').toUpperCase() + '_CLOCKSOURCE_' + peripheralConfigurations[peripName]['clock_source']['name'],
+                        CCR: "T" + peripName.split("_")[1] + "CCR" + assignments[i].peripheralPin.name.match(/[0-4]$/g) + peripName.split("_")[1].replace(/[0-9]/g,''),
+                        GPIOPort: getGPIOPort(assignments[i]),
+                        GPIOPin: getGPIOPin(assignments[i]),
+                        ReqName: assignments[i].requirementName + '_' + assignments[i].peripheralPin.name.split('.')[1]
+                    }
+                );
+            }
+            else if (selectedUseCases[assignments[i].requirementName].name == "104_usecase_103")    //Capture
+            {
+                if (captureHWAttrs[peripName] != null) {
+                    throw new Error("Capture only allows one active CCI pin per module!");
+                }
+                if (captureHWAttrs[peripName] == null ) {
+                    captureHWAttrs[peripName] = {BaseAddr:"", ClockSource:"", ClockDivider:"", CapturePort:"", ReqName:""};
+                }
+                
+                captureHWAttrs[peripName].BaseAddr = peripName.toUpperCase() + "_BASE";
+                captureHWAttrs[peripName].ClockSource = peripName.replace(/[0-9]/g,'').toUpperCase() + '_CLOCKSOURCE_' + peripheralConfigurations[peripName]['clock_source']['name'];
+                captureHWAttrs[peripName].ClockDivider = peripheralConfigurations[peripName]['clock_divider']['name'];
+                captureHWAttrs[peripName].CapturePort = 'CaptureMSP432_P' + getGPIOPort(assignments[i]) + "_" + getGPIOPin(assignments[i]) + "_T" + peripName.split("_")[1];
+                captureHWAttrs[peripName].ReqName = assignments[i].requirementName;
+            }
+        }
+    }
+    
+    for ( var i = 0; i < peripheralConfigurables.length; i++)   //by driver
+    {
+        
+        peripName = peripheralConfigurables[i].peripheral;
+        
+        if (peripheralConfigurables[i].interfaceName.match(/^TIMER_A/gi)) {
+            if (timerHWAttrs[peripName] == null ) {
+                timerHWAttrs[peripName] = {BaseAddr:"", ClockSource:"", ReqName:""};
+            }
+            
+            timerHWAttrs[peripName].BaseAddr = peripName.toUpperCase() + "_BASE";
+            timerHWAttrs[peripName].ClockSource = peripName.replace(/[0-9]/g,'').toUpperCase() + '_CLOCKSOURCE_' + peripheralConfigurations[peripName]['clock_source']['name'];
+            timerHWAttrs[peripName].ReqName = peripheralConfigurables[i].requirementName;
+            if (selectedUseCases[peripheralConfigurables[i].requirementName].name != "104_usecase_101") //not Timer
+            {
+                timerHWAttrs[peripName].ReqName += "_TIMER";
+            }
+            availableTimerATable = _.without(availableTimerATable, peripName.toUpperCase());
+        }
+        else if (peripheralConfigurables[i].interfaceName.match(/^TIMER32/gi)) {
+            if (timer32HWAttrs[peripName] == null) {
+                timer32HWAttrs[peripName] = {BaseAddr:"", ClockSource:"", ReqName:""};
+            }
+            
+            timer32HWAttrs[peripName].BaseAddr = peripName.toUpperCase() + "_BASE";
+            timer32HWAttrs[peripName].ClockSource = "TIMER_A_CLOCKSOURCE_" + peripheralConfigurables[i].configurables['clock_source']['name'];
+            timer32HWAttrs[peripName].ReqName = peripheralConfigurables[i].requirementName;
+        }
+        else if (peripheralConfigurables[i].interfaceName.match(/^WATCHDOG/gi)) {
+            if (watchdogHWAttrs[peripName] == null) {
+                watchdogHWAttrs[peripName] = {BaseAddr:"", ClockSource:"", ClockDivider:"", ReqName:""};
+            }
+            watchdogHWAttrs[peripName].BaseAddr = 'WDT_A_BASE';
+            watchdogHWAttrs[peripName].ClockSource = 'WDT_A_CLOCKSOURCE_' + peripheralConfigurables[i].configurables['wdtClockSource']['name'];
+            watchdogHWAttrs[peripName].ClockDivider = 'WDT_A_CLOCKDIVIDER_' + peripheralConfigurables[i].configurables['wdtClockDivider']['name'];
+            watchdogHWAttrs[peripName].ReqName = peripheralConfigurables[i].requirementName;
+        }
+        else if (peripheralConfigurables[i].interfaceName.match(/^ADC/gi)) {
+            if(selectedUseCases[peripheralConfigurables[i].requirementName].name == "106_usecase_102")  //ADCBuf
+            {
+                if (adcBufHWAttrs[peripName] == null) {
+                    adcBufHWAttrs[peripName] = {ReqName:""};
+                }
+                adcBufHWAttrs[peripName].ReqName = peripheralConfigurables[i].requirementName;
+            }
+        }
+    }
+    for ( var i = 0; i < peripheralConfigurables.length; i++)
+    {
+        if (peripheralConfigurables[i].interfaceName.match(/^ADC/gi)) {
+            if(selectedUseCases[peripheralConfigurables[i].requirementName].name == "106_usecase_102")  //ADCBuf
+            {
+                if(availableTimerATable.length == 0)
+                {
+                    throw new Error("No available TIMER_A left for ADCBuf");
+                }
+                if(!(_.contains(availableTimerATable, peripheralConfigurables[i].configurables['timer_trigger']['name'].split("_")[1].toUpperCase().replace("TIMER", "TIMER_"))))
+                {
+                    throw new Error("ADCBuf's selected timer trigger is already in use!");
+                }
+                selectedADCBufTimerTrigger = peripheralConfigurables[i].configurables['timer_trigger']['name'];
+                if (timerHWAttrs[peripName] == null ) {
+                    timerHWAttrs[peripName] = {BaseAddr:"", ClockSource:"", ReqName:""};
+                }
+                
+                timerHWAttrs[peripName].BaseAddr =  peripheralConfigurables[i].configurables['timer_trigger']['name'].split("_")[1].toUpperCase().replace("TIMER", "TIMER_") + "_BASE";
+                timerHWAttrs[peripName].ClockSource =  "TIMER_A_CLOCKSOURCE_SMCLK";
+                timerHWAttrs[peripName].ReqName = peripheralConfigurables[i].requirementName + "_TIMER";
+                availableTimerATable = _.without(availableTimerATable, peripheralConfigurables[i].configurables['timer_trigger']['name'].split("_")[1].toUpperCase().replace("TIMER", "TIMER_"));
+            }
+        }
+    }
+%%}
+
+#include <stdbool.h>
+
+#include <ti/drivers/Power.h>
+#include <ti/drivers/power/PowerMSP432.h>
+
+#include <ti/devices/msp432p4xx/inc/msp.h>
+#include <ti/devices/msp432p4xx/driverlib/rom.h>
+#include <ti/devices/msp432p4xx/driverlib/rom_map.h>
+#include <ti/devices/msp432p4xx/driverlib/adc14.h>
+#include <ti/devices/msp432p4xx/driverlib/dma.h>
+#include <ti/devices/msp432p4xx/driverlib/gpio.h>
+#include <ti/devices/msp432p4xx/driverlib/i2c.h>
+#include <ti/devices/msp432p4xx/driverlib/interrupt.h>
+#include <ti/devices/msp432p4xx/driverlib/pmap.h>
+#include <ti/devices/msp432p4xx/driverlib/ref_a.h>
+#include <ti/devices/msp432p4xx/driverlib/spi.h>
+#include <ti/devices/msp432p4xx/driverlib/timer_a.h>
+#include <ti/devices/msp432p4xx/driverlib/timer32.h>
+#include <ti/devices/msp432p4xx/driverlib/uart.h>
+#include <ti/devices/msp432p4xx/driverlib/wdt_a.h>
+
+#include "Board.h"
+
+%  if(adcHWAttrs.length > 0) {
+/*
+ *  =============================== ADC ===============================
+ */
+#include <ti/drivers/ADC.h>
+#include <ti/drivers/adc/ADCMSP432.h>
+
+/* ADC objects */
+ADCMSP432_Object adcMSP432Objects[Board_ADCCOUNT];
+
+/* ADC configuration structure */
+const ADCMSP432_HWAttrsV1 adcMSP432HWAttrs[Board_ADCCOUNT] = {
+%  for(var i=0; i<adcHWAttrs.length; i++) {
+    {
+        .adcPin = ADCMSP432_P`getGPIOPort(assignments[adcHWAttrs[i].gpioIdx])`_`getGPIOPin(assignments[adcHWAttrs[i].gpioIdx])`_`adcHWAttrs[i].channel`,
+        .refVoltage = `adcHWAttrs[i].refVoltage`,
+        .resolution = `adcHWAttrs[i].resolution`,
+    },
+%   }
+};
+
+const ADC_Config ADC_config[Board_ADCCOUNT] = {
+%  for(var i=0; i<adcHWAttrs.length; i++) {
+    {
+        .fxnTablePtr = &ADCMSP432_fxnTable,
+        .object = &adcMSP432Objects[`adcHWAttrs[i].reqName`],
+        .hwAttrs = &adcMSP432HWAttrs[`adcHWAttrs[i].reqName`]
+    },
+%   }
+};
+
+const uint_least8_t ADC_count = Board_ADCCOUNT;
+%  }
+%  if((adcBufHWAttrs.length > 0) || (selectedADCBufTimerTrigger != null)) {
+/*
+ *  =============================== ADCBuf ===============================
+ */
+#include <ti/drivers/ADCBuf.h>
+#include <ti/drivers/adcbuf/ADCBufMSP432.h>
+
+/* ADCBuf objects */
+ADCBufMSP432_Object adcbufMSP432Objects[Board_ADCBUFCOUNT];
+
+/* ADCBuf configuration structure */
+%  for(var j=0; j<1; j++) {
+ADCBufMSP432_Channels adcBuf`j`MSP432Channels[Board_ADCBUF`j`CHANNELCOUNT] = {
+%  for(var i=0; i<adcBufChannels.length; i++) {
+    {
+        .adcPin = ADCBufMSP432_P`getGPIOPort(assignments[adcBufChannels[i].gpioIdx])`_`getGPIOPin(assignments[adcBufChannels[i].gpioIdx])`_`adcBufChannels[i].channel`,
+        .refSource = ADCBufMSP432_`adcBufChannels[i].refSource`,
+        .refVoltage = `adcBufChannels[i].refVoltage`,
+    },
+%   }
+};
+%   }
+
+/* ADC configuration structure */
+%  for(var j=0; j<1; j++) {
+const ADCBufMSP432_HWAttrs adcbufMSP432HWAttrs[Board_ADCBUFCOUNT] = {
+    {
+        .intPriority =  ~0,
+        .channelSetting = adcBuf`j`MSP432Channels,
+        .adcTimerTriggerSource = `selectedADCBufTimerTrigger`
+    }
+};
+%   }
+
+const ADCBuf_Config ADCBuf_config[Board_ADCBUFCOUNT] = {
+%  for(var key in adcBufHWAttrs) {
+    {
+        .fxnTablePtr = &ADCBufMSP432_fxnTable,
+        .object = &adcbufMSP432Objects[`adcBufHWAttrs[key].ReqName`],
+        .hwAttrs = &adcbufMSP432HWAttrs[`adcBufHWAttrs[key].ReqName`]
+    },
+%   }
+};
+
+const uint_least8_t ADCBuf_count = Board_ADCBUFCOUNT;
+%  }
+%  if(Object.keys(captureHWAttrs).length > 0) {
+/*
+ *  ============================= Capture =============================
+ */
+#include <ti/drivers/Capture.h>
+#include <ti/drivers/capture/CaptureMSP432.h>
+
+CaptureMSP432_Object captureMSP432Objects[Board_CAPTURECOUNT];
+
+const CaptureMSP432_HWAttrs captureMSP432HWAttrs[Board_CAPTURECOUNT] = {
+%  for( var key in captureHWAttrs) {
+    {        
+        .timerBaseAddress = `captureHWAttrs[key].BaseAddr`,
+        .clockSource = `captureHWAttrs[key].ClockSource`,
+        .clockDivider = `captureHWAttrs[key].ClockDivider`,
+        .capturePort = `captureHWAttrs[key].CapturePort`,
+        .intPriority = ~0
+    },
+%   }
+};
+
+const Capture_Config Capture_config[Board_CAPTURECOUNT] = {
+%  for(var key in captureHWAttrs) {
+    {
+        .fxnTablePtr = &CaptureMSP432_captureFxnTable,
+        .object = &captureMSP432Objects[`captureHWAttrs[key].ReqName`],
+        .hwAttrs = &captureMSP432HWAttrs[`captureHWAttrs[key].ReqName`]
+    },
+%   }
+};
+
+const uint_least8_t Capture_count = Board_CAPTURECOUNT;
+%  }
+
+/*
+ *  =============================== DMA ===============================
+ */
+#include <ti/drivers/dma/UDMAMSP432.h>
+
+#if defined(__TI_COMPILER_VERSION__)
+#pragma DATA_ALIGN(dmaControlTable, 256)
+#elif defined(__IAR_SYSTEMS_ICC__)
+#pragma data_alignment=256
+#elif defined(__GNUC__)
+__attribute__ ((aligned (256)))
+#endif
+static DMA_ControlTable dmaControlTable[8];
+
+/*
+ *  ======== dmaErrorHwi ========
+ *  This is the handler for the uDMA error interrupt.
+ */
+static void dmaErrorHwi(uintptr_t arg)
+{
+    int status = MAP_DMA_getErrorStatus();
+    MAP_DMA_clearErrorStatus();
+
+    /* Suppress unused variable warning */
+    (void)status;
+
+    while (1);
+}
+
+UDMAMSP432_Object udmaMSP432Object;
+
+const UDMAMSP432_HWAttrs udmaMSP432HWAttrs = {
+    .controlBaseAddr = (void *)dmaControlTable,
+    .dmaErrorFxn = (UDMAMSP432_ErrorFxn)dmaErrorHwi,
+    .intNum = INT_DMA_ERR,
+    .intPriority = (~0)
+};
+
+const UDMAMSP432_Config UDMAMSP432_config = {
+    .object = &udmaMSP432Object,
+    .hwAttrs = &udmaMSP432HWAttrs
+};
+
+%  if(Object.keys(displayHWAttrs).length > 0) {
+/*
+ *  ============================= Display =============================
+ */
+#include <ti/display/Display.h>
+#include <ti/display/DisplayUart.h>
+#define MAXPRINTLEN 1024
+
+DisplayUart_Object displayUartObject;
+
+static char displayBuf[MAXPRINTLEN];
+
+const DisplayUart_HWAttrs displayUartHWAttrs = {
+%  for(var key in displayHWAttrs) {
+    .uartIdx = `displayHWAttrs[key].ReqName`,
+    .baudRate = `displayHWAttrs[key].BaudRate`,
+    .mutexTimeout = (unsigned int)(-1),
+    .strBuf = displayBuf,
+    .strBufLen = MAXPRINTLEN
+%  }
+};
+
+const Display_Config Display_config[] = {
+    {
+#  if defined(BOARD_DISPLAY_UART_USE_ANSI)
+        .fxnTablePtr = &DisplayUartAnsi_fxnTable,
+#  else /* Default to minimal UART with no cursor placement */
+        .fxnTablePtr = &DisplayUartMin_fxnTable,
+#  endif
+        .object = &displayUartObject,
+        .hwAttrs = &displayUartHWAttrs
+    },
+};
+
+const uint_least8_t Display_count = sizeof(Display_config) / sizeof(Display_Config);
+%  }
+
+/*
+ *  ======== MSP_EXP432P401R_initGeneral ========
+ */
+void MSP_EXP432P401R_initGeneral(void)
+{
+    Power_init();
+}
+
+%  if(gpioConfig.length > 0) {
+/*
+ *  =============================== GPIO ===============================
+ */
+#include <ti/drivers/GPIO.h>
+#include <ti/drivers/gpio/GPIOMSP432.h>
+
+/*
+ * Array of Pin configurations
+ * NOTE: The order of the pin configurations must coincide with what was
+ *       defined in MSP_EXP432P401R.h
+ * NOTE: Pins not used for interrupts should be placed at the end of the
+ *       array.  Callback entries can be omitted from callbacks array to
+ *       reduce memory usage.
+ */
+GPIO_PinConfig gpioPinConfigs[] = {
+%  for(var i=0; i<gpioConfig.length; i++) {
+    `gpioConfig[i]`,
+%   }
+};
+
+/*
+ * Array of callback function pointers
+ * NOTE: The order of the pin configurations must coincide with what was
+ *       defined in MSP_EXP432P401R.h
+ * NOTE: Pins not used for interrupts can be omitted from callbacks array to
+ *       reduce memory usage (if placed at end of gpioPinConfigs array).
+ */
+GPIO_CallbackFxn gpioCallbackFunctions[] = {
+    NULL,
+    NULL
+};
+
+const GPIOMSP432_Config GPIOMSP432_config = {
+    .pinConfigs = (GPIO_PinConfig *)gpioPinConfigs,
+    .callbacks = (GPIO_CallbackFxn *)gpioCallbackFunctions,
+    .numberOfPinConfigs = sizeof(gpioPinConfigs)/sizeof(GPIO_PinConfig),
+    .numberOfCallbacks = sizeof(gpioCallbackFunctions)/sizeof(GPIO_CallbackFxn),
+    .intPriority = (~0)
+};
+%  }
+%  if(Object.keys(i2cHWAttrs).length > 0) {
+/*
+ *  =============================== I2C ===============================
+ */
+#include <ti/drivers/I2C.h>
+#include <ti/drivers/i2c/I2CMSP432.h>
+
+I2CMSP432_Object i2cMSP432Objects[Board_I2CCOUNT];
+
+const I2CMSP432_HWAttrsV1 i2cMSP432HWAttrs[Board_I2CCOUNT] = {
+%  var i = 0;
+%  for( var key in i2cHWAttrs) {
+    {
+        .baseAddr = `i2cHWAttrs[key].BaseAddr`,
+        .intNum = `intTable[i2cHWAttrs[key].BaseAddr]`,
+        .intPriority = (~0),
+        .clockSource = `i2cHWAttrs[key].ClockSource`,
+        .dataPin = I2CMSP432_P`i2cHWAttrs[key]["SDA"]["Port"]`_`i2cHWAttrs[key]["SDA"]["Pin"]`_`i2cHWAttrs[key]["SDA"]["Mode"]`,
+        .clkPin = I2CMSP432_P`i2cHWAttrs[key]["SCL"]["Port"]`_`i2cHWAttrs[key]["SCL"]["Pin"]`_`i2cHWAttrs[key]["SCL"]["Mode"]`,
+    },
+%   }
+};
+
+const I2C_Config I2C_config[Board_I2CCOUNT] = {
+%  for(var key in i2cHWAttrs) {
+    {
+        .fxnTablePtr = &I2CMSP432_fxnTable,
+        .object = &i2cMSP432Objects[`i2cHWAttrs[key].ReqName`],
+        .hwAttrs = &i2cMSP432HWAttrs[`i2cHWAttrs[key].ReqName`]
+    },
+%   }
+};
+
+const uint_least8_t I2C_count = Board_I2CCOUNT;
+%  }
+%  if(Object.keys(i2cSlaveHWAttrs).length > 0) {
+/*
+ *  =============================== I2CSlave ===============================
+ */
+#include <ti/drivers/I2CSlave.h>
+#include <ti/drivers/i2cslave/I2CSlaveMSP432.h>
+
+I2CSlaveMSP432_Object i2cSlaveMSP432Objects[Board_I2CSLAVECOUNT];
+
+const I2CSlaveMSP432_HWAttrs i2cSlaveMSP432HWAttrs[Board_I2CSLAVECOUNT] = {
+%  var i = 0;
+%  for( var key in i2cSlaveHWAttrs) {
+    {
+        .baseAddr = `i2cSlaveHWAttrs[key].BaseAddr`,
+        .intNum = `intTable[i2cSlaveHWAttrs[key].BaseAddr]`,
+        .intPriority = ~0,
+        .slaveAddress = `i2cSlaveHWAttrs[key].SlaveAddress`,
+        .dataPin = I2CSLAVEMSP432_P`i2cSlaveHWAttrs[key]["SDA"]["Port"]`_`i2cSlaveHWAttrs[key]["SDA"]["Pin"]`_`i2cSlaveHWAttrs[key]["SDA"]["Mode"]`,
+        .clkPin = I2CSLAVEMSP432_P`i2cSlaveHWAttrs[key]["SCL"]["Port"]`_`i2cSlaveHWAttrs[key]["SCL"]["Pin"]`_`i2cSlaveHWAttrs[key]["SCL"]["Mode"]`,
+    },
+%   }
+};
+
+const I2CSlave_Config I2CSlave_config[Board_I2CSLAVECOUNT] = {
+%  for(var key in i2cSlaveHWAttrs) {
+    {
+        .fxnTablePtr = &I2CSlaveMSP432_fxnTable,
+        .object = &i2cSlaveMSP432Objects[`i2cSlaveHWAttrs[key].ReqName`],
+        .hwAttrs = &i2cSlaveMSP432HWAttrs[`i2cSlaveHWAttrs[key].ReqName`]
+    },
+%   }
+};
+
+const uint_least8_t I2CSlave_count = Board_I2CSLAVECOUNT;
+%  }
+/*
+ *  =============================== Power ===============================
+ */
+const PowerMSP432_ConfigV1 PowerMSP432_config = {
+    .policyInitFxn = &PowerMSP432_initPolicy,
+    .policyFxn = &PowerMSP432_sleepPolicy,
+    .initialPerfLevel = `powerHWAttrs['initialPerfLevel']`,
+    .enablePolicy = `powerHWAttrs['enablePolicy']`,
+    .enablePerf = `powerHWAttrs['enablePerf']`,
+    .enableParking = `powerHWAttrs['enableParking']`
+};
+%  if(pwmHWAttrs.length > 0) {
+/*
+ *  =============================== PWM ===============================
+ */
+#include <ti/drivers/PWM.h>
+#include <ti/drivers/pwm/PWMTimerMSP432.h>
+
+PWMTimerMSP432_Object pwmTimerMSP432Objects[Board_PWMCOUNT];
+
+const PWMTimerMSP432_HWAttrsV2 pwmTimerMSP432HWAttrs[Board_PWMCOUNT] = {
+%  for(var i=0; i<pwmHWAttrs.length; i++) {
+    {        
+        .clockSource = `pwmHWAttrs[i].ClockSource`,
+        .pwmPin = PWMTimerMSP432_P`pwmHWAttrs[i].GPIOPort`_`pwmHWAttrs[i].GPIOPin`_`pwmHWAttrs[i].CCR`,
+    },
+%   }
+};
+
+const PWM_Config PWM_config[Board_PWMCOUNT] = {
+%  for(var i=0; i<pwmHWAttrs.length; i++) {
+    {
+        .fxnTablePtr = &PWMTimerMSP432_fxnTable,
+        .object = &pwmTimerMSP432Objects[`pwmHWAttrs[i].ReqName`],
+        .hwAttrs = &pwmTimerMSP432HWAttrs[`pwmHWAttrs[i].ReqName`]
+    },
+%   }
+};
+
+const uint_least8_t PWM_count = Board_PWMCOUNT;
+%  }
+%  if(Object.keys(sdSpiHWAttrs).length > 0) {
+
+/*
+ *  =============================== SDSPI ===============================
+ */
+#include <ti/drivers/SDSPI.h>
+#include <ti/drivers/sdspi/SDSPIMSP432.h>
+
+/* SDSPI objects */
+SDSPIMSP432_Object sdspiMSP432Objects[Board_SDSPICOUNT];
+
+/* SDSPI configuration structure */
+const SDSPIMSP432_HWAttrsV1 sdspiMSP432HWAttrs[Board_SDSPICOUNT] = {
+%  var i = 0;
+%  for( var key in sdSpiHWAttrs) {
+    {
+        .baseAddr = `sdSpiHWAttrs[key].BaseAddr`,
+        .clockSource = `sdSpiHWAttrs[key].ClockSource`,
+        
+        /* CLK, MOSI & MISO ports & pins */
+        .sckPin = SDSPIMSP432_P`sdSpiHWAttrs[key].CLK.Port`_`sdSpiHWAttrs[key].CLK.Pin`_`sdSpiHWAttrs[key].CLK.Mode`,
+        .somiPin = SDSPIMSP432_P`sdSpiHWAttrs[key].SOMI.Port`_`sdSpiHWAttrs[key].SOMI.Pin`_`sdSpiHWAttrs[key].SOMI.Mode`,
+        .simoPin = SDSPIMSP432_P`sdSpiHWAttrs[key].SIMO.Port`_`sdSpiHWAttrs[key].SIMO.Pin`_`sdSpiHWAttrs[key].SIMO.Mode`,
+        
+        /* Chip select port & pin */
+        .csPin = SDSPIMSP432_P`sdSpiHWAttrs[key].CS.Port`_`sdSpiHWAttrs[key].CS.Pin`_CS,
+    },
+%   }
+};
+
+const SDSPI_Config SDSPI_config[Board_SDSPICOUNT] = {
+%  for(var key in sdSpiHWAttrs) {
+    {
+        .fxnTablePtr = &SDSPIMSP432_fxnTable,
+        .object = &sdspiMSP432Objects[`sdSpiHWAttrs[key].ReqName`],
+        .hwAttrs = &sdspiMSP432HWAttrs[`sdSpiHWAttrs[key].ReqName`]
+    },
+%   }
+};
+
+const uint_least8_t SDSPI_count = Board_SDSPICOUNT;
+%  }
+%  if(Object.keys(spiHWAttrs).length > 0) {
+
+/*
+ *  =============================== SPI ===============================
+ */
+#include <ti/drivers/SPI.h>
+#include <ti/drivers/spi/SPIMSP432DMA.h>
+
+/* SPI objects */
+SPIMSP432DMA_Object spiMSP432DMAObjects[Board_SPICOUNT];
+
+/* SPI configuration structure */
+const SPIMSP432DMA_HWAttrsV1 spiMSP432DMAHWAttrs[Board_SPICOUNT] = {
+%  var i = 0;
+%  for( var key in spiHWAttrs) {
+    {
+        .baseAddr = `spiHWAttrs[key].BaseAddr`,
+        .bitOrder = `spiHWAttrs[key].BitOrder`,
+        .clockSource = `spiHWAttrs[key].ClockSource`,
+        .defaultTxBufValue = 0,
+        .dmaIntNum = INT_DMA_INT`++i`,
+        .intPriority = (~0),
+        .rxDMAChannelIndex = `dmaSPIChannel[spiHWAttrs[key].BaseAddr][0]`,
+        .txDMAChannelIndex = `dmaSPIChannel[spiHWAttrs[key].BaseAddr][1]`,
+        .clkPin = SPIMSP432DMA_P`spiHWAttrs[key].CLK.Port`_`spiHWAttrs[key].CLK.Pin`_`spiHWAttrs[key].CLK.Mode`,
+        .simoPin = SPIMSP432DMA_P`spiHWAttrs[key].SIMO.Port`_`spiHWAttrs[key].SIMO.Pin`_`spiHWAttrs[key].SIMO.Mode`,
+        .somiPin = SPIMSP432DMA_P`spiHWAttrs[key].SOMI.Port`_`spiHWAttrs[key].SOMI.Pin`_`spiHWAttrs[key].SOMI.Mode`,
+        .stePin = SPIMSP432DMA_P`spiHWAttrs[key].STE.Port`_`spiHWAttrs[key].STE.Pin`_`spiHWAttrs[key].STE.Mode`,
+        .pinMode = `spiHWAttrs[key].PinMode`
+    },
+%   }
+};
+
+const SPI_Config SPI_config[Board_SPICOUNT] = {
+%  for(var key in spiHWAttrs) {
+    {
+        .fxnTablePtr = &SPIMSP432DMA_fxnTable,
+        .object = &spiMSP432DMAObjects[`spiHWAttrs[key].ReqName`],
+        .hwAttrs = &spiMSP432DMAHWAttrs[`spiHWAttrs[key].ReqName`]
+    },
+%   }
+};
+
+const uint_least8_t SPI_count = Board_SPICOUNT;
+%  }
+%  if((Object.keys(timerHWAttrs).length > 0) || (Object.keys(timer32HWAttrs).length > 0)) {
+/*
+ *  =============================== Timer ===============================
+ */
+#include <ti/drivers/Timer.h>
+#include <ti/drivers/timer/TimerMSP432.h>
+
+TimerMSP432_Object timerMSP432Objects[Board_TIMERCOUNT];
+
+const TimerMSP432_HWAttrs timerMSP432HWAttrs[Board_TIMERCOUNT] = {
+%  for( var key in timer32HWAttrs) {
+    {
+        .timerBaseAddress = `timer32HWAttrs[key].BaseAddr`,
+        .clockSource = `timer32HWAttrs[key].ClockSource`,
+        .intNum = `intTable[timer32HWAttrs[key].BaseAddr]`,
+        .intPriority = ~0
+    },
+%   }
+%  for( var key in timerHWAttrs) {
+    {        
+        .timerBaseAddress = `timerHWAttrs[key].BaseAddr`,
+        .clockSource = `timerHWAttrs[key].ClockSource`,
+        .intNum = `intTable[timerHWAttrs[key].BaseAddr]`,
+        .intPriority = ~0
+    },
+%   }
+};
+
+const Timer_Config Timer_config[Board_TIMERCOUNT] = {
+%  for(var key in timer32HWAttrs) {
+    {
+        .fxnTablePtr = &TimerMSP432_Timer32_fxnTable,
+        .object = &timerMSP432Objects[`timer32HWAttrs[key].ReqName`],
+        .hwAttrs = &timerMSP432HWAttrs[`timer32HWAttrs[key].ReqName`]
+    },
+%   }
+%   for(var key in timerHWAttrs) {
+    {
+        .fxnTablePtr = &TimerMSP432_Timer_A_fxnTable,
+        .object = &timerMSP432Objects[`timerHWAttrs[key].ReqName`],
+        .hwAttrs = &timerMSP432HWAttrs[`timerHWAttrs[key].ReqName`]
+    },
+%   }
+};
+
+const uint_least8_t Timer_count = Board_TIMERCOUNT;
+%  }
+%  if((Object.keys(uartHWAttrs).length > 0) || (Object.keys(displayHWAttrs).length > 0)) {
+
+/*
+ *  =============================== UART ===============================
+ */
+#include <ti/drivers/UART.h>
+#include <ti/drivers/uart/UARTMSP432.h>
+
+UARTMSP432_Object uartMSP432Objects[Board_UARTCOUNT];
+unsigned char uartMSP432RingBuffer[Board_UARTCOUNT][32];
+
+/*
+ * The baudrate dividers were determined by using the MSP432 baudrate
+ * calculator
+ * http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSP430BaudRateConverter/index.html
+ */
+const UARTMSP432_BaudrateConfig uartMSP432Baudrates[] = {
+    /* {baudrate, input clock, prescalar, UCBRFx, UCBRSx, oversampling} */
+    {
+        .outputBaudrate = 115200,
+        .inputClockFreq = 12000000,
+        .prescalar = 6,
+        .hwRegUCBRFx = 8,
+        .hwRegUCBRSx = 32,
+        .oversampling = 1
+    },
+    {115200, 6000000,   3,  4,   2, 1},
+    {115200, 3000000,   1, 10,   0, 1},
+    {9600,   12000000, 78,  2,   0, 1},
+    {9600,   6000000,  39,  1,   0, 1},
+    {9600,   3000000,  19,  8,  85, 1},
+    {9600,   32768,     3,  0, 146, 0}
+};
+
+const UARTMSP432_HWAttrsV1 uartMSP432HWAttrs[Board_UARTCOUNT] = {
+%  for( var key in displayHWAttrs) {
+    {
+        .baseAddr = `displayHWAttrs[key].BaseAddr`,
+        .intNum = `intTable[displayHWAttrs[key].BaseAddr]`,
+        .intPriority = (~0),
+        .clockSource = `displayHWAttrs[key].ClockSource`,
+        .bitOrder = `displayHWAttrs[key].BitOrder`,
+        .numBaudrateEntries = sizeof(uartMSP432Baudrates) /
+            sizeof(UARTMSP432_BaudrateConfig),
+        .baudrateLUT = uartMSP432Baudrates,
+        .ringBufPtr  = uartMSP432RingBuffer[`displayHWAttrs[key].ReqName`],
+        .ringBufSize = sizeof(uartMSP432RingBuffer[`displayHWAttrs[key].ReqName`]),
+        .rxPin = UARTMSP432_P`displayHWAttrs[key]["RXD"]["Port"]`_`displayHWAttrs[key]["RXD"]["Pin"]`_`displayHWAttrs[key]["RXD"]["Mode"]`,
+        .txPin = UARTMSP432_P`displayHWAttrs[key]["TXD"]["Port"]`_`displayHWAttrs[key]["TXD"]["Pin"]`_`displayHWAttrs[key]["TXD"]["Mode"]`,
+    },
+%   }
+%  for( var key in uartHWAttrs) {
+    {
+        .baseAddr = `uartHWAttrs[key].BaseAddr`,
+        .intNum = `intTable[uartHWAttrs[key].BaseAddr]`,
+        .intPriority = (~0),
+        .clockSource = `uartHWAttrs[key].ClockSource`,
+        .bitOrder = `uartHWAttrs[key].BitOrder`,
+        .numBaudrateEntries = sizeof(uartMSP432Baudrates) /
+            sizeof(UARTMSP432_BaudrateConfig),
+        .baudrateLUT = uartMSP432Baudrates,
+        .ringBufPtr  = uartMSP432RingBuffer[`uartHWAttrs[key].ReqName`],
+        .ringBufSize = sizeof(uartMSP432RingBuffer[`uartHWAttrs[key].ReqName`]),
+        .rxPin = UARTMSP432_P`uartHWAttrs[key]["RXD"]["Port"]`_`uartHWAttrs[key]["RXD"]["Pin"]`_`uartHWAttrs[key]["RXD"]["Mode"]`,
+        .txPin = UARTMSP432_P`uartHWAttrs[key]["TXD"]["Port"]`_`uartHWAttrs[key]["TXD"]["Pin"]`_`uartHWAttrs[key]["TXD"]["Mode"]`,
+    },
+%   }
+};
+
+const UART_Config UART_config[Board_UARTCOUNT] = {
+%  for(var key in displayHWAttrs) {
+    {
+        .fxnTablePtr = &UARTMSP432_fxnTable,
+        .object = &uartMSP432Objects[`displayHWAttrs[key].ReqName`],
+        .hwAttrs = &uartMSP432HWAttrs[`displayHWAttrs[key].ReqName`]
+    }
+%   }
+%  for(var key in uartHWAttrs) {
+    {
+        .fxnTablePtr = &UARTMSP432_fxnTable,
+        .object = &uartMSP432Objects[`uartHWAttrs[key].ReqName`],
+        .hwAttrs = &uartMSP432HWAttrs[`uartHWAttrs[key].ReqName`]
+    },
+%   }
+};
+
+const uint_least8_t UART_count = Board_UARTCOUNT;
+%  }
+%  if(Object.keys(watchdogHWAttrs).length > 0) {
+    
+/*
+ *  =============================== Watchdog ===============================
+ */
+#include <ti/drivers/Watchdog.h>
+#include <ti/drivers/watchdog/WatchdogMSP432.h>
+
+WatchdogMSP432_Object watchdogMSP432Objects[Board_WATCHDOGCOUNT];
+
+const WatchdogMSP432_HWAttrs watchdogMSP432HWAttrs[Board_WATCHDOGCOUNT] = {
+%   for (var key in watchdogHWAttrs) {
+    {
+        .baseAddr = `watchdogHWAttrs[key].BaseAddr`,
+        .intNum = `intTable[watchdogHWAttrs[key].BaseAddr]`,
+        .intPriority = (~0),
+        .clockSource = `watchdogHWAttrs[key].ClockSource`,
+        .clockDivider = `watchdogHWAttrs[key].ClockDivider`
+    },
+%   }
+};
+
+const Watchdog_Config Watchdog_config[Board_WATCHDOGCOUNT] = {
+%   for (var key in watchdogHWAttrs) {
+    {
+        .fxnTablePtr = &WatchdogMSP432_fxnTable,
+        .object = &watchdogMSP432Objects[`watchdogHWAttrs[key].ReqName`],
+        .hwAttrs = &watchdogMSP432HWAttrs[`watchdogHWAttrs[key].ReqName`]
+    },
+%   }
+};
+
+const uint_least8_t Watchdog_count = Board_WATCHDOGCOUNT;
+%  }

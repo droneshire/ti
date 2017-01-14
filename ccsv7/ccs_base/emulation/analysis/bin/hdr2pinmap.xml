@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+
+<!-- This file can be used whether or not a Drishti is in the system.  If there's no Drishti, 
+    don't specify any DRISHTIPIN-NUM fields.  If you do, they will be ignored.  
+    This file defines the connectivity between the target header and the ports of the FPGA and Drishti. -->
+
+<!-- Possible port ID's are: FPGAINPUT-NUM, FPGAOUTPUT-NUM, and DRISHTIPIN-NUM. -->
+
+<HDR2PORT-MAPPING version="1.0">
+	<MAP> <!-- EMU0 Pin map--> 
+		<HDRPIN-NUM>B14</HDRPIN-NUM> <!-- Header pin number-->
+		<DRISHTIPIN-NUM>0x00</DRISHTIPIN-NUM> <!-- Drishti pin number-->
+	</MAP>
+	<MAP> <!-- EMU1 Pin map--> 
+		<HDRPIN-NUM>C14</HDRPIN-NUM> <!-- Header pin number-->
+		<DRISHTIPIN-NUM>0x01</DRISHTIPIN-NUM> <!-- Drishti pin number-->
+	</MAP>
+	<MAP> <!-- EMU2 Pin map--> 
+		<HDRPIN-NUM>B13</HDRPIN-NUM> <!-- Header pin number-->
+		<DRISHTIPIN-NUM>0x02</DRISHTIPIN-NUM> <!-- Drishti pin number-->
+	</MAP>
+	<MAP> <!-- EMU3 Pin map--> 
+		<HDRPIN-NUM>C13</HDRPIN-NUM> <!-- Header pin number-->
+		<DRISHTIPIN-NUM>0x03</DRISHTIPIN-NUM> <!-- Drishti pin number-->
+	</MAP>
+	<MAP> <!-- EMU4 Pin map--> 
+		<HDRPIN-NUM>C12</HDRPIN-NUM> <!-- Header pin number-->
+		<DRISHTIPIN-NUM>0x04</DRISHTIPIN-NUM> <!-- Drishti pin number-->
+	</MAP>
+	<MAP> <!-- EMU5 Pin map--> 
+		<HDRPIN-NUM>B11</HDRPIN-NUM> <!-- Header pin number-->
+		<DRISHTIPIN-NUM>0x05</DRISHTIPIN-NUM> <!-- Drishti pin number-->
+	</MAP>
+	<MAP> <!-- EMU6 Pin map--> 
+		<HDRPIN-NUM>C11</HDRPIN-NUM> <!-- Header pin number-->
+		<DRISHTIPIN-NUM>0x06</DRISHTIPIN-NUM> <!-- Drishti pin number-->
+	</MAP>
+	<MAP> <!-- EMU7 Pin map--> 
+		<HDRPIN-NUM>B10</HDRPIN-NUM> <!-- Header pin number-->
+		<DRISHTIPIN-NUM>0x07</DRISHTIPIN-NUM> <!-- Drishti pin number-->
+	</MAP>
+	<MAP> <!-- EMU8 Pin map--> 
+		<HDRPIN-NUM>C10</HDRPIN-NUM> <!-- Header pin number-->
+		<DRISHTIPIN-NUM>0x08</DRISHTIPIN-NUM> <!-- Drishti pin number-->
+	</MAP>
+	<MAP> <!-- EMU9 Pin map--> 
+		<HDRPIN-NUM>B09</HDRPIN-NUM> <!-- Header pin number-->
+		<DRISHTIPIN-NUM>0x09</DRISHTIPIN-NUM> <!-- Drishti pin number-->
+	</MAP>
+	<MAP> <!-- EMU10 Pin map--> 
+		<HDRPIN-NUM>C09</HDRPIN-NUM> <!-- Header pin number-->
+		<DRISHTIPIN-NUM>0x0A</DRISHTIPIN-NUM> <!-- Drishti pin number-->
+	</MAP>
+	<MAP> <!-- EMU11 Pin map--> 
+		<HDRPIN-NUM>C07</HDRPIN-NUM> <!-- Header pin number-->
+		<DRISHTIPIN-NUM>0x0B</DRISHTIPIN-NUM> <!-- Drishti pin number-->
+	</MAP>
+	<MAP> <!-- EMU12 Pin map--> 
+		<HDRPIN-NUM>B06</HDRPIN-NUM> <!-- Header pin number-->
+		<DRISHTIPIN-NUM>0x0C</DRISHTIPIN-NUM> <!-- Drishti pin number-->
+	</MAP>
+	<MAP> <!-- EMU13 Pin map--> 
+		<HDRPIN-NUM>C06</HDRPIN-NUM> <!-- Header pin number-->
+		<DRISHTIPIN-NUM>0x0D</DRISHTIPIN-NUM> <!-- Drishti pin number-->
+	</MAP>
+	<MAP> <!-- EMU14 Pin map--> 
+		<HDRPIN-NUM>B05</HDRPIN-NUM> <!-- Header pin number-->
+		<DRISHTIPIN-NUM>0x0E</DRISHTIPIN-NUM> <!-- Drishti pin number-->
+	</MAP>
+	<MAP> <!-- EMU15 Pin map--> 
+		<HDRPIN-NUM>C05</HDRPIN-NUM> <!-- Header pin number-->
+		<DRISHTIPIN-NUM>0x0F</DRISHTIPIN-NUM> <!-- Drishti pin number-->
+	</MAP>
+	<MAP> <!-- EMU16 Pin map--> 
+		<HDRPIN-NUM>C04</HDRPIN-NUM> <!-- Header pin number-->
+		<DRISHTIPIN-NUM>0x10</DRISHTIPIN-NUM> <!-- Drishti pin number-->
+	</MAP>
+	<MAP> <!-- EMU17 Pin map--> 
+		<HDRPIN-NUM>B03</HDRPIN-NUM> <!-- Header pin number-->
+		<DRISHTIPIN-NUM>0x11</DRISHTIPIN-NUM> <!-- Drishti pin number-->
+	</MAP>
+	<MAP> <!-- EMU18 Pin map--> 
+		<HDRPIN-NUM>C02</HDRPIN-NUM> <!-- Header pin number-->
+		<DRISHTIPIN-NUM>0x12</DRISHTIPIN-NUM> <!-- Drishti pin number-->
+	</MAP>
+</HDR2PORT-MAPPING>

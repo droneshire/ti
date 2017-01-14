@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<drivers id="TMS320C55XX">
+	<isa Type="TMS320C55XX" ProcID="0x50015400">
+		<driver file="..\..\..\emulation\drivers\tixds55x.dvr">
+	            <property Type="hiddenfield" Value="true" id="realtimeEnabled" />
+			<connectionType Type="TIXDS100v2"/>
+		</driver>
+	</isa>
+</drivers>

@@ -1,0 +1,49 @@
+Texas Instruments C2000 USB Flash Programmer Example Package for F2837xD
+
+
+This file describes how to reproduce the firmware upgrade example for F2837xD CPU01
+and how the firmware upgrade works.
+
+    * The blinky example can be found in ControlSuite in the
+      device_support/F2837xD/{version_number}/F2837xD_examples_Cpu1 directory.
+    * The F2837xD_usb_flash_kernels example can be found in ControlSuite in the
+      device_support/F2837xD/{version_number}/F2837xD_examples_Dual/cpu01 directory.
+
+The f2837xD_fw_upgrade_example directory contains the following files:
+
+	* blinky_cpu01.dat: An input data file for usb_flash_programmer.exe containing
+      the loadable sections of blinky_cpu01.out.
+	* blinky_cpu01.out: A CCS compiled and linked executable program for F2837x
+      which endlessly toggle GPIO31.
+	* F2837xD_usb_flash_kernels_cpu01.dat: An input data file for usb_flash_programmer.exe
+      containing the loadable sections of fw_upgrade_usb_kernels_cpu01.out
+    * F2837xD_usb_flash_kernels_cpu01.out: A CCS compiled and linked executable
+      program for F2837xD which loads an application from USB and programs it into Flash.
+      This is used for a CPU01 firmware upgrade.
+
+The .dat files were converted to the boot loader data format using hex2000, which
+is part of the C2000 Code Generation Tools package. The correct command line is:
+
+	hex2000.exe -boot -b blinky_cpu01.out -o blinky_cpu01.dat
+	hex2000.exe -boot -b F2837xD_usb_flash_kernels_cpu01.out -o F2837xD_usb_flsah_kernels_cpu01.dat
+
+If everything was done correctly, blinky_cpu01.dat and F2837xD_usb_flash_kernels_cpu01.dat
+will now contain the loadable sections of the respective F2837xD executables in the correct format.
+
+How the firmware upgrade works:
+    The F2837xD is first put in USB Boot Mode.  Then the usb_flash_programmer.exe connects to the
+F2837xD and does a bulk data transfer of F2837xD_usb_flash_kernels_cpu01.dat to the F2837xD.
+After this load completes, the F2837xD branches to the start address of the kernel just
+loaded in RAM.  This kernel then uses the USB to load the firmware upgrade application and
+programs it into Flash.  In our example, the application is blinky_cpu01.dat.  This application
+must be compiled and linked to run from Flash so that the kernel can use the Flash API to
+upgrade the firmware in Flash.
+
+Procedure:
+    1) Boot the F2837xD in USB Boot Mode (see contents.txt, "Starting the MCU")
+    2) Connect USB from Host PC to F2837xD.
+    3) From the Host command line:
+        usb_flash_programmer.exe  F2837xD_usb_flash_kernels_cpu01.dat  blinky_cpu01.dat
+
+
+

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module id="Shadow" HW_revision="" XML_version="1" description="Shadow Registers">
+
+    <register id="SR0"       acronym="SR0"       offset="0x00" page="4" width="32" description="Shadow R0" />
+    <register id="SR1"       acronym="SR1"       offset="0x01" page="4" width="32" description="Shadow R1" />
+    <register id="SR2"       acronym="SR2"       offset="0x02" page="4" width="32" description="Shadow R2" />
+    <register id="SR3"       acronym="SR3"       offset="0x03" page="4" width="32" description="Shadow R3" />
+    <register id="SR4"       acronym="SR4"       offset="0x04" page="4" width="32" description="Shadow R4" />
+    <register id="SR5"       acronym="SR5"       offset="0x05" page="4" width="32" description="Shadow R5" />
+    <register id="SR6"       acronym="SR6"       offset="0x06" page="4" width="32" description="Shadow R6" />
+    <register id="SR7"       acronym="SR7"       offset="0x07" page="4" width="32" description="Shadow R7" />
+    <register id="SLSA0"     acronym="SLSA0"     offset="0x08" page="4" width="32" description="Shadow Loop 0 Start Address" />
+    <register id="SLEA0"     acronym="SLEA0"     offset="0x09" page="4" width="32" description="Shadow Loop 0 End Address" />
+    <register id="SLCNT0"    acronym="SLEA0"     offset="0x0a" page="4" width="32" description="Shadow Loop 0 Iteration Count" />
+    <register id="SLSA1"     acronym="SLSA1"     offset="0x0b" page="4" width="32" description="Shadow Loop 1 Start Address" />
+    <register id="SLEA1"     acronym="SLEA1"     offset="0x0c" page="4" width="32" description="Shadow Loop 1 End Address" />
+    <register id="SLCNT1"    acronym="SLCNT1"    offset="0x0d" page="4" width="32" description="Shadow Loop 1 Iteration Count" />
+    <register id="SLCNT0RLD" acronym="SLCNT0RLD" offset="0x0e" page="4" width="32" description="Shadow Loop 0 Iteration Count Reload" />
+
+</module>
+
+
+
+
+
+
+
+
+
+
+
+ 

@@ -1,0 +1,421 @@
+//*****************************************************************************
+// Board.h
+//
+// configure the device pins for different signals
+//
+// Copyright (C) 2015 Texas Instruments Incorporated - http://www.ti.com/ 
+// 
+// 
+//  Redistribution and use in source and binary forms, with or without 
+//  modification, are permitted provided that the following conditions 
+//  are met:
+//
+//    Redistributions of source code must retain the above copyright 
+//    notice, this list of conditions and the following disclaimer.
+//
+//    Redistributions in binary form must reproduce the above copyright
+//    notice, this list of conditions and the following disclaimer in the 
+//    documentation and/or other materials provided with the   
+//    distribution.
+//
+//    Neither the name of Texas Instruments Incorporated nor the names of
+//    its contributors may be used to endorse or promote products derived
+//    from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
+//  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
+//  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+//  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT 
+//  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+//  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT 
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+//  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+//  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+//  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//*****************************************************************************
+
+% var date = new Date();
+// This file was automatically generated on `date.toLocaleDateString()` at `date.toLocaleTimeString()`
+// by TI PinMux version `version`
+//
+//*****************************************************************************
+%%{
+    var boardADC = [];
+    var boardADCBuf = {};
+    var boardADCBufChannel = [];
+    var boardCapture = {};
+    var boardDisplay = {};
+    var boardSDSPI = {};
+    var boardSPI = {};
+    var boardUART = {};
+    var boardI2C = {};
+    var boardI2CSlave = {};
+    var boardGPIO = [];
+    var boardPWM = [];
+    var boardTimer = {};
+    var boardTimer32 = {};
+    var boardWatchdog = {};
+
+    function strContains(str,substr){
+        return str.indexOf(substr) !== -1;
+    }
+
+    for( var i = 0; i < assignments.length; i++ ) { //by pin
+        if (assignments[i].interfaceName.match(/^GPIO/gi)) {
+            /*
+            Example: if requirement name is Board_BUTTON
+            if none existed before, adding one GPIO pin produces Board_BUTTON
+            if one existed before, adding one more GPIO pin produces Board_BUTTON1 and changes old to Board_BUTTON0
+            else, any more added will begin to increment Board_BUTTON2, Board_BUTTON3, etc.
+            */
+            var reqName = assignments[i].requirementName;
+            var numOccurrences = _.reduce(boardGPIO,function(num, name) {
+                 return num + (strContains(name,reqName));
+            }, 0);
+            if(numOccurrences == 0)
+            {
+                boardGPIO.push(reqName);
+            }
+            else if(numOccurrences == 1)
+            {
+                boardGPIO[boardGPIO.indexOf(reqName)] += '0';
+                boardGPIO.push(reqName + numOccurrences);
+            }
+            else
+            {
+                boardGPIO.push(reqName + numOccurrences);
+            }
+        }
+        else if (assignments[i].interfaceName.match(/^ADC/gi)) {
+            if(assignments[i].peripheralPin.interfacePin.name.match(/A[0-9]{1,2}/) == null)
+            {
+                //skip VREF+, VREF-, VeREF+, or VeREF-
+                continue;
+            }
+            if(selectedUseCases[assignments[i].requirementName].name == "106_usecase_101")  //ADC
+            {
+                boardADC.push(assignments[i].requirementName + assignments[i].peripheralPin.interfacePin.name.match(/[^A]{1,2}$/gi));
+            }
+            else    //ADCBuf
+            {
+                var reqName = assignments[i].requirementName;
+                if (boardADCBuf[reqName] == null) {
+                    boardADCBuf[reqName] = reqName;
+                }
+                boardADCBufChannel.push(boardADCBuf[reqName] + 'CHANNEL' + assignments[i].peripheralPin.interfacePin.name.match(/[^A]{1,2}$/gi));
+                reqName += "_TIMER";
+                if (boardTimer[reqName] == null) {
+                    boardTimer[reqName] = reqName;
+                }
+            }
+        }
+        else if (assignments[i].interfaceName.match(/^I2C/gi)) {
+            var reqName = assignments[i].requirementName;
+            if (selectedUseCases[assignments[i].requirementName].name == "103_usecase_101")  //i2cMaster
+            {
+                if (boardI2C[reqName] == null) {
+                    boardI2C[reqName] = reqName;
+                }
+            }
+            else {  //i2cSlave
+                if (boardI2CSlave[reqName] == null) {
+                    boardI2CSlave[reqName] = reqName;
+                }
+            }
+        }
+        else if (assignments[i].interfaceName.match(/^SPI/gi)) {
+            var reqName = assignments[i].requirementName;
+            if(selectedUseCases[assignments[i].requirementName].name == "101_usecase_102")  //sdSpi
+            {
+                if (boardSDSPI[reqName] == null) {
+                    boardSDSPI[reqName] = reqName;
+                }
+            }
+            else    //spi
+            {
+                if (boardSPI[reqName] == null) {
+                    boardSPI[reqName] = reqName;
+                }
+            }
+        }
+        else if (assignments[i].interfaceName.match(/^UART/gi)) {
+            var reqName = assignments[i].requirementName;
+            if (boardUART[reqName] == null) {
+                boardUART[reqName] = reqName;
+            }
+        }
+        else if (assignments[i].interfaceName.match(/^TIMER_A/gi)) {
+            var reqName = assignments[i].requirementName;
+            if (selectedUseCases[assignments[i].requirementName].name == "104_usecase_102")    //PWM
+            {
+                boardPWM.push(reqName + "_" + assignments[i].peripheralPin.name.split('.')[1]);
+            }
+            else if (selectedUseCases[assignments[i].requirementName].name == "104_usecase_103")    //Capture
+            {
+                if (boardCapture[reqName] != null) {
+                    throw new Error("Capture only allows one active CCI pin per module!");
+                }
+                if (boardCapture[reqName] == null) {
+                    boardCapture[reqName] = reqName;
+                }
+            }
+        }
+    }
+    
+    for (var i = 0; i < peripheralConfigurables.length; i++)    //by driver
+    {
+        if (peripheralConfigurables[i].interfaceName.match(/^TIMER_A/gi)) {
+            var reqName = peripheralConfigurables[i].requirementName;
+            if (selectedUseCases[peripheralConfigurables[i].requirementName].name != "104_usecase_101") //not Timer
+            {
+                reqName += "_TIMER";
+            }
+            if (boardTimer[reqName] == null) {
+                boardTimer[reqName] = reqName;
+            }
+        }
+        else if (peripheralConfigurables[i].interfaceName.match(/^TIMER32/gi)) {
+            var reqName = peripheralConfigurables[i].requirementName;
+            if(boardTimer32[reqName] == null) {
+                boardTimer32[reqName] = reqName;
+            }
+        }
+        else if (peripheralConfigurables[i].interfaceName.match(/^WATCHDOG/gi)) {
+            var reqName = peripheralConfigurables[i].requirementName;
+            if(boardWatchdog[reqName] == null) {
+                boardWatchdog[reqName] = reqName;
+            }
+        }
+        else if (peripheralConfigurables[i].interfaceName.match(/^DISPLAY/gi)) {
+            var reqName = peripheralConfigurables[i].requirementName;
+            if(boardDisplay[reqName] == null) {
+                boardDisplay[reqName] = reqName;
+            }
+        }
+    }
+%%}
+#ifndef __BOARD_H__
+#define __BOARD_H__
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/* LEDs on MSP_EXP432P401R are active high. */
+#define Board_GPIO_LED_OFF (0)
+#define Board_GPIO_LED_ON  (1)
+
+#define Board_initADC               ADC_init
+#define Board_initADCBuf            ADCBuf_init
+#define Board_initGeneral           MSP_EXP432P401R_initGeneral
+#define Board_initGPIO              GPIO_init
+#define Board_initI2C               I2C_init
+#define Board_initPWM               PWM_init
+#define Board_initSDSPI             SDSPI_init
+#define Board_initSPI               SPI_init
+#define Board_initUART              UART_init
+#define Board_initWatchdog          Watchdog_init
+
+/* Board specific I2C addresses */
+#define Board_TMP_ADDR              (0x40)
+#define Board_RF430CL330_ADDR       (0x28)
+#define Board_TPL0401_ADDR          (0x40)
+%  if(boardADC.length > 0) {
+
+/*!
+ *  @def    MSP_EXP432P401R_ADCName
+ *  @brief  Enum of ADC channels on the MSP_EXP432P401R dev board
+ */
+typedef enum Board_ADCName {
+%  for(var i=0; i<boardADC.length; i++) {
+    `boardADC[i]` = `i`,
+%   }
+    Board_ADCCOUNT
+} Board_ADCName;
+%  }
+%  if(Object.keys(boardADCBuf).length > 0) {
+
+/*!
+ *  @def    MSP_EXP432P401R_ADCBufName
+ *  @brief  Enum of ADCBuf hardware peripherals on the MSP_EXP432P401R dev board
+ */
+ typedef enum Board_ADCBufName {
+%  var i = 0;
+%  for(var key in boardADCBuf) {
+    `boardADCBuf[key]` = `i++`,
+%   }
+    Board_ADCBUFCOUNT
+ } Board_ADCBufName;
+
+    
+/*!
+ *  @def    MSP_EXP432P401R_ADCBufChannelName
+ *  @brief  Enum of ADCBuf channels on the MSP_EXP432P401R dev board
+ */
+ typedef enum Board_ADCBuf0ChannelName {
+%  for(var i=0; i<boardADCBufChannel.length; i++) {
+    `boardADCBufChannel[i]` = `i`,
+%   }
+    Board_ADCBUF0CHANNELCOUNT
+ } Board_ADCBuf0ChannelName;
+%  }
+%  if(Object.keys(boardCapture).length > 0) {
+    
+/*!
+ *  @def    MSP_EXP432P401R_CaptureName
+ *  @brief  Enum of Capture timer names on the MSP_EXP432P401R dev board
+ */
+ typedef enum Board_CaptureName {
+%  var i = 0;
+%  for(var key in boardCapture) {
+    `boardCapture[key]` = `i++`,
+% }
+    Board_CAPTURECOUNT
+} Board_CaptureName;
+%  }
+%  if(boardGPIO.length > 0) {
+
+/*!
+ *  @def    MSP_EXP432P401R_GPIOName
+ *  @brief  Enum of GPIO names on the MSP_EXP432P401R dev board
+ */
+typedef enum Board_GPIOName {
+%  for(var i=0; i<boardGPIO.length; i++) {
+    `boardGPIO[i]` = `i`,
+%   }
+    Board_GPIOCOUNT
+} Board_GPIOName;
+%  }
+%  if(Object.keys(boardI2C).length > 0) {
+
+/*!
+ *  @def    MSP_EXP432P401R_I2CName
+ *  @brief  Enum of I2C names on the MSP_EXP432P401R dev board
+ */
+typedef enum Board_I2CName {
+%  var i = 0;
+%  for(var key in boardI2C) {
+    `boardI2C[key]` = `i++`,
+%  }
+   Board_I2CCOUNT
+} Board_I2CName;
+%  }
+%  if(Object.keys(boardI2CSlave).length > 0) {
+    
+/*!
+ *  @def    MSP_EXP432P401R_I2CSlaveName
+ *  @brief  Enum of I2CSlave names on the MSP_EXP432P401R dev board
+ */
+ typedef enum Board_I2CSlaveName {
+%   var i = 0;
+%   for(var key in boardI2CSlave) {
+    `boardI2CSlave[key]` = `i++`,
+%   }
+    Board_I2CSLAVECOUNT
+} Board_I2CSlaveName;
+%  }
+%  if(boardPWM.length > 0) {
+
+/*!
+ *  @def    MSP_EXP432P401R_PWMName
+ *  @brief  Enum of PWM names on the MSP_EXP432P401R dev board
+ */
+typedef enum Board_PWMName {
+%  for(var i=0; i<boardPWM.length; i++) {
+    `boardPWM[i]` = `i`,
+%    }
+    Board_PWMCOUNT
+} Board_PWMName;
+%  }
+%  if(Object.keys(boardSDSPI).length > 0) {
+    
+/*!
+ *  @def    MSP_EXP432P401R_SDSPIName
+ *  @brief  Enum of SDSPI names on the MSP_EXP432P401R dev board
+ */
+ typedef enum Board_SDSPIName {
+%  var i = 0;
+%  for(var key in boardSDSPI) {
+    `boardSDSPI[key]` = `i++`,
+%   }
+    Board_SDSPICOUNT
+} Board_SDSPIName;
+%  }
+%  if(Object.keys(boardSPI).length > 0) {
+
+/*!
+ *  @def    MSP_EXP432P401R_SPIName
+ *  @brief  Enum of SPI names on the MSP_EXP432P401R dev board
+ */
+typedef enum Board_SPIName {
+%  var i = 0;
+%  for(var key in boardSPI) {
+    `boardSPI[key]` = `i++`,
+%  }
+   Board_SPICOUNT
+} Board_SPIName;
+%  }
+%  if((Object.keys(boardTimer).length > 0) || (Object.keys(boardTimer32).length > 0)) {
+    
+/*!
+ *  @def    MSP_EXP432P401R_TimerName
+ *  @brief  Enum of Timer names on the MSP_EXP432P401R dev board
+ */
+typedef enum Board_TimerName {
+%  var i = 0;
+%  for(var key in boardTimer32) {
+    `boardTimer32[key]` = `i++`,
+%  }
+%  for(var key in boardTimer) {
+    `boardTimer[key]` = `i++`,
+%  }
+   Board_TIMERCOUNT
+} Board_TimerName;
+%  }
+%  if((Object.keys(boardUART).length > 0) || (Object.keys(boardDisplay).length > 0)) {
+
+/*!
+ *  @def    MSP_EXP432P401R_UARTName
+ *  @brief  Enum of UART names on the MSP_EXP432P401R dev board
+ */
+typedef enum Board_UARTName {
+%  var i = 0;
+%  for( var key in boardDisplay) {
+    `boardDisplay[key]` = `i++`,
+%  }
+%  for( var key in boardUART) {
+    `boardUART[key]` = `i++`,
+%  }
+    Board_UARTCOUNT
+} Board_UARTName;
+%  }
+    
+%  if(Object.keys(boardWatchdog).length > 0) {
+/*!
+ *  @def    MSP_EXP432P401R_WatchdogName
+ *  @brief  Enum of Watchdog names on the MSP_EXP432P401R dev board
+ */
+typedef enum Board_WatchdogName {
+%  var i = 0;
+%  for( var key in boardWatchdog) {
+    `boardWatchdog[key]` = `i++`,
+%  }
+   Board_WATCHDOGCOUNT
+} Board_WatchdogName;
+%  }
+
+/*!
+ *  @brief  Initialize the general board specific settings
+ *
+ *  This function initializes the general board specific settings.
+ */
+extern void Board_initGeneral(void);
+
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* __BOARD_H__ */

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="enable" basedir=".">
+	<!-- 
+		Define the following properties in the importing control.xml file: 
+			dvt.activity: The name of the activity for this data provider. It appears in the Dashboard and menus.
+			dvt.activity.description: A description of what this activity does. It appears in the Dashboard.
+			analysisFeatureName: The name of the Analysis Feature in analysis library.
+			
+		 The template creates a reference to the added Analysis Feature called 'analysisFeatureRef'. This reference can be
+		 also used in the control xml. 
+		
+		Example: 
+			<property name="dvt.activity.name" value="Viewers/CSV Viewer"/>
+			<property name="dvt.activity.description" value="Opens a CSV file."/>
+			<property name="analysisFeatureName" value="CsvViewer"/>
+	-->
+	
+	<!-- enable is a built-in DVT target which is executed when the Activity is made available.
+		 Add the Analysis Fetaure to the 'Analyze' context menu of every DVT view. The menu name is the name of the activity. -->
+	<target name="enable">
+		<!--script language="javascript">
+			<![CDATA[ 
+				activityName = project.getProperty("dvt.activity.name");
+				menuNameAf = activityName.substring(activityName.lastIndexOf("/")+1);
+				project.setNewProperty("menuNameAf", menuNameAf);
+			]]>
+		</script -->
+		<dvt.menu.context text="Analyze">
+			<dvt.menu.context id="contextMenuRef" text="${ant.project.name}" icon="${dvt.activity.icon}">
+				<dvt.call target="enable1">
+					<reference refid="contextMenuRef"/>
+				</dvt.call>
+			</dvt.menu.context>
+		</dvt.menu.context>
+	</target>
+
+	<target name="enable1" 
+		depends="
+			preAddAnalysisFeature, 
+			addAnalysisFeature, 
+			configureAnalysisFeature,
+			hookupAnalysisFeature,
+			createStandardContextMenu,
+			createContextMenu,
+			createConfigurationActions,
+			postAddAnalysisFeature
+			"/>
+	
+	<!-- this target may be overridden by the control xml file to perform any custom inilization required 
+		 before the Analysis Feature is added -->
+	<target name="preAddAnalysisFeature">
+	</target>
+
+	<!-- Add the Analysis Feature. Creates analysisFeatureRef, a reference to the added Analysis Feature which can be 
+	     referred in the control xml -->
+	<target name="addAnalysisFeature">
+		<!-- enable the Activity -->
+		<property name="dvt.enable" value="true"/>
+		<!-- add the Analysis Feature to the current Analysis Session -->
+		<dvt.analysisfeature.add id="analysisFeatureRef" debug="false" refid="contextMenuRef" name="${analysisFeatureName}"/>
+		<!--dvt.hookup source="contextMenuRef" destination="analysisFeatureRef" destinationChannel="0"/-->
+	</target>
+
+	<!-- this target may be overridden by the control xml file to configure the Analysis Feature, e.g. through a wizard -->
+	<target name="configureAnalysisFeature">
+	</target>
+
+	<!-- Hook-up the Analysis Feature -->
+	<target name="hookupAnalysisFeature"> 
+		<dvt.hookup 
+			source="contextMenuRef" 
+		 	destination="analysisFeatureRef" 
+		 	destinationChannel="0" 
+		 	bufferbypass="${bufferbypass.text}"
+		 	selectedFields="${requiredFields}"
+		/>
+	</target>
+
+	<!-- this target may be overridden by the control xml file to perform any tasks after the Analysis Feature is added, 
+		 start the Analysis Feature, show views, etc -->
+	<target name="postAddAnalysisFeature">
+	</target>
+
+	<!-- Create the standard menu items required for all Analysis Feature -->
+	<target name="createStandardContextMenu">
+		<!-- makeContextMenu menuid="standardContextMenuRef">
+			<menu -->
+				<!-- Refresh: Re-run the Analysis Feature -->
+				<!-- dvt.menu.context id="refreshMenu" text="Refresh">
+					<dvt.stop refid="analysisFeatureRef"/>
+					<dvt.start refid="analysisFeatureRef"/>
+				</dvt.menu.context>
+			</menu>
+		</makeContextMenu -->
+		<dvt.menu.context id="contextMenuRef" refid="analysisFeatureRef" text="${ant.project.name} views"/>
+	</target>
+
+	<!-- This target may be overridden by the control xml file to add any custom menu items required for the Analysis Feature --> 
+	<target name="createContextMenu">
+	</target>
+	
+	<!-- This target may be overridden by the control xml file to add configuration actions ot the dashboard --> 
+	<target name="createConfigurationActions">
+	</target>
+
+	<!-- this target may be overridden by the control xml file to perform any custom actions prior to disabling this  
+		 Analysis Feature -->
+	<target name="preDisable">
+	</target>
+
+	<!-- disable is a built-in DVT target which is executed when the Activity gets disable. -->
+	<target name="disable" depends="preDisable">
+		<dvt.remove refid="standardContextMenuRef"/>
+		<dvt.remove refid="analysisFeatureRef"/>
+	</target>
+	
+	<target name="reset">
+		<dvt.reset refid="analysisFeatureRef"/>
+	</target>
+	
+
+	<!-- Macro that creates context menus for all views of the Analysis Feature. The menu name is the name of the activity. -->
+	<macrodef name="makeContextMenu">
+		<attribute name="menuid"/>
+		<element name="menu" optional="yes"/>
+		<sequential>
+			<!-- script language="javascript">
+				<![CDATA[ 
+					activityName = project.getProperty("dvt.activity.name");
+					menuName = activityName.substring(activityName.lastIndexOf("/")+1);
+					project.setNewProperty("menuName", menuName);
+				]]>
+			</script -->
+			<dvt.menu.context id="@{menuid}" refid="analysisFeatureRef" text="${ant.project.name}">
+				<menu/> <!-- place where the passed in menu element will go -->
+			</dvt.menu.context>
+		</sequential>
+	</macrodef>
+	
+</project>

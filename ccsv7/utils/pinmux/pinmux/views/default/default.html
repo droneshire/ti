@@ -1,0 +1,110 @@
+<div class="defaultCol1">
+	<div class="gettingStarted">
+		<h4 id="welcomeText">
+			Welcome! To get started with <span style="font-weight:bold"><span style="color:#cc0000">TI</span> PinMux</span>, please
+			use one of the below options to start or continue your design.
+		</h4>
+
+		<!-- New Designs Section -->
+		<div id="defaultNewDesignContainer" style="margin:5px 12px">
+			<div class="panel panel-default shadow1" style="border:none;">
+				<div class="panel-heading panel-heading-custom panel-heading-main" ng-click="hideNewSection=!hideNewSection">
+					<span ng-class="getTriangleGlyphClass(hideNewSection)"></span>
+					<span style="font-size:16px;font-weight:bold;">Start a new Design</span>
+				</div>
+				<div class="panel-body" style="padding:4px 10px;background-color:#fbfbfb;" ng-hide="hideNewSection">
+					<device-config/>
+				</div>
+			</div>
+		</div>
+
+		<!-- Open Designs Section -->
+		<div id="defaultOpenDesignContainer" style="margin:5px 12px">
+			<div class="panel panel-default shadow1" style="border:none;">
+				<div class="panel-heading panel-heading-custom panel-heading-main" ng-click="hideOpenSection=!hideOpenSection">
+					<span ng-class="getTriangleGlyphClass(hideOpenSection)"></span>
+					<span style="font-size:16px;font-weight:bold;">Open an Existing Design</span>
+				</div>
+				<div class="panel-body" style="padding:6px 10px;background-color:#fbfbfb;" ng-hide="hideOpenSection">
+					<div>
+						<input style="display:none" type="file" id="openProjectInput" />
+						<span class="openProjButton" id="openProjID" ng-click="load()">&nbsp;Open&nbsp;</span>
+						<div style="height:28px;display:table-cell; vertical-align:bottom;">
+							a saved .pinmux file to continue your design.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Open Cloud Designs Section -->
+		<div id="defaultCloudDesignContainer" style="margin:5px 12px" ng-show="cloudFiles.length > 0">
+			<div class="panel panel-default shadow1" style="border:none;">
+				<div class="panel-heading panel-heading-custom panel-heading-main" ng-click="hideCloudSection=!hideCloudSection">
+					<span ng-class="getTriangleGlyphClass(hideCloudSection)"></span>
+					<span style="font-size:16px;font-weight:bold;">Saved Designs on myTI Cloud</span>
+					<span style="float:right;padding-top:4px;font-size:12px;">({{(cloudFilesSize/1048576).toFixed(2)}}MB of 100MB used)</span>
+				</div>
+				<div class="panel-body" style="padding:4px 10px 10px 10px;background-color:#fbfbfb;" ng-hide="hideCloudSection">
+					<div style="margin-top:7px">
+						<div class="btn-group btn-group-justified" role="group" ng-show="cloudFiles.length === 0">No designs saved on Cloud storage. Go and start designing!</div>
+						<div class="btn-group btn-group-justified" role="group" ng-repeat="file in cloudFiles | orderBy:'mtime':true">
+							<div class="defaultCloudDeleteButton btn-group">
+								<button type="button" class="btn btn-default" title="Delete {{file.name}}" ng-click="deleteCloudFile(file.name)" style="border-right:0;">
+									<span class="glyphicon glyphicon-remove"></span>
+								</button>
+							</div>
+							<div class="defaultCloudFilename btn-group">
+								<button type="button" class="btn btn-default" ng-click="loadCloudFile(file.name)" title="Open {{file.name}}">
+								<span style="float:left">{{file.name}}</span><span style="float:right">{{(file.mtime.substring(0, file.mtime.length-5)).replace("T", " ")}}</span></button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Recent Designs Section -->
+		<div id="defaultRecentDesignContainer" style="margin:5px 12px" ng-show="recentProjects.length > 0">
+			<div class="panel panel-default shadow1" style="border:none;">
+				<div class="panel-heading panel-heading-custom panel-heading-main" ng-click="hideRecentSection=!hideRecentSection">
+					<span ng-class="getTriangleGlyphClass(hideRecentSection)"></span>
+					<span style="font-size:16px;font-weight:bold;">Recent Designs</span>
+				</div>
+				<div class="panel-body" style="padding:7px 15px 0px 15px;background-color:#fbfbfb;" ng-hide="hideRecentSection">
+					<span ng-show="areSettingNew">No saved projects available.</span>
+					<p ng-repeat="recentProject in recentProjects">
+						<a class="aReset" id="recentProjectLink{{$index}}" href="" title="{{recentProject.path}}" ng-click="loadFromFile(recentProject.path)">{{recentProject.description}}  </a>
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<!-- End Sections -->
+	</div>
+</div>
+
+<div class="defaultCol2">
+	<div class="panel panel-info shadow1" style="border:none">
+		<div class="panel-heading panel-heading-custom panel-heading-sub" ng-click="hideInfoSection=!hideInfoSection">
+			<span ng-class="getTriangleGlyphClass(hideInfoSection)" style="margin-right:0px;"></span>
+			<span class="panel-title" style="font-weight:bold;font-size:14px;">Quick Links</span>
+		</div>
+		<span id="defaultCol2Content" ng-hide="hideInfoSection">
+			<a href="" target="_blank" class="list-group-item" style="color:#118899;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:6px 15px 6px 18px" ng-click="openLink('http://www.ti.com/tool/PINMUXTOOL')">TI PinMux Tools Page</a>
+			<a href="" target="_blank" class="list-group-item" style="color:#118899;border-left:none;border-right:none;padding:6px 15px 6px 18px" ng-click="openLink('http://processors.wiki.ti.com/index.php/TI_PinMux_Tool')">TI PinMux Wiki</a>
+			<a href="" target="_blank" class="list-group-item" style="color:#118899;border-left:none;border-right:none;border-bottom:none;padding:6px 15px 6px 18px" ng-click="openLink('https://www.youtube.com/watch?v=Q8yby_i3N_M')">TI PinMux Tutorial Video</a>
+		</span>
+	</div>
+</div>
+
+<div class="updates">
+	<span ng-show="updatesSupported">
+        <span ng-show="checkingForUpdates" style="text-align:center;width:100%" >
+			<img src="icons/loading-icon-small.gif"></img> <br> Checking for updates...
+        </span>
+	<span ng-show="!checkingForUpdates">
+            <a ng-show="updatesFound" class="aReset" ng-click="installUpdates()" href="">Install Available Updates</a>
+            <span ng-show="!updatesFound" href="">No Updates Available</span>
+	</span>
+	</span>
+</div>

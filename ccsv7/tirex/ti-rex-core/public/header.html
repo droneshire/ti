@@ -1,0 +1,76 @@
+<header role="banner">
+    <div class="container-fluid">
+	<div class="row">
+	    <div class="col-sm-3 vcenter" >
+		<p/>
+		<p><a  id="ti_logo" name="&amp;lid=en_US_logo_link" href="//www.ti.com">&nbsp;</a></p>
+	    </div><!-- get rid of any spaces inbetween as a work around for inline-block issue; don't modify this comment; see http://css-tricks.com/fighting-the-space-between-inline-block-elements/ 
+		     --><div class="col-sm-7 vcenter">
+                <!-- Google Custom Search 
+                     <script>
+                     (function() {
+                     var cx = '005343551376066893960:uuvs7licqqg';
+                     var gcse = document.createElement('script');
+                     gcse.type = 'text/javascript';
+                     gcse.async = true;
+                     gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+                     '//www.google.com/cse/cse.js?cx=' + cx;
+                     var s = document.getElementsByTagName('script')[0];
+                     s.parentNode.insertBefore(gcse, s);
+                     })();
+                     </script>
+                     <gcse:search></gcse:search>
+                   -->
+		     </div><!-- get rid of any spaces inbetween as a work around for inline-block issue, don't modify this comment; see http://css-tricks.com/fighting-the-space-between-inline-block-elements/
+			      --><div class="col-sm-2 text-right vcenter">
+   		         <div id="user" ng-controller="CookieController" >
+                             <div id="login" ng-show="!uid"><a href="//tgdccscloud.toro.design.ti.com/login" fancybox data-fancybox-type="iframe">Login / register</a></div>          
+                             <div id="logout" ng-show="uid"> <span class="fa fa-user"></span> <span id="user_name">{{uid}}</span> | <a href="//tgdccscloud.toro.design.ti.com/logout">Logout</a></div>
+                         </div>				  
+			      </div>
+	</div>
+    </div>
+    <nav class="navbar navbar-default" role="navigation">
+	<div class="container-fluid">
+	    <!-- Brand and toggle get grouped for better mobile display -->
+	    <div class="navbar-header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+		    <span class="sr-only">Toggle navigation</span>
+		    <span class="icon-bar"></span>
+		    <span class="icon-bar"></span>
+		    <span class="icon-bar"></span>
+		</button>
+	    </div>
+	    
+	    <!-- Collect the nav links, forms, and other content for toggling -->
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		<div ng-controller="RexController"  >
+		    <ul class="nav navbar-nav bold_nav">
+			<li class="active"><a href="home.html" title="home"><span class="large glyphicon glyphicon-home"/></a></li>
+			<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" >Development Boards</a>
+			    <ul class="dropdown-menu">
+			        <li ng-repeat="node in tree | filter:search:strict"><a ng-href="#HardwareTools/{{node.name}}" >{{node.name}}</a></li>
+  			    </ul>
+			</li>			        
+			<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" >Devices</a>
+			    <ul class="dropdown-menu">
+			        <li ng-repeat="node in tree | filter:search:strict"><a ng-href="#Device/{{node.name}}" >{{node.name}}</a></li>
+  			    </ul>
+			</li>
+		    </ul>
+                    <form class="navbar-form navbar-left" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search Keyword">
+                        </div>
+                    </form>			      
+		    
+		</div>
+		<!--			      
+		     <ul class="nav navbar-nav navbar-right bold_nav">
+		     <li><a href="http://www.ti.com/ww/en/parametric_selection_tool">Parametric Search</a></li>
+		     </ul>
+		   -->
+	    </div><!-- /.navbar-collapse -->
+	</div><!-- /.container-fluid -->
+    </nav>
+</header>

@@ -1,0 +1,140 @@
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  davincievm_dsp.gel                                                      *
+ *  Version 3.2a                                                            *
+ *                                                                          *
+ *  This GEL file is designed to be used in conjunction with                *
+ *  CCStudio 3.2+ and the DM6446 based EVM.                                 *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  StartUp( )                                                              *
+ *      Setup Memory Map                                                    *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+StartUp( )
+{
+    Setup_Memory_Map( );
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  OnTargetConnect( )                                                      *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+OnTargetConnect( )
+{
+    // Do nothing
+}
+
+menuitem "DaVinci EVM Memory Map";
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  Setup_Memory_Map( )                                                     *
+ *      Setup the Memory Map for DSP side only.                             *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+hotmenu
+Setup_Memory_Map( )
+{
+    GEL_MapOn( );
+    GEL_MapReset( );
+
+    /* DSP RAM & ROM */
+    GEL_MapAddStr( 0x00100000, 0, 0x00100000, "R|W|AS4", 0 );   // DSP UMAP1 ImgCop
+    GEL_MapAddStr( 0x00800000, 0, 0x00010000, "R|W|AS4", 0 );   // DSP UMAP0( L2 Cache )
+    GEL_MapAddStr( 0x00e00000, 0, 0x00004000, "R|AS4",   0 );   // DSP L1P( Secure ROM )
+    GEL_MapAddStr( 0x00e08000, 0, 0x00008000, "R|W|AS4", 0 );   // DSP L1P Cache
+    GEL_MapAddStr( 0x00f04000, 0, 0x0000c000, "R|W|AS4", 0 );   // DSP L1D RAM
+    GEL_MapAddStr( 0x00f10000, 0, 0x00008000, "R|W|AS4", 0 );   // DSP L1D Cache
+
+    /* DSP RAM */
+    GEL_MapAddStr( 0x11100000, 0, 0x00100000, "R|W|AS4", 0 );   // DSP ImgCop
+    GEL_MapAddStr( 0x11800000, 0, 0x00010000, "R|W|AS4", 0 );   // DSP L2 Cache
+    GEL_MapAddStr( 0x11e00000, 0, 0x00004000, "R|AS4",   0 );   // DSP L1P ROM
+    GEL_MapAddStr( 0x11e08000, 0, 0x00008000, "R|W|AS4", 0 );   // DSP L1P Cache
+    GEL_MapAddStr( 0x11f04000, 0, 0x0000c000, "R|W|AS4", 0 );   // DSP L1D RAM
+    GEL_MapAddStr( 0x11f10000, 0, 0x00008000, "R|W|AS4", 0 );   // DSP L1D Cache
+
+    /* DSP Peripherals */
+    GEL_MapAddStr( 0x01800000, 0, 0x00010000, "R|W|AS4", 0 );   // DSP Interrupts
+    GEL_MapAddStr( 0x01810000, 0, 0x00001000, "R|W|AS4", 0 );   // DSP Powerdown
+    GEL_MapAddStr( 0x01811000, 0, 0x00001000, "R|W|AS4", 0 );   // DSP Security ID
+    GEL_MapAddStr( 0x01812000, 0, 0x00001000, "R|W|AS4", 0 );   // DSP Revision ID
+    GEL_MapAddStr( 0x01820000, 0, 0x00010000, "R|W|AS4", 0 );   // DSP EMC
+    GEL_MapAddStr( 0x01840000, 0, 0x00010000, "R|W|AS4", 0 );   // DSP Memory System
+    GEL_MapAddStr( 0x01bc0000, 0, 0x00000100, "R|W|AS4", 0 );   // DSP AET Registers
+    GEL_MapAddStr( 0x01bc0100, 0, 0x00000100, "R|W|AS4", 0 );   // DSP Pin Manager and Trace
+
+    /* Peripherals */
+    GEL_MapAddStr( 0x01c00000, 0, 0x00000644, "R|W|AS4", 0 );   // EDMA Channel Ctrl
+    GEL_MapAddStr( 0x01c01000, 0, 0x00000098, "R|W|AS4", 0 );   // EDMA Channel Ctrl
+    GEL_MapAddStr( 0x01c02000, 0, 0x00000098, "R|W|AS4", 0 );   // EDMA Channel Ctrl
+    GEL_MapAddStr( 0x01c02200, 0, 0x00000098, "R|W|AS4", 0 );   // EDMA Channel Ctrl
+    GEL_MapAddStr( 0x01c10000, 0, 0x000003d8, "R|W|AS4", 0 );   // EDMA Transfer Ctrl 0
+    GEL_MapAddStr( 0x01c10400, 0, 0x000003d8, "R|W|AS4", 0 );   // EDMA Transfer Ctrl 1
+    GEL_MapAddStr( 0x01c20000, 0, 0x00000034, "R|W|AS4", 0 );   // UART 0
+    GEL_MapAddStr( 0x01c20400, 0, 0x00000034, "R|W|AS4", 0 );   // UART 1
+    GEL_MapAddStr( 0x01c20800, 0, 0x00000034, "R|W|AS4", 0 );   // UART 2
+    GEL_MapAddStr( 0x01c21000, 0, 0x0000003c, "R|W|AS4", 0 );   // I2C
+    GEL_MapAddStr( 0x01c21400, 0, 0x00000028, "R|W|AS4", 0 );   // Timer 0
+    GEL_MapAddStr( 0x01c21800, 0, 0x00000028, "R|W|AS4", 0 );   // Timer 1
+    GEL_MapAddStr( 0x01c21c00, 0, 0x0000002c, "R|W|AS4", 0 );   // Timer 2 WDT
+    GEL_MapAddStr( 0x01c22000, 0, 0x0000001c, "R|W|AS4", 0 );   // PWM 0
+    GEL_MapAddStr( 0x01c22400, 0, 0x0000001c, "R|W|AS4", 0 );   // PWM 1
+    GEL_MapAddStr( 0x01c22800, 0, 0x0000001c, "R|W|AS4", 0 );   // PWM 2
+    GEL_MapAddStr( 0x01c40000, 0, 0x00000050, "R|W|AS4", 0 );   // System Module
+    GEL_MapAddStr( 0x01c40800, 0, 0x00000168, "R|W|AS4", 0 );   // PLL 1
+    GEL_MapAddStr( 0x01c40c00, 0, 0x00000154, "R|W|AS4", 0 );   // PLL 2
+    GEL_MapAddStr( 0x01c41000, 0, 0x00000518, "R|W|AS4", 0 );   // PSC Domain Control
+    GEL_MapAddStr( 0x01c41800, 0, 0x000000a4, "R|W|AS4", 0 );   // PSC Module Status
+    GEL_MapAddStr( 0x01c41a00, 0, 0x000000a4, "R|W|AS4", 0 );   // PSC Module Control
+    GEL_MapAddStr( 0x01c42030, 0, 0x00000004, "R|W|AS4", 0 );   // DDR2 VTP
+    GEL_MapAddStr( 0x01c48000, 0, 0x00000050, "R|W|AS4", 0 );   // ARM Interrupts
+    GEL_MapAddStr( 0x01c64000, 0, 0x00002000, "R|W|AS4", 0 );   // USB 2.0 + RAM
+    GEL_MapAddStr( 0x01c66000, 0, 0x00000800, "R|W|AS2", 0 );   // ATA / CF
+    GEL_MapAddStr( 0x01c66800, 0, 0x00000074, "R|W|AS4", 0 );   // SPI
+    GEL_MapAddStr( 0x01c67000, 0, 0x00000038, "R|W|AS4", 0 );   // GPIO
+    GEL_MapAddStr( 0x01c70000, 0, 0x00004000, "R|W|AS4", 0 );   // VPSS
+    GEL_MapAddStr( 0x01c80000, 0, 0x00001000, "R|W|AS4", 0 );   // EMAC Control
+    GEL_MapAddStr( 0x01c81000, 0, 0x00001000, "R|W|AS4", 0 );   // EMAC Module
+    GEL_MapAddStr( 0x01c82000, 0, 0x00002000, "R|W|AS4", 0 );   // EMAC Module RAM
+    GEL_MapAddStr( 0x01c84000, 0, 0x00000090, "R|W|AS4", 0 );   // MDIO
+    GEL_MapAddStr( 0x01cc0000, 0, 0x00020000, "R|W|AS4", 0 );   // VICP
+    GEL_MapAddStr( 0x01e00000, 0, 0x000000b4, "R|W|AS4", 0 );   // EMIFA Control
+    GEL_MapAddStr( 0x01e01000, 0, 0x00000048, "R|W|AS4", 0 );   // VLYNQ Control
+    GEL_MapAddStr( 0x01e02000, 0, 0x0000005c, "R|W|AS4", 0 );   // ASP
+    GEL_MapAddStr( 0x01e10000, 0, 0x00000078, "R|W|AS4", 0 );   // MMC / SD
+
+    /* Off-chip */
+    GEL_MapAddStr( 0x02000000, 0, 0x02000000, "R|W|AS4", 0 );   // AEMIF CS2
+    GEL_MapAddStr( 0x04000000, 0, 0x02000000, "R|W|AS4", 0 );   // AEMIF CS3
+    GEL_MapAddStr( 0x06000000, 0, 0x02000000, "R|W|AS4", 0 );   // AEMIF CS4
+    GEL_MapAddStr( 0x08000000, 0, 0x02000000, "R|W|AS4", 0 );   // AEMIF CS5
+    GEL_MapAddStr( 0x0c000000, 0, 0x04000000, "R|W|AS4", 0 );   // VLYNQ
+
+    /* ARM RAM & ROM */
+    GEL_MapAddStr( 0x10008000, 0, 0x00002000, "R|W|AS4", 0 );   // ARM RAM0
+    GEL_MapAddStr( 0x1000A000, 0, 0x00002000, "R|W|AS4", 0 );   // ARM RAM1
+    GEL_MapAddStr( 0x1000C000, 0, 0x00004000, "R|AS4",   0 );   // ARM ROM
+
+    /* DDR2 */
+    GEL_MapAddStr( 0x20000000, 0, 0x000000f4, "R|W|AS4", 0 );   // DDR2 Control
+    GEL_MapAddStr( 0x42000000, 0, 0x0e000000, "R|W|AS4", 0 );   // AEMIF/VLYNQ Shadow
+    GEL_MapAddStr( 0x80000000, 0, 0x10000000, "R|W|AS4", 0 );   // DDR2 SDRAM
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  Clear_Memory_Map( )                                                     *
+ *      Clear the Memory Map                                                *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+hotmenu
+Clear_Memory_Map( )
+{
+    GEL_MapOff( );
+    GEL_MapReset( );
+}

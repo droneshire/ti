@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse-cdt version="2.0"?>
+
+<cdtproject id="org.eclipse.cdt.managedbuilder.core.managedMake">
+<extension id="com.ti.ccstudio.binaryparser.CoffParser" point="org.eclipse.cdt.core.BinaryParser"/>
+<data/>
+</cdtproject>

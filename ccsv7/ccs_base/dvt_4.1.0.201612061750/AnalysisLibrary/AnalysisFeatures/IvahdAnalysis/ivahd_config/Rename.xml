@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<translate name="Rename Fields for IVAHD">
+<!-- remove all spaces in field names because of bug in Find dialog -->
+	<passthru name="deltaCycle"		input="Local_Delta_Timestamp"/>
+   <passthru name="Time" input="Local_Timestamp" />
+   <passthru name="Event" 				input="Data" />
+   <!--passthru name="EventString" 		input="Type" /-->
+   <passthru name="EventString"   input="Domain+&quot;_&quot;+Class+&quot;_&quot;+Data_Message" />
+</translate>

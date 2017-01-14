@@ -1,0 +1,613 @@
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  evmdm350.gel                                                            *
+ *  Version 0.95                                                           *
+ *                                                                          *
+ *  This GEL file is designed to be used in conjunction with                *
+ *  CCStudio 3.3+ and the DM350 based EVM.                                  *
+ *                                                                          *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+
+ // Version History
+ //
+ // 0.80 Initial public release (EVM alpha)
+ // 0.85 PLL initialization fixed
+ // 0.86 PLL setup code modifications for full ARM speed
+ // 0.90 NAND EMIF setting updated
+ // 0.91 Remove PSC interrupt bit setting, tune AEMIF settings, clean comments
+ //      Add separate NAND/NOR settings to match USER_CPLD jumper options
+ // 0.92 Fix A1CR/A2CR swap in Setup_AEMIF_NOR( )
+ // 0.93 Change PINMUX4 so SPI EN0 is active, corresponding change in SPIROM test
+ // 0.94 Enabled pre-load cleanup in OnPreFileLoaded()
+ // 0.95 Enable extended wait cycles for NAND Flash
+ //
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  StartUp( )                                                              *
+ *      Setup Memory Map                                                    *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+StartUp( )
+{
+    Setup_Memory_Map( );
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  OnTargetConnect( )                                                      *
+ *      Setup PinMux, Power, PLLs, DDR, & EMIF                              *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+OnTargetConnect( )
+{
+    GEL_TextOut( "\nDM350EVM ARM Startup Sequence\n\n" );
+
+    Setup_Memory_Map();
+
+    Disable_IRQ_Flush_Cache();          // Clean up system state
+    Setup_Psc_All_On();
+    Setup_Pin_Mux();                    // Setup Pin Mux
+    Setup_PLL1();                       // Configure ARM at 216MHz
+    Setup_PLL2();                       // Confogire DDR at 171MHz
+    Setup_DDR2();                       // Configure DDR2 controller
+    Setup_AEMIF_NAND();                 // Setup AEMIF (CE0 and CE1)
+
+    GEL_TextOut( "\nStartup Complete.\n\n" );
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  OnPreFileLoaded( )                                                      *
+ *      This function is called automatically when the 'Load Program'       *
+ *      Menu item is selected.                                              *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+OnPreFileLoaded( )
+{
+    /*
+     *  GEL_Reset() is used to deal with the worst case senario of
+     *  unknown target state.  If for some reason a reset is not desired
+     *  upon target connection, GEL_Reset() may be removed and replaced
+     *  with something "less brutal" like a cache initialization
+     *  function.
+     */
+    GEL_Reset();
+
+    Disable_VPSS( );                    // Disable VPSS
+    Disable_IRQ_Flush_Cache( );         // Clean up system state
+    Disable_EDMA( );                    // Disable EDMA
+
+    GEL_TextOut( "\n" );
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  OnRestart( )                                                            *
+ *      This function is called by CCS when you do Debug->Restart.          *
+ *      The goal is to put the C6x into a known good state with respect to  *
+ *      cache, edma and interrupts.                                         *
+ *      Failure to do this can cause problems when you restart and          *
+ *      run your application code multiple times.  This is different        *
+ *      then OnPreFileLoaded() which will do a GEL_Reset() to get the       *
+ *      C6x into a known good state.                                        *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+OnRestart( int nErrorCode )
+{
+    Disable_IRQ_Flush_Cache( );         // Clean up system state
+    Disable_EDMA( );                    // Disable EDMA
+
+    GEL_TextOut( "\n" );
+}
+
+menuitem "DM350 EVM Memory Map";
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  Setup_Memory_Map( )                                                     *
+ *      Setup the Memory Map for ARM side only.                             *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+hotmenu
+Setup_Memory_Map( )
+{
+    GEL_MapOn( );
+    GEL_MapReset( );
+
+    /* ARM RAM & ROM */
+    GEL_MapAddStr( 0x00000000, 0, 0x00004000, "R|W|AS4", 0 );   // ARM RAM0 Instruction
+    GEL_MapAddStr( 0x00004000, 0, 0x00004000, "R|W|AS4", 0 );   // ARM RAM1 Instruction
+    GEL_MapAddStr( 0x00008000, 0, 0x00008000, "R|AS4",   0 );   // ARM ROM Instruction
+    GEL_MapAddStr( 0x00010000, 0, 0x00004000, "R|W|AS4", 0 );   // ARM RAM0 Data
+    GEL_MapAddStr( 0x00014000, 0, 0x00004000, "R|W|AS4", 0 );   // ARM RAM1 Data
+    GEL_MapAddStr( 0x00018000, 0, 0x00008000, "R|AS4",   0 );   // ARM ROM Data
+
+    /* Extend Trace */
+    GEL_MapAddStr( 0x01bc0000, 0, 0x00001900, "R|W|AS4", 0 );   // ARM ETB
+
+    /* Peripherals */
+    GEL_MapAddStr( 0x01c00000, 0, 0x00000644, "R|W|AS4", 0 );   // EDMA Channel Ctrl
+    GEL_MapAddStr( 0x01c01000, 0, 0x00000098, "R|W|AS4", 0 );   // EDMA Channel Ctrl
+    GEL_MapAddStr( 0x01c02000, 0, 0x00000098, "R|W|AS4", 0 );   // EDMA Channel Ctrl
+    GEL_MapAddStr( 0x01c02200, 0, 0x00000098, "R|W|AS4", 0 );   // EDMA Channel Ctrl
+    GEL_MapAddStr( 0x01c10000, 0, 0x000003d8, "R|W|AS4", 0 );   // EDMA Transfer Ctrl 0
+    GEL_MapAddStr( 0x01c10400, 0, 0x000003d8, "R|W|AS4", 0 );   // EDMA Transfer Ctrl 1
+    GEL_MapAddStr( 0x01c20000, 0, 0x00000034, "R|W|AS4", 0 );   // UART 0
+    GEL_MapAddStr( 0x01c20400, 0, 0x00000034, "R|W|AS4", 0 );   // UART 1
+    GEL_MapAddStr( 0x01c20800, 0, 0x00000400, "R|W|AS4", 0 );   // * Timer 4/5
+    GEL_MapAddStr( 0x01c20C00, 0, 0x00000400, "R|W|AS4", 0 );   // RTO
+    GEL_MapAddStr( 0x01c21000, 0, 0x0000003c, "R|W|AS4", 0 );   // I2C
+    GEL_MapAddStr( 0x01c21400, 0, 0x00000028, "R|W|AS4", 0 );   // * Timer 0/1
+    GEL_MapAddStr( 0x01c21800, 0, 0x00000028, "R|W|AS4", 0 );   // * Timer 2/3
+    GEL_MapAddStr( 0x01c21c00, 0, 0x0000002c, "R|W|AS4", 0 );   // WDT
+    GEL_MapAddStr( 0x01c22000, 0, 0x0000001c, "R|W|AS4", 0 );   // PWM 0
+    GEL_MapAddStr( 0x01c22400, 0, 0x0000001c, "R|W|AS4", 0 );   // PWM 1
+    GEL_MapAddStr( 0x01c22800, 0, 0x0000001c, "R|W|AS4", 0 );   // PWM 2
+    GEL_MapAddStr( 0x01c22C00, 0, 0x0000001c, "R|W|AS4", 0 );   // PWM 3
+    GEL_MapAddStr( 0x01c40000, 0, 0x00000800, "R|W|AS4", 0 );   // System Module
+    GEL_MapAddStr( 0x01c40800, 0, 0x00000400, "R|W|AS4", 0 );   // PLL 1
+    GEL_MapAddStr( 0x01c40c00, 0, 0x00000400, "R|W|AS4", 0 );   // PLL 2
+    GEL_MapAddStr( 0x01c41000, 0, 0x00001000, "R|W|AS4", 0 );   // PSC Domain Control
+    GEL_MapAddStr( 0x01c48000, 0, 0x00000050, "R|W|AS4", 0 );   // ARM Interrupts
+    GEL_MapAddStr( 0x01c64000, 0, 0x00002000, "R|W|AS4", 0 );   // USB 2.0 + RAM
+    GEL_MapAddStr( 0x01c66000, 0, 0x00000074, "R|W|AS4", 0 );   // SPI0
+    GEL_MapAddStr( 0x01c66800, 0, 0x00000074, "R|W|AS4", 0 );   // SPI1
+    GEL_MapAddStr( 0x01c67000, 0, 0x00000038, "R|W|AS4", 0 );   // GPIO
+    GEL_MapAddStr( 0x01c67800, 0, 0x00000074, "R|W|AS4", 0 );   // SPI2
+    GEL_MapAddStr( 0x01c70000, 0, 0x00010000, "R|W|AS4", 0 );   // VPSS
+    GEL_MapAddStr( 0x01cc0000, 0, 0x00020000, "R|W|AS4", 0 );   // IMCOP
+    GEL_MapAddStr( 0x01e00000, 0, 0x00000078, "R|W|AS4", 0 );   // * MMC / SD1
+    GEL_MapAddStr( 0x01e02000, 0, 0x00002000, "R|W|AS4", 0 );   // McBSP0
+    GEL_MapAddStr( 0x01e04000, 0, 0x00002000, "R|W|AS4", 0 );   // McBSP1    
+    GEL_MapAddStr( 0x01e06000, 0, 0x00000034, "R|W|AS4", 0 );   // UART 2
+    GEL_MapAddStr( 0x01e10000, 0, 0x000000b4, "R|W|AS4", 0 );   // EMIFA Control
+    GEL_MapAddStr( 0x01e11000, 0, 0x00000078, "R|W|AS4", 0 );   // MMC / SD0
+    GEL_MapAddStr( 0x01e12000, 0, 0x00020000, "R|W|AS4", 0 );   // * MS
+    GEL_MapAddStr( 0x01f00000, 0, 0x00020000, "R|W|AS4", 0 );   // IMCOP Memories
+	
+    /* Off-chip */
+    GEL_MapAddStr( 0x02000000, 0, 0x02000000, "R|W|AS4", 0 );   // AEMIF CE0
+    GEL_MapAddStr( 0x04000000, 0, 0x02000000, "R|W|AS4", 0 );   // AEMIF CE1
+
+    /* DDR2 */
+    GEL_MapAddStr( 0x20000000, 0, 0x000000f4, "R|W|AS4", 0 );   // DDR2 Control
+    GEL_MapAddStr( 0x80000000, 0, 0x10000000, "R|W|AS4", 0 );   // DDR2 SDRAM
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  Clear_Memory_Map( )                                                     *
+ *      Clear the Memory Map                                                *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+hotmenu
+Clear_Memory_Map( )
+{
+    GEL_MapOff( );
+    GEL_MapReset( );
+}
+
+menuitem "DM350 EVM Functions";
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  Flush_Cache_Disable_MMU( )                                              *
+ *      Flush Cache & Disable MMU                                           *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+Disable_IRQ_Flush_Cache( )
+{
+    #define INTC_FIQ0            *( int* )( 0x01c48000 )
+    #define INTC_FIQ1            *( int* )( 0x01c48004 )
+    #define INTC_IRQ0            *( int* )( 0x01c48008 )
+    #define INTC_IRQ1            *( int* )( 0x01c4800c )
+    #define INTC_EINT0           *( int* )( 0x01c48018 )
+    #define INTC_EINT1           *( int* )( 0x01c4801c )
+    #define INTC_INTCTL          *( int* )( 0x01c48020 )
+    #define INTC_EABASE          *( int* )( 0x01c48024 )
+
+    GEL_TextOut( "Disable IRQ/FIQ\n" );
+    CPSR = 0x400000D3;                  // Set to supervisor mode, disable IRQ/FIQ
+
+    GEL_TextOut( "Flush Cache\n" );
+    REG_CP15_FLSH_DI;                   // Flush then disable D-Cache & I-Cache
+    REG_CP15_I_CACHE = 1;
+    REG_CP15_D_CACHE = 1;
+
+    GEL_TextOut( "Disable MMU\n" );
+    REG_CP15_MMU = 0;                   // Disable MMU
+
+    INTC_INTCTL = 4;                    // Disable ARM interrupts
+    INTC_EABASE = 0;
+    INTC_EINT0 = 0;
+    INTC_EINT1 = 0;
+
+    INTC_FIQ0 = 0xffffffff;
+    INTC_FIQ1 = 0xffffffff;
+    INTC_IRQ0 = 0xffffffff;
+    INTC_IRQ1 = 0xffffffff;
+
+    _wait( 200 );
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  Disable_VPSS( )                                                         *
+ *      Disable VPFE & VPBE                                                 *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+Disable_VPSS( )
+{
+    #define VPFE_CCDC_PCR       *( unsigned int* )( 0x01C70404 )
+    #define VPBE_PCR            *( unsigned int* )( 0x01C72704 )
+    #define VPBE_VENC_VMOD      *( unsigned int* )( 0x01C72400 )
+    #define VPBE_OSD_MODE       *( unsigned int* )( 0x01C72600 )
+
+    GEL_TextOut( "Disable VPSS\n" );
+    VPFE_CCDC_PCR = 0;          // Disable VPFE.CCDC
+    VPBE_PCR = 1;               // Disable VPBE clock
+    VPBE_VENC_VMOD = 0;         // Disable VPBE.VENC
+    VPBE_OSD_MODE = 0;          // Disable VPBE.OSD
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  Disable_EDMA( )                                                         *
+ *      Disabe EDMA events and interrupts, clear any pending events         *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+Disable_EDMA( )
+{
+    #define EDMA_3CC_IECRH          *( int* )( 0x01C0105C )
+    #define EDMA_3CC_EECRH          *( int* )( 0x01C0102C )
+    #define EDMA_3CC_ICRH           *( int* )( 0x01C01074 )
+    #define EDMA_3CC_ECRH           *( int* )( 0x01C0100C )
+
+    #define EDMA_3CC_IECR           *( int* )( 0x01C01058 )
+    #define EDMA_3CC_EECR           *( int* )( 0x01C01028 )
+    #define EDMA_3CC_ICR            *( int* )( 0x01C01070 )
+    #define EDMA_3CC_ECR            *( int* )( 0x01C01008 )
+
+    GEL_TextOut( "Disable EDMA events\n" );
+    EDMA_3CC_IECRH  = 0xFFFFFFFF;   // IERH ( disable high interrupts )
+    EDMA_3CC_EECRH  = 0xFFFFFFFF;   // EERH ( disable high events )
+    EDMA_3CC_ICRH   = 0xFFFFFFFF;   // ICRH ( clear high interrupts )
+    EDMA_3CC_ECRH   = 0xFFFFFFFF;   // ICRH ( clear high events )
+
+    EDMA_3CC_IECR   = 0xFFFFFFFF;   // IER  ( disable low interrupts )
+    EDMA_3CC_EECR   = 0xFFFFFFFF;   // EER  ( disable low events )
+    EDMA_3CC_ICR    = 0xFFFFFFFF;   // ICR  ( clear low interrupts )
+    EDMA_3CC_ECR    = 0xFFFFFFFF;   // ICRH ( clear low events )
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  Setup_Pin_Mux( )                                                        *
+ *      Configure Pin Multiplexing                                          *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+Setup_Pin_Mux( )
+{
+    GEL_TextOut( "Setup PinMux... " );
+    #define PINMUX0             *( unsigned int* )( 0x01c40000 )
+    #define PINMUX1             *( unsigned int* )( 0x01c40004 )
+    #define PINMUX2             *( unsigned int* )( 0x01c40008 )
+    #define PINMUX3             *( unsigned int* )( 0x01c4000C )
+    #define PINMUX4             *( unsigned int* )( 0x01c40010 )
+
+    PINMUX0 = 0x00007F55;  // All Video Inputs
+    PINMUX1 = 0x00145555;  // All Video Outputs
+    PINMUX2 = 0x00000004;  // EMIFA
+    PINMUX3 = 0x1BFF55FF;  // SPI0, SPI1, UART1, I2C, SD0, SD1, McBSP0, CLKOUTs
+    PINMUX4 = 0x00000000;  // MMC/SD0 instead of MS, SPI0        
+
+    GEL_TextOut( "[Done]\n" );
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  Setup_Psc_All_On( )                                                     *
+ *      Enable all PSC modules on ALWAYSON and DSP power dominas.           *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+Setup_Psc_All_On( )
+{
+    int i;
+    GEL_TextOut( "Setup Power Modules (All on)... " );
+
+    /*
+     *  Enable all non-reserved power modules
+     *  Reserved: 39
+     */
+    for ( i = 0 ; i <= 38 ; i++ )
+        psc_change_state( i , 3 );
+    psc_change_state( 40 , 3 );
+
+    GEL_TextOut( "[Done]\n" );
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  psc_change_state( id, state )                                           *
+ *      id    = Domain #ID                                                  *
+ *      state = ( ENABLE, DISABLE, SYNCRESET, RESET )                       *
+ *              (   =3  ,   =2   ,    =1    ,   =0  )                       *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+psc_change_state( int id, int state )
+{
+    #define PSC_PTCMD           *( unsigned int* )( 0x01c41120 )
+    #define PSC_PTSTAT          *( unsigned int* )( 0x01c41128 )
+    int* mdstat                 = ( int* )( 0x01c41800 + ( 4 * id ) );
+    int* mdctl                  = ( int* )( 0x01c41a00 + ( 4 * id ) );
+    int set_interrupt;
+
+    /*
+     *  Step 0 - Ignore request if the state is already set as is
+     */
+    if ( ( ( *mdstat ) & 0x1f ) == state )
+        return;
+
+    /*
+     *  Step 1 - Wait for PTSTAT.GOSTAT to clear
+     */
+    while( PSC_PTSTAT & 1 );
+
+    /*
+     *  Step 2 - Set MDCTLx.NEXT to new state
+     */
+    *mdctl &= ~0x1f;
+    *mdctl |= state;
+
+    /*
+     *  Step 3 - Start power transition ( set PTCMD.GO to 1 )
+     */
+    PSC_PTCMD |= 1;
+
+    /*
+     *  Step 4 - Wait for PTSTAT.GOSTAT to clear
+     */
+    while( PSC_PTSTAT & 1 );
+
+    /*
+     *  Step 5 - Clear Interrupt
+     */
+    if ( set_interrupt )
+       *mdctl &= ~0x0200;
+}
+
+_wait( int delay )
+{
+    int i;
+    for( i = 0 ; i < delay ; i++ ){}
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  Setup_PLL1( )                                                           *
+ *  CLKIN   = 24MHz                                                         *
+ *  PLL1 =    432MHz                                                        *
+ *  SYSCLK1 = 216MHz (ARM)                                                  *
+ *  SYSCLK2 = 108MHz (Peripherals)                                          *
+ *  SYSCLK3 = 27MHz  (VENC)                                                 *
+ *  SYSCLK4 = 108MHz (VPSS)                                                 *               
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+Setup_PLL1()
+{
+    unsigned int* pll_ctl       = ( unsigned int* )( 0x01c40900 );
+    unsigned int* pll_pllm      = ( unsigned int* )( 0x01c40910 );
+    unsigned int* pll_cmd       = ( unsigned int* )( 0x01c40938 );
+    unsigned int* pll_stat      = ( unsigned int* )( 0x01c4093c );
+    unsigned int* pll_div1      = ( unsigned int* )( 0x01c40918 );
+    unsigned int* pll_div2      = ( unsigned int* )( 0x01c4091c );
+    unsigned int* pll_div3      = ( unsigned int* )( 0x01c40920 );
+    unsigned int* pll_div4      = ( unsigned int* )( 0x01c40960 );
+    unsigned int* pll_bpdiv     = ( unsigned int* )( 0x01c4092c );
+    unsigned int* sysctl_misc   = ( unsigned int* )( 0x01c40038 );
+
+    GEL_TextOut( "Setup PLL1... " );
+
+    *pll_ctl &= ~0x0100;             // Onchip Oscillator
+
+    *pll_ctl &= ~0x0020;             // Clear PLLENSRC
+    *pll_ctl &= ~0x0001;             // Set PLL in bypass
+    _wait( 150 );
+
+    *pll_ctl |= 0x0008;              // Put PLL in reset
+
+    *pll_ctl |= 0x0010;              // Disable PLL
+    *pll_ctl &= ~0x0002;             // Power up PLL
+    *pll_ctl &= ~0x0010;             // Enable PLL
+    _wait( 150 );                    // Wait for PLL to stabilize
+
+    *pll_pllm = 143;                 // PLL1 24 * (143 + 1) / (7 + 1) = 432MHz
+    *pll_div1 |= 0x8000;             // SYSCLK1 = 432MHz / 2 = 216MHz (ARM)
+    *pll_div2 |= 0x8000;             // SYSCLK2 = 432MHz / 4 = 108MHz (Peripherals)
+    *pll_div3 = 0x8000 | 15;         // SYSCLK3 = 432MHz / 16 = 27MHz (VENC)
+    *pll_div4 = 0x8000 | 3;          // SYSCLK4 = 432MHz / 4 = 108MHz (VPSS)
+    _wait (100 );
+    
+    *sysctl_misc &= 0xFFFFFFD;       // Enable high frequency operation
+ 
+    *pll_cmd |= 0x0001;              // Set GOSET
+    while( ( *pll_stat & 1 ) != 0 ); // Wait until complete
+
+    _wait( 2000 );
+    *pll_ctl &= ~0x0008;             // Take PLL out of reset
+
+    _wait( 2000 );
+    *pll_ctl = 0x0001;               // Enable PLL
+
+    GEL_TextOut( "[Done]\n" );
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  Setup_PLL2( )                                                           *
+ *                                                                          *
+ *  CLKIN =   24MHz                                                         *
+ *  SYSCLK1 = 171MHz (DDR PHY)                                              *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+Setup_PLL2()
+{
+    unsigned int* pll_ctl       = ( unsigned int* )( 0x01c40d00 );
+    unsigned int* pll_pllm      = ( unsigned int* )( 0x01c40d10 );
+    unsigned int* pll_cmd       = ( unsigned int* )( 0x01c40d38 );
+    unsigned int* pll_stat      = ( unsigned int* )( 0x01c40d3c );
+    unsigned int* pll_div1      = ( unsigned int* )( 0x01c40d18 );
+    unsigned int* pll_div2      = ( unsigned int* )( 0x01c40d1c );
+    unsigned int* pll_bpdiv     = ( unsigned int* )( 0x01c40d2c );
+
+    GEL_TextOut( "Setup PLL2... " );
+
+    *pll_ctl &= ~0x0100;             // Onchip Oscillator
+
+    *pll_ctl &= ~0x0020;             // Clear PLLENSRC
+    *pll_ctl &= ~0x0001;             // Set PLL in bypass
+    _wait( 150 );
+
+    *pll_ctl |= 0x0008;              // Put PLL in reset
+
+    *pll_ctl |= 0x0010;              // Disable PLL
+    *pll_ctl &= ~0x0002;             // Power up PLL
+    *pll_ctl &= ~0x0010;             // Enable PLL
+    _wait( 150 );                    // Wait for PLL to stabilize
+
+    *pll_pllm = 113;                 // PLL2 24 * (113 + 1) / (7+1) = 342MHz
+    *pll_div1 |= 0x8000;             // SYSCLK1 = 342MHz / 2 = 171MHz (DDR2)
+  
+    *pll_cmd |= 0x0001;              // Set GOSET
+    while( ( *pll_stat & 1 ) != 0 ); // Wait until complete
+
+    _wait( 2000 );
+    *pll_ctl &= ~0x0008;             // Take PLL out of reset
+    
+    _wait( 2000 );
+    *pll_ctl |= 0x0001;             // Enable PLL
+
+    GEL_TextOut( "[Done]\n" );
+}
+
+#define SYSCTL_BASE		 0x01c40000
+#define	DDR_BASE 0x20000000
+#define EIDRR            (unsigned int*)(DDR_BASE + 0x00)    		//EMIF Module ID and Revision Register                                    
+#define SDSTAT           (unsigned int*)(DDR_BASE + 0x04)    		//SDRAM Status Register  
+#define SDCFG1           (unsigned int*)(DDR_BASE + 0x08) 	  		//SDRAM Bank Config Register
+#define SDREF            (unsigned int*)(DDR_BASE + 0x0C) 	  		//SDRAM Refresh Control Register
+#define SDTIM0           (unsigned int*)(DDR_BASE + 0x10) 	  		//SDRAM Timing Register
+#define SDTIM1           (unsigned int*)(DDR_BASE + 0x14) 	  		//SDRAM Timing Register
+#define SDCFG2           (unsigned int*)(DDR_BASE + 0x1C) 	  		//SDRAM Config Register 2
+#define VBUSMP           (unsigned int*)(DDR_BASE + 0x20) 	  		//VBUSM Burst Priority Register
+#define VBUSMCFG1        (unsigned int*)(DDR_BASE + 0x28) 	  		//VBUSM config Value1 Register
+#define VBUSMCFG2        (unsigned int*)(DDR_BASE + 0x2c) 	  		//VBUSM config Value2 Register
+#define PERFCNT1		 (unsigned int*)(DDR_BASE + 0x40)	  		//Performance Counter Register 1
+#define PERFCNT2		 (unsigned int*)(DDR_BASE + 0x44)	  		//Performance Counter Register 2
+#define PERFCNTCFG		 (unsigned int*)(DDR_BASE + 0x48)    		//Performance Counter Config Register
+#define PERFCNTMSTREGSEL (unsigned int*)(DDR_BASE + 0x4C)	  		//Performance Counter Master Region Select Register
+#define INTRAW			 (unsigned int*)(DDR_BASE + 0xC0)    		//Interrupt Raw Register
+#define INTMASK          (unsigned int*)(DDR_BASE + 0xC4)    		//Interrupt Masked Register
+#define INTMASKSET       (unsigned int*)(DDR_BASE + 0xC8)    		//Interrupt Mask Set Register
+#define INTMASKCLR       (unsigned int*)(DDR_BASE + 0xCC)    		//Interrupt Mask Clear Register
+#define DDRPHYREV        (unsigned int*)(DDR_BASE + 0xE0)    		//DDR PHY ID and Revision Register
+#define DDRPHYCTL1       (unsigned int*)(DDR_BASE + 0xE4)    		//DDR PHY Control Register
+#define VTPIOCR		 	 (unsigned int*)(SYSCTL_BASE + 0x70)		//DDR PHY VTP IO Control
+
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  Setup_DDR2( )                                                           *
+ *      Configure DDR2 to run at 171MHz.                                    *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+
+#define DDR_SDBCR           *( unsigned int* )( 0x20000008 )
+#define DDR_SDRCR           *( unsigned int* )( 0x2000000c )
+#define DDR_SDTIMR          *( unsigned int* )( 0x20000010 )
+#define DDR_SDTIMR2         *( unsigned int* )( 0x20000014 )
+#define DDR_DDRPHYCR        *( unsigned int* )( 0x200000e4 )
+
+#define DDR_VTPIOCR         *( unsigned int* )( 0x200000f0 )
+#define DDR_DDRVTPR         *( unsigned int* )( 0x01c42030 )
+#define DDR_DDRVTPER        *( unsigned int* )( 0x01c4004c )
+
+Setup_DDR2( )
+{
+    GEL_TextOut( "Setup DDR2... " );
+
+    /* Turn on DDR2 PHY in PSC */    
+    psc_change_state( 13, 3 );
+    *(VTPIOCR) = *(VTPIOCR) & 0xFFFFDF3F;  // Clear bit CLRZ & PWRDN & LOCK bit(bit 13/6/7)
+    *(VTPIOCR) = *(VTPIOCR) | 0x00002000;  // Set bit CLRZ (bit 13)
+
+    while(!(*(VTPIOCR)&0x8000));
+
+    *(VTPIOCR) = *(VTPIOCR) | 0x00004000;  // Set bit VTP_IO_READY(bit 14)
+    *(VTPIOCR) = *(VTPIOCR) | 0x00000180;  // Set bit LOCK(bit 7) and  PWRSAVE  (bit 8)
+    *(VTPIOCR) = *(VTPIOCR) | 0x00000040;  // Powerdown VTP as it is locked  (bit 6)
+    	
+    /* DDR2 controller initialization */
+    *DDRPHYCTL1 = 0x51006494;	//External DQS gating enabled
+		
+    *SDREF = 0x00000535;		//Program SDRAM Refresh Control Register
+		
+    *VBUSMP = 0x000000FE;		//VBUSM Burst Priority Register, pr_old_count = 0xFE
+    *SDCFG1 = 0x0000C632;		//Program SDRAM Bank Config Register
+	
+    *SDTIM0 =0x2A923249;		//Program SDRAM Timing Control Register1
+    *SDTIM1 =0x3c17C763;		//Program SDRAM Timing Control Register2
+		
+    *SDCFG1 = 0x00004632;		//Program SDRAM Bank Config Register
+
+    GEL_TextOut( "[Done]\n" );
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  setup_aemif( )                                                          *
+ *      Setup Async-EMIF to the specified timings using either NAND Hw      *
+ *      controller or normal EMIF controller                                *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+#define AEMIF_AWCCR             *( unsigned int* )( 0x01e10004 )
+#define AEMIF_A1CR              *( unsigned int* )( 0x01e10010 )
+#define AEMIF_A2CR              *( unsigned int* )( 0x01e10014 )
+#define AEMIF_A3CR              *( unsigned int* )( 0x01e10018 )
+#define AEMIF_A4CR              *( unsigned int* )( 0x01e1001C )
+#define AEMIF_NANDFCR           *( unsigned int* )( 0x01e10060 )
+
+hotmenu
+Setup_AEMIF_NAND( )
+{
+    /* EMIF configuration for J7 in NAND mode */
+    /* Use extended wait cycles to keep CE low during NAND access */
+    AEMIF_AWCCR = 0xff;
+
+    /* Setup CE0 - 8-bit NAND, 9.26ns/cycle */
+    AEMIF_A1CR = 0x40400204;  // Setup=0, Strobe=4, Hold=0, TA=1, 8-bit
+    AEMIF_NANDFCR |= 1;
+
+    /* Setup CE1 - 16-bit normal async, 9.26ns/cycle */
+    AEMIF_A2CR = 0x00a00505;  // Setup=0, Strobe=A, Hold=0, TA=1, 16-bit
+    AEMIF_NANDFCR &= ~2;
+}
+
+hotmenu
+Setup_AEMIF_NOR( )
+{
+    /* EMIF configuration for J7 in NOR mode */
+    /* Use extended wait cycles to keep CE low during NAND access */
+    AEMIF_AWCCR = 0xff;
+
+    /* Setup CE0 - 16-bit normal async, 9.26ns/cycle */
+    AEMIF_A1CR = 0x00a00505;  // Setup=0, Strobe=A, Hold=0, TA=1, 16-bit
+    AEMIF_NANDFCR &= ~1;
+
+    /* Setup CE1 - 8-bit NAND, 9.26ns/cycle */
+    AEMIF_A2CR = 0x40400204;  // Setup=0, Strobe=4, Hold=0, TA=1, 8-bit
+    AEMIF_NANDFCR |= 2;
+}
+

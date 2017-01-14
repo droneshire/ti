@@ -1,0 +1,6 @@
+com.ti.ccstudio.scripting
+com.ti.ccstudio.scripting.environment
+com.ti.debug.engine.scripting
+com.ti.debug.engine.scripting.events
+com.ti.debug.engine.scripting.events.internal
+com.ti.debug.engine.scripting.setup

@@ -1,0 +1,68 @@
+{
+	"IcoMoonType": "selection",
+	"icons": [
+		{
+			"icon": {
+				"paths": [
+					"M508.672 293.205c-62.336 0-113.237 50.603-113.237 112.896 0 62.763 50.901 113.237 113.237 113.237 62.507 0 113.152-50.603 113.152-113.237-0-62.123-50.816-112.896-113.152-112.896z",
+					"M512 85.333l-426.667 426.667 426.837 426.667 426.496-426.581-426.667-426.752zM512 162.901l349.013 349.184-139.947 139.904-108.416-108.587c-27.563 25.515-63.829 40.917-104.021 40.917s-76.672-15.403-104.149-40.917l-104.96 105.088-136.619-136.491 349.099-349.099z"
+				],
+				"attrs": [],
+				"isMulticolor": false,
+				"grid": 0,
+				"tags": [
+					"ic-myti"
+				]
+			},
+			"attrs": [],
+			"properties": {
+				"order": 8,
+				"id": 0,
+				"prevSize": 32,
+				"code": 58880,
+				"name": "myti"
+			},
+			"setIdx": 0,
+			"setId": 0,
+			"iconIdx": 0
+		}
+	],
+	"height": 1024,
+	"metadata": {
+		"name": "ti-icon-fonts"
+	},
+	"preferences": {
+		"showGlyphs": true,
+		"showQuickUse": true,
+		"showQuickUse2": true,
+		"showSVGs": true,
+		"fontPref": {
+			"prefix": "ti-icon-",
+			"metadata": {
+				"fontFamily": "ti-icon-fonts",
+				"majorVersion": 1,
+				"minorVersion": 0
+			},
+			"metrics": {
+				"emSize": 1024,
+				"baseline": 6.25,
+				"whitespace": 50
+			},
+			"embed": false,
+			"autoHost": true
+		},
+		"imagePref": {
+			"prefix": "icon-",
+			"png": true,
+			"useClassSelector": true,
+			"color": 4473924,
+			"bgColor": 16777215
+		},
+		"historySize": 100,
+		"showCodes": false,
+		"quickUsageToken": {
+			"UntitledProject1": "YzYwMGJmMDAzNGY0OTYxMWQxYmI4MDE0YTgxNGQ3MDMjMSMxNDQyMDAxNTAyIyMj"
+		},
+		"fontHostingName": false
+	}
+}

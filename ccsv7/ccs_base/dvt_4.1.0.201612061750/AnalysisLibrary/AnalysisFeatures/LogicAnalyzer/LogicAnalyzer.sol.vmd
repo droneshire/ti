@@ -1,0 +1,1240 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_34" class="java.beans.XMLDecoder"> 
+ <object class="com.ti.dvt.ui.views.core.ViewModel"> 
+  <void property="viewConnectionMgr"> 
+   <void property="connections"> 
+    <void method="add"> 
+     <object class="com.ti.dvt.ui.views.core.ViewConnection"> 
+      <void property="source"> 
+       <string>$Debug.VirtualBuffer</string> 
+      </void> 
+      <void property="target"> 
+       <string>com.ti.dvt.ui.views.table:$Debug.Log</string> 
+      </void> 
+     </object> 
+    </void> 
+    <void method="add"> 
+     <object class="com.ti.dvt.ui.views.core.ViewConnection"> 
+      <void property="source"> 
+       <string>Graph</string> 
+      </void> 
+      <void property="target"> 
+       <string>com.ti.dvt.ui.views.dvtgraph:Logic Analyzer</string> 
+      </void> 
+     </object> 
+    </void> 
+   </void> 
+  </void> 
+  <void property="viewGroupMgr"> 
+   <void property="viewGroups"> 
+    <void method="put"> 
+     <string>Default</string> 
+     <object class="com.ti.dvt.ui.views.core.ViewGroup"> 
+      <void property="memberIDs"> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.state:Trace Analyzer state.1246978812229</string> 
+       </void> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.line:Trace Analyzer line.1246978812745</string> 
+       </void> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.table:Trace Analyzer Trace Display w/ 4 Data Trace Fields</string> 
+       </void> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.tracetableview:Trace Analyzer Trace Display</string> 
+       </void> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.table:Trace Analyzer Log Table</string> 
+       </void> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.state:Trace Analyzer state.1247072904215</string> 
+       </void> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.table:Trace Analyzer table.1246978701745</string> 
+       </void> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.discrete:Trace Analyzer discrete.1246978701354</string> 
+       </void> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.line:Trace Analyzer Program Address vs. Cycle</string> 
+       </void> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.line:Trace Analyzer APA</string> 
+       </void> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.discrete:Trace Analyzer Test</string> 
+       </void> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.discrete:Trace Analyzer Function Execution Graph</string> 
+       </void> 
+      </void> 
+      <void property="name"> 
+       <string>Default</string> 
+      </void> 
+     </object> 
+    </void> 
+    <void method="put"> 
+     <string>PMI_Global</string> 
+     <object class="com.ti.dvt.ui.views.core.ViewGroup"> 
+      <void property="memberIDs"> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.state:PMI Events@1</string> 
+       </void> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.line:Mem OPP</string> 
+       </void> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.state:Mem Power@1</string> 
+       </void> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.line:Logic OPP</string> 
+       </void> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.state:Logic Power@1</string> 
+       </void> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.table:PMI Logs</string> 
+       </void> 
+      </void> 
+      <void property="name"> 
+       <string>PMI_Global</string> 
+      </void> 
+     </object> 
+    </void> 
+    <void method="put"> 
+     <string>STM statistics</string> 
+     <object class="com.ti.dvt.ui.views.core.ViewGroup"> 
+      <void property="memberIDs"> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.line:line.1289845398068</string> 
+       </void> 
+       <void method="add"> 
+        <string>com.ti.dvt.ui.views.table:table.1289845395885</string> 
+       </void> 
+      </void> 
+      <void property="name"> 
+       <string>STM statistics</string> 
+      </void> 
+     </object> 
+    </void> 
+   </void> 
+  </void> 
+  <void property="viewInfoMap"> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.dvtgraph:Logic Analyzer</string> 
+    <object class="com.ti.dvt.ui.views.core.ViewInfo"> 
+     <void property="paneInfoColl"> 
+      <void method="add"> 
+       <object class="com.ti.dvt.ui.views.core.PaneInfo"> 
+        <void property="ID"> 
+         <string>com.ti.dvt.ui.views.dvtgraph:Logic Analyzer</string> 
+        </void> 
+        <void property="properties"> 
+         <object class="com.ti.dvt.ui.views.core.DVTGraphProperty"> 
+          <void property="XDisplayFormat"> 
+           <string>General</string> 
+          </void> 
+          <void property="XFieldName"> 
+           <string>Time</string> 
+          </void> 
+          <void property="XRange"> 
+           <void property="span"> 
+            <double>2000.0</double> 
+           </void> 
+          </void>
+          <void property="XTitle"> 
+           <string>Timing</string> 
+          </void>
+          <void property="YFieldName"> 
+           <string>AllData</string> 
+          </void> 
+          <void property="YRange"> 
+           <void property="end"> 
+            <double>5.0</double> 
+           </void> 
+          </void> 
+		  <void property="alreadySorted"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="autoAssignPresentation"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="axesProps"> 
+           <void index="0"> 
+            <void property="YAxis"> 
+             <void property="displayFormat"> 
+              <string>General</string> 
+             </void> 
+             <void property="labelWidth"> 
+              <int>20</int> 
+             </void> 
+             <void property="title"> 
+              <string>Event Source Name</string> 
+             </void> 
+            </void> 
+           </void> 
+          </void> 
+          <void property="channelColumnDetectName"> 
+           <string>Event Source Name</string> 
+          </void> 
+          <void property="channelDiscovery"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="channelFieldDetectName"> 
+           <string>.*</string> 
+          </void> 
+          <void property="presentationTypeAlias"> 
+           <string>Event=Shape,Msg=Message,Address=Value</string> 
+          </void> 
+          <void property="presentationTypeFieldName"> 
+           <string>Type</string> 
+          </void> 
+          <void property="solutionName"> 
+           <string>LogicAnalyzer</string> 
+          </void> 
+          <void property="stateCategoryMap"> 
+           <void method="put"> 
+            <string>PM.Cortex-A9-C1.Logic Power State</string> 
+            <object class="java.util.ArrayList"> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="label"> 
+                <string>???</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="put"> 
+            <string>IVAHD.MC3.Store</string> 
+            <object class="java.util.ArrayList"> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object id="RGB0" class="org.eclipse.swt.graphics.RGB"> 
+                 <int>0</int> 
+                 <int>128</int> 
+                 <int>0</int> 
+                </object> 
+               </void> 
+               <void property="label"> 
+                <string>Start</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="put"> 
+            <string> Main</string> 
+            <object class="java.util.ArrayList"> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object id="RGB1" class="org.eclipse.swt.graphics.RGB"> 
+                 <int>179</int> 
+                 <int>230</int> 
+                 <int>170</int> 
+                </object> 
+               </void> 
+               <void property="label"> 
+                <string>On</string> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object id="RGB2" class="org.eclipse.swt.graphics.RGB"> 
+                 <int>249</int> 
+                 <int>222</int> 
+                 <int>183</int> 
+                </object> 
+               </void> 
+               <void property="label"> 
+                <string>Ret</string> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object id="RGB3" class="org.eclipse.swt.graphics.RGB"> 
+                 <int>137</int> 
+                 <int>191</int> 
+                 <int>235</int> 
+                </object> 
+               </void> 
+               <void property="label"> 
+                <string>Sleep</string> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object id="RGB4" class="org.eclipse.swt.graphics.RGB"> 
+                 <int>253</int> 
+                 <int>118</int> 
+                 <int>94</int> 
+                </object> 
+               </void> 
+               <void property="label"> 
+                <string>Off</string> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB0"/> 
+               </void> 
+               <void property="label"> 
+                <string>Start</string> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object id="RGB5" class="org.eclipse.swt.graphics.RGB"> 
+                 <int>206</int> 
+                 <int>36</int> 
+                 <int>16</int> 
+                </object> 
+               </void> 
+               <void property="label"> 
+                <string>Stop</string> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="label"> 
+                <string>???</string> 
+               </void> 
+              </object> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="put"> 
+            <string>PM.CAM.Logic Power State</string> 
+            <object class="java.util.ArrayList"> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB1"/> 
+               </void> 
+               <void property="label"> 
+                <string>On</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB4"/> 
+               </void> 
+               <void property="label"> 
+                <string>Off</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="put"> 
+            <string>CortexA9_0.MPU L2.Memory Power State</string> 
+            <object class="java.util.ArrayList"> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB1"/> 
+               </void> 
+               <void property="label"> 
+                <string>On</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="put"> 
+            <string>PM.SRAM MPU.Memory Voltage OPP</string> 
+            <object class="java.util.ArrayList"> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB3"/> 
+               </void> 
+               <void property="label"> 
+                <string>Sleep</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="put"> 
+            <string>PM.CAM.Memory Power State</string> 
+            <object class="java.util.ArrayList"> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB1"/> 
+               </void> 
+               <void property="label"> 
+                <string>On</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB4"/> 
+               </void> 
+               <void property="label"> 
+                <string>Off</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="put"> 
+            <string>PM.DSS.Logic Power State</string> 
+            <object class="java.util.ArrayList"> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB1"/> 
+               </void> 
+               <void property="label"> 
+                <string>On</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="label"> 
+                <string>???</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="put"> 
+            <string>PM.TESLA EDMA.Memory Power State</string> 
+            <object class="java.util.ArrayList"> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB1"/> 
+               </void> 
+               <void property="label"> 
+                <string>On</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB4"/> 
+               </void> 
+               <void property="label"> 
+                <string>Off</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="put"> 
+            <string>IVAHD.ECD3.Load</string> 
+            <object class="java.util.ArrayList"> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB0"/> 
+               </void> 
+               <void property="label"> 
+                <string>Start</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB5"/> 
+               </void> 
+               <void property="label"> 
+                <string>Stop</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="put"> 
+            <string>IVAHD.iCONT1.Task3</string> 
+            <object class="java.util.ArrayList"> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB0"/> 
+               </void> 
+               <void property="label"> 
+                <string>Start</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB5"/> 
+               </void> 
+               <void property="label"> 
+                <string>Stop</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="put"> 
+            <string>IVAHD.ECD3.Computation</string> 
+            <object class="java.util.ArrayList"> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB0"/> 
+               </void> 
+               <void property="label"> 
+                <string>Start</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB5"/> 
+               </void> 
+               <void property="label"> 
+                <string>Stop</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="put"> 
+            <string>IVAHD.iCONT1.Task2</string> 
+            <object class="java.util.ArrayList"> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB0"/> 
+               </void> 
+               <void property="label"> 
+                <string>Start</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB5"/> 
+               </void> 
+               <void property="label"> 
+                <string>Stop</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="put"> 
+            <string>IVAHD.iCONT1.Task1</string> 
+            <object class="java.util.ArrayList"> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB0"/> 
+               </void> 
+               <void property="label"> 
+                <string>Start</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB5"/> 
+               </void> 
+               <void property="label"> 
+                <string>Stop</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="put"> 
+            <string>PM.TESLA L1.Memory Power State</string> 
+            <object class="java.util.ArrayList"> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB1"/> 
+               </void> 
+               <void property="label"> 
+                <string>On</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB4"/> 
+               </void> 
+               <void property="label"> 
+                <string>Off</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="put"> 
+            <string>PM.GFX.Logic Power State</string> 
+            <object class="java.util.ArrayList"> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB1"/> 
+               </void> 
+               <void property="label"> 
+                <string>On</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB4"/> 
+               </void> 
+               <void property="label"> 
+                <string>Off</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="put"> 
+            <string>IVAHD.MC3.Load</string> 
+            <object class="java.util.ArrayList"> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB0"/> 
+               </void> 
+               <void property="label"> 
+                <string>Start</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB5"/> 
+               </void> 
+               <void property="label"> 
+                <string>Stop</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="put"> 
+            <string>PM.MPU L2.Memory Power State</string> 
+            <object class="java.util.ArrayList"> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB1"/> 
+               </void> 
+               <void property="label"> 
+                <string>On</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="label"> 
+                <string>???</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="put"> 
+            <string>PM.SL2.Memory Power State</string> 
+            <object class="java.util.ArrayList"> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB1"/> 
+               </void> 
+               <void property="label"> 
+                <string>On</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB4"/> 
+               </void> 
+               <void property="label"> 
+                <string>Off</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="put"> 
+            <string>PM.IVAHD.Logic Power State</string> 
+            <object class="java.util.ArrayList"> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB1"/> 
+               </void> 
+               <void property="label"> 
+                <string>On</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB4"/> 
+               </void> 
+               <void property="label"> 
+                <string>Off</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="put"> 
+            <string>PM.Cortex-A9-C0.Logic Power State</string> 
+            <object class="java.util.ArrayList"> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="label"> 
+                <string>???</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="put"> 
+            <string>IVAHD.ECD3.Store</string> 
+            <object class="java.util.ArrayList"> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB0"/> 
+               </void> 
+               <void property="label"> 
+                <string>Start</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB5"/> 
+               </void> 
+               <void property="label"> 
+                <string>Stop</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="put"> 
+            <string>PM.MPU.Logic Power State</string> 
+            <object class="java.util.ArrayList"> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB4"/> 
+               </void> 
+               <void property="label"> 
+                <string>Off</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="label"> 
+                <string>???</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="put"> 
+            <string>PM.TESLA L2.Memory Power State</string> 
+            <object class="java.util.ArrayList"> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB2"/> 
+               </void> 
+               <void property="label"> 
+                <string>Ret</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB1"/> 
+               </void> 
+               <void property="label"> 
+                <string>On</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB4"/> 
+               </void> 
+               <void property="label"> 
+                <string>Off</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="put"> 
+            <string>PM.DSS.Memory Power State</string> 
+            <object class="java.util.ArrayList"> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB1"/> 
+               </void> 
+               <void property="label"> 
+                <string>On</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="label"> 
+                <string>???</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="put"> 
+            <string>PM.TESLA.Logic Power State</string> 
+            <object class="java.util.ArrayList"> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB1"/> 
+               </void> 
+               <void property="label"> 
+                <string>On</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB4"/> 
+               </void> 
+               <void property="label"> 
+                <string>Off</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="put"> 
+            <string>PM.GFX.Memory Power State</string> 
+            <object class="java.util.ArrayList"> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB1"/> 
+               </void> 
+               <void property="label"> 
+                <string>On</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB4"/> 
+               </void> 
+               <void property="label"> 
+                <string>Off</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="put"> 
+            <string>IVAHD.MC3.Computation</string> 
+            <object class="java.util.ArrayList"> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB0"/> 
+               </void> 
+               <void property="label"> 
+                <string>Start</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB5"/> 
+               </void> 
+               <void property="label"> 
+                <string>Stop</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="put"> 
+            <string>PM.PERPH MEM.Memory Power State</string> 
+            <object class="java.util.ArrayList"> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB1"/> 
+               </void> 
+               <void property="label"> 
+                <string>On</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB4"/> 
+               </void> 
+               <void property="label"> 
+                <string>Off</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="put"> 
+            <string>CM1.MPU DPLL.Clock Domain State</string> 
+            <object class="java.util.ArrayList"> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB1"/> 
+               </void> 
+               <void property="label"> 
+                <string>On</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="put"> 
+            <string>PM.CORE.Logic Power State</string> 
+            <object class="java.util.ArrayList"> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="label"> 
+                <string>???</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="put"> 
+            <string>IVAHD.iCONT2.Task1</string> 
+            <object class="java.util.ArrayList"> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB5"/> 
+               </void> 
+               <void property="label"> 
+                <string>Stop</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB0"/> 
+               </void> 
+               <void property="label"> 
+                <string>Start</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="put"> 
+            <string>CM1.CORE L4.Clock Source Selection</string> 
+            <object class="java.util.ArrayList"> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB1"/> 
+               </void> 
+               <void property="label"> 
+                <string>On</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+            </object> 
+           </void> 
+           <void method="put"> 
+            <string>IVAHD.iCONT2.Task2</string> 
+            <object class="java.util.ArrayList"> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB5"/> 
+               </void> 
+               <void property="label"> 
+                <string>Stop</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+             <void method="add"> 
+              <object class="com.ti.dvt.ui.views.core.EventPresentationProperty"> 
+               <void property="RGB"> 
+                <object idref="RGB0"/> 
+               </void> 
+               <void property="label"> 
+                <string>Start</string> 
+               </void> 
+               <void property="valueDefined"> 
+                <boolean>false</boolean> 
+               </void> 
+              </object> 
+             </void> 
+            </object> 
+           </void> 
+          </void> 
+         </object> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="title"> 
+      <string>Graph</string> 
+     </void> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:$Debug.Log</string> 
+    <object class="com.ti.dvt.ui.views.core.ViewInfo"> 
+     <void property="paneInfoColl"> 
+      <void method="add"> 
+       <object class="com.ti.dvt.ui.views.core.PaneInfo"> 
+        <void property="ID"> 
+         <string>com.ti.dvt.ui.views.table:$Debug.Log</string> 
+        </void> 
+        <void property="properties"> 
+         <object class="com.ti.dvt.ui.views.core.TableProp"> 
+          <void property="solutionName"> 
+           <string>LogicAnalyzer</string> 
+          </void> 
+         </object> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="title"> 
+      <string>$Debug.Log</string> 
+     </void> 
+    </object> 
+   </void> 
+  </void> 
+ </object> 
+</java> 

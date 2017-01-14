@@ -1,0 +1,7 @@
+myTest()
+{
+	#define TEST       0x020000
+
+  	*(int *)TEST = 0xDEADBEEF;  
+}
+

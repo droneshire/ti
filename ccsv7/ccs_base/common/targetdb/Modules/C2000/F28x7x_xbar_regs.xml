@@ -1,0 +1,188 @@
+<module id="XBAR_REGS" HW_revision="" description="XBAR Registers">
+	<register id="XBARFLG1" width="32" page="1" offset="0x0" internal="0" description="X-Bar Input Flag Register 1">
+		<bitfield id="CMPSS1_CTRIPL" description="Input Flag for CMPSS1.CTRIPL Signal" begin="0" end="0" width="1" rwaccess="R"/>
+		<bitfield id="CMPSS1_CTRIPH" description="Input Flag for CMPSS1.CTRIPH Signal" begin="1" end="1" width="1" rwaccess="R"/>
+		<bitfield id="CMPSS2_CTRIPL" description="Input Flag for CMPSS2.CTRIPL Signal" begin="2" end="2" width="1" rwaccess="R"/>
+		<bitfield id="CMPSS2_CTRIPH" description="Input Flag for CMPSS2.CTRIPH Signal" begin="3" end="3" width="1" rwaccess="R"/>
+		<bitfield id="CMPSS3_CTRIPL" description="Input Flag for CMPSS3.CTRIPL Signal" begin="4" end="4" width="1" rwaccess="R"/>
+		<bitfield id="CMPSS3_CTRIPH" description="Input Flag for CMPSS3.CTRIPH Signal" begin="5" end="5" width="1" rwaccess="R"/>
+		<bitfield id="CMPSS4_CTRIPL" description="Input Flag for CMPSS4.CTRIPL Signal" begin="6" end="6" width="1" rwaccess="R"/>
+		<bitfield id="CMPSS4_CTRIPH" description="Input Flag for CMPSS4.CTRIPH Signal" begin="7" end="7" width="1" rwaccess="R"/>
+		<bitfield id="CMPSS5_CTRIPL" description="Input Flag for CMPSS5.CTRIPL Signal" begin="8" end="8" width="1" rwaccess="R"/>
+		<bitfield id="CMPSS5_CTRIPH" description="Input Flag for CMPSS5.CTRIPH Signal" begin="9" end="9" width="1" rwaccess="R"/>
+		<bitfield id="CMPSS6_CTRIPL" description="Input Flag for CMPSS6.CTRIPL Signal" begin="10" end="10" width="1" rwaccess="R"/>
+		<bitfield id="CMPSS6_CTRIPH" description="Input Flag for CMPSS6.CTRIPH Signal" begin="11" end="11" width="1" rwaccess="R"/>
+		<bitfield id="CMPSS7_CTRIPL" description="Input Flag for CMPSS7.CTRIPL Signal" begin="12" end="12" width="1" rwaccess="R"/>
+		<bitfield id="CMPSS7_CTRIPH" description="Input Flag for CMPSS7.CTRIPH Signal" begin="13" end="13" width="1" rwaccess="R"/>
+		<bitfield id="CMPSS8_CTRIPL" description="Input Flag for CMPSS8.CTRIPL Signal" begin="14" end="14" width="1" rwaccess="R"/>
+		<bitfield id="CMPSS8_CTRIPH" description="Input Flag for CMPSS8.CTRIPH Signal" begin="15" end="15" width="1" rwaccess="R"/>
+		<bitfield id="CMPSS1_CTRIPOUTL" description="Input Flag for CMPSS1.CTRIPOUTL Signal" begin="16" end="16" width="1" rwaccess="R"/>
+		<bitfield id="CMPSS1_CTRIPOUTH" description="Input Flag for CMPSS1.CTRIPOUTH Signal" begin="17" end="17" width="1" rwaccess="R"/>
+		<bitfield id="CMPSS2_CTRIPOUTL" description="Input Flag for CMPSS2.CTRIPOUTL Signal" begin="18" end="18" width="1" rwaccess="R"/>
+		<bitfield id="CMPSS2_CTRIPOUTH" description="Input Flag for CMPSS2.CTRIPOUTH Signal" begin="19" end="19" width="1" rwaccess="R"/>
+		<bitfield id="CMPSS3_CTRIPOUTL" description="Input Flag for CMPSS3.CTRIPOUTL Signal" begin="20" end="20" width="1" rwaccess="R"/>
+		<bitfield id="CMPSS3_CTRIPOUTH" description="Input Flag for CMPSS3.CTRIPOUTH Signal" begin="21" end="21" width="1" rwaccess="R"/>
+		<bitfield id="CMPSS4_CTRIPOUTL" description="Input Flag for CMPSS4.CTRIPOUTL Signal" begin="22" end="22" width="1" rwaccess="R"/>
+		<bitfield id="CMPSS4_CTRIPOUTH" description="Input Flag for CMPSS4.CTRIPOUTH Signal" begin="23" end="23" width="1" rwaccess="R"/>
+		<bitfield id="CMPSS5_CTRIPOUTL" description="Input Flag for CMPSS5.CTRIPOUTL Signal" begin="24" end="24" width="1" rwaccess="R"/>
+		<bitfield id="CMPSS5_CTRIPOUTH" description="Input Flag for CMPSS5.CTRIPOUTH Signal" begin="25" end="25" width="1" rwaccess="R"/>
+		<bitfield id="CMPSS6_CTRIPOUTL" description="Input Flag for CMPSS6.CTRIPOUTL Signal" begin="26" end="26" width="1" rwaccess="R"/>
+		<bitfield id="CMPSS6_CTRIPOUTH" description="Input Flag for CMPSS6.CTRIPOUTH Signal" begin="27" end="27" width="1" rwaccess="R"/>
+		<bitfield id="CMPSS7_CTRIPOUTL" description="Input Flag for CMPSS7.CTRIPOUTL Signal" begin="28" end="28" width="1" rwaccess="R"/>
+		<bitfield id="CMPSS7_CTRIPOUTH" description="Input Flag for CMPSS7.CTRIPOUTH Signal" begin="29" end="29" width="1" rwaccess="R"/>
+		<bitfield id="CMPSS8_CTRIPOUTL" description="Input Flag for CMPSS8.CTRIPOUTL Signal" begin="30" end="30" width="1" rwaccess="R"/>
+		<bitfield id="CMPSS8_CTRIPOUTH" description="Input Flag for CMPSS8.CTRIPOUTH Signal" begin="31" end="31" width="1" rwaccess="R"/>
+	</register>
+	<register id="XBARFLG2" width="32" page="1" offset="0x2" internal="0" description="X-Bar Input Flag Register 2">
+		<bitfield id="INPUT1" description="Input Flag for INPUT1 Signal" begin="0" end="0" width="1" rwaccess="R"/>
+		<bitfield id="INPUT2" description="Input Flag for INPUT2 Signal" begin="1" end="1" width="1" rwaccess="R"/>
+		<bitfield id="INPUT3" description="Input Flag for INPUT3 Signal" begin="2" end="2" width="1" rwaccess="R"/>
+		<bitfield id="INPUT4" description="Input Flag for INPUT4 Signal" begin="3" end="3" width="1" rwaccess="R"/>
+		<bitfield id="INPUT5" description="Input Flag for INPUT5 Signal" begin="4" end="4" width="1" rwaccess="R"/>
+		<bitfield id="INPUT7" description="Input Flag for INPUT7 Signal" begin="5" end="5" width="1" rwaccess="R"/>
+		<bitfield id="ADCSOCAO" description="Input Flag for ADCSOCAO Signal" begin="6" end="6" width="1" rwaccess="R"/>
+		<bitfield id="ADCSOCBO" description="Input Flag for ADCSOCBO Signal" begin="7" end="7" width="1" rwaccess="R"/>
+		<bitfield id="CLB1_4_1" description="Input Flag for CLB1_4.1 Signal" begin="8" end="8" width="1" rwaccess="R"/>
+		<bitfield id="CLB1_5_1" description="Input Flag for CLB1_5.1 Signal" begin="9" end="9" width="1" rwaccess="R"/>
+		<bitfield id="CLB2_4_1" description="Input Flag for CLB2_4.1 Signal" begin="10" end="10" width="1" rwaccess="R"/>
+		<bitfield id="CLB2_5_1" description="Input Flag for CLB2_5.1 Signal" begin="11" end="11" width="1" rwaccess="R"/>
+		<bitfield id="CLB3_4_1" description="Input Flag for CLB3_4.1 Signal" begin="12" end="12" width="1" rwaccess="R"/>
+		<bitfield id="CLB3_5_1" description="Input Flag for CLB3_5.1 Signal" begin="13" end="13" width="1" rwaccess="R"/>
+		<bitfield id="CLB4_4_1" description="Input Flag for CLB4_4.1 Signal" begin="14" end="14" width="1" rwaccess="R"/>
+		<bitfield id="CLB4_5_1" description="Input Flag for CLB4_5.1 Signal" begin="15" end="15" width="1" rwaccess="R"/>
+		<bitfield id="ECAP1_OUT" description="Input Flag for ECAP1.OUT Signal" begin="16" end="16" width="1" rwaccess="R"/>
+		<bitfield id="ECAP2_OUT" description="Input Flag for ECAP2.OUT Signal" begin="17" end="17" width="1" rwaccess="R"/>
+		<bitfield id="ECAP3_OUT" description="Input Flag for ECAP3.OUT Signal" begin="18" end="18" width="1" rwaccess="R"/>
+		<bitfield id="ECAP4_OUT" description="Input Flag for ECAP4.OUT Signal" begin="19" end="19" width="1" rwaccess="R"/>
+		<bitfield id="ECAP5_OUT" description="Input Flag for ECAP5.OUT Signal" begin="20" end="20" width="1" rwaccess="R"/>
+		<bitfield id="ECAP6_OUT" description="Input Flag for ECAP6.OUT Signal" begin="21" end="21" width="1" rwaccess="R"/>
+		<bitfield id="EXTSYNCOUT" description="Input Flag for EXTSYNCOUT Signal" begin="22" end="22" width="1" rwaccess="R"/>
+		<bitfield id="ADCAEVT1" description="Input Flag for ADCAEVT1 Signal" begin="23" end="23" width="1" rwaccess="R"/>
+		<bitfield id="ADCAEVT2" description="Input Flag for ADCAEVT2 Signal" begin="24" end="24" width="1" rwaccess="R"/>
+		<bitfield id="ADCAEVT3" description="Input Flag for ADCAEVT3 Signal" begin="25" end="25" width="1" rwaccess="R"/>
+		<bitfield id="ADCAEVT4" description="Input Flag for ADCAEVT4 Signal" begin="26" end="26" width="1" rwaccess="R"/>
+		<bitfield id="ADCBEVT1" description="Input Flag for ADCBEVT1 Signal" begin="27" end="27" width="1" rwaccess="R"/>
+		<bitfield id="ADCBEVT2" description="Input Flag for ADCBEVT2 Signal" begin="28" end="28" width="1" rwaccess="R"/>
+		<bitfield id="ADCBEVT3" description="Input Flag for ADCBEVT3 Signal" begin="29" end="29" width="1" rwaccess="R"/>
+		<bitfield id="ADCBEVT4" description="Input Flag for ADCBEVT4 Signal" begin="30" end="30" width="1" rwaccess="R"/>
+		<bitfield id="ADCCEVT1" description="Input Flag for ADCCEVT1 Signal" begin="31" end="31" width="1" rwaccess="R"/>
+	</register>
+	<register id="XBARFLG3" width="32" page="1" offset="0x4" internal="0" description="X-Bar Input Flag Register 3">
+		<bitfield id="ADCCEVT2" description="Input Flag for ADCCEVT2 Signal" begin="0" end="0" width="1" rwaccess="R"/>
+		<bitfield id="ADCCEVT3" description="Input Flag for ADCCEVT3 Signal" begin="1" end="1" width="1" rwaccess="R"/>
+		<bitfield id="ADCCEVT4" description="Input Flag for ADCCEVT4 Signal" begin="2" end="2" width="1" rwaccess="R"/>
+		<bitfield id="ADCDEVT1" description="Input Flag for ADCDEVT1 Signal" begin="3" end="3" width="1" rwaccess="R"/>
+		<bitfield id="ADCDEVT2" description="Input Flag for ADCDEVT2 Signal" begin="4" end="4" width="1" rwaccess="R"/>
+		<bitfield id="ADCDEVT3" description="Input Flag for ADCDEVT3 Signal" begin="5" end="5" width="1" rwaccess="R"/>
+		<bitfield id="ADCDEVT4" description="Input Flag for ADCDEVT4 Signal" begin="6" end="6" width="1" rwaccess="R"/>
+		<bitfield id="SD1FLT1_COMPL" description="Input Flag for SD1FLT1.COMPL Signal" begin="7" end="7" width="1" rwaccess="R"/>
+		<bitfield id="SD1FLT1_COMPH" description="Input Flag for SD1FLT1.COMPH Signal" begin="8" end="8" width="1" rwaccess="R"/>
+		<bitfield id="SD1FLT2_COMPL" description="Input Flag for SD1FLT2.COMPL Signal" begin="9" end="9" width="1" rwaccess="R"/>
+		<bitfield id="SD1FLT2_COMPH" description="Input Flag for SD1FLT2.COMPH Signal" begin="10" end="10" width="1" rwaccess="R"/>
+		<bitfield id="SD1FLT3_COMPL" description="Input Flag for SD1FLT3.COMPL Signal" begin="11" end="11" width="1" rwaccess="R"/>
+		<bitfield id="SD1FLT3_COMPH" description="Input Flag for SD1FLT3.COMPH Signal" begin="12" end="12" width="1" rwaccess="R"/>
+		<bitfield id="SD1FLT4_COMPL" description="Input Flag for SD1FLT4.COMPL Signal" begin="13" end="13" width="1" rwaccess="R"/>
+		<bitfield id="SD1FLT4_COMPH" description="Input Flag for SD1FLT4.COMPH Signal" begin="14" end="14" width="1" rwaccess="R"/>
+		<bitfield id="SD2FLT1_COMPL" description="Input Flag for SD2FLT1.COMPL Signal" begin="15" end="15" width="1" rwaccess="R"/>
+		<bitfield id="SD2FLT1_COMPH" description="Input Flag for SD2FLT1.COMPH Signal" begin="16" end="16" width="1" rwaccess="R"/>
+		<bitfield id="SD2FLT2_COMPL" description="Input Flag for SD2FLT2.COMPL Signal" begin="17" end="17" width="1" rwaccess="R"/>
+		<bitfield id="SD2FLT2_COMPH" description="Input Flag for SD2FLT2.COMPH Signal" begin="18" end="18" width="1" rwaccess="R"/>
+		<bitfield id="SD2FLT3_COMPL" description="Input Flag for SD2FLT3.COMPL Signal" begin="19" end="19" width="1" rwaccess="R"/>
+		<bitfield id="SD2FLT3_COMPH" description="Input Flag for SD2FLT3.COMPH Signal" begin="20" end="20" width="1" rwaccess="R"/>
+		<bitfield id="SD2FLT4_COMPL" description="Input Flag for SD2FLT4.COMPL Signal" begin="21" end="21" width="1" rwaccess="R"/>
+		<bitfield id="SD2FLT4_COMPH" description="Input Flag for SD2FLT4.COMPH Signal" begin="22" end="22" width="1" rwaccess="R"/>
+	</register>
+	<register id="XBARCLR1" width="32" page="1" offset="0x8" internal="0" description="X-Bar Input Flag Clear Register 1">
+		<bitfield id="CMPSS1_CTRIPL" description="Input Flag Clear for CMPSS1.CTRIPL Signal" begin="0" end="0" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CMPSS1_CTRIPH" description="Input Flag Clear for CMPSS1.CTRIPH Signal" begin="1" end="1" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CMPSS2_CTRIPL" description="Input Flag Clear for CMPSS2.CTRIPL Signal" begin="2" end="2" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CMPSS2_CTRIPH" description="Input Flag Clear for CMPSS2.CTRIPH Signal" begin="3" end="3" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CMPSS3_CTRIPL" description="Input Flag Clear for CMPSS3.CTRIPL Signal" begin="4" end="4" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CMPSS3_CTRIPH" description="Input Flag Clear for CMPSS3.CTRIPH Signal" begin="5" end="5" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CMPSS4_CTRIPL" description="Input Flag Clear for CMPSS4.CTRIPL Signal" begin="6" end="6" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CMPSS4_CTRIPH" description="Input Flag Clear for CMPSS4.CTRIPH Signal" begin="7" end="7" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CMPSS5_CTRIPL" description="Input Flag Clear for CMPSS5.CTRIPL Signal" begin="8" end="8" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CMPSS5_CTRIPH" description="Input Flag Clear for CMPSS5.CTRIPH Signal" begin="9" end="9" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CMPSS6_CTRIPL" description="Input Flag Clear for CMPSS6.CTRIPL Signal" begin="10" end="10" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CMPSS6_CTRIPH" description="Input Flag Clear for CMPSS6.CTRIPH Signal" begin="11" end="11" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CMPSS7_CTRIPL" description="Input Flag Clear for CMPSS7.CTRIPL Signal" begin="12" end="12" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CMPSS7_CTRIPH" description="Input Flag Clear for CMPSS7.CTRIPH Signal" begin="13" end="13" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CMPSS8_CTRIPL" description="Input Flag Clear for CMPSS8.CTRIPL Signal" begin="14" end="14" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CMPSS8_CTRIPH" description="Input Flag Clear for CMPSS8.CTRIPH Signal" begin="15" end="15" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CMPSS1_CTRIPOUTL" description="Input Flag Clear for CMPSS1.CTRIPOUTL Signal" begin="16" end="16" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CMPSS1_CTRIPOUTH" description="Input Flag Clear for CMPSS1.CTRIPOUTH Signal" begin="17" end="17" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CMPSS2_CTRIPOUTL" description="Input Flag Clear for CMPSS2.CTRIPOUTL Signal" begin="18" end="18" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CMPSS2_CTRIPOUTH" description="Input Flag Clear for CMPSS2.CTRIPOUTH Signal" begin="19" end="19" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CMPSS3_CTRIPOUTL" description="Input Flag Clear for CMPSS3.CTRIPOUTL Signal" begin="20" end="20" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CMPSS3_CTRIPOUTH" description="Input Flag Clear for CMPSS3.CTRIPOUTH Signal" begin="21" end="21" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CMPSS4_CTRIPOUTL" description="Input Flag Clear for CMPSS4.CTRIPOUTL Signal" begin="22" end="22" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CMPSS4_CTRIPOUTH" description="Input Flag Clear for CMPSS4.CTRIPOUTH Signal" begin="23" end="23" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CMPSS5_CTRIPOUTL" description="Input Flag Clear for CMPSS5.CTRIPOUTL Signal" begin="24" end="24" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CMPSS5_CTRIPOUTH" description="Input Flag Clear for CMPSS5.CTRIPOUTH Signal" begin="25" end="25" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CMPSS6_CTRIPOUTL" description="Input Flag Clear for CMPSS6.CTRIPOUTL Signal" begin="26" end="26" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CMPSS6_CTRIPOUTH" description="Input Flag Clear for CMPSS6.CTRIPOUTH Signal" begin="27" end="27" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CMPSS7_CTRIPOUTL" description="Input Flag Clear for CMPSS7.CTRIPOUTL Signal" begin="28" end="28" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CMPSS7_CTRIPOUTH" description="Input Flag Clear for CMPSS7.CTRIPOUTH Signal" begin="29" end="29" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CMPSS8_CTRIPOUTL" description="Input Flag Clear for CMPSS8.CTRIPOUTL Signal" begin="30" end="30" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CMPSS8_CTRIPOUTH" description="Input Flag Clear for CMPSS8.CTRIPOUTH Signal" begin="31" end="31" width="1" rwaccess="R=0/W=1"/>
+	</register>
+	<register id="XBARCLR2" width="32" page="1" offset="0xa" internal="0" description="X-Bar Input Flag Clear Register 2">
+		<bitfield id="INPUT1" description="Input Flag Clear for INPUT1 Signal" begin="0" end="0" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="INPUT2" description="Input Flag Clear for INPUT2 Signal" begin="1" end="1" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="INPUT3" description="Input Flag Clear for INPUT3 Signal" begin="2" end="2" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="INPUT4" description="Input Flag Clear for INPUT4 Signal" begin="3" end="3" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="INPUT5" description="Input Flag Clear for INPUT5 Signal" begin="4" end="4" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="INPUT7" description="Input Flag Clear for INPUT7 Signal" begin="5" end="5" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="ADCSOCAO" description="Input Flag Clear for ADCSOCAO Signal" begin="6" end="6" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="ADCSOCBO" description="Input Flag Clear for ADCSOCBO Signal" begin="7" end="7" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CLB1_4_1" description="Input Flag Clear for CLB1_4.1 Signal" begin="8" end="8" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CLB1_5_1" description="Input Flag Clear for CLB1_5.1 Signal" begin="9" end="9" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CLB2_4_1" description="Input Flag Clear for CLB2_4.1 Signal" begin="10" end="10" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CLB2_5_1" description="Input Flag Clear for CLB2_5.1 Signal" begin="11" end="11" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CLB3_4_1" description="Input Flag Clear for CLB3_4.1 Signal" begin="12" end="12" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CLB3_5_1" description="Input Flag Clear for CLB3_5.1 Signal" begin="13" end="13" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CLB4_4_1" description="Input Flag Clear for CLB4_4.1 Signal" begin="14" end="14" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="CLB4_5_1" description="Input Flag Clear for CLB4_5.1 Signal" begin="15" end="15" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="ECAP1_OUT" description="Input Flag Clear for ECAP1.OUT Signal" begin="16" end="16" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="ECAP2_OUT" description="Input Flag Clear for ECAP2.OUT Signal" begin="17" end="17" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="ECAP3_OUT" description="Input Flag Clear for ECAP3.OUT Signal" begin="18" end="18" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="ECAP4_OUT" description="Input Flag Clear for ECAP4.OUT Signal" begin="19" end="19" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="ECAP5_OUT" description="Input Flag Clear for ECAP5.OUT Signal" begin="20" end="20" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="ECAP6_OUT" description="Input Flag Clear for ECAP6.OUT Signal" begin="21" end="21" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="EXTSYNCOUT" description="Input Flag Clear for EXTSYNCOUT Signal" begin="22" end="22" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="ADCAEVT1" description="Input Flag Clear for ADCAEVT1 Signal" begin="23" end="23" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="ADCAEVT2" description="Input Flag Clear for ADCAEVT2 Signal" begin="24" end="24" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="ADCAEVT3" description="Input Flag Clear for ADCAEVT3 Signal" begin="25" end="25" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="ADCAEVT4" description="Input Flag Clear for ADCAEVT4 Signal" begin="26" end="26" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="ADCBEVT1" description="Input Flag Clear for ADCBEVT1 Signal" begin="27" end="27" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="ADCBEVT2" description="Input Flag Clear for ADCBEVT2 Signal" begin="28" end="28" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="ADCBEVT3" description="Input Flag Clear for ADCBEVT3 Signal" begin="29" end="29" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="ADCBEVT4" description="Input Flag Clear for ADCBEVT4 Signal" begin="30" end="30" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="ADCCEVT1" description="Input Flag Clear for ADCCEVT1 Signal" begin="31" end="31" width="1" rwaccess="R=0/W=1"/>
+	</register>
+	<register id="XBARCLR3" width="32" page="1" offset="0xc" internal="0" description="X-Bar Input Flag Clear Register 3">
+		<bitfield id="ADCCEVT2" description="Input Flag Clear for ADCCEVT2 Signal" begin="0" end="0" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="ADCCEVT3" description="Input Flag Clear for ADCCEVT3 Signal" begin="1" end="1" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="ADCCEVT4" description="Input Flag Clear for ADCCEVT4 Signal" begin="2" end="2" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="ADCDEVT1" description="Input Flag Clear for ADCDEVT1 Signal" begin="3" end="3" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="ADCDEVT2" description="Input Flag Clear for ADCDEVT2 Signal" begin="4" end="4" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="ADCDEVT3" description="Input Flag Clear for ADCDEVT3 Signal" begin="5" end="5" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="ADCDEVT4" description="Input Flag Clear for ADCDEVT4 Signal" begin="6" end="6" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="SD1FLT1_COMPL" description="Input Flag Clear for SD1FLT1.COMPL Signal" begin="7" end="7" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="SD1FLT1_COMPH" description="Input Flag Clear for SD1FLT1.COMPH Signal" begin="8" end="8" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="SD1FLT2_COMPL" description="Input Flag Clear for SD1FLT2.COMPL Signal" begin="9" end="9" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="SD1FLT2_COMPH" description="Input Flag Clear for SD1FLT2.COMPH Signal" begin="10" end="10" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="SD1FLT3_COMPL" description="Input Flag Clear for SD1FLT3.COMPL Signal" begin="11" end="11" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="SD1FLT3_COMPH" description="Input Flag Clear for SD1FLT3.COMPH Signal" begin="12" end="12" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="SD1FLT4_COMPL" description="Input Flag Clear for SD1FLT4.COMPL Signal" begin="13" end="13" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="SD1FLT4_COMPH" description="Input Flag Clear for SD1FLT4.COMPH Signal" begin="14" end="14" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="SD2FLT1_COMPL" description="Input Flag Clear for SD2FLT1.COMPL Signal" begin="15" end="15" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="SD2FLT1_COMPH" description="Input Flag Clear for SD2FLT1.COMPH Signal" begin="16" end="16" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="SD2FLT2_COMPL" description="Input Flag Clear for SD2FLT2.COMPL Signal" begin="17" end="17" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="SD2FLT2_COMPH" description="Input Flag Clear for SD2FLT2.COMPH Signal" begin="18" end="18" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="SD2FLT3_COMPL" description="Input Flag Clear for SD2FLT3.COMPL Signal" begin="19" end="19" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="SD2FLT3_COMPH" description="Input Flag Clear for SD2FLT3.COMPH Signal" begin="20" end="20" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="SD2FLT4_COMPL" description="Input Flag Clear for SD2FLT4.COMPL Signal" begin="21" end="21" width="1" rwaccess="R=0/W=1"/>
+		<bitfield id="SD2FLT4_COMPH" description="Input Flag Clear for SD2FLT4.COMPH Signal" begin="22" end="22" width="1" rwaccess="R=0/W=1"/>
+	</register>
+</module>

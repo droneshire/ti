@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  TI File $Revision: /main/1 $
+  Checkin $Date: August 5, 2009   17:02:35 $
+  -->
+
+
+<!-- TMS320C2000 A/D Converter Registers
+     ===================================
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     -->
+<module id="ADC" HW_revision="" XML_version="1" description="ADC Registers">
+	<register id="ADCTRL1" acronym="ADCTRL1" offset="0" page="1" width="16" description="ADC Control Register 1" />
+	<register id="ADCTRL2" acronym="ADCTRL2" offset="1" page="1" width="16" description="ADC Control Register 2" />
+	<register id="ADCMAXCONV" acronym="ADCMAXCONV" offset="2" page="1" width="16" description="ADC Maximum Conversion Channels Register" />
+	<register id="ADCCHSELSEQ1" acronym="ADCCHSELSEQ1" offset="3" page="1" width="16" description="ADC Channel Select Sequencing Control Register 1" />
+	<register id="ADCCHSELSEQ2" acronym="ADCCHSELSEQ2" offset="4" page="1" width="16" description="ADC Channel Select Sequencing Control Register 2" />
+	<register id="ADCCHSELSEQ3" acronym="ADCCHSELSEQ3" offset="5" page="1" width="16" description="ADC Channel Select Sequencing Control Register 3" />
+	<register id="ADCCHSELSEQ4" acronym="ADCCHSELSEQ4" offset="6" page="1" width="16" description="ADC Channel Select Sequencing Control Register 4" />
+	<register id="ADCASEQSR" acronym="ADCASEQSR" offset="7" page="1" width="16" description="ADC Auto-Sequence Status Register" />
+	<register id="ADCRESULT0" acronym="ADCRESULT0" offset="8" page="1" width="16" description="ADC Conversion Result Buffer Register 0" />
+	<register id="ADCRESULT1" acronym="ADCRESULT1" offset="9" page="1" width="16" description="ADC Conversion Result Buffer Register 1" />
+	<register id="ADCRESULT2" acronym="ADCRESULT2" offset="10" page="1" width="16" description="ADC Conversion Result Buffer Register 2" />
+	<register id="ADCRESULT3" acronym="ADCRESULT3" offset="11" page="1" width="16" description="ADC Conversion Result Buffer Register 3" />
+	<register id="ADCRESULT4" acronym="ADCRESULT4" offset="12" page="1" width="16" description="ADC Conversion Result Buffer Register 4" />
+	<register id="ADCRESULT5" acronym="ADCRESULT5" offset="13" page="1" width="16" description="ADC Conversion Result Buffer Register 5" />
+	<register id="ADCRESULT6" acronym="ADCRESULT6" offset="14" page="1" width="16" description="ADC Conversion Result Buffer Register 6" />
+	<register id="ADCRESULT7" acronym="ADCRESULT7" offset="15" page="1" width="16" description="ADC Conversion Result Buffer Register 7" />
+	<register id="ADCRESULT8" acronym="ADCRESULT8" offset="16" page="1" width="16" description="ADC Conversion Result Buffer Register 8" />
+	<register id="ADCRESULT9" acronym="ADCRESULT9" offset="17" page="1" width="16" description="ADC Conversion Result Buffer Register 9" />
+	<register id="ADCRESULT10" acronym="ADCRESULT10" offset="18" page="1" width="16" description="ADC Conversion Result Buffer Register 10" />
+	<register id="ADCRESULT11" acronym="ADCRESULT11" offset="19" page="1" width="16" description="ADC Conversion Result Buffer Register 11" />
+	<register id="ADCRESULT12" acronym="ADCRESULT12" offset="20" page="1" width="16" description="ADC Conversion Result Buffer Register 12" />
+	<register id="ADCRESULT13" acronym="ADCRESULT13" offset="21" page="1" width="16" description="ADC Conversion Result Buffer Register 13" />
+	<register id="ADCRESULT14" acronym="ADCRESULT14" offset="22" page="1" width="16" description="ADC Conversion Result Buffer Register 14" />
+	<register id="ADCRESULT15" acronym="ADCRESULT15" offset="23" page="1" width="16" description="ADC Conversion Result Buffer Register 15" />							
+	<register id="ADCTRL3" acronym="ADCTRL3" offset="24" page="1" width="16" description="ADC Control Register 3" />
+	<register id="ADCST" acronym="ADCST" offset="25" page="1" width="16" description="ADC Status Register" />
+	<!-- 2 empty -->        
+	<register id="ADCREFSEL" acronym="ADCREFSEL" offset="28" page="1" width="16" description="ADC Reference Select Register" /> 
+	<register id="ADCOFFTRIM" acronym="ADCOFFTRIM" offset="29" page="1" width="16" description="ADC Offset Trim Register" /> 
+</module>
+

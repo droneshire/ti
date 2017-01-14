@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<board  id="DEVKITRESDCDCF2808" XML_version="1" desc="Developer's Kit - Resonant DC/DC (F2808)" description="Resonant DC/DC Developer's Kit (F2808)">
+    <instance XML_version="1.2" href="devices/f2808.xml" id="F2808" xml="f2808.xml" xmlpath="." /> 
+</board>

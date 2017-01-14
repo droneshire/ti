@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<board 	id="EZDSPF28335" XML_version="1" desc="EZDSPF28335" description="Spectrum Digital eZdspF28335 Board">
+    <instance XML_version="1.2" href="devices/f28335.xml" id="F28335" xml="f28335.xml" xmlpath="." /> 
+</board>

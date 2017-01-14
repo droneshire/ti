@@ -1,0 +1,48 @@
+<div class="modal-header">
+    Dependencies
+</div>
+<div>
+    <div class="info-text">
+        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+        <span class="text" ng-model="messageHeader"> {{ messageHeader }}</span>
+    </div>
+    <table class="table table-hover">
+        <tbody>
+            <tr ng-repeat="dependency in dependencies"
+                ng-class="{'checkbox-highlight': dependency.selected}">
+                <td>
+                    <div class="checkbox"
+                         ng-click="toggleSelection(dependency)"
+                         style="width: 92%">
+                        <input type="checkbox"
+                               ng-disabled="dependency.isMandatory"
+                               ng-model="dependency.selected"
+                               ng-click="$event.stopPropagation()">
+                        <span class="name"> {{ dependency.name }} </span>
+                        <span class="version"
+                              ng-hide="{{ dependency.version === '' || dependency.version === undefined }}"> - {{ dependency.version }}</span>
+                        <span class="badge"
+                              ng-hide="{{ dependency.size === '' || dependency.size === undefined }} "> {{ dependency.size }} </span>
+                        <span class="message italic"> {{ dependency.message }} </span>
+                    </div>
+                    <div class="description"
+                         data-toggle="tooltip"
+                         title="Dependency Information"
+                         tooltip-placement="right"
+                         ng-click="dependency.showDescription = !dependency.showDescription">
+                        <i class="glyphicon glyphicon-list-alt" aria-hidden="true"></i>
+                    </div>
+                    <div class="description-box">
+                        <div class="well nav" ng-hide="!dependency.showDescription"> {{ dependency.description }}</div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default"
+            ng-click="install()">OK</button>
+    <button type="button" class="btn btn-default"
+            ng-click="cancel()">Cancel</button>
+</div>

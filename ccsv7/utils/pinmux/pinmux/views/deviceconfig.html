@@ -1,0 +1,44 @@
+<span>
+	<table id="defaultConfigTable" style="float:left" ng-show="!loading">
+		<tr>
+			<td style="font-weight:bold;width:94px;">Board:</td>
+			<td ng-class="getDropdownClass()">
+				<select ng-focus="deviceConfigChildSetFocus(true)"  ng-blur="deviceConfigChildSetFocus(false)" class="form-control select-form-control"  ng-model="selectedBoard" ng-options="board.name for board in boards"></select>
+			</td>
+		</tr>
+		<tr>
+			<td style="font-weight:bold;width:94px;">Device:</td>
+			<td ng-class="getDropdownClass()">
+				<select ng-focus="deviceConfigChildSetFocus(true)"  ng-blur="deviceConfigChildSetFocus(false)" ng-disabled="isBoard" id="{{idPreFix}}DeviceSelect" class="form-control select-form-control"  ng-model="selectedDeviceDescription" ng-options="deviceDescription.name for deviceDescription in devices"></select>
+			</td>
+		</tr>
+		<tr>
+			<td style="font-weight:bold;">Part:</td>
+			<td ng-class="getDropdownClass()">
+				<select ng-focus="deviceConfigChildSetFocus(true)"  ng-blur="deviceConfigChildSetFocus(false)" ng-disabled="isBoard" id="{{idPreFix}}PartSelect" class="form-control select-form-control" ng-model="selectedPart"  ng-options="part.name for part in selectedDeviceDescription.part | orderBy:$root.natural('name')"></select>
+			</td>
+		</tr>
+		<tr>
+			<td style="font-weight:bold;">Package:</td>
+			<td ng-class="getDropdownClass()">
+				<select ng-focus="deviceConfigChildSetFocus(true)"  ng-blur="deviceConfigChildSetFocus(false)" ng-disabled="isBoard" id="{{idPreFix}}PackageSelect" class="form-control select-form-control" ng-model="selectedPackage" ng-options="package.name for package in selectedPart.packageDescriptions | orderBy:$root.natural('name')"></select>
+			</td>
+		</tr>
+	
+		<tr>
+			<td></td>
+			<td style="padding-top:4px;">
+				<button class="configureBtn" id="{{idPreFix}}ConfigureBtn" href="" ng-click="configurePins()">Start</button>
+			</td>
+		</tr>
+	</table>
+	
+	<div style="width:100%;padding-top:10px;" ng-show="loading">
+		<span style="font-size:16px;">Loading available device information...</span>
+<div class="progress">
+	<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+		style="width:100%">
+	</div>
+</div>
+</div>
+</span>

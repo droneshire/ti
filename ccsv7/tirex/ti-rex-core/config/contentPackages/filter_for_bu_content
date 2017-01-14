@@ -1,0 +1,50 @@
+exclude **/.git*
+# Mixing include and exclude patterns requires us to be explicit
+# about the paths that we keep.  If we don't keep a parent directory
+# explicitly, then any path for children is automatically excluded.
+include /ti-rex/
+include /ti-rex/git/
+include /ti-rex/git/ti-rex-content/
+
+include /ti-rex/git/ti-rex-content/cc26xx_bluetooth_smart/
+# include /ti-rex/git/ti-rex-content/cc26xx_bluetooth_smart/cc26xx_bluetooth_smart__2.01.00.44423/
+exclude /ti-rex/git/ti-rex-content/cc26xx_bluetooth_smart/*
+
+include /ti-rex/git/ti-rex-content/cc3200_simplelink_wifi/
+# include /ti-rex/git/ti-rex-content/cc3200_simplelink_wifi/cc3200_simplelink_wifi__1.1.0.0/
+exclude /ti-rex/git/ti-rex-content/cc3200_simplelink_wifi/*
+
+include /ti-rex/git/ti-rex-content/mspware/
+# include /ti-rex/git/ti-rex-content/mspware/mspware__2.40.00.37/
+exclude /ti-rex/git/ti-rex-content/mspware/*
+
+# this is a link
+include /ti-rex/git/ti-rex-content/MSPware/
+# include /ti-rex/git/ti-rex-content/MSPware/energia-0101E0016
+exclude /ti-rex/git/ti-rex-content/MSPware/*
+# back up to here
+
+#include /ti-rex/git/ti-rex-content/energia/
+
+include /ti-rex/git/ti-rex-content/project0/
+# include /ti-rex/git/ti-rex-content/project0/project0__1.00.00.01/
+exclude /ti-rex/git/ti-rex-content/project0/*
+
+include /ti-rex/git/ti-rex-content/sitara/
+# include /ti-rex/git/ti-rex-content/sitara/sitara__1.02.00.00/
+exclude /ti-rex/git/ti-rex-content/sitara/*
+
+include /ti-rex/git/ti-rex-content/ti-rtos_tivac/
+# include /ti-rex/git/ti-rex-content/ti-rtos_tivac/ti-rtos_tivac__2.14.04.31/
+exclude /ti-rex/git/ti-rex-content/ti-rtos_tivac/*
+
+exclude /ti-rex/git/ti-rex-content/zips/***
+
+# Note all rules are matched in order - the first match is considered the
+# winner.  But note also, that rules are reapplied for each successive
+# directory from the root down, so they work a bit weirdly.
+# Delete all files and directories unmatched above from /packages/
+exclude /ti-rex/git/ti-rex-content/*
+exclude /ti-rex/git/*
+exclude /ti-rex/*
+

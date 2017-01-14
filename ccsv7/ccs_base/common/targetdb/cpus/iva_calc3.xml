@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cpu id="TMS192C2000" isa="hidden" HW_revision="1.0" XML_version="1.0" description="IVA CALC3 Accelerator">
+    <register id="CALC_PID"                   acronym="CALC_PID"                   width="32" description="CALC3 PID register"/>
+    <register id="CALC_COUNT"                 acronym="CALC_COUNT"                 width="32" description="CALC3 cycle counter register"/>
+    <register id="CALC_CTRL"                  acronym="CALC_CTRL"                  width="32" description="CALC3 control register"/>
+    <register id="CALC_TEST"                  acronym="CALC_TEST"                  width="32" description="CALC3 test register"/>
+    <register id="CALC_MODE"                  acronym="CALC_MODE"                  width="32" description="CALC3 mode select register"/>
+    <register id="CALC_FWDQ_RND_INTRA"        acronym="CALC_FWDQ_RND_INTRA"        width="32" description="CALC3 forward quantiation's rounding coefficients and shift offsets for intra MB"/>
+    <register id="CALC_FWDQ_RND_INTER"        acronym="CALC_FWDQ_RND_INTER"        width="32" description="CALC3 forward quantiation's rounding coefficients and shift offsets for inter MB"/>
+    <register id="CALC_VP7_MB_FEATURE_DATA_3" acronym="CALC_VP7_MB_FEATURE_DATA_3" width="32" description="Pre-assigned parameter register for the destination pitch of VP7"/>
+    <register id="CALC_FWDQ_RND_INTRA_DC"     acronym="CALC_FWDQ_RND_INTRA_DC"     width="32" description="Round offset value setting for fwd Q, intra and DC coefficient"/>
+    <register id="CALC_FWDQ_RND_INTER_DC"     acronym="CALC_FWDQ_RND_INTER_DC"     width="32" description="Round offset value setting for fwd Q, inter and DC coefficient"/>
+
+    <instance href="..\Modules\ihwa\iva_debug.xml" id="Debug" xml="iva_debug.xml" xmlpath="..\Modules\ihwa\" HW_revision="1.0" description="IVA IHWA Debug Registers" requestor="TMS192C2000" baseaddr="0" size="0" accessnumbytes="4" permissions="rw"/>
+    <instance href="..\Modules\ihwa\iva_syncbox.xml" id="SyncBox" xml="iva_syncbox.xml" xmlpath="..\Modules\ihwa\" HW_revision="1.0" description="IVA IHWA SyncBox Registers" requestor="TMS192C2000" baseaddr="0" size="0" accessnumbytes="4" permissions="rw"/>
+</cpu>

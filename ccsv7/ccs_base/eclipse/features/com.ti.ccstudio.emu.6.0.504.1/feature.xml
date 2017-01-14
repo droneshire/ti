@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+	id="com.ti.ccstudio.emu.6.0.504.1"
+	label="Emulation and Analysis Tools"
+	version="6.0.504.1">
+
+	<copyright>Copyright Texas Instruments 2016</copyright>
+
+   <description url="http://ti.com">
+      Describe what this feature does.
+   </description>
+
+   <license url="http://www.ti.com/myregisteredsoftware">
+      This patch is delivered to you under the license terms that you agreed to when activating Code Composer Studio.  You can view your specific license agreement by visiting www.ti.com/myregisteredsoftware and clicking on &quot;View EULA&quot; under your Code Composer Studio activation.
+   </license>
+</feature>

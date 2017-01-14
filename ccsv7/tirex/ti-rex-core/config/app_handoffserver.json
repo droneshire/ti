@@ -1,0 +1,21 @@
+{
+    "//": "NOTE: The properties below override the ones in app_default.json",
+    "mode": "remoteserver",
+    "subMode": "handoffserver",
+    "myHttpPort": "4002",
+    "webComponentsServer": "http://dev-sl.ti.com/components",
+    "contentPath": "~/ti/tirex-handoffserver/content",
+    "dbPath": "~/ti/tirex-handoffserver/.db",
+    "contentPackagesConfig": "~/ti/tirex-handoffserver/content/config/default.json",
+    "downloadsCache": "~/ti/tirex-handoffserver/.downloads",
+    "ccsCloudUrl": "{ccs-url}",
+    "logsDir": "~/ti/tirex-handoffserver/.logs",
+    "analyticsDir": "~/ti/tirex-handoffserver/.tirex-analytics-data",
+    "remoteBundleZips": "",
+    "refreshDB": "false",
+    "allowRefreshFromWeb": "true",
+    "seaportHostIP": "127.0.0.1",
+    "seaportPort": "8002",
+    "myRole": ""
+}
+

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<breakpoints xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="breakpoints.xsd">
+
+  <breakpoint type="AET">
+    <property>
+      <name>Hardware Configuration</name>
+      <property>
+        <name>Type</name>
+        <string>Trace</string>
+        <property>
+          <name>STM Trace Type</name>
+          <string>Performance Probe</string>
+          <property>
+            <name>Use Cases</name>
+            <string>ThroughPut per Sampling Period</string>
+            <property>
+              <name>Subsystem Type</name>
+              <string>EMIF2_SYS</string>
+            </property>
+            <property>
+              <name>Transaction Filter</name>
+              <string></string>
+              <property>
+                <name>Initiator Enable</name>
+                <string>All Initiators</string>
+              </property>
+              <property>
+                <name>ReqInfo Setting</name>
+                <string></string>
+                <property>
+                  <name>Priority[2]</name>
+                  <string>Don't Care</string>
+                </property>
+                <property>
+                  <name>Priority[1]</name>
+                  <string>Don't Care</string>
+                </property>
+                <property>
+                  <name>Priority[0]</name>
+                  <string>Don't Care</string>
+                </property>
+                <property>
+                  <name>DMA_Channel_ID[4]</name>
+                  <string>Don't Care</string>
+                </property>
+                <property>
+                  <name>DMA_Channel_ID[3]</name>
+                  <string>Don't Care</string>
+                </property>
+                <property>
+                  <name>DMA_Channel_ID[2]</name>
+                  <string>Don't Care</string>
+                </property>
+                <property>
+                  <name>DMA_Channel_ID[1]</name>
+                  <string>Don't Care</string>
+                </property>
+                <property>
+                  <name>DMA_Channel_ID[0]</name>
+                  <string>Don't Care</string>
+                </property>
+                <property>
+                  <name>Valid CPU ID</name>
+                  <string>Don't Care</string>
+                </property>
+                <property>
+                  <name>Invalid CPU ID</name>
+                  <string>Don't Care</string>
+                </property>
+                <property>
+                  <name>Endianness</name>
+                  <string>Don't Care</string>
+                </property>
+                <property>
+                  <name>Domain 2</name>
+                  <string>Don't Care</string>
+                </property>
+                <property>
+                  <name>Domain 1</name>
+                  <string>Don't Care</string>
+                </property>
+                <property>
+                  <name>Domain 0</name>
+                  <string>Don't Care</string>
+                </property>
+                <property>
+                  <name>Secure Mode</name>
+                  <string>Don't Care</string>
+                </property>
+                <property>
+                  <name>Debug Mode</name>
+                  <string>Don't Care</string>
+                </property>
+                <property>
+                  <name>Supervisor</name>
+                  <string>Don't Care</string>
+                </property>
+                <property>
+                  <name>Type[0]</name>
+                  <string>Don't Care</string>
+                </property>
+              </property>
+            </property>
+            <property>
+              <name>Transaction Type</name>
+              <string>Read and Write</string>
+            </property>
+            <property>
+              <name>Sample Window Size</name>
+              <integer>4095</integer>
+            </property>
+          </property>
+          <property>
+            <name>Trigger Type</name>
+            <string>Permanent</string>
+          </property>
+          <property>
+            <name>Export Type</name>
+            <string>Auto</string>
+          </property>
+          <property>
+            <name>Dump Mode</name>
+            <string>Unconditional</string>
+          </property>
+        </property>
+      </property>
+    </property>
+    <property>
+      <name>Miscellaneous</name>
+      <property>
+        <name>Group</name>
+        <string>Default Group</string>
+      </property>
+      <property>
+        <name>Name</name>
+        <string>Throughput RW EMIF2</string>
+      </property>
+    </property>
+    <enabled>0</enabled>
+  </breakpoint>
+
+</breakpoints>

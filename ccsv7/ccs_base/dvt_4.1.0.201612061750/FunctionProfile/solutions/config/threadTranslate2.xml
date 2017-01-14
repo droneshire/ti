@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<translate name="ProfileTranslate2">
+   	<passthru name="Thread"	input="Thread$valid"/>
+	<passthruAll>
+	   	<removeField name="Thread"/>
+	</passthruAll>
+</translate>

@@ -1,0 +1,133 @@
+﻿
+<!--
+
+	This file based on the CortexA9 Register base. Currenly, it only supports MMUv7 mode of the
+	A15 MMU and not the LPAE.
+	
+    /*__________________________________________________________________________*/
+    /* Coprocessor 15 - MMU and Configuration control Registers                 */
+    /*__________________________________________________________________________*/
+	CP15 now supports two translation table base registers: TTBR0 and TTBR1. 
+	The N most significant address bits of a virtual address use TTBR0
+	in virtual addresses that use TTBR0; 0 < N < 7. The device resets with N equal to zero, 
+	meaning all virtual addresses
+	use TTBR0, otherwise the address space 0-232-N will use TTBR0 and other addresses will
+	use TTBR1. The size of the first level page table required for TTBR0 will vary from 128
+	bytes to 16kB depending on the value of N, offering additional scope for memory savings
+	in resource critical systems, particularly where multiple tables are held in memory and
+	swapped on a context switch by updating the translation base register.
+	
+    
+    REG_CTXA15_CP15_C2_TTBCR : Translation table base control register (defines "N")
+    REG_CTXA15_CP15_C2_TTBR0 : Translation table base register 0          
+    REG_CTXA15_CP15_C2_TTBR1 : Translation table base register 1  
+    REG_CTXA15_CP15_C3_DACR  : Domain Access Control Register 
+
+-->
+<Register>
+	<Name>CPSR</Name>
+	<SymbolName>CPSR</SymbolName>
+	<Address>-1</Address>
+	<LengthInMAUs>4</LengthInMAUs>
+	<NumRegistersInSet>1</NumRegistersInSet>
+	<MemoryPageNumber>0</MemoryPageNumber>
+	<IsMemoryMapped>false</IsMemoryMapped>
+	<IsRegValueReadOnHalt>true</IsRegValueReadOnHalt>
+	<IsRegValueSetDuringPrefetch>false</IsRegValueSetDuringPrefetch>
+	<IsRegValueContextRestoreReqd>false</IsRegValueContextRestoreReqd>
+	<RegDecoder>GetModeStatusString</RegDecoder>
+	<RegDecoder>GetThumbModeStatusString</RegDecoder>
+</Register>
+<Register>
+	<Name>MmuStatus</Name>
+	<SymbolName>REG_SYSTEM_MMU_STATUS</SymbolName>
+	<Address>-1</Address>
+	<LengthInMAUs>4</LengthInMAUs>
+	<NumRegistersInSet>1</NumRegistersInSet>
+	<MemoryPageNumber>0</MemoryPageNumber>
+	<IsMemoryMapped>false</IsMemoryMapped>
+	<IsRegValueReadOnHalt>true</IsRegValueReadOnHalt>
+	<IsRegValueSetDuringPrefetch>false</IsRegValueSetDuringPrefetch>
+	<IsRegValueContextRestoreReqd>false</IsRegValueContextRestoreReqd>
+	<RegDecoder>IsMmuEnabled</RegDecoder>
+</Register>
+<Register>
+	<Name>MmuControl</Name>
+	<SymbolName>REG_SYSTEM_MMU_STATUS</SymbolName>
+	<Address>-1</Address>
+	<LengthInMAUs>4</LengthInMAUs>
+	<NumRegistersInSet>1</NumRegistersInSet>
+	<MemoryPageNumber>0</MemoryPageNumber>
+	<IsMemoryMapped>false</IsMemoryMapped>
+	<IsRegValueReadOnHalt>true</IsRegValueReadOnHalt>
+	<IsRegValueSetDuringPrefetch>false</IsRegValueSetDuringPrefetch>
+	<IsRegValueContextRestoreReqd>false</IsRegValueContextRestoreReqd>
+	<RegDecoder>IsMmuEnabled</RegDecoder>
+</Register>
+<Register>
+	<Name>MmuTranslationTableBaseControlReg</Name>
+	<SymbolName>REG_CTXA15_CP15_C2_TTBCR</SymbolName>
+	<Address>-1</Address>
+	<LengthInMAUs>4</LengthInMAUs>
+	<NumRegistersInSet>1</NumRegistersInSet>
+	<MemoryPageNumber>0</MemoryPageNumber>
+	<IsMemoryMapped>false</IsMemoryMapped>
+	<IsRegValueReadOnHalt>true</IsRegValueReadOnHalt>
+	<IsRegValueSetDuringPrefetch>false</IsRegValueSetDuringPrefetch>
+	<IsRegValueContextRestoreReqd>false</IsRegValueContextRestoreReqd>
+	<RegDecoder>GetTTBR1CutoverAdrs</RegDecoder>
+</Register>
+<Register>
+	<Name>MmuTranslationTableReg0BaseAdrs</Name>
+	<SymbolName>REG_CTXA15_CP15_C2_TTBR0_64B</SymbolName>
+	<Address>-1</Address>
+	<LengthInMAUs>4</LengthInMAUs>
+	<NumRegistersInSet>1</NumRegistersInSet>
+	<MemoryPageNumber>0</MemoryPageNumber>
+	<IsMemoryMapped>false</IsMemoryMapped>
+	<IsRegValueReadOnHalt>true</IsRegValueReadOnHalt>
+	<IsRegValueSetDuringPrefetch>false</IsRegValueSetDuringPrefetch>
+	<IsRegValueContextRestoreReqd>false</IsRegValueContextRestoreReqd>
+	<RegDecoder>GetTranslationTableBaseAdrs</RegDecoder>
+</Register>
+<Register>
+	<Name>MmuTranslationTableReg1BaseAdrs</Name>
+	<SymbolName>REG_CTXA15_CP15_C2_TTBR1_64B</SymbolName>
+	<Address>-1</Address>
+	<LengthInMAUs>4</LengthInMAUs>
+	<NumRegistersInSet>1</NumRegistersInSet>
+	<MemoryPageNumber>0</MemoryPageNumber>
+	<IsMemoryMapped>false</IsMemoryMapped>
+	<IsRegValueReadOnHalt>true</IsRegValueReadOnHalt>
+	<IsRegValueSetDuringPrefetch>false</IsRegValueSetDuringPrefetch>
+	<IsRegValueContextRestoreReqd>false</IsRegValueContextRestoreReqd>
+	<RegDecoder>GetTranslationTableBaseAdrs</RegDecoder>
+</Register>
+<Register>
+	<Name>MmuDACR</Name>
+	<SymbolName>REG_CTXA15_CP15_C3_DACR</SymbolName>
+	<Address>-1</Address>
+	<LengthInMAUs>4</LengthInMAUs>
+	<NumRegistersInSet>1</NumRegistersInSet>
+	<MemoryPageNumber>0</MemoryPageNumber>
+	<IsMemoryMapped>false</IsMemoryMapped>
+	<IsRegValueReadOnHalt>true</IsRegValueReadOnHalt>
+	<IsRegValueSetDuringPrefetch>false</IsRegValueSetDuringPrefetch>
+	<IsRegValueContextRestoreReqd>false</IsRegValueContextRestoreReqd>
+	<RegDecoder>Getb1_b0</RegDecoder>
+	<RegDecoder>Getb3_b2</RegDecoder>
+	<RegDecoder>Getb5_b4</RegDecoder>
+	<RegDecoder>Getb7_b6</RegDecoder>
+	<RegDecoder>Getb9_b8</RegDecoder>
+	<RegDecoder>Getb11_b10</RegDecoder>
+	<RegDecoder>Getb13_b12</RegDecoder>
+	<RegDecoder>Getb15_b14</RegDecoder>
+	<RegDecoder>Getb17_b16</RegDecoder>
+	<RegDecoder>Getb19_b18</RegDecoder>
+	<RegDecoder>Getb21_b20</RegDecoder>
+	<RegDecoder>Getb23_b22</RegDecoder>
+	<RegDecoder>Getb25_b24</RegDecoder>
+	<RegDecoder>Getb27_b26</RegDecoder>
+	<RegDecoder>Getb29_b28</RegDecoder>
+	<RegDecoder>Getb31_b30</RegDecoder>
+</Register>

@@ -1,0 +1,42 @@
+// TI - specific additions and overrides
+// osohm 5/22/2014
+
+// TI additions
+
+// show dropdown menu on hover
+// from: http://stackoverflow.com/questions/8878033/how-to-make-twitter-bootstrap-menu-dropdown-on-hover-rather-than-click
+ul.nav li.dropdown:hover > ul.dropdown-menu {
+    display: block;    
+}
+
+// copy of .dropdown-menu with TI overrides as marked
+
+// The dropdown menu (ul)
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: @zindex-dropdown;
+  display: none; // none by default, but block on "open" of the menu
+  float: left;
+  min-width: 160px;
+  padding: 5px 0;
+  margin: 2px 0 0; // override default ul
+  list-style: none;
+  font-size: @font-size-base;
+  background-color: @dropdown-bg;
+  border: 2px solid @dropdown-fallback-border; // IE8 fallback,    osohm 5/22/2014: 2px
+  border: 2px solid @dropdown-border; 							// osohm 5/22/2014: 2px
+  border-top-width: 0px; 										// osohm 5/22/2014: no top border
+  border-radius: 0px; // @border-radius-base; 					   osohm 5/22/2014: no rounded corners
+  .box-shadow(0 0px 0px rgba(0,0,0,0)); 						// osohm 5/22/2014: no shadow
+  background-clip: padding-box;
+
+  // Aligns the dropdown menu to right
+  //
+  // Deprecated as of 3.1.0 in favor of `.dropdown-menu-[dir]`
+  &.pull-right {
+    right: 0;
+    left: auto;
+  }
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- 
+  TI File $Revision: 
+  Checkin $Date: 
+  --> 
+
+<!--  C28M36x EPI REGS Registers 
+     =================================== 
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     --> 
+<module id="EPI REGS" HW_revision="" XML_version="1" description="EPI REGS Registers">
+    <register id="CEPIRTWCFG" acronym="CEPIRTWCFG" offset="0" page="1" width="32" description="Real Time Window Configure Register" />
+    <register id="CEPIRTWCNT" acronym="CEPIRTWCNT" offset="2" page="1" width="32" description="Real Time Window Counter Register" />
+    <register id="CEPIRTWPRD" acronym="CEPIRTWPRD" offset="4" page="1" width="32" description="Real Time Window Period Register" />
+    <!--  1 empty  -->
+    <!--  1 empty  -->
+    <register id="CEPISTATUS" acronym="CEPISTATUS" offset="10" page="1" width="32" description="EPI Status Register" />
+    <!--  1 empty  -->
+    <!--  1 empty  -->
+</module>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="Memory Throughput Analysis" basedir=".">
+
+	<property name="dvt.activity.name" value="Hardware Trace Analyzer/${ant.project.name}"/>
+  	<property name="dvt.activity.description" value="Graphs the memory access throughput (MB/s) and/or&#10;the number of bus cycles spent waiting to access memory."/>
+
+
+   	<property name="uc_name" value="Memory_Throughput_Analysis" />
+	<property name="technology" value="Hardware System Trace" /><!-- UIA, Sim -->
+
+	<dvt.import file="../../scripts/MemoryThroughputAnalysisDialog.js"/>
+	<dvt.import file="../../scripts/SystemTrace.js"/>	
+	
+	<dvt.property>
+		version=1.0.0
+		dvt.activity.names=CSSTM
+		dvt.activity.priority = 70
+
+		<!-- Data Provider and AF information-->
+		dataproviders=Trace
+		Trace.name=Trace Viewer
+		Trace.analyzer=Memory Throughput,Minimum Average Latency
+	</dvt.property>
+	
+</project>

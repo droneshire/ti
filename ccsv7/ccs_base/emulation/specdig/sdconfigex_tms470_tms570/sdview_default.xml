@@ -1,0 +1,44 @@
+<SDView>
+  <EmulatorClass id="XDS510PP">XDS510PP-SPI515
+    <Emulator id="XDS510PP_278">278
+      <Panel id="Emu">Emu</Panel>
+      <Panel id="TMS470-TMS570">TMS470-TMS570</Panel>
+      </Emulator>  
+    <Emulator id="XDS510PP_378">378
+       <Panel id="Emu">Emu</Panel>
+       <Panel id="TMS470-TMS570">TMS470-TMS570</Panel>
+    </Emulator>  
+    <Emulator id="XDS510PP_3BC">3BC
+       <Panel id="Emu">Emu</Panel>
+       <Panel id="TMS470-TMS570">TMS470-TMS570</Panel>
+    </Emulator>  
+  </EmulatorClass>
+  <EmulatorClass id="XDS510USB">XDS510USB
+    <Emulator id="XDS510USB_510">510
+       <Panel id="Emu">Emu</Panel>
+       <Panel id="XDS510USB-PLUS">XDS510USB-PLUS</Panel>
+       <Panel id="TMS470-TMS570">TMS470-TMS570</Panel>
+    </Emulator>  
+    <Emulator id="XDS510USB_511">511
+       <Panel id="Emu">Emu</Panel>
+       <Panel id="XDS510USB-PLUS">XDS510USB-PLUS</Panel>
+       <Panel id="TMS470-TMS570">TMS470-TMS570</Panel>
+    </Emulator>
+    <Emulator id="XDS510USB_512">512
+       <Panel id="Emu">Emu</Panel>
+       <Panel id="XDS510USB-PLUS">XDS510USB-PLUS</Panel>
+       <Panel id="TMS470-TMS570">TMS470-TMS570</Panel>
+    </Emulator>  
+    <Emulator id="XDS510USB_513">513
+       <Panel id="Emu">Emu</Panel>
+       <Panel id="XDS510USB-PLUS">XDS510USB-PLUS</Panel>
+       <Panel id="TMS470-TMS570">TMS470-TMS570</Panel>
+    </Emulator>  
+  </EmulatorClass>
+  <EmulatorClass id="SPI525">SPI525
+    <Emulator id="SPI525_100">100
+     <Panel id="Emu">Emu</Panel>
+     <Panel id="TMS470-TMS570">TMS470-TMS570</Panel>
+    </Emulator>  
+  </EmulatorClass>
+</SDView>

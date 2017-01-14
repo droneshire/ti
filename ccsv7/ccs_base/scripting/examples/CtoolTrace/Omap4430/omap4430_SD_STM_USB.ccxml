@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configurations XML_version="1.2" id="configurations_0">
+<configuration XML_version="1.2" id="Spectrum Digital XDS560V2 STM USB Emulator_0">
+        <instance XML_version="1.2" desc="Spectrum Digital XDS560V2 STM USB Emulator_0" href="connections\SD560V2USB_Connection.xml" id="Spectrum Digital XDS560V2 STM USB Emulator_0" xml="SD560V2USB_Connection.xml" xmlpath="connections"/>
+        <connection XML_version="1.2" id="Spectrum Digital XDS560V2 STM USB Emulator_0">
+            <instance XML_version="1.2" href="drivers\tixds560icepick_d.xml" id="drivers" xml="tixds560icepick_d.xml" xmlpath="drivers"/>
+            <instance XML_version="1.2" href="drivers\tixds560c646x.xml" id="drivers" xml="tixds560c646x.xml" xmlpath="drivers"/>
+            <instance XML_version="1.2" href="drivers\tixds560arm9.xml" id="drivers" xml="tixds560arm9.xml" xmlpath="drivers"/>
+            <instance XML_version="1.2" href="drivers\tixds560cs_dap.xml" id="drivers" xml="tixds560cs_dap.xml" xmlpath="drivers"/>
+            <instance XML_version="1.2" href="drivers\tixds560cortexM.xml" id="drivers" xml="tixds560cortexM.xml" xmlpath="drivers"/>
+            <instance XML_version="1.2" href="drivers\tixds560dap_pc.xml" id="drivers" xml="tixds560dap_pc.xml" xmlpath="drivers"/>
+            <instance XML_version="1.2" href="drivers\tixds560cortexA9.xml" id="drivers" xml="tixds560cortexA9.xml" xmlpath="drivers"/>
+            <instance XML_version="1.2" href="drivers\tixds560csstm.xml" id="drivers" xml="tixds560csstm.xml" xmlpath="drivers"/>
+            <instance XML_version="1.2" href="drivers\tixds560etbcs.xml" id="drivers" xml="tixds560etbcs.xml" xmlpath="drivers"/>
+            <property Type="choicelist" Value="2" id="JTAG TCLK Frequency (MHz)">
+                <choice Name="Fixed with user specified faster value" value="specific">
+                    <property Type="stringfield" Value="10" id="-- Enter a value from 0.5MHz to 64.0MHz"/>
+                </choice>
+            </property>
+            <property Type="choicelist" Value="1" id="TMS/TDO Output Timing"/>
+            <platform XML_version="1.2" id="platform_0">
+                <instance XML_version="1.2" desc="OMAP4430_0" href="Devices\OMAP4430.xml" id="OMAP4430_0" xml="OMAP4430.xml" xmlpath="Devices"/>
+                <device HW_revision="1" XML_version="1.2" description="OMAP4" id="OMAP4430_0" partnum="OMAP4430" simulation="no">
+                    <router HW_revision="1.0" XML_version="1.2" description="ICEPick_D Router" id="IcePick_D_0" isa="ICEPICK_D">
+                        <subpath id="subpath_5">
+                            <router HW_revision="1.0" XML_version="1.2" description="CS_DAP Router" id="CS_DAP_0" isa="CS_DAP">
+                                <subpath id="ChironSS">
+                                    <router HW_revision="1.0" XML_version="1.2" description="CS_DAP_PC Router" id="CS_DAP_PC_0" isa="CS_DAP_PC">
+                                        <subpath id="cortex_a9_1">
+                                            <property Type="numericfield" Value="0x1" desc="Port Number_0" id="Port Number"/>
+                                            <property Type="choicelist" Value="1" desc="Type_0" id="Type"/>
+                                        <cpu HW_revision="1.0" XML_version="1.2" description="CortexA9 CPU" deviceSim="false" id="CortexA9_1" isa="CortexA9">
+                                                <property Type="numericfield" Value="2" id="TraceDeviceId"/>
+                                            </cpu>
+                                        </subpath>
+                                        <property Type="numericfield" Value="0x4b6b902f" desc="DAP TAP ID_0" id="DAP TAP ID"/>
+                                    <subpath id="cortex_a9_0">
+                                            <cpu HW_revision="1.0" XML_version="1.2" description="CortexA9 CPU" deviceSim="false" id="CortexA9_0" isa="CortexA9">
+                                                <property Type="filepathfield" Value="..\..\emulation\gel\omap4gel\omap4430_startup.gel" id="GEL File"/>
+                                            <property Type="numericfield" Value="1" id="TraceDeviceId"/>
+                                            </cpu>
+                                        </subpath>
+                                    </router>
+                                </subpath>
+                                <property Type="numericfield" Value="0x4b6b902f" desc="DAP TAP ID_1" id="DAP TAP ID"/>
+                            <property Type="filepathfield" Value="..\..\emulation\gel\omap4gel\omap4430_dap_startup.gel" id="GEL File"/>
+                            </router>
+                        </subpath>
+                    <property Type="filepathfield" Value="..\..\emulation\gel\omap4gel\omap4430_ICEPickD_Utility.gel" id="GEL File"/>
+                    <subpath id="subpath_3">
+                            <router HW_revision="1.0" XML_version="1.2" description="CS_DAP Router" id="CS_DAP_1" isa="CS_DAP">
+                                <subpath id="cortexm3_1">
+                                    <cpu HW_revision="1.0" XML_version="1.2" desc="Cortex_M3_RTOS" description="Cortex_M3 CPU" deviceSim="false" id="Cortex_M3_0" isa="Cortex_M3">
+                                        <property Type="numericfield" Value="3" id="TraceDeviceId"/>
+                                    </cpu>
+                                </subpath>
+                            </router>
+                        </subpath>
+                        <subpath id="subpath_4">
+                            <router HW_revision="1.0" XML_version="1.2" description="CS_DAP Router" id="CS_DAP_2" isa="CS_DAP">
+                                <subpath id="cortexm3_2">
+                                    <cpu HW_revision="1.0" XML_version="1.2" desc="Cortex_M3_ISS" description="Cortex_M3 CPU" deviceSim="false" id="Cortex_M3_1" isa="Cortex_M3">
+                                        <property Type="numericfield" Value="4" id="TraceDeviceId"/>
+                                    </cpu>
+                                </subpath>
+                            </router>
+                        </subpath>
+                    <subpath id="subpath_1">
+                            <cpu HW_revision="1.0" XML_version="1.2" description="The ARM9 Core" deviceSim="false" id="arm9_0" isa="ARM9">
+                                <property Type="numericfield" Value="5" id="TraceDeviceId"/>
+                            </cpu>
+                        </subpath>
+                        <subpath id="subpath_2">
+                            <cpu HW_revision="1.0" XML_version="1.2" description="The ARM9 Core" deviceSim="false" id="arm9_1" isa="ARM9">
+                                <property Type="numericfield" Value="6" id="TraceDeviceId"/>
+                            </cpu>
+                        </subpath>
+                        <subpath id="subpath_0">
+                            <cpu HW_revision="1.0" XML_version="1.2" description="C64x+ MiniGEM CPU" deviceSim="false" id="C646X_0" isa="TMS320C646X">
+                                <property Type="numericfield" Value="7" id="TraceDeviceId"/>
+                            </cpu>
+                        </subpath>
+                    </router>
+                </device>
+            </platform>
+        </connection>
+    </configuration>
+</configurations>

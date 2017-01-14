@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  TI File $Revision: /main/2 $
+  Checkin $Date: November 5, 2010   14:50:18 $
+  -->
+
+
+<!-- TMS320C2000 External Interface Registers
+     ========================================
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     -->
+
+
+
+<module id="XINTF" HW_revision="" XML_version="1" description="External Interface Configuration and Control">
+	<register id="XTIMING0" acronym="XTIMING0" offset="0" page="1" width="32" description="XINTF Timing Register, Zone 0" /> 
+	<register id="XTIMING6" acronym="XTIMING6" offset="12" page="1" width="32" description="XINTF Timing Register, Zone 6" /> 
+	<register id="XTIMING7" acronym="XTIMING7" offset="14" page="1" width="32" description="XINTF Timing Register, Zone 7" /> 
+	<register id="XINTCNF2" acronym="XINTCNF2" offset="20" page="1" width="32" description="XINTF Configuration Register" /> 
+	<register id="XBANK" acronym="XBANK" offset="24" page="1" width="16" description="XINTF Bank Control Register" /> 
+	<register id="XREVISION" acronym="XREVISION" offset="26" page="1" width="16" description="XINTF Revision Register" /> 
+	<register id="XRESET" acronym="XRESET" offset="29" page="1" width="16" description="XINTF Reset Register" />  
+</module>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="breakpoints">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="group" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="breakpoint" type="breakpoint_type" minOccurs="0" maxOccurs="unbounded"/>					
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>	
+	
+	<xs:complexType name="breakpoint_type">
+		<xs:sequence>
+			<xs:element name="property" type="property_type" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="enabled" type="xs:boolean"/>
+		</xs:sequence>
+		<xs:attribute name="type" type="xs:string"/>
+	</xs:complexType>
+	
+	<xs:complexType name="property_type">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string"/>
+			<xs:choice minOccurs="0">
+				<xs:element name="boolean" type="xs:boolean"/>
+				<xs:element name="file" type="xs:string"/>
+				<xs:element name="integer" type="xs:integer"/>
+				<xs:element name="location" type="location_type"/>
+				<xs:element name="string" type="xs:string"/>
+			</xs:choice>
+			<xs:element name="property" type="property_type" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="location_type">
+		<xs:sequence>
+			<xs:choice>
+				<xs:element name="address" type="xs:integer"/>
+				<xs:element name="expression" type="xs:string"/>
+				<xs:element name="source">
+					<xs:complexType>
+						<xs:all>
+							<xs:element name="symbol_file" type="xs:string"/>
+							<xs:element name="filename" type="xs:string"/>
+							<xs:element name="line" type="xs:integer"/>
+						</xs:all>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+			<xs:element name="page" type="xs:integer"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+</xs:schema>

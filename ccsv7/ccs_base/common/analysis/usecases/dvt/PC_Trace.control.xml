@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="PC Trace" basedir=".">
+
+	<property name="dvt.activity.name" value="Hardware Trace Analyzer/${ant.project.name}"/>
+  	<property name="dvt.activity.description" value="Collect Address and Timing data.&#10;Data can be analyzed using the Analyze button in the Trace Viewer."/>
+
+   	<property name="uc_name" value="PC_Trace" />
+	<property name="technology" value="Hardware Core Trace" />
+
+	<dvt.import file="../../scripts/CoreTraceDialog.js"/>
+	<dvt.import file="../../scripts/CoreTrace.js"/>
+
+
+	<dvt.property>
+		version=1.0.0
+		dvt.activity.priority = 80
+		<!-- Data Provider and AF information-->
+		dataproviders=Trace
+		Trace.name=Trace Viewer
+		Trace.analyzer=None
+	</dvt.property>
+	
+</project>

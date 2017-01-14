@@ -1,0 +1,31 @@
+[Name]
+Collect Code Coverage and Exclusive Profile Data
+
+[Attributes]
+PartialEvents=true
+SimulationOnly=true
+
+[ISA]
+TMS470R1
+TMS470R2
+TMS470R3
+TMS470Re
+TMS470Rd
+TMS470R15
+
+[Events]
+dataclass.aba_prog.events.CPU.instruction.decoded
+dataclass.aba_prog.events.CPU.instruction.condition_false
+
+[EventClasses]
+aba_prog
+
+[Attributes]
+dataclass.aba_prog.Maximum Events=,userCanModify=false
+
+[Description]
+Gather source line coverage and exclusive source line and function performance data during target execution.  Additional target events and profiling options can be configured via the Activity's properties.
+
+[MetaData]
+collectionType=coverage_data
+analysisType=Line Coverage

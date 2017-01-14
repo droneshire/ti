@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.5.0_14" class="java.beans.XMLDecoder"> 
+ <object class="com.ti.dvt.ui.views.core.TableProp"> 
+  <void property="XFieldName"> 
+   <string>Cycle</string> 
+  </void> 
+  <void property="allowSort"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="scrollLock"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="showEndOnUpdate"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="solutionName"> 
+   <string>Trace</string> 
+  </void> 
+  <void property="tableMeta"> 
+   <void property="columnMetaMap"> 
+    <void method="put"> 
+     <string>Class</string> 
+     <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+      <void property="width"> 
+       <int>125</int> 
+      </void> 
+     </object> 
+    </void> 
+    <void method="put"> 
+     <string>Trace Status</string> 
+     <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+      <void property="width"> 
+       <int>90</int> 
+      </void> 
+     </object> 
+    </void> 
+    <void method="put"> 
+     <string>Time</string> 
+     <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+      <void property="alignment"> 
+       <int>131072</int> 
+      </void> 
+      <void property="width"> 
+       <int>78</int> 
+      </void> 
+     </object> 
+    </void> 
+    <void method="put"> 
+     <string>Micro Secs</string> 
+     <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+      <void property="alignment"> 
+       <int>131072</int> 
+      </void> 
+      <void property="displayFormat"> 
+       <string>Decimal %.4f</string> 
+      </void> 
+      <void property="width"> 
+       <int>65</int> 
+      </void> 
+     </object> 
+    </void> 
+    <void method="put"> 
+     <string>Data</string> 
+     <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+      <void property="alignment"> 
+       <int>131072</int> 
+      </void> 
+      <void property="width"> 
+       <int>60</int> 
+      </void> 
+     </object> 
+    </void> 
+    <void method="put"> 
+     <string>Data Message</string> 
+     <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+      <void property="width"> 
+       <int>60</int> 
+      </void> 
+     </object> 
+    </void> 
+    <void method="put"> 
+     <string>Program Address</string> 
+     <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+      <void property="alignment"> 
+       <int>131072</int> 
+      </void> 
+      <void property="displayFormat"> 
+       <string>Hex %#010X</string> 
+      </void> 
+      <void property="width"> 
+       <int>105</int> 
+      </void> 
+      <void property="fontDesc"> 
+	   <string>1|Courier New|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|0|3|2|1|49|Courier New</string> 
+      </void> 
+     </object> 
+    </void> 
+    <void method="put"> 
+     <string>Filename</string> 
+     <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+      <void property="width"> 
+       <int>92</int> 
+      </void> 
+     </object> 
+    </void> 
+    <void method="put"> 
+     <string>Function</string> 
+     <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+      <void property="width"> 
+       <int>83</int> 
+      </void> 
+     </object> 
+    </void> 
+    <void method="put"> 
+     <string>Receiver Status</string> 
+     <object class="com.ti.dvt.ui.views.core.TableColumnMeta"> 
+      <void property="width"> 
+       <int>93</int> 
+      </void> 
+     </object> 
+    </void> 
+   </void> 
+   <void property="columnOrder"> 
+    <array class="java.lang.String" length="29"> 
+     <void index="0"> 
+      <string></string> 
+     </void> 
+     <void index="1"> 
+      <string>Time</string> 
+     </void> 
+     <void index="2"> 
+      <string>Micro Secs</string> 
+     </void> 
+     <void index="3"> 
+      <string>Class</string> 
+     </void> 
+     <void index="4"> 
+      <string>Data Message</string> 
+     </void> 
+     <void index="5"> 
+      <string>Data</string> 
+     </void> 
+     <void index="6"> 
+      <string>Program Address</string> 
+     </void> 
+     <void index="6"> 
+      <string>Filename</string> 
+     </void> 
+     <void index="7"> 
+      <string>Function</string> 
+     </void> 
+     <void index="8"> 
+      <string>Trace Status</string> 
+     </void> 
+     <void index="9"> 
+      <string>Receiver Status</string> 
+     </void> 
+    </array> 
+   </void> 
+  </void> 
+ </object> 
+</java> 

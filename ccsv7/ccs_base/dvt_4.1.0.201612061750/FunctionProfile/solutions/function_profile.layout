@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.5.0_14" class="java.beans.XMLDecoder"> 
+ <object class="com.ti.dvt.gadget.model.LayoutModel"> 
+  <void property="autoLayout"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="layoutMap"> 
+   <void method="put"> 
+    <string>ProfilerAnalyzer</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>91</int> 
+     <int>420</int> 
+     <int>107</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>ProfileFilter</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>102</int> 
+     <int>374</int> 
+     <int>85</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.restorable.table:Profile</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>114</int> 
+     <int>530</int> 
+     <int>61</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>Tap.1</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>63</int> 
+     <int>114</int> 
+     <int>59</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>UnlimitedBuffer</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>92</int> 
+     <int>10</int> 
+     <int>104</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>Tap</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>119</int> 
+     <int>322</int> 
+     <int>50</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>Time Accumulator</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>87</int> 
+     <int>218</int> 
+     <int>115</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>Tap.DataSource</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>90</int> 
+     <int>62</int> 
+     <int>109</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>FunctionProfile</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>93</int> 
+     <int>478</int> 
+     <int>102</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>SymbolicTranslator</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>84</int> 
+     <int>270</int> 
+     <int>121</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>UnlimitedBuffer.1</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>8</int> 
+     <int>166</int> 
+     <int>114</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+  </void> 
+ </object> 
+</java> 

@@ -1,0 +1,44 @@
+<module id="PBIST_REGS" HW_revision="" description="PBIST Registers">
+	<register id="RAMT" width="32" page="1" offset="0x160" internal="0" description="RAM Configuration Register">
+		<bitfield id="RDS" description="Return Data Select" begin="23" end="16" width="8" rwaccess="R/W"/>
+		<bitfield id="RGS" description="RAM Group Select" begin="31" end="24" width="8" rwaccess="R/W"/>
+	</register>
+	<register id="DLRT" width="32" page="1" offset="0x164" internal="0" description="PBIST Data Logger Register">
+		<bitfield id="ROM_TEST" description="ROM-based testing" begin="2" end="2" width="1" rwaccess="R/W"/>
+		<bitfield id="TCK_GATED" description="TCK gated" begin="3" end="3" width="1" rwaccess="R/W"/>
+		<bitfield id="CONFIG_ACC" description="Config Access" begin="4" end="4" width="1" rwaccess="R/W"/>
+		<bitfield id="GO_NOGO_TEST" description="GO/ NO-GO Testing" begin="9" end="9" width="1" rwaccess="R/W"/>
+	</register>
+	<register id="STR" width="32" page="1" offset="0x16c" internal="0" description="Program Control Register">
+		<bitfield id="RESUME" description="Resume / Emulation Read" begin="1" end="1" width="1" rwaccess="R/W"/>
+		<bitfield id="STOP" description="Stops PBIST testing" begin="2" end="2" width="1" rwaccess="R/W"/>
+	</register>
+	<register id="PACT" width="32" page="1" offset="0x180" internal="0" description="PBIST Activate Register">
+		<bitfield id="ENABLE" description="Enable clocks to PBIST" begin="0" end="0" width="1" rwaccess="R/W"/>
+	</register>
+	<register id="OVERRIDE" width="32" page="1" offset="0x188" internal="0" description="PBIST Override Register">
+		<bitfield id="RINFO_MEM_OVER" description="ROM Memory Information Override" begin="0" end="0" width="1" rwaccess="R/W"/>
+		<bitfield id="ALGO_OVER" description="ROM Algorithm Override" begin="3" end="3" width="1" rwaccess="R/W"/>
+	</register>
+	<register id="FSRF0" width="32" page="1" offset="0x190" internal="0" description="Fail Status - Port 0">
+		<bitfield id="FSRF0" description="Fail Status Fail - Port 0" begin="31" end="0" width="32" rwaccess="R/W"/>
+	</register>
+	<register id="FSRF1" width="32" page="1" offset="0x194" internal="0" description="Fail Status - Port 1">
+		<bitfield id="FSRF1" description="Fail Status Fail - Port 1" begin="31" end="0" width="32" rwaccess="R/W"/>
+	</register>
+	<register id="FSRC0" width="32" page="1" offset="0x198" internal="0" description="Fail Status Count - Port 0">
+		<bitfield id="FSRC0" description="Fail Status Count - Port 0" begin="31" end="0" width="32" rwaccess="R/W"/>
+	</register>
+	<register id="FSRC1" width="32" page="1" offset="0x19c" internal="0" description="Fail Status Count - Port 1">
+		<bitfield id="FSRC0" description="Fail Status Count - Port 1" begin="31" end="0" width="32" rwaccess="R/W"/>
+	</register>
+	<register id="ALGO" width="32" page="1" offset="0x1c4" internal="0" description="PBIST Algorithm">
+		<bitfield id="ALGO" description="Algo Select Register" begin="31" end="0" width="32" rwaccess="R/W"/>
+	</register>
+	<register id="RINFOL" width="32" page="1" offset="0x1c8" internal="0" description="RAM Info Mask Register Lower">
+		<bitfield id="RINFOL" description="RINFO Mask Register Lower" begin="31" end="0" width="32" rwaccess="R/W"/>
+	</register>
+	<register id="RINFOU" width="32" page="1" offset="0x1cc" internal="0" description="RAM Info Mask Register Higher">
+		<bitfield id="RINFOU" description="RINFO Mask Register Upper" begin="31" end="0" width="32" rwaccess="R/W"/>
+	</register>
+</module>

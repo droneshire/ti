@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<drivers id="CortexA7">
+    <isa Type="CortexA7" ProcID="0x75801C00">
+        <driver file="..\..\..\emulation\drivers\tixds560cortexA7.dvr">
+            <connectionType Type="TIXDS560"/>
+            <connectionType Type="TIXDS200"/>
+	        <!--Driver level property-->
+	        <property Name="Address" Type="numericfield" Value="0x0" NumericType="HEX" UpperBound="0xFFFFFFFF" LowerBound="0" ID="device.address"/>
+            <property Name="Access Port Designator" Type="numericfield" Value="0x0" NumericType="HEX" UpperBound="0xFFFFFFFF" LowerBound="0" ID="device.identify"/>
+            <property Name="TraceDeviceId" Type="numericfield" Value="0x0" NumericType="HEX" UpperBound="0xFFFFFFFF" LowerBound="0" ID="device.traceId"/>
+            <property id="Retry Factor" Type="numericfield" Value="0x3" NumericType="HEX"/>
+        </driver>
+    </isa>
+</drivers>

@@ -1,0 +1,49 @@
+<!doctype html>
+<html ng-app="explorerApp">
+	<head>
+	    <title>Target Support Content Explorer</title>
+	</head>
+	<body>
+		
+	    <div ng-controller="MainController as vm">
+	    	<form ng-submit="vm.getTopLevelData(vm.filter)">
+	    	<label>Search: <input ng-model="vm.filter"></label>
+	    		<a ng-show="!vm.loading" href="" ng-click="vm.getTopLevelData(vm.filter)"> get </a>
+	    	</form>
+	    	<span ng-show="vm.loading">
+	    		loading...
+	    	</span>
+	    	<ul>
+		    	<li ng-repeat="(name,versions) in vm.resources">
+		    		{{name}} <a href="" ng-click="vm.showResource[name]=!vm.showResource[name]">[show/hide]</a>
+		    		<ul ng-show="vm.showResource[name]" >
+		    			<li ng-repeat="version in versions">
+		    				{{version.version}} <a href="" ng-click="version.show=!version.show">[show/hide]</a>
+		    				<a  href="" ng-click="vm.getRaw(name,version)">[Show Raw]</a>
+		    				<a  href="{{vm.rawURL(name,version.version)}}" target="_blank">[Download]</a>
+		    				<div ng-show="version.showRaw">
+		    					
+	    						<pre class="prettyprint lang-xml" prettyprint version="version">
+	    							
+	    						</pre>
+		    					
+		    				</div>
+		    				<div ng-show="version.show">
+		    					<code>
+		    						<pre>
+		    							{{vm.getMetaDisplayVal(version.meta)}}
+		    						</pre>
+		    					</code>
+		    				</div>
+		    			<li>
+		    		</ul>
+		    	</li>
+	    	</ul>
+	    </div>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.5.1/lodash.min.js"></script>
+	    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+	    <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+	    <script src="https://google-code-prettify.googlecode.com/svn/loader/prettify.js"></script>
+	    <script src="app.js"></script>
+	</body>
+</html>

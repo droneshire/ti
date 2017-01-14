@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="Open File" basedir=".">
+
+	<property name="dvt.activity.name" value="Hardware Trace Analyzer/${ant.project.name}"/>
+  	<property name="dvt.activity.description" value="Display data from selected TDF or CSV file. Data can be analyzed using the&#10;Analyze button in the Trace Viewer."/>
+
+	<property name="uc_name" value="Open_File" />
+	<property name="technology" value="Hardware Core Trace" />
+
+	<dvt.import file="../../scripts/OpenFile.js"/>
+
+	<dvt.property>
+		version=1.0.0
+		dvt.activity.priority = 110
+	</dvt.property>
+</project>

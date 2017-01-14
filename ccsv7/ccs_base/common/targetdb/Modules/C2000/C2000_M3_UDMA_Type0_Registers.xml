@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- 
+  TI File $Revision: 
+  Checkin $Date: 
+  --> 
+
+<!--  28M35x UDMA REGS Registers 
+     =================================== 
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     --> 
+<module id="UDMA REGS" HW_revision="" XML_version="1" description="UDMA REGS Registers">
+    <register id="DMASTAT" acronym="DMASTAT" offset="0" page="1" width="32" description="DMA Status" />
+    <register id="DMACFG" acronym="DMACFG" offset="4" page="1" width="32" description="DMA Configuration" />
+    <register id="DMACTLBASE" acronym="DMACTLBASE" offset="8" page="1" width="32" description="DMA Channel Control Base Pointer" />
+    <register id="DMAALTBASE" acronym="DMAALTBASE" offset="12" page="1" width="32" description="DMA Alternate Channel Control Base Pointer" />
+    <register id="DMAWAITSTAT" acronym="DMAWAITSTAT" offset="16" page="1" width="32" description="DMA Channel Wait-on-Request Status" />
+    <register id="DMASWREQ" acronym="DMASWREQ" offset="20" page="1" width="32" description="DMA Channel Software Request" />
+    <register id="DMAUSEBURSTSET" acronym="DMAUSEBURSTSET" offset="24" page="1" width="32" description="DMA Channel Useburst Set" />
+    <register id="DMAUSEBURSTCLR" acronym="DMAUSEBURSTCLR" offset="28" page="1" width="32" description="DMA Channel Useburst Clear" />
+    <register id="DMAREQMASKSET" acronym="DMAREQMASKSET" offset="32" page="1" width="32" description="DMA Channel Request Mask Set" />
+    <register id="DMAREQMASKCLR" acronym="DMAREQMASKCLR" offset="36" page="1" width="32" description="DMA Channel Request Mask Clear" />
+    <register id="DMAENASET" acronym="DMAENASET" offset="40" page="1" width="32" description="DMA Channel Enable Set" />
+    <register id="DMAENACLR" acronym="DMAENACLR" offset="44" page="1" width="32" description="DMA Channel Enable Clear" />
+    <register id="DMAALTSET" acronym="DMAALTSET" offset="48" page="1" width="32" description="DMA Channel Primary Alternate Set" />
+    <register id="DMAALTCLR" acronym="DMAALTCLR" offset="52" page="1" width="32" description="DMA Channel Primary Alternate Clear 290" />
+    <register id="DMAPRIOSET" acronym="DMAPRIOSET" offset="56" page="1" width="32" description="DMA Channel Priority Set" />
+    <register id="DMAPRIOCLR" acronym="DMAPRIOCLR" offset="60" page="1" width="32" description="DMA Channel Priority Clear" />
+    <!--  12 empty  -->
+    <register id="DMAERRCLR" acronym="DMAERRCLR" offset="76" page="1" width="32" description="DMA Bus Error Clear" />
+    <!--  1200 empty  -->
+    <register id="DMACHALTL" acronym="DMACHMAPL" offset="1280" page="1" width="32" description="DMA Channel Alternate Select" />
+    <!--  12 empty  -->
+    <register id="DMACHMAP0" acronym="DMACHMAP0" offset="1296" page="1" width="32" description="DMA Channel Map Select 0" />
+    <register id="DMACHMAP1" acronym="DMACHMAP1" offset="1300" page="1" width="32" description="DMA Channel Map Select 1" />
+    <register id="DMACHMAP2" acronym="DMACHMAP2" offset="1304" page="1" width="32" description="DMA Channel Map Select 2" />
+    <register id="DMACHMAP3" acronym="DMACHMAP3" offset="1308" page="1" width="32" description="DMA Channel Map Select 3" />
+</module>

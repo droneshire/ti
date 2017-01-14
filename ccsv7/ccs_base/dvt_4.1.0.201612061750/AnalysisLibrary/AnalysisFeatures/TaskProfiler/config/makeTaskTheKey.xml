@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<translate>
+<passthru name="Source"     input="(isIncomplete == 0) ? &quot;(Completed):&quot;+TaskFunc : &quot;(Incomplete):&quot;+TaskFunc" />
+
+<passthru name="isInterrupt"    input="isInterrupt" />
+<passthru name="Running"     	input="Running" /> 
+<passthru name="Blocked"     	input="Blocked" /> 
+<passthru name="Ready"		input="Ready" /> 
+<passthru name="Sleep"     	input="Sleep" /> 
+<passthru name="Yield"     	input="Yielded" /> 
+<passthru name="Interrupted"    input="Interrupted" />
+<passthru name="TotalTime"     	input="TotalTime" /> 
+<passthru name="StartTime"     	input="StartTime" /> 
+<!-- <passthru name="ExitTime"     	input="(isIncomplete == 0) ? ExitTime : 0" /> -->
+<passthru name="Running %"     	input="RunningPercent" /> 
+<passthru name="Blocked %"     	input="BlockedPercent" /> 
+<passthru name="Ready %"     	input="ReadyPercent" /> 
+<passthru name="Sleep %"     	input="SleepPercent" /> 
+<passthru name="Yield %"     	input="YieldPercent" /> 
+
+</translate>
+
+

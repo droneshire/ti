@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<drivers id="cortex_do_not_use">
+	<isa Type="*" ProcID="0x0">
+		<driver file="../../../emulation/drivers/DEFAULT">
+			<connectionType Type="OTHERXDS510"/>
+		</driver>
+	</isa>
+</drivers>

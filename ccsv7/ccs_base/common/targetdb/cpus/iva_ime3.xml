@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cpu id="TMS192C2003" isa="hidden" HW_revision="1.0" XML_version="1.0" description="IVA IME3 Accelerator">
+    <register id="PC"                 acronym="PC"                 width="32" description="Program Ccounter register"/>
+    <register id="IME3_REVISION"      acronym="IME3_REVISION"      width="32" description="IP Revision Identifier register"/>
+    <register id="IME3_SYSCONFIG"     acronym="IME3_SYSCONFIG"     width="32" description="Clock Management Configuration register"/>
+    <register id="IME3_IRQ_EOI"       acronym="IME3_IRQ_EOI"       width="32" description="End of Interrupt Specification register"/>
+    <register id="IME3_IRQSTATUS_RAW" acronym="IME3_IRQSTATUS_RAW" width="32" description="Per Event Raw Interrupt Status register"/>
+    <register id="IME3_IRQSTATUS"     acronym="IME3_IRQSTATUS"     width="32" description="Per Event Enabled Interrupt Status register"/>
+    <register id="IME3_IRQENABLE_SET" acronym="IME3_IRQENABLE_SET" width="32" description="Per Event Enable Interrupt Bit register"/>
+    <register id="IME3_IRQENABLE_CLR" acronym="IME3_IRQENABLE_CLR" width="32" description="Per Event Disable Interrupt Bit register"/>
+
+    <instance href="..\Modules\ihwa\iva_debug.xml" id="Debug" xml="iva_debug.xml" xmlpath="..\Modules\ihwa\" HW_revision="1.0" description="IVA IHWA Debug Registers" requestor="TMS192C2003" baseaddr="0" size="0" accessnumbytes="4" permissions="rw"/>
+    <instance href="..\Modules\ihwa\iva_syncbox.xml" id="SyncBox" xml="iva_syncbox.xml" xmlpath="..\Modules\ihwa\" HW_revision="1.0" description="IVA IHWA SyncBox Registers" requestor="TMS192C2003" baseaddr="0" size="0" accessnumbytes="4" permissions="rw"/>
+</cpu>

@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!-- This file defines how trace receivers available in the system.  
+     It is required.  Don&apos;t make any changes unless you know what you&apos;re doing, 
+     and make a backup first.
+     If a new kind of receiver is added in the system, add that entry in this file.
+ -->
+
+<!-- Trace system setup  -->
+<TRACE version="1.0.0.0" Copyright="Copyright (c) 2005-2007 Texas Instruments">
+	<CONTROL>TraceCntrl</CONTROL> <!-- Default trace control application name -->
+	<DISPLAY></DISPLAY> <!-- Default trace display application name -->
+	<TADLL-NAME>ICETargetAdapter</TADLL-NAME> <!-- Default target adapter DLL name -->
+	
+	<RCVR-SETUP> <!-- Available trace receivers in the system -->
+		<RCVR> 
+    		<DISPLAY-NAME>ETB</DISPLAY-NAME> 
+			<RCVRDLL-NAME>ETBRcvr</RCVRDLL-NAME> 
+			<RCVR-MULTICORE>true</RCVR-MULTICORE> 
+		</RCVR>
+		<RCVR> 
+    		<DISPLAY-NAME>560 V2 Trace</DISPLAY-NAME> <!-- Receiver name for user display-->
+			<RCVRDLL-NAME>DtcRcvr</RCVRDLL-NAME> <!-- Receivers DLL name -->
+			<RCVR-MULTICORE>true</RCVR-MULTICORE> <!-- True if receiver supports multi-core-->
+		</RCVR>
+		<RCVR> 
+    		<DISPLAY-NAME>560 Trace Pod</DISPLAY-NAME> <!-- Receiver name for user display-->
+			<RCVRDLL-NAME>TsunamiRcvr</RCVRDLL-NAME> <!-- Receivers DLL name -->
+			<RCVR-MULTICORE>true</RCVR-MULTICORE> <!-- True if receiver supports multi-core-->
+		</RCVR>
+		<RCVR> 
+    		<DISPLAY-NAME>Pro Trace</DISPLAY-NAME> <!-- Receiver name for user display-->
+			<RCVRDLL-NAME>ProRcvr</RCVRDLL-NAME> <!-- Receivers DLL name -->
+			<RCVR-MULTICORE>true</RCVR-MULTICORE> <!-- True if receiver supports multi-core-->
+		</RCVR>
+		<RCVR> 
+			<DISPLAY-NAME>SWO Trace</DISPLAY-NAME> <!-- Receiver name for user display-->
+			<RCVRDLL-NAME>SwoRcvr</RCVRDLL-NAME> <!-- Receivers DLL name -->
+			<RCVR-MULTICORE>false</RCVR-MULTICORE> <!-- True if receiver supports multi-core-->
+		</RCVR>
+		<RCVR>
+    		<DISPLAY-NAME>None</DISPLAY-NAME> <!-- Receiver name for user display-->
+			<RCVRDLL-NAME>None</RCVRDLL-NAME> <!-- Receivers DLL name -->
+			<RCVR-MULTICORE>true</RCVR-MULTICORE> <!-- True if receiver supports multi-core-->
+		</RCVR>
+	</RCVR-SETUP>
+	
+	<XMTR-SETUP> <!-- Available trace transmitter in the system -->
+		<XMTR> 
+    		<XMTR-NAME>DSP Transmitter</XMTR-NAME> <!-- Xmtr name -->
+    		<XMTRDLL-NAME>ctools_xmtr</XMTRDLL-NAME> <!-- DLL name -->
+		</XMTR>
+		<XMTR> 
+    		<XMTR-NAME>ARM Transmitter</XMTR-NAME> 
+    		<XMTRDLL-NAME>etm_xmtr</XMTRDLL-NAME> 
+		</XMTR>
+	</XMTR-SETUP>
+
+</TRACE>

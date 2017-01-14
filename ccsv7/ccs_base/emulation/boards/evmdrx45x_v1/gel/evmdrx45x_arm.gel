@@ -1,0 +1,1163 @@
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  evmdrx45x_arm.gel                                                       *
+ *  Version 0.10                                                            *
+ *                                                                          *
+ *  This GEL file is designed to be used in conjunction with                *
+ *  CCStudio 3.3+ and the JAMR based EVM.                                   *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+ // Version History
+ //
+ // 0.10 GPIO4_7 enabled on PINMUX0. ATA pin pulled down on PULLCTL. (To disable VBUS)
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  StartUp( )                                                              *
+ *      Setup Memory Map                                                    *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+StartUp( )
+{
+    Setup_Memory_Map_Arm( );
+}
+
+OnTargetConnect2()
+{
+    GEL_TextOut( "\nTest.\n\n" );
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  OnTargetConnect( )                                                      *
+ *      Setup PinMux, Power, PLLs, DDR, & EMIF                              *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+OnTargetConnect( )
+{
+    reset_arm();
+    Setup_Pin_Mux( );                           // Setup Pin Mux
+    Setup_Psc_All_On( );                        // Setup Power Domains
+    Setup_PLL0_552_MHz( );                      // Setup Pll0 for DSP @ 552 MHz, EMIF-A @ 110.4 MHz
+    Setup_PLL1_408_MHz( );                      // Setup Pll1 for ARM @ 408 MHz
+    Setup_EMIFA_110MHz( );                      // Setup EMIF-A [110.4 Mhz]
+	Setup_PLL2(  );                             // Setup PLL2 for DDR2 @192 MHz
+    Setup_EMIFB_192MHz( );                      // Setup EMIFB for DDR @192 Mhz
+
+	DSP_Boot_from_L2_Cache( );
+
+    GEL_TextOut( "\nStartup Complete.\n\n" );
+}
+
+OnPreFileLoaded()
+{
+//	GEL_BreakPtReset();
+    GEL_Reset();
+    reset_arm();
+}
+
+menuitem "Memory Map";
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  Setup_Memory_Map_Arm( )                                                 *
+ *                                                                          *
+ *      Setup the Memory Map for ARM side only.                             *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+hotmenu Setup_Memory_Map_Arm( )
+{
+    GEL_MapOn( );
+    GEL_MapReset( );
+
+    /* ARM RAM/ROM memory map */
+    GEL_MapAddStr( 0x00000000, 0, 0x00004000, "R|W|AS4", 0 );   // ARM Instruction IRAM
+    GEL_MapAddStr( 0x00004000, 0, 0x00004000, "R|AS4",   0 );   // ARM Instruction IROM
+    GEL_MapAddStr( 0x00008000, 0, 0x00004000, "R|W|AS4", 0 );   // ARM Data DRAM
+    GEL_MapAddStr( 0x0000C000, 0, 0x00004000, "R|AS4",   0 );   // ARM Data DROM
+
+    /* DSP RAM/ROM memory map */
+    GEL_MapAddStr( 0x11220000, 0, 0x00010000, "R|AS4", 0 );     // *DSP UMAP1 L2 ROM 64K
+    GEL_MapAddStr( 0x11800000, 0, 0x00020000, "R|W|AS4", 0 );   // *DSP UMAP0 L2 RAM/Cache 64K
+    GEL_MapAddStr( 0x11E08000, 0, 0x00008000, "R|W|AS4", 0 );   // DSP L1P Cache 32K
+    GEL_MapAddStr( 0x11F04000, 0, 0x0000c000, "R|W|AS4", 0 );   // DSP L1D RAM 48K
+    GEL_MapAddStr( 0x11F10000, 0, 0x00008000, "R|W|AS4", 0 );   // *DSP L1D Cache 32K
+
+    /* ARM internal memory map */
+    GEL_MapAddStr( 0x01BC0000, 0, 0x00001900, "R|W|AS4", 0 );   // ARM ETB
+    GEL_MapAddStr( 0x01CA0000, 0, 0x00000AD4, "R|W|AS4", 0 );   // ?Power Sleep Ctrl
+    GEL_MapAddStr( 0x01CA1800, 0, 0x00000050, "R|W|AS4", 0 );   // ?ARM Interrupt
+    GEL_MapAddStr( 0x01CA1C00, 0, 0x00000174, "R|W|AS4", 0 );   // ?PLL0
+    GEL_MapAddStr( 0x01CA2000, 0, 0x00000174, "R|W|AS4", 0 );   // ?PLL1
+    GEL_MapAddStr( 0x01CA2400, 0, 0x000000A4, "R|W|AS4", 0 );   // ?RTI0
+    GEL_MapAddStr( 0x18000000, 0, 0x00000100, "R|W|AS4", 0 );   // EMIF-A Ctrl
+    GEL_MapAddStr( 0x18001000, 0, 0x00000100, "R|W|AS4", 0 );   // EMIF-B Ctrl
+
+    /* Peripheral memory map */
+    GEL_MapAddStr( 0x01BC0100, 0, 0x00000100, "R|W|AS4", 0 );   // Pin Manager & Trace
+    GEL_MapAddStr( 0x01C00000, 0, 0x00010000, "R|W|AS4", 0 );   // CC
+    GEL_MapAddStr( 0x01C10000, 0, 0x00000400, "R|W|AS4", 0 );   // TC0
+    GEL_MapAddStr( 0x01C10400, 0, 0x00000400, "R|W|AS4", 0 );   // TC1
+    GEL_MapAddStr( 0x01C10800, 0, 0x00000400, "R|W|AS4", 0 );   // TC2
+    GEL_MapAddStr( 0x01C20000, 0, 0x00000038, "R|W|AS4", 0 );   // UART0
+    GEL_MapAddStr( 0x01C20400, 0, 0x00000038, "R|W|AS4", 0 );   // UART3
+    GEL_MapAddStr( 0x01C20800, 0, 0x00000038, "R|W|AS4", 0 );   // UART1
+    GEL_MapAddStr( 0x01C20C00, 0, 0x00000038, "R|W|AS4", 0 );   // UART2
+    GEL_MapAddStr( 0x01C21000, 0, 0x00000060, "R|W|AS4", 0 );   // I2C0
+    GEL_MapAddStr( 0x01C21400, 0, 0x00000060, "R|W|AS4", 0 );   // I2C1
+    GEL_MapAddStr( 0x01C21800, 0, 0x00000060, "R|W|AS4", 0 );   // I2C2
+    GEL_MapAddStr( 0x01C21C00, 0, 0x00000400, "R|W|AS4", 0 );   // I2C3
+    GEL_MapAddStr( 0x01C22000, 0, 0x0000001A, "R|W|AS4", 0 );   // eCAP0
+    GEL_MapAddStr( 0x01C22400, 0, 0x0000001A, "R|W|AS4", 0 );   // eCAP1
+    GEL_MapAddStr( 0x01C22800, 0, 0x0000001A, "R|W|AS4", 0 );   // eCAP2
+    GEL_MapAddStr( 0x01C22C00, 0, 0x0000001A, "R|W|AS4", 0 );   // eCAP3
+    GEL_MapAddStr( 0x01C23000, 0, 0x00000400, "R|W|AS4", 0 );   // eCAP4
+    GEL_MapAddStr( 0x01C23400, 0, 0x00000400, "R|W|AS4", 0 );   // eCAP5
+    GEL_MapAddStr( 0x01C23800, 0, 0x00000400, "R|W|AS4", 0 );   // eCAP6
+    GEL_MapAddStr( 0x01C23C00, 0, 0x00000400, "R|W|AS4", 0 );   // eCAP7
+    GEL_MapAddStr( 0x01C24000, 0, 0x00000400, "R|W|AS4", 0 );   // UART4
+    GEL_MapAddStr( 0x01C24400, 0, 0x00000400, "R|W|AS4", 0 );   // SPI1
+    GEL_MapAddStr( 0x01C24800, 0, 0x00000400, "R|W|AS4", 0 );   // SPI2
+    GEL_MapAddStr( 0x01C24C00, 0, 0x00000400, "R|W|AS4", 0 );   // SPI3
+    GEL_MapAddStr( 0x01C25000, 0, 0x00000400, "R|W|AS4", 0 );   // UART5
+    GEL_MapAddStr( 0x01C25400, 0, 0x00000400, "R|W|AS4", 0 );   // UART6
+    GEL_MapAddStr( 0x01C28000, 0, 0x00000080, "R|W|AS4", 0 );   // HECC0 MMR
+    GEL_MapAddStr( 0x01C2A000, 0, 0x00000200, "R|W|AS4", 0 );   // HECC0 RAM
+    GEL_MapAddStr( 0x01C2B000, 0, 0x00000180, "R|W|AS4", 0 );   // HECC0 TCR
+    GEL_MapAddStr( 0x01C2C000, 0, 0x00000080, "R|W|AS4", 0 );   // HECC1 MMR
+    GEL_MapAddStr( 0x01C2E000, 0, 0x00000200, "R|W|AS4", 0 );   // HECC1 RAM
+    GEL_MapAddStr( 0x01C2F000, 0, 0x00000180, "R|W|AS4", 0 );   // HECC1 TCR
+    GEL_MapAddStr( 0x01C40000, 0, 0x0000040C, "R|W|AS4", 0 );   // PATA
+    GEL_MapAddStr( 0x01C40800, 0, 0x00000128, "R|W|AS4", 0 );   // UHPI
+    GEL_MapAddStr( 0x01C41000, 0, 0x00000088, "R|W|AS4", 0 );   // GPIO
+    GEL_MapAddStr( 0x01C41800, 0, 0x00000400, "R|W|AS4", 0 );   // MMC1
+    GEL_MapAddStr( 0x01C41C00, 0, 0x00000400, "R|W|AS4", 0 );   // MMC2
+    GEL_MapAddStr( 0x01C42000, 0, 0x00000550, "R|W|AS4", 0 );   // USB
+    GEL_MapAddStr( 0x01C44000, 0, 0x00000030, "R|W|AS4", 0 );   // ECC
+    GEL_MapAddStr( 0x01C44400, 0, 0x00000014, "R|W|AS4", 0 );   // CRC
+    GEL_MapAddStr( 0x01C44800, 0, 0x000000A4, "R|W|AS4", 0 );   // RTI2
+    GEL_MapAddStr( 0x01C48000, 0, 0x00000188, "R|W|AS4", 0 );   // Device Config
+    GEL_MapAddStr( 0x01C4CC00, 0, 0x00000400, "R|W|AS4", 0 );   // SPI0 MMR
+    GEL_MapAddStr( 0x01C4D000, 0, 0x00000400, "R|W|AS4", 0 );   // SPI0 RAM
+    GEL_MapAddStr( 0x01C50000, 0, 0x00010000, "R|W|AS4", 0 );   // MMC0
+    GEL_MapAddStr( 0x01C80000, 0, 0x000002C0, "R|W|AS4", 0 );   // McASP0 ctrl
+    GEL_MapAddStr( 0x01C80400, 0, 0x00000400, "R|W|AS4", 0 );   // McASP0 data
+    GEL_MapAddStr( 0x01C80800, 0, 0x000002C0, "R|W|AS4", 0 );   // McASP1 ctrl
+    GEL_MapAddStr( 0x01C80C00, 0, 0x00000400, "R|W|AS4", 0 );   // McASP1 data
+    GEL_MapAddStr( 0x01C81000, 0, 0x000002C0, "R|W|AS4", 0 );   // McASP2 ctrl
+    GEL_MapAddStr( 0x01C81400, 0, 0x00000400, "R|W|AS4", 0 );   // McASP2 data
+    GEL_MapAddStr( 0x01C81800, 0, 0x000002C0, "R|W|AS4", 0 );   // McASP3 ctrl
+    GEL_MapAddStr( 0x01C81C00, 0, 0x00000400, "R|W|AS4", 0 );   // McASP3 data
+    GEL_MapAddStr( 0x01C82000, 0, 0x00000800, "R|W|AS4", 0 );   // SPDIF-DOR
+    GEL_MapAddStr( 0x01C82800, 0, 0x000000A4, "R|W|AS4", 0 );   // RTI1 config
+    GEL_MapAddStr( 0x01C82C00, 0, 0x00000400, "R|W|AS4", 0 );   // EMIFA Memory Protection
+    GEL_MapAddStr( 0x01C83000, 0, 0x00000400, "R|W|AS4", 0 );   // EMIFB Memory Protection
+    GEL_MapAddStr( 0x01C84000, 0, 0x00001000, "R|W|AS4", 0 );   // DARtE config/data
+    GEL_MapAddStr( 0x01C85000, 0, 0x00000400, "R|W|AS4", 0 );   // DARtE IRC0
+    GEL_MapAddStr( 0x01C85400, 0, 0x00000400, "R|W|AS4", 0 );   // DARtE IRC1
+    GEL_MapAddStr( 0x01C90000, 0, 0x00004000, "R|W|AS4", 0 );   // VPSS0
+    GEL_MapAddStr( 0x01C94000, 0, 0x00004000, "R|W|AS4", 0 );   // VPSS1
+    GEL_MapAddStr( 0x01C9C000, 0, 0x00000400, "R|W|AS4", 0 );   // VCP Config
+    GEL_MapAddStr( 0x01C9D000, 0, 0x00001000, "R|W|AS4", 0 );   // VLYNQ Control
+    GEL_MapAddStr( 0x01CA0000, 0, 0x00004000, "R|W|AS4", 0 );   // PSC
+    GEL_MapAddStr( 0x02000000, 0, 0x00010000, "R|W|AS4", 0 );   // Viterbi Data
+
+    /* Off-chip memory map */
+    GEL_MapAddStr( 0x0C000000, 0, 0x04000000, "R|W|AS4", 0 );   // VLYNQ Remote
+    GEL_MapAddStr( 0x20000000, 0, 0x04000000, "R|W|AS4", 0 );   // EMIF-A CS2
+    GEL_MapAddStr( 0x24000000, 0, 0x04000000, "R|W|AS4", 0 );   // EMIF-A CS3
+    GEL_MapAddStr( 0x28000000, 0, 0x04000000, "R|W|AS4", 0 );   // EMIF-A CS4
+    GEL_MapAddStr( 0x2C000000, 0, 0x04000000, "R|W|AS4", 0 );   // EMIF-A CS5
+    GEL_MapAddStr( 0x40000000, 0, 0x20000000, "R|W|AS4", 0 );   // EMIF-A SDRAM
+
+	/* DDR2 */
+    GEL_MapAddStr( 0x18001000, 0, 0x00000100, "R|W|AS4", 0 );   // DDR2 Control, also called EMIFB_Control
+    GEL_MapAddStr( 0x80000000, 0, 0x40000000, "R|W|AS4", 0 );   // DDR2 SDRAM
+
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  Clear_Memory_Map_Arm( )                                                 *
+ *      Clear the Memory Map                                                *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+hotmenu Clear_Memory_Map_Arm( )
+{
+    GEL_MapOff( );
+    GEL_MapReset( );
+}
+
+menuitem "Jacinto Functions";
+
+sw_wait( int wait )
+{
+    int count;
+    for( count = wait ; count > 0 ; count-- ){}
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  unlock_psc_pll( )                                                       *
+ *  lock_psc_pll( )                                                         *
+ *      Lock & Unlock PSC/PLL registers                                     *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+#define CFG_ARMAUX_CTL0     *( unsigned int* )( 0x01C4814C )
+
+unlock_psc_pll( )
+{
+    /* Disable PLL & PSC lock */
+    CFG_ARMAUX_CTL0 &= 0xFFF0FFFF;
+    CFG_ARMAUX_CTL0 |= 0x00090000;
+	sw_wait( 100 );
+}
+
+lock_psc_pll( )
+{
+    /* Enable PLL & PSC lock */
+    CFG_ARMAUX_CTL0 |= 0x000F0000;
+}
+
+/*--------------------------------------------------------------*/
+/* reset_arm( )                                                 */
+/* Resets the CPSR to ARM state, Supervisor mode                */
+/* Disables MMU & CACHEs                                        */
+/*--------------------------------------------------------------*/
+reset_arm( )
+{
+    CPSR = 0x400000D3;          // Set CPSR to supervisor mode, disable IRQ/FIQ
+  //PC = 0x00000000;            // Set PC to 0x00000000
+
+    REG_CP15_FLSH_DI;           // Flush then disable D-Cache & I-Cache
+    REG_CP15_I_CACHE = 0;
+    REG_CP15_D_CACHE = 0;
+    REG_CP15_MMU = 0;           // Disable MMU
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  Setup_Pin_Mux( )                                                        *
+ *      Configure Pin Multiplexing to match the DaVinci EVM.                *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+hotmenu Setup_Pin_Mux( )
+{
+    #define CFG_PINMUX0             *( unsigned int* )( 0x01C48100 )
+    #define CFG_PINMUX1             *( unsigned int* )( 0x01C48104 )
+    #define CFG_PINMUX2             *( unsigned int* )( 0x01C48108 )
+    #define CFG_PULLCTL             *( unsigned int* )( 0x01C4810C )
+    #define CFG_IO_PWDN             *( unsigned int* )( 0x01C48118 )
+    #define CFG_OBSMUX              *( unsigned int* )( 0x01C4811C )
+
+    CFG_PINMUX0 = 0x0000C5F0;
+    /*  | ( 0 << 31 )   //  I2S5C       - I2S5_DO                   // AIC23-1A
+        | ( 0 << 30 )   //  I2S5B       - I2S5_DI                   // AIC23-1A
+        | ( 0 << 29 )   //  I2S5A       - I2S5_[CLK,LR]             // AIC23-1A
+        | ( 0 << 27 )   //  I2S4C[2]    - I2S4_DO                   // SPDIF-OUT
+        | ( 0 << 25 )   //  I2S4B[2]    - I2S4_DI
+        | ( 0 << 24 )   //  I2S4A       - I2S4_[CLK,LR]
+        | ( 0 << 23 )   //  I2S3        - I2S3_[CLK,LR,DIO]         // AIC23-1B
+        | ( 0 << 22 )   //  I2S2        - I2S2_[CLK,LR,DIO]         // SPDIF-IN
+        | ( 0 << 21 )   //  I2S1B       - I2S1_DIO
+        | ( 0 << 20 )   //  I2S1A       - I2S1_[CLK,LR]
+        | ( 0 << 19 )   //  I2S0A       - I2S0_[CLK,LR]             // AIC23-1B
+        | ( 0 << 18 )   //  I2S0B       - I2S0_DIO                  // AIC23-1B
+	| ( 0 << 17 )   //  SPI3CSFORCE                                           (new for J1DDR)
+	| ( 0 << 16 )   //  SPI2CSFORCE                                           (new for J1DDR)
+        | ( 1 << 15 )   //  ATA3        - ATA_[CS0:1,DA0:2,INTRQ]   // PATA
+        | ( 1 << 14 )   //  ATA2        - ATA_DDIR                  // PATA
+        | ( 1 << 13 )   //  ATA1        - ATA_DDEN                  // PATA
+        | ( 0 << 11 )   //  HPI[2]      - Boot Strapped
+        | ( 1 << 10 )   //  EMIFA_BFN   - EMIFA_BUFFEN              // EMIF-A
+        | ( 0 << 9 )    //  EMIFA_CS1   - GPIO1_11                  // WM8746.MUTE
+        | ( 1 << 8 )    //  EMIFA_CS4   - EMIFA_[CS4A/B]            // ENET
+        | ( 1 << 7 )    //  EMIFA_CS5   - EMIFA_[CS5A/B]            // NAND
+        | ( 1 << 6 )    //  EMIFA_A23   - EMIFA_A23                 // NOR
+        | ( 1 << 5 )    //  EMIFA_RW    - EMIFA_RWn                 // EMIF-A
+        | ( 1 << 4 )    //  EA1         - EMIFA_[CKE,RASn,CASn,CS0] // SDR-A
+// Last 4 bits reserved in drx45x       
+        | ( 0 << 1 )    //  EMIFB_CS1   - GPIO0_15                  // MLB.INT
+//      | ( 1 << 0 )    //  EMIFB_A12   - EMIFB_A12                 // SDR-B */
+
+    CFG_PINMUX1 = 0x11600450;
+    /*
+	| ( 0 << 31 )   //  UART6                                               (new for J1DDR)
+	| ( 0 << 30 )   //  UART3FLOW                                           (new for J1DDR)
+	| ( 0 << 29 )   //  UART3       - UART1_[RTS,CTS]
+        | ( 1 << 28 )   //  HECC1       - GPIO3_[13/12]
+        | ( 0 << 26 )   //  ECAP3[2]    - GPIO1_7
+        | ( 1 << 24 )   //  ECAP2[2]    - ECAP2                     // PWM-OUT
+        | ( 1 << 22 )   //  ECAP1[2]    - ECAP1                     // TIMER-IN
+        | ( 2 << 20 )   //  ECAP0[2]    - SD2_CMD 
+        | ( 0 << 18 )   //  GPIO4_3[2]  - GPIO4_3
+        | ( 0 << 16 )   //  GPIO4_2[2]  - GPIO4_2
+        | ( 0 << 14 )   //  GPIO4_1[2]  - GPIO4_1
+        | ( 0 << 12 )   //  GPIO4_0[2]  - GPIO4_0
+        | ( 1 << 10 )   //  SPI3[2]     - SPI3_[CS0,CLK,SIMO/I,ENA] // WM8746
+        | ( 0 << 8 )    //  SPI2B[2]    - SPI2_[CLK,SIMO,SOMI,ENA]
+        | ( 0 << 7 )    //  SPI2A       - SPI2_CS0
+        | ( 1 << 6 )    //  I2C2        - I2C2_SDA/SCL              // PCF8575
+        | ( 0 << 5 )    //  UART1       - GPIO1_[15/14]
+        | ( 1 << 4 )    //  UART0       - UART0_[RTS/CTS]           // RS232
+        | ( 0 << 2 )    //  SD[2]       - SD_[CLK,CMD,DATA3:0]      // SD
+        | ( 0 << 1 )    //  SPI1cs0     - SPI1_CS0
+        | ( 0 << 0 )    //  SPI1ena     - SPI1_ENA */
+
+    CFG_PINMUX2 = 0x002AA02F;
+    /*  | ( 0 << 31 )   //  ASP3D       - MCASP3_HCLKR
+        | ( 0 << 30 )   //  ASP3C       - MCASP3_HCLKX
+        | ( 0 << 29 )   //  ASP3B       - MCASP3_MUTEIN
+        | ( 0 << 28 )   //  ASP3A       - MCASP3_MUTE
+        | ( 0 << 27 )   //  ASP0C       - MCASP0_XR0                // WM8746
+        | ( 0 << 26 )   //  ASP0B       - MCASP0_XR1                // WM8746
+        | ( 0 << 25 )   //  ASP0A       - MCASP0_[XR2/3]            // WM8746
+        | ( 0 << 24 )   //  SPDIF       - MCASP0_XR7
+	| ( 0 << 23 )   //  UART5FLOW                                           (new for J1DDR)
+	| ( 0 << 22 )   //  UART5DAT                                            (new for J1DDR)
+        | ( 2 << 20 )   //  XREF2[2]    - GPIO2_10                  // ENET.INT
+        | ( 2 << 18 )   //  XREF1[2]    - GPIO1_10
+        | ( 2 << 16 )   //  XREF0[2]    - GPIO0_10
+        | ( 1 << 14 )   //  VIN_B[2]    - VLYNQ_SCRUN, GPIO0_13     // VLYNQ
+        | ( 1 << 12 )   //  VIN_A[2]    - VLYNQ_[CLK,TX3:0,RX3:0]   // VLYNQ
+	| ( 0 << 11 )   //  CCDC_ALTPIN                                           (new for J1DDR)
+	| ( 0 << 10 )   //  UART4FLOW                                             (new for J1DDR)
+
+        | ( 0 << 8 )    //  VOUT_CLKX[2]- GPIO0_14
+        | ( 0 << 6 )    //  VID[2]      - Hi-Z
+        | ( 2 << 4 )    //  VOUT[2]     - VLCD_[Y[7:0],C[7:0]]
+        | ( 3 << 2 )    //  VID_B[2]    - VDIN_[11:8]               // TVP5146
+        | ( 3 << 0 )    //  VID_A[2]    - VDIN_[15:12]              // TVP5146 */
+
+    CFG_OBSMUX = 0;     // Observation Mux disabled
+    CFG_PULLCTL = 0x10; // GPIO4_7 pull down, All other pullups & pulldowns on
+    CFG_IO_PWDN = 0;    // All 3.3V I/O powered up
+}
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  Setup_Psc_All_On( )                                                     *
+ *      Enable all PSC modules on ALWAYSON and DSP power dominas.           *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+hotmenu Setup_Psc_All_On( )
+{
+    int i;
+    #define CFG_ARMAUX_CTL0     *( unsigned int* )( 0x01C4814C )
+    #define PSC_BASE            ( 0x01CA0000 )
+    #define PSC_EPCPR           *( unsigned int* )( 0x01CA0070 )
+    #define PSC_PTCMD           *( unsigned int* )( 0x01CA0120 )
+    #define PSC_PTSTAT          *( unsigned int* )( 0x01CA0128 )
+    #define PSC_MDSTAT_BASE     ( 0x01CA0800 )
+    #define PSC_MDCTL_BASE      ( 0x01CA0A00 )
+
+    GEL_TextOut( "Power setup ( All domains on )... " );
+
+    /*
+     *  1. Disable PLL & PSC lock
+     */
+    CFG_ARMAUX_CTL0 &= 0xFFF0FFFF;
+    CFG_ARMAUX_CTL0 |= 0x00090000;
+
+	sw_wait( 100 );
+
+    /*
+     *  2. Enable all power domains
+     *           16, 41, 48 are Reserved  //**
+     */
+    for ( i = 0 ; i <= 15 ; i++ )
+        *( unsigned int* )( PSC_MDCTL_BASE + 4 * i ) |= 0x0003;
+    for ( i = 17 ; i <= 40 ; i++ )
+        *( unsigned int* )( PSC_MDCTL_BASE + 4 * i ) |= 0x0003;
+    for ( i = 42 ; i <= 47 ; i++ )
+        *( unsigned int* )( PSC_MDCTL_BASE + 4 * i ) |= 0x0003;
+    for ( i = 49 ; i <= 56 ; i++ )
+        *( unsigned int* )( PSC_MDCTL_BASE + 4 * i ) |= 0x0003;
+    
+    /*
+     *  3. Transition power
+     */
+    PSC_PTCMD = 0x0001;                     // Transition power ( ALWAYSON )
+    while( ( PSC_PTSTAT & 0x0001 ) );       // Wait for transtion to finish
+
+    /*
+     *  3. Enable PLL & PSC lock
+     */
+    CFG_ARMAUX_CTL0 |= 0x000F0000;
+
+    GEL_TextOut( "[Done]\n" );
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  psc_change_state( id, state )                                           *
+ *      id    = Domain #ID                                                  *
+ *      state = ( ENABLE, DISABLE, SYNCRESET, RESET )                       *
+ *              (   =3  ,   =2   ,    =1    ,   =0  )                       *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+psc_change_state( int id, int state )
+{
+
+    #define CFG_ARMAUX_CTL0     *( unsigned int* )( 0x01C4814C )
+    #define PSC_PTCMD           *( unsigned int* )( 0x01CA0120 )
+    #define PSC_PTSTAT          *( unsigned int* )( 0x01CA0128 )
+    unsigned int* mdstat  = ( unsigned int* )( 0x01CA0800 + ( 4 * id ) );
+    unsigned int* mdctl   = ( unsigned int* )( 0x01CA0A00 + ( 4 * id ) );
+
+    /*
+     *  Disable PLL & PSC lock
+     */
+    CFG_ARMAUX_CTL0 &= 0xFFF0FFFF;
+    CFG_ARMAUX_CTL0 |= 0x00090000;
+
+	sw_wait( 100 );
+
+    /*
+     *  Step 0 - Ignore request if the state is already set as is
+     */
+    if ( ( *mdstat & 0x1f ) == state )
+        return;
+
+    /*
+     *  Step 1 - Wait for PTSTAT.GOSTAT to clear
+     */
+    while( PSC_PTSTAT & 1 );
+
+    /*
+     *  Step 2 - Set MDCTLx.NEXT to new state
+     */
+    *mdctl &= ~0x1f;
+    *mdctl |= state;
+
+    /*
+     *  Step 3 - Start power transition ( set PTCMD.GO to 1 )
+     */
+    PSC_PTCMD = 1;
+
+    /*
+     *  Step 4 - Wait for PTSTAT.GOSTAT to clear
+     */
+    while( PSC_PTSTAT & 1 );
+
+    /*
+     *  Step 5 - Verify state changed
+     */
+    while( ( *mdstat & 0x1f ) != state );
+
+   /*
+     *  Enable PLL & PSC lock
+     */
+    CFG_ARMAUX_CTL0 |= 0x000F0000;
+
+    GEL_TextOut( "[Done]\n" );
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  setup_pll_0( )                                                          *
+ *                                                                          *
+ *      clock_source    <- 0: Onchip Oscillator                             *
+ *                         1: External Clock                                *
+ *                                                                          *
+ *      pll_multiplier  <- 0-22: 1-23x Multiplier * 24 MHz Clk              *
+ *                             : Max 552 MHz                                *
+ *                                                                          *
+ *    xx  emifa_div [3]   <- 3-4: 4x/5x divider                             *
+ *                                                                          *
+ *    xx   vlynq_div [7]   <- 2-4: 3x/4x/5x divider                         *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+setup_pll_0( int clock_source, int pll_multiplier, int emifa_div, int vlynq_div )
+{
+   
+   /* on J1DDR EVM, OSC0 is 24MHz, and SOC1 is 22.5792Mhz */
+    #define CFG_ARMAUX_CTL0     *( unsigned int* )( 0x01C4814C )
+
+    #define PLL0_BASE           0x01CA1C00
+    #define PLL0_PLLCTL         0x01CA1D00      // PLL0 Control
+    #define PLL0_SECCTL         0x01CA1D08      // PLL0 secondary Control
+    #define PLL0_PLLM           0x01CA1D10      // PLL0 Multiplier
+    #define PLL0_PLLCMD         0x01CA1D38      // PLL0 Command
+    #define PLL0_PLLSTAT        0x01CA1D3C      // PLL0 Status
+    #define PLL0_PLLDIV1        0x01CA1D18      // PLL0 Div1
+    #define PLL0_PLLDIV2        0x01CA1D1C      // PLL0 Div2
+    #define PLL0_PLLDIV3        0x01CA1D20      // PLL0 Div3
+    #define PLL0_POSTDIV        0x01CA1D28      // PLL0 Post Divider
+    #define PLL0_PLLDIV4        0x01CA1D60      // PLL0 Div4
+    #define PLL0_PLLDIV5        0x01CA1D64      // PLL0 Div5
+    #define PLL0_PLLDIV6        0x01CA1D68      // PLL0 Div6
+    #define PLL0_PLLDIV7        0x01CA1D6C      // PLL0 Div7
+    #define PLL0_PLLDIV8        0x01CA1D70      // PLL0 Div8
+    #define PLL0_PLLDIV9        0x01CA1D74      // PLL0 Div9   
+
+    unsigned int* pll_ctl       = ( unsigned int* )PLL0_PLLCTL;          
+    unsigned int* pll_secctl    = ( unsigned int* )PLL0_SECCTL;  /*16th bit is for PLL selection: 0-->OSC0 default, 1-->OSC1 */
+    unsigned int* pll_pllm      = ( unsigned int* )PLL0_PLLM;
+    unsigned int* pll_cmd       = ( unsigned int* )PLL0_PLLCMD;
+    unsigned int* pll_stat      = ( unsigned int* )PLL0_PLLSTAT;
+    unsigned int* pll_div1      = ( unsigned int* )PLL0_PLLDIV1;
+    unsigned int* pll_div2      = ( unsigned int* )PLL0_PLLDIV2;
+    unsigned int* pll_div3      = ( unsigned int* )PLL0_PLLDIV3;
+    unsigned int* pll_postdiv   = ( unsigned int* )PLL0_POSTDIV;  
+    unsigned int* pll_div4      = ( unsigned int* )PLL0_PLLDIV4;
+    unsigned int* pll_div5      = ( unsigned int* )PLL0_PLLDIV5;
+    unsigned int* pll_div6      = ( unsigned int* )PLL0_PLLDIV6;
+    unsigned int* pll_div7      = ( unsigned int* )PLL0_PLLDIV7;
+    unsigned int* pll_div8      = ( unsigned int* )PLL0_PLLDIV8;
+    unsigned int* pll_div9      = ( unsigned int* )PLL0_PLLDIV9;  
+
+    int dsp_freq = 24 * ( pll_multiplier + 1 );
+    int emifa_freq = dsp_freq / (emifa_div + 1);
+    int vlynq_freq = dsp_freq / vlynq_div;
+
+    GEL_TextOut( "PLL 0 ( DSP @ %d / EMIF-A @ %d / VLYNQ @ %d ) MHz "
+    	,,,,, dsp_freq, emifa_freq, vlynq_freq );
+
+    if ( clock_source == 0 )
+        GEL_TextOut( "w/ Onchip Oscilator... " );
+    else
+        GEL_TextOut( "w/ External Clock... " );
+
+
+    /*
+     *  1. Disable PLL & PSC lock
+     */
+    unlock_psc_pll( );
+
+     sw_wait( 2000 );                     // Wait for PLL to stabilize
+    *pll_pllm = pll_multiplier;
+	 
+
+    *pll_ctl = 0x00000000;             // Reset PLL
+    sw_wait( 2000 );                     // Wait for PLL to stabilize
+
+
+    *pll_secctl = 0x00800000;             // Switch to BYPASS mode
+    sw_wait( 2000 );                     // Wait for PLL to stabilize
+
+  
+    *pll_ctl = 0x00000008;             // Release from reset
+    sw_wait( 2000 );                     // Wait for PLL to stabilize
+
+
+    if ( clock_source == 0 )
+        *pll_ctl &= 0xFFFFFEFF;         // 0: Onchip Oscillator
+    else
+        *pll_ctl |= 0x00000100;         // 1: External Clock
+
+
+    /*
+     *  4. Load PLL0 dividers
+     *      1 - Programmable - DSP
+     *      2 - Programmable - EDMA, core clocks for VPSS0/1, EMIFA,EMIFB/DDR and others
+     *      3 - Programmable - I/O clock for EMIFA, CRC, ECC
+     *      4 - Programmable - Optional I/O clock for UART1/2
+     *      5 - Fixed        - Core clocks for various peripherals
+     *      6 - Programmable - Reserved (TI internal)
+     *      7 - Programmable - VLYNQ I/O clock
+     *      8 - fixed        - Reserved (TI internal)
+     *      9 - Programmable - DARtE, McASP0-3
+     */
+    *pll_div1  = 0x8000;  /* tied off, DSP clock *///**
+    *pll_div2  = 0x8002;  /* tied off, EDMA, cores for VPSS0/1, EMIFA, EMIFB/DDR  */
+    *pll_div3  = 0x8000 | ( emifa_div & 0x1F );  /* I/O clock for EMIA */
+    *pll_div4  = 0x8000 ;  /* optional clock for UART0/1 */
+    *pll_div5  = 0x8005;  /* tied off */
+    *pll_div6 |= 0x8000;  /* TI internal use only */
+    *pll_div7  = 0x8000 | ( vlynq_div & 0x1F ); /* VLYNQ I/O clock */
+    *pll_div8 |= 0x8000;   /* tied off */
+    *pll_div9  = 0x8000;   /* Enable, DARtE, McASP0-3 */
+
+    *pll_cmd |= 0x00000001;             // Set phase alignment
+    while( ( *pll_stat & 1 ) );         // Wait for operation to finish
+    sw_wait( 2000 );                     // Wait for PLL to stabilize
+
+	GEL_TextOut( "w/ PLL0 stabilized... " );
+
+     /*
+     */
+    *pll_ctl = 0x00000009;  //enable PLL0 and switch off bypass
+    sw_wait( 2000 );                     // Wait for PLL to stabilize
+    
+ //   *pll_cmd = 0x00000001;   //phase align the clocks
+ //   sw_wait( 2000 );                     // Wait for PLL to stabilize
+
+   /*
+     *  7. Enable PLL & PSC lock
+     */
+    lock_psc_pll( );
+
+    GEL_TextOut( "[Done]\n" );
+}
+
+hotmenu Setup_PLL0_552_MHz( )
+{
+    /*  DSP @ 552 MHz
+     *  EMIF-A @ 110.4 MHz
+     *  VLYNQ @  MHz
+     *  Onchip Oscillator */
+    setup_pll_0( 0, 22, 4, 5 );
+}
+hotmenu Setup_PLL0_480_MHz_OscIn( )
+{
+    /*  DSP @ 480 MHz
+     *  EMIF-A @ 120 MHz
+     *  VLYNQ @ 96 MHz
+     *  Onchip Oscillator */
+    setup_pll_0( 0, 17, 3, 4 );
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  setup_pll_1( )                                                          *
+ *                                                                          *
+ *      clock_source    <- 0: Onchip Oscillator                             *
+ *                         1: External Clock                                *
+ *                                                                          *
+ *      pll_multiplier  <- 13: 14x Multiplier * 24 MHz Clk                  *
+ *                             : Max 336 MHz                                *
+ *                                                                          *
+ *      pll_post_div    <- 0/1 : 1x/2x divider                              *
+ *                                                                          *
+ *      emifa_div [3]   <- 2/4/5 : 3x/5x/6x divider                         *
+ *                                                                          *
+ *      emifb_div [4]   <- 2/4/5 : 3x/5x/6x divider                         *
+ *                                                                          *
+ *      vpbe_div [5]    <- 5/11 : 6x/12x divider                            *
+ *                                                                          *
+ *      rti2_div [8]    <- 11/23 : 12x/24x divider                          *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+setup_pll_1( int clock_source, int pll_multiplier, int pll_post_div, 
+             int emifa_div, int vpbe_div, int rti2_div )
+{
+    #define CFG_ARMAUX_CTL0     *( unsigned int* )( 0x01C4814C )
+
+    #define PLL1_BASE           0x01CA2100
+    #define PLL1_PLLCTL         0x01CA2100      // PLL1 Control
+    #define PLL1_SECCTL         0x01CA2108      // PLL1 secondary Control
+    #define PLL1_PLLM           0x01CA2110      // PLL1 Multiplier
+    #define PLL1_POSTDIV        0x01CA2128      // PLL1 Post Div
+    #define PLL1_PLLCMD         0x01CA2138      // PLL1 Command
+    #define PLL1_PLLSTAT        0x01CA213C      // PLL1 Status
+    #define PLL1_PLLDIV1        0x01CA2118      // PLL1 Div1
+    #define PLL1_PLLDIV2        0x01CA211C      // PLL1 Div2
+    #define PLL1_PLLDIV3        0x01CA2120      // PLL1 Div3
+    #define PLL1_PLLDIV4        0x01CA2160      // PLL1 Div4
+    #define PLL1_PLLDIV5        0x01CA2164      // PLL1 Div5
+    #define PLL1_PLLDIV6        0x01CA2168      // PLL1 Div6
+    #define PLL1_PLLDIV7        0x01CA216C      // PLL1 Div7
+    #define PLL1_PLLDIV8        0x01CA2170      // PLL1 Div8
+
+    unsigned int* pll_ctl       = ( unsigned int* )PLL1_PLLCTL;
+    unsigned int* pll_secctl    = ( unsigned int* )PLL1_SECCTL;
+    unsigned int* pll_pllm      = ( unsigned int* )PLL1_PLLM;
+    unsigned int* pll_postdiv   = ( unsigned int* )PLL1_POSTDIV;
+    unsigned int* pll_cmd       = ( unsigned int* )PLL1_PLLCMD;
+    unsigned int* pll_stat      = ( unsigned int* )PLL1_PLLSTAT;
+    unsigned int* pll_div1      = ( unsigned int* )PLL1_PLLDIV1;
+    unsigned int* pll_div2      = ( unsigned int* )PLL1_PLLDIV2;
+    unsigned int* pll_div3      = ( unsigned int* )PLL1_PLLDIV3;
+    unsigned int* pll_div4      = ( unsigned int* )PLL1_PLLDIV4;
+    unsigned int* pll_div5      = ( unsigned int* )PLL1_PLLDIV5;
+    unsigned int* pll_div6      = ( unsigned int* )PLL1_PLLDIV6;
+    unsigned int* pll_div7      = ( unsigned int* )PLL1_PLLDIV7;
+    unsigned int* pll_div8      = ( unsigned int* )PLL1_PLLDIV8;
+
+    int arm_freq = 24 * ( pll_multiplier + 1 );
+    int emifa_freq = arm_freq / (emifa_div + 1);
+    int vpbe_freq  = arm_freq / vpbe_div;
+    int rti2_freq  = arm_freq / rti2_div;
+
+    GEL_TextOut( "PLL 1 ( ARM @ %d / EMIF-A @ %d )\n"
+        ,,,,, arm_freq, emifa_freq );
+    GEL_TextOut( "      ( VPBE @ %d / RTI2 @ %d ) MHz "
+    	,,,,, vpbe_freq, rti2_freq );
+
+    if ( clock_source == 0 )
+        GEL_TextOut( "w/ Onchip Oscilator... " );
+    else
+        GEL_TextOut( "w/ External Clock... " );
+ /*
+     *  1. Disable PLL & PSC lock
+     */
+    unlock_psc_pll( );
+
+    sw_wait( 2000 );                     // Wait for PLL to stabilize
+    *pll_pllm = pll_multiplier;
+
+    *pll_ctl = 0x00000000;             // Reset PLL
+    sw_wait( 2000 );                     // Wait for PLL to stabilize
+
+
+    *pll_secctl = 0x00800000;             // Switch to BYPASS mode
+    sw_wait( 2000 );                     // Wait for PLL to stabilize
+
+  
+    *pll_ctl = 0x00000008;             // Release from reset
+    sw_wait( 2000 );                     // Wait for PLL to stabilize
+
+
+    if ( clock_source == 0 )
+        *pll_ctl &= 0xFFFFFEFF;         // 0: Onchip Oscillator
+    else
+        *pll_ctl |= 0x00000100;         // 1: External Clock
+
+    /*
+     *  4. Load PLL1 dividers
+     *      1 - /1 or /2        - ARM Subsystem
+     *      2 - /2 or /4        - ARM peripherals
+     *      3 - Programmable - I/O clocks for EMIFA, CRC, ECC
+     *      4 - Programmable - Optional I/O clock for UART1/2
+     *      5 - Programmable - Optional I/O clock for VPSS0/1
+     *      6 - CLKOUT
+     *      7 - Reserved (TI Internal)
+     *      8 - Optional I/O clock for VPSS0/1; or RTI2
+     */
+    *pll_div1 = 0x8000;  /* /1 when POSTDIV=1; /2 when POSTDIV=2 */
+    *pll_div2 = 0x8000;  /* /1 when POSTDIV=1; /2 when POSTDIV=2 */    
+    *pll_div3 = 0x8000 | ( emifa_div & 0x1F );
+    *pll_div4 = 0x8000; 
+    *pll_div5 = 0x8000 | ( vpbe_div & 0x1F );    /*FRACT_divider, 0.5*n divider feeding VPSS */
+    *pll_div6 = 0x8000;
+    *pll_div7 = 0x8000;
+    *pll_div8 = 0x8000 | ( rti2_div & 0x1F );  /* either vidided by 12 or by 24 */
+
+    
+   *pll_cmd |= 0x00000001;             // Set phase alignment
+	 
+
+    while( ( *pll_stat & 1 ) );         // Wait for operation to finish
+    sw_wait( 2000 );                     // Wait for PLL to stabilize
+
+    /*
+     */
+    *pll_ctl = 0x00000009;  //enable PLL0 and switch off bypass
+    sw_wait( 2000 );                     // Wait for PLL to stabilize
+    
+    sw_wait( 2000 );                     // Wait for PLL to stabilize
+
+    /*
+     *  8. Enable PLL & PSC lock
+     */
+    lock_psc_pll( );
+
+    GEL_TextOut( "[Done]\n" );
+}
+
+hotmenu Setup_PLL1_24_MHz_EMIFS_67_MHZ_OscIn( )
+{
+    /*  ARM @ 24 MHz
+     *  EMIF-A @ 67 MHz
+     *  EMIF-B @ 67  MHz
+     *  VPBE @ 56 MHz
+     *  RTI2 @ 28 MHz
+     *  Onchip Oscillator */
+    setup_pll_1( 0, 0, 0, 4, 5, 11 );
+}
+
+hotmenu Setup_PLL1_336_MHz_EMIFS_112_MHZ_OscIn( )
+{
+    /*  ARM @ 336 MHz
+     *  EMIF-A @ 112 MHz
+     *  EMIF-B @ 112 MHz
+     *  VPBE @ 56 MHz
+     *  RTI2 @ 28 MHz
+     *  Onchip Oscillator */
+   setup_pll_1( 0, 13, 0, 2, 5, 11 );
+}
+
+hotmenu Setup_PLL1_408_MHz( )
+{
+    /*  This is for VPSS to use 54MHz for display
+     *  ARM @ 408 MHz
+     *  EMIF-A @ 102 MHz
+     *  VPBE @ 37 MHz
+     *  RTI2 @ 17 MHz
+     *  Onchip Oscillator */
+   setup_pll_1( 0, 16, 0, 3, 11, 23 );
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  Setup_PLL2( )                                                           *
+ *      Setup PLL2: Doesn't have PLL controller. Configured using           *
+ *      ARMAUX_CTL0 and ARMAUX_CTL1                                         *
+ *      Set for 192MHz                                                      *
+ * ------------------------------------------------------------------------ */
+Setup_PLL2(  )
+{
+    #define CFG_ARMAUX_CTL0     *( unsigned int* )( 0x01C4814C )
+	#define CFG_ARMAUX_CTL1     *( unsigned int* )( 0x01C48168 )  
+
+	int i;
+
+    CFG_ARMAUX_CTL1 = 0x001F0000; /* set the multiplier */
+
+    CFG_ARMAUX_CTL1 |= 0x01000000;/* Assert Reset : (Bit3) PLLRST = 1    */
+
+    for(i=0;i<2000;i++){}
+
+    /* Set the BYPASSZ of PLL0/PLL1 to 1 */
+
+    CFG_ARMAUX_CTL1 |= 0x00800000;   /* for PLL2 */
+ 
+    /* postdiv for pll2 */
+
+    CFG_ARMAUX_CTL1 |= 0x02000000;   /* for PLL2 : 384/2 = 192 MHz */
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  setup_emifa( )                                                          *
+ *      Setup EMIF to Max Wait cycles and DDR to specified freq.            *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+setup_emifa( int emifa_freq, int nor_bus_width )
+{
+    int refresh_rate;
+
+    /* For SDR */
+    #define EMIFA_SDCR          *( unsigned int* )( 0x18000008 )
+    #define EMIFA_SDRCR         *( unsigned int* )( 0x1800000C )
+    #define EMIFA_SDRCR_SR     *( unsigned char* )( 0x1800000F )
+    #define EMIFA_SDTIMR1       *( unsigned int* )( 0x18000010 )
+    #define EMIFA_SDTIMR2       *( unsigned int* )( 0x18000014 )
+
+    /* For Async EMIF */
+    #define EMIFA_ACS2CR        *( unsigned int* )( 0x18000080 )
+    #define EMIFA_ACS3CR        *( unsigned int* )( 0x18000084 )
+    #define EMIFA_ACS4CR        *( unsigned int* )( 0x18000088 )
+    #define EMIFA_ACS5CR        *( unsigned int* )( 0x1800008C )
+
+    #define CFG_MISC_CTL0       *( unsigned int* )( 0x01C48138 )
+    #define CFG_ARMAUX_CTL0     *( unsigned int* )( 0x01C4814C )
+
+    GEL_TextOut( "EMIF-A setup ( @ %f MHz )... ",,,,, emifa_freq );
+
+    refresh_rate = ( emifa_freq * 64000 ) >> 13;    // ( freq * 64ms / 8192 )
+
+    /*
+     *  1. CLK setup
+     */
+
+    CFG_MISC_CTL0 &= 0xFFFCFFFF;
+    CFG_MISC_CTL0 |= 0x00000000;    // For PLL0.SYSCLK3
+
+	/*
+    CFG_MISC_CTL0 &= 0xFFFCFFFF;
+    CFG_MISC_CTL0 |= 0x00010000;    // For PLL1.SYSCLK3
+    */
+
+    /*
+     *  2. SDRAM Initialization @ 112 MHz
+     */
+    if ( emifa_freq == 112 )
+    {
+        EMIFA_SDRCR_SR = 0x80;      // Self Refresh
+        EMIFA_SDCR = 0x00800000;    // Boot Unlock
+        EMIFA_SDCR = 0x00010000;    // Enable SDRAM
+
+        CFG_ARMAUX_CTL0 |= 1;       // EMIF controls EMIF pns
+
+        EMIFA_SDCR |= 0x00008000;   // Timing Unlock//**
+
+        EMIFA_SDTIMR1 = 0x0E9121C9;
+        /*  | ( 7 << 25 )           // tRTC [66 ns]
+            | ( 2 << 22 )           // tRP  [20 ns]
+            | ( 2 << 19 )           // tRCD [20 ns]
+            | ( 1 << 16 )           // tWR  [15 ns]
+            | ( 4 << 11 )           // tRAS [44 ns]
+            | ( 7 <<  6 )           // tRC  [66 ns]
+            | ( 1 <<  3 )           // tRRD [15 ns]
+            | ( 1 <<  0 );          // tWTR [15 ns] */
+
+        EMIFA_SDTIMR2 = 0x000A0001;
+        /*  | ( 10 << 16 )          // tXSR [75 ns]
+            | ( 0 <<  0 );          // tCKE [ 5 ns] */
+
+        EMIFA_SDRCR = refresh_rate; // Refresh rate = ( freq * 64ms / 8192 rows )
+
+        EMIFA_SDCR = 0x00000622;
+        /*  | ( 0 << 23 )           // Boot lock    [Locked]
+            | ( 0 << 15 )           // Timing lock  [Locked]
+            | ( 0 << 14 )           // Bus width    [32-bit]
+            | ( 3 << 9 )            // CAS          [3]
+            | ( 2 << 4 )            // Banks        [4]
+            | ( 0 << 3 )            // Chip Select  [EMIFx_CS0n]
+            | ( 2 << 0 );           // Page Size    [1024-words] */
+    }
+
+    if ( emifa_freq == 110.4 )      // 9.06ns CLK
+    {
+        EMIFA_SDRCR_SR = 0x80;      // Self Refresh
+        EMIFA_SDCR = 0x00800000;    // Boot Unlock
+        EMIFA_SDCR = 0x00010000;    // Enable SDRAM
+
+        CFG_ARMAUX_CTL0 |= 1;       // EMIF controls EMIF pns
+
+        EMIFA_SDCR |= 0x00008000;   // Timing Unlock
+
+        EMIFA_SDTIMR1 = 0x0E9121C9;
+        /*  | ( 7 << 25 )           // tRTC [66 ns]
+            | ( 2 << 22 )           // tRP  [20 ns]
+            | ( 2 << 19 )           // tRCD [20 ns]
+            | ( 1 << 16 )           // tWR  [15 ns]
+            | ( 4 << 11 )           // tRAS [44 ns]
+            | ( 7 <<  6 )           // tRC  [66 ns]
+            | ( 1 <<  3 )           // tRRD [15 ns]
+            | ( 1 <<  0 );          // tWTR [15 ns] */
+
+        EMIFA_SDTIMR2 = 0x00080001;
+        /*  | ( 10 << 16 )          // tXSR [75 ns]
+            | ( 0 <<  0 );          // tCKE [ 5 ns] */
+
+        EMIFA_SDRCR = refresh_rate; // Refresh rate = ( freq * 64ms / 8192 rows )
+
+        EMIFA_SDCR = 0x00000622;
+        /*  | ( 0 << 23 )           // Boot lock    [Locked]
+            | ( 0 << 15 )           // Timing lock  [Locked]
+            | ( 0 << 14 )           // Bus width    [32-bit]
+            | ( 3 << 9 )            // CAS          [3]
+            | ( 2 << 4 )            // Banks        [4]
+            | ( 0 << 3 )            // Chip Select  [EMIFx_CS0n]
+            | ( 2 << 0 );           // Page Size    [1024-words] */
+    }
+
+    /*
+     *  2. SDRAM Initialization @ 67 MHz
+     */
+    if ( emifa_freq == 67 )
+    {
+        EMIFA_SDRCR_SR = 0x80;      // Self Refresh
+        EMIFA_SDCR = 0x00800000;    // Boot Unlock
+        EMIFA_SDCR = 0x00010000;    // Enable SDRAM
+
+        CFG_ARMAUX_CTL0 |= 1;       // EMIF controls EMIF pns
+
+        EMIFA_SDCR = 0x00008000;   // Timing Unlock
+
+        EMIFA_SDTIMR1 = 0x08491109;
+        /*  | ( 4 << 25 )           // tRTC [66 ns]
+            | ( 1 << 22 )           // tRP  [20 ns]
+            | ( 1 << 19 )           // tRCD [20 ns]
+            | ( 1 << 16 )           // tWR  [15 ns]
+            | ( 2 << 11 )           // tRAS [44 ns]
+            | ( 4 << 6 )            // tRC  [66 ns]
+            | ( 1 << 3 )            // tRRD [15 ns]
+            | ( 1 << 0 );           // tWTR [20 ns] */
+
+        EMIFA_SDTIMR2 = 0x00120001;
+        /*  | ( 18 << 16 )          // tXSR [75 ns]
+            | ( 1 << 0 );           // tCKE [ 8 ns] */
+
+        EMIFA_SDRCR = refresh_rate; // Refresh rate = ( freq * 64ms / 8192 )
+
+        EMIFA_SDCR = 0x00000422;
+        /*  | ( 0 << 23 )           // Boot lock    [Locked]
+            | ( 0 << 15 )           // Timing lock  [Locked]
+            | ( 0 << 14 )           // Bus width    [32-bit]
+            | ( 2 << 9 )            // CAS          [2]
+            | ( 2 << 4 )            // Banks        [4]
+            | ( 0 << 3 )            // Chip Select  [EMIFx_CS0n]
+            | ( 2 << 0 );           // Page Size    [1024-words] */
+    }
+
+    /*
+     *  3. Async-EMIF Initialization
+     */
+    if (nor_bus_width == 16)
+    {  
+        EMIFA_ACS2CR = 0x000C0181;      // <<-- NOR Flash (S29Gl512N)
+    }
+    if (nor_bus_width == 32)
+    {  
+       EMIFA_ACS2CR = 0x000C0182;      // <<-- NOR Flash (S29Gl512N) & SRAM
+    }
+
+    EMIFA_ACS3CR = 0x0FFFFFFC;      // <<-- N/A
+    EMIFA_ACS4CR = 0x030C906a;      // <<-- ENET LAN91C111
+    EMIFA_ACS5CR = 0x030C906a;      // <<-- ENET LAN9312
+//    EMIFA_ACS5CR = 0x0FFFFFFC;      // <<-- NAND Flash
+
+    GEL_TextOut( "[Done]\n" );
+}
+
+hotmenu Setup_EMIFA_112MHz_Clk( )
+{
+    setup_emifa( 112, 16 );
+}
+
+hotmenu Setup_EMIFA_110MHz( )
+{
+    setup_emifa( 110.4, 32 );
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  setup_emifb( )                                                          *
+ *      Configure EMIF to run at specified frequency.                       *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+setup_emifb( int emifb_freq )
+{
+    int refresh_rate;
+
+    /* For DDR */
+    #define EMIFB_BASE           0x18001000 
+    #define EMIFB_SDCR          *( unsigned int* )( EMIFB_BASE + 0x08 )
+    #define EMIFB_SDRCR         *( unsigned int* )( EMIFB_BASE + 0x0C )
+    #define EMIFB_SDTIMR1       *( unsigned int* )( EMIFB_BASE + 0x10 )
+    #define EMIFB_SDTIMR2       *( unsigned int* )( EMIFB_BASE + 0x14 )
+    #define EMIFB_PBBPR         *( unsigned int* )( EMIFB_BASE + 0x20 )
+	#define EMIFB_DDRPHYCR      *( unsigned int* )( EMIFB_BASE + 0xE4 ) 
+
+    #define IODFT_TLGC		    *( unsigned int* )(EMIFB_BASE + 0x60)          //IODFT test logic and Control register
+    #define CFG_ARMAUX_CTL0     *( unsigned int* )( 0x01C4814C )
+    #define CFG_ARMAUX_CTL1     *( unsigned int* )( 0x01C48168 )  
+ 
+    GEL_TextOut( "EMIF-B setup ( @ %d MHz ) w/ 32-bit bus... ",,,,, emifb_freq );
+    refresh_rate = (  emifb_freq  *  64000 ) >> 13;    // ( freq * 64ms / 8192 )
+
+     /* DDR Initialization @ 192 MHz */
+    if ( emifb_freq == 192 ) // (5.2ns)
+    {
+	    CFG_ARMAUX_CTL0 |= 1;
+	    EMIFB_DDRPHYCR = 0x0884; // Read latency = 3, enable PHY
+		IODFT_TLGC |= 0x00000400;
+        sw_wait(0x1000);
+
+        EMIFB_SDRCR = refresh_rate;  // Refresh rate = ( freq * 64ms / 8192 )
+        EMIFB_SDCR = 0x00800000;     // Boot Unlock
+
+        EMIFB_SDTIMR1 = 0x4A923A89;
+        /*  | ( 37 << 25 )           // tRFC [197.5 ns]
+            | ( 2  << 22 )           // tRP  [15 ns]
+            | ( 2  << 19 )           // tRCD [15 ns]
+            | ( 2  << 16 )           // tWR  [15 ns]
+            | ( 7 << 11  )           // tRAS [40 ns]
+            | ( 10 << 6  )           // tRC  [55 ns]
+            | ( 1  << 3  )           // tRRD [7.5 ns]
+            | ( 1  << 0  );          // tWTR [7.5 ns] */
+
+        EMIFB_SDTIMR2 = 0x0029A727;
+        /*  | (  2 << 23 )          // tODT [2]
+            | ( 41 << 16 )          // tXSR [207 ns] 
+			| ( 167<< 8  )          // tXSRD [168 ns] (from TI)
+			| (  1 << 5  )          // t_RTP [7.5 ns]
+            | (  7 << 0  );         // tCKE [ 40 ns] */
+        EMIFB_PBBPR = 0x00000010;   // Bus Burst Priority Register
+
+        EMIFB_SDCR = 0x00538632;
+        /*  | ( 0 << 23 )           // Boot lock    [Locked]
+		    | ( 1 << 16 )           // SDRAM fully enabled
+            | ( 0 << 15 )           // Timing lock  [Locked]
+            | ( 0 << 14 )           // Bus width    [32-bit]
+            | ( 3 << 9 )            // CAS          [3]
+            | ( 3 << 4 )            // Banks        [8]
+            | ( 2 << 0 );           // Page Size    [1024-word pages requiring 10 column address bits] */
+        EMIFB_SDRCR = refresh_rate; // Refresh rate = ( freq * 64ms / 8192 )
+    }
+
+    /*
+     *  2. DDR Initialization @ 168 MHz
+     */
+    if ( emifb_freq == 168 )
+    {
+       	CFG_ARMAUX_CTL0 |= 1;
+	    EMIFB_DDRPHYCR = 0x0884; // Read latency = 3, enable PHY
+		IODFT_TLGC |= 0x00000400;
+        sw_wait(0x1000);
+
+        EMIFB_SDRCR = refresh_rate;  // Refresh rate = ( freq * 64ms / 8192 )
+        EMIFB_SDCR = 0x00800000;     // Boot Unlock
+
+        EMIFB_SDTIMR1 = 0x22923249;
+        /*  | ( 37 << 25 )           // tRFC [197.5 ns]
+            | ( 2  << 22 )           // tRP  [15 ns]
+            | ( 2  << 19 )           // tRCD [15 ns]
+            | ( 2  << 16 )           // tWR  [15 ns]
+            | ( 7 << 11  )           // tRAS [40 ns]
+            | ( 10 << 6  )           // tRC  [55 ns]
+            | ( 1  << 3  )           // tRRD [7.5 ns]
+            | ( 1  << 0  );          // tWTR [7.5 ns] */
+
+        EMIFB_SDTIMR2 = 0x0022c722;
+        /*  | (  2 << 23 )          // tODT [2]
+            | ( 41 << 16 )          // tXSR [207 ns] 
+			| ( 167<< 8  )          // tXSRD [168 ns] (from TI)
+			| (  1 << 5  )          // t_RTP [7.5 ns]
+            | (  7 << 0  );         // tCKE [ 40 ns] */
+        EMIFB_PBBPR = 0x00000010;   // Bus Burst Priority Register
+
+        EMIFB_SDCR = 0x00538632;
+        /*  | ( 0 << 23 )           // Boot lock    [Locked]
+		    | ( 1 << 16 )           // SDRAM fully enabled
+            | ( 0 << 15 )           // Timing lock  [Locked]
+            | ( 0 << 14 )           // Bus width    [32-bit]
+            | ( 3 << 9 )            // CAS          [3]
+            | ( 3 << 4 )            // Banks        [8]
+            | ( 2 << 0 );           // Page Size    [1024-word pages requiring 10 column address bits] */
+        EMIFB_SDRCR = refresh_rate; // Refresh rate = ( freq * 64ms / 8192 )
+    }
+
+
+    GEL_TextOut( "[Done]\n" );
+}
+
+hotmenu Setup_EMIFB_168MHz_Clk( )
+{
+    setup_emifb( 168 );
+}
+
+hotmenu Setup_EMIFB_192MHz( )
+{
+    setup_emifb( 192 );
+}
+
+menuitem "DSP Boot";
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  boot_dsp_from_arm( )                                                    *
+ *      Boot DSP from ARM side.                                             *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+boot_dsp_from_arm( unsigned int boot_address )
+{
+    #define PSC_MDSTAT_DSP      *( unsigned int* )( 0x01Ca0804 )
+    #define PSC_MDCTL_DSP       *( unsigned int* )( 0x01Ca0A04 )
+    #define CFG_DSPBOOTADDR     *( unsigned int* )( 0x01C48008 )
+
+    /*
+     *  1. Assert local reset
+     */
+    PSC_MDCTL_DSP &= 0xFEFF;
+
+    /*
+     *  2. Program DSP boot address & add branch to self opcode
+     */
+    CFG_DSPBOOTADDR = boot_address;
+    GEL_MemoryFill( boot_address, 0, 32, 0x13 );
+    GEL_TextOut( "DSP Boot from %x ",,,,, boot_address );
+
+    /*
+     *  3. Release from reset
+     */
+//    PSC_MDCTL_DSP |= 0x0100;
+    GEL_TextOut( "[Done]\n" );
+}
+
+hotmenu DSP_Boot_from_L2_Cache( )
+{
+    boot_dsp_from_arm( 0x11800000 );            // L2 Memory
+}
+
+hotmenu DSP_Boot_from_SDRA( )
+{
+    boot_dsp_from_arm( 0x40000000 );            // SDR-A Memory
+}
+
+hotmenu DSP_Boot_from_SDRB( )
+{
+    boot_dsp_from_arm( 0x80000000 );            // SDR-B Memory
+}

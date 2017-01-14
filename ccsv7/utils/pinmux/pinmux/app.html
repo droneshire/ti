@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+
+<head data-gc-version="1.5.@mmddyyyy@">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta charset="utf-8">
+	<title>TI PinMux - TI Cloud Tools</title>
+
+	<!-- third party JS libraries -->
+	<script src="bower_components/angular/angular.min.js"></script>
+	<script src="bower_components/angular-route/angular-route.min.js"></script>
+	<script src="bower_components/angular-animate/angular-animate.min.js"></script>
+	<script src="bower_components/ace-builds/src-min-noconflict/ace.js"></script>
+	<script src="bower_components/angular-toastr/dist/angular-toastr.tpls.min.js"></script>
+	<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+	<script src="bower_components/file-saver/FileSaver.min.js"></script>
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+	<script src="bower_components/jszip/dist/jszip.min.js"></script>
+	<script src="bower_components/underscore/underscore-min.js"></script>
+	<script src="bower_components/konva/konva.min.js"></script>
+
+	<!-- third party non bower components -->
+	<!-- may include some custom changes -->
+	<script src="non_bower_components/sort/naturalSortVersionCaching.js"></script>
+
+	<!-- third party css -->
+	<link rel="stylesheet" href="bower_components/bootstrap-css-only/css/bootstrap.min.css">
+	<link rel="stylesheet" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css">
+	<link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.min.css" />
+
+	<!-- stylesheets -->
+	<link rel="stylesheet" href="fonts/roboto.css">
+	<link rel="stylesheet" href="fonts/ti-icon-fonts/style.css">
+	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/app.css">
+	<link rel="stylesheet" href="css/codegen.css">
+	<link rel="stylesheet" href="css/nav.css">
+	<link rel="stylesheet" href="css/table.css">
+
+	<script src="globals.js" type="text/javascript"></script>
+	<script src="app.js" type="text/javascript"></script>
+
+	<!-- services -->
+	<script src="services/solver/choiceFactories.js" type="text/javascript"></script>
+	<script src="services/solver/choices.js" type="text/javascript"></script>
+	<script src="services/solver/clauseGeneration.js" type="text/javascript"></script>
+	<script src="services/solver/clauses.js" type="text/javascript"></script>
+	<script src="services/solver/debug.js" type="text/javascript"></script>
+	<script src="services/solver/errorLocation.js" type="text/javascript"></script>
+	<script src="services/solver/glucose.js" type="text/javascript"></script>
+	<script src="services/solver/glucoseFunctions.js" type="text/javascript"></script>
+	<script src="services/solver/solver.js" type="text/javascript"></script>
+	<script src="services/storage/cloudStorage.js" type="text/javascript"></script>
+	<script src="services/storage/nwStorage.js" type="text/javascript"></script>
+	<script src="services/storage/storage.js" type="text/javascript"></script>
+	<script src="services/accountManagement.js"></script>
+	<script src="services/analytics.js" type="text/javascript"></script>
+	<script src="services/codeGenerator.js" type="text/javascript"></script>
+	<script src="services/config.js" type="text/javascript"></script>
+	<script src="services/data.js" type="text/javascript"></script>
+	<script src="services/extendScope.js" type="text/javascript"></script>
+	<script src="services/file.js" type="text/javascript"></script>
+	<script src="services/fileList.js" type="text/javascript"></script>
+	<script src="services/fsutil.js" type="text/javascript"></script>
+	<script src="services/layout.js" type="text/javascript"></script>
+	<script src="services/modals.js" type="text/javascript"></script>
+	<script src="services/nav.js" type="text/javascript"></script>
+	<script src="services/pinmuxRootScope.js" type="text/javascript"></script>
+	<script src="services/pinmuxRouteParams.js" type="text/javascript"></script>
+	<script src="services/pinview.js" type="text/javascript"></script>
+	<script src="services/project.js" type="text/javascript"></script>
+	<script src="services/requirements.js" type="text/javascript"></script>
+	<script src="services/settings.js" type="text/javascript"></script>
+	<script src="services/style.js" type="text/javascript"></script>
+	<script src="services/toolTip.js" type="text/javascript"></script>
+	<script src="services/ui.js" type="text/javascript"></script>
+	<script src="services/uiConfigurables.js" type="text/javascript"></script>
+	<script src="services/update.js" type="text/javascript"></script>
+	<script src="services/userPreferences.js" type="text/javascript"></script>
+	<script src="services/utils.js" type="text/javascript"></script>
+
+	<!--controllers -->
+	<script src="controllers/config/interfaces/interfaces.js" type="text/javascript"></script>
+	<script src="controllers/config/output/editor.js" type="text/javascript"></script>
+	<script src="controllers/config/output/filelist.js" type="text/javascript"></script>
+	<script src="controllers/config/output/pinview.js" type="text/javascript"></script>
+	<script src="controllers/config/output/summary.js" type="text/javascript"></script>
+	<script src="controllers/config/requirements/configurable.js" type="text/javascript"></script>
+	<script src="controllers/config/requirements/myRequirements.js" type="text/javascript"></script>
+	<script src="controllers/config/requirements/requirementConfig.js" type="text/javascript"></script>
+	<script src="controllers/config/requirements/requirementConfigGPIO.js" type="text/javascript"></script>
+	<script src="controllers/config/requirements/requirementName.js" type="text/javascript"></script>
+	<script src="controllers/config/requirements/requirementPins.js" type="text/javascript"></script>
+	<script src="controllers/config/config.js" type="text/javascript"></script>
+	<script src="controllers/default/default.js" type="text/javascript"></script>
+	<script src="controllers/eclipse/launchfromeclipse.js" type="text/javascript"></script>
+	<script src="controllers/iosets/iosets.js" type="text/javascript"></script>
+	<script src="controllers/powerdomains/powerdomains.js" type="text/javascript"></script>
+	<script src="controllers/deviceconfig.js" type="text/javascript"></script>
+	<script src="controllers/nav.js" type="text/javascript"></script>
+	<script src="controllers/userPrefs.js" type="text/javascript"></script>
+
+	<!--directives -->
+	<script src="directives/config/interfaces/interfaces.js" type="text/javascript"></script>
+	<script src="directives/config/output/editor.js" type="text/javascript"></script>
+	<script src="directives/config/output/filelist.js" type="text/javascript"></script>
+	<script src="directives/config/output/pinview.js" type="text/javascript"></script>
+	<script src="directives/config/output/summary.js" type="text/javascript"></script>
+	<script src="directives/config/requirements/displaySinglePinRequirements.js" type="text/javascript"></script>
+	<script src="directives/config/requirements/myRequirements.js" type="text/javascript"></script>
+	<script src="directives/config/requirements/pmConfigurable.js" type="text/javascript"></script>
+	<script src="directives/config/requirements/pmRequirementName.js" type="text/javascript"></script>
+	<script src="directives/config/requirements/pmValidateRequirementName.js" type="text/javascript"></script>
+	<script src="directives/config/requirements/pmWatchValidity.js" type="text/javascript"></script>
+	<script src="directives/config/requirements/requirementConfig.js" type="text/javascript"></script>
+	<script src="directives/config/requirements/requirementConfigGpio.js" type="text/javascript"></script>
+	<script src="directives/config/requirements/requirementPins.js" type="text/javascript"></script>
+	<script src="directives/deviceConfig.js" type="text/javascript"></script>
+	<script src="directives/filteredSelect.js" type="text/javascript"></script>
+	<script src="directives/userPrefs.js" type="text/javascript"></script>
+
+	<!-- server scripts -->
+	<script>
+			if (!isNode()) {
+				document.write('<script src="/login/index.js" defer><\/script>');
+				document.write('<script src="/analytics/index.js" defer><\/script>');
+				document.write('<script src="/socket.io/socket.io.js" defer><\/script>');
+				document.write('<script src="/analytics/googleAnalytics.js"><\/script>');
+				document.write('<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">');
+			}
+		</script>
+
+	<link rel="shortcut icon" href="pinmux.ico">
+
+	<!-- set scale for mobile viewing -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+</head>
+
+<body>
+	<ng-include src="'views/nav.html'"></ng-include>
+	<!-- include the nav (hidden by default until after configuration) -->
+	<div ng-view></div>
+	<!-- load the default view -->
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  TI File $Revision: /main/1 $
+  Checkin $Date: August 5, 2009   17:02:34 $
+  -->
+
+
+<!-- TMS320C2000 A/D Converter Mirror Registers
+     ==========================================
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     -->
+<module id="ADCMIRROR" HW_revision="" XML_version="1" description="ADC Mirror Registers">
+	<register id="ADCRESULT_MIRROR_0" acronym="ADCRESULT_MIRROR_0" offset="0" page="1" width="16" description="ADC Conversion Result Buffer Register 0 Mirror" /> 
+	<register id="ADCRESULT_MIRROR_1" acronym="ADCRESULT_MIRROR_1" offset="1" page="1" width="16" description="ADC Conversion Result Buffer Register 1 Mirror" /> 
+	<register id="ADCRESULT_MIRROR_2" acronym="ADCRESULT_MIRROR_2" offset="2" page="1" width="16" description="ADC Conversion Result Buffer Register 2 Mirror" /> 
+	<register id="ADCRESULT_MIRROR_3" acronym="ADCRESULT_MIRROR_3" offset="3" page="1" width="16" description="ADC Conversion Result Buffer Register 3 Mirror" /> 
+	<register id="ADCRESULT_MIRROR_4" acronym="ADCRESULT_MIRROR_4" offset="4" page="1" width="16" description="ADC Conversion Result Buffer Register 4 Mirror" /> 
+	<register id="ADCRESULT_MIRROR_5" acronym="ADCRESULT_MIRROR_5" offset="5" page="1" width="16" description="ADC Conversion Result Buffer Register 5 Mirror" /> 
+	<register id="ADCRESULT_MIRROR_6" acronym="ADCRESULT_MIRROR_6" offset="6" page="1" width="16" description="ADC Conversion Result Buffer Register 6 Mirror" /> 
+	<register id="ADCRESULT_MIRROR_7" acronym="ADCRESULT_MIRROR_7" offset="7" page="1" width="16" description="ADC Conversion Result Buffer Register 7 Mirror" /> 
+	<register id="ADCRESULT_MIRROR_8" acronym="ADCRESULT_MIRROR_8" offset="8" page="1" width="16" description="ADC Conversion Result Buffer Register 8 Mirror" /> 
+	<register id="ADCRESULT_MIRROR_9" acronym="ADCRESULT_MIRROR_9" offset="9" page="1" width="16" description="ADC Conversion Result Buffer Register 9 Mirror" /> 
+	<register id="ADCRESULT_MIRROR_10" acronym="ADCRESULT_MIRROR_10" offset="10" page="1" width="16" description="ADC Conversion Result Buffer Register 10 Mirror" /> 
+	<register id="ADCRESULT_MIRROR_11" acronym="ADCRESULT_MIRROR_11" offset="11" page="1" width="16" description="ADC Conversion Result Buffer Register 11 Mirror" /> 
+	<register id="ADCRESULT_MIRROR_12" acronym="ADCRESULT_MIRROR_12" offset="12" page="1" width="16" description="ADC Conversion Result Buffer Register 12 Mirror" /> 
+	<register id="ADCRESULT_MIRROR_13" acronym="ADCRESULT_MIRROR_13" offset="13" page="1" width="16" description="ADC Conversion Result Buffer Register 13 Mirror" /> 
+	<register id="ADCRESULT_MIRROR_14" acronym="ADCRESULT_MIRROR_14" offset="14" page="1" width="16" description="ADC Conversion Result Buffer Register 14 Mirror" /> 
+	<register id="ADCRESULT_MIRROR_15" acronym="ADCRESULT_MIRROR_15" offset="15" page="1" width="16" description="ADC Conversion Result Buffer Register 15 Mirror" /> 
+</module>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="SA" basedir=".">
+
+	<property name="dvt.activity.description" value="UIA Dataprovider and Context Aware Profile AF."/>
+
+	<property name="uc_name" value="SA" />
+	<property name="technology" value="Hardware Core Trace" />
+
+	<dvt.import file="../../scripts/SA.js"/>
+
+	<dvt.property>
+		version=1.0.0
+		dvt.activity.priority = 120
+
+		<!-- Data Provider and AF information-->
+		dataproviders=UIA
+		UIA.name=UIA Log Viewer
+		UIA.analyzer=Context Aware Profile
+	</dvt.property>
+</project>

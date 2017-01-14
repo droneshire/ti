@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<newBreakpoint xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="schema.xsd" name="Hardware Watchpoint" breakpointType="1">
+	<targets>
+		<target>
+			<type>dsk,emu</type>
+			<familyId>470</familyId>
+			<subfamilyId>e,a</subfamilyId>
+			<revision>*</revision>
+		</target>
+	</targets>
+	<defaultProperty>
+		<property name="Miscellaneous.Name" value="Watchpoint"/>
+		<property name="Hardware Configuration.Type" value="Watchpoint"/>
+	</defaultProperty>
+	<submitSequence>
+		<id>Hardware Configuration.Type.Location</id>
+		<id>Hardware Configuration.Type.Memory</id>
+	</submitSequence>
+	<showIn>
+		<breakpointView autoSubmit="false"/>
+		<editor autoSubmit="true" selectionType="variable">
+			<property>
+				<id>Hardware Configuration.Type.Location</id>
+				<selectionLocation>selection</selectionLocation>
+			</property>
+		</editor>
+		<variableObject autoSubmit="true">
+			<property>
+				<id>Hardware Configuration.Type.Location</id>
+				<selectionLocation>selection</selectionLocation>
+			</property>
+		</variableObject>
+	</showIn>
+	<dialog colCount="2">
+		<label id="label_location" widthHint="50" heightHint="18" verticalAlign="center" horizontalAlign="fill">
+			<text>Location:</text>
+		</label>
+		<textBox id="Hardware Configuration.Type.Location" widthHint="190" heightHint="20" verticalAlign="center" horizontalAlign="center">
+			<text>Enter memory location here (symbol or address)...</text>
+		</textBox>
+		<label id="label_memory" widthHint="80" heightHint="18" verticalAlign="center" horizontalAlign="fill">
+			<text>Memory:</text>
+		</label>
+		<comboBox id="Hardware Configuration.Type.Memory" widthHint="190" heightHint="20" verticalAlign="center" horizontalAlign="center">
+			<text>Write</text>
+			<choices>
+				<item>Write</item>
+				<item>Read</item>
+				<item>Any</item>
+			</choices>
+		</comboBox>
+	</dialog>
+</newBreakpoint>

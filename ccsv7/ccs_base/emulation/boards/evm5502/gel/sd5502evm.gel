@@ -1,0 +1,472 @@
+/*--------------------------------------------------------------*/
+/* SD5502EVM.gel                                                */
+/* Version 3.00                                                 */
+/*                                                              */
+/* This GEL file is designed to be used in conjunction with     */
+/* CCS 3.X and the TMS320VC5502 based EVM.                      */
+/*                                                              */
+/*--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------*/
+/* StartUp()                                                    */
+/* This function is called each time CCS is started.            */
+/* Customize this function to perform desired initialization.   */
+/*--------------------------------------------------------------*/
+StartUp()
+{
+    setup_memory_map();
+
+    /*------------------------------------------------------*/
+    /* Uncomment the OnTargetConnect() call for CCS 2.X     */
+    /* support.                                             */
+    /*                                                      */
+    /*                                                      */
+    /*------------------------------------------------------*/
+    //OnTargetConnect();
+}
+
+/*--------------------------------------------------------------*/
+/* OnTargetConnect()                                            */
+/* This function is called by CCS when you do Debug->Connect on */
+/* CCS 3.X.  When using CCS 2.X, the OnTargetConnect() call     */
+/* should be uncommented from the StartUp() function.           */
+/*--------------------------------------------------------------*/
+OnTargetConnect()
+{
+    /*------------------------------------------------------*/
+    /* GEL_Reset() is used to deal with the worst case      */
+    /* senario of unknown target state.  If for some reason */
+    /* a reset is not desired upon target connection,       */
+    /* GEL_Reset() may be removed and replaced with         */
+    /* something "less brutal".                             */
+    /*------------------------------------------------------*/
+    GEL_Reset();
+
+    setup_ext_memory_map();
+
+    init_emif();
+
+    GEL_TextOut("GEL StartUp Complete.\n");
+}
+
+/*--------------------------------------------------------------*/
+/* setup_memory_map()                                           */
+/* Memory map setup                                             */
+/*--------------------------------------------------------------*/
+setup_memory_map()
+{
+    GEL_MapOn();
+    GEL_MapReset();
+
+    /* Program Space */
+    GEL_MapAdd( 0x0000C0u, 0, 0x00FF40u, 1, 1 );    // DARAM
+    GEL_MapAdd( 0x010000u, 0, 0x3F0000u, 1, 1 );    // External CE0
+    GEL_MapAdd( 0x400000u, 0, 0x400000u, 1, 1 );    // External CE1
+    GEL_MapAdd( 0x800000u, 0, 0x400000u, 1, 1 );    // External CE2
+
+    /* Data Space */
+    GEL_MapAdd( 0x000000u, 1, 0x000050u, 1, 1 );    // MMRs
+    GEL_MapAdd( 0x000060u, 1, 0x007FA0u, 1, 1 );    // DARAM
+
+    /* IO Space */
+    GEL_MapAdd( 0x0000u, 2, 0x0003u, 1, 1 );        // Idle Control
+    GEL_MapAdd( 0x000Fu, 2, 0x0001u, 1, 1 );        // Bootmode
+    GEL_MapAdd( 0x0100u, 2, 0x0003u, 1, 1 );        // XPORT Reg
+    GEL_MapAdd( 0x0200u, 2, 0x0003u, 1, 1 );        // DPORT Reg
+    GEL_MapAdd( 0x0302u, 2, 0x0001u, 1, 1 );        // IPORT Reg
+    GEL_MapAdd( 0x07FDu, 2, 0x0001u, 1, 1 );        // Systems Config Reg
+    GEL_MapAdd( 0x0800u, 2, 0x002Cu, 1, 1 );        // EMIF
+    GEL_MapAdd( 0x0C00u, 2, 0x00B0u, 1, 1 );        // DMA
+    GEL_MapAdd( 0x0E00u, 2, 0x0002u, 1, 1 );        // DMA
+    GEL_MapAdd( 0x1000u, 2, 0x0013u, 1, 1 );        // Timers
+    GEL_MapAdd( 0x1400u, 2, 0x0004u, 1, 1 );        // ICACHE
+    GEL_MapAdd( 0x1C80u, 2, 0x0019u, 1, 1 );        // Clock Generator
+    GEL_MapAdd( 0x2000u, 2, 0x0055u, 1, 1 );        // Trace FIFO
+    GEL_MapAdd( 0x2400u, 2, 0x0013u, 1, 1 );        // Timers
+    GEL_MapAdd( 0x2800u, 2, 0x0020u, 1, 1 );        // MCBSP#0
+    GEL_MapAdd( 0x2C00u, 2, 0x0020u, 1, 1 );        // MCBSP#1
+    GEL_MapAdd( 0x3000u, 2, 0x0020u, 1, 1 );        // MCBSP#2
+    GEL_MapAdd( 0x3400u, 2, 0x0002u, 1, 1 );        // GPIO
+    GEL_MapAdd( 0x3800u, 2, 0x0008u, 1, 1 );        // Die ID
+    GEL_MapAdd( 0x3C00u, 2, 0x000Fu, 1, 1 );        // I2C
+    GEL_MapAdd( 0x4000u, 2, 0x0016u, 1, 1 );        // Timers
+    GEL_MapAdd( 0x4400u, 2, 0x0009u, 1, 1 );        // Parallel GPIO
+    GEL_MapAdd( 0x6C00u, 2, 0x0002u, 1, 1 );        // External Bus
+    GEL_MapAdd( 0x8000u, 2, 0x0001u, 1, 1 );        // Timer Signal Selection
+    GEL_MapAdd( 0x8400u, 2, 0x0001u, 1, 1 );        // CLKOUT Selection
+    GEL_MapAdd( 0x8c00u, 2, 0x0001u, 1, 1 );        // Clock Mode
+    GEL_MapAdd( 0x9000u, 2, 0x0001u, 1, 1 );        // Timeout Control
+    GEL_MapAdd( 0x9400u, 2, 0x0004u, 1, 1 );        // Idle Control
+    GEL_MapAdd( 0x9C00u, 2, 0x000Du, 1, 1 );        // UART
+    GEL_MapAdd( 0xA000u, 2, 0x0021u, 1, 1 );        // HPI
+}
+
+/*--------------------------------------------------------------*/
+/* setup_ext_memory_map()                                       */
+/* External memory map setup                                    */
+/*--------------------------------------------------------------*/
+setup_ext_memory_map()
+{
+    /* CPU Registers */
+    #define ST3_55          0x0004
+
+    /* Chip Registers */
+    #define XBSR            0x6c00
+
+    if ( *(short *)ST3_55 & 0x0040 )
+    {
+        /* MPnMC bit is bit 6 of ST3_55.        */
+        /* For MP/MC=1 (BOOTM[2:0] = 0h or 4h)  */
+        GEL_MapAdd(0xC00000u, 0, 0x400000u, 1, 1);  /* External CE3 */
+    }
+    else
+    {
+        /* For MP/MC=0 (BOOTM[2:0] != 0h or 4h) */
+        GEL_MapAdd(0xC00000u, 0, 0x3F8000u, 1, 1);  /* External CE3 */
+        GEL_MapAdd(0xFF8000u, 0, 0x008000u, 1, 0);  /* On-chip ROM  */
+    }
+
+    if ( *(short *)XBSR@IO & 0x0001 )
+    {
+        /* Only map external memory if EMIF is enabled. */
+        GEL_MapAdd(0x008000u, 1, 0x1F8000u, 1, 1);  /* External CE0 */
+        GEL_MapAdd(0x200000u, 1, 0x200000u, 1, 1);  /* External CE1 */
+        GEL_MapAdd(0x400000u, 1, 0x200000u, 1, 1);  /* External CE2 */
+    }
+
+    if ( *(short *)ST3_55 & 0x0040 )
+    {
+        /* MPnMC bit is bit 6 of ST3_55.        */
+        /* For MP/MC=1 (BOOTM[2:0] = 0h or 4h)  */
+        GEL_MapAdd(0x600000u, 1, 0x200000u, 1, 1);  /* External CE3 */
+    }
+    else
+    {
+        /* For MP/MC=0 (BOOTM[2:0] != 0h or 4h) */
+        GEL_MapAdd(0x600000u, 1, 0x1FC000u, 1, 1);  /* External CE3 */
+        GEL_MapAdd(0x7FC000u, 1, 0x004000u, 1, 0);  /* On-chip ROM  */
+    }
+}
+
+/*--------------------------------------------------------------*/
+/* clear_memory_map()                                           */
+/* Memory map disable                                           */
+/*--------------------------------------------------------------*/
+clear_memory_map()
+{
+    GEL_MapOff();
+}
+
+/*--------------------------------------------------------------*/
+/* init_emif()                                                  */
+/* Emif initialization                                          */
+/*--------------------------------------------------------------*/
+init_emif()
+{
+    Init_CE0_32bit_SDRAM();
+    Init_CE1_16bit_Async();
+    Init_CE3_32bit_SBSRAM();
+}
+
+/*--------------------------------------------------------------*/
+/* EVM5502 MENU                                                 */
+/*--------------------------------------------------------------*/
+menuitem "EVM5502 Functions";
+
+hotmenu Reset()
+{
+    GEL_Reset();
+    GEL_TextOut("Reset Complete.\n");
+}
+
+hotmenu InitEmif()
+{
+    init_emif();
+    GEL_TextOut("Init Emif Complete.\n");
+}
+
+/*--------------------------------------------------------------*/
+/* EMIF MENU                                                    */
+/*--------------------------------------------------------------*/
+menuitem "EMIF Functions";
+
+
+/*************************************************/
+/* C5502 REGISTERS                               */
+/*************************************************/
+    /* CPU Registers */
+    #define ST3_55          0x0004
+
+    /* Chip Registers */
+    #define XBSR            0x6c00
+
+    /* EMIF Registers */
+    #define EMIF_GCTL1      0x0800
+    #define EMIF_GCTL2      0x0801
+    #define EMIF_CE11       0x0802
+    #define EMIF_CE12       0x0803
+    #define EMIF_CE01       0x0804
+    #define EMIF_CE02       0x0805
+    #define EMIF_CE21       0x0808
+    #define EMIF_CE22       0x0809
+    #define EMIF_CE31       0x080A
+    #define EMIF_CE32       0x080B
+    #define EMIF_SDCNT1     0x080C
+    #define EMIF_SDCNT2     0x080D
+    #define EMIF_SDREF1     0x080E
+    #define EMIF_SDREF2     0x080F
+    #define EMIF_SDEXT1     0x0810
+    #define EMIF_SDEXT2     0x0811
+    #define EMIF_CE1SECCTL1 0x0822
+    #define EMIF_CE1SECCTL2 0x0823
+    #define EMIF_CE0SECCTL1 0x0824
+    #define EMIF_CE0SECCTL2 0x0825
+    #define EMIF_CE2SECCTL1 0x0828
+    #define EMIF_CE2SECCTL2 0x0829
+    #define EMIF_CE3SECCTL1 0x082A
+    #define EMIF_CE3SECCTL2 0x082B
+    #define EMIF_CECTL1     0x0840
+    #define EMIF_CECTL2     0x0841
+
+    /* PLL Registers */
+    #define PLLCSR          0x1C80
+    #define CK3SEL          0x1C81
+    #define PLLM            0x1C88
+    #define PLLDIV0         0x1C8A
+    #define PLLDIV1         0x1C8C
+    #define PLLDIV2         0x1C8E
+    #define PLLDIV3         0x1C90
+    #define OSCDIV1         0x1C92
+    #define WAKEUP          0x1C98
+
+/*************************************************/
+
+/*--------------------------------------------------------------*/
+/* Init_CE0_32bit_Async()                                       */
+/*--------------------------------------------------------------*/
+hotmenu Init_CE0_32bit_Async()
+{
+    if ( *(short *)XBSR@IO & 0x0001 )
+    {
+        *(short *)EMIF_CE01@IO = 0xFF23;            /* 32-bit async in CE0 space. */
+
+        GEL_MapAdd(0x010000u, 0, 0x3B0000u, 1, 1);  /* External CE0 */
+        GEL_MapAdd(0x008000u, 1, 0x1D8000u, 1, 1);  /* External CE0 */
+
+        GEL_TextOut("CE0 configured for 32-bit asynchronous memory.\n");
+    }
+    else
+    {
+        GEL_TextOut("EMIF is not enabled. GPIO6 must be high at reset to enable EMIF.\n");
+    }
+
+    /*--------------------------------------------------------------------------*/
+    /* Note:    Default timings for async mode are kept, therefore accesses     */
+    /*          will be very slow. GEL code can be added to complete the EMIF   */
+    /*          configuration if desired.                                       */
+    /*--------------------------------------------------------------------------*/
+}
+
+/*--------------------------------------------------------------*/
+/* Init_CE1_16bit_Async()                                       */
+/*--------------------------------------------------------------*/
+hotmenu Init_CE1_16bit_Async()
+{
+    if ( *(short *)XBSR@IO & 0x0001 )
+    {
+        *(short *)EMIF_CE11@IO = 0xFF13;            /* 16-bit async in CE1 space. */
+
+        GEL_MapAdd(0x400000u, 0, 0x400000u, 1, 1);  /* External CE1 */
+        GEL_MapAdd(0x200000u, 1, 0x200000u, 1, 1);  /* External CE1 */
+
+        GEL_TextOut("CE1 configured for 16-bit asynchronous memory.\n");
+    }
+    else
+    {
+        GEL_TextOut("EMIF is not enabled. GPIO6 must be high at reset to enable EMIF.\n");
+    }
+
+    /*--------------------------------------------------------------------------*/
+    /* Note:    Default timings for async mode are kept, therefore accesses     */
+    /*          will be very slow. GEL code can be added to complete the EMIF   */
+    /*          configuration if desired.                                       */
+    /*--------------------------------------------------------------------------*/
+}
+
+/*--------------------------------------------------------------*/
+/* Init_CE1_32bit_Async()                                       */
+/*--------------------------------------------------------------*/
+hotmenu Init_CE1_32bit_Async()
+{
+    if ( *(short *)XBSR@IO & 0x0001 )
+    {
+        *(short *)EMIF_CE11@IO = 0xFF23;            /* 32-bit async in CE1 space. */
+
+        GEL_MapAdd(0x400000u, 0, 0x400000u, 1, 1);  /* External CE1 */
+        GEL_MapAdd(0x200000u, 1, 0x200000u, 1, 1);  /* External CE1 */
+
+        GEL_TextOut("CE1 configured for 32-bit asynchronous memory.\n");
+    }
+    else
+    {
+        GEL_TextOut("EMIF is not enabled. GPIO6 must be high at reset to enable EMIF.\n");
+    }
+
+    /*--------------------------------------------------------------------------*/
+    /* Note:    Default timings for async mode are kept, therefore accesses     */
+    /*          will be very slow. GEL code can be added to complete the EMIF   */
+    /*          configuration if desired.                                       */
+    /*--------------------------------------------------------------------------*/
+}
+
+/*--------------------------------------------------------------*/
+/* Init_CE0_32bit_SDRAM()                                       */
+/* For MT48LC2M32B2 Micron Memory use.                          */
+/*--------------------------------------------------------------*/
+hotmenu Init_CE0_32bit_SDRAM()
+{
+    if ( *(short *)XBSR@IO & 0x0001 )
+    {
+        *(short *)EMIF_GCTL1    |= 0x0020;          /* enable ECLKOUT1 */
+        *(short *)EMIF_CE01@IO   = 0xFF33;          /* 32-bit SDRAM in CE0 space. */
+        *(short *)EMIF_SDCNT1@IO = 0xF000;
+        *(short *)EMIF_SDCNT2@IO = 0x4748;
+        *(short *)EMIF_SDREF1@IO = 0x0001;
+        *(short *)EMIF_SDREF2@IO = 0x0000;
+
+        GEL_MapAdd(0x010000u, 0, 0x3B0000u, 1, 1);  /* External CE0 - program space */
+        GEL_MapAdd(0x008000u, 1, 0x1D8000u, 1, 1);  /* External CE0 - data space */
+
+        GEL_TextOut("CE0 configured for 32-bit SDRAM memory.\n");
+    }
+    else
+    {
+        GEL_TextOut("EMIF is not enabled. GPIO6 must be high at reset to enable EMIF.\n");
+    }
+}
+
+/*--------------------------------------------------------------*/
+/* Init_CE1_32bit_SDRAM()                                       */
+/* For MT48LC2M32B2 Micron Memory use.                          */
+/*--------------------------------------------------------------*/
+hotmenu Init_CE1_32bit_SDRAM()
+{
+    if ( *(short *)XBSR@IO & 0x0001 )
+    {
+        *(short *)EMIF_GCTL1    |= 0x0020;          /* enable ECLKOUT1 */
+        *(short *)EMIF_CE11@IO   = 0xFF33;          /* 32-bit SDRAM in CE1 space. */
+        *(short *)EMIF_SDCNT1@IO = 0xF000;
+        *(short *)EMIF_SDCNT2@IO = 0x4748;
+        *(short *)EMIF_SDREF1@IO = 0x0001;
+        *(short *)EMIF_SDREF2@IO = 0x0000;
+
+        GEL_MapAdd(0x400000u, 0, 0x400000u, 1, 1);  /* External CE1 - program space */
+        GEL_MapAdd(0x200000u, 1, 0x200000u, 1, 1);  /* External CE1 - data space */
+
+        GEL_TextOut("CE1 configured for 32-bit SDRAM memory.\n");
+    }
+    else
+    {
+        GEL_TextOut("EMIF is not enabled. GPIO6 must be high at reset to enable EMIF.\n");
+    }
+}
+
+/*--------------------------------------------------------------*/
+/* Init_CE3_32bit_SBSRAM()                                      */
+/* For MT58L25632PS Micron Memory use.                          */
+/*--------------------------------------------------------------*/
+hotmenu Init_CE3_32bit_SBSRAM()
+{
+    if ( *(short *)XBSR@IO & 0x0001 )
+    {
+        *(short *)EMIF_GCTL1 |= 0x0020;             /* enable ECLKOUT1 */
+        *(short *)EMIF_CE31@IO = 0xFF43;            /* 32-bit SBSRAM in CE3 space. */
+        *(short *)EMIF_CE1SECCTL1 = 0x0002;
+
+        GEL_MapAdd(0x0400000u, 0, 0x3FFFFFu, 1, 1); /* External CE1 - program space */
+        GEL_MapAdd(0x0200000u, 1, 0x1FFFFFu, 1, 1); /* External CE1 - data space */
+
+        GEL_TextOut("CE3 configured for 32-bit SBSRAM memory.\n");
+    }
+    else
+    {
+        GEL_TextOut("EMIF is not enabled. GPIO6 must be high at reset to enable EMIF.\n");
+    }
+}
+
+/*--------------------------------------------------------------*/
+/* CLOCK GENERATOR MENU                                         */
+/*--------------------------------------------------------------*/
+menuitem "Clock Generator Functions";
+
+/*--------------------------------------------------------------*/
+/* Clock_Gen_Setup()                                            */
+/* This dialog box can be used by the user to configure the     */
+/* clock generator on the device.                               */
+/*--------------------------------------------------------------*/
+dialog Clock_Gen_Setup(PLLM_val "Multiplier value [2-15]", PLLDIV0_val "Divider value [1-32]")
+{
+    int lock, i;
+
+    if (PLLM_val > 1 && PLLM_val < 16)
+    {
+        if (PLLDIV0_val > 0 && PLLDIV0_val < 33)
+        {
+            *(short *)PLLCSR@IO &= 0xFFFE;              /* set PLL to bypass mode */
+            *(short *)PLLCSR@IO |= 0x0008;              /* set PLL to reset      */
+            *(short *)PLLM@IO    = PLLM_val;            /* set PLLM              */
+            *(short *)PLLDIV0@IO = (PLLDIV0_val - 1) | 0x8000;    /* set PLLDIV0 */
+            *(short *)PLLCSR@IO &= 0xFFF7;              /* take PLL out of reset */
+
+            lock = 0;
+            /* number of iterations in loop can be increased if needed*/
+            for ( i = 0 ; i < 1000 ; i++ )
+            {
+                if ( *(short *)PLLCSR@IO | 0x0020 )
+                {
+                    lock = 1;
+                }
+            }
+
+            if (lock)
+            {
+                Lock_Mode();
+                GEL_TextOut("PLL configured successfully.\n");
+            }
+            else
+            {
+                GEL_TextOut("PLL did not lock.\n");
+            }
+        }
+        else
+        {
+            GEL_TextOut("PLLDIV0 must be between 1 and 32.\n");
+        }
+    }
+    else
+    {
+        GEL_TextOut("PLLM value must be between 2 and 15.\n");
+    }
+}
+
+hotmenu Lock_Mode()
+{
+    /* PLL enabled */
+    *(short *)PLLCSR@IO |= 0x0001;
+}
+
+hotmenu Bypass_Mode()
+{
+    /* PLL in bypass */
+    *(short *)PLLCSR@IO &= 0x0FFFE;
+}
+
+hotmenu CLKOUT_off()
+{
+    *(short *)ST3_55@DATA |= 0x0004;
+}
+
+hotmenu CLKOUT_on()
+{
+    *(short *)ST3_55@DATA &= 0x0FFFB;
+}

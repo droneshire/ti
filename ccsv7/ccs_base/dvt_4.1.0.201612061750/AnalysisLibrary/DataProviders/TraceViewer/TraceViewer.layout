@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_35" class="java.beans.XMLDecoder"> 
+ <object class="com.ti.dvt.gadget.model.LayoutModel"> 
+  <void property="autoLayout"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="layoutMap"> 
+   <void method="put"> 
+    <string>Symbols</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>359</int> 
+     <int>65</int> 
+     <int>104</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:Debug</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>616</int> 
+     <int>513</int> 
+     <int>62</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>Req: for scripting buffers shall have the same name as the view</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>170</int> 
+     <int>123</int> 
+     <int>189</int> 
+     <int>44</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>Trace Viewer</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>359</int> 
+     <int>125</int> 
+     <int>110</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:Trace Analyzer ProfileAnalysis</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>190</int> 
+     <int>782</int> 
+     <int>115</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:Trace Display</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>360</int> 
+     <int>185</int> 
+     <int>120</int> 
+     <int>36</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>Trace Data Source</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>336</int> 
+     <int>13</int> 
+     <int>151</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>VirtualBuffer</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>515</int> 
+     <int>127</int> 
+     <int>97</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>Trace CSV File Reader</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>529</int> 
+     <int>11</int> 
+     <int>144</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+  </void> 
+ </object> 
+</java> 

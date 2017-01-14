@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cpu id="TMS192C2001" isa="hidden" HW_revision="1.0" XML_version="1.0" description="IVA ECD3 Accelerator">
+    <register id="CMD_ADD"   acronym="CMD_ADD"   width="32" description="ECD3 Command Address register"/>
+    <register id="ECD_PID"   acronym="ECD_PID"   width="32" description="ECD3 Product Identification register"/>
+    <register id="ECD_COUNT" acronym="ECD_COUNT" width="32" description="ECD3 Cycle Counter register"/>
+    <register id="ECD_CTRL"  acronym="ECD_CTRL"  width="32" description="ECD3 Control register"/>
+    <register id="ECD_STAT"  acronym="ECD_STAT"  width="32" description="ECD3 Status register"/>
+
+    <instance href="..\Modules\ihwa\iva_debug.xml" id="Debug" xml="iva_debug.xml" xmlpath="..\Modules\ihwa\" HW_revision="1.0" description="IVA IHWA Debug Registers" requestor="TMS192C2001" baseaddr="0" size="0" accessnumbytes="4" permissions="rw"/>
+    <instance href="..\Modules\ihwa\iva_syncbox.xml" id="SyncBox" xml="iva_syncbox.xml" xmlpath="..\Modules\ihwa\" HW_revision="1.0" description="IVA IHWA SyncBox Registers" requestor="TMS192C2001" baseaddr="0" size="0" accessnumbytes="4" permissions="rw"/>
+</cpu>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<!-- DM6437 Emulation Target -->
+<!DOCTYPE CodeComposer [                 
+<!ENTITY MemoryBase SYSTEM "include/TMS320C64XXPlus_MemoryBaseV2.xml">
+<!ENTITY RegisterBase SYSTEM "include/TMS320C64XXPlus_RegisterBase.xml">
+<!ENTITY DecoderBase SYSTEM "include/TMS320C64XXPlus_DecoderBase.xml">
+<!ENTITY SharedMemory SYSTEM "include/TMS320C64XXPlus_SharedMemory.xml">
+<!ENTITY ExternalData SYSTEM "include/TMS320C64XXPlus_ExternalData.xml">
+
+<!ENTITY L1PRegion0StartAdrs "0x00E00000">
+<!ENTITY L1PRegion0Length "0x00000000">
+<!ENTITY L1PRegion0CanBeSecured "false">
+<!ENTITY L1PRegion0CanBeProtected "false">
+<!ENTITY L1PRegion0MemoryProtectionPageSize "0x00001000">
+<!ENTITY L1PRegion0MemorySecurityPageSize "0x00001000">
+<!ENTITY L1PRegion0IsROM "true">
+<!ENTITY L1PRegion1StartAdrs "0x0E08000">
+<!ENTITY L1PRegion1Length "0x008000">
+<!ENTITY L1PRegion1CanBeSecured "true">
+<!ENTITY L1PRegion1CanBeProtected "true">
+<!ENTITY L1PRegion1MemoryProtectionPageSize "0x00000800">
+<!ENTITY L1PRegion1MemorySecurityPageSize "0x0000800">
+<!ENTITY L1PRegion1IsROM "false">
+<!-- 32KB L1P Program RAM/Cache -->
+<!ENTITY L1PLineSize "32">
+<!ENTITY L1PMaxNumCacheLines "1024">
+
+<!ENTITY L1DRegion0StartAdrs "0x00F04000">
+<!ENTITY L1DRegion0Length "0x0000C000">
+<!ENTITY L1DRegion0CanBeSecured "true">
+<!ENTITY L1DRegion0CanBeProtected "true">
+<!ENTITY L1DRegion0MemoryProtectionPageSize "0x00001000">
+<!ENTITY L1DRegion0MemorySecurityPageSize "0x00001000">
+<!ENTITY L1DRegion1StartAdrs "0x00F10000">
+<!ENTITY L1DRegion1Length "0x08000">
+<!ENTITY L1DRegion1CanBeSecured "true">
+<!ENTITY L1DRegion1CanBeProtected "true">
+<!ENTITY L1DRegion1MemoryProtectionPageSize "0x00000800">
+<!ENTITY L1DRegion1MemorySecurityPageSize "0x0000800">
+<!-- 80KB L1D Data RAM/Cache -->
+<!ENTITY L1DLineSize "64">
+<!ENTITY L1DMaxNumCacheLines "1280">
+
+<!ENTITY L2Region0StartAdrs "0x00800000">
+<!ENTITY L2Region0Length "0x0010000">
+<!ENTITY L2Region0CanBeSecured "true">
+<!ENTITY L2Region0CanBeProtected "true">
+<!ENTITY L2Region0MemoryProtectionPageSize "0x00000800">
+<!ENTITY L2Region0MemorySecurityPageSize "0x00000800">
+<!ENTITY L2Region0IsROM "false">
+<!ENTITY L2Region1StartAdrs "0x000810000">
+<!ENTITY L2Region1Length "0x00010000">
+<!ENTITY L2Region1CanBeSecured "true">
+<!ENTITY L2Region1CanBeProtected "true">
+<!ENTITY L2Region1MemoryProtectionPageSize "0x00800">
+<!ENTITY L2Region1MemorySecurityPageSize "0x00800">
+<!ENTITY L2Region1IsROM "false">
+<!-- 128KB L2 Unified Mapped RAM/Cache -->
+<!ENTITY L2LineSize "128">
+<!ENTITY L2MaxNumCacheLines "1024">
+
+<!ENTITY ExternalStartAdrs "0x20000000">
+<!ENTITY ExternalLength "0xFE000000">
+<!ENTITY SharedStartAdrs "0x010008000">
+<!ENTITY SharedLength "0x00008000">
+<!ENTITY ExternalDataStartAdrs "0x02000000">
+<!ENTITY ExternalDataLength "0x008000000">
+<!ENTITY ExternalLineSize "128">
+
+<!ENTITY IsCacheTagRamDecodingSupported "true">
+]>
+<CodeComposer>
+	<CcsMemoryServer>
+		<XMLFileVersion>1.0.0.0</XMLFileVersion>
+		<!-- TraceLevel 0=off,1=error,2=warning,3=info,4=verbose -->
+		<!-- set SendTraceEventsToOutputWindow true to output trace data to the CCS Output window-->
+		<!-- set TraceRequestLifecycle true to trace construction and recycling of request descriptors -->
+		<!-- set TraceVerboseMinAdrs to the first hex address to trace in detail -->
+		<!-- set TraceVerboseMaxAdrs to the last hex address to trace in detail -->
+		<Device>
+			<Name>TMS320C64XX</Name>
+			<NumCores>1</NumCores>
+			<Core index="0">
+				<Name>TMS320C64XX</Name>
+				<NumAddressSpaces>1</NumAddressSpaces>
+				<IsMemoryColoringSupported>true</IsMemoryColoringSupported>
+				<IsGTI_GetMemWithStatSupported>true</IsGTI_GetMemWithStatSupported>
+				<IsVirtualMemorySupported>false</IsVirtualMemorySupported>
+				<!-- set MinNumMausPerMemoryRead = number of minimum addressable units per line of memory -->
+				<MinNumMausPerMemoryRead>256</MinNumMausPerMemoryRead>
+				<DeviceId>
+					<IsDeviceIdSupported>true</IsDeviceIdSupported>
+					<ConfigReg>DEVICE_ID</ConfigReg>
+					<DecoderName>IsThisTheRightXmlFile</DecoderName>
+				</DeviceId>
+				<CoreNumber>
+					<ConfigReg>CORENUMBER</ConfigReg>
+					<DecoderName>GetCoreNumber</DecoderName>
+				</CoreNumber>
+				<AddressSpace page="0">
+					<!-- The GEM Memory hierarchy consists of the following:
+	L1P Memory: Region 0, Region 1 (PMC - Program Memory Controller)
+	L1P Cache 
+	L1D Memory: Region 0, Region 1 (DMC - Data Memory Controller)
+	L1D Cache 
+	L2 Memory: Region 0, Region 1  (UMC - Unified Memory Controller)
+	L2 Cache 
+	External Memory 
+	
+	The following variables are defined as External Entity Parameters:
+	
+	-->
+					&MemoryBase;&SharedMemory;&ExternalData;
+				</AddressSpace>
+				<!-- the following registers are used to configure the 
+				memory, cache, memory protection and memory security features of this device-->
+				<RegisterDefinitions>
+					&RegisterBase;
+					<Register>
+						<Name>DEVICE_ID</Name>
+						<Address>0x01c40028</Address>
+						<LengthInMAUs>4</LengthInMAUs>
+						<NumRegistersInSet>1</NumRegistersInSet>
+						<MemoryPageNumber>0</MemoryPageNumber>
+						<IsMemoryMapped>true</IsMemoryMapped>
+						<IsRegValueReadOnHalt>false</IsRegValueReadOnHalt>
+						<IsRegValueSetDuringPrefetch>false</IsRegValueSetDuringPrefetch>
+						<IsRegValueContextRestoreReqd>false</IsRegValueContextRestoreReqd>
+						<RegDecoder>IsDM6437</RegDecoder>
+						<RegDecoder>IsDM6467</RegDecoder>
+					</Register>
+				</RegisterDefinitions>
+				<!-- the following register decoders are used to decode bitfields in
+				the registers defined for this device-->
+				<DecoderDefinitions>
+					 &DecoderBase;
+					 <!-- IsThisTheRightXmlFile must return true to indicate that the
+					      target device that this XML file describes matches the actual
+					      target device -->
+					<Decoder>
+						<DecoderName>IsThisTheRightXmlFile</DecoderName>
+						<XorWithRegValue>0x0B72102F</XorWithRegValue>
+						<!-- XorWithRegValue for CCCFG: 0x00223445 -->
+						<BitfieldMask>0x0FFFFFFE</BitfieldMask>
+						<BitfieldShift>0</BitfieldShift>
+						<Multiplier>1.0</Multiplier>
+						<AddToProduct>0</AddToProduct>
+						<IsTrueIfResultIsZero>true</IsTrueIfResultIsZero>
+					</Decoder>
+				</DecoderDefinitions>
+			</Core>
+		</Device>
+	</CcsMemoryServer>
+</CodeComposer>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<board  id="CONTROLSTICKF28027" XML_version="1" desc="controlSTICK - Piccolo F28027" description="Piccolo F28027 controlSTICK">
+    <instance XML_version="1.2" href="devices/f28027.xml" id="F28027" xml="f28027.xml" xmlpath="." /> 
+</board>

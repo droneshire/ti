@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+
+<UCdeviceinfo>
+
+<targets>
+	<!-- c6678 -->
+	<device>
+		<deviceId>0x0009E02F</deviceId>
+		<deviceIdMask>0x0FFFFFFF</deviceIdMask>
+		<RcvrJobs>
+			STM_ETB.xml,
+			STM_560v2.xml,
+			STM_PRO.xml
+		</RcvrJobs>
+		<Trigger_Jobs>
+			<job name="STM/C6678_CP_Memory_Transaction_Logging_Job1.xml" active="true"/>
+		</Trigger_Jobs>
+	</device>
+ 	<!-- c66xx,c66xx_turbo -->
+	<device>
+		<deviceId>0x0009D02F,0x0B94102F</deviceId>
+		<deviceIdMask>0x0FFFFFFF,0x0FFFFFFF</deviceIdMask>
+		<RcvrJobs> 
+			STM_ETB.xml,
+			STM_560v2.xml,
+			STM_PRO.xml
+		</RcvrJobs>
+		<Trigger_Jobs>
+			<job name="STM/C6616_CP_Memory_Transaction_Logging_Job1.xml" active="true"/>
+		</Trigger_Jobs>
+	</device>
+	<!-- 6614 -->
+	<device>
+		<deviceId>0x0B96202F</deviceId>
+		<deviceIdMask>0x0FFFFFFF</deviceIdMask>
+		<RcvrJobs> 
+			STM_ETB.xml,
+			STM_560v2.xml,
+			STM_PRO.xml
+		</RcvrJobs>
+		<Trigger_Jobs>
+			<job name="STM/C6614_CP_Memory_Transaction_Logging_Job1.xml" active="true"/>
+		</Trigger_Jobs>
+	</device>
+	<!-- c6657 -->
+	<device>
+		<deviceId>0x0B97A02F</deviceId>
+		<deviceIdMask>0x0FFFFFFF</deviceIdMask>
+		<RcvrJobs> 
+			STM_ETB.xml,
+			STM_560v2.xml,
+			STM_PRO.xml
+		</RcvrJobs>
+		<Trigger_Jobs>
+			<job name="STM/C6657_CP_Memory_Transaction_Logging_Job1.xml" active="true"/>
+		</Trigger_Jobs>
+	</device>
+	<!-- kepler -->
+	<device>
+		<deviceId>0xb98102f</deviceId>
+		<deviceIdMask>0x0FFFFFFF</deviceIdMask>
+		<RcvrJobs>
+			STM_ETB.xml,
+			STM_560v2.xml,
+			STM_PRO.xml
+		</RcvrJobs>
+		<Trigger_Jobs>
+			<job name="STM/C6638_CP_Memory_Transaction_Logging_Job1.xml" active="true"/>
+			<job name="STM/C6638_CP_Memory_Transaction_Logging_Job2.xml" active="true"/>
+		</Trigger_Jobs>
+	</device>
+	<!-- Lamarr -->
+	<device>
+		<deviceId>0x0b9a702f</deviceId>
+		<deviceIdMask>0x0FFFFFFF</deviceIdMask>
+		<RcvrJobs>
+			STM_ETB.xml,
+			STM_560v2.xml,
+			STM_PRO.xml
+		</RcvrJobs>
+		<Trigger_Jobs>
+			<job name="STM/Lamarr_CP_Memory_Transaction_Logging_Job1.xml" active="true"/>
+		</Trigger_Jobs>
+	</device>
+	<!-- Edison -->
+	<device>
+		<deviceId>0x0b9a602f</deviceId>
+		<deviceIdMask>0x0FFFFFFF</deviceIdMask>
+		<RcvrJobs>
+			STM_ETB.xml,
+			STM_560v2.xml,
+			STM_PRO.xml
+		</RcvrJobs>
+		<Trigger_Jobs>
+			<job name="STM/Edison_CP_Memory_Transaction_Logging_Job1.xml" active="true"/>
+			<job name="STM/Edison_CP_Memory_Transaction_Logging_Job2.xml" active="true"/>
+		</Trigger_Jobs>
+	</device>
+	<!-- Galileo -->
+	<device>
+		<deviceId>0x0bb0602f</deviceId>
+		<deviceIdMask>0x0FFFFFFF</deviceIdMask>
+		<RcvrJobs>
+			STM_ETB.xml,
+			STM_560v2.xml,
+			STM_PRO.xml
+		</RcvrJobs>
+		<Trigger_Jobs>
+			<job name="STM/Galileo_CP_Memory_Transaction_Logging_Job1.xml" active="true"/>
+		</Trigger_Jobs>
+		<gel>
+		    	<!-- This is the GEL function to enable funnel which is required for both ETB and TPIU -->
+			<always gel_funcs="Enable_Funnel_For_STM()" />
+			<with_receiver receiver="Pro Trace" gel_funcs="Set_PAD_IO()" />
+		</gel>
+	</device>
+</targets>
+
+<ConfigUI>
+	<jobs>
+		<names>
+			STM_ETB.xml,
+			STM_560v2.xml,
+			STM_PRO.xml
+		</names>
+
+		<configUIactions
+			ID="Receiver"
+			description="Receiver Setting"
+			values="ETB,560 V2 Trace,Pro Trace"
+			default="ETB">
+			<job>
+				<jobProperty name="Hardware Configuration.Receiver Settings.Receiver" />
+			</job>			
+		</configUIactions>
+
+		<configUIactions
+			ID="Synchronize trace collection with target run and halt"
+			description="Automatically synchronize trace captures with running and halting the target"
+			default="True">
+			<job>
+				<jobProperty name="Hardware Configuration.Receiver Settings.Receiver.Synchronize with target" />
+				<jobProperty name="Hardware Configuration.Receiver Settings.Receiver.Sample Configuration.Synchronize with target" />
+			</job>
+		</configUIactions>
+		<configUIactions
+			ID="Buffer size"
+			description="Buffer Size"
+			values="@Hardware Configuration.Receiver Settings.Receiver.Buffer size"
+			>
+			<job>
+				<jobProperty name="Hardware Configuration.Receiver Settings.Receiver.Buffer size" />
+			</job>
+		</configUIactions>
+
+		<configUIactions
+			ID="Buffer type"
+			description="Circular or Linear(Stop on full)"
+			values="@Hardware Configuration.Receiver Settings.Receiver.Trace Buffer Type,@Hardware Configuration.Receiver Settings.Receiver.Sample Configuration.Buffer Type"
+			>
+			<job>
+				<jobProperty name="Hardware Configuration.Receiver Settings.Receiver.Trace Buffer Type" />
+				<jobProperty name="Hardware Configuration.Receiver Settings.Receiver.Sample Configuration.Buffer Type"/>
+			</job>
+		</configUIactions>
+
+		<configUIactions
+			ID="Buffer/IP Address"
+			description="Buffer Address / IP Address"
+			>
+			<job>
+				<jobProperty name="Hardware Configuration.Receiver Settings.Receiver.Sample Configuration.Buffer/IP Address"/>
+			</job>
+		</configUIactions>
+		
+		<configUIactions
+			ID="Buffer Size/Core ID"
+			description="Buffer Size / Core ID"
+			>
+			<job>
+				<jobProperty name="Hardware Configuration.Receiver Settings.Receiver.Sample Configuration.Buffer Size/Core ID"/>
+			</job>
+		</configUIactions>
+		
+		<configUIactions
+			ID="Connection Type"
+			values="@Hardware Configuration.Receiver Settings.Receiver.Global Settings.Connection Type"
+			description="Connection Type"
+			>
+			<job>
+				<jobProperty name="Hardware Configuration.Receiver Settings.Receiver.Global Settings.Connection Type"/>
+			</job>
+		</configUIactions>					
+
+		<configUIactions
+			ID="IP Address"
+			description="IP Address"
+			>
+			<job>
+				<jobProperty name="Hardware Configuration.Receiver Settings.Receiver.Global Settings.IP Address"/>
+			</job>
+		</configUIactions>	
+
+			<configUIactions
+			       ID="Number of Pins"
+			       description="Number of Pins"
+			       values="@Hardware Configuration.Receiver Settings.Receiver.Port width,@Hardware Configuration.Receiver Settings.Receiver.Pins"
+	       		       >
+       			       <job>
+		                   		   <jobProperty name="Hardware Configuration.Receiver Settings.Receiver.Port width" />
+				<jobProperty name="Hardware Configuration.Receiver Settings.Receiver.Pins" />                          
+			      </job>
+			</configUIactions>
+	
+	</jobs>
+		<jobs>
+		<names>
+			STM/C6657_CP_Memory_Transaction_Logging_Job1.xml,
+			STM/C6614_CP_Memory_Transaction_Logging_Job1.xml,
+			STM/C6616_CP_Memory_Transaction_Logging_Job1.xml,
+			STM/C6678_CP_Memory_Transaction_Logging_Job1.xml,
+			STM/C6638_CP_Memory_Transaction_Logging_Job1.xml,
+			STM/C6638_CP_Memory_Transaction_Logging_Job2.xml,
+			STM/Lamarr_CP_Memory_Transaction_Logging_Job1.xml,
+			STM/Edison_CP_Memory_Transaction_Logging_Job1.xml,
+			STM/Edison_CP_Memory_Transaction_Logging_Job2.xml
+		</names>
+
+		<configUIactions 
+			ID="Access Type"
+			description="Access type filter"
+			values="Only Reads,Only Writes,Reads and Writes"
+			default="Reads and Writes">
+
+			<job ID="Only Reads">
+				<jobProperty name="Hardware Configuration.Type.STM Trace Type.Function.Event Filter.Access Type" value="Read" />
+			</job>
+
+			<job ID="Only Writes">
+				<jobProperty name="Hardware Configuration.Type.STM Trace Type.Function.Event Filter.Access Type" value="Write" />
+			</job>
+
+			<job ID="Reads and Writes">
+				<jobProperty name="Hardware Configuration.Type.STM Trace Type.Function.Event Filter.Access Type" value="Any" />
+			</job>
+		</configUIactions>
+	</jobs>
+</ConfigUI>
+
+</UCdeviceinfo>

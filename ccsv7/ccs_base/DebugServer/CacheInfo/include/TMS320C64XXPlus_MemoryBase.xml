@@ -1,0 +1,1103 @@
+<!-- The GEM Memory hierarchy consists of the following:
+	L1P Memory: Region 0, Region 1 (PMC - Program Memory Controller)
+	L1P Cache 
+	L1D Memory: Region 0, Region 1 (DMC - Data Memory Controller)
+	L1D Cache 
+	L2 Memory: Region 0, Region 1  (UMC - Unified Memory Controller)
+	L2 Cache 
+	External Memory 
+	
+	The following variables are defined as External Entity Parameters:
+	
+	-->
+	
+<AddressSpaceName>Unified</AddressSpaceName>
+<!-- id=0 : L1D memory Region 0 -->
+<MemoryType>
+	<Name>L1D memory Region 0</Name>
+	<MemoryLevelName>L1D memory Region 0</MemoryLevelName>
+	<GTIMemHierarchyReadEnableFlags>0x02</GTIMemHierarchyReadEnableFlags>
+	<MemLevelBitFlag>0x01</MemLevelBitFlag>
+	<Description>L1D memory Region 0</Description>
+	<CanBeBypassed>true</CanBeBypassed>
+	<IsBypassedByDefault>false</IsBypassedByDefault>
+	<SimulatorSupportsConsistencyChecking>false</SimulatorSupportsConsistencyChecking>
+	<CanBeLocked>false</CanBeLocked>
+	<!-- CanBeSecured = false for simulator, true for emulator -->
+	<CanBeSecured>&L1DRegion0CanBeSecured;</CanBeSecured>
+	<CanBeNonEmulatable>&L1DRegion0CanBeSecured;</CanBeNonEmulatable>
+	<CanBeProtected>&L1DRegion0CanBeProtected;</CanBeProtected>
+	<HasMemoryAccessIDs>false</HasMemoryAccessIDs>
+	<IsCache>false</IsCache>
+	<IsMapped>true</IsMapped>
+	<IsProgram>false</IsProgram>
+	<IsData>true</IsData>
+	<IsIOSpace>false</IsIOSpace>
+	<IsExternal>false</IsExternal>
+	<IsShared>false</IsShared>
+	<IsReserved>false</IsReserved>
+	<IsROM>false</IsROM>
+	<IsPaged>false</IsPaged>
+	<IsVirtualMemorySupported>false</IsVirtualMemorySupported>
+	<IsVirtualWayConversionEnabled>false</IsVirtualWayConversionEnabled>
+	<Linesize>64</Linesize>
+	<HierarchyDepth>1</HierarchyDepth>
+	<!-- the following are only read if IsCache is false -->
+	<MappedMemory>
+		<PhysicalAddresses>
+			<CanBeDisabled>false</CanBeDisabled>
+			<StartAddress>
+				<IsFixed>true</IsFixed>
+				<!-- For Himalaya, Region 0 = 0x0 -->
+				<FixedValue>&L1DRegion0StartAdrs;</FixedValue>
+			</StartAddress>
+			<Length>
+				<IsFixed>true</IsFixed>
+				<!-- For Himalaya, Region 0 = 0x0 -->
+				<FixedValue>&L1DRegion0Length;</FixedValue>
+				<ConfigReg>L1DCFG</ConfigReg>
+				<DecoderName>GetL1CacheSize</DecoderName>
+			</Length>
+		</PhysicalAddresses>
+		<!-- the following element is only read if CanBeProtected is true-->
+		<AddressMappedAttribute name="MemoryProtection">
+			<Name>L1D Memory Protection (RWX)</Name>
+			<Description>Memory Protection Flags (RWX): User,  Supervisor</Description>
+			<!-- page size determines the amount of memory each
+							     memory protection register represents
+					For Himalaya Region 0, Page Size = 0x0
+							      -->
+			<PageSizeInMAUs>&L1DRegion0MemoryProtectionPageSize;</PageSizeInMAUs>
+			<!-- global addresses have a specific bit pattern in the
+								  upper bits to identify which device they represent.
+								  If these bits match the bit patterns for the local device,
+								  the local memory attributes should be displayed.-->
+			<GlobalAddressMask>0xff000000</GlobalAddressMask>
+			<GlobalAddressSpaceIdBits>
+			   <ConfigReg>CORENUMBER</ConfigReg>
+			   <DecoderName>GetGlobalAdrsForThisCore</DecoderName>
+			</GlobalAddressSpaceIdBits>
+			<ConfigReg>L1DMPPA_REGION0</ConfigReg>
+			<NumFlags>2</NumFlags>
+			<Flag index="0">
+				<DecoderName>GetUserRWX</DecoderName>
+				<PropertyName>User</PropertyName>
+				<Description>User Permissions: Read Write Execute</Description>
+			</Flag>
+			<Flag index="1">
+				<DecoderName>GetSuperRWX</DecoderName>
+				<PropertyName>Supervisor</PropertyName>
+				<Description>Supervisor Permissions:  Read Write Execute</Description>
+			</Flag>
+		</AddressMappedAttribute>
+		<!-- the following element is only read if HasMemoryAccessIDs is true-->
+		<AddressMappedAttribute name="MemoryAccessIDs">
+			<Name>L1D Memory Access IDs</Name>
+			<Description>Memory Access IDs: LOCAL, External, CPU 0-5</Description>
+			<!-- page size determines the amount of memory each
+							     memory protection register represents
+					For Himalaya Region 0, Page Size = 0x0
+							      -->
+			<PageSizeInMAUs>&L1DRegion0MemoryProtectionPageSize;</PageSizeInMAUs>
+			<!-- global addresses have a specific bit pattern in the
+								  upper bits to identify which device they represent.
+								  If these bits match the bit patterns for the local device,
+								  the local memory attributes should be displayed.-->
+			<GlobalAddressMask>0xff000000</GlobalAddressMask>
+			<GlobalAddressSpaceIdBits>
+			   <ConfigReg>CORENUMBER</ConfigReg>
+			   <DecoderName>GetGlobalAdrsForThisCore</DecoderName>
+			</GlobalAddressSpaceIdBits>
+			<ConfigReg>L1DMPPA_REGION0</ConfigReg>
+			<NumFlags>3</NumFlags>
+			<Flag index="0">
+				<DecoderName>IsAccessID_LOCAL</DecoderName>
+				<PropertyName>LOCAL</PropertyName>
+				<Description>Can be accessed by locally initiated DMA</Description>
+				<!--  if IsDisplayBinaryData is false (default), the attribute displays the decoder's  string table output  if there is a string table, or displays the property name if decoded result is true -->
+				<IsDisplayBinaryData>true</IsDisplayBinaryData> 
+			</Flag>
+			<Flag index="1">
+				<DecoderName>IsAccessID_AIDX</DecoderName>
+				<PropertyName>AIDX</PropertyName>
+				<Description>Can be accessed by externally initiated DMA</Description>
+				<IsDisplayBinaryData>true</IsDisplayBinaryData> 
+			</Flag>
+			<Flag index="2">
+				<DecoderName>IsAccessID_CPU</DecoderName>
+				<PropertyName>AID[5:0]</PropertyName>
+				<Description>AIDx=1 Indicates that access ID x has permission to access this memory</Description>
+				<IsDisplayBinaryData>true</IsDisplayBinaryData> 
+			</Flag>
+		</AddressMappedAttribute>
+		<!-- the following element is only read if CanBeSecured is true-->
+		<AddressMappedAttribute name="MemorySecurity">
+			<Name>L1D Memory Security</Name>
+			<Description>Memory Security Flags: NonEMU = non emulatable (displayed as **** by CCStudio), Secure = memory security enabled</Description>
+			<!-- For Himalaya Region 0, PageSize = 0x0 -->
+			<PageSizeInMAUs>&L1DRegion0MemorySecurityPageSize;</PageSizeInMAUs>
+			<!-- global addresses have a specific bit pattern in the
+								  upper bits to identify which device they represent.
+								  If these bits match the bit patterns for the local device,
+								  the local memory attributes should be displayed.-->
+			<GlobalAddressMask>0xff000000</GlobalAddressMask>
+			<GlobalAddressSpaceIdBits>
+			   <ConfigReg>CORENUMBER</ConfigReg>
+			   <DecoderName>GetGlobalAdrsForThisCore</DecoderName>
+			</GlobalAddressSpaceIdBits>
+			<ConfigReg>L1DMPPA_REGION0</ConfigReg>
+			<NumFlags>2</NumFlags>
+			<Flag index="0">
+				<DecoderName>IsSecure</DecoderName>
+				<PropertyName>L1D Secure</PropertyName>
+				<Description>Secure memory</Description>
+			</Flag>
+			<Flag index="1">
+				<DecoderName>IsNonEmulatable</DecoderName>
+				<PropertyName>NonEMU</PropertyName>
+				<Description>Memory may not be accessed by emulation</Description>
+			</Flag>
+		</AddressMappedAttribute>
+	</MappedMemory>
+</MemoryType>
+<!-- id=1 : L1D memory Region 1 -->
+<MemoryType>
+	<Name>L1D memory Region 1</Name>
+	<MemoryLevelName>L1D memory Region 1</MemoryLevelName>
+	<GTIMemHierarchyReadEnableFlags>0x02</GTIMemHierarchyReadEnableFlags>
+	<MemLevelBitFlag>0x01</MemLevelBitFlag>
+	<Description>L1D memory Region 1</Description>
+	<CanBeBypassed>true</CanBeBypassed>
+	<IsBypassedByDefault>false</IsBypassedByDefault>
+	<SimulatorSupportsConsistencyChecking>false</SimulatorSupportsConsistencyChecking>
+	<CanBeLocked>false</CanBeLocked>
+	<!-- CanBeSecured = false for simulator, true for emulator -->
+	<CanBeSecured>&L1DRegion1CanBeSecured;</CanBeSecured>
+	<CanBeNonEmulatable>&L1DRegion1CanBeSecured;</CanBeNonEmulatable>
+	<CanBeProtected>&L1DRegion1CanBeProtected;</CanBeProtected>
+	<HasMemoryAccessIDs>false</HasMemoryAccessIDs>
+	<IsCache>false</IsCache>
+	<IsMapped>true</IsMapped>
+	<IsProgram>false</IsProgram>
+	<IsData>true</IsData>
+	<IsIOSpace>false</IsIOSpace>
+	<IsExternal>false</IsExternal>
+	<IsShared>false</IsShared>
+	<IsReserved>false</IsReserved>
+	<IsROM>false</IsROM>
+	<IsPaged>false</IsPaged>
+	<IsVirtualMemorySupported>false</IsVirtualMemorySupported>
+	<IsVirtualWayConversionEnabled>false</IsVirtualWayConversionEnabled>
+	<Linesize>64</Linesize>
+	<HierarchyDepth>1</HierarchyDepth>
+	<!-- the following are only read if IsCache is false -->
+	<MappedMemory>
+		<PhysicalAddresses>
+			<CanBeDisabled>false</CanBeDisabled>
+			<StartAddress>
+				<IsFixed>true</IsFixed>
+				<!-- For Himalaya, Region 1 = 0x00F00000 -->
+				<FixedValue>&L1DRegion1StartAdrs;</FixedValue>
+			</StartAddress>
+			<Length>
+				<IsFixed>true</IsFixed>
+				<!-- For Himalaya, Region 1 = 0x08000 -->
+				<FixedValue>&L1DRegion1Length;</FixedValue>
+				<ConfigReg>L1DCFG</ConfigReg>
+				<DecoderName>GetL1CacheSize</DecoderName>
+			</Length>
+		</PhysicalAddresses>
+		<!-- the following element is only read if CanBeProtected is true-->
+		<AddressMappedAttribute name="MemoryProtection">
+			<Name>L1D Memory Protection (RWX)</Name>
+			<Description>Memory Protection Flags (RWX): User,  Supervisor,  ExternalDevices(X), LocaDevices(X)</Description>
+			<!-- page size determines the amount of memory each
+							     memory protection register represents
+					For Himalaya Region 1, Page Size = 0x400
+							      -->
+			<PageSizeInMAUs>&L1DRegion1MemoryProtectionPageSize;</PageSizeInMAUs>
+			<!-- global addresses have a specific bit pattern in the
+								  upper bits to identify which device they represent.
+								  If these bits match the bit patterns for the local device,
+								  the local memory attributes should be displayed.-->
+			<GlobalAddressMask>0xff000000</GlobalAddressMask>
+			<GlobalAddressSpaceIdBits>
+			   <ConfigReg>CORENUMBER</ConfigReg>
+			   <DecoderName>GetGlobalAdrsForThisCore</DecoderName>
+			</GlobalAddressSpaceIdBits>
+			<ConfigReg>L1DMPPA_REGION1</ConfigReg>
+			<NumFlags>2</NumFlags>
+			<Flag index="0">
+				<DecoderName>GetUserRWX</DecoderName>
+				<PropertyName>User</PropertyName>
+				<Description>User Permissions: Read Write Execute</Description>
+			</Flag>
+			<Flag index="1">
+				<DecoderName>GetSuperRWX</DecoderName>
+				<PropertyName>Supervisor</PropertyName>
+				<Description>Supervisor Permissions: Read Write Execute</Description>
+			</Flag>
+		</AddressMappedAttribute>
+		<!-- the following element is only read if HasMemoryAccessIDs is true-->
+		<AddressMappedAttribute name="MemoryAccessIDs">
+			<Name>L1D Region 1  AccessIDs</Name>
+			<Description>Memory Access IDs: LOCAL, External, CPU 0-5</Description>
+			<!-- page size determines the amount of memory each
+							     memory protection register represents
+					For Himalaya Region 1, Page Size = 0x400
+							      -->
+			<PageSizeInMAUs>&L1DRegion1MemoryProtectionPageSize;</PageSizeInMAUs>
+			<!-- global addresses have a specific bit pattern in the
+								  upper bits to identify which device they represent.
+								  If these bits match the bit patterns for the local device,
+								  the local memory attributes should be displayed.-->
+			<GlobalAddressMask>0xff000000</GlobalAddressMask>
+			<GlobalAddressSpaceIdBits>
+			   <ConfigReg>CORENUMBER</ConfigReg>
+			   <DecoderName>GetGlobalAdrsForThisCore</DecoderName>
+			</GlobalAddressSpaceIdBits>
+			<ConfigReg>L1DMPPA_REGION1</ConfigReg>
+			<NumFlags>3</NumFlags>
+			<Flag index="0">
+				<DecoderName>IsAccessID_LOCAL</DecoderName>
+				<PropertyName>LOCAL</PropertyName>
+				<Description>Can be accessed by locally initiated DMA</Description>
+				<!--  if IsDisplayBinaryData is false (default), the attribute displays the decoder's  string table output  if there is a string table, or displays the property name if decoded result is true -->
+				<IsDisplayBinaryData>true</IsDisplayBinaryData> 
+			</Flag>
+			<Flag index="1">
+				<DecoderName>IsAccessID_AIDX</DecoderName>
+				<PropertyName>AIDX</PropertyName>
+				<Description>Can be accessed by externally initiated DMA</Description>
+				<IsDisplayBinaryData>true</IsDisplayBinaryData> 
+			</Flag>
+			<Flag index="2">
+				<DecoderName>IsAccessID_CPU</DecoderName>
+				<PropertyName>AID[5:0]</PropertyName>
+				<Description>AIDx=1 Indicates that access ID x has permission to access this memory</Description>
+				<IsDisplayBinaryData>true</IsDisplayBinaryData> 
+			</Flag>
+		</AddressMappedAttribute>
+		<!-- the following element is only read if CanBeSecured is true-->
+		<AddressMappedAttribute name="MemorySecurity">
+			<Name>L1D Memory Security</Name>
+			<Description>Memory Security Flags: NonEMU = non emulatable (displayed as **** by CCStudio), Secure = memory security enabled</Description>
+			<!-- For Himalaya Region 1, PageSize = 0x0400 -->
+			<PageSizeInMAUs>&L1DRegion1MemorySecurityPageSize;</PageSizeInMAUs>
+			<!-- global addresses have a specific bit pattern in the
+								  upper bits to identify which device they represent.
+								  If these bits match the bit patterns for the local device,
+								  the local memory attributes should be displayed.-->
+			<GlobalAddressMask>0xff000000</GlobalAddressMask>
+			<GlobalAddressSpaceIdBits>
+			   <ConfigReg>CORENUMBER</ConfigReg>
+			   <DecoderName>GetGlobalAdrsForThisCore</DecoderName>
+			</GlobalAddressSpaceIdBits>
+			<ConfigReg>L1DMPPA_REGION1</ConfigReg>
+			<NumFlags>2</NumFlags>
+			<Flag index="0">
+				<DecoderName>IsSecure</DecoderName>
+				<PropertyName>L1D Secure</PropertyName>
+				<Description>Secure memory</Description>
+			</Flag>
+			<Flag index="1">
+				<DecoderName>IsNonEmulatable</DecoderName>
+				<PropertyName>NonEMU</PropertyName>
+				<Description>Memory may not be accessed by emulation</Description>
+			</Flag>
+		</AddressMappedAttribute>
+	</MappedMemory>
+</MemoryType>
+<!-- id=5 : L1D cache -->
+<MemoryType>
+	<Name>L1D cache</Name>
+	<MemoryLevelName>L1D</MemoryLevelName>
+	<GTIMemHierarchyReadEnableFlags>0x20</GTIMemHierarchyReadEnableFlags>
+	<MemLevelBitFlag>0x01</MemLevelBitFlag>
+	<Description>L1D memory</Description>
+	<CanBeBypassed>true</CanBeBypassed>
+	<IsBypassedByDefault>false</IsBypassedByDefault>
+	<SimulatorSupportsConsistencyChecking>false</SimulatorSupportsConsistencyChecking>
+	<CanBeLocked>false</CanBeLocked>
+	<CanBeSecured>false</CanBeSecured>
+	<CanBeNonEmulatable>true</CanBeNonEmulatable>
+	<CanBeProtected>false</CanBeProtected>
+	<HasMemoryAccessIDs>false</HasMemoryAccessIDs>
+	<IsCache>true</IsCache>
+	<IsMapped>false</IsMapped>
+	<IsProgram>false</IsProgram>
+	<IsData>true</IsData>
+	<IsIOSpace>false</IsIOSpace>
+	<IsExternal>false</IsExternal>
+	<IsShared>false</IsShared>
+	<IsReserved>false</IsReserved>
+	<IsROM>false</IsROM>
+	<IsPaged>false</IsPaged>
+	<IsVirtualMemorySupported>false</IsVirtualMemorySupported>
+	<IsVirtualWayConversionEnabled>false</IsVirtualWayConversionEnabled>
+	<Linesize>64</Linesize>
+	<HierarchyDepth>1</HierarchyDepth>
+	<!--the following are only read if the memory level is cache-->
+	<Cache>
+		<IsCacheTagRamDecodingSupported>&IsCacheTagRamDecodingSupported;</IsCacheTagRamDecodingSupported>
+		<MaxNumCacheLines>512</MaxNumCacheLines>
+		<NumCacheLines>
+			<ConfigReg>L1DCFG</ConfigReg>
+			<DecoderName>GetL1DNumCacheLines</DecoderName>
+		</NumCacheLines>
+		<CacheSize>
+			<ConfigReg>L1DCFG</ConfigReg>
+			<DecoderName>GetL1CacheSize</DecoderName>
+		</CacheSize>
+		<IsCacheEnabled>
+			<ConfigReg>L1DCFG</ConfigReg>
+			<DecoderName>IsCacheEnabled</DecoderName>
+		</IsCacheEnabled>
+		<IsCacheDirtyBitAccessible>true</IsCacheDirtyBitAccessible>
+		<IsLruSupported>true</IsLruSupported>
+		<NumBitsInLruBitField>2</NumBitsInLruBitField>
+		<NumWaysInCache>2</NumWaysInCache>
+		<DecoderName>L1DLruToWayMap</DecoderName>
+	</Cache>
+</MemoryType>
+<!-- id=0 : L1P memory Region 0 -->
+<MemoryType>
+	<Name>L1P memory Region 0</Name>
+	<MemoryLevelName>L1P memory Region 0</MemoryLevelName>
+	<!-- Custom Background colors can be defined like this:
+                        <BackColor>WhiteSmoke</BackColor>
+                        -->
+	<GTIMemHierarchyReadEnableFlags>0x01</GTIMemHierarchyReadEnableFlags>
+	<MemLevelBitFlag>0x02</MemLevelBitFlag>
+	<Description>L1P memory Region 0</Description>
+	<CanBeBypassed>true</CanBeBypassed>
+	<IsBypassedByDefault>false</IsBypassedByDefault>
+	<SimulatorSupportsConsistencyChecking>false</SimulatorSupportsConsistencyChecking>
+	<CanBeLocked>false</CanBeLocked>
+	<!-- CanBeSecured = false for simulator, true for emulator -->
+	<CanBeSecured>&L1PRegion0CanBeSecured;</CanBeSecured>
+	<CanBeNonEmulatable>&L1PRegion0CanBeSecured;</CanBeNonEmulatable>
+	<CanBeProtected>&L1PRegion0CanBeProtected;</CanBeProtected>
+	<HasMemoryAccessIDs>&L1PRegion0CanBeProtected;</HasMemoryAccessIDs>
+	<IsCache>false</IsCache>
+	<IsMapped>true</IsMapped>
+	<IsProgram>true</IsProgram>
+	<IsData>false</IsData>
+	<IsIOSpace>false</IsIOSpace>
+	<IsExternal>false</IsExternal>
+	<IsShared>false</IsShared>
+	<IsReserved>false</IsReserved>
+	<IsROM>&L1PRegion0IsROM;</IsROM>
+	<IsPaged>false</IsPaged>
+	<IsVirtualMemorySupported>false</IsVirtualMemorySupported>
+	<IsVirtualWayConversionEnabled>false</IsVirtualWayConversionEnabled>
+	<Linesize>32</Linesize>
+	<HierarchyDepth>1</HierarchyDepth>
+	<!-- the following are only read if IsCache is false -->
+	<MappedMemory>
+		<PhysicalAddresses>
+			<CanBeDisabled>false</CanBeDisabled>
+			<StartAddress>
+				<IsFixed>true</IsFixed>
+				<!-- For Himalaya: 0x0 -->
+				<FixedValue>&L1PRegion0StartAdrs;</FixedValue>
+				<ConfigReg></ConfigReg>
+				<DecoderName></DecoderName>
+			</StartAddress>
+			<Length>
+				<IsFixed>true</IsFixed>
+				<!-- For Himalaya: 0x0 -->
+				<FixedValue>&L1PRegion0Length;</FixedValue>
+				<ConfigReg>L1PCFG</ConfigReg>
+				<DecoderName></DecoderName>
+			</Length>
+		</PhysicalAddresses>
+		<!-- the following element is only read if CanBeProtected is true-->
+		<AddressMappedAttribute name="MemoryProtection">
+			<Name>L1P Region 0 Memory Protection (RWX)</Name>
+			<Description>Memory Protection Flags (RWX): User,  Supervisor</Description>
+			<!-- page size determines the amount of memory each
+							     memory protection register represents.
+							     For Himalaya = 0x0 -->
+			<PageSizeInMAUs>&L1PRegion0MemoryProtectionPageSize;</PageSizeInMAUs>
+			<!-- global addresses have a specific bit pattern in the
+								  upper bits to identify which device they represent.
+								  If these bits match the bit patterns for the local device,
+								  the local memory attributes should be displayed.-->
+			<GlobalAddressMask>0xff000000</GlobalAddressMask>
+			<GlobalAddressSpaceIdBits>
+			   <ConfigReg>CORENUMBER</ConfigReg>
+			   <DecoderName>GetGlobalAdrsForThisCore</DecoderName>
+			</GlobalAddressSpaceIdBits>
+			<ConfigReg>L1PMPPA_REGION0</ConfigReg>
+			<NumFlags>2</NumFlags>
+			<Flag index="0">
+				<DecoderName>GetUserRWX</DecoderName>
+				<PropertyName>User</PropertyName>
+				<Description>User Permissions: Read Write Execute</Description>
+			</Flag>
+			<Flag index="1">
+				<DecoderName>GetSuperRWX</DecoderName>
+				<PropertyName>Supervisor</PropertyName>
+				<Description>Supervisor Permissions: Read Write Execute</Description>
+			</Flag>
+		</AddressMappedAttribute>
+		<!-- the following element is only read if HasMemoryAccessIDs is true-->
+		<AddressMappedAttribute name="MemoryAccessIDs">
+			<Name>L1P Region 0  AccessIDs</Name>
+			<Description>Memory Access IDs: LOCAL, External, CPU 0-5</Description>
+			<!-- page size determines the amount of memory each
+							     memory protection register represents.
+							     For Himalaya = 0x0 -->
+			<PageSizeInMAUs>&L1PRegion0MemoryProtectionPageSize;</PageSizeInMAUs>
+			<!-- global addresses have a specific bit pattern in the
+								  upper bits to identify which device they represent.
+								  If these bits match the bit patterns for the local device,
+								  the local memory attributes should be displayed.-->
+			<GlobalAddressMask>0xff000000</GlobalAddressMask>
+			<GlobalAddressSpaceIdBits>
+			   <ConfigReg>CORENUMBER</ConfigReg>
+			   <DecoderName>GetGlobalAdrsForThisCore</DecoderName>
+			</GlobalAddressSpaceIdBits>
+			<ConfigReg>L1PMPPA_REGION0</ConfigReg>
+			<NumFlags>3</NumFlags>
+			<Flag index="0">
+				<DecoderName>IsAccessID_LOCAL</DecoderName>
+				<PropertyName>LOCAL</PropertyName>
+				<Description>Can be accessed by locally initiated DMA</Description>
+				<!--  if IsDisplayBinaryData is false (default), the attribute displays the decoder's  string table output  if there is a string table, or displays the property name if decoded result is true -->
+				<IsDisplayBinaryData>true</IsDisplayBinaryData> 
+			</Flag>
+			<Flag index="1">
+				<DecoderName>IsAccessID_AIDX</DecoderName>
+				<PropertyName>AIDX</PropertyName>
+				<Description>Can be accessed by externally initiated DMA</Description>
+				<IsDisplayBinaryData>true</IsDisplayBinaryData> 
+			</Flag>
+			<Flag index="2">
+				<DecoderName>IsAccessID_CPU</DecoderName>
+				<PropertyName>AID[5:0]</PropertyName>
+				<Description>AIDx=1 Indicates that access ID x has permission to access this memory</Description>
+				<IsDisplayBinaryData>true</IsDisplayBinaryData> 
+			</Flag>
+		</AddressMappedAttribute>
+		<!-- the following element is only read if CanBeSecured is true-->
+		<AddressMappedAttribute name="MemorySecurity">
+			<Name>L1P Memory Security</Name>
+			<Description>Memory Security Flags: NonEMU = non emulatable (displayed as **** by CCStudio), Secure = memory security enabled</Description>
+			<!-- For Himalaya, Page Size = 0x0 -->
+			<PageSizeInMAUs>&L1PRegion0MemorySecurityPageSize;</PageSizeInMAUs>
+			<!-- global addresses have a specific bit pattern in the
+								  upper bits to identify which device they represent.
+								  If these bits match the bit patterns for the local device,
+								  the local memory attributes should be displayed.-->
+			<GlobalAddressMask>0xff000000</GlobalAddressMask>
+			<GlobalAddressSpaceIdBits>
+			   <ConfigReg>CORENUMBER</ConfigReg>
+			   <DecoderName>GetGlobalAdrsForThisCore</DecoderName>
+			</GlobalAddressSpaceIdBits>
+			<ConfigReg>L1PMPPA_REGION0</ConfigReg>
+			<NumFlags>2</NumFlags>
+			<Flag index="0">
+				<DecoderName>IsSecure</DecoderName>
+				<PropertyName>L1P Secure</PropertyName>
+				<Description>Secure memory</Description>
+			</Flag>
+			<Flag index="1">
+				<DecoderName>IsNonEmulatable</DecoderName>
+				<PropertyName>NonEMU</PropertyName>
+				<Description>Memory may not be accessed by emulation</Description>
+			</Flag>
+		</AddressMappedAttribute>
+	</MappedMemory>
+</MemoryType>
+<!-- id=1 : L1P memory Region 1 -->
+<MemoryType>
+	<Name>L1P memory Region 1</Name>
+	<MemoryLevelName>L1P memory Region 1</MemoryLevelName>
+	<!-- Custom Background colors can be defined like this:
+                        <BackColor>WhiteSmoke</BackColor>
+                        -->
+	<GTIMemHierarchyReadEnableFlags>0x01</GTIMemHierarchyReadEnableFlags>
+	<MemLevelBitFlag>0x02</MemLevelBitFlag>
+	<Description>L1P memory Region 1</Description>
+	<CanBeBypassed>true</CanBeBypassed>
+	<IsBypassedByDefault>false</IsBypassedByDefault>
+	<SimulatorSupportsConsistencyChecking>false</SimulatorSupportsConsistencyChecking>
+	<CanBeLocked>false</CanBeLocked>
+	<!-- CanBeSecured = false for simulator, true for emulator -->
+	<CanBeSecured>&L1PRegion1CanBeSecured;</CanBeSecured>
+	<CanBeNonEmulatable>&L1PRegion1CanBeSecured;</CanBeNonEmulatable>
+	<CanBeProtected>&L1PRegion1CanBeProtected;</CanBeProtected>
+	<HasMemoryAccessIDs>&L1PRegion1CanBeProtected;</HasMemoryAccessIDs>
+	<IsCache>false</IsCache>
+	<IsMapped>true</IsMapped>
+	<IsProgram>true</IsProgram>
+	<IsData>false</IsData>
+	<IsIOSpace>false</IsIOSpace>
+	<IsExternal>false</IsExternal>
+	<IsShared>false</IsShared>
+	<IsReserved>false</IsReserved>
+	<IsROM>&L1PRegion1IsROM;</IsROM>
+	<IsPaged>false</IsPaged>
+	<IsVirtualMemorySupported>false</IsVirtualMemorySupported>
+	<IsVirtualWayConversionEnabled>false</IsVirtualWayConversionEnabled>
+	<Linesize>32</Linesize>
+	<HierarchyDepth>1</HierarchyDepth>
+	<!-- the following are only read if IsCache is false -->
+	<MappedMemory>
+		<PhysicalAddresses>
+			<CanBeDisabled>false</CanBeDisabled>
+			<StartAddress>
+				<IsFixed>true</IsFixed>
+				<!-- For Himalaya: 0x0E00000 -->
+				<FixedValue>&L1PRegion1StartAdrs;</FixedValue>
+				<ConfigReg></ConfigReg>
+				<DecoderName></DecoderName>
+			</StartAddress>
+			<Length>
+				<IsFixed>true</IsFixed>
+				<!-- For Himalaya: 0x08000 -->
+				<FixedValue>&L1PRegion1Length;</FixedValue>
+				<ConfigReg>L1PCFG</ConfigReg>
+				<DecoderName></DecoderName>
+			</Length>
+		</PhysicalAddresses>
+		<!-- the following element is only read if CanBeProtected is true-->
+		<AddressMappedAttribute name="MemoryProtection">
+			<Name>L1P Region 1 Memory Protection (RWX)</Name>
+			<Description>Memory Protection Flags (RWX): User,  Supervisor</Description>
+			<!-- page size determines the amount of memory each
+							     memory protection register represents.
+							     For Himalaya  = 0x400 -->
+			<PageSizeInMAUs>&L1PRegion1MemoryProtectionPageSize;</PageSizeInMAUs>
+			<!-- global addresses have a specific bit pattern in the
+								  upper bits to identify which device they represent.
+								  If these bits match the bit patterns for the local device,
+								  the local memory attributes should be displayed.-->
+			<GlobalAddressMask>0xff000000</GlobalAddressMask>
+			<GlobalAddressSpaceIdBits>
+			   <ConfigReg>CORENUMBER</ConfigReg>
+			   <DecoderName>GetGlobalAdrsForThisCore</DecoderName>
+			</GlobalAddressSpaceIdBits>
+			<ConfigReg>L1PMPPA_REGION1</ConfigReg>
+			<NumFlags>2</NumFlags>
+			<Flag index="0">
+				<DecoderName>GetUserRWX</DecoderName>
+				<PropertyName>User</PropertyName>
+				<Description>User Permissions: Read Write Execute</Description>
+			</Flag>
+			<Flag index="1">
+				<DecoderName>GetSuperRWX</DecoderName>
+				<PropertyName>Supervisor</PropertyName>
+				<Description>Supervisor Permissions: Read Write Execute</Description>
+			</Flag>
+		</AddressMappedAttribute>
+		<!-- the following element is only read if HasMemoryAccessIDs is true-->
+		<AddressMappedAttribute name="MemoryAccessIDs">
+			<Name>L1P Region 1 Access IDs</Name>
+			<Description>Memory Execute Permission Flags (X):  ExternalDevices(X), LocaDevices(X)</Description>
+			<!-- page size determines the amount of memory each
+							     memory protection register represents.
+							     For Himalaya  = 0x400 -->
+			<PageSizeInMAUs>&L1PRegion1MemoryProtectionPageSize;</PageSizeInMAUs>
+			<!-- global addresses have a specific bit pattern in the
+								  upper bits to identify which device they represent.
+								  If these bits match the bit patterns for the local device,
+								  the local memory attributes should be displayed.-->
+			<GlobalAddressMask>0xff000000</GlobalAddressMask>
+			<GlobalAddressSpaceIdBits>
+			   <ConfigReg>CORENUMBER</ConfigReg>
+			   <DecoderName>GetGlobalAdrsForThisCore</DecoderName>
+			</GlobalAddressSpaceIdBits>
+			<ConfigReg>L1PMPPA_REGION1</ConfigReg>
+			<NumFlags>3</NumFlags>
+			<Flag index="0">
+				<DecoderName>IsAccessID_LOCAL</DecoderName>
+				<PropertyName>LOCAL</PropertyName>
+				<Description>Can be accessed by locally initiated DMA</Description>
+				<!--  if IsDisplayBinaryData is false (default), the attribute displays the decoder's  string table output  if there is a string table, or displays the property name if decoded result is true -->
+				<IsDisplayBinaryData>true</IsDisplayBinaryData> 
+			</Flag>
+			<Flag index="1">
+				<DecoderName>IsAccessID_AIDX</DecoderName>
+				<PropertyName>AIDX</PropertyName>
+				<Description>Can be accessed by externally initiated DMA</Description>
+				<IsDisplayBinaryData>true</IsDisplayBinaryData> 
+			</Flag>
+			<Flag index="2">
+				<DecoderName>IsAccessID_CPU</DecoderName>
+				<PropertyName>AID[5:0]</PropertyName>
+				<Description>AIDx=1 Indicates that access ID x has permission to access this memory</Description>
+				<IsDisplayBinaryData>true</IsDisplayBinaryData> 
+			</Flag>
+		</AddressMappedAttribute>
+		<!-- the following element is only read if CanBeSecured is true-->
+		<AddressMappedAttribute name="MemorySecurity">
+			<Name>L1P Memory Security</Name>
+			<Description>Memory Security Flags: NonEMU = non emulatable (displayed as **** by CCStudio), Secure = memory security enabled</Description>
+			<!-- For Himalaya, Page Size = 0x400 -->
+			<PageSizeInMAUs>&L1PRegion1MemorySecurityPageSize;</PageSizeInMAUs>
+			<!-- global addresses have a specific bit pattern in the
+								  upper bits to identify which device they represent.
+								  If these bits match the bit patterns for the local device,
+								  the local memory attributes should be displayed.-->
+			<GlobalAddressMask>0xff000000</GlobalAddressMask>
+			<GlobalAddressSpaceIdBits>
+			   <ConfigReg>CORENUMBER</ConfigReg>
+			   <DecoderName>GetGlobalAdrsForThisCore</DecoderName>
+			</GlobalAddressSpaceIdBits>
+			<ConfigReg>L1PMPPA_REGION1</ConfigReg>
+			<NumFlags>2</NumFlags>
+			<Flag index="0">
+				<DecoderName>IsSecure</DecoderName>
+				<PropertyName>L1P Secure</PropertyName>
+				<Description>Secure memory</Description>
+			</Flag>
+			<Flag index="1">
+				<DecoderName>IsNonEmulatable</DecoderName>
+				<PropertyName>NonEMU</PropertyName>
+				<Description>Memory may not be accessed by emulation</Description>
+			</Flag>
+		</AddressMappedAttribute>
+	</MappedMemory>
+</MemoryType>
+<!-- id=2 : L1P cache -->
+<MemoryType>
+	<Name>L1P cache</Name>
+	<MemoryLevelName>L1P</MemoryLevelName>
+	<GTIMemHierarchyReadEnableFlags>0x10</GTIMemHierarchyReadEnableFlags>
+	<MemLevelBitFlag>0x02</MemLevelBitFlag>
+	<Description>L1P Cache</Description>
+	<CanBeBypassed>true</CanBeBypassed>
+	<IsBypassedByDefault>true</IsBypassedByDefault>
+	<SimulatorSupportsConsistencyChecking>false</SimulatorSupportsConsistencyChecking>
+	<CanBeLocked>false</CanBeLocked>
+	<CanBeSecured>false</CanBeSecured>
+	<CanBeNonEmulatable>true</CanBeNonEmulatable>
+	<CanBeProtected>false</CanBeProtected>
+	<HasMemoryAccessIDs>false</HasMemoryAccessIDs>
+	<IsCache>true</IsCache>
+	<IsMapped>false</IsMapped>
+	<IsProgram>true</IsProgram>
+	<IsData>false</IsData>
+	<IsExternal>false</IsExternal>
+	<IsIOSpace>false</IsIOSpace>
+	<IsShared>false</IsShared>
+	<IsReserved>false</IsReserved>
+	<IsROM>false</IsROM>
+	<IsPaged>false</IsPaged>
+	<IsVirtualMemorySupported>false</IsVirtualMemorySupported>
+	<IsVirtualWayConversionEnabled>false</IsVirtualWayConversionEnabled>
+	<Linesize>32</Linesize>
+	<HierarchyDepth>1</HierarchyDepth>
+	<!--the following are only read if the memory level is cache-->
+	<Cache>
+		<IsCacheTagRamDecodingSupported>&IsCacheTagRamDecodingSupported;</IsCacheTagRamDecodingSupported>
+		<MaxNumCacheLines>1024</MaxNumCacheLines>
+		<NumCacheLines>
+			<ConfigReg>L1PCFG</ConfigReg>
+			<DecoderName>GetL1PNumCacheLines</DecoderName>
+		</NumCacheLines>
+		<CacheSize>
+			<ConfigReg>L1PCFG</ConfigReg>
+			<DecoderName>GetL1CacheSize</DecoderName>
+		</CacheSize>
+		<IsCacheEnabled>
+			<ConfigReg>L1PCFG</ConfigReg>
+			<DecoderName>IsCacheEnabled</DecoderName>
+		</IsCacheEnabled>
+		<IsCacheDirtyBitAccessible>false</IsCacheDirtyBitAccessible>
+		<IsLruSupported>false</IsLruSupported>
+	</Cache>
+</MemoryType>
+<!-- id=6 : L2 memory Region 0 -->
+<MemoryType>
+	<Name>L2 memory Region 0</Name>
+	<MemoryLevelName>L2 memory Region 0</MemoryLevelName>
+	<GTIMemHierarchyReadEnableFlags>0x04</GTIMemHierarchyReadEnableFlags>
+	<MemLevelBitFlag>0x04</MemLevelBitFlag>
+	<Description>L2 memory Region 0</Description>
+	<CanBeBypassed>false</CanBeBypassed>
+	<IsBypassedByDefault>false</IsBypassedByDefault>
+	<SimulatorSupportsConsistencyChecking>false</SimulatorSupportsConsistencyChecking>
+	<CanBeLocked>false</CanBeLocked>
+	<!-- CanBeSecured = false for simulator, true for emulator -->
+	<CanBeSecured>&L2Region0CanBeSecured;</CanBeSecured>
+	<CanBeNonEmulatable>&L2Region0CanBeSecured;</CanBeNonEmulatable>
+	<CanBeProtected>&L2Region0CanBeProtected;</CanBeProtected>
+	<HasMemoryAccessIDs>&L2Region0CanBeProtected;</HasMemoryAccessIDs>
+	<IsCache>false</IsCache>
+	<IsMapped>true</IsMapped>
+	<IsProgram>true</IsProgram>
+	<IsData>true</IsData>
+	<IsIOSpace>false</IsIOSpace>
+	<IsExternal>false</IsExternal>
+	<IsShared>false</IsShared>
+	<IsReserved>false</IsReserved>
+	<IsROM>&L2Region0IsROM;</IsROM>
+	<IsPaged>false</IsPaged>
+	<IsVirtualMemorySupported>false</IsVirtualMemorySupported>
+	<IsVirtualWayConversionEnabled>false</IsVirtualWayConversionEnabled>
+	<Linesize>128</Linesize>
+	<HierarchyDepth>2</HierarchyDepth>
+	<!-- the following are only read if IsCache is false -->
+	<MappedMemory>
+		<PhysicalAddresses>
+			<CanBeDisabled>false</CanBeDisabled>
+			<StartAddress>
+				<IsFixed>true</IsFixed>
+				<!-- For Joule Region 0, = 0x0 -->
+				<FixedValue>&L2Region0StartAdrs;</FixedValue>
+			</StartAddress>
+			<Length>
+				<IsFixed>true</IsFixed>
+				<!-- For Joule Region 0, 0x0 -->
+				<FixedValue>&L2Region0Length;</FixedValue>
+				<ConfigReg>L2CFG</ConfigReg>
+				<DecoderName>GetL2CacheSize</DecoderName>
+			</Length>
+		</PhysicalAddresses>
+		<!-- the following element is only read if CanBeProtected is true-->
+		<AddressMappedAttribute name="MemoryProtection">
+			<Name>L2 Memory Protection (RWX)</Name>
+			<Description>Memory Protection Flags (RWX): User,  Supervisor</Description>
+			<!-- page size determines the amount of memory each
+							     memory protection register represents 
+							     For Joule Region 0 = 0x0 -->
+			<PageSizeInMAUs>&L2Region0MemoryProtectionPageSize;</PageSizeInMAUs>
+			<!-- global addresses have a specific bit pattern in the
+								  upper bits to identify which device they represent.
+								  If these bits match the bit patterns for the local device,
+								  the local memory attributes should be displayed.-->
+			<GlobalAddressMask>0xff000000</GlobalAddressMask>
+			<GlobalAddressSpaceIdBits>
+			   <ConfigReg>CORENUMBER</ConfigReg>
+			   <DecoderName>GetGlobalAdrsForThisCore</DecoderName>
+			</GlobalAddressSpaceIdBits>
+			<ConfigReg>L2MPPA_UMAP0</ConfigReg>
+			<NumFlags>2</NumFlags>
+			<Flag index="0">
+				<DecoderName>GetUserRWX</DecoderName>
+				<PropertyName>User</PropertyName>
+				<Description>User Permissions: Read Write Execute</Description>
+			</Flag>
+			<Flag index="1">
+				<DecoderName>GetSuperRWX</DecoderName>
+				<PropertyName>Supervisor</PropertyName>
+				<Description>Supervisor Permissions: Read Write Execute</Description>
+			</Flag>
+		</AddressMappedAttribute>
+		<!-- the following element is only read if HasMemoryAccessIDs is true-->
+		<AddressMappedAttribute name="MemoryAccessIDs">
+			<Name>L2 Memory Access IDs</Name>
+			<Description>Memory Access IDs:  LOCAL, External, CPU0-5</Description>
+			<!-- page size determines the amount of memory each
+							     memory protection register represents 
+							     For Joule Region 0 = 0x0 -->
+			<PageSizeInMAUs>&L2Region0MemoryProtectionPageSize;</PageSizeInMAUs>
+			<!-- global addresses have a specific bit pattern in the
+								  upper bits to identify which device they represent.
+								  If these bits match the bit patterns for the local device,
+								  the local memory attributes should be displayed.-->
+			<GlobalAddressMask>0xff000000</GlobalAddressMask>
+			<GlobalAddressSpaceIdBits>
+			   <ConfigReg>CORENUMBER</ConfigReg>
+			   <DecoderName>GetGlobalAdrsForThisCore</DecoderName>
+			</GlobalAddressSpaceIdBits>
+			<ConfigReg>L2MPPA_UMAP0</ConfigReg>
+			<NumFlags>3</NumFlags>
+			<Flag index="0">
+				<DecoderName>IsAccessID_LOCAL</DecoderName>
+				<PropertyName>LOCAL</PropertyName>
+				<Description>Can be accessed by locally initiated DMA</Description>
+				<!--  if IsDisplayBinaryData is false (default), the attribute displays the decoder's  string table output  if there is a string table, or displays the property name if decoded result is true -->
+				<IsDisplayBinaryData>true</IsDisplayBinaryData> 
+			</Flag>
+			<Flag index="1">
+				<DecoderName>IsAccessID_AIDX</DecoderName>
+				<PropertyName>AIDX</PropertyName>
+				<Description>Can be accessed by externally initiated DMA</Description>
+				<IsDisplayBinaryData>true</IsDisplayBinaryData> 
+			</Flag>
+			<Flag index="2">
+				<DecoderName>IsAccessID_CPU</DecoderName>
+				<PropertyName>AID[5:0]</PropertyName>
+				<Description>AIDx=1 Indicates that access ID x has permission to access this memory</Description>
+				<IsDisplayBinaryData>true</IsDisplayBinaryData> 
+			</Flag>
+		</AddressMappedAttribute>
+		<!-- the following element is only read if CanBeSecured is true-->
+		<AddressMappedAttribute name="MemorySecurity">
+			<Name>L2 Memory Security</Name>
+			<Description>Memory Security Flags: NonEMU = non emulatable (displayed as **** by CCStudio), Secure = memory security enabled</Description>
+			<!-- For Joule Region 0 = 0x0 -->
+			<PageSizeInMAUs>&L2Region0MemorySecurityPageSize;</PageSizeInMAUs>
+			<!-- global addresses have a specific bit pattern in the
+								  upper bits to identify which device they represent.
+								  If these bits match the bit patterns for the local device,
+								  the local memory attributes should be displayed.-->
+			<GlobalAddressMask>0xff000000</GlobalAddressMask>
+			<GlobalAddressSpaceIdBits>
+			   <ConfigReg>CORENUMBER</ConfigReg>
+			   <DecoderName>GetGlobalAdrsForThisCore</DecoderName>
+			</GlobalAddressSpaceIdBits>
+			<ConfigReg>L2MPPA_UMAP0</ConfigReg>
+			<NumFlags>2</NumFlags>
+			<Flag index="0">
+				<DecoderName>IsSecure</DecoderName>
+				<PropertyName>L2 Secure</PropertyName>
+				<Description>Secure memory</Description>
+			</Flag>
+			<Flag index="1">
+				<DecoderName>IsNonEmulatable</DecoderName>
+				<PropertyName>NonEMU</PropertyName>
+				<Description>Memory may not be accessed by emulation</Description>
+			</Flag>
+		</AddressMappedAttribute>
+	</MappedMemory>
+</MemoryType>
+<!-- id=7 : L2 memory Region 1 -->
+<MemoryType>
+	<Name>L2 memory Region 1</Name>
+	<MemoryLevelName>L2 memory Region 1</MemoryLevelName>
+	<GTIMemHierarchyReadEnableFlags>0x04</GTIMemHierarchyReadEnableFlags>
+	<MemLevelBitFlag>0x04</MemLevelBitFlag>
+	<Description>L2 memory Region 1</Description>
+	<CanBeBypassed>false</CanBeBypassed>
+	<IsBypassedByDefault>false</IsBypassedByDefault>
+	<SimulatorSupportsConsistencyChecking>false</SimulatorSupportsConsistencyChecking>
+	<CanBeLocked>false</CanBeLocked>
+	<!-- CanBeSecured = false for simulator, true for emulator -->
+	<CanBeSecured>&L2Region1CanBeSecured;</CanBeSecured>
+	<CanBeNonEmulatable>&L2Region1CanBeSecured;</CanBeNonEmulatable>
+	<CanBeProtected>&L2Region1CanBeProtected;</CanBeProtected>
+	<HasMemoryAccessIDs>&L2Region1CanBeProtected;</HasMemoryAccessIDs>
+	<IsCache>false</IsCache>
+	<IsMapped>true</IsMapped>
+	<IsProgram>true</IsProgram>
+	<IsData>true</IsData>
+	<IsIOSpace>false</IsIOSpace>
+	<IsExternal>false</IsExternal>
+	<IsShared>false</IsShared>
+	<IsReserved>false</IsReserved>
+	<IsROM>&L2Region1IsROM;</IsROM>
+	<IsPaged>false</IsPaged>
+	<IsVirtualMemorySupported>false</IsVirtualMemorySupported>
+	<IsVirtualWayConversionEnabled>false</IsVirtualWayConversionEnabled>
+	<Linesize>128</Linesize>
+	<HierarchyDepth>2</HierarchyDepth>
+	<!-- the following are only read if IsCache is false -->
+	<MappedMemory>
+		<PhysicalAddresses>
+			<CanBeDisabled>false</CanBeDisabled>
+			<StartAddress>
+				<IsFixed>true</IsFixed>
+				<!-- For Himalaya Region 0, = 0x0 -->
+				<FixedValue>&L2Region1StartAdrs;</FixedValue>
+			</StartAddress>
+			<Length>
+				<IsFixed>true</IsFixed>
+				<!-- For Himalaya Region 0 = 0x0 -->
+				<FixedValue>&L2Region1Length;</FixedValue>
+				<ConfigReg>L2CFG</ConfigReg>
+				<DecoderName>GetL2CacheSize</DecoderName>
+			</Length>
+		</PhysicalAddresses>
+		<!-- the following element is only read if CanBeProtected is true-->
+		<AddressMappedAttribute name="MemoryProtection">
+			<Name>L2 Memory Protection (RWX)</Name>
+			<Description>Memory Protection Flags (RWX): User,  Supervisor</Description>
+			<!-- page size determines the amount of memory each
+							     memory protection register represents 
+							     For Joule Region 1 = 0 -->
+			<PageSizeInMAUs>&L2Region1MemoryProtectionPageSize;</PageSizeInMAUs>
+			<!-- global addresses have a specific bit pattern in the
+								  upper bits to identify which device they represent.
+								  If these bits match the bit patterns for the local device,
+								  the local memory attributes should be displayed.-->
+			<GlobalAddressMask>0xff000000</GlobalAddressMask>
+			<GlobalAddressSpaceIdBits>
+			   <ConfigReg>CORENUMBER</ConfigReg>
+			   <DecoderName>GetGlobalAdrsForThisCore</DecoderName>
+			</GlobalAddressSpaceIdBits>
+			<ConfigReg>L2MPPA_UMAP1</ConfigReg>
+			<NumFlags>2</NumFlags>
+			<Flag index="0">
+				<DecoderName>GetUserRWX</DecoderName>
+				<PropertyName>User</PropertyName>
+				<Description>User Permissions: Read Write Execute</Description>
+			</Flag>
+			<Flag index="1">
+				<DecoderName>GetSuperRWX</DecoderName>
+				<PropertyName>Supervisor</PropertyName>
+				<Description>Supervisor Permissions: Read Write Execute</Description>
+			</Flag>
+		</AddressMappedAttribute>
+		<!-- the following element is only read if HasMemoryAccessIDs is true-->
+		<AddressMappedAttribute name="MemoryAccessIDs">
+			<Name>L2 Memory Allowed Access IDs</Name>
+			<Description>Memory Access IDs: LOCAL, External, CPU 0-5</Description>
+			<!-- page size determines the amount of memory each
+							     memory protection register represents 
+							     For Joule Region 1 = 0 -->
+			<PageSizeInMAUs>&L2Region1MemoryProtectionPageSize;</PageSizeInMAUs>
+			<!-- global addresses have a specific bit pattern in the
+								  upper bits to identify which device they represent.
+								  If these bits match the bit patterns for the local device,
+								  the local memory attributes should be displayed.-->
+			<GlobalAddressMask>0xff000000</GlobalAddressMask>
+			<GlobalAddressSpaceIdBits>
+			   <ConfigReg>CORENUMBER</ConfigReg>
+			   <DecoderName>GetGlobalAdrsForThisCore</DecoderName>
+			</GlobalAddressSpaceIdBits>
+			<ConfigReg>L2MPPA_UMAP1</ConfigReg>
+			<NumFlags>3</NumFlags>
+			<Flag index="0">
+				<DecoderName>IsAccessID_LOCAL</DecoderName>
+				<PropertyName>LOCAL</PropertyName>
+				<Description>Can be accessed by locally initiated DMA</Description>
+				<!--  if IsDisplayBinaryData is false (default), the attribute displays the decoder's  string table output  if there is a string table, or displays the property name if decoded result is true -->
+				<IsDisplayBinaryData>true</IsDisplayBinaryData> 
+			</Flag>
+			<Flag index="1">
+				<DecoderName>IsAccessID_AIDX</DecoderName>
+				<PropertyName>AIDX</PropertyName>
+				<Description>Can be accessed by externally initiated DMA</Description>
+				<IsDisplayBinaryData>true</IsDisplayBinaryData> 
+			</Flag>
+			<Flag index="2">
+				<DecoderName>IsAccessID_CPU</DecoderName>
+				<PropertyName>AID[5:0]</PropertyName>
+				<Description>AIDx=1 Indicates that access ID x has permission to access this memory</Description>
+				<IsDisplayBinaryData>true</IsDisplayBinaryData> 
+			</Flag>
+		</AddressMappedAttribute>
+		<!-- the following element is only read if CanBeSecured is true-->
+		<AddressMappedAttribute name="MemorySecurity">
+			<Name>L2 Memory Security</Name>
+			<Description>Memory Security Flags: NonEMU = non emulatable (displayed as **** by CCStudio), Secure = memory security enabled</Description>
+			<!-- For Himalaya Region 0 = 0x0 -->
+			<PageSizeInMAUs>&L2Region1MemorySecurityPageSize;</PageSizeInMAUs>
+			<!-- global addresses have a specific bit pattern in the
+								  upper bits to identify which device they represent.
+								  If these bits match the bit patterns for the local device,
+								  the local memory attributes should be displayed.-->
+			<GlobalAddressMask>0xff000000</GlobalAddressMask>
+			<GlobalAddressSpaceIdBits>
+			   <ConfigReg>CORENUMBER</ConfigReg>
+			   <DecoderName>GetGlobalAdrsForThisCore</DecoderName>
+			</GlobalAddressSpaceIdBits>
+			<ConfigReg>L2MPPA_UMAP1</ConfigReg>
+			<NumFlags>2</NumFlags>
+			<Flag index="0">
+				<DecoderName>IsSecure</DecoderName>
+				<PropertyName>L2 Secure</PropertyName>
+				<Description>Secure memory</Description>
+			</Flag>
+			<Flag index="1">
+				<DecoderName>IsNonEmulatable</DecoderName>
+				<PropertyName>NonEMU</PropertyName>
+				<Description>Memory may not be accessed by emulation</Description>
+			</Flag>
+		</AddressMappedAttribute>
+	</MappedMemory>
+</MemoryType>
+<!-- id=8 : L2 cache -->
+<MemoryType>
+	<Name>L2 cache</Name>
+	<MemoryLevelName>L2</MemoryLevelName>
+	<GTIMemHierarchyReadEnableFlags>0x40</GTIMemHierarchyReadEnableFlags>
+	<MemLevelBitFlag>0x04</MemLevelBitFlag>
+	<Description>L2 cache</Description>
+	<CanBeBypassed>true</CanBeBypassed>
+	<IsBypassedByDefault>false</IsBypassedByDefault>
+	<SimulatorSupportsConsistencyChecking>false</SimulatorSupportsConsistencyChecking>
+	<CanBeLocked>false</CanBeLocked>
+	<CanBeSecured>false</CanBeSecured>
+	<CanBeNonEmulatable>true</CanBeNonEmulatable>
+	<CanBeProtected>false</CanBeProtected>
+	<HasMemoryAccessIDs>false</HasMemoryAccessIDs>
+	<IsCache>true</IsCache>
+	<IsMapped>false</IsMapped>
+	<IsProgram>true</IsProgram>
+	<IsData>true</IsData>
+	<IsIOSpace>false</IsIOSpace>
+	<IsExternal>false</IsExternal>
+	<IsShared>false</IsShared>
+	<IsReserved>false</IsReserved>
+	<IsROM>false</IsROM>
+	<IsPaged>false</IsPaged>
+	<IsVirtualMemorySupported>false</IsVirtualMemorySupported>
+	<IsVirtualWayConversionEnabled>false</IsVirtualWayConversionEnabled>
+	<Linesize>128</Linesize>
+	<HierarchyDepth>2</HierarchyDepth>
+	<!--the following are only read if the memory level is cache-->
+	<Cache>
+		<IsCacheTagRamDecodingSupported>&IsCacheTagRamDecodingSupported;</IsCacheTagRamDecodingSupported>
+		<MaxNumCacheLines>16384</MaxNumCacheLines>
+		<NumCacheLines>
+			<ConfigReg>L2CFG</ConfigReg>
+			<DecoderName>GetL2NumCacheLines</DecoderName>
+		</NumCacheLines>
+		<CacheSize>
+			<ConfigReg>L2CFG</ConfigReg>
+			<DecoderName>GetL2CacheSize</DecoderName>
+		</CacheSize>
+		<IsCacheEnabled>
+			<ConfigReg>L2CFG</ConfigReg>
+			<DecoderName>IsCacheEnabled</DecoderName>
+		</IsCacheEnabled>
+		<IsCacheDirtyBitAccessible>true</IsCacheDirtyBitAccessible>
+		<IsLruSupported>true</IsLruSupported>
+		<NumWaysInCache>4</NumWaysInCache>
+		<DecoderName>L2LruToWayMap</DecoderName>
+	</Cache>
+</MemoryType>
+<!-- id=9 : External -->
+<MemoryType>
+	<Name>External</Name>
+	<MemoryLevelName>External</MemoryLevelName>
+	<GTIMemHierarchyReadEnableFlags>0x08</GTIMemHierarchyReadEnableFlags>
+	<MemLevelBitFlag>0x08</MemLevelBitFlag>
+	<Description>External memory</Description>
+	<CanBeBypassed>false</CanBeBypassed>
+	<IsBypassedByDefault>false</IsBypassedByDefault>
+	<SimulatorSupportsConsistencyChecking>false</SimulatorSupportsConsistencyChecking>
+	<CanBeLocked>false</CanBeLocked>
+	<CanBeSecured>false</CanBeSecured>
+	<CanBeNonEmulatable>false</CanBeNonEmulatable>
+	<CanBeProtected>false</CanBeProtected>
+	<HasMemoryAccessIDs>false</HasMemoryAccessIDs>
+	<IsCache>false</IsCache>
+	<IsMapped>true</IsMapped>
+	<IsProgram>true</IsProgram>
+	<IsData>true</IsData>
+	<IsIOSpace>false</IsIOSpace>
+	<IsExternal>true</IsExternal>
+	<IsShared>false</IsShared>
+	<IsROM>false</IsROM>
+	<IsPaged>false</IsPaged>
+	<IsVirtualMemorySupported>false</IsVirtualMemorySupported>
+	<IsVirtualWayConversionEnabled>false</IsVirtualWayConversionEnabled>
+	<Linesize>128</Linesize>
+	<HierarchyDepth>3</HierarchyDepth>
+	<!-- the following are only read if IsCache is false -->
+	<MappedMemory>
+		<PhysicalAddresses>
+			<CanBeDisabled>false</CanBeDisabled>
+			<StartAddress>
+				<IsFixed>true</IsFixed>
+				<FixedValue>&ExternalStartAdrs;</FixedValue>
+				<ConfigReg></ConfigReg>
+				<DecoderName></DecoderName>
+			</StartAddress>
+			<Length>
+				<IsFixed>true</IsFixed>
+				<FixedValue>&ExternalLength;</FixedValue>
+				<ConfigReg></ConfigReg>
+				<DecoderName></DecoderName>
+			</Length>
+		</PhysicalAddresses>
+	</MappedMemory>
+</MemoryType>

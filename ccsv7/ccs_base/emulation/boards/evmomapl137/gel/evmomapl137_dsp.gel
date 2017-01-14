@@ -1,0 +1,880 @@
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  evmomapl137_dsp.gel                                                     *
+ *  Version 1.05                                                            *
+ *                                                                          *
+ *  This GEL file is designed to be used in conjunction with                *
+ *  CCStudio 3.3+ and the omap-l137 based EVM.                              *
+ *                                                                          *
+ *  Version History:                                                        *
+ *  1.00 Initial Release                                                    *
+ *  1.01 Added USB1 clock enable in CFGCGHIP2                               *
+ *  1.02 Added Setup_Data_Cache(), added hotmenu item Setup_EMIFA_PinMux()  *
+ *  1.03 Corrected PINMUX0, 11 settings to enable EMB_CLK, AXR2[0]          *
+ *  1.04 General cleanup                                                    *
+ *  1.05 Corrected ARM INTC in Memory map                                   *
+ * ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  StartUp( )                                                              *
+ *      Setup Memory Map                                                    *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+StartUp( )
+{
+    Setup_Memory_Map( );
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  OnTargetConnect( )                                                      *
+ *      Setup PinMux, Power, PLLs, SDRAM & EMIFs                            *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+OnTargetConnect( )
+{
+    GEL_TextOut( "\nomap-l137 DSP Startup Sequence\n\n" );
+
+    Setup_Data_Cache();             // Setup L1D to 32 KB cache
+
+    Setup_System_Config( );         // Setup Pin Mux and other system module registers
+    Setup_PLL();                    // Setup PLL0 (300MHZ ARM, 300MHz DSP, 133MHz EMIFs
+
+    Setup_Psc_All_On( );            // Setup All Power Domains
+
+    Setup_EMIFA();                  // Async EMIF
+    Setup_EMIFB();                  // Setup SDRAM
+
+    Enable_ARM();
+
+    GEL_TextOut( "\nStartup Complete.\n\n" );
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  OnPreFileLoaded( )                                                      *
+ *      This function is called automatically when the 'Load Program'       *
+ *      Menu item is selected.                                              *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+OnPreFileLoaded( )
+{
+    /*
+     *  GEL_Reset() is used to deal with the worst case senario of
+     *  unknown target state.  If for some reason a reset is not desired
+     *  upon target connection, GEL_Reset() may be removed and replaced
+     *  with something "less brutal" like a cache initialization
+     *  function.
+     */
+    GEL_Reset( );
+
+//    Disable_EDMA( );                // Disable EDMA
+
+    GEL_TextOut( "\n" );
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  OnRestart( )                                                            *
+ *      This function is called by CCS when you do Debug->Restart.          *
+ *      The goal is to put the CPU into a known good state with respect to  *
+ *      edma.                                                               *
+ *      Failure to do this can cause problems when you restart and          *
+ *      run your application code multiple times.  This is different        *
+ *      then OnPreFileLoaded() which will do a GEL_Reset() to get the       *
+ *      ARM9 into a known good state.                                       *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+OnRestart( int nErrorCode )
+{
+    Disable_EDMA( );                // Disable EDMA
+
+    GEL_TextOut( "\n" );
+}
+
+menuitem "omap-l137 Memory Map";
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  Setup_Memory_Map( )                                                     *
+ *      Setup the Memory Map for DSP.                                       *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+hotmenu
+Setup_Memory_Map( )
+{
+    GEL_MapOn( );
+    GEL_MapReset( );
+
+    /* ARM */
+    GEL_MapAddStr( 0xFFFD0000, 0, 0x00010000, "R|W|AS4", 0 );   // ARM Local ROM
+    GEL_MapAddStr( 0xFFFEE000, 0, 0x00002000, "R|W|AS4", 0 );   // ARM INTC
+    GEL_MapAddStr( 0xFFFF0000, 0, 0x00002000, "R|W|AS4", 0 );   // ARM Local RAM
+    GEL_MapAddStr( 0x01BC0000, 0, 0x00001000, "R|W|AS4", 0 );   // ARM ETB Memory
+    GEL_MapAddStr( 0x01BC1000, 0, 0x00000800, "R|W|AS4", 0 );   // ARM ETB Regs
+    GEL_MapAddStr( 0x01BC1800, 0, 0x00000100, "R|W|AS4", 0 );   // ARM Ice Crusher
+
+    /* DSP */
+    GEL_MapAddStr( 0x00700000, 0, 0x00100000, "R|W|AS4", 0 );   // DSP L2 ROM
+    GEL_MapAddStr( 0x00800000, 0, 0x00040000, "R|W|AS4", 0 );   // DSP l2 RAM
+    GEL_MapAddStr( 0x00E00000, 0, 0x00008000, "R|W|AS4", 0 );   // DSP L1P RAM
+    GEL_MapAddStr( 0x00F00000, 0, 0x00008000, "R|W|AS4", 0 );   // DSP L1D RAM
+    GEL_MapAddStr( 0x01800000, 0, 0x00010000, "R|W|AS4", 0 );   // DSP Interrupt Controller
+    GEL_MapAddStr( 0x01810000, 0, 0x00001000, "R|W|AS4", 0 );   // DSP Powerdown Controller
+    GEL_MapAddStr( 0x01811000, 0, 0x00001000, "R|W|AS4", 0 );   // DSP Security ID
+    GEL_MapAddStr( 0x01812000, 0, 0x00008000, "R|W|AS4", 0 );   // DSP Revision ID
+    GEL_MapAddStr( 0x01820000, 0, 0x00010000, "R|W|AS4", 0 );   // DSP EMC
+    GEL_MapAddStr( 0x01830000, 0, 0x00010000, "R|W|AS4", 0 );   // DSP Internal Reserved
+    GEL_MapAddStr( 0x01840000, 0, 0x00010000, "R|W|AS4", 0 );   // DSP Memory System
+
+    GEL_MapAddStr( 0x11700000, 0, 0x00100000, "R|W|AS4", 0 );   // DSP L2 ROM (mirror)
+    GEL_MapAddStr( 0x11800000, 0, 0x00040000, "R|W|AS4", 0 );   // DSP l2 RAM (mirror)
+    GEL_MapAddStr( 0x11E00000, 0, 0x00008000, "R|W|AS4", 0 );   // DSP L1P RAM (mirror)
+    GEL_MapAddStr( 0x11F00000, 0, 0x00008000, "R|W|AS4", 0 );   // DSP L1D RAM (mirror)
+ 
+    /* Shared RAM */
+    GEL_MapAddStr( 0x80000000, 0, 0x00020000, "R|W|AS4", 0 );   // Shared RAM
+
+    /* EMIFA */
+    GEL_MapAddStr( 0x68000000, 0, 0x00008000, "R|W|AS4", 0 );   // EMIFA Control
+    GEL_MapAddStr( 0x40000000, 0, 0x20000000, "R|W|AS4", 0 );   // EMIFA SDRAM Data
+    GEL_MapAddStr( 0x60000000, 0, 0x02000000, "R|W|AS4", 0 );   // AEMIF CS2
+    GEL_MapAddStr( 0x62000000, 0, 0x02000000, "R|W|AS4", 0 );   // AEMIF CS3
+    GEL_MapAddStr( 0x64000000, 0, 0x02000000, "R|W|AS4", 0 );   // AEMIF CS4
+    GEL_MapAddStr( 0x66000000, 0, 0x02000000, "R|W|AS4", 0 );   // AEMIF CS5
+
+    /* DDR */
+    GEL_MapAddStr( 0xB0000000, 0, 0x00008000, "R|W|AS4", 0 );   // EMIFB Control
+    GEL_MapAddStr( 0xC0000000, 0, 0x20000000, "R|W|AS4", 0 );   // EMIFB SDRAM Data
+
+    /* Peripherals */
+    GEL_MapAddStr( 0x01C00000, 0, 0x00008000, "R|W|AS4", 0 );   // TPCC
+    GEL_MapAddStr( 0x01C08000, 0, 0x00000400, "R|W|AS4", 0 );   // TPTC0
+    GEL_MapAddStr( 0x01C08400, 0, 0x00000400, "R|W|AS4", 0 );   // TPTC1
+    GEL_MapAddStr( 0x01C10000, 0, 0x00001000, "R|W|AS4", 0 );   // PSC 0
+    GEL_MapAddStr( 0x01C11000, 0, 0x00001000, "R|W|AS4", 0 );   // PLL Controller 0
+    GEL_MapAddStr( 0x01C12000, 0, 0x00001000, "R|W|AS4", 0 );   // Key Manager
+    GEL_MapAddStr( 0x01C13000, 0, 0x00001000, "R|W|AS4", 0 );   // Security Controller
+    GEL_MapAddStr( 0x01C14000, 0, 0x00001000, "R|W|AS4", 0 );   // BootConfig
+    GEL_MapAddStr( 0x01C16000, 0, 0x00001000, "R|W|AS4", 0 );   // IOPU 0
+    GEL_MapAddStr( 0x01C17000, 0, 0x00001000, "R|W|AS4", 0 );   // IOPU 2
+    GEL_MapAddStr( 0x01C20000, 0, 0x00001000, "R|W|AS4", 0 );   // Timer64P 0
+    GEL_MapAddStr( 0x01C21000, 0, 0x00001000, "R|W|AS4", 0 );   // Timer64P 1
+    GEL_MapAddStr( 0x01C22000, 0, 0x00001000, "R|W|AS4", 0 );   // I2C 0
+    GEL_MapAddStr( 0x01C23000, 0, 0x00001000, "R|W|AS4", 0 );   // RTC
+    GEL_MapAddStr( 0x01C24000, 0, 0x00001000, "R|W|AS4", 0 );   // IOPU 1
+    GEL_MapAddStr( 0x01C30000, 0, 0x00000200, "R|W|AS4", 0 );   // dMax Data RAM 0
+    GEL_MapAddStr( 0x01C32000, 0, 0x00000200, "R|W|AS4", 0 );   // dMax Data RAM 1
+    GEL_MapAddStr( 0x01C34000, 0, 0x00004000, "R|W|AS4", 0 );   // dMax Control Registers
+    GEL_MapAddStr( 0x01C38000, 0, 0x00001000, "R|W|AS4", 0 );   // dMAX MAX0 Config Memory
+    GEL_MapAddStr( 0x01C3C000, 0, 0x00001000, "R|W|AS4", 0 );   // dMAX MAX1 Config Memory
+    GEL_MapAddStr( 0x01C40000, 0, 0x00001000, "R|W|AS4", 0 );   // MMC/SD 0
+    GEL_MapAddStr( 0x01C41000, 0, 0x00001000, "R|W|AS4", 0 );   // SPI 0
+    GEL_MapAddStr( 0x01C42000, 0, 0x00001000, "R|W|AS4", 0 );   // UART 0
+    GEL_MapAddStr( 0x01C43000, 0, 0x00001000, "R|W|AS4", 0 );   // MPU 0
+    GEL_MapAddStr( 0x01D00000, 0, 0x00001000, "R|W|AS4", 0 );   // McASP 0 Control
+    GEL_MapAddStr( 0x01D01000, 0, 0x00001000, "R|W|AS4", 0 );   // McASP 0 FIFO Ctrl
+    GEL_MapAddStr( 0x01D02000, 0, 0x00001000, "R|W|AS4", 0 );   // McASP 0 Data
+    GEL_MapAddStr( 0x01D04000, 0, 0x00001000, "R|W|AS4", 0 );   // McASP 1 Control
+    GEL_MapAddStr( 0x01D05000, 0, 0x00001000, "R|W|AS4", 0 );   // McASP 1 FIFO Ctrl
+    GEL_MapAddStr( 0x01D06000, 0, 0x00001000, "R|W|AS4", 0 );   // McASP 1 Data
+    GEL_MapAddStr( 0x01D08000, 0, 0x00001000, "R|W|AS4", 0 );   // McASP 2 Control
+    GEL_MapAddStr( 0x01D09000, 0, 0x00001000, "R|W|AS4", 0 );   // McASP 2 FIFO Ctrl
+    GEL_MapAddStr( 0x01D0A000, 0, 0x00001000, "R|W|AS4", 0 );   // McASP 2 Data
+    GEL_MapAddStr( 0x01D0C000, 0, 0x00001000, "R|W|AS4", 0 );   // UART 1
+    GEL_MapAddStr( 0x01D0D000, 0, 0x00001000, "R|W|AS4", 0 );   // UART 2
+    GEL_MapAddStr( 0x01D0E000, 0, 0x00001000, "R|W|AS4", 0 );   // IOPU 4
+    GEL_MapAddStr( 0x01E00000, 0, 0x00010000, "R|W|AS4", 0 );   // USB0 (USB HS) Cfg
+    GEL_MapAddStr( 0x01E10000, 0, 0x00001000, "R|W|AS4", 0 );   // UHPI Cfg
+    GEL_MapAddStr( 0x01E11000, 0, 0x00001000, "R|W|AS4", 0 );   // UHPI (IODFT)
+    GEL_MapAddStr( 0x01E12000, 0, 0x00001000, "R|W|AS4", 0 );   // SPI 1
+    GEL_MapAddStr( 0x01E13000, 0, 0x00001000, "R|W|AS4", 0 );   // LCD Controller
+    GEL_MapAddStr( 0x01E14000, 0, 0x00001000, "R|W|AS4", 0 );   // MPU 1
+    GEL_MapAddStr( 0x01E15000, 0, 0x00001000, "R|W|AS4", 0 );   // MPU 2
+    GEL_MapAddStr( 0x01E20000, 0, 0x00002000, "R|W|AS4", 0 );   // EMAC CPPI port
+    GEL_MapAddStr( 0x01E22000, 0, 0x00001000, "R|W|AS4", 0 );   // EMAC CPGMACSS registers
+    GEL_MapAddStr( 0x01E23000, 0, 0x00001000, "R|W|AS4", 0 );   // EMAC CPGMAC registers
+    GEL_MapAddStr( 0x01E24000, 0, 0x00001000, "R|W|AS4", 0 );   // EMAC MDIO port
+    GEL_MapAddStr( 0x01E25000, 0, 0x00001000, "R|W|AS4", 0 );   // USB1 (USB FS)
+    GEL_MapAddStr( 0x01E26000, 0, 0x00001000, "R|W|AS4", 0 );   // GPIO
+    GEL_MapAddStr( 0x01E27000, 0, 0x00001000, "R|W|AS4", 0 );   // PSC 1
+    GEL_MapAddStr( 0x01E28000, 0, 0x00001000, "R|W|AS4", 0 );   // I2C 1
+    GEL_MapAddStr( 0x01E29000, 0, 0x00001000, "R|W|AS4", 0 );   // IOPU 3
+    GEL_MapAddStr( 0x01E2A000, 0, 0x00001000, "R|W|AS4", 0 );   // PBIST Controller
+    GEL_MapAddStr( 0x01E2B000, 0, 0x00001000, "R|W|AS4", 0 );   // PBIST Combiner
+    GEL_MapAddStr( 0x01F00000, 0, 0x00001000, "R|W|AS4", 0 );   // EPWM 0
+    GEL_MapAddStr( 0x01F01000, 0, 0x00001000, "R|W|AS4", 0 );   // HRPWM 0
+    GEL_MapAddStr( 0x01F02000, 0, 0x00001000, "R|W|AS4", 0 );   // EPWM 1
+    GEL_MapAddStr( 0x01F03000, 0, 0x00001000, "R|W|AS4", 0 );   // HRPWM 1
+    GEL_MapAddStr( 0x01F04000, 0, 0x00001000, "R|W|AS4", 0 );   // EPWM 2
+    GEL_MapAddStr( 0x01F05000, 0, 0x00001000, "R|W|AS4", 0 );   // HRPWM 2
+    GEL_MapAddStr( 0x01F06000, 0, 0x00001000, "R|W|AS4", 0 );   // ECAP 0
+    GEL_MapAddStr( 0x01F07000, 0, 0x00001000, "R|W|AS4", 0 );   // ECAP 1
+    GEL_MapAddStr( 0x01F08000, 0, 0x00001000, "R|W|AS4", 0 );   // ECAP 2
+    GEL_MapAddStr( 0x01F09000, 0, 0x00001000, "R|W|AS4", 0 );   // EQEP 0
+    GEL_MapAddStr( 0x01F0A000, 0, 0x00001000, "R|W|AS4", 0 );   // EQEP 1
+    GEL_MapAddStr( 0x01F0B000, 0, 0x00001000, "R|W|AS4", 0 );   // IOPU 5
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  Clear_Memory_Map( )                                                     *
+ *      Clear the Memory Map                                                *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+hotmenu
+Clear_Memory_Map( )
+{
+    GEL_MapOff( );
+    GEL_MapReset( );
+}
+
+menuitem "EVMOMAPL137 Functions";
+
+_wait( int delay )
+{
+    int i;
+    for( i = 0 ; i < delay ; i++ ){}
+}
+
+#define SYS_BASE            0x01C14000
+#define REVID               *(unsigned int*)(SYS_BASE + 0x000)  
+#define DIEIDR0             *(unsigned int*)(SYS_BASE + 0x008)
+#define DIEIDR1             *(unsigned int*)(SYS_BASE + 0x00C)
+#define DIEIDR2             *(unsigned int*)(SYS_BASE + 0x010)
+#define DIEIDR3             *(unsigned int*)(SYS_BASE + 0x014)
+#define DEVIDR0             *(unsigned int*)(SYS_BASE + 0x018)
+#define DEVIDR1             *(unsigned int*)(SYS_BASE + 0x01C)
+#define BOOTCFG             *(unsigned int*)(SYS_BASE + 0x020)
+#define CHIPREVIDR          *(unsigned int*)(SYS_BASE + 0x024)
+#define KICK0R              *(unsigned int*)(SYS_BASE + 0x038)  
+#define KICK1R              *(unsigned int*)(SYS_BASE + 0x03c)  
+#define HOST0CFG            *(unsigned int*)(SYS_BASE + 0x040)  //ARM HOST0CFG
+#define HOST1CFG            *(unsigned int*)(SYS_BASE + 0x044)
+#define IRAWSTAT            *(unsigned int*)(SYS_BASE + 0x0E0)  
+#define IENSTAT             *(unsigned int*)(SYS_BASE + 0x0E4)  
+#define IENSET              *(unsigned int*)(SYS_BASE + 0x0E8)  
+#define IENCLR              *(unsigned int*)(SYS_BASE + 0x0EC)  
+#define EOI                 *(unsigned int*)(SYS_BASE + 0x0F0)  
+#define FLTADDRR            *(unsigned int*)(SYS_BASE + 0x0F4)  
+#define FLTSTAT             *(unsigned int*)(SYS_BASE + 0x0F8)  
+#define MSTPRI0             *(unsigned int*)(SYS_BASE + 0x110)  
+#define MSTPRI1             *(unsigned int*)(SYS_BASE + 0x114)  
+#define MSTPRI2             *(unsigned int*)(SYS_BASE + 0x118) 
+#define PINMUX0	            *(unsigned int*)(SYS_BASE + 0x120)	//PINMUX0
+#define PINMUX1	            *(unsigned int*)(SYS_BASE + 0x124)	//PINMUX1
+#define PINMUX2	            *(unsigned int*)(SYS_BASE + 0x128)	//PINMUX2
+#define PINMUX3	            *(unsigned int*)(SYS_BASE + 0x12C)	//PINMUX3
+#define PINMUX4	            *(unsigned int*)(SYS_BASE + 0x130)	//PINMUX4
+#define PINMUX5	            *(unsigned int*)(SYS_BASE + 0x134)	//PINMUX5
+#define PINMUX6	            *(unsigned int*)(SYS_BASE + 0x138)	//PINMUX6
+#define PINMUX7	            *(unsigned int*)(SYS_BASE + 0x13C)	//PINMUX7
+#define PINMUX8	            *(unsigned int*)(SYS_BASE + 0x140)	//PINMUX8
+#define PINMUX9	            *(unsigned int*)(SYS_BASE + 0x144)	//PINMUX9
+#define PINMUX10            *(unsigned int*)(SYS_BASE + 0x148)	//PINMUX10
+#define PINMUX11            *(unsigned int*)(SYS_BASE + 0x14C)	//PINMUX11
+#define PINMUX12            *(unsigned int*)(SYS_BASE + 0x150)	//PINMUX12
+#define PINMUX13            *(unsigned int*)(SYS_BASE + 0x154)	//PINMUX13
+#define PINMUX14            *(unsigned int*)(SYS_BASE + 0x158)	//PINMUX14
+#define PINMUX15            *(unsigned int*)(SYS_BASE + 0x15C)	//PINMUX15
+#define PINMUX16            *(unsigned int*)(SYS_BASE + 0x160)	//PINMUX16
+#define PINMUX17            *(unsigned int*)(SYS_BASE + 0x164)	//PINMUX17
+#define PINMUX18            *(unsigned int*)(SYS_BASE + 0x168)	//PINMUX18
+#define PINMUX19            *(unsigned int*)(SYS_BASE + 0x16C)	//PINMUX19
+#define SUSPSRC	            *(unsigned int*)(SYS_BASE + 0x170) 
+#define CHIPSIG	            *(unsigned int*)(SYS_BASE + 0x174) 
+#define CHIPSIG_CLR         *(unsigned int*)(SYS_BASE + 0x178) 
+#define CFGCHIP0            *(unsigned int*)(SYS_BASE + 0x17C) 
+#define CFGCHIP1            *(unsigned int*)(SYS_BASE + 0x180) 
+#define CFGCHIP2            *(unsigned int*)(SYS_BASE + 0x184) 
+#define CFGCHIP3            *(unsigned int*)(SYS_BASE + 0x188) 
+#define CFGCHIP4            *(unsigned int*)(SYS_BASE + 0x18C) 
+
+#define PLL0_BASE   	0x01C11000   							/*SYSTEM PLL BASE ADDRESS*/
+
+#define PLL0_PID      	*(unsigned int*) (PLL0_BASE + 0x00)		/*PID*/
+#define PLL0_FUSERR   	*(unsigned int*) (PLL0_BASE + 0xE0)		/*x*FuseFarm Error Reg*/
+#define PLL0_RSTYPE	    *(unsigned int*) (PLL0_BASE + 0xE4)		/*Reset Type status Reg*/
+#define PLL0_PLLCTL     *(unsigned int*) (PLL0_BASE + 0x100) 	/*PLL Control Register*/
+#define PLL0_OCSEL      *(unsigned int*) (PLL0_BASE + 0x104)	/*OBSCLK Select Register*/
+#define PLL0_SECCTL     *(unsigned int*) (PLL0_BASE + 0x108)	/*PLL Secondary Control Register*/
+#define PLL0_PLLM       *(unsigned int*) (PLL0_BASE + 0x110)    /*PLL Multiplier*/	
+#define PLL0_PREDIV     *(unsigned int*) (PLL0_BASE + 0x114)    /*Pre divider*/	
+#define PLL0_PLLDIV1    *(unsigned int*) (PLL0_BASE + 0x118)    /*Diveder-1*/	
+#define PLL0_PLLDIV2    *(unsigned int*) (PLL0_BASE + 0x11C)    /*Diveder-2*/	
+#define PLL0_PLLDIV3    *(unsigned int*) (PLL0_BASE + 0x120)    /*Diveder-3*/	
+#define PLL0_OSCDIV1    *(unsigned int*) (PLL0_BASE + 0x124)    /*Oscilator Divider*/	
+#define PLL0_POSTDIV    *(unsigned int*) (PLL0_BASE + 0x128)    /*Post Divider*/	
+#define PLL0_BPDIV      *(unsigned int*) (PLL0_BASE + 0x12C)	/*Bypass Divider*/
+#define PLL0_WAKEUP     *(unsigned int*) (PLL0_BASE + 0x130)	/*Wakeup Reg*/
+#define PLL0_PLLCMD     *(unsigned int*) (PLL0_BASE + 0x138)	/*Command Reg*/
+#define PLL0_PLLSTAT    *(unsigned int*) (PLL0_BASE + 0x13C)	/*Status Reg*/
+#define PLL0_ALNCTL     *(unsigned int*) (PLL0_BASE + 0x140)	/*Clock Align Control Reg*/
+#define PLL0_DCHANGE    *(unsigned int*) (PLL0_BASE + 0x144)	/*PLLDIV Ratio Chnage status*/
+#define PLL0_CKEN       *(unsigned int*) (PLL0_BASE + 0x148)	/*Clock Enable Reg*/
+#define PLL0_CKSTAT     *(unsigned int*) (PLL0_BASE + 0x14C)	/*Clock Status Reg*/
+#define PLL0_SYSTAT     *(unsigned int*) (PLL0_BASE + 0x150)	/*Sysclk status reg*/
+#define PLL0_PLLDIV4    *(unsigned int*) (PLL0_BASE + 0x160)	/*Divider 4*/
+#define PLL0_PLLDIV5    *(unsigned int*) (PLL0_BASE + 0x164)	/*Divider 5*/
+#define PLL0_PLLDIV6    *(unsigned int*) (PLL0_BASE + 0x168)	/*Divider 6*/
+#define PLL0_PLLDIV7    *(unsigned int*) (PLL0_BASE + 0x16C)	/*Divider 7*/
+#define PLL0_PLLDIV8    *(unsigned int*) (PLL0_BASE + 0x170)	/*Divider 8*/
+#define PLL0_PLLDIV9    *(unsigned int*) (PLL0_BASE + 0x174)	/*Divider 9*/
+#define PLL0_PLLDIV10   *(unsigned int*) (PLL0_BASE + 0x178)	/*Divider 10*/
+#define PLL0_PLLDIV11   *(unsigned int*) (PLL0_BASE + 0x17C)	/*Divider 11*/
+#define PLL0_PLLDIV12   *(unsigned int*) (PLL0_BASE + 0x180)	/*Divider 12*/
+#define PLL0_PLLDIV13   *(unsigned int*) (PLL0_BASE + 0x184)	/*Divider 13*/
+#define PLL0_PLLDIV14   *(unsigned int*) (PLL0_BASE + 0x188)	/*Divider 14*/
+#define PLL0_PLLDIV15   *(unsigned int*) (PLL0_BASE + 0x18C)	/*Divider 15*/
+#define PLL0_PLLDIV16   *(unsigned int*) (PLL0_BASE + 0x190)	/*Divider 16*/
+#define PLLEN_MUX_SWITCH  4 
+#define PLL_LOCK_TIME_CNT 2400
+
+
+/*PSC Module Related Registers*/              
+#define PSC0_BASE  	    0x01C10000
+#define PSC1_BASE  	    0x01E27000
+
+#define PSC0_MDCTL 		(PSC0_BASE+0xA00)
+#define PSC0_MDSTAT 	(PSC0_BASE+0x800)
+#define PSC0_PTCMD  	*(unsigned int*) (PSC0_BASE + 0x120)
+#define PSC0_PTSTAT 	*(unsigned int*) (PSC0_BASE + 0x128)
+
+#define PSC1_MDCTL 		(PSC1_BASE+0xA00)
+#define PSC1_MDSTAT 	(PSC1_BASE+0x800)
+#define PSC1_PTCMD  	*(unsigned int*) (PSC1_BASE + 0x120)
+#define PSC1_PTSTAT 	*(unsigned int*) (PSC1_BASE + 0x128)
+
+
+/*Enable Function for PSC0*/
+PSC0_lPSC_enable(unsigned int PD, unsigned int LPSC_num) {
+
+  *(unsigned int*) (PSC0_MDCTL+4*LPSC_num) = (*(unsigned int*) (PSC0_MDCTL+4*LPSC_num) & 0xFFFFFFE0) | 0x0003;
+  PSC0_PTCMD = 0x1<<PD;
+  while( (PSC0_PTSTAT & (0x1<<PD) ) !=0) ; /*Wait for power state transition to finish*/
+  while( (*(unsigned int*)(PSC0_MDSTAT+4 * LPSC_num) & 0x1F) !=0x3);
+}
+
+/*Enable Function for PSC1*/
+PSC1_lPSC_enable(unsigned int PD, unsigned int LPSC_num) {
+
+  *(unsigned int*) (PSC1_MDCTL+4*LPSC_num) = (*(unsigned int*) (PSC1_MDCTL+4*LPSC_num) & 0xFFFFFFE0) | 0x0003;
+  PSC1_PTCMD = 0x1<<PD;
+  while( (PSC1_PTSTAT & (0x1<<PD) ) !=0) ; /*Wait for power state transition to finish*/
+  while( (*(unsigned int*)(PSC1_MDSTAT+4 * LPSC_num) & 0x1F) !=0x3);
+}
+
+#define L1DCFG              0x01840040
+#define L1DWB               0x01845040
+
+Setup_Data_Cache ()
+{
+    // Flush L1D
+    *((unsigned int *) L1DWB) = 0x01;
+    // Reconfigure L1D to default state (full cache)
+    *((unsigned int *) L1DCFG) = 0x07;
+}
+
+hotmenu
+Setup_PLL()
+{
+    int i = 0;
+
+    /* Configure ARM, DSP at 300MHz, EMIFs at 133MHz */
+    unsigned int DIV45_EN = 1;
+    unsigned int CLKMODE = 0;
+    unsigned int PLLM = 24;
+    unsigned int POSTDIV = 1;
+    unsigned int PLLDIV3 = 2;
+    unsigned int PLLDIV5 = 5;
+    unsigned int PLLDIV7 = 7;
+
+	// Moved step 2c and 2d to step 0
+   /*Set PLLEN=0 and PLLRST=0, Reset the PLL*/
+    PLL0_PLLCTL &=  0xFFFFFFFE; 	/*PLL BYPASS MODE*/
+   
+   /*wait for 4 cycles to allow PLLEN mux switches properly to bypass clock*/
+   for(i=0; i<PLLEN_MUX_SWITCH; i++) {;}   /*Make PLLEN_MUX_SWITCH as bootpacket*/
+
+   /*Select the Clock Mode bit 8 as External Clock or On Chip Oscilator*/
+	PLL0_PLLCTL &= 0xFFFFFEFF;  
+    PLL0_PLLCTL |= (CLKMODE<<8);  /* Make CLKSRC as BootPacket to pass the value*/
+
+   /*Set PLLENSRC '0',bit 5, PLL Enable(PLLEN) selection is controlled through MMR*/
+    PLL0_PLLCTL &=  0xFFFFFFDF; 
+   
+   /*PLLCTL.EXTCLKSRC bit 9 should be left at 0 for Primus*/
+    PLL0_PLLCTL &=  0xFFFFFDFF;
+
+   /* Clear PLLRST bit to 0 -Reset the PLL */
+   PLL0_PLLCTL &= 0xFFFFFFF7; 	
+  
+   /*Disable the PLL output*/ 
+   PLL0_PLLCTL |= 0x10; 		
+   
+   /*PLL initialization sequence*/
+   
+   /*Power up the PLL- PWRDN bit set to 0 to bring the PLL out of power down bit*/
+   PLL0_PLLCTL &= 0xFFFFFFFD;
+   
+   /*Enable the PLL from Disable Mode PLLDIS bit to 0 - This is step is not required for Primus*/
+   PLL0_PLLCTL &= 0xFFFFFFEF;
+   
+   /*PLL stabilisation time- take out this step , not required here when PLL in bypassmode*/
+  /* for(i=0; i<PLL_STABILIZATION_TIME; i++) {;}  /* Make PLL_STABILIZATION_TIME as bootpacket*/
+   
+   /*Program the required multiplier value in PLLM*/
+   PLL0_PLLM    = PLLM; /* Make PLLMULTIPLEIR as bootpacket*/
+
+   /*If desired to scale all the SYSCLK frequencies of a given PLLC, program the POSTDIV ratio*/
+   PLL0_POSTDIV = 0x8000 | POSTDIV; /* Make POSTDIV as bootpacket*/
+
+   /*If Necessary program the PLLDIVx*/
+   /*Check for the GOSTAT bit in PLLSTAT to clear to 0 to indicate that no GO operation is currently in progress*/
+   while(PLL0_PLLSTAT & 0x1==1){}
+
+   /*Program the RATIO field in PLLDIVx with the desired divide factors. In addition, make sure in this step you leave the PLLDIVx.DxEN bits set so clocks are still enabled (default).*/
+    PLL0_PLLDIV3 = 0x8000 | PLLDIV3; /* Make PLLDIV3 as bootpacket, do it for other PLLDIVx to if required*/
+    PLL0_PLLDIV5 = 0x8000 | PLLDIV5; /* Make PLLDIV5 as bootpacket, do it for other PLLDIVx to if required*/
+    PLL0_PLLDIV7 = 0x8000 | PLLDIV7; /* Make PLLDIV7 as bootpacket, do it for other PLLDIVx to if required*/
+
+    /*Set the GOSET bit in PLLCMD to 1 to initiate a new divider transition.*/
+    PLL0_PLLCMD |= 0x1;
+
+	/*Wait for the GOSTAT bit in PLLSTAT to clear to 0 (completion of phase alignment).*/
+    while(PLL0_PLLSTAT & 0x1==1) { } 
+   
+ 
+   /*Wait for PLL to reset properly. See PLL spec for PLL reset time - This step is not required here -step11*/
+  /* for(i=0; i<PLL_RESET_TIME_CNT; i++) {;}   /*128 MXI Cycles*/ /*Make PLL_RESET_TIME_CNT as boot packet*/
+      
+   /*Set the PLLRST bit in PLLCTL to 1 to bring the PLL out of reset*/
+   PLL0_PLLCTL |= 0x8;
+   
+   /*Wait for PLL to lock. See PLL spec for PLL lock time*/
+   for(i=0; i<PLL_LOCK_TIME_CNT; i++) {;} /*Make PLL_LOCK_TIME_CNT as boot Packet*/ 
+   
+   /*Set the PLLEN bit in PLLCTL to 1 to remove the PLL from bypass mode*/
+   PLL0_PLLCTL |=  0x1;
+
+   KICK0R = 0x83e70b13;  // Kick0 register + data (unlock)
+   KICK1R = 0x95a4f1e0;  // Kick1 register + data (unlock)
+   CFGCHIP3 |= 0x4;       // Enable 4.5 divider PLL
+   CFGCHIP3 |= 0x1;       // Select 4.5 divider for EMIFB clock source only (not EMIFA)
+
+   GEL_TextOut( "PLL Setup Complete\n" );
+}
+
+
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  setup_pll_0( )                                                          *
+ *                                                                          *
+ *      clock_source    <- 0: Onchip Oscillator                             *
+ *                         1: External Clock                                *
+ *                                                                          *
+ *      pll_mult        <- 21: 22x Multiplier * 27MHz Clk = 594 MHz         *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+setup_pll_0( int clock_source, int pll_mult )
+{
+    unsigned int* pll_ctl       = ( unsigned int* )( 0x01c11100 );
+    unsigned int* pll_pllm      = ( unsigned int* )( 0x01c11110 );
+    unsigned int* pll_cmd       = ( unsigned int* )( 0x01c11138 );
+    unsigned int* pll_postdiv   = ( unsigned int* )( 0x01c11128 );
+    unsigned int* pll_bpdiv     = ( unsigned int* )( 0x01c1112c );
+    unsigned int* pll_div1      = ( unsigned int* )( 0x01c11118 );
+    unsigned int* pll_div2      = ( unsigned int* )( 0x01c1111c );
+    unsigned int* pll_div3      = ( unsigned int* )( 0x01c11120 );
+    unsigned int* pll_div4      = ( unsigned int* )( 0x01c11160 );
+    unsigned int* pll_div5      = ( unsigned int* )( 0x01c11164 );
+    unsigned int* pll_div6      = ( unsigned int* )( 0x01c11168 );
+    unsigned int* pll_div7      = ( unsigned int* )( 0x01c1116c );
+    unsigned int* pll_div8      = ( unsigned int* )( 0x01c11170 );
+    unsigned int* pll_div9      = ( unsigned int* )( 0x01c11174 );
+
+    int pll0_freq = 24 * ( pll_mult + 1 );
+
+    GEL_TextOut( "Setup PLL0 " );
+
+    /*
+     *  Step 1 - Set clock mode
+     */
+    if ( clock_source == 0 )
+        *pll_ctl &= ~0x0100;        // Onchip Oscillator
+    else
+        *pll_ctl |= 0x0100;         // External Clock
+
+    /*
+     *  Step 2 - Set PLL to bypass
+     *         - Wait for PLL to stabilize
+     */
+    *pll_ctl &= ~0x0020;
+    *pll_ctl &= ~0x0001;
+    _wait( 150 );
+
+    /*
+     *  Step 3 - Reset PLL
+     */
+    *pll_ctl |= 0x0008;
+
+    /*
+     *  Step 4 - Disable PLL
+     *  Step 5 - Powerup PLL
+     *  Step 6 - Enable PLL
+     *  Step 7 - Wait for PLL to stabilize
+     */
+    *pll_ctl |= 0x0010;             // Disable PLL
+    *pll_ctl &= ~0x0002;            // Power up PLL
+    *pll_ctl &= ~0x0010;            // Enable PLL
+    _wait( 150 );                   // Wait for PLL to stabilize
+
+    /*
+     *  Step 8 - Load PLL multiplier
+     */
+    *pll_pllm = pll_mult & 0x3f;
+
+    /*
+     *  Step 9 - Set PLL post dividers
+     */
+
+    *pll_postdiv= 0x8000 | 1; // Post divider 
+    *pll_div5 = 0x8001;
+    *pll_cmd   |= 0x0001;           // GO
+    _wait( 2000 );
+
+    /*
+     *  Step 10 - Wait for PLL to reset ( 2000 cycles )
+     *  Step 11 - Release from reset
+     */
+    _wait( 2000 );
+    *pll_ctl &= ~0x0008;
+
+    /*
+     *  Step 12 - Wait for PLL to re-lock ( 2000 cycles )
+     *  Step 13 - Switch out of BYPASS mode
+     */
+    _wait( 2000 );
+    *pll_ctl |= 0x0001;
+
+    // Enable 4.5X divider
+    KICK0R = 0x83e70b13;  // Kick0 register + data (unlock)
+    KICK1R = 0x95a4f1e0;  // Kick1 register + data (unlock)
+    CFGCHIP3 |= 0x4;       // Enable 4.5 divider PLL
+//    CFGCHIP3 |= 0x3;       // Select 4.5 divider for EMIFA / EMIFB clock source
+
+    pll0_freq = 24 * ( ( *pll_pllm & 0x3f ) + 1 ) / 2;
+
+    GEL_TextOut( "(DSP = %d MHz + ",,,,, pll0_freq );
+    GEL_TextOut( "ARM = %d MHz + ",,,,, pll0_freq );
+
+    if ( clock_source == 0 )
+        GEL_TextOut( "Onchip Oscillator)... " );
+    else
+        GEL_TextOut( "External Clock)... " );
+
+    GEL_TextOut( "[Done]\n" );
+}
+
+
+
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  Disable_IRQ_Flush_Cache( )                                              *
+ *      Flush Cache & Disable Interrupts                                    *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+Disable_IRQ_Flush_Cache( )
+{
+
+}
+
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  Disable_EDMA( )                                                         *
+ *      Disabe EDMA events and interrupts, clear any pending events         *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+Disable_EDMA( )
+{
+    #define EDMA_3CC_IECRH          *( unsigned int* )( 0x01c0105c )
+    #define EDMA_3CC_EECRH          *( unsigned int* )( 0x01c0102c )
+    #define EDMA_3CC_ICRH           *( unsigned int* )( 0x01c01074 )
+    #define EDMA_3CC_ECRH           *( unsigned int* )( 0x01c0100c )
+
+    #define EDMA_3CC_IECR           *( unsigned int* )( 0x01c01058 )
+    #define EDMA_3CC_EECR           *( unsigned int* )( 0x01c01028 )
+    #define EDMA_3CC_ICR            *( unsigned int* )( 0x01c01070 )
+    #define EDMA_3CC_ECR            *( unsigned int* )( 0x01c01008 )
+
+    GEL_TextOut( "Disable EDMA events\n" );
+
+    EDMA_3CC_IECRH  = 0xffffffff;   // IERH - Disable high interrupts
+    EDMA_3CC_EECRH  = 0xffffffff;   // EERH - Disable high events
+    EDMA_3CC_ICRH   = 0xffffffff;   // ICRH - Clear high interrupts
+    EDMA_3CC_ECRH   = 0xffffffff;   // ICRH - Clear high events
+
+    EDMA_3CC_IECR   = 0xffffffff;   // IER  - Disable low interrupts
+    EDMA_3CC_EECR   = 0xffffffff;   // EER  - Disable low events
+    EDMA_3CC_ICR    = 0xffffffff;   // ICR  - Clear low interrupts
+    EDMA_3CC_ECR    = 0xffffffff;   // ICRH - Clear low events
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  Enable_Instruction_Cache( )                                             *
+ *      Enable I-Cache                                                      *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+hotmenu Enable_Instruction_Cache( )
+{
+    GEL_TextOut( "\Enable Instruction Cache.\n\n" );
+
+    CPSR = 0x400000d3;              // Set to supervisor mode, disable IRQ/FIQ
+    REG_CP15_I_CACHE = 1;           // Enable Instruction Cache
+} 
+
+
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  Setup_System_Config( )                                                  *
+ *      Configure PINMUX and other system module registers                  *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+hotmenu
+Setup_System_Config( )
+{
+
+    GEL_TextOut( "Setup PINMUX Registers... " );
+    KICK0R = 0x83e70b13;  // Kick0 register + data (unlock)
+    KICK1R = 0x95a4f1e0;  // Kick1 register + data (unlock)
+
+    PINMUX0  = 0x11112188;  // EMIFB, Check EMU0/RTCK
+    PINMUX1  = 0x11111111;  // EMIFB
+    PINMUX2  = 0x11111111;  // EMIFB
+    PINMUX3  = 0x11111111;  // EMIFB
+    PINMUX4  = 0x11111111;  // EMIFB
+    PINMUX5  = 0x11111111;  // EMIFB
+    PINMUX6  = 0x11111111;  // EMIFB
+    PINMUX7  = 0x11111111;  // EMIFB, SPI0
+    PINMUX8  = 0x21122111;  // UART2, McASP1, I2C0, I2C1
+    PINMUX9  = 0x11011112;  // RMII CLK, McASP0, USB_DRVVBUS, UART2
+    PINMUX10 = 0x22222221;  // RMII/ McASP0
+    PINMUX11 = 0x11142222;  // McASP1, UART1, McASP0, MDIO (last 2 digits 0x22 for MDIO instead of GPIO)
+    PINMUX12 = 0x11111111;  // McASP0 / McASP1
+    PINMUX13 = 0x22111111;  // SD / McASP1
+    PINMUX14 = 0x88222222;  // SD / EMIFA
+    PINMUX15 = 0x21888888;  // SD / EMIFA
+    PINMUX16 = 0x11111112;  // SD / EMIFA
+    PINMUX17 = 0x00100111;  // EMIFA
+    PINMUX18 = 0x11111111;  // EMIFA
+    PINMUX19 = 0x00000001;  // EMIFA
+
+    CFGCHIP2 |= 0x00001000; // Enable USB1 clock
+
+    GEL_TextOut( "[Done]\n" );
+}
+
+hotmenu
+Setup_EMIFA_PinMux()
+{
+    PINMUX13 &= 0x00FFFFFF;
+    PINMUX13 |= 0x11000000;
+    PINMUX14  = 0x11111111;
+    PINMUX15  = 0x11111111;
+    PINMUX16  = 0x11111111;
+    PINMUX17  = 0x11111111;
+    PINMUX18  = 0x11111111;
+    PINMUX19 &= 0xFFFFFFF0;
+    PINMUX19 |= 0x00000001;
+
+    GEL_TextOut( "[Done]\n" );
+}
+
+/*Enable Function for PSC0*/
+PSC0_lPSC_enableARM(unsigned int PD, unsigned int LPSC_num) {
+
+  *(unsigned int*) (PSC0_MDCTL+4*LPSC_num) = (*(unsigned int*) (PSC0_MDCTL+4*LPSC_num) & 0xFFFFFEE0) | 0x0103;
+
+  PSC0_PTCMD = 0x1<<PD;
+  while( (PSC0_PTSTAT & (0x1<<PD) ) !=0) ; /*Wait for power state transition to finish*/
+  while( (*(unsigned int*)(PSC0_MDSTAT+4 * LPSC_num) & 0x1F) !=0x3);
+}
+
+hotmenu Enable_ARM()
+{
+    /* Turn on ARM RAM */
+    PSC0_lPSC_enable(0, 7);
+
+    /* Put branch to self at ARM vector table before releasing PSC */
+    *( unsigned int* )( 0xFFFF0000 ) = 0xEAFFFFFE;
+    *( unsigned int* )( 0xFFFF0004 ) = 0xEAFFFFFE;
+    *( unsigned int* )( 0xFFFF0008 ) = 0xEAFFFFFE;
+    *( unsigned int* )( 0xFFFF000C ) = 0xEAFFFFFE;
+
+    HOST0CFG = 0x00000001; 
+
+    /* Turn on ARM */
+    PSC0_lPSC_enableARM(0, 14);
+
+	GEL_TextOut(" ARM Enabled\n");
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  Setup_Psc_All_On( )                                                     *
+ *      Enable all PSC modules on ALWAYSON and DSP power dominas.           *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+hotmenu
+Setup_Psc_All_On( )
+{
+    int i;
+    GEL_TextOut( "Setup Power Modules (All on)... " );
+
+    // PSC0
+    PSC0_lPSC_enable(0, 0);
+    PSC0_lPSC_enable(0, 1);
+    PSC0_lPSC_enable(0, 2);
+    PSC0_lPSC_enable(0, 3);  // EMIFA
+    PSC0_lPSC_enable(0, 4);
+    PSC0_lPSC_enable(0, 5);
+    PSC0_lPSC_enable(0, 6);
+    PSC0_lPSC_enable(0, 8);
+    PSC0_lPSC_enable(0, 9);
+    PSC0_lPSC_enable(0, 10);
+    PSC0_lPSC_enable(0, 11);
+    PSC0_lPSC_enable(0, 12);
+    PSC0_lPSC_enable(0, 13);
+
+	// PSC1
+    PSC1_lPSC_enable(0, 1);
+    PSC1_lPSC_enable(0, 2);
+    PSC1_lPSC_enable(0, 3);
+	PSC1_lPSC_enable(0, 4);
+    PSC1_lPSC_enable(0, 5);
+    PSC1_lPSC_enable(0, 6);  // EMIFB
+    PSC1_lPSC_enable(0, 7);
+    PSC1_lPSC_enable(0, 8);
+    PSC1_lPSC_enable(0, 9);
+    PSC1_lPSC_enable(0, 10);
+    PSC1_lPSC_enable(0, 11);
+    PSC1_lPSC_enable(0, 12);
+    PSC1_lPSC_enable(0, 13);
+    PSC1_lPSC_enable(0, 16);
+    PSC1_lPSC_enable(0, 17);
+    PSC1_lPSC_enable(0, 20);
+    PSC1_lPSC_enable(0, 21);
+    PSC1_lPSC_enable(0, 24);
+    PSC1_lPSC_enable(0, 25);
+    PSC1_lPSC_enable(0, 26);
+    PSC1_lPSC_enable(0, 31);
+
+    GEL_TextOut( "[Done]\n" );
+}
+
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  Setup_EMIFA( )                                                          *
+ *      Setup Async-EMIF to the specified timings using either NAND Hw      *
+ *      controller or normal EMIF controller                                *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+#define AEMIF_AWCCR             *( unsigned int* )( 0x68000004 )
+#define AEMIF_A1CR              *( unsigned int* )( 0x68000010 )
+#define AEMIF_A2CR              *( unsigned int* )( 0x68000014 )
+#define AEMIF_A3CR              *( unsigned int* )( 0x68000018 )
+#define AEMIF_A4CR              *( unsigned int* )( 0x6800001C )
+#define AEMIF_NANDFCR           *( unsigned int* )( 0x68000060 )
+
+Setup_EMIFA( )
+{
+    /* Use extended wait cycles to keep CE low during NAND access */
+    AEMIF_AWCCR = 0xff;
+
+    /* Setup CS2 - 8-bit normal async */
+    AEMIF_A1CR = 0x00300608;
+    AEMIF_NANDFCR &= ~1;
+
+    /* Setup CS3 - 8-bit NAND */
+    AEMIF_A2CR = 0x00300388;
+    AEMIF_NANDFCR |= 2;
+
+    /* Setup CS4 - 8-bit normal async */
+    AEMIF_A3CR = 0x00a00504;  // Setup=0, Strobe=A, Hold=0, TA=1, 8-bit
+    AEMIF_NANDFCR &= ~4;
+
+    /* Setup CS5 - 8-bit normal async */
+    AEMIF_A4CR = 0x00a00504;  // Setup=0, Strobe=A, Hold=0, TA=1, 8-bit
+    AEMIF_NANDFCR &= ~8;
+}
+
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  Setup_EMIFB( )                                                          *
+ *      Configure SDRAM.                                                    *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+#define EMIFB_BASE              0xB0000000
+#define EMIFB_SDSTAT            *(unsigned int*)(EMIFB_BASE + 0x04)    //SDRAM Status Register  
+#define EMIFB_SDCFG             *(unsigned int*)(EMIFB_BASE + 0x08)    //SDRAM Bank Config Register
+#define EMIFB_SDREF             *(unsigned int*)(EMIFB_BASE + 0x0C)    //SDRAM Refresh Control Register
+#define EMIFB_SDTIM1            *(unsigned int*)(EMIFB_BASE + 0x10)    //SDRAM Timing Register
+#define EMIFB_SDTIM2            *(unsigned int*)(EMIFB_BASE + 0x14)    //SDRAM Timing Register
+
+
+
+Setup_EMIFB()
+{
+    // ISSI IS42S16160B-6BL SDRAM, 2 x 16M x 16 (32-bit data path), 133MHz
+    EMIFB_SDCFG = 0         // SDRAM Bank Config Register
+        |( 1 << 15)         // Unlock timing registers
+        |( 2 << 9 )         // CAS latency is 2
+        |( 2 << 4 )         // 4 bank SDRAM devices
+        |( 1 << 0 );        // 512-word pages requiring 9 column address bits
+
+    EMIFB_SDREF = 0         // SDRAM Refresh Control Register
+        |( 0 << 31)         // Low power mode disabled
+        |( 0 << 30)         // MCLK stoping disabled
+        |( 0 << 23)         // Selects self refresh instead of power down
+        |( 1040 <<0);       // Refresh rate = 7812.5ns / 7.5ns
+
+    EMIFB_SDTIM1 = 0        // SDRAM Timing Register 1
+        |( 25 << 25)        // (67.5ns / 7.55ns) - 1 = TRFC  @ 133MHz
+        |( 2 << 22 )        // (20ns / 7.5ns) - 1 =TRP
+        |( 2 << 19 )        // (20ns / 7.5ns) - 1 = TRCD
+        |( 1 << 16 )        // (14ns / 7.5ns) - 1 = TWR
+        |( 5 << 11 )        // (45ns / 7.5ns) - 1 = TRAS
+        |( 8 <<  6 )        // (67.5ns / 7.5ns) - 1 = TRC
+        |( 2 <<  3 );       // *(((4 * 14ns) + (2 * 7.5ns)) / (4 * 7.5ns)) -1. = TRRD
+                            // but it says to use this formula if 8 banks but only 4 are used here.
+                            // and SDCFG1 register only suports upto 4 banks.
+
+    EMIFB_SDTIM2 = 0        // SDRAM Timing Register 2
+        |( 14<< 27)         // not sure how they got this number. the datasheet says value should be
+                            // "Maximum number of refresh_rate intervals from Activate to Precharge command"
+                            // but has no equation. TRASMAX is 120k.
+        |( 9 << 16)         // ( 70 / 7.5) - 1
+        |( 5 << 0 );        // ( 45 / 7.5 ) - 1
+
+    EMIFB_SDCFG = 0         // SDRAM Bank Config Register
+	    |( 1 << 16)
+        |( 0 << 15)         // Unlock timing registers
+        |( 2 << 9 )         // CAS latency is 2
+        |( 2 << 4 )         // 4 bank SDRAM devices
+        |( 1 << 0 );        // 512-word pages requiring 9 column address bits
+
+  /*Program the EMIF3C_SDRAM Controller*/
+//  EMIF3C_SDCFG  = 0x00008421;
+//  EMIF3C_SDTIM1 = 0x10912A10;  
+//  EMIF3C_SDTIM2 = 0x70090005;
+//  EMIF3C_SDREF  = 0x410;
+}
+
+

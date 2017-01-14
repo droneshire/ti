@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<translate name="toto">
+	<passthru name="Cycle"	input="Cycle"/>
+	<passthru name="Function"	input="Function$0 != Function$1 ? Function :  &quot;&quot;"/>
+	<passthru name="Presentation"	input="&quot;State&quot;"/>
+	<passthru name="Group" input="&quot;Function&quot;"/>
+</translate>
+

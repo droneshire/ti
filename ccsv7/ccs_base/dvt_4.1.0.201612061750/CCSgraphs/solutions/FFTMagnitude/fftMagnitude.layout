@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_29" class="java.beans.XMLDecoder"> 
+ <object class="com.ti.dvt.gadget.model.LayoutModel"> 
+  <void property="autoLayout"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="layoutMap"> 
+   <void method="put"> 
+    <string>CCSGraphsJtagDataSource</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>217</int> 
+     <int>37</int> 
+     <int>162</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>FFTCCSGraphDecoder</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>221</int> 
+     <int>95</int> 
+     <int>191</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.line:MagnitudeOnly</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>289</int> 
+     <int>261</int> 
+     <int>81</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>GraphScaleDecoder</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>264</int> 
+     <int>143</int> 
+     <int>125</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>CircularBuffer</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>274</int> 
+     <int>191</int> 
+     <int>97</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+  </void> 
+ </object> 
+</java> 

@@ -1,0 +1,3 @@
+<select ng-change="selectionChanged(selectionChangedArg,currentSelection)" title="{{currentSelection.getDisplay()}}" ng-model="currentSelection" 
+	ng-options="selection.getDisplay() disable when !selection.enabled for selection in sortedAndGroupedSelections" > 
+</select>

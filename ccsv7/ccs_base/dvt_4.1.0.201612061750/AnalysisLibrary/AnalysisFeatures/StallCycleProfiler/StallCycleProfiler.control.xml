@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Stall Cycle Profiler" default="enable" basedir=".">
+	<import file="../../templates/analysisfeature.xml"/>
+	
+	<property name="dvt.activity.name" value="Load/${ant.project.name}"/>
+	<property name="dvt.activity.description" value="${ant.project.name}"/>
+	<property name="dvt.data.type" value="PCTrace"/>
+	<property name="dvt.views" value="Stall Cycle Profile"/>
+	<property name="dvt.views.show" value="Stall Cycle Profile"/>
+	<property name="analysisFeatureName" value="StallCycleProfiler" />
+	<!--property name="bufferbypass.text" value="true" /-->
+
+	<!-- minimum required input fields for the AF (optional, for better performance) -->
+	<property name="requiredFields" value="Filename,Function,Delta Cycles,Stall Cycle Data binary"/>
+	
+	<!-- override template target -->
+	<target name="postAddAnalysisFeature">
+		<dvt.start refid="analysisFeatureRef"/>
+		<dvt.view.show refid="analysisFeatureRef" view="${dvt.views.show}"/>
+	</target>
+
+	<target name="createStandardContextMenu">
+	</target>
+
+</project>

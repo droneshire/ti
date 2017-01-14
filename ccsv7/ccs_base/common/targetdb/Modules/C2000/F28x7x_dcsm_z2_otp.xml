@@ -1,0 +1,20 @@
+<module id="DCSM_Z2_OTP" HW_revision="" description="DCSM Z2 OTP Registers">
+  <register id="Z2OTP_LINKPOINTER1" width="32" page="1" offset="0x0" internal="0" description="Zone 2 Link Pointer1 in Z2 OTP">
+    <bitfield id="Z2OTP_LINKPOINTER1" description="Zone2 Link Pointer 1 location in USER OTP." begin="31" end="0" width="32" rwaccess="R/W"/>
+  </register>
+  <register id="Z2OTP_LINKPOINTER2" width="32" page="1" offset="0x4" internal="0" description="Zone 2 Link Pointer2 in Z2 OTP">
+    <bitfield id="Z2OTP_LINKPOINTER2" description="Zone2 Link Pointer 2 location in USER OTP." begin="31" end="0" width="32" rwaccess="R/W"/>
+  </register>
+  <register id="Z2OTP_LINKPOINTER3" width="32" page="1" offset="0x8" internal="0" description="Zone 2 Link Pointer3 in Z2 OTP">
+    <bitfield id="Z2OTP_LINKPOINTER3" description="Zone2 Link Pointer 3 location in USER OTP." begin="31" end="0" width="32" rwaccess="R/W"/>
+  </register>
+  <register id="Z2OTP_PSWDLOCK" width="32" page="1" offset="0xc" internal="0" description="Secure Password Lock in Z2 OTP">
+    <bitfield id="Z2OTP_PSWDLOCK" description="Zone2 Password lock location in USER OTP." begin="31" end="0" width="32" rwaccess="R/W"/>
+  </register>
+  <register id="Z2OTP_CRCLOCK" width="32" page="1" offset="0x10" internal="0" description="Secure CRC Lock in Z2 OTP">
+    <bitfield id="Z2OTP_CRCLOCK" description="Zone2 CRC lock location in USER OTP." begin="31" end="0" width="32" rwaccess="R/W"/>
+  </register>
+  <register id="Z2OTP_BOOTCTRL" width="32" page="1" offset="0x18" internal="0" description="Boot Mode in Z2 OTP">
+    <bitfield id="Z2OTP_BOOTCTRL" description="Zone2 Boot control location in USER OTP." begin="31" end="0" width="32" rwaccess="R/W"/>
+  </register>
+</module>

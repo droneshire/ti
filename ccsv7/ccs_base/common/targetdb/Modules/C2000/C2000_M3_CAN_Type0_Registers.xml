@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- 
+  TI File $Revision: 
+  Checkin $Date: 
+  --> 
+
+<!--  C28M35x CAN REGS Registers 
+     =================================== 
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     --> 
+<module id="CAN REGS" HW_revision="" XML_version="1" description="CAN REGS Registers">
+    <register id="CAN_CTL" acronym="CAN_CTL" offset="0x0" page="1" width="32" description="CAN Control Register" />
+    <register id="CAN_ES" acronym="CAN_ES" offset="0x4" page="1" width="32" description="CAN Error and Status Register" />
+    <register id="CAN_ERRC" acronym="CAN_ERRC" offset="0x8" page="1" width="32" description="CAN Error Counter Register" />
+    <register id="CAN_BTR" acronym="CAN_BTR" offset="0xc" page="1" width="32" description="CAN Bit Timing Register" />
+    <register id="CAN_INT" acronym="CAN_INT" offset="0x10" page="1" width="32" description="CAN Interrupt Register" />
+    <register id="CAN_TEST" acronym="CAN_TEST" offset="0x14" page="1" width="32" description="CAN Test Register" />
+    <!--  4 empty  -->
+    <register id="CAN_PERR" acronym="CAN_PERR" offset="0x1c" page="1" width="32" description="CAN Parity Error Code Register" />
+    <!--  4 empty  -->
+    <!--  4 empty  -->
+    <!--  4 empty  -->
+    <!--  84 empty  -->
+    <register id="CAN_ABOTR" acronym="CAN_ABOTR" offset="0x80" page="1" width="32" description="CAN Auto-bus-on Time Register" />
+    <!--  4 empty  -->
+    <register id="CAN_TXRQ" acronym="CAN_TXRQ" offset="0x88" page="1" width="32" description="CAN Transmission Request 2_1 Register" />
+    <!--  12 empty  -->
+    <!--  4 empty  -->
+    <register id="CAN_NWDAT" acronym="CAN_NWDAT" offset="0x9c" page="1" width="32" description="CAN New Data 2_1 Register" />
+    <!--  12 empty  -->
+    <!--  4 empty  -->
+    <register id="CAN_INTPND" acronym="CAN_INTPND" offset="0xb0" page="1" width="32" description="CAN Interrupt Pending 2_1 Register" />
+    <!--  12 empty  -->
+    <!--  4 empty  -->
+    <register id="CAN_MSGVAL" acronym="CAN_MSGVAL" offset="0xc4" page="1" width="32" description="CAN Message Valid 2_1 Register" />
+    <!--  16 empty  -->
+    <register id="CAN_INTMUX" acronym="CAN_INTMUX" offset="0xd8" page="1" width="32" description="CAN Interrupt Multiplexer 2_1 Register" />
+    <!--  24 empty  -->
+    <register id="CAN_IF1CMD" acronym="CAN_IF1CMD" offset="0x100" page="1" width="32" description="CAN Interface 1 Command Register" />
+    <register id="CAN_IF1MSK" acronym="CAN_IF1MSK" offset="0x104" page="1" width="32" description="CAN Interface 1 Mask Register" />
+    <register id="CAN_IF1ARB" acronym="CAN_IF1ARB" offset="0x108" page="1" width="32" description="CAN Interface 1 Arbitration Register" />
+    <register id="CAN_IF1MCTL" acronym="CAN_IF1MCTL" offset="0x10c" page="1" width="32" description="CAN Interface 1 Message Control Register" />
+    <register id="CAN_IF1DATA" acronym="CAN_IF1DATA" offset="0x110" page="1" width="32" description="CAN Interface 1 DATA A2_A1 Register" />
+    <register id="CAN_IF1DATB" acronym="CAN_IF1DATB" offset="0x114" page="1" width="32" description="CAN Interface 1 DATA B2_B1 Register" />
+    <!--  8 empty  -->
+    <register id="CAN_IF2CMD" acronym="CAN_IF2CMD" offset="0x120" page="1" width="32" description="CAN Interface 2 Command Register" />
+    <register id="CAN_IF2MSK" acronym="CAN_IF2MSK" offset="0x124" page="1" width="32" description="CAN Interface 2 Mask Register" />
+    <register id="CAN_IF2ARB" acronym="CAN_IF2ARB" offset="0x128" page="1" width="32" description="CAN Interface 2 Arbitration Register" />
+    <register id="CAN_IF2MCTL" acronym="CAN_IF2MCTL" offset="0x12c" page="1" width="32" description="CAN Interface 2 Message Control Register" />
+    <register id="CAN_IF2DATA" acronym="CAN_IF2DATA" offset="0x130" page="1" width="32" description="CAN Interface 2 DATA A2_A1 Register" />
+    <register id="CAN_IF2DATB" acronym="CAN_IF2DATB" offset="0x134" page="1" width="32" description="CAN Interface 2 DATA B2_B1 Register" />
+    <!--  8 empty  -->
+    <register id="CAN_IF3OBS" acronym="CAN_IF3OBS" offset="0x140" page="1" width="32" description="CAN Interface 3 Observation Register" />
+    <register id="CAN_IF3MSK" acronym="CAN_IF3MSK" offset="0x144" page="1" width="32" description="CAN Interface 3 Mask Register" />
+    <register id="CAN_IF3ARB" acronym="CAN_IF3ARB" offset="0x148" page="1" width="32" description="CAN Interface 3 Arbitration Register" />
+    <register id="CAN_IF3MCTL" acronym="CAN_IF3MCTL" offset="0x14c" page="1" width="32" description="CAN Interface 3 Message Control Register" />
+    <register id="CAN_IF3DATA" acronym="CAN_IF3DATA" offset="0x150" page="1" width="32" description="CAN Interface 3 DATA A2_A1 Register" />
+    <register id="CAN_IF3DATB" acronym="CAN_IF3DATB" offset="0x154" page="1" width="32" description="CAN Interface 3 DATA B2_B1 Register" />
+    <!--  8 empty  -->
+    <register id="CAN_IF3UPD" acronym="CAN_IF3UPD" offset="0x160" page="1" width="32" description="CAN Interface 3 Update Enable 2_1 Register" />
+    <!--  112 empty  -->
+    <!--  4 empty  -->
+    <!--  4 empty  -->
+    <!--  24 empty  -->
+</module>

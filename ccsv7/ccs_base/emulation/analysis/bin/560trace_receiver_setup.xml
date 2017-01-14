@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!-- This file defines the setup values for a Hurricane controller.  It is required.  Don't make any changes unless you know what you're doing, and make a backup first. -->
+
+
+<EMU-SETUP version="1.0.0.0" Copyright="Copyright (c) 2005-2007 Texas Instruments">
+
+    <BOARD>
+	<!-- Use DTP-ID=-1 and # DTPS=0 if there's no drishti on the board -->
+	<!-- EBM-SIZE is in Megabytes -->
+	<!-- The path to the configuration files is defined in environment variable TI_EMU_CFG_DIR -->
+
+		<HW-REV>0</HW-REV> <!-- Hardware revision (unused)-->
+		<SW-REV>0</SW-REV> <!-- Software revision (unused)-->
+		<STARTING-DTP-ID>0</STARTING-DTP-ID> <!-- Starting drishti ID for board; If no dirshti, its -1-->
+		<NUMBEROF-DTPS>1</NUMBEROF-DTPS> <!-- Total drishtis on the board-->
+		<EBM-SIZE>64</EBM-SIZE> <!-- Amount of external bulk memory (MB) available to each DTP -->
+		<FUNCTION-DICTIONARY>default_fns.xml</FUNCTION-DICTIONARY> <!-- Function directory file for the baord -->
+		<HDR2PORTMAP>hdr2pinmap.xml</HDR2PORTMAP> <!-- Defines header to target connection map file-->
+		<SETUPWIRING>startupcfg.xml</SETUPWIRING> <!-- Connections that have to be made at startup file-->
+		<TARGETMAP>trgtconnectivity.xml</TARGETMAP> <!-- Optional, if the receiver can be quried dynamically; This file defines core connectivity. -->
+    </BOARD>
+</EMU-SETUP>

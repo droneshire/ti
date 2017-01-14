@@ -1,0 +1,45 @@
+<div id="viewIOSets" class="nonConfig">	 
+	<div id="ioSetDiv1">
+		IOSets for <div class="dropdown"><select style="width:100%" ng-change="peripheralChanged(peripheral)" ng-model="peripheral" ng-options="peripheralSelection.name for peripheralSelection in peripherals | orderBy:$root.natural('name')"></select></div>
+
+		<ul style="list-style-type:none; padding:5px 0 0 0; margin:0;">
+			<li style="border-bottom:solid 1px black" ng-show="peripheral.ioSets.length > 0">
+				<input class="listFilter form-control select-form-control" placeholder="Type filter text..." ng-model="search.name">
+			</li>
+			<li ng-repeat="ioSet in peripheral.ioSets | filter:search">
+				<button style="padding-left: 5px;" ng-class="getIoSetButtonClass( ioSet )" href="" ng-click="ioSetClicked( ioSet )">{{ioSet.name}}</button>
+			</li>
+		</ul>
+	</div>
+
+	<div id="ioSetDiv2" class="datagrid datagridBlue">
+		<!--<h4 style="margin-left:.5in"> {{selectedIOSet.name}} </h4>-->
+		<table ng-show="selectedIOSet" class="shadow1" style="margin-top:28px">
+			<thead>
+				<tr>
+					<th style="font-size:14px">Signal</th>
+					<th style="font-size:14px">Device Pin</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat='(peripehralPinName,devicePinName) in selectedIOSet.ioSetRules track by $index' ng-class-odd="''" ng-class-even="'alt'">
+					<td>
+						{{peripehralPinName}}
+					</td>
+					<td>
+						{{devicePinName}} ( {{devicePins[devicePinName].designSignalName}} )
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<span ng-show="!selectedIOSet"> No IO Sets defined for {{peripheral.name}}</span>
+	</div>
+	
+</div>
+<br/>
+<br/>
+<a id="configurePinsBtn" style="color: #ffffff;" class="aReset" href="" ng-click="configureCurrentDevicePins()">
+	<div class="backPinBottomNav">
+		<span class="glyphicon glyphicon-arrow-left"></span> Back to pin configuration
+	</div>
+</a>

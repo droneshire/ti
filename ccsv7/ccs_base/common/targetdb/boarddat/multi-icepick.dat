@@ -1,0 +1,8 @@
+# config version=3.5
+
+$ router
+  skip_polling = yes
+  adaptive_tclk = no
+$ /
+
+# /

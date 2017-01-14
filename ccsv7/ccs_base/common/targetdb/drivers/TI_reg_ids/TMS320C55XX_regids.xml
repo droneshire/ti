@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- TMS320C5510 Phase 3 drivers -->
+
+<register_ids id="TMS320C55xx" XML_version="2.0">
+
+	<register_id id="CLK" value="300" address="0" page="0"/>
+	<register_id id="PC" value="0" address="0" page="0"/>
+	<register_id id="FP" value="240" address="0" page="0"/>
+	<register_id id="SP" value="1" address="0" page="0"/>
+	<register_id id="SSP" value="2" address="0" page="0"/>
+	<register_id id="ST0" value="3" address="0" page="0"/>
+	<register_id id="ST1" value="4" address="0" page="0"/>
+	<register_id id="ST2" value="5" address="0" page="0"/>
+	<register_id id="ST3" value="6" address="0" page="0"/>
+
+	<register_id id="AR0" value="7" address="0" page="0"/>
+	<register_id id="AR1" value="8" address="0" page="0"/>
+	<register_id id="AR2" value="9" address="0" page="0"/>
+	<register_id id="AR3" value="10" address="0" page="0"/>
+	<register_id id="AR4" value="11" address="0" page="0"/>	
+	<register_id id="AR5" value="12" address="0" page="0"/>
+	<register_id id="AR6" value="13" address="0" page="0"/>
+	<register_id id="AR7" value="14" address="0" page="0"/>
+
+	<register_id id="T0" value="15" address="0" page="0"/>
+	<register_id id="T1" value="16" address="0" page="0"/>
+	<register_id id="T2" value="17" address="0" page="0"/>
+	<register_id id="T3" value="18" address="0" page="0"/>
+	<register_id id="TRN0" value="19" address="0" page="0"/>
+	<register_id id="TRN1" value="20" address="0" page="0"/>
+
+	<register_id id="DP" value="21" address="0" page="0"/>
+	<register_id id="PDP" value="22" address="0" page="0"/>
+	<register_id id="CDP" value="23" address="0" page="0"/>
+	<register_id id="MDP" value="24" address="0" page="0"/>
+	<register_id id="MDP05" value="25" address="0" page="0"/>
+	<register_id id="MDP67" value="26" address="0" page="0"/>
+
+	<register_id id="BK03" value="27" address="0" page="0"/>
+	<register_id id="BSA01" value="28" address="0" page="0"/>
+	<register_id id="BSA23" value="29" address="0" page="0"/>
+	<register_id id="BK47" value="30" address="0" page="0"/>
+	<register_id id="BSA45" value="31" address="0" page="0"/>
+	<register_id id="BSA67" value="32" address="0" page="0"/>
+	<register_id id="BKC" value="33" address="0" page="0"/>
+	<register_id id="BSAC" value="34" address="0" page="0"/>
+
+	<register_id id="BRC0" value="35" address="0" page="0"/>
+	<register_id id="BRC1" value="36" address="0" page="0"/>
+	<register_id id="BRS1" value="37" address="0" page="0"/>
+
+	<register_id id="CSR" value="38" address="0" page="0"/>
+	<register_id id="RSA0" value="39" address="0" page="0"/>
+	<register_id id="REA0" value="40" address="0" page="0"/>
+	<register_id id="RSA1" value="41" address="0" page="0"/>
+	<register_id id="REA1" value="42" address="0" page="0"/>
+	<register_id id="RPTC" value="43" address="0" page="0"/>
+
+	<register_id id="IER0" value="44" address="0" page="0"/>
+	<register_id id="IER1" value="45" address="0" page="0"/>
+	<register_id id="IFR0" value="46" address="0" page="0"/>
+	<register_id id="IFR1" value="47" address="0" page="0"/>
+	<register_id id="DBIER0" value="48" address="0" page="0"/>
+	<register_id id="DBIER1" value="49" address="0" page="0"/>
+
+	<register_id id="IVPD" value="50" address="0" page="0"/>
+	<register_id id="IVPH" value="51" address="0" page="0"/>
+
+	<register_id id="RETA" value="52" address="0" page="0"/>
+	<register_id id="LCRPC" value="52" address="0" page="0"/>
+	<register_id id="AC0_LH" value="53" address="0" page="0"/>
+	<register_id id="AC0_GR" value="54" address="0" page="0"/>
+	<register_id id="AC1_LH" value="55" address="0" page="0"/>
+	<register_id id="AC1_GR" value="56" address="0" page="0"/>
+	<register_id id="AC2_LH" value="57" address="0" page="0"/>
+	<register_id id="AC2_GR" value="58" address="0" page="0"/>
+	<register_id id="AC3_LH" value="59" address="0" page="0"/>
+	<register_id id="AC3_GR" value="60" address="0" page="0"/>
+	<register_id id="SPH" value="61" address="0" page="0"/>
+	<register_id id="CDPH" value="62" address="0" page="0"/>
+	<register_id id="ST0P" value="63" address="0" page="0"/>
+	<register_id id="ST1P" value="64" address="0" page="0"/>
+	<register_id id="PMST" value="65" address="0" page="0"/>
+	<register_id id="XPC" value="66" address="0" page="0"/>
+	<register_id id="BIOS" value="67" address="0" page="0"/>
+	<register_id id="INST" value="68" address="0" page="0"/>
+
+	<register_id id="AC0_GS" value="69" address="0" page="0"/>
+	<register_id id="AC1_GS" value="70" address="0" page="0"/>
+	<register_id id="AC2_GS" value="71" address="0" page="0"/>
+	<register_id id="AC3_GS" value="72" address="0" page="0"/>
+
+	<register_id id="ACU_SEL" value="100" address="0" page="0"/>
+	<register_id id="DCU_SEL" value="101" address="0" page="0"/>
+	<register_id id="ECU_SEL" value="102" address="0" page="0"/>
+	<register_id id="WP2_SEL" value="103" address="0" page="0"/>
+	<register_id id="WP3_SEL" value="104" address="0" page="0"/>
+
+	<register_id id="ACUPSA_L32" value="105" address="0" page="0"/>
+	<register_id id="ACUPSA_M08" value="106" address="0" page="0"/>
+	<register_id id="ACUPSA_CNTL" value="107" address="0" page="0"/>
+	<register_id id="ACUPSA" value="108" address="0" page="0"/>
+
+	<register_id id="ACUHWBPEVT_MASK" value="109" address="0" page="0"/>
+	<register_id id="ACUHWBPEVT_REF" value="110" address="0" page="0"/>
+	<register_id id="ACUHWBPEVT_CNTL" value="111" address="0" page="0"/>
+	<register_id id="ACUHWBPEVT_ID" value="112" address="0" page="0"/>
+
+	<register_id id="ACUBUSEVT_MASK" value="113" address="0" page="0"/>
+	<register_id id="ACUBUSEVT_REF" value="114" address="0" page="0"/>
+	<register_id id="ACUBUSEVT_CNTL" value="115" address="0" page="0"/>
+	<register_id id="ACUBUSEVT_ID" value="116" address="0" page="0"/>
+
+	<register_id id="ACUBENCHMARK_L32" value="117" address="0" page="0"/>
+	<register_id id="ACUBENCHMARK_M08" value="118" address="0" page="0"/>
+	<register_id id="ACUBENCHMARK_ESEL" value="119" address="0" page="0"/>
+	<register_id id="ACUBENCHMARK_CNTL" value="120" address="0" page="0"/>
+	<register_id id="ACUBENCHMARK" value="121" address="0" page="0"/>
+
+	<register_id id="ACU32CNT_CNT" value="122" address="0" page="0"/>
+	<register_id id="ACU32CNT_MATCH" value="123" address="0" page="0"/>
+	<register_id id="ACU32CNT_ESEL" value="124" address="0" page="0"/>
+	<register_id id="ACU32CNT_CNTL" value="125" address="0" page="0"/>
+	<register_id id="ACU32CNT" value="126" address="0" page="0"/>
+
+	<register_id id="ACU16CNT1_CNT" value="127" address="0" page="0"/>
+	<register_id id="ACU16CNT2_CNT" value="128" address="0" page="0"/>
+	<register_id id="ACU16CNT1_MATCH" value="129" address="0" page="0"/>
+	<register_id id="ACU16CNT2_MATCH" value="130" address="0" page="0"/>
+	<register_id id="ACU16CNT_ESEL" value="131" address="0" page="0"/>
+	<register_id id="ACU16CNT_CNTL" value="132" address="0" page="0"/>
+	<register_id id="ACU16CNT" value="133" address="0" page="0"/>
+
+	<register_id id="ACUDMA_ADDR" value="134" address="0" page="0"/>
+	<register_id id="ACUDMA_DATA" value="135" address="0" page="0"/>
+	<register_id id="ACUDMA_CNTL" value="136" address="0" page="0"/>
+	<register_id id="ACUDMA" value="137" address="0" page="0"/>
+
+	<register_id id="DCUPSA_L32" value="138" address="0" page="0"/>
+	<register_id id="DCUPSA_M08" value="139" address="0" page="0"/>
+	<register_id id="DCUPSA_CNTL" value="140" address="0" page="0"/>
+	<register_id id="DCUPSA" value="141" address="0" page="0"/>
+
+	<register_id id="DCUHWBPEVT_MASK" value="142" address="0" page="0"/>
+	<register_id id="DCUHWBPEVT_REF" value="143" address="0" page="0"/>
+	<register_id id="DCUHWBPEVT_CNTL" value="144" address="0" page="0"/>
+	<register_id id="DCUHWBPEVT" value="145" address="0" page="0"/>
+
+	<register_id id="DCU2BUSEVT_MASK" value="146" address="0" page="0"/>
+	<register_id id="DCU2BUSEVT_REF" value="147" address="0" page="0"/>
+	<register_id id="DCU2BUSEVT_CNTL" value="148" address="0" page="0"/>
+	<register_id id="DCU2BUSEVT" value="149" address="0" page="0"/>
+
+	<register_id id="DCUBUSEVT_MASK" value="150" address="0" page="0"/>
+	<register_id id="DCUBUSEVT_REF" value="151" address="0" page="0"/>
+	<register_id id="DCUBUSEVT_CNTL" value="152" address="0" page="0"/>
+	<register_id id="DCUBUSEVT" value="153" address="0" page="0"/>
+
+	<register_id id="ECU_CNTL" value="154" address="0" page="0"/>
+	<register_id id="ECU" value="155" address="0" page="0"/>
+
+	<register_id id="WP2PSA1_L32" value="156" address="0" page="0"/>
+	<register_id id="WP2PSA1_M08" value="157" address="0" page="0"/>
+	<register_id id="WP2PSA1_CNTL" value="158" address="0" page="0"/>
+	<register_id id="WP2PSA2_L32" value="159" address="0" page="0"/>
+	<register_id id="WP2PSA2_M08" value="160" address="0" page="0"/>
+	<register_id id="WP2PSA2_CNTL" value="161" address="0" page="0"/>
+	<register_id id="WP2PSA1" value="162" address="0" page="0"/>
+
+	<register_id id="WP2HWBPEVT_MASK" value="163" address="0" page="0"/>
+	<register_id id="WP2HWBPEVT_REF" value="164" address="0" page="0"/>
+	<register_id id="WP2HWBPEVT_CNTL" value="165" address="0" page="0"/>
+	<register_id id="WP2HWBPEVT" value="166" address="0" page="0"/>
+
+	<register_id id="WP2BUSEVT_AMASK" value="167" address="0" page="0"/>
+	<register_id id="WP2BUSEVT_AREF" value="168" address="0" page="0"/>
+	<register_id id="WP2BUSEVT_DMASK" value="169" address="0" page="0"/>
+	<register_id id="WP2BUSEVT_DREF" value="170" address="0" page="0"/>
+	<register_id id="WP2BUSEVT_CNTL" value="171" address="0" page="0"/>
+	<register_id id="WP2BUSEVT" value="172" address="0" page="0"/>
+
+	<register_id id="WP3PSA1_L32" value="173" address="0" page="0"/>
+	<register_id id="WP3PSA1_M08" value="174" address="0" page="0"/>
+	<register_id id="WP3PSA1_CNTL" value="175" address="0" page="0"/>
+	<register_id id="WP3PSA2_L32" value="176" address="0" page="0"/>
+	<register_id id="WP3PSA2_M08" value="177" address="0" page="0"/>
+	<register_id id="WP3PSA2_CNTL" value="178" address="0" page="0"/>
+	<register_id id="WP3PSA" value="179" address="0" page="0"/>
+
+	<register_id id="WP3HWBPEVT_MASK" value="180" address="0" page="0"/>
+	<register_id id="WP3HWBPEVT_REF" value="181" address="0" page="0"/>
+	<register_id id="WP3HWBPEVT_CNTL" value="182" address="0" page="0"/>
+	<register_id id="WP3HWBPEVT" value="183" address="0" page="0"/>
+
+	<register_id id="WP3BUSEVT_AMASK" value="184" address="0" page="0"/>
+	<register_id id="WP3BUSEVT_AREF" value="185" address="0" page="0"/>
+	<register_id id="WP3BUSEVT_DMASK" value="186" address="0" page="0"/>
+	<register_id id="WP3BUSEVT_DREF" value="187" address="0" page="0"/>
+	<register_id id="WP3BUSEVT_CNTL" value="188" address="0" page="0"/>
+	<register_id id="WP3BUSEVT" value="189" address="0" page="0"/>
+	<register_id id="DBGSTAT" value="190" address="0" page="0"/>
+	<register_id id="ANASTOP" value="191" address="0" page="0"/>
+	<register_id id="ANA_ENABLE" value="339" address="0" page="0" />	
+	<register_id id="ECU_EMU0" value="192" address="0" page="0"/>
+	<register_id id="ECU_EMU1" value="193" address="0" page="0"/>
+
+	<register_id id="ANAENBLEVT" value="100" address="0" page="0"/>
+	<register_id id="ANAEVENTS" value="101" address="0" page="0"/>
+	<register_id id="ANASTATUS" value="102" address="0" page="0"/>
+	<register_id id="PGMBPEVT1_ADDR" value="103" address="0" page="0"/>
+	<register_id id="PGMBPEVT1_CNT" value="104" address="0" page="0"/>
+	<register_id id="PGMBPEVT1_CTRL" value="105" address="0" page="0"/>
+	<register_id id="PGMBPEVT2_ADDR" value="106" address="0" page="0"/>
+	<register_id id="PGMBPEVT2_CNT" value="107" address="0" page="0"/>
+	<register_id id="PGMBPEVT2_CTRL" value="108" address="0" page="0"/>
+	<register_id id="PGMBPEVT3_ADDR" value="109" address="0" page="0"/>
+	<register_id id="PGMBPEVT3_CNT" value="110" address="0" page="0"/>
+	<register_id id="PGMBPEVT3_CTRL" value="111" address="0" page="0"/>
+	<register_id id="PGMBPEVT4_ADDR" value="112" address="0" page="0"/>
+	<register_id id="PGMBPEVT4_CNT" value="113" address="0" page="0"/>
+	<register_id id="PGMBPEVT4_CTRL" value="114" address="0" page="0"/>
+	<register_id id="DATABUSEVT1_ADDR" value="115" address="0" page="0"/>
+	<register_id id="DATABUSEVT1_VALUE" value="116" address="0" page="0"/>
+	<register_id id="DATABUSEVT1_MASK" value="117" address="0" page="0"/>
+	<register_id id="DATABUSEVT1_CTRL" value="118" address="0" page="0"/>
+	<register_id id="DATABUSEVT2_ADDR" value="119" address="0" page="0"/>
+	<register_id id="DATABUSEVT2_VALUE" value="120" address="0" page="0"/>
+	<register_id id="DATABUSEVT2_MASK" value="121" address="0" page="0"/>
+	<register_id id="DATABUSEVT2_CTRL" value="122" address="0" page="0"/>
+	<register_id id="DATABUSEVT3_ADDR" value="123" address="0" page="0"/>
+	<register_id id="DATABUSEVT3_VALUE" value="124" address="0" page="0"/>
+	<register_id id="DATABUSEVT3_MASK" value="125" address="0" page="0"/>
+	<register_id id="DATABUSEVT3_CTRL" value="126" address="0" page="0"/>
+	<register_id id="PGMWINEVT_CTRL" value="127" address="0" page="0"/>
+
+	<register_id id="AC0_HL" value="200" address="0" page="0"/>
+	<register_id id="AC0_G" value="201" address="0" page="0"/>
+	<register_id id="AC1_HL" value="202" address="0" page="0"/>
+	<register_id id="AC1_G" value="203" address="0" page="0"/>
+	<register_id id="AC2_HL" value="204" address="0" page="0"/>
+	<register_id id="AC2_G" value="205" address="0" page="0"/>
+	<register_id id="AC3_HL" value="206" address="0" page="0"/>
+	<register_id id="AC3_G" value="207" address="0" page="0"/>
+	<register_id id="AC0_L" value="208" address="0" page="0"/>
+	<register_id id="AC0_H" value="209" address="0" page="0"/>
+	<register_id id="AC1_L" value="210" address="0" page="0"/>
+	<register_id id="AC1_H" value="211" address="0" page="0"/>
+	<register_id id="AC2_L" value="212" address="0" page="0"/>
+	<register_id id="AC2_H" value="213" address="0" page="0"/>
+	<register_id id="AC3_L" value="214" address="0" page="0"/>
+	<register_id id="AC3_H" value="215" address="0" page="0"/>
+	<register_id id="RSA0_L" value="216" address="0" page="0"/>
+	<register_id id="RSA0_H" value="217" address="0" page="0"/>
+	<register_id id="REA0_L" value="218" address="0" page="0"/>
+	<register_id id="REA0_H" value="219" address="0" page="0"/>
+	<register_id id="RSA1_L" value="220" address="0" page="0"/>
+	<register_id id="RSA1_H" value="221" address="0" page="0"/>
+	<register_id id="REA1_L" value="222" address="0" page="0"/>
+	<register_id id="REA1_H" value="223" address="0" page="0"/>
+	<register_id id="LCRPC_L" value="224" address="0" page="0"/>
+	<register_id id="LCRPC_H" value="225" address="0" page="0"/>
+	<register_id id="CFCT" value="226" address="0" page="0"/>
+
+	<register_id id="SCR" value="227" address="0" page="0"/>
+	<register_id id="CYCLE" value="228" address="0" page="0"/>
+	<register_id id="CYCLE_L" value="229" address="0" page="0"/>
+	<register_id id="CYCLE_H" value="230" address="0" page="0"/>
+	<register_id id="SIDLE" value="231" address="0" page="0"/>
+	<register_id id="XAR0" value="232" address="0" page="0"/>
+	<register_id id="XAR1" value="233" address="0" page="0"/>
+	<register_id id="XAR2" value="234" address="0" page="0"/>
+	<register_id id="XAR3" value="235" address="0" page="0"/>
+	<register_id id="XAR4" value="236" address="0" page="0"/>
+	<register_id id="XAR5" value="237" address="0" page="0"/>
+	<register_id id="XAR6" value="238" address="0" page="0"/>
+	<register_id id="XAR7" value="239" address="0" page="0"/>
+	<register_id id="XSP" value="240" address="0" page="0"/>
+	<register_id id="XSSP" value="241" address="0" page="0"/>
+	<register_id id="XDP" value="242" address="0" page="0"/>
+	<register_id id="XCDP" value="243" address="0" page="0"/>
+	<register_id id="XSP_US" value="244" address="0" page="0"/>
+	<register_id id="XSSP_US" value="245" address="0" page="0"/>
+
+	<register_id id="AC0" value="200" address="0" page="0"/>
+	<register_id id="AC1" value="201" address="0" page="0"/>
+	<register_id id="AC2" value="202" address="0" page="0"/>
+	<register_id id="AC3" value="203" address="0" page="0"/>
+
+	<register_id id="RUNCOUNT" value="300" address="0" page="0"/>
+	<register_id id="TIMEOUT" value="301" address="0" page="0"/>
+	<register_id id="XDS_STAT" value="302" address="0" page="0"/>
+	<register_id id="XDS_DFR" value="303" address="0" page="0"/>
+	<register_id id="XDS_DBGM" value="304" address="0" page="0"/>
+	<register_id id="XDS_HPI" value="305" address="0" page="0"/>
+	<register_id id="XDS_IDMATCH" value="306" address="0" page="0"/>
+	<register_id id="XDS_PREEMPT" value="307" address="0" page="0"/>
+	<register_id id="XDS_MFREG1" value="308" address="0" page="0"/>
+	<register_id id="XDS_CPUREV" value="309" address="0" page="0"/>
+	<register_id id="XDS_CPUMIG" value="310" address="0" page="0"/>
+	<register_id id="XDS_MFREG0" value="311" address="0" page="0"/>
+	<register_id id="HWA_ADDR" value="312" address="0" page="0"/>
+	<register_id id="HWA_DATA" value="313" address="0" page="0"/>
+	<register_id id="XDS_ICELOG" value="320" address="0" page="0"/>
+	<register_id id="XDS_ISAREV" value="321" address="0" page="0"/>
+	<register_id id="XDS_SSR" value="322" address="0" page="0"/>
+	<register_id id="XDS_NMP_CACHE_FIX" value="326" address="0" page="0"/>
+	<register_id id="RAPIDO_CACHE_FIX" value="327" address="0" page="0"/>
+	<register_id id="OMAP2420_IPF_FIX" value="328" address="0" page="0"/>
+
+	<register_id id="CMR" value="-1" address="0" page="2"/>
+	<register_id id="ICR" value="-1" address="1" page="2"/>
+	<register_id id="ISTR" value="-1" address="2" page="2"/>
+	<register_id id="BOOT_MOD" value="-1" address="15" page="2"/>
+	<register_id id="CLKMD" value="-1" address="0x1c00" page="2"/>
+	<register_id id="TIM0" value="-1" address="0x1000" page="2"/>
+	<register_id id="PRD0" value="-1" address="0x1001" page="2"/>
+	<register_id id="TCR0" value="-1" address="0x1002" page="2"/>
+	<register_id id="PRSC0" value="-1" address="0x1003" page="2"/>
+	<register_id id="TIM1" value="-1" address="0x2400" page="2"/>
+	<register_id id="PRD1" value="-1" address="0x2401" page="2"/>
+	<register_id id="TCR1" value="-1" address="0x2402" page="2"/>
+	<register_id id="PRSC1" value="-1" address="0x2403" page="2"/>
+	<register_id id="IODIR" value="-1" address="0x3400" page="2"/>
+	<register_id id="IODATA" value="-1" address="0x3401" page="2"/>
+	<register_id id="Rev_Id" value="-1" address="0x3804" page="2"/>
+	<register_id id="DieId_H" value="-1" address="0x3800" page="2"/>
+	<register_id id="DieId_L" value="-1" address="0x3802" page="2"/>
+
+	<register_id id="SP_US" value="401" address="0" page="0"/>
+	<register_id id="SSP_US" value="402" address="0" page="0"/>
+	<register_id id="LCRPC_US" value="452" address="0" page="0"/>
+	<register_id id="SPH_US" value="461" address="0" page="0"/>
+
+	<register_id id="CPUREV" value="309" address="0" page="0"/>
+
+</register_ids>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<register_ids id="TMS700C40XX" XML_version="2.0">
+
+    <!-- Core Registers -->
+    <register_id id="PC"                      value="0x7fffffff" address="0" page="0" />
+    <register_id id="SP"                      value="0x7ffffffe" address="0" page="0" />
+    <register_id id="EMU_INPUT_TRIG_EN_REG"   value="0x7ffffffd" address="0" page="0" />
+
+    <!-- Debug Registers -->
+    <register_id id="DBG_CAP"          value="0x00003000" address="0" page="0" />
+    <register_id id="DBG_CNTL"         value="0x00003004" address="0" page="0" />
+    <register_id id="DBG_OWN"          value="0x0000300c" address="0" page="0" />
+    <register_id id="DBG_INDRCT_CAP"   value="0x00003014" address="0" page="0" />
+    <register_id id="DBG_INDRCT_CTRL"  value="0x00003018" address="0" page="0" />
+    <register_id id="DBG_INDRCT_ADDR"  value="0x0000301c" address="0" page="0" />
+    <register_id id="DBG_INDRCT_DATA"  value="0x00003024" address="0" page="0" />
+    <register_id id="DBG_HWBP_0_CNTL"  value="0x00003040" address="0" page="0" />
+    <register_id id="DBG_HWBP_0_ADDR"  value="0x00003044" address="0" page="0" />
+    <register_id id="DBG_HWBP_0_AMASK" value="0x0000304c" address="0" page="0" />
+    <register_id id="DBG_HWWP_0_CNTL"  value="0x00003054" address="0" page="0" />
+    <register_id id="DBG_HWWP_0_ADDR"  value="0x00003058" address="0" page="0" />
+    <register_id id="DBG_HWWP_0_AMASK" value="0x00003060" address="0" page="0" />
+    <register_id id="DBG_HWWP_0_DATA"  value="0x00003068" address="0" page="0" />
+    <register_id id="DBG_HWBP_1_CNTL"  value="0x00003080" address="0" page="0" />
+    <register_id id="DBG_HWBP_1_ADDR"  value="0x00003084" address="0" page="0" />
+    <register_id id="DBG_HWBP_1_AMASK" value="0x0000308c" address="0" page="0" />
+    <register_id id="DBG_HWWP_1_CNTL"  value="0x00003094" address="0" page="0" />
+    <register_id id="DBG_HWWP_1_ADDR"  value="0x00003098" address="0" page="0" />
+    <register_id id="DBG_HWWP_1_AMASK" value="0x000030a0" address="0" page="0" />
+    <register_id id="DBG_HWWP_1_DATA"  value="0x000030a8" address="0" page="0" />
+
+</register_ids>

@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<breakpoints xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="breakpoints.xsd">
+
+  <breakpoint type="AET">
+    <property>
+      <name>Hardware Configuration</name>
+      <property>
+        <name>Type</name>
+        <string>Trace</string>
+        <property>
+          <name>STM Trace Type</name>
+          <string>Clock Management Profiling 1</string>
+          <property>
+            <name>Profile Type</name>
+            <string>CM Event Capture</string>
+          </property>
+          <property>
+            <name>Idle Mode</name>
+            <string>No Idle</string>
+          </property>
+          <property>
+            <name>Sampling Window(cycles)</name>
+            <integer>255</integer>
+          </property>
+          <property>
+            <name>Clock Divide Factor</name>
+            <integer>1</integer>
+          </property>
+          <property>
+            <name>Start on Ext. Trigger</name>
+            <boolean>0</boolean>
+          </property>
+          <property>
+            <name>Stop on Ext. Trigger</name>
+            <boolean>0</boolean>
+          </property>
+          <property>
+            <name>Event Class Enable</name>
+            <string></string>
+            <property>
+              <name>Clock Domain State</name>
+              <string></string>
+              <property>
+                <name>Class Enable</name>
+                <boolean>1</boolean>
+              </property>
+              <property>
+                <name>Class Event List</name>
+                <string></string>
+                <property>
+                  <name>MPU DPLL</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>TESLA Root</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>ABE 24M GF</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>ABE ALWON 32K</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>ABE System</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>Func 24M GF</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>OCP ABE GI</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>ABE X2</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>BGAP 32K GF</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>SR Core System</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>SR IVA System</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>SR MPU System</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>L4 AO Input</name>
+                  <string></string>
+                </property>
+              </property>
+            </property>
+            <property>
+              <name>Frequence Divider</name>
+              <string></string>
+              <property>
+                <name>Class Enable (8-bit)</name>
+                <boolean>1</boolean>
+              </property>
+              <property>
+                <name>Class Enable (4-bit)</name>
+                <boolean>1</boolean>
+              </property>
+              <property>
+                <name>Class Event List</name>
+                <string></string>
+                <property>
+                  <name>CLKSEL_OPP</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>CM_BYCLK_DPLL_MPU</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>CM_BYCLK_DPLL_IVA</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>CM1_ABE_AESS_CLKCTRL.CLKSEL_AESS_FCLK</name>
+                  <string></string>
+                </property>
+              </property>
+            </property>
+            <property>
+              <name>Source Selection Update</name>
+              <string></string>
+              <property>
+                <name>Class Enable</name>
+                <boolean>1</boolean>
+              </property>
+              <property>
+                <name>Class Event List</name>
+                <string></string>
+                <property>
+                  <name>CM_CLKSEL_CORE.CLKSEL_L4</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>CM_CLKSEL_CORE.CLKSEL_L3</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>CM_CLKSEL_CORE.CLKSEL_CORE</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>CM_CLKSEL_DPLL_CORE</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>CM_CLKSEL_DPLL_MPU</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>CM_CLKSEL_DPLL_IVA</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>CM_CLKSEL_DPLL_ABE</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>CM1_ABE_DMIC_CLKCTRL.CLKSEL_INTERNAL_SOURCE</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>CM1_ABE_DMIC_CLKCTRL.CLKSEL_SOURCE</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>CM1_ABE_MCASP_CLKCTRL.CLKSEL_INTERNAL_SOURCE</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>CM1_ABE_MCASP_CLKCTRL.CLKSEL_SOURCE</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>CM1_ABE_MCASP1_CLKCTRL.CLKSEL_INTERNAL_SOURCE</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>CM1_ABE_MCASP1_CLKCTRL.CLKSEL_SOURCE</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>CM1_ABE_MCASP2_CLKCTRL.CLKSEL_INTERNAL_SOURCE</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>CM1_ABE_MCASP2_CLKCTRL.CLKSEL_SOURCE</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>CM1_ABE_MCASP3_CLKCTRL.CLKSEL_INTERNAL_SOURCE</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>CM1_ABE_MCASP3_CLKCTRL.CLKSEL_SOURCE</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>CM1_ABE_TIMER5_CLKCTRL.CLKSEL</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>CM1_ABE_TIMER6_CLKCTRL.CLKSEL</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>CM1_ABE_TIMER7_CLKCTRL.CLKSEL</name>
+                  <string></string>
+                </property>
+                <property>
+                  <name>CM1_ABE_TIMER8_CLKCTRL.CLKSEL</name>
+                  <string></string>
+                </property>
+              </property>
+            </property>
+            <property>
+              <name>DPLL Setting Update</name>
+              <string></string>
+              <property>
+                <name>DPLL_CORE</name>
+                <boolean>1</boolean>
+              </property>
+              <property>
+                <name>DPLL_MPU</name>
+                <boolean>1</boolean>
+              </property>
+              <property>
+                <name>DPLL_IVA</name>
+                <boolean>1</boolean>
+              </property>
+              <property>
+                <name>DPLL_ABE</name>
+                <boolean>1</boolean>
+              </property>
+              <property>
+                <name>DPLL_DDRPHY</name>
+                <boolean>1</boolean>
+              </property>
+            </property>
+          </property>
+        </property>
+      </property>
+    </property>
+    <property>
+      <name>Miscellaneous</name>
+      <property>
+        <name>Group</name>
+        <string>Default Group</string>
+      </property>
+      <property>
+        <name>Name</name>
+        <string>Clock Management Profiling 1</string>
+      </property>
+    </property>
+    <enabled>0</enabled>
+  </breakpoint>
+
+</breakpoints>

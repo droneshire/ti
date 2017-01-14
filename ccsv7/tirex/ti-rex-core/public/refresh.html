@@ -1,0 +1,173 @@
+<head>
+    <link rel="stylesheet" href="stylesheets/refresh.css" type="text/css"/>
+    <script src="scripts/angular-1.2.9/angular.min.js"></script>
+    <script src="scripts/angular-1.2.9/select2.js"></script>
+    <script src="scripts/bootstrap-3.1.1/js/ui-bootstrap-tpls-0.11.2.min.js"></script>
+</head>
+<body>
+    <header id="header" role="nav">
+
+	<div id="navMenuLogo" ng-class="showTIToolsMenu?'navMenuListLiActive':'navMenuListLi'" ng-mouseenter="showAppMenu()" ng-click="showTIToolsMenu=!showTIToolsMenu" ng-mouseleave="hideAppMenu(800)">
+	    <!-- TI logo image -->
+	    <a title="Texas Instruments Inc."><img id="TILogo" src="icns/ti_logo_white.svg"/></a>
+	</div>
+	<ul>
+	    <li>
+		<a href="#/">TI&nbsp;Resource&nbsp;Explorer</a>
+	    </li>
+
+	</ul>
+    </header>
+    <div id="left-pane">
+	<div class="sub-heading" ng-click="doRefresh()">
+	    TIRex Admin Panel
+	</div>
+	<a class="tab" href="/#/" target="_blank">
+	    View site
+	</a>
+	<div id="last-refresh" ng-show="lastRe	freshTime">
+	    <strong>Last Refresh: </strong></br> {{lastRefreshTime}}
+	</div>
+	<div class="tab" href="/#/" target="_blank" ng-click="doRefresh('all')">
+	    Refresh All
+	</div>
+	<!--<div class="tab" href="/#/" target="_blank" ng-click="doRefresh()">-->
+	    <!--Refresh Selected Packages-->
+	<!--</div>-->
+	<!--<div class="drop-down-selector">-->
+	    <!--<select multiple ui-select2 id="package-selector" class="right-align small-width" data-placeholder="Select Packages">-->
+		<!--<option value=""></option>-->
+		<!--<option ng-repeat="package in packages" value="{{package.name}}">{{package.name}}</option>-->
+	    <!--</select>-->
+	<!--</div>-->
+	<!--<div style="padding-left: 15px; padding-right: 5px">-->
+	    <!--NOTE:</br>-->
+	    <!--Refresh Selected Packages can only be used if Refresh All was invoked at least once before AND there are:</br> -->
+	    <!-- - no changes to devices.tirex.json and devtools.tirex.json</br>-->
+	    <!-- - no changes to rootCategory in the package header-->
+	<!--</div>-->
+	<!-- <div class="run-selections">
+	     <div class="run-selections-child">
+	     <div class="tab selected">
+	     <div>
+	     Refresh
+	     </div>
+	     </div>
+	     <div class="tab">
+	     <div>
+	     Task 2
+	     </div>
+	     </div>
+	     <div class="tab">
+	     <div>
+	     Task 3
+	     </div>
+	     </div>
+	     <div class="tab">
+	     <div>
+	     Task 4
+	     </div>
+	     </div>
+	     </div>
+	     </div> -->
+    </div>
+    <div id="right-pane">
+	<div class="current-package-name">
+	    Refresh
+	</div>
+	<!--<div class="button-box">-->
+	    <!--<div class="button-row">-->
+		<!--<div class="prompt">-->
+		    <!--Pick log messages to show:-->
+		<!--</div>-->
+		<!-- 				<div class="button-row">
+		     <div class="button-wrap" ng-click="toggleTask('refreshFilter')">
+		     <div class="button active task-button" ng-show="refreshFilter">
+		     Refresh
+		     </div>
+		     <div class="button task-button" ng-show="!refreshFilter">
+		     Refresh
+		     </div>
+		     </div>
+		     <div class="button-wrap" ng-click="toggleTask('task2Filter')">
+		     <div class="button active task-button" ng-show="task2Filter">
+		     Task 2
+		     </div>
+		     <div class="button task-button" ng-show="!task2Filter">
+		     Task 2
+		     </div>
+		     </div>
+		     <div class="button-wrap" ng-click="toggleTask('task3Filter')">
+		     <div class="button active task-button" ng-show="task3Filter">
+		     Task 3
+		     </div>
+		     <div class="button task-button" ng-show="!task3Filter">
+		     Task 3
+		     </div>
+		     </div>
+		     <div class="button-wrap" ng-click="toggleTask('task4Filter')">
+		     <div class="button active task-button" ng-show="task4Filter">
+		     Task 4
+		     </div>
+		     <div class="button task-button" ng-show="!task4Filter">
+		     Task 4
+		     </div>
+		     </div>
+		     </div> -->
+		<!--<div class="button-row">-->
+		    <!--<div class="button-wrap" ng-click="toggleFilter('infoFilter')">-->
+			<!--<div class="button active" ng-show="infoFilter">-->
+			    <!--Hide </br> Info-->
+			<!--</div>-->
+			<!--<div class="button" ng-show="!infoFilter">-->
+			    <!--Show </br> Info-->
+			<!--</div>-->
+		    <!--</div>-->
+		    <!--<div class="button-wrap" ng-click="toggleFilter('warnFilter')">-->
+			<!--<div class="button active" ng-show="warnFilter">-->
+			    <!--Hide </br> Warnings-->
+			<!--</div>-->
+			<!--<div class="button" ng-show="!warnFilter">-->
+			    <!--Show </br> Warnings-->
+			<!--</div>-->
+		    <!--</div>-->
+		    <!--<div class="button-wrap" ng-click="toggleFilter('errorFilter')">-->
+			<!--<div class="button active" ng-show="errorFilter">-->
+			    <!--Hide </br> Errors-->
+			<!--</div>-->
+			<!--<div class="button" ng-show="!errorFilter">-->
+			    <!--Show </br> Errors-->
+			<!--</div>-->
+		    <!--</div>-->
+		<!--</div>-->
+	    <!--</div>-->
+	    <!-- 			<div class="button-row">
+		 <div class="prompt">
+		 Pick packages to show log messages from:
+		 </div>
+		 <select multiple ui-select2 id="package-selector-filter" class="right-align widthisbig" data-placeholder="Select Packages">
+		 <option value=""></option>
+		 <option ng-repeat="package in packages" value="{{package.name}}">{{package.name}}</option>
+		 </select>
+		 </div>
+	      </div> -->
+	    <!--<div style="height: auto">-->
+		<!--{{status}}&nbsp;-->
+		<!--<i id="loading-icon" class="glyphicon glyphicon-repeat gly-spin"></i>-->
+	    <!--</div>-->
+	    <!--<pre id="log-data">-->
+			<iframe id="live-Log" src={{refreshUrl}}></iframe>
+		<!--</pre>-->
+	    <!-- ng-show="logData">-->
+
+	    <!-- <div class="no-height" ng-repeat="datum in filteredData track by $index">
+		 {{datum}}
+		 </div>
+		 <div>
+		 {{datum}}
+		 </div>  -->
+	    <!--
+		 {{logData}}
+	       -->
+    </div>
+</body>

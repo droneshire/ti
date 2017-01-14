@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Analytics</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+		<!--  osohm: note that the less.js-middleware in Express will automatically compile the less files 
+      		  to css files on-the-fly. Should be converted to pre-compiled css for production. -->
+        <link rel="stylesheet" href="stylesheets/main.css">
+
+        <script src="html5-boilerplate-4.3.0/js/vendor/modernizr-2.6.2.min.js"></script>
+
+        <!-- Respond.js for IE 8 or less only -->
+		<!--[if (lt IE 9) & (!IEMobile)]>
+			<script src="respond/dest/respond.min.js"></script>
+		<![endif]-->
+		<style>
+		.activities {
+		    display: inline-block;
+		    width:100%;
+		}
+
+		.graphs {
+			text-align: center;
+		}
+
+		h1 {
+			text-align: center;
+		}
+		/* fixed header css */
+		div.FixedHeader_Cloned th,
+		div.FixedHeader_Cloned td {
+			background-color: white !important;
+		}
+
+		/* bootstraps borders are kind of weird with datatables
+		   removing them and adding my own */
+		.table th, .table td { 
+		     border-top: none !important; 
+		 }
+		tr {outline: 0.5px solid #f0f0f0;}
+		</style>
+    </head>
+    <body>
+		<!-- Bootstrap 3.x only supports IE8+ -->
+        <!--[if lte IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+		<%
+			var userActivityObj = [];
+			function print(s) {
+				if (s == null) {
+					return '-';
+				}
+				return s;
+			}
+			function printObj() {
+				return userActivityObj;
+			}
+			function printLengths(table) {
+				var s = '';
+				stats.forEach(function (stat) {
+					if (stat.tableKeysSorted[table] != null) {
+						s = s + '<td>' + print(stat.tableKeysSorted[table].length) + '</td>';
+					} else {
+						s = s + '<td>n/a</td>';
+					}
+				});
+				return s;
+			}
+
+			function getLengths(table) {
+				var s = [];
+				stats.forEach(function (stat) {
+					if (stat.tableKeysSorted[table] != null) {
+						s.push(stat.tableKeysSorted[table].length);
+					} else {
+						s.push(0);
+					}
+				});
+				return s;
+			}
+
+			function getTotals(table) {
+				var s = []
+				stats.forEach(function(stat) {
+					if (stat.tables[table]['#total'] != null) {
+						s.push(stat.tables[table]['#total']);
+					} else {
+						s.push(0);
+					}
+		 		});
+				return s;
+			}
+
+			function printTotals(name, table) {
+				userActivityObj[name] = [];
+				var s = '';
+				s += '<tr>';
+				s += '<td>' + name + '</td>';
+				if (statsOverall.tables[table] != null) {
+					s += '<td>' + print(statsOverall.tables[table]['#total']) + '</td>';
+					userActivityObj[name][(userActivityObj[name]).length] = statsOverall.tables[table]['#total'];
+				} else {
+					s += '<td>n/a</td>';
+					userActivityObj[name][(userActivityObj[name]).length] = 0;
+				}
+				stats.forEach(function(stat) {
+					if (stat.tables[table] != null) {
+						s += '<td>' + print(stat.tables[table]['#total']) + '</td>';
+					} else {
+						s += '<td>n/a</td>';
+					}
+		 		});
+				s += '<tr>';
+				return s;
+			}
+
+			function printTops(name, table, max) {
+				var s = '';
+				s += '<tr class="top-'+table+'">';
+				s += '<td>' + name + '<br></td>';
+				s += '<td></td>';
+				stats.forEach(function(stat) {
+					s += '<td></td>'
+				 });
+				s += '</tr>';
+				for (var i = 0; i < 100; i++) {
+					s += '<tr num="'+i+'" class="top-'+table+'">';
+					s += '<td>' + (i+1) + '</td>';
+					if (statsOverall.tableKeysSorted[table] != null) {
+						var overallKey = statsOverall.tableKeysSorted[table][i];
+					}	
+					if (overallKey != null) {
+						s += '<td>' + overallKey + ' (' + statsOverall.tables[table][overallKey] + ')</td>';
+					} else {
+						s += '<td> - </td>';
+					}
+
+					stats.forEach(function(stat) {
+						var key;
+						if (stat.tableKeysSorted[table] != null) {
+							key = stat.tableKeysSorted[table][i];
+						}
+						if (key != null) {
+				 			s += '<td>' + key + ' (' + stat.tables[table][key] + ')</td>';
+						} else {
+							s += '<td> - </td>';
+				 		}
+				 	});
+					s += '</tr>'
+			 	}
+				return s;
+			}
+		%>
+		<h1>Resource Explorer Analytics</h1>
+		<div class="graphs">
+<!-- 			<div id="userLegend" class="baby-box"> </div>
+			<div id="visitorLegend" class="baby-box"></div> -->
+			<div class="activities">
+				<h3>User Activity</h3>
+				<canvas id="userActivity" class="mychart" width="800" height="400"></canvas>
+				<h3>Number of Visitors</h3>
+				<canvas id="visitorActivity" class="mychart" width="800" height="400"></canvas>
+			</div>
+			<h3>Page Requests Made</h3>
+			<div class="requests">
+				<canvas id="requestActivity" class="mychart" width="800" height="400"></canvas>
+			</div>
+		</div>
+
+		<div class="container">
+		<h2> Detailed Data </h2>
+
+		<table class="table table-condensed sexyTable">
+			<thead>
+			<tr>
+				<th></th>
+				<th>Overall (since <%= statsOverall.date %>)</th>
+				<% stats.forEach(function(stat) { %>
+					<th><%= stat.date %></th>
+				<% }); %>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td>Total visitors</td>
+				<td>not applicable</td>
+				<%- printLengths('visitorSessions') %> <!-- this leaves the returned html tags unescaped -->
+			</tr>
+			<tr>
+				<td>New visitors</td>
+				<td><%= print(statsOverall.tableKeysSorted['newVisitors'].length) %></td>
+				<%- printLengths('newVisitors') %>
+			</tr>
+
+			<%- printTotals('Visitor sessions', 'visitorSessions') %>
+
+			<tr>
+				<td>IPs</td>
+				<td>not applicable</td>
+				<%- printLengths('uniqueIPs') %>
+			</tr>
+
+			<%- printTotals('Device/Devtool Selections', 'selections') %>
+			<%- printTotals('Searches', 'searches') %>
+			<%- printTotals('Views', 'views') %>
+			<%- printTotals('Downloads', 'downloads') %>
+			<%- printTotals('Imports', 'imports') %>
+			<%- printTotals('Total Requests', 'uniqueIPs') %>
+
+			<%- printTops('Top Visitors by Activity', 'visitorActivity', 5) %>
+			<%- printTops('Top IPs', 'uniqueIPs', 5) %>
+			<%- printTops('Top Device/Devtool Selections', 'selections', 5) %>
+			<%- printTops('Top Searches', 'searches', 5) %>
+			<%- printTops('Top Views', 'views', 5) %>
+			<%- printTops('Top Downloads', 'downloads', 5) %>
+			<%- printTops('Top Imports', 'imports', 5) %>
+			<%- printTops('Top Referrers', 'referers',5 )%>
+
+			</tbody>
+		</table>
+	</div>
+		<!-- scripts that are required by dependent script must be included first -->
+       <!-- <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script> -->
+        <script>window.jQuery || document.write('<script src="html5-boilerplate-4.3.0/js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+        <script src="bootstrap-3.1.1/dist/js/bootstrap.min.js"></script>
+        <script src="html5-boilerplate-4.3.0/js/plugins.js"></script>
+        <script src="html5-boilerplate-4.3.0/js/main.js"></script>
+        <script src="analytics/Chart.js"></script>
+        <script type="text/javascript" src="analytics/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="analytics/dataTables.fixedHeader.min.js"></script>
+        <script>
+
+        var max = 5;
+        // var modifiedMaxes = ['top-visitorActivity','top-uniqueIPs','top-selections','top-searches','top-downloads','top-imports','top-views'];
+        var modifiedMaxes = [];
+		// function printTops(name, table, max) {
+		// 	var s = '';
+		// 	for (var i = 0; i < max; i++) {
+		// 		s += '<tr class="top-'+table+'">';
+		// 		s += '<td>' + (i+1) + '</td>';
+		// 		var overallKey = statsOverall.tableKeysSorted[table][i];
+		// 		if (overallKey != null) {
+		// 			s += '<td>' + overallKey + ' (' + statsOverall.tables[table][overallKey] + ')</td>';
+		// 		} else {
+		// 			s += '<td> - </td>';
+		// 		}
+		// 		stats.forEach(function(stat) {
+		// 			var key;
+		// 			if (stat.tableKeysSorted[table] != null) {
+		// 				key = stat.tableKeysSorted[table][i];
+		// 			}
+		// 			if (key != null) {
+		// 	 			s += '<td>' + key + ' (' + stat.tables[table][key] + ')</td>';
+		// 			} else {
+		// 				s += '<td> - </td>';
+		// 	 		}
+		// 	 	});
+		// 		s += '</tr>'
+		//  	}
+		// 	return s;
+		// }
+
+		$(document).ready(function() {
+			var isShown = false;
+			//suppress data table warning to console
+			$.fn.dataTableExt.sErrMode = "console";
+			var table = $('.sexyTable').DataTable( {
+				"ordering": false,
+				"paging": false
+			});
+
+			new $.fn.dataTable.FixedHeader(table, {
+				left: true
+			});
+			
+			$.fn.dataTableExt.afnFiltering.push(
+			    function( oSettings, aData, iDataIndex ) {
+					var matches = false
+			        var nTr = oSettings.aoData[iDataIndex].nTr;
+			        if ( (nTr.getAttribute('num') < max))  {
+			            return true;
+			        }
+			        return false;
+			    });
+
+			table.draw();
+
+			$('.dataTables_filter').append("<a style='float:right;' class='more' href='javascript:void(0)'>Show More Data (Tops)</a>");
+	     //    $(".top-visitorActivity,.top-uniqueIPs,.top-selections,.top-searches,.top-downloads,.top-imports,.top-views").each(function() {
+	     //    	// var num = $(this).attr('num');
+	     //    	// if (num) {
+		    //     // 	if (num > max - 1) {
+		    //     // 		$(this).hide();
+		    //     // 	}
+	     //    	// }
+	     //    	var child = table.row(this).child;
+	     //    	console.log(child);
+	     //    	if ($(this).attr('num') > max) {
+	     //    		child.hide();
+	     //    	}
+	    	// });
+	    	// table.rows().each(function(rowIdx) {
+	    	// 	console.log($(this));
+	    	// });
+
+	  //       table.fnDestroy();
+	  //       var new_table = table = $('.sexyTable').dataTable( {
+			// 	"ordering": false,
+			// 	"paging": false
+			// });
+			// new $.fn.dataTable.FixedHeader(new_table, {
+			// 	left: true
+			// });
+			
+			$('.more').click(function() {
+				if (!isShown) {
+						//modifiedMaxes.push('top-'+tableName);	
+						max = 100;
+						$('.more').text("Show Less Data (Tops)") ;
+						isShown = true;
+				} else {
+					// var index = modifiedMaxes.indexOf('top-'+tableName);
+					// 	modifiedMaxes.splice(index,1);
+						max = 5;
+						$('.more').text("Show More Data (Tops)") ;
+						isShown = false;
+				}
+				table.draw();
+			});
+		});
+
+
+		var statsOverall = <%- JSON.stringify(statsOverall) %>;
+		var stats = <%- JSON.stringify(stats) %>;
+		var userActivityObj = {labels:[], datasets:[]};
+		var downloadData = [];
+		var importData = [];
+		var selectionData = [];
+		var viewData = []; 
+		var searchData = [];
+		for (i in stats) {
+			userActivityObj["labels"].push(stats[i].date);
+			var new_visits = 0;
+			var total_visits = 0;
+			var visitor_sessions = 0;
+			var downloads = 0;
+			var selections = 0;
+			var searches = 0;
+			var views = 0;
+			var downloads = 0;
+			var imports = 0;
+			if (stats[i].tables.downloads['#total'] != null) {
+				downloads = stats[i].tables.downloads['#total'];
+			}
+			if (stats[i].tables.imports['#total'] != null) {
+				imports = stats[i].tables.imports['#total'];
+			}
+			if (stats[i].tables.selections['#total'] != null) {
+				selections = stats[i].tables.selections['#total'];
+			}		
+			if (stats[i].tables.searches['#total'] != null) {
+				searches = stats[i].tables.searches['#total'];
+			}
+			if (stats[i].tables.views['#total'] != null) {
+				views = stats[i].tables.views['#total'];
+			}
+			downloadData.push(downloads);
+			importData.push(imports);
+			selectionData.push(selections);
+			searchData.push(searches);
+			viewData.push(views);
+		}
+		var total_visitors_data =  <%- JSON.stringify(getLengths('visitorSessions')) %>;
+		var new_visitors_data = <%- JSON.stringify(getLengths('newVisitors')) %>;
+		var visitor_session_data = <%- JSON.stringify(getTotals('visitorSessions')) %>;
+
+		var request_data = <%- JSON.stringify(getTotals('uniqueIPs')) %>;
+		</script>
+		<!-- Chart.js uses the same separator as ejs, so we need to put those references in a nother file to not confuse ejs -->
+        <script type="text/javascript" src="analytics/analytics.js"></script>
+    </body>
+</html>

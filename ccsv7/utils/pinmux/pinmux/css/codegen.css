@@ -1,0 +1,26 @@
+.codeGenOptionsPopDiv .title .glyphicon-cog {
+	color:#115566;
+	position:relative;
+	right:5px;
+	font-size:24px;
+	top:3px;
+}
+
+.codeGenOptionsPopDiv .title #codeGenOptionsTitle {
+	font-size:16px;
+	font-weight:bold;
+	text-decoration:underline;
+	position:relative;
+	top:-3px;
+	right:3px;
+}
+
+.codeGenOptionsPopDiv .formLayout {
+	padding: 10px 0;
+	border-bottom:1px solid #ddd;
+}
+
+.codeGenOptionsPopDiv .formLayout:last-child {
+	border-bottom:none;
+	padding-bottom:3px;
+}

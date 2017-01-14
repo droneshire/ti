@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cpu id="TMS700C41XX" isa="hidden" HW_revision="1.0" XML_version="1.0" description="IVA2 ARP32 CPU">
+
+	<register id="PC" acronym="PC" width="32" description="PC Register"/>
+	<register id="SP" acronym="SP" width="32" description="SP Register"/>
+	
+	<!-- defining CLK register as a dummy register even though ARP32 doesnot have one. If PC, SP and CLK registers are not defined,
+	debugger works weirdly and ignores register ID of 0x0 which is the ID of DBG_CAP -->
+	<instance href="..\Modules\ihwa\iva2_arp32\iva2_arp32_dummy.xml" id="" xml="iva2_arp32_dummy.xml" xmlpath="..\Modules\ihwa\iva2_arp32\" HW_version="1.0" description="Dummy Registers" requestor="TMS700C41XX" baseaddr="0x00" endaddr="0x07" size="0x08" accessnumbytes="4" permissions="p"/>
+	<!-- Adding hidden pseuod registers -->
+	<instance href="..\Modules\ihwa\ihwa_notvisible.xml" id="" xml="ihwa_notvisible.xml" xmlpath="..\Modules\ihwa\" HW_version="1.0" description="Dummy Registers" requestor="TMS700C41XX" baseaddr="0x00" endaddr="0x00" size="0x01" accessnumbytes="4" permissions="p"/>
+	
+	<instance href="..\Modules\ihwa\arp32_arch.xml" id="Arch" xml="arp32_arch.xml" xmlpath="..\Modules\ihwa\" HW_version="1.0" description="Architectural Registers" requestor="TMS700C41XX" baseaddr="0x00" endaddr="0x07" size="0x08" accessnumbytes="4" permissions="p"/>
+	<!-- IDE expression window needs to be able to access the arch registers without Arch prefix. Hence adding them again under hidden group -->
+	<instance href="..\Modules\ihwa\arp32_arch.xml" id="" xml="arp32_arch.xml" xmlpath="..\Modules\ihwa\" HW_version="1.0" description="" requestor="TMS700C41XX" baseaddr="0x00" endaddr="0x00" size="0x00" accessnumbytes="4" permissions="p"/>
+	<instance href="..\Modules\ihwa\arp32_control.xml" id="Control" xml="arp32_control.xml" xmlpath="..\Modules\ihwa\" HW_version="1.0" description="Control Registers" requestor="TMS700C41XX" baseaddr="0x00" endaddr="0x1f" size="0x20" accessnumbytes="4" permissions="p"/>
+	<instance href="..\Modules\ihwa\arp32_shadow.xml" id="Shadow" xml="arp32_shadow.xml" xmlpath="..\Modules\ihwa\" HW_version="1.0" description="Shadow Registers" requestor="TMS700C41XX" baseaddr="0x00" endaddr="0x0f" size="0x10" accessnumbytes="4" permissions="p"/>
+	<instance href="..\Modules\ihwa\arp32_debug.xml" id="Debug" xml="arp32_debug.xml" xmlpath="..\Modules\ihwa\" HW_revision="1.0" description="Debug Registers" requestor="TMS700C41XX" baseaddr="0" size="0" accessnumbytes="4" permissions="p"/>
+	<!-- ctools expects the debug registers be accessible without the Debug prefix. Hence adding them again under a hidden group with null id -->
+	<instance href="..\Modules\ihwa\arp32_debug.xml" id="" xml="arp32_debug.xml" xmlpath="..\Modules\ihwa\" HW_revision="1.0" description="" requestor="TMS700C41XX" baseaddr="0" size="0" accessnumbytes="4" permissions="p"/>
+	
+	<instance href="..\Modules\ihwa\iva2_arp32\icont5_cfg_targetdb.xml" id="ICONT5_System" xml="icont5_cfg_targetdb.xml" xmlpath="..\Modules\ihwa\iva2_arp32\" HW_revision="1.0" description="ICONT5 System Registers" requestor="TMS700C41XX" baseaddr="0x80000" size="0x2000" accessnumbytes="4" permissions="rw"/>
+	
+	<instance href="..\Modules\ihwa\iva2_arp32\ime5_target_db.xml" id="IME5_System" xml="ime5_target_db.xml" xmlpath="..\Modules\ihwa\iva2_arp32\" HW_revision="1.0" description="IME5 System Registers" requestor="TMS700C41XX" baseaddr="0x8a0000" size="0x20000" accessnumbytes="4" permissions="rw"/>
+	
+	<instance href="..\Modules\ihwa\iva2_arp32\lpf5_target_db.xml" id="ILF5_System" xml="lpf5_target_db.xml" xmlpath="..\Modules\ihwa\iva2_arp32\" HW_revision="1.0" description="ILF5 System Registers" requestor="TMS700C41XX" baseaddr="0x8e0000" size="0x10000" accessnumbytes="4" permissions="rw"/>
+	
+	<instance href="..\Modules\ihwa\iva2_arp32\calc5_target_db.xml" id="CALC5_System" xml="calc5_target_db.xml" xmlpath="..\Modules\ihwa\iva2_arp32\" HW_revision="1.0" description="CALC5 System Registers" requestor="TMS700C41XX" baseaddr="0x920000" size="0x20000" accessnumbytes="4" permissions="rw"/>
+	
+	<instance href="..\Modules\ihwa\iva2_arp32\ecd5_target_db.xml" id="ECD5_System" xml="ecd5_target_db.xml" xmlpath="..\Modules\ihwa\iva2_arp32\" HW_revision="1.0" description="ECD5 System Registers" requestor="TMS700C41XX" baseaddr="0x940000" size="0x20000" accessnumbytes="4" permissions="rw"/>
+	
+	<instance href="..\Modules\ihwa\iva2_arp32\ipe5_target_db.xml" id="IPE5_System" xml="ipe5_target_db.xml" xmlpath="..\Modules\ihwa\iva2_arp32\" HW_revision="1.0" description="IPE5 System Registers" requestor="TMS700C41XX" baseaddr="0x960000" size="0x10000" accessnumbytes="4" permissions="rw"/>
+	
+	<instance href="..\Modules\ihwa\iva2_arp32\mc5_target_db.xml" id="MC5_System" xml="mc5_target_db.xml" xmlpath="..\Modules\ihwa\iva2_arp32\" HW_revision="1.0" description="MC5 System Registers" requestor="TMS700C41XX" baseaddr="0x980000" size="0x30000" accessnumbytes="4" permissions="rw"/>
+
+</cpu>

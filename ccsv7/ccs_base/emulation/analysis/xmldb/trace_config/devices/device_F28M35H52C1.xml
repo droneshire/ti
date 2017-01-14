@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<!-- This file defines how ETB Trace attributes are available for a device.
+	 This information is used by Trace subsystem to find out setup parameters 
+	 and way to access and configure those parameters. 
+ -->
+<!-- ETB Trace Setup Attributes for OMAP3430 -->
+<device id="Sonata" value="0xb92902f" mask="0x0FFFFFFF" HW_revision="1.0" XML_version="1.0">
+
+<FileVersion version="2.0.0.0" Copyright="Copyright (c) 2005-2007 Texas Instruments"></FileVersion>
+	<trace_routes>
+		<route>
+			<source source="sonata_M3"/>
+			<link module=""/>
+			<sink module="MOD_ETB0"/>
+			<pin module=""/>
+		</route> 						
+		<route>
+			<source source="sonata_M3"/>
+			<link module=""/>
+			<sink module="MOD_TPIU"/>
+			<pin module="MOD_DRM"/>
+		</route> 
+		
+	</trace_routes>
+
+	<!-- Supported proc access mechanisms for the device -->
+	<procs>
+		<!-- sonata C28x -->
+		<proc id="sonata_C28" kind="tms320c28xx" traceid="0">
+			<identifier>
+			</identifier> 	
+		</proc>
+
+		<!-- sonata CortexM3-->
+		<proc id="sonata_M3" kind="cortex_mxx" traceid="0">
+			<identifier>
+				<register id="PID0" address="0xE00FFFE0" page="0" addrunit="1" width="32" type="mem"/>
+				<value idvalue="0" />
+			</identifier> 	
+		</proc>
+
+		<!-- sonata CortexM3-->
+		<proc id="sonata_ARIA" kind="cortex_mxx" traceid="1">
+			<identifier>
+				<register id="PID0" address="0xE00FFFE0" page="0" addrunit="1" width="32" type="mem"/>
+				<value idvalue="0" />
+			</identifier> 	
+		</proc>
+
+	</procs>
+
+	<!-- Available Trace sources for the device -->
+	<sources>
+		<!-- processor Trace source -->
+		<source id="sonata_M3" proc="sonata_M3" stmmaster = "false">					
+			<components>
+				<component module="MOD_ITM"/>
+			</components> 
+			<characteristics>
+				<characteristic id="DEV_CHAR_ITM_SUPPORT" value="1"/> 
+				<characteristic id="DEV_CHAR_CTI" value="0"/> 
+				<characteristic id="DEV_CHAR_CTIFILE" value="AET_PropertyCTI_GB.xml"/> 
+				<characteristic id="DEV_CHAR_SCTMFILE" value="AET_PropertyARM_M3_DWT.xml"/>
+				<characteristic id="DEV_CHAR_ATBID" value="0x1"/>
+			</characteristics>
+		</source> 		
+			
+		<source id="sonata_C28" proc="sonata_C28" stmmaster = "false">					
+			<components>
+			</components> 
+			<characteristics>
+				<characteristic id="DEV_CHAR_CTI" value="0"/> 
+				<characteristic id="DEV_CHAR_CTIFILE" value="AET_PropertyCTI_GB.xml"/> 
+			</characteristics>
+		</source> 					
+		
+		<source id="sonata_ARIA" proc="sonata_ARIA" stmmaster = "false">					
+			<components>
+			</components> 
+			<characteristics>
+				<characteristic id="DEV_CHAR_CTI" value="0"/> 
+				<characteristic id="DEV_CHAR_CTIFILE" value="AET_PropertyCTI_GB.xml"/> 
+			</characteristics>
+		</source> 		
+			
+	</sources>
+
+	<!-- Available modules asscoiated with various modules in the device -->
+	<modules> 
+		<!-- Pins module -->
+		<module id ="MOD_DRM"  kind="drm" proc="Cortex_M3_0" version="1.0" >
+			<registers>
+			</registers>
+			<!-- Define dsp, pti, and tpiu pin maps supported for this device -->
+			<mapping id="program.pinouts">
+				<map program="0" pinouts="tpiu=2,0" />
+				<map program="1" pinouts="tpiu=2,1,0" />
+				<map program="2" pinouts="tpiu=2,4,3,1,0" />
+			</mapping>
+		</module>
+
+
+		<module id ="MOD_ITM"  kind="drm" proc="sonata_M3" version="1.0" >
+			<mapping id="masterid.decoder">
+				<map masterid="1"   decoder="ItmDWTDecodeUnit"/>
+				<map masterid="2"   decoder="ItmSWDecodeUnit"/>						
+			</mapping>
+		</module>	
+
+		<!-- version 0 indicates a TPIU light type -->
+		<module id ="MOD_TPIU"  kind="tpiu" proc="" version="0" >
+			<registers>
+			</registers>
+			<characteristics>
+				<characteristic id="DEV_CHAR_TPIUBASE" value="0xE0040000"/> 
+			</characteristics>
+		</module>	
+	</modules>
+
+
+</device>

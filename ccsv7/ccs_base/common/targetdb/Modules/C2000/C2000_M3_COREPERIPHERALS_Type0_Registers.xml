@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- 
+  TI File $Revision: 
+  Checkin $Date: 
+  --> 
+
+<!--  28M35x M3 CORE PERIPHERALS Registers 
+     =================================== 
+     The offsets noted below are based on the base address that is specified in the device file that includes this file 
+     --> 
+<module id="M3 CORE PERIPHERALS" HW_revision="" XML_version="1" description="M3 CORE PERIPHERALS Registers">
+    <!--  4 empty  -->
+    <register id="NVIC_INT_TYPE" acronym="NVIC_INT_TYPE" offset="4" page="1" width="32" description="Interrupt Controller Type Reg" />
+    <!--  8 empty  -->
+    <register id="SYSTICK_ST_CTRL" acronym="SYSTICK_ST_CTRL" offset="16" page="1" width="32" description="SysTick Control and Status Reg" />
+    <register id="SYSTICK_ST_RELOAD" acronym="SYSTICK_ST_RELOAD" offset="20" page="1" width="32" description="SysTick Reload Value Register" />
+    <register id="SYSTICK_ST_CURRENT" acronym="SYSTICK_ST_CURRENT" offset="24" page="1" width="32" description="SysTick Current Value Register" />
+    <register id="SYSTICK_ST_CAL" acronym="SYSTICK_ST_CAL" offset="28" page="1" width="32" description="SysTick Calibration Value Reg" />
+    <!--  224 empty  -->
+    <register id="NVIC_EN0" acronym="NVIC_EN0" offset="256" page="1" width="32" description="IRQ 0 to 31 Set Enable Register" />
+    <register id="NVIC_EN1" acronym="NVIC_EN1" offset="260" page="1" width="32" description="IRQ 32 to 63 Set Enable Register" />
+    <register id="NVIC_EN2" acronym="NVIC_EN2" offset="264" page="1" width="32" description="IRQ 64 to 95 Set Enable Register" />
+    <!--  116 empty  -->
+    <register id="NVIC_DIS0" acronym="NVIC_DIS0" offset="384" page="1" width="32" description="IRQ 0 to 31 Clear Enable Reg" />
+    <register id="NVIC_DIS1" acronym="NVIC_DIS1" offset="388" page="1" width="32" description="IRQ 32 to 63 Clear Enable Reg" />
+    <register id="NVIC_DIS2" acronym="NVIC_DIS2" offset="392" page="1" width="32" description="IRQ 64 to 95 Clear Enable Reg" />
+    <!--  116 empty  -->
+    <register id="NVIC_PEND0" acronym="NVIC_PEND0" offset="512" page="1" width="32" description="IRQ 0 to 31 Set Pending Register" />
+    <register id="NVIC_PEND1" acronym="NVIC_PEND1" offset="516" page="1" width="32" description="IRQ 32 to 63 Set Pending Reg" />
+    <register id="NVIC_PEND2" acronym="NVIC_PEND2" offset="520" page="1" width="32" description="IRQ 64 to 95 Set Pending Reg" />
+    <!--  116 empty  -->
+    <register id="NVIC_UNPEND0" acronym="NVIC_UNPEND0" offset="640" page="1" width="32" description="IRQ 0 to 31 Clear Pending Reg" />
+    <register id="NVIC_UNPEND1" acronym="NVIC_UNPEND1" offset="644" page="1" width="32" description="IRQ 32 to 63 Clear Pending Reg" />
+    <register id="NVIC_UNPEND2" acronym="NVIC_UNPEND2" offset="648" page="1" width="32" description="IRQ 64 to 95 Clear Pending Reg" />
+    <!--  116 empty  -->
+    <register id="NVIC_ACTIVE0" acronym="NVIC_ACTIVE0" offset="768" page="1" width="32" description="IRQ 0 to 31 Active Register" />
+    <register id="NVIC_ACTIVE1" acronym="NVIC_ACTIVE1" offset="772" page="1" width="32" description="IRQ 32 to 63 Active Register" />
+    <register id="NVIC_ACTIVE2" acronym="NVIC_ACTIVE2" offset="776" page="1" width="32" description="IRQ 64 to 95 Active Register" />
+    <!--  244 empty  -->
+    <register id="NVIC_PRI0" acronym="NVIC_PRI0" offset="1024" page="1" width="32" description="IRQ 0 to 3 Priority Register" />
+    <register id="NVIC_PRI1" acronym="NVIC_PRI1" offset="1028" page="1" width="32" description="IRQ 4 to 7 Priority Register" />
+    <register id="NVIC_PRI2" acronym="NVIC_PRI2" offset="1032" page="1" width="32" description="IRQ 8 to 11 Priority Register" />
+    <register id="NVIC_PRI3" acronym="NVIC_PRI3" offset="1036" page="1" width="32" description="IRQ 12 to 15 Priority Register" />
+    <register id="NVIC_PRI4" acronym="NVIC_PRI4" offset="1040" page="1" width="32" description="IRQ 16 to 19 Priority Register" />
+    <register id="NVIC_PRI5" acronym="NVIC_PRI5" offset="1044" page="1" width="32" description="IRQ 20 to 23 Priority Register" />
+    <register id="NVIC_PRI6" acronym="NVIC_PRI6" offset="1048" page="1" width="32" description="IRQ 24 to 27 Priority Register" />
+    <register id="NVIC_PRI7" acronym="NVIC_PRI7" offset="1052" page="1" width="32" description="IRQ 28 to 31 Priority Register" />
+    <register id="NVIC_PRI8" acronym="NVIC_PRI8" offset="1056" page="1" width="32" description="IRQ 32 to 35 Priority Register" />
+    <register id="NVIC_PRI9" acronym="NVIC_PRI9" offset="1060" page="1" width="32" description="IRQ 36 to 39 Priority Register" />
+    <register id="NVIC_PRI10" acronym="NVIC_PRI10" offset="1064" page="1" width="32" description="IRQ 40 to 43 Priority Register" />
+    <register id="NVIC_PRI11" acronym="NVIC_PRI11" offset="1068" page="1" width="32" description="IRQ 44 to 47 Priority Register" />
+    <register id="NVIC_PRI12" acronym="NVIC_PRI12" offset="1072" page="1" width="32" description="IRQ 48 to 51 Priority Register" />
+    <register id="NVIC_PRI13" acronym="NVIC_PRI13" offset="1076" page="1" width="32" description="IRQ 52 to 55 Priority Register" />
+    <register id="NVIC_PRI14" acronym="NVIC_PRI14" offset="1080" page="1" width="32" description="IRQ 56 to 59 Priority Register" />
+    <register id="NVIC_PRI15" acronym="NVIC_PRI15" offset="1084" page="1" width="32" description="IRQ 60 to 63 Priority Register" />
+    <register id="NVIC_PRI16" acronym="NVIC_PRI16" offset="1088" page="1" width="32" description="IRQ 64 to 67 Priority Register" />
+    <register id="NVIC_PRI17" acronym="NVIC_PRI17" offset="1092" page="1" width="32" description="IRQ 68 to 71 Priority Register" />
+    <register id="NVIC_PRI18" acronym="NVIC_PRI18" offset="1096" page="1" width="32" description="IRQ 72 to 75 Priority Register" />
+    <register id="NVIC_PRI19" acronym="NVIC_PRI19" offset="1100" page="1" width="32" description="IRQ 76 to 79 Priority Register" />
+    <register id="NVIC_PRI20" acronym="NVIC_PRI20" offset="1104" page="1" width="32" description="IRQ 80 to 83 Priority Register" />
+    <register id="NVIC_PRI21" acronym="NVIC_PRI21" offset="1108" page="1" width="32" description="IRQ 84 to 87 Priority Register" />
+    <register id="NVIC_PRI22" acronym="NVIC_PRI22" offset="1112" page="1" width="32" description="IRQ 88 to 91 Priority Register" />
+    <register id="NVIC_PRI23" acronym="NVIC_PRI23" offset="1116" page="1" width="32" description="IRQ 92 to 95 Priority Register" />
+    <!--  2208 empty  -->
+    <register id="SCB_CPUID" acronym="SCB_CPUID" offset="3328" page="1" width="32" description="CPUID Base Register" />
+    <register id="SCB_INT_CTRL" acronym="SCB_INT_CTRL" offset="3332" page="1" width="32" description="Interrupt Control State Register" />
+    <register id="SCB_VTABLE" acronym="SCB_VTABLE" offset="3336" page="1" width="32" description="Vector Table Offset Register" />
+    <register id="SCB_APINT" acronym="SCB_APINT" offset="3340" page="1" width="32" description="App. Int &amp; Reset Control Reg" />
+    <register id="SCB_SYS_CTRL" acronym="SCB_SYS_CTRL" offset="3344" page="1" width="32" description="System Control Register" />
+    <register id="SCB_CFG_CTRL" acronym="SCB_CFG_CTRL" offset="3348" page="1" width="32" description="Configuration Control Register" />
+    <register id="SCB_SYS_PRI1" acronym="SCB_SYS_PRI1" offset="3352" page="1" width="32" description="Sys. Handlers 4 to 7 Priority" />
+    <register id="SCB_SYS_PRI2" acronym="SCB_SYS_PRI2" offset="3356" page="1" width="32" description="Sys. Handlers 8 to 11 Priority" />
+    <register id="SCB_SYS_PRI3" acronym="SCB_SYS_PRI3" offset="3360" page="1" width="32" description="Sys. Handlers 12 to 15 Priority" />
+    <register id="SCB_SYS_HND_CTRL" acronym="SCB_SYS_HND_CTRL" offset="3364" page="1" width="32" description="System Handler Control and State" />
+    <register id="SCB_FAULT_STAT" acronym="SCB_FAULT_STAT" offset="3368" page="1" width="32" description="Configurable Fault Status Reg" />
+    <register id="SCB_HFAULT_STAT" acronym="SCB_HFAULT_STAT" offset="3372" page="1" width="32" description="Hard Fault Status Register" />
+    <register id="DEBUG_STAT" acronym="DEBUG_STAT" offset="3376" page="1" width="32" description="Debug Status Register" />
+    <register id="SCB_MM_ADDR" acronym="SCB_MM_ADDR" offset="3380" page="1" width="32" description="Mem Manage Address Register" />
+    <register id="SCB_FAULT_ADDR" acronym="SCB_FAULT_ADDR" offset="3384" page="1" width="32" description="Bus Fault Address Register" />
+    <!--  84 empty  -->
+    <register id="MPU_TYPE" acronym="MPU_TYPE" offset="3472" page="1" width="32" description="MPU Type Register" />
+    <register id="MPU_CTRL" acronym="MPU_CTRL" offset="3476" page="1" width="32" description="MPU Control Register" />
+    <register id="MPU_NUMBER" acronym="MPU_NUMBER" offset="3480" page="1" width="32" description="MPU Region Number Register" />
+    <register id="MPU_BASE" acronym="MPU_BASE" offset="3484" page="1" width="32" description="MPU Region Base Address Register" />
+    <register id="MPU_ATTR" acronym="MPU_ATTR" offset="3488" page="1" width="32" description="MPU Region Attribute &amp; Size Reg" />
+    <!--  76 empty  -->
+    <register id="DEBUG_DBG_CTRL" acronym="DEBUG_DBG_CTRL" offset="3568" page="1" width="32" description="Debug Control and Status Reg" />
+    <register id="DEBUG_DBG_XFER" acronym="DEBUG_DBG_XFER" offset="3572" page="1" width="32" description="Debug Core Reg. Transfer Select" />
+    <register id="DEBUG_DBG_DATA" acronym="DEBUG_DBG_DATA" offset="3576" page="1" width="32" description="Debug Core Register Data" />
+    <register id="DEBUG_DBG_INT" acronym="DEBUG_DBG_INT" offset="3580" page="1" width="32" description="Debug Reset Interrupt Control" />
+    <!--  256 empty  -->
+    <register id="NVIC_SW_TRIG" acronym="NVIC_SW_TRIG" offset="3840" page="1" width="32" description="Software Trigger Interrupt Reg" />
+</module>

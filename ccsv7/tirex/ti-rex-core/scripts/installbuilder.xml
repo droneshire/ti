@@ -1,0 +1,310 @@
+<project>
+    <shortName>TIRex</shortName>
+    <fullName>TIRex</fullName>
+    <version>2.0.0.2</version>
+    <installerFilename>tirex_${product_version}_${platform_suffix}.${platform_exec_suffix}</installerFilename>
+    <debugLevel>4</debugLevel>
+    <componentList>
+        <component>
+            <name>tirex</name>
+            <description>TIRex</description>
+            <canBeEdited>1</canBeEdited>
+            <selected>1</selected>
+            <show>1</show>
+            <folderList>
+                <folder>
+                    <description>TIRex</description>
+                    <destination>${installdir}</destination>
+                    <name>tirex</name>
+                    <platforms>all</platforms>
+                    <distributionFileList>
+                        <distributionDirectory>
+                            <origin>${buildartifacts}/tirex</origin>
+                        </distributionDirectory>
+                    </distributionFileList>
+                </folder>
+            </folderList>
+        </component>
+    </componentList>
+    <preBuildActionList>
+        <throwError>
+            <text>You need to specify buildartifacts on the build command line. (IE --setvars buildartifacts=path-to-artifacts</text>
+            <ruleList>
+                <compareText>
+                    <logic>contains</logic>
+                    <text>${buildartifacts}</text>
+                    <value>unknown variable</value>
+                </compareText>
+            </ruleList>
+        </throwError>
+        <setInstallerVariable>
+            <name>platform_suffix</name>
+            <value>win32</value>
+            <ruleList>
+                <compareText logic="equals" text="${platform_name}" value="windows"/>
+            </ruleList>
+        </setInstallerVariable>
+        <setInstallerVariable>
+            <name>platform_suffix</name>
+            <value>linux32</value>
+            <ruleList>
+                <compareText logic="equals" text="${platform_name}" value="linux"/>
+            </ruleList>
+        </setInstallerVariable>
+        <setInstallerVariable>
+            <name>platform_suffix</name>
+            <value>linux64</value>
+            <ruleList>
+                <compareText logic="equals" text="${platform_name}" value="linux-x64"/>
+            </ruleList>
+        </setInstallerVariable>		
+        <setInstallerVariable>
+            <name>platform_suffix</name>
+            <value>osx</value>
+            <ruleList>
+                <compareText logic="equals" text="${platform_name}" value="osx"/>
+            </ruleList>
+        </setInstallerVariable>
+    </preBuildActionList>
+    <preInstallationActionList>
+        <setInstallerVariable>
+            <name>installdir_prefix</name>
+            <value>C:\\ti</value>
+            <ruleList>
+                <platformTest>
+                    <type>windows</type>
+                </platformTest>
+            </ruleList>
+        </setInstallerVariable>
+        <setInstallerVariable>
+            <name>installdir_prefix</name>
+            <value>/opt/ti</value>
+            <ruleList>
+                <platformTest>
+                    <negate>1</negate>
+                    <type>windows</type>
+                </platformTest>
+                <compareText logic="equals" text="${installer_is_root_install}" value="1"/>
+            </ruleList>
+        </setInstallerVariable>
+        <setInstallerVariable>
+            <name>installdir_prefix</name>
+            <value>${env(HOME)}/ti</value>
+            <ruleList>
+                <platformTest>
+                    <negate>1</negate>
+                    <type>windows</type>
+                </platformTest>
+                <compareText logic="does_not_equal" text="${installer_is_root_install}" value="1"/>
+            </ruleList>
+        </setInstallerVariable>
+    </preInstallationActionList>
+    <readyToInstallActionList>
+        <createDirectory>
+            <path>${installdir}/install_logs</path>
+            <ruleList>
+                <fileTest condition="not_exists" path="${installdir}/install_logs"/>
+            </ruleList>
+        </createDirectory>
+        <createDirectory>
+            <path>${installdir}/uninstallers</path>
+            <ruleList>
+                <fileTest condition="not_exists" path="${installdir}/uninstallers"/>
+            </ruleList>
+        </createDirectory>
+        <setInstallerVariable>
+            <name>app_config</name>
+            <value>app_localserver_win.json</value>
+            <ruleList>
+                <platformTest>
+                    <type>windows</type>
+                </platformTest>
+            </ruleList>
+        </setInstallerVariable>
+        <setInstallerVariable>
+            <name>app_config</name>
+            <value>app_localserver.json</value>
+            <ruleList>
+                <platformTest>
+                    <type>linux</type>
+                </platformTest>
+            </ruleList>
+        </setInstallerVariable>
+        <setInstallerVariable>
+            <name>app_config</name>
+            <value>app_localserver.json</value>
+            <ruleList>
+                <platformTest>
+                    <type>linux-x64</type>
+                </platformTest>
+            </ruleList>
+        </setInstallerVariable>		
+        <setInstallerVariable>
+            <name>app_config</name>
+            <value>app_localserver.json</value>
+            <ruleList>
+                <platformTest>
+                    <type>osx</type>
+                </platformTest>
+            </ruleList>
+        </setInstallerVariable>
+    </readyToInstallActionList>
+    <postInstallationActionList>
+        <runProgram>
+            <abortOnError>0</abortOnError>
+            <bnBrr4ZbREq2WBaTOYPjoF3b></bnBrr4ZbREq2WBaTOYPjoF3b>
+            <program>${installdir}/tirex/node</program>
+            <programArguments>${installdir}/tirex/ti-rex-core/app.js ${installdir}/tirex/ti-rex-core/dinfra-desktop/dinfra.js ${installdir}/tirex/ti-rex-core/config/dconfig_localserver.json ${installdir}/tirex/ti-rex-core/config/${app_config} --install</programArguments>
+            <showMessageOnError>0</showMessageOnError>
+        </runProgram>
+    </postInstallationActionList>
+    <postUninstallerCreationActionList>
+        <runProgram>
+            <abortOnError>0</abortOnError>
+            <bnBrr4ZbREq2WBaTOYPjoF3b></bnBrr4ZbREq2WBaTOYPjoF3b>
+            <program>chmod</program>
+            <programArguments>777 "${installdir}/uninstallers/uninstall_tirex"</programArguments>
+            <showMessageOnError>0</showMessageOnError>
+            <ruleList>
+                <platformTest type="linux-x64"/>
+            </ruleList>
+        </runProgram>	
+        <runProgram>
+            <abortOnError>0</abortOnError>
+            <bnBrr4ZbREq2WBaTOYPjoF3b></bnBrr4ZbREq2WBaTOYPjoF3b>
+            <program>chmod</program>
+            <programArguments>644 "${installdir}/uninstallers/uninstall_tirex.dat"</programArguments>
+            <showMessageOnError>0</showMessageOnError>
+            <ruleList>
+                <platformTest type="linux-x64"/>
+            </ruleList>
+        </runProgram>	
+        <runProgram>
+            <abortOnError>0</abortOnError>
+            <bnBrr4ZbREq2WBaTOYPjoF3b></bnBrr4ZbREq2WBaTOYPjoF3b>
+            <program>chmod</program>
+            <programArguments>777 "${installdir}/uninstallers/uninstall_tirex"</programArguments>
+            <showMessageOnError>0</showMessageOnError>
+            <ruleList>
+                <platformTest type="linux"/>
+            </ruleList>
+        </runProgram>	
+        <runProgram>
+            <abortOnError>0</abortOnError>
+            <bnBrr4ZbREq2WBaTOYPjoF3b></bnBrr4ZbREq2WBaTOYPjoF3b>
+            <program>chmod</program>
+            <programArguments>644 "${installdir}/uninstallers/uninstall_tirex.dat"</programArguments>
+            <showMessageOnError>0</showMessageOnError>
+            <ruleList>
+                <platformTest type="linux"/>
+            </ruleList>
+        </runProgram>
+        <runProgram>
+            <abortOnError>0</abortOnError>
+            <bnBrr4ZbREq2WBaTOYPjoF3b></bnBrr4ZbREq2WBaTOYPjoF3b>
+            <program>chmod</program>
+            <programArguments>-R 777 "${installdir}/uninstallers/uninstall_tirex.app"</programArguments>
+            <ruleList>
+                <platformTest type="osx"/>
+            </ruleList>
+        </runProgram>
+    </postUninstallerCreationActionList>
+    <postUninstallationActionList>
+        <deleteFile>
+            <path>${installdir}/install_logs/tirex_${project.version}_install.log</path>
+        </deleteFile>
+    </postUninstallationActionList>
+    <cdromDirectory></cdromDirectory>
+    <compressionAlgorithm>lzma-ultra</compressionAlgorithm>
+    <createWindowsARPEntry>0</createWindowsARPEntry>
+    <enableDebugger>1</enableDebugger>
+    <enableRollback>0</enableRollback>
+    <enableTimestamp>1</enableTimestamp>
+    <ignoreInvalidOptions>1</ignoreInvalidOptions>
+    <installationLogFile>${installdir}/install_logs/tirex_${project.version}_install.log</installationLogFile>
+    <removeLogFile>1</removeLogFile>
+    <requestedExecutionLevel>asInvoker</requestedExecutionLevel>
+    <singleInstanceCheck>1</singleInstanceCheck>
+    <startMenuGroupName></startMenuGroupName>
+    <uninstallerDirectory>${installdir}/uninstallers</uninstallerDirectory>
+    <uninstallerName>uninstall_tirex</uninstallerName>
+    <vendor>Texas Instruments</vendor>
+    <installationAbortedActionList>
+        <runProgram>
+            <abortOnError>0</abortOnError>
+            <bnBrr4ZbREq2WBaTOYPjoF3b></bnBrr4ZbREq2WBaTOYPjoF3b>
+            <program>chmod</program>
+            <programArguments>-R 666 "${installer_installation_log}"</programArguments>
+            <ruleList>
+                <platformTest type="windows">
+                    <negate>1</negate>
+                </platformTest>
+            </ruleList>
+        </runProgram>
+        <copyFile>
+            <abortOnError>0</abortOnError>
+            <destination>${installdir}/install_logs/tirex_${project.version}_install.log</destination>
+            <origin>${installer_installation_log}</origin>
+            <showMessageOnError>0</showMessageOnError>
+        </copyFile>
+    </installationAbortedActionList>
+    <parameterList>
+        <directoryParameter>
+            <name>installdir</name>
+            <description>Installer.Parameter.installdir.description</description>
+            <explanation>Installer.Parameter.installdir.explanation</explanation>
+            <value></value>
+            <default>${installdir_prefix}/ccsv6</default>
+            <allowEmptyValue>0</allowEmptyValue>
+            <ask>yes</ask>
+            <cliOptionName>prefix</cliOptionName>
+            <mustBeWritable>yes</mustBeWritable>
+            <mustExist>0</mustExist>
+            <width>40</width>
+        </directoryParameter>
+        <directoryParameter>
+            <name>eclipsedir</name>
+            <description>Existing eclipse location</description>
+            <explanation>Existing eclipse location</explanation>
+            <value></value>
+            <default></default>
+            <allowEmptyValue>1</allowEmptyValue>
+            <ask>no</ask>
+            <cliOptionName>eclipseprefix</cliOptionName>
+            <mustBeWritable>yes</mustBeWritable>
+            <mustExist>0</mustExist>
+            <width>40</width>
+        </directoryParameter>
+        <booleanParameter>
+            <name>ccs</name>
+            <description></description>
+            <explanation>True passed by the calling installer if being installed for CCS.</explanation>
+            <value></value>
+            <default>false</default>
+            <ask>0</ask>
+            <cliOptionName>ccs</cliOptionName>
+        </booleanParameter>
+        <booleanParameter>
+            <name>test</name>
+            <description></description>
+            <explanation>True passed by the calling installer will stop the install from being deleted at the end.</explanation>
+            <value></value>
+            <default>false</default>
+            <ask>0</ask>
+            <cliOptionName>test</cliOptionName>
+        </booleanParameter>
+        <directoryParameter>
+            <name>buildartifacts</name>
+            <description></description>
+            <explanation></explanation>
+            <value></value>
+            <default></default>
+            <allowEmptyValue>0</allowEmptyValue>
+            <ask>0</ask>
+            <mustBeWritable>0</mustBeWritable>
+            <mustExist>0</mustExist>
+            <width>40</width>
+        </directoryParameter>
+    </parameterList>
+ </project>
+

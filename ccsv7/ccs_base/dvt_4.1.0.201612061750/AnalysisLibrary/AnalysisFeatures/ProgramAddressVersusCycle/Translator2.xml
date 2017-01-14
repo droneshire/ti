@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<translate name="nop">
+	<passthru name="Program Address"	input="Program_Address"/>
+	<passthru name="Cycle"	input="Cycle"/>
+</translate>
+

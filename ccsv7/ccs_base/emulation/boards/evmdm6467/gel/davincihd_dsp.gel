@@ -1,0 +1,352 @@
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  davincihd_dsp.gel                                                       *
+ *  Version 0.03                                                            *
+ *                                                                          *
+ *  This GEL file is designed to be used in conjunction with                *
+ *  CCStudio 3.2+ and the DM646x based EVM.                                 *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  StartUp( )                                                              *
+ *      Setup Memory Map                                                    *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+StartUp( )
+{
+    Setup_Memory_Map( );
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  OnTargetConnect( )                                                      *
+ *      Setup PinMux, Power, PLLs, DDR, & EMIF                              *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+OnTargetConnect( )
+{
+    GEL_TextOut( "\nDaVinci HD Startup Sequence\n\n" );
+
+    Setup_Cache( );                     // Setup L1P/L1D Cache
+
+    GEL_TextOut( "\nStartup Complete.\n\n" );
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  OnPreFileLoaded( )                                                      *
+ *      This function is called automatically when the 'Load Program'       *
+ *      Menu item is selected.                                              *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+OnPreFileLoaded( )
+{
+    /*
+     *  GEL_Reset() is used to deal with the worst case senario of
+     *  unknown target state.  If for some reason a reset is not desired
+     *  upon target connection, GEL_Reset() may be removed and replaced
+     *  with something "less brutal" like a cache initialization
+     *  function.
+     */
+    GEL_Reset( );
+
+    Disable_VPSS( );                // Disable VPSS
+
+    GEL_TextOut( "Clear L2 Cache in DDR Range\n" );
+    GEL_MemoryFill( 0x01848200, 0, 0x40, 0 );
+    Setup_Cache( );                 // Invalidate Cache
+
+    Disable_EDMA( );                // Disable EDMA
+
+    IER = 0;                        // Disable DSP interrupts
+    IFR = 0;
+
+    GEL_TextOut( "\n" );
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  OnRestart( )                                                            *
+ *      This function is called by CCS when you do Debug->Restart.          *
+ *      The goal is to put the C6x into a known good state with respect to  *
+ *      cache, edma and interrupts.                                         *
+ *      Failure to do this can cause problems when you restart and          *
+ *      run your application code multiple times.  This is different        *
+ *      then OnPreFileLoaded() which will do a GEL_Reset() to get the       *
+ *      C6x into a known good state.                                        *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+OnRestart( int nErrorCode )
+{
+    /*
+     *  Turn off L2 for DDR.  The app should manage these for coherency
+     *  in the application.  Disable L2 cache in the DDR memory space
+     */
+    GEL_TextOut( "Clear L2 Cache in DDR Range\n" );
+    GEL_MemoryFill( 0x01848200, 0, 0x40, 0 );
+
+    Setup_Cache( );                 // Setup Cache
+
+    Disable_EDMA( );                // Disable EDMA
+
+    IER = 0;                        // Disable DSP interrupts
+    IFR = 0;
+    GEL_TextOut( "\n" );
+}
+
+menuitem "DaVinci EVM Memory Map";
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  Setup_Memory_Map( )                                                     *
+ *      Setup the Memory Map for ARM side only.                             *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+hotmenu
+Setup_Memory_Map( )
+{
+    GEL_MapOn( );
+    GEL_MapReset( );
+
+    /* ARM RAM & ROM */
+    GEL_MapAddStr( 0x10010000, 0, 0x00004000, "R|W|AS4", 0 );   // ARM RAM0 Data
+    GEL_MapAddStr( 0x10014000, 0, 0x00004000, "R|W|AS4", 0 );   // ARM RAM1 Data
+    GEL_MapAddStr( 0x10018000, 0, 0x00008000, "R|AS4",   0 );   // ARM ROM  Data
+
+    /* DSP CFG */
+    GEL_MapAddStr( 0x01800000, 0, 0x00010000, "R|W|AS4", 0 );   // C64x+ Intr Ctrl
+    GEL_MapAddStr( 0x01810000, 0, 0x00001000, "R|W|AS4", 0 );   // C64x+ Powerdown Ctrl
+    GEL_MapAddStr( 0x01811000, 0, 0x00001000, "R|W|AS4", 0 );   // C64x+ Security ID
+    GEL_MapAddStr( 0x01812000, 0, 0x00001000, "R|W|AS4", 0 );   // C64x+ Revision ID
+    GEL_MapAddStr( 0x01820000, 0, 0x00010000, "R|W|AS4", 0 );   // C64x+ EMC
+    GEL_MapAddStr( 0x01840000, 0, 0x00010000, "R|W|AS4", 0 );   // C64x+ Memory System
+
+    /* Peripherals */
+    GEL_MapAddStr( 0x01c00000, 0, 0x00000644, "R|W|AS4", 0 );   // EDMA Channel Ctrl
+    GEL_MapAddStr( 0x01c01000, 0, 0x00000098, "R|W|AS4", 0 );   // EDMA Channel Ctrl
+    GEL_MapAddStr( 0x01c02000, 0, 0x00000098, "R|W|AS4", 0 );   // EDMA Channel Ctrl
+    GEL_MapAddStr( 0x01c02200, 0, 0x00000098, "R|W|AS4", 0 );   // EDMA Channel Ctrl
+    GEL_MapAddStr( 0x01c10000, 0, 0x000003d8, "R|W|AS4", 0 );   // EDMA Transfer Ctrl 0
+    GEL_MapAddStr( 0x01c10400, 0, 0x000003d8, "R|W|AS4", 0 );   // EDMA Transfer Ctrl 1
+    GEL_MapAddStr( 0x01c10800, 0, 0x000003d8, "R|W|AS4", 0 );   // EDMA Transfer Ctrl 2
+    GEL_MapAddStr( 0x01c10c00, 0, 0x000003d8, "R|W|AS4", 0 );   // EDMA Transfer Ctrl 3
+    GEL_MapAddStr( 0x01c12000, 0, 0x00000400, "R|W|AS4", 0 );   // Video Port
+    GEL_MapAddStr( 0x01c12800, 0, 0x00000800, "R|W|AS4", 0 );   // Graphics Engine
+    GEL_MapAddStr( 0x01c13000, 0, 0x00000400, "R|W|AS4", 0 );   // Stream I/O 0
+    GEL_MapAddStr( 0x01c13400, 0, 0x00000400, "R|W|AS4", 0 );   // Stream I/O 1
+    GEL_MapAddStr( 0x01c1a000, 0, 0x00000800, "R|W|AS4", 0 );   // PCI Control
+    GEL_MapAddStr( 0x01c20000, 0, 0x00000060, "R|W|AS4", 0 );   // UART 0
+    GEL_MapAddStr( 0x01c20400, 0, 0x00000060, "R|W|AS4", 0 );   // UART 1
+    GEL_MapAddStr( 0x01c20800, 0, 0x00000060, "R|W|AS4", 0 );   // UART 2
+    GEL_MapAddStr( 0x01c21000, 0, 0x0000003c, "R|W|AS4", 0 );   // I2C
+    GEL_MapAddStr( 0x01c21400, 0, 0x00000028, "R|W|AS4", 0 );   // Timer 0
+    GEL_MapAddStr( 0x01c21800, 0, 0x00000028, "R|W|AS4", 0 );   // Timer 1
+    GEL_MapAddStr( 0x01c21c00, 0, 0x0000002c, "R|W|AS4", 0 );   // Timer 2 WDT
+    GEL_MapAddStr( 0x01c22000, 0, 0x0000001c, "R|W|AS4", 0 );   // PWM 0
+    GEL_MapAddStr( 0x01c22400, 0, 0x0000001c, "R|W|AS4", 0 );   // PWM 1
+    GEL_MapAddStr( 0x01c26000, 0, 0x00000058, "R|W|AS4", 0 );   // CRGEN0
+    GEL_MapAddStr( 0x01c26400, 0, 0x00000058, "R|W|AS4", 0 );   // CRGEN1
+    GEL_MapAddStr( 0x01c40000, 0, 0x00000080, "R|W|AS4", 0 );   // Device System
+    GEL_MapAddStr( 0x01c40400, 0, 0x00000400, "R|W|AS4", 0 );   // Security Controller
+    GEL_MapAddStr( 0x01c40800, 0, 0x00000178, "R|W|AS4", 0 );   // PLL0
+    GEL_MapAddStr( 0x01c40c00, 0, 0x00000154, "R|W|AS4", 0 );   // PLL1
+    GEL_MapAddStr( 0x01c41000, 0, 0x00000518, "R|W|AS4", 0 );   // PSC Domain Control
+    GEL_MapAddStr( 0x01c41800, 0, 0x000000b8, "R|W|AS4", 0 );   // PSC Module Status
+    GEL_MapAddStr( 0x01c41a00, 0, 0x000000b8, "R|W|AS4", 0 );   // PSC Module Control
+    GEL_MapAddStr( 0x01c64000, 0, 0x00002000, "R|W|AS4", 0 );   // USB 2.0
+    GEL_MapAddStr( 0x01c66000, 0, 0x0000007c, "R|W|AS2", 0 );   // ATA
+    GEL_MapAddStr( 0x01c66800, 0, 0x00000068, "R|W|AS4", 0 );   // SPI
+    GEL_MapAddStr( 0x01c67000, 0, 0x00000060, "R|W|AS4", 0 );   // GPIO
+    GEL_MapAddStr( 0x01c67800, 0, 0x00000800, "R|W|AS4", 0 );   // HPI
+    GEL_MapAddStr( 0x01c80000, 0, 0x00000280, "R|W|AS4", 0 );   // EMAC Control
+    GEL_MapAddStr( 0x01c81000, 0, 0x00000078, "R|W|AS4", 0 );   // EMAC Module
+    GEL_MapAddStr( 0x01c82000, 0, 0x00002000, "R|W|AS4", 0 );   // EMAC Module RAM
+    GEL_MapAddStr( 0x01c84000, 0, 0x00000090, "R|W|AS4", 0 );   // MDIO
+    GEL_MapAddStr( 0x01d11000, 0, 0x00001400, "R|W|AS4", 0 );   // MCASP0
+    GEL_MapAddStr( 0x01d11400, 0, 0x00000400, "R|W|AS4", 0 );   // MCASP0 Data
+    GEL_MapAddStr( 0x01d11800, 0, 0x00000400, "R|W|AS4", 0 );   // MCASP1
+    GEL_MapAddStr( 0x01d11c00, 0, 0x00000400, "R|W|AS4", 0 );   // MCASP1 Data
+    GEL_MapAddStr( 0x02000000, 0, 0x00200000, "R|W|AS4", 0 );   // HD-VICP0
+    GEL_MapAddStr( 0x02200000, 0, 0x00200000, "R|W|AS4", 0 );   // HD-VICP1
+
+    /* HD-VICP0 */
+    GEL_MapAddStr( 0x00400000, 0, 0x00100000, "R|W|AS4", 0 );   // HD-VICP0
+    GEL_MapAddStr( 0x11400000, 0, 0x00100000, "R|W|AS4", 0 );   // HD-VICP0
+    GEL_MapAddStr( 0x40400000, 0, 0x00040000, "R|W|AS4", 0 );   // HD-VICP0 R/W Port
+    GEL_MapAddStr( 0x40440000, 0, 0x00040000, "R|W|AS4", 0 );   // HD-VICP0 R-Only Port
+    GEL_MapAddStr( 0x40480000, 0, 0x00040000, "R|W|AS4", 0 );   // HD-VICP0 W-Only Port
+
+    /* HD-VICP1 */
+    GEL_MapAddStr( 0x00600000, 0, 0x00100000, "R|W|AS4", 0 );   // HD-VICP1
+    GEL_MapAddStr( 0x11600000, 0, 0x00100000, "R|W|AS4", 0 );   // HD-VICP1
+    GEL_MapAddStr( 0x40600000, 0, 0x00040000, "R|W|AS4", 0 );   // HD-VICP1 R/W Port
+    GEL_MapAddStr( 0x40640000, 0, 0x00040000, "R|W|AS4", 0 );   // HD-VICP1 R-Only Port
+    GEL_MapAddStr( 0x40680000, 0, 0x00040000, "R|W|AS4", 0 );   // HD-VICP1 W-Only Port
+
+    /* DSP RAM */
+    GEL_MapAddStr( 0x00818000, 0, 0x00020000, "R|W|AS4", 0 );   // DSP L2 RAM/Cache
+    GEL_MapAddStr( 0x00e00000, 0, 0x00008000, "R|W|AS4", 0 );   // DSP L1P Cache/RAM
+    GEL_MapAddStr( 0x00f00000, 0, 0x00008000, "R|W|AS4", 0 );   // DSP L1D Cache/RAM
+    GEL_MapAddStr( 0x11818000, 0, 0x00020000, "R|W|AS4", 0 );   // DSP L2 RAM/Cache
+    GEL_MapAddStr( 0x11e00000, 0, 0x00008000, "R|W|AS4", 0 );   // DSP L1P Cache/RAM
+    GEL_MapAddStr( 0x11f00000, 0, 0x00008000, "R|W|AS4", 0 );   // DSP L1D Cache/RAM
+
+    /* DDR2 */
+    GEL_MapAddStr( 0x20000000, 0, 0x000000f4, "R|W|AS4", 0 );   // DDR2 Control
+    GEL_MapAddStr( 0x80000000, 0, 0x40000000, "R|W|AS4", 0 );   // DDR2 SDRAM
+
+    /* EMIFA */
+    GEL_MapAddStr( 0x20008000, 0, 0x00000080, "R|W|AS4", 0 );   // EMIFA Control
+    GEL_MapAddStr( 0x42000000, 0, 0x02000000, "R|W|AS4", 0 );   // AEMIF CS2
+    GEL_MapAddStr( 0x44000000, 0, 0x02000000, "R|W|AS4", 0 );   // AEMIF CS3
+    GEL_MapAddStr( 0x46000000, 0, 0x02000000, "R|W|AS4", 0 );   // AEMIF CS4
+    GEL_MapAddStr( 0x48000000, 0, 0x02000000, "R|W|AS4", 0 );   // AEMIF CS5
+
+    /* VLYNQ */
+    GEL_MapAddStr( 0x20010000, 0, 0x00000048, "R|W|AS4", 0 );   // VLYNQ Control
+  //GEL_MapAddStr( 0x20010080, 0, 0x00000068, "R|W|AS4", 0 );   // VLYNQ Control Remote
+    GEL_MapAddStr( 0x4c000000, 0, 0x04000000, "R|W|AS4", 0 );   // VLYNQ Remote Devices
+
+    /* PCI */
+    GEL_MapAddStr( 0x30000000, 0, 0x10000000, "R|W|AS4", 0 );   // PCI Address Space
+
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  Clear_Memory_Map( )                                                     *
+ *      Clear the Memory Map                                                *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+hotmenu
+Clear_Memory_Map( )
+{
+    GEL_MapOff( );
+    GEL_MapReset( );
+}
+
+menuitem "DaVinci HD Functions";
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  Setup_Cache( )                                                          *
+ *      Invalidate old cache and setup cache for operation                  *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+hotmenu
+Setup_Cache( )
+{
+    int l1p, l1d, l2;
+
+    GEL_TextOut( "Setup Cache " );
+    #define CACHE_L2CFG         *( unsigned int* )( 0x01840000 )
+    #define CACHE_L2INV         *( unsigned int* )( 0x01845008 )
+    #define CACHE_L1PCFG        *( unsigned int* )( 0x01840020 )
+    #define CACHE_L1PINV        *( unsigned int* )( 0x01845028 )
+    #define CACHE_L1DCFG        *( unsigned int* )( 0x01840040 )
+    #define CACHE_L1DINV        *( unsigned int* )( 0x01845048 )
+
+    CACHE_L1PINV = 1;           // L1P invalidated
+    CACHE_L1PCFG = 7;           // L1P on, MAX size
+    CACHE_L1DINV = 1;           // L1D invalidated
+    CACHE_L1DCFG = 7;           // L1D on, MAX size
+    CACHE_L2INV  = 1;           // L2 invalidated
+    CACHE_L2CFG  = 0;           // L2 off, use as RAM
+
+    l1p = CACHE_L1PCFG;
+    if ( l1p == 0 )
+        GEL_TextOut( "(L1P = 0K) + " );
+    if ( l1p == 1 )
+        GEL_TextOut( "(L1P = 4K) + " );
+    if ( l1p == 2 )
+        GEL_TextOut( "(L1P = 8K) + " );
+    if ( l1p == 3 )
+        GEL_TextOut( "(L1P = 16K) + " );
+    if ( l1p >= 4 )
+        GEL_TextOut( "(L1P = 32K) + " );
+
+    l1d = CACHE_L1DCFG;
+    if ( l1d == 0 )
+        GEL_TextOut( "(L1D = 0K) + " );
+    if ( l1d == 1 )
+        GEL_TextOut( "(L1D = 4K) + " );
+    if ( l1d == 2 )
+        GEL_TextOut( "(L1D = 8K) + " );
+    if ( l1d == 3 )
+        GEL_TextOut( "(L1D = 16K) + " );
+    if ( l1d >= 4 )
+        GEL_TextOut( "(L1D = 32K) + " );
+
+    l2 = CACHE_L2CFG;
+    if ( l2 == 0 )
+        GEL_TextOut( "(L2 = ALL SRAM)... " );
+    else if ( l2 == 1 )
+        GEL_TextOut( "(L2 = 31/32 SRAM)... " );
+    else if ( l2 == 2 )
+        GEL_TextOut( "(L2 = 15/16 SRAM)... " );
+    else if ( l2 == 3 )
+        GEL_TextOut( "(L2 = 7/8 SRAM)... " );
+    else if ( l2 == 7 )
+        GEL_TextOut( "(L2 = 3/4 SRAM)... " );
+
+    GEL_TextOut( "[Done]\n" );
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  Disable_VPSS( )                                                         *
+ *      Disable VPFE & VPBE                                                 *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+Disable_VPSS( )
+{
+    #define VPIF_CHCTRL0            *( unsigned int* )( 0x01c12004 )
+    #define VPIF_CHCTRL1            *( unsigned int* )( 0x01c12008 )
+    #define VPIF_CHCTRL2            *( unsigned int* )( 0x01c1200c )
+    #define VPIF_CHCTRL3            *( unsigned int* )( 0x01c12010 )
+    #define VPIF_INTEN              *( unsigned int* )( 0x01c12020 )
+    #define VPIF_INTENCLR           *( unsigned int* )( 0x01c12028 )
+
+    GEL_TextOut( "Disable VPSS\n" );
+    VPIF_CHCTRL0 = 0;
+    VPIF_CHCTRL1 = 0;
+    VPIF_CHCTRL2 = 0;
+    VPIF_CHCTRL3 = 0;
+
+    VPIF_INTEN = 0;
+    VPIF_INTENCLR = 0x0f;
+
+    /* Clear Channels */
+  //GEL_MemoryFill( 0x01c12040, 0, 104, 0 ); // Channel 0-3
+}
+
+/* ------------------------------------------------------------------------ *
+ *                                                                          *
+ *  Disable_EDMA( )                                                         *
+ *      Disabe EDMA events and interrupts, clear any pending events         *
+ *                                                                          *
+ * ------------------------------------------------------------------------ */
+Disable_EDMA( )
+{
+    #define EDMA_3CC_IECRH          *( int* )( 0x01C0105C )
+    #define EDMA_3CC_EECRH          *( int* )( 0x01C0102C )
+    #define EDMA_3CC_ICRH           *( int* )( 0x01C01074 )
+    #define EDMA_3CC_ECRH           *( int* )( 0x01C0100C )
+
+    #define EDMA_3CC_IECR           *( int* )( 0x01C01058 )
+    #define EDMA_3CC_EECR           *( int* )( 0x01C01028 )
+    #define EDMA_3CC_ICR            *( int* )( 0x01C01070 )
+    #define EDMA_3CC_ECR            *( int* )( 0x01C01008 )
+
+    GEL_TextOut( "Disable EDMA events\n" );
+    EDMA_3CC_IECRH  = 0xFFFFFFFF;   // IERH ( disable high interrupts )
+    EDMA_3CC_EECRH  = 0xFFFFFFFF;   // EERH ( disable high events )
+    EDMA_3CC_ICRH   = 0xFFFFFFFF;   // ICRH ( clear high interrupts )
+    EDMA_3CC_ECRH   = 0xFFFFFFFF;   // ICRH ( clear high events )
+
+    EDMA_3CC_IECR   = 0xFFFFFFFF;   // IER  ( disable low interrupts )
+    EDMA_3CC_EECR   = 0xFFFFFFFF;   // EER  ( disable low events )
+    EDMA_3CC_ICR    = 0xFFFFFFFF;   // ICR  ( clear low interrupts )
+    EDMA_3CC_ECR    = 0xFFFFFFFF;   // ICRH ( clear low events )
+}

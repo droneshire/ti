@@ -1,0 +1,413 @@
+// (c) Copyright 2010-2011 by Texas Instruments Inc.  All rights reserved.
+
+//------------------------------------------------------------------------------
+// dasm_vcop.gel
+//
+// Displays disassembly of the EVE VCOP in the CCS Console window.
+//
+// SearchForVloop() - Locates the VLOOP at start of current vloop.
+// RedrawDisasm()   - Redraws the VCOP disassembly if currently in a vloop.
+// Step()           - Enables stepping for the requested number of steps.
+// OnHalt()         - Handles stepping and disassembly redrawing on T16 halt.
+// OnReset()        - Makes sure VCOP stepping is re-enabled after a T16 reset.
+// DisasmEnable()   - User menu option to enable VCOP disassembly.  
+// DisasmDisable()  - User menu option to disable VCOP disassembly.  
+// DisasmRefresh()  - User menu option to refresh VCOP disassembly.  
+// StepEnable()     - User menu option to enable VCOP stepping.  
+// StepDisable()    - User menu option to disable VCOP stepping.  
+// SingleStep()     - User menu option to execute a VCOP single step.
+// StepN()          - User dialog option to do a number of VCOP steps.
+// CancelStep()     - User menu option to cancel any VCOP stepping run amok.
+//------------------------------------------------------------------------------
+
+#define VCTRL_OPCODE  0x00000010 // VCTRL opcode encoding bits
+#define VCTRL_MASK    0x08ffffff // VCTRL opcode encoding mask
+
+#define VLOOP_OPCODE  0x00000210 // VLOOP opcode encoding bits
+#define VLOOP_MASK    0x00001fff // VLOOP opcode encoding bits
+
+#define CMD_LEN_MASK  0x0fe00000 // VLOOP cmd_len field mask
+#define CMD_LEN_SHIFT 21         // VLOOP cmd_len field shift
+
+// This a short cut for the Expression window to set the WAY
+// index in one place for looking at multiple vector variables.
+// It is not used in this file, just defined here so it's available.
+unsigned int WAY = 0;
+
+// Flag if disassembly output is enabled or not
+int disasm_enabled = 0;
+
+// Record of the start and size of the current vloop
+unsigned int vloop_start = 0;
+unsigned int vloop_count = 0;
+
+// Flag that we detected we entered a new vloop
+unsigned int vloop_new = 0;
+
+// Flag if stepping is enabled or not
+unsigned int step_enabled = 0;
+
+// In single step control, keep count of the number of run requests by 
+// user. Keep restarting the run until the requested count is 0.
+unsigned int run_count = 0;
+
+//------------------------------------------------------------------------------
+// SearchForVloop()
+//
+// Searches target memory to locate the VLOOP instruction at the start of the
+// current vloop.  Sets the globals vloop_start and vloop_count to control what
+// memory range needs to be disasembled.
+//
+// Note that in some simulators the vloop_ptr register actually steps through 
+// the vloop as it executes, but in silicon, the register should remain at the 
+// VLOOP instruction location. This function should work for either case.
+//------------------------------------------------------------------------------
+
+SearchForVloop()    
+{
+    unsigned int vloop_ptr; // Current value of the VCOP vloop_ptr register
+    unsigned int count;     // Count of the attempts to find VLOOP
+    unsigned int done;      // Flag if search loop is done
+    unsigned int opcode;    // Next opcode to examine
+
+    // Capture the current VCOP loop location
+    vloop_ptr = VCOP_Status_Registers_vloop_ptr;
+
+    // Assume we're not in a new vloop until we find otherwise
+    vloop_new = 0;
+
+    if (0 == vloop_ptr)
+    {
+        // Not currently in a vloop (simulator)
+        vloop_start = 0;
+        vloop_count = 0;
+        return;
+    }
+
+    if (0 != vloop_start)
+    {
+        // Previously detected that the VCOP is executing a task
+        // Double-check that we're still in that vloop
+        if (vloop_ptr >= vloop_start && vloop_ptr < (vloop_start + 4 * vloop_count))
+        {
+            // Still in the previously recorded vloop
+            return;
+        }
+    }
+
+    // Look for the VLOOP instruction for the current loop
+    done        = 0;
+    count       = 0;
+    vloop_start = 0;
+    vloop_count = 0;
+    while (0 == done)
+    {
+        opcode = *vloop_ptr;
+        if (VLOOP_OPCODE == (opcode & VLOOP_MASK))
+        {
+            // Found the VLOOP instruction
+            done = 1;
+        }
+        else
+        {
+            // Must be inside the vloop, step back toward the start
+            count += 1;
+            if (count > 64 || vloop_ptr <= 4)
+            {
+                // The start wasn't found within the max loop size
+                GEL_TextOut("Failed to locate VLOOP instruction for current vloop.\n");
+                return;
+            }
+            vloop_ptr -= 4;
+        }
+    }
+
+    // The while loop only falls through if we located the VLOOP 
+    vloop_start = vloop_ptr;
+    vloop_new   = 1;
+
+    // Extract the number of instructions in the vloop
+    vloop_count = (opcode & CMD_LEN_MASK) >> CMD_LEN_SHIFT;
+
+    // One more thing to check, if the one or two instruction just before the 
+    // VLOOP are VCTRL, we want to show those with the disassembly
+    opcode = *(vloop_start - 4);
+    if (VCTRL_OPCODE == (opcode & VCTRL_MASK))
+    {
+        // Found a VCTRL, include it in the disassembly
+        vloop_start -= 4;
+        vloop_count += 1;
+
+        // Look again, there could be two
+        opcode = *(vloop_start - 4);
+        if (VCTRL_OPCODE == (opcode & VCTRL_MASK))
+        {
+            // Found a second VCTRL, include it in the disassembly
+            vloop_start -= 4;
+            vloop_count += 1;
+        }
+    }
+}
+
+//------------------------------------------------------------------------------
+// RedrawDisasm()
+//
+// Redraws the VCOP disassembly if currently in a vloop.
+//------------------------------------------------------------------------------
+
+RedrawDisasm()
+{
+    // Make sure we've recorded a vloop to disassemble
+    if (0 != vloop_start)
+    {
+        // Call the command line utility to output the disassembly
+        // (Send 66 words from memory starting at the start of the loop, 
+        // the maximum loop size of 64 plus up to two VCTRL instructions.)
+        GEL_System("\"$(GEL_file_dir)\\..\\..\\emulation\\tpi\\dasm_vcop.exe\" %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d",
+                   vloop_start, vloop_count, 
+                   *(vloop_start+0x00), *(vloop_start+0x04), *(vloop_start+0x08), *(vloop_start+0x0c),
+                   *(vloop_start+0x10), *(vloop_start+0x14), *(vloop_start+0x18), *(vloop_start+0x1c),
+                   *(vloop_start+0x20), *(vloop_start+0x24), *(vloop_start+0x28), *(vloop_start+0x2c),
+                   *(vloop_start+0x30), *(vloop_start+0x34), *(vloop_start+0x38), *(vloop_start+0x3c),
+                   *(vloop_start+0x40), *(vloop_start+0x44), *(vloop_start+0x48), *(vloop_start+0x4c),
+                   *(vloop_start+0x50), *(vloop_start+0x54), *(vloop_start+0x58), *(vloop_start+0x5c),
+                   *(vloop_start+0x60), *(vloop_start+0x64), *(vloop_start+0x68), *(vloop_start+0x6c),
+                   *(vloop_start+0x70), *(vloop_start+0x74), *(vloop_start+0x78), *(vloop_start+0x7c),
+                   *(vloop_start+0x80), *(vloop_start+0x84), *(vloop_start+0x88), *(vloop_start+0x8c),
+                   *(vloop_start+0x90), *(vloop_start+0x94), *(vloop_start+0x98), *(vloop_start+0x9c),
+                   *(vloop_start+0xa0), *(vloop_start+0xa4), *(vloop_start+0xa8), *(vloop_start+0xac),
+                   *(vloop_start+0xb0), *(vloop_start+0xb4), *(vloop_start+0xb8), *(vloop_start+0xbc),
+                   *(vloop_start+0xc0), *(vloop_start+0xc4), *(vloop_start+0xc8), *(vloop_start+0xcc),
+                   *(vloop_start+0xd0), *(vloop_start+0xd4), *(vloop_start+0xd8), *(vloop_start+0xdc),
+                   *(vloop_start+0xe0), *(vloop_start+0xe4), *(vloop_start+0xe8), *(vloop_start+0xec),
+                   *(vloop_start+0xf0), *(vloop_start+0xf4), *(vloop_start+0xf8), *(vloop_start+0xfc),
+                   *(vloop_start+0x100),*(vloop_start+0x104));
+    }
+}
+
+//------------------------------------------------------------------------------
+// Step()
+//
+// Enables stepping for the requested number of steps.
+//------------------------------------------------------------------------------
+
+Step(
+    unsigned int count) // Number of steps to execute
+{
+    if (1 == step_enabled)
+    {
+        run_count = count;
+        GEL_Run();
+    }
+    else
+    {
+        GEL_TextOut("VCOP stepping is disabled.\n");
+    }
+}
+
+//------------------------------------------------------------------------------
+// OnHalt()
+//
+// Handles stepping. Redraws the VCOP disassembly if needed.  Executed whenever 
+// the debugger detects that the T16 has halted (e.g. halt, break, single step).
+//------------------------------------------------------------------------------
+
+OnHalt()
+{
+    // Find the VLOOP instruction for the current vloop
+    // and update the vloop_start and vloop_count info
+    SearchForVloop();
+
+    if (0 == vloop_start)
+    {
+        // Not currently in a vloop.  Disable stepping.
+        if (run_count > 0)
+        {
+            run_count = 0;
+        }
+    }
+    else if (1 == vloop_new)
+    {
+        // In a new vloop. Disable stepping.
+        if (run_count > 0)
+        {
+            run_count = 0;
+        }
+
+        // Redraw disassembly if enabled
+        if (1 == disasm_enabled)
+        {
+            RedrawDisasm();
+        }
+        vloop_new = 0;
+    }
+    else
+    {
+        // Handle any pending stepping
+        if (run_count > 0)
+        {
+            run_count--;
+            if (run_count > 0)
+            {
+                GEL_Run();
+            }
+        }
+    }
+}
+
+//------------------------------------------------------------------------------
+// OnReset()
+//
+// Makes sure VCOP stepping is re-enabled after a T16 reset.  
+//------------------------------------------------------------------------------
+
+OnReset()
+{
+    vloop_start = 0;
+    vloop_count = 0;
+    run_count   = 0;
+
+    if (1 == step_enabled)
+    {
+        VCOP_Status_Registers_ctrl |= 0x00000003;
+    }
+}
+
+menuitem "VCOP Disassembly";
+
+//------------------------------------------------------------------------------
+// DisasmEnable()
+//
+// User menu option to enable VCOP disassembly. 
+//------------------------------------------------------------------------------
+
+hotmenu DisasmEnable()
+{
+    disasm_enabled = 1;
+    GEL_TextOut("VCOP disassembly is enabled.\n");
+}
+	
+//------------------------------------------------------------------------------
+// DisasmDisable()
+//
+// User menu option to disable VCOP disassembly.  
+//------------------------------------------------------------------------------
+
+hotmenu DisasmDisable()
+{
+    disasm_enabled = 0;
+    GEL_TextOut("VCOP disassembly is disabled.\n");
+}	
+
+//------------------------------------------------------------------------------
+// DisasmRefresh()
+//
+// User menu option to refresh VCOP disassembly.  
+//------------------------------------------------------------------------------
+
+hotmenu DisasmRefresh()
+{
+    // Find the VLOOP instruction for the current vloop
+    // and update the vloop_start and vloop_count info
+    SearchForVloop();
+
+    if (0 == disasm_enabled)
+    {
+        GEL_TextOut("VCOP disassembly is disabled.\n");
+    }
+    else if (0 == vloop_start)
+    {
+        GEL_TextOut("The VCOP is not executing a task.\n");
+    }
+    else
+    {
+        RedrawDisasm();
+    }
+}
+
+menuitem "VCOP Step Control";
+
+//------------------------------------------------------------------------------
+// StepEnable()
+//
+// User menu option to enable single step mode on VCOP.  
+//------------------------------------------------------------------------------
+
+hotmenu StepEnable()
+{
+    if (0 == step_enabled)
+    {
+        // Find the VLOOP instruction for the current vloop
+        // and update the vloop_start and vloop_count info
+        SearchForVloop();
+
+        if (0 == vloop_start)
+        {
+            step_enabled = 1;
+            run_count    = 0;
+            VCOP_Status_Registers_ctrl |= 0x00000003;
+        }
+        else
+        {
+            GEL_TextOut("Step cannot be enabled when VCOP is already executing a task.\n");
+            return;
+        }
+    }
+    GEL_TextOut("VCOP stepping is enabled.\n");
+}
+
+//------------------------------------------------------------------------------
+// StepDisable()
+//
+// User menu option to disable single step mode on VCOP.  
+//------------------------------------------------------------------------------
+
+hotmenu StepDisable()
+{
+    step_enabled = 0;
+    run_count    = 0;
+    VCOP_Status_Registers_ctrl &= 0xfffffffc;
+    GEL_TextOut("VCOP stepping is disabled.\n");
+}
+
+//------------------------------------------------------------------------------
+// SingleStep()
+//
+// User menu option to execute a single step on VCOP.  
+//------------------------------------------------------------------------------
+
+hotmenu SingleStep()
+{
+    Step(1);
+}
+
+//------------------------------------------------------------------------------
+// StepN()
+//
+// User menu option to execute N number of steps on VCOP.  
+//------------------------------------------------------------------------------
+
+dialog StepN(count "Number of steps to execute.")
+{
+    if (count > 0)
+    {
+        Step(count);
+    }
+}
+
+//------------------------------------------------------------------------------
+// CancelStep()
+//
+// User menu option to cancel any VCOP stepping run amok.
+//------------------------------------------------------------------------------
+
+hotmenu CancelStep()
+{
+    if (1 == step_enabled && run_count > 0)
+    {
+        GEL_Halt();
+        run_count = 0;
+    }
+}
+
+// End of File

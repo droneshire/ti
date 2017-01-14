@@ -1,0 +1,21 @@
+<input 
+	ng-if="srvConfigVM.selectedInterface.peripheralRequirementsLength() > 0" 
+	title="{{srvToolTip.reqName}}" 
+	id="{{inputId}}" 
+	type="text"
+	ng-model="srvConfigVM.selectedRequirement.requirement.name" 
+	style="color:#000000"
+	ng-change="onChange()"  
+	pm-validate-requirement-name>
+<input ng-if="srvConfigVM.selectedInterface.peripheralRequirementsLength() == 0">
+<div id="{{inputId}}Error" 
+	 ng-show="srvConfigVM.selectedRequirement.requirement.requirementNameErrorMessage">
+	<span>
+		<span class="label label-danger shadow1 shadowButton" 
+			  ng-click="displayCurrentValidationErrorWarning()"
+			  title="Click to show details">
+			<span class="glyphicon glyphicon-ban-circle errorFG marginLeft" style="position:relative;"></span>
+			  {{srvConfigVM.selectedRequirement.requirement.requirementNameErrorMessage}}
+		</span>
+	</span>
+</div>

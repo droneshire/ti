@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<newBreakpoint xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="schema.xsd" enable="false" name="Count" breakpointType="2">
+	<targets>
+		<target>
+			<type>dsk,emu</type>
+			<familyId>320</familyId>
+			<subfamilyId>55,56</subfamilyId>
+			<revision>*</revision>
+		</target>
+	</targets>
+	
+	<submitSequence>
+		<id>Hardware Configuration.Type</id>
+	</submitSequence>
+
+	<showIn>
+		<breakpointView autoSubmit="false" />
+	</showIn>
+
+	<dialog colCount="2">
+		<label id="label_what_to_count" widthHint="80" heightHint="30" verticalAlign="center" horizontalAlign="fill">
+			<text>What to Count:</text>
+		</label>
+
+		<comboBox id="Hardware Configuration.Type" widthHint="190" heightHint="20" verticalAlign="center" horizontalAlign="center">
+			<text>Count Event</text>
+			<choices>
+				<item>Count Event</item>
+				<item>Data Access Count</item>
+			</choices>
+		</comboBox>		
+	</dialog>
+</newBreakpoint>

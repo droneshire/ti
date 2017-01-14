@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_35" class="java.beans.XMLDecoder"> 
+ <object class="com.ti.dvt.gadget.model.LayoutModel"> 
+  <void property="autoLayout"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="layoutMap"> 
+   <void method="put"> 
+    <string>Profile Tap</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>405</int> 
+     <int>255</int> 
+     <int>91</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>CSVFileReader</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>415</int> 
+     <int>59</int> 
+     <int>106</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>Delta</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>455</int> 
+     <int>424</int> 
+     <int>71</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:Trace Analyzer Memory Event Profile</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>598</int> 
+     <int>683</int> 
+     <int>246</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>TraceEventDecoder</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>613</int> 
+     <int>407</int> 
+     <int>126</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>VirtualBuffer</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>241</int> 
+     <int>696</int> 
+     <int>97</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>Memory Events Counter</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>637</int> 
+     <int>621</int> 
+     <int>147</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>Pipeline Stall ProfilerAnalyzer</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>425</int> 
+     <int>622</int> 
+     <int>151</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>CPU Cycles ProfilerAnalyzer</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>56</int> 
+     <int>369</int> 
+     <int>151</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>Rename Fields</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>81</int> 
+     <int>649</int> 
+     <int>108</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>Last Stall Standing Counter</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>807</int> 
+     <int>622</int> 
+     <int>151</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>CPU Cycles Counter</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>51</int> 
+     <int>694</int> 
+     <int>144</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>Accumulator</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>447</int> 
+     <int>474</int> 
+     <int>90</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:Trace Analyzer ProfileAnalysis</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>190</int> 
+     <int>782</int> 
+     <int>115</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.bar:Trace Analyzer gFunction Analysis</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>276</int> 
+     <int>779</int> 
+     <int>228</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:Trace Analyzer ProfileAnalysis2</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>6</int> 
+     <int>782</int> 
+     <int>234</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>Tap</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>451</int> 
+     <int>191</int> 
+     <int>51</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>Pipeline Stalls Counter</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>578</int> 
+     <int>730</int> 
+     <int>145</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:Trace Analyzer Per-Call Function Profile</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>351</int> 
+     <int>736</int> 
+     <int>196</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:Debug</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>616</int> 
+     <int>513</int> 
+     <int>62</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>ContextInterruptAwareFormer</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>3968</int> 
+     <int>529</int> 
+     <int>-1</int> 
+     <int>-1</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>(Function!=null)</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>435</int> 
+     <int>524</int> 
+     <int>116</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>RTFieldLookup</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>245</int> 
+     <int>645</int> 
+     <int>100</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>(Function != null) &amp;&amp; (Delta_Cycles&gt;=0)</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>255</int> 
+     <int>321</int> 
+     <int>151</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>Tap.1</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>200</int> 
+     <int>528</int> 
+     <int>59</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>Tap.2</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>677</int> 
+     <int>491</int> 
+     <int>59</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>$Input</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>442</int> 
+     <int>133</int> 
+     <int>65</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>$Debug.VirtualBuffer</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>535</int> 
+     <int>228</int> 
+     <int>163</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:Trace Analyzer LSS</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>862</int> 
+     <int>732</int> 
+     <int>279</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>Rename Fields.2</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>211</int> 
+     <int>587</int> 
+     <int>115</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:$Debug.Log</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>665</int> 
+     <int>276</int> 
+     <int>145</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>Rename Fields.1</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>456</int> 
+     <int>685</int> 
+     <int>110</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+   <void method="put"> 
+    <string>com.ti.dvt.ui.views.table:Trace Analyzer Exclusive Total Stall Count</string> 
+    <object class="org.eclipse.draw2d.geometry.Rectangle"> 
+     <int>587</int> 
+     <int>780</int> 
+     <int>238</int> 
+     <int>32</int> 
+    </object> 
+   </void> 
+  </void> 
+ </object> 
+</java> 

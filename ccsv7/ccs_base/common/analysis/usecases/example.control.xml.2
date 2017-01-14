@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Example" basedir=".">
+	
+	<!-- define the activity and data provider for the dataprovider template -->
+	<property name="dvt.activity.description" value="Opens a CSV file."/>
+	
+	<!-- roperty file="example.properties"/-->
+	<dvt.property>
+		#General information
+		dvt.activity.disabled=false
+		dvt.activity.disabled.reason=Because it's disabled.
+		dvt.activity.instances=3
+		dvt.activity.names=mike,blah,test
+		
+		dvt.activity.resources=cpu_0,cpu_2,cpu_3
+
+		#Data Providers
+		dataproviders=csv,trace
+
+		#CSV Data Provider
+		csv.name=CSV Viewer
+		csv.analysis=Duration,Execution Graph,Count Analysis
+
+		#Trace Data Provider
+		trace.name=Trace_Viewer
+		trace.analysis=Duration
+
+		#Sample misc properties
+		sampleProperty=test 1
+		sampleProperty2=test 2
+	</dvt.property>
+	
+	<echo message="${sampleProperty}"/>
+	<echo message="${sampleProperty2}"/>
+	
+	<dvt.import file="CsvViewer.js"/>
+	
+	<target name="enable2">
+		<echo message="should we get here?"/>
+		
+		<dvt.config.wizard id="ConfigWizard" text="Analysis Configuration">
+			<page id="configPage" text="${ant.project.name} Configuration" numColumns="1" description="Configuration using .control.xml">
+				<section text="test section" expanding="true">
+					<section>
+						<label text="Core or Master"/>
+		        		<combo id="wizard.page1.masterlist" text="ALL" edit="true" >
+							<item text = "ALL"/>
+				        	<list text="${myList}" delimiter=","/>
+						</combo>
+						<check id="example.check" text="example check"/>
+					</section>
+				</section>
+				<section text="test section2" expanding="true">
+					<button text="test me">
+						<dvt.config.wizard refid="ConfigWizard">
+							<page refid="configPage">
+								<check refid="example.check" enabled="false"/>
+							</page>
+						</dvt.config.wizard>
+					</button>
+				</section>
+			</page>
+		</dvt.config.wizard>
+		
+		<condition property="dvt.enable2" value="true">
+			<isset property="ConfigWizard"/>
+		</condition>
+		<condition property="dvt.enable2" value="false">
+			<not>
+				<isset property="ConfigWizard"/>
+			</not>
+		</condition>
+	</target>
+</project>

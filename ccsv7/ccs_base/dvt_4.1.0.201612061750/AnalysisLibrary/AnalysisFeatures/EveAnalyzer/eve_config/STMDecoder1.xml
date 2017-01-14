@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<translate name="STM decoder1">
+  <passthru name="Local Timestamp" input="Local_Timestamp" />
+  <stringParser delimiters="." multi="yes" input="EventString">
+    <string name="Source" translate="$1.$2.$3" />
+    <string name="SrcEvent"  translate="$4" />
+  </stringParser>
+</translate>

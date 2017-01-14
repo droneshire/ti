@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Function Profiler" default="enable" basedir=".">
+	<import file="../../templates/analysisfeature.xml"/>
+	
+	<property name="dvt.activity.name" value="Load/${ant.project.name}"/>
+	<property name="dvt.activity.description" value="${ant.project.name}"/>
+	<property name="dvt.data.type" value="PCTrace"/>
+	<property name="dvt.views" value="Summary,Details,Per Call,Execution Graph"/>
+	<property name="dvt.views.show" value="Summary"/>
+	<property name="analysisFeatureName" value="TraceFunctionProfiler" />
+	<!--property name="bufferbypass.text" value="true" /-->
+	
+	<!-- override template target -->
+	<target name="configureAnalysisFeature" depends="wizard,updateConfig,remove" >
+	</target>
+	
+	<target name="checkWizard">
+		<echo message="checkWizard()"/>
+
+		<condition property="isNoWizard">
+			<isset property="cfgNoWizard"/>
+		</condition>
+
+	</target>
+	
+	<target name="getWizardParameters" depends="checkWizard" unless="isNoWizard">
+		<echo message="getWizardParameters()"/>
+		
+		<property name="cfgShowLibraries" value="${uicfgShowLibraries}" />
+		
+		<property name="cfgMapBIOS" value="${uicfgMapBIOS}" />
+
+		<property name="cfgProfileLevel" value="${uicfgProfileLevel.text}" />
+		
+	</target>
+	
+	<target name="checkInitialized" depends="getWizardParameters">
+		<echo message="checkInitialized()"/>
+
+		<condition property="isSetProfileLevel">
+			<isset property="cfgProfileLevel"/>
+		</condition>
+		
+		<condition property="isSetMapBIOS">
+			<isset property="cfgMapBIOS"/>
+		</condition>
+		
+		<condition property="isSetShowLib">
+			<isset property="cfgShowLibraries"/>
+		</condition>
+		
+		<condition property="initialized">
+			<or>
+				<isset property="cfgNoWizard"/>
+				<isset property="ConfigWizard"/>
+			</or>
+		</condition>
+	</target>
+	
+	<target name="configProfileLevel" if="isSetProfileLevel">
+		<echo message="configProfileLevel()"/>
+		<dvt.property refid="analysisFeatureRef" dataprocessor="TraceProfilerPreprocessor" name="Profile Level" value="${cfgProfileLevel}"/>
+	</target>
+	
+	<target name="configShowLib" if="isSetShowLib">
+		<echo message="configShowLib()"/>
+		<dvt.property refid="analysisFeatureRef" dataprocessor="Summary" name="Show Lib" value="${cfgShowLibraries}"/>
+		<dvt.property refid="analysisFeatureRef" dataprocessor="Details" name="Show Lib" value="${cfgShowLibraries}"/>
+	</target>
+	
+	<target name="configMapBIOS" if="isSetMapBIOS">
+		<echo message="configMapBIOS()"/>
+		<dvt.property refid="analysisFeatureRef" dataprocessor="TraceProfilerPreprocessor" name="Map BIOS" value="${cfgMapBIOS}"/>
+	</target>
+	
+	<target name="remove" unless="initialized">
+		<echo message="remove()"/>
+		<dvt.remove/>
+	</target>
+	
+	<target name="updateConfig" depends="checkWizard,checkInitialized,configProfileLevel,configMapBIOS,configShowLib" >
+		<echo message="updateConfig()"/>
+	</target>
+	
+	<target name="wizard" depends="checkWizard" unless="isNoWizard">
+		<echo message="wizard()"/>
+		<dvt.script language="javascript">
+			<![CDATA[
+			]]> 
+		</dvt.script>
+		<dvt.config.wizard id="ConfigWizard" text="Analysis Feature Configuration">
+			<page text="Function Profiler Configuration" numColumns="1">
+			
+				<section numColumns="2">
+					<check id="uicfgMapBIOS" check="true"/>
+					<label text="Show all TI-RTOS execution as a single function"/>
+					
+					<check id="uicfgShowLibraries" />
+					<label text="Show TI Libraries"/>
+				</section>
+				
+				<section numColumns="2">
+					<label text="Profile Level: "/>
+					<!-- Items from TraceProfilerPreprocessor.ProfileLevel -->
+					<combo id="uicfgProfileLevel" selection="2">
+						<item text = "Exclusive"/>
+						<item text = "Inclusive"/>
+						<item text = "Callee"/>
+					</combo>
+				</section>
+			
+			</page>
+		</dvt.config.wizard>
+	</target>
+
+	<!-- override template target -->
+	<target name="postAddAnalysisFeature">
+		<dvt.start refid="analysisFeatureRef"/>
+		<dvt.view.show refid="analysisFeatureRef" view="${dvt.views.show}"/>
+	</target>
+</project>

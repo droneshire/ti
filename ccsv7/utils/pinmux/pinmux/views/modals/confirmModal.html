@@ -1,0 +1,14 @@
+<script type="text/ng-template" id="confirm.html">
+	<div class="modal-header" style="padding:0 16px 0 16px;">
+		<h3>{{heading}}</h3>
+	</div>
+
+	<div class="modal-body" style="padding:16px 16px 0 16px;">
+		{{message}}
+	</div>
+				
+	<div class="modal-footer" style="padding:8px;">
+		<button id="confirmYesBtn" class="btn btn-primary" ng-click="yes()">Yes</button>
+		<button id="confirmNoBtn" class="btn btn-primary" ng-click="no()">No</button>
+	</div>
+</script>
